@@ -1,11 +1,12 @@
 import time
 import network
 import urequests as requests
+from secretsausage import SecretSausage
 
 class PicoNetwork:
     def initialise(self):
-        ssid = 'ssid'
-        password = 'password'
+        ssid = SecretSausage.SSID
+        pwd = SecretSausage.Password
 
         wlan = network.WLAN(network.STA_IF)
         wlan.active(True)
@@ -52,8 +53,8 @@ class PicoNetwork:
 
 
     def initialise_original(self):
-        ssid = 'ssid'
-        password = 'password'
+        ssid = SecretSausage.SSID
+        pwd = SecretSausage.Password
 
         wlan = network.WLAN(network.STA_IF)
         wlan.active(True)
