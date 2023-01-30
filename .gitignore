@@ -1,0 +1,15 @@
+*.pyc
+
+
+bin/
+obj/
+
+*.suo
+*.swp
+*.user
+*.userosscache
+*.sln.docstates
+.vs/
+
+# Compiled Python bytecode
+#*.py[cod]
