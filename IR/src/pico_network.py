@@ -6,7 +6,7 @@ from secretsausage import SecretSausage
 class PicoNetwork:
     def initialise(self):
         ssid = SecretSausage.SSID
-        pwd = SecretSausage.Password
+        password = SecretSausage.Password
 
         wlan = network.WLAN(network.STA_IF)
         wlan.active(True)
