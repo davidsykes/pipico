@@ -2,6 +2,7 @@ import time
 import network
 import urequests as requests
 from secretsausage import SecretSausage
+import json
 
 class PicoNetwork:
     def initialise(self):
@@ -46,7 +47,11 @@ class PicoNetwork:
             #else:
             #    print('failed')
 
-
+    def put(self, url, headers, data):
+        jsonObj = json.dumps(data)
+        response = requests.put(url, data=jsonObj, headers=headers)
+        print('put response', response.status_code)
+        return response.status_code
 
     def initialise_original(self):
         ssid = SecretSausage.SSID

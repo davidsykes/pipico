@@ -33,6 +33,7 @@ def maincode(system, network_layer):
         network = Network(network_layer)
         network.initialise()
         network_options = network.get_network_options()
+        network.put()
 
     if (switch3.value()):
         while True:
