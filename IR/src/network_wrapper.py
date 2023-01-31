@@ -1,5 +1,5 @@
 class Network:
-    options_url = 'http://192.168.1.125:5004/weatherforecast'
+    options_url = 'http://192.168.1.87:5000/option?option=oli'
 
     def __init__(self, network_layer):
         self._network_layer = network_layer
@@ -9,4 +9,4 @@ class Network:
 
     def get_network_options(self):
         options = self._network_layer.get(self.options_url)
-        print('options', options)
+        print('Network options', options)

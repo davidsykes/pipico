@@ -31,13 +31,9 @@ class PicoNetwork:
 
     def get(self, url):
         try:
-            print ("About to get", url)
             response = requests.get(url)
-            print('got response')
-            print('get response', response.json())
-            #response.close()
-
-            return response.json()
+            #print(response.status_code)
+            return response.text
         except:
             print('Get url failed:', url)
             #print("could not connect (status =" + str(wlan.status()) + ")")
