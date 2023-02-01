@@ -5,12 +5,10 @@ services:
     image: "192.168.1.125:5000/picoservices:latest"
     ports:
       - "5000:5000"
-    #volumes:
-    #  - "/media/database:/media/database"
-    #  - "/media/logs:/media/logs"
-    #environment:
-    #  - DatabasePath=/media/database/music.sql
-    #  - DatabaseUpdateLogFile=/media/database/musicupdates.sql
-    #  - LogFilePath=/media/logs/jbdbapi.log
-    #  - ErrorLogFilePath=/media/logs/jbdbapierrors.log
+    volumes:
+      - "/media/database:/media/database"
+      - "/media/logs:/media/logs"
+    environment:
+      - DatabasePath=/media/database/picoservices.sql
+      - LogFilePath=/media/logs/picoservices.log
     #restart: always
