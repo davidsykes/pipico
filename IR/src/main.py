@@ -1,6 +1,6 @@
 from machine import Pin, Timer
 import time
-from maincode import maincode
+from maincode import MainCode
 from pico_network import PicoNetwork
 
 
@@ -25,4 +25,5 @@ class SystemWrapper:
 
 network = PicoNetwork()
 system = SystemWrapper()
-maincode(system, network)
+maincode = MainCode()
+maincode.maincode(system, network)

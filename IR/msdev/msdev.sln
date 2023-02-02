@@ -15,8 +15,13 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{7AE1E3EC-45A
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{75C6D714-B0E6-4578-BFFF-A85456068F12}"
 	ProjectSection(SolutionItems) = preProject
-		..\tests\test_waveanalyser.py = ..\tests\test_waveanalyser.py
 		..\tests\test_pinwatcher.py = ..\tests\test_pinwatcher.py
+		..\tests\test_waveanalyser.py = ..\tests\test_waveanalyser.py
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Pico", "Pico", "{00D60B4D-0181-4033-8584-C01AC76582A7}"
+	ProjectSection(SolutionItems) = preProject
+		..\src\main.py = ..\src\main.py
 	EndProjectSection
 EndProject
 Global
@@ -26,6 +31,7 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{7AE1E3EC-45A4-454A-8F55-2BB3B1625CF2} = {8BE4A2D1-A8CA-474E-B87A-E3799C176608}
 		{75C6D714-B0E6-4578-BFFF-A85456068F12} = {8BE4A2D1-A8CA-474E-B87A-E3799C176608}
+		{00D60B4D-0181-4033-8584-C01AC76582A7} = {8BE4A2D1-A8CA-474E-B87A-E3799C176608}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {CE166307-D452-4CEE-A095-45EF435EEC30}
