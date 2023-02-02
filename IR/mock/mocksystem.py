@@ -13,7 +13,7 @@ class MockSystem:
     def MakeOutputPin(self, name):
         return MockPin(name, self)
 
-    def MakeInputPin(self, name):
+    def MakeInputPin(self, name, pullup=None):
         return MockPin(name, self)
 
     def MakeTimer(self):

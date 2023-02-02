@@ -8,8 +8,10 @@ class SystemWrapper:
     def MakeOutputPin(self, name):
         return Pin(name, Pin.OUT)
 
-    def MakeInputPin(self, name):
-        return Pin(name, Pin.IN)
+    def MakeInputPin(self, name, pull = None):
+        if (pull is None):
+            return Pin(name, Pin.IN)
+        return Pin(name, Pin.IN, Pin.PULL_UP if pull else Pin.PULL_DOWN)
 
     def MakeTimer(self):
         return Timer()

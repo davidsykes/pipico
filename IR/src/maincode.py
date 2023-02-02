@@ -19,10 +19,10 @@ def maincode(system, network_layer):
     analyser = WaveAnalyser()
     network = None
 
-    switch1 = system.MakeInputPin(5)    #   Enable flash
-    switch2 = system.MakeInputPin(4)    #   Enable network
-    switch3 = system.MakeInputPin(3)    #   Enable ir detector
-    switch4 = system.MakeInputPin(2)
+    switch1 = system.MakeInputPin(5, False)    #   Enable flash
+    switch2 = system.MakeInputPin(4, False)    #   Enable network
+    switch3 = system.MakeInputPin(3, False)    #   Enable ir detector
+    switch4 = system.MakeInputPin(2, False)
     print('Switches', switch1.value(), switch2.value(), switch3.value(), switch4.value())
 
     if (switch1.value()):

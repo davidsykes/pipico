@@ -24,11 +24,13 @@ class PicoNetwork:
 
         # Handle connection error
         if wlan.status() != 3:
-            raise RuntimeError('network connection failed')
+            print('network connection failed')
+            return False
         else:
             print('The internet is connected')
             status = wlan.ifconfig()
             print( 'ip = ' + status[0] )
+            return True
 
     def get(self, url):
         try:

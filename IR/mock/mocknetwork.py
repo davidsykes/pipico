@@ -3,6 +3,7 @@ from urllib.request import urlopen
 class MockNetwork:
     def initialise(self):
         print('Start the internet')
+        return True
     
     def get(self, url):
         with urlopen(url) as x:
