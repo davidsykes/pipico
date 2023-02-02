@@ -29,9 +29,9 @@ class MainCode:
 
         network_options = None
         if (switch2.value()):
-            network = Network(network_layer)
-            network.initialise()
-            network_options = network.get_network_options()
+            self.network = Network(network_layer)
+            self.network.initialise()
+            network_options = self.network.get_network_options()
 
         if (switch3.value()):
             while True:
@@ -47,7 +47,10 @@ class MainCode:
                         signal_times.append(ctime)
                     else:
                         if (len(signal_values) > 1):
-                            self.analyse(signal_times, signal_values, analyser, network)
+                            if (switch4.value()):
+                                self.dump_ir(signal_times, signal_values)
+                            else:
+                                self.analyse(signal_times, signal_values, analyser)
                             #print(len(signal_values), "values")
                             #print('[', end='')
                             #for i in range(0, len(signal_values)):
@@ -58,14 +61,20 @@ class MainCode:
                             #print()
                         receiving = False
 
-    def analyse(signal_times, signal_values, analyser, network):
+    def analyse(self, signal_times, signal_values, analyser):
+        data = self.convert_data(signal_times, signal_values)
+        result = analyser.analyse(data)
+        self.network.put('key', result)
+
+    def dump_ir(self, signal_times, signal_values):
+        data = self.convert_data(signal_times, signal_values)
+        self.network.put('ir', data)
+
+    def convert_data(self, signal_times, signal_values):
         data = []
         for i in range(0, len(signal_times)):
             d = []
             d.append(signal_times[i])
             d.append(signal_values[i])
             data.append(d)
-        print('ddd', data)
-        result = analyser.analyse(data)
-        print('result', result)
-        network.put('key', result, data)
+        return data

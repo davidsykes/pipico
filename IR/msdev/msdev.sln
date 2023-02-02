@@ -9,6 +9,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{7AE1E3EC-45A
 	ProjectSection(SolutionItems) = preProject
 		..\src\irexception.py = ..\src\irexception.py
 		..\src\maincode.py = ..\src\maincode.py
+		..\src\network_wrapper.py = ..\src\network_wrapper.py
 		..\src\pinwatcher.py = ..\src\pinwatcher.py
 		..\src\waveanalyser.py = ..\src\waveanalyser.py
 	EndProjectSection
@@ -24,6 +25,13 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Pico", "Pico", "{00D60B4D-0
 		..\src\main.py = ..\src\main.py
 	EndProjectSection
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Mock", "Mock", "{C517FF09-DB07-45F9-806C-0F9F330070D3}"
+	ProjectSection(SolutionItems) = preProject
+		..\mock\mock.py = ..\mock\mock.py
+		..\mock\mocknetwork.py = ..\mock\mocknetwork.py
+		..\mock\mockpin.py = ..\mock\mockpin.py
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -32,6 +40,7 @@ Global
 		{7AE1E3EC-45A4-454A-8F55-2BB3B1625CF2} = {8BE4A2D1-A8CA-474E-B87A-E3799C176608}
 		{75C6D714-B0E6-4578-BFFF-A85456068F12} = {8BE4A2D1-A8CA-474E-B87A-E3799C176608}
 		{00D60B4D-0181-4033-8584-C01AC76582A7} = {8BE4A2D1-A8CA-474E-B87A-E3799C176608}
+		{C517FF09-DB07-45F9-806C-0F9F330070D3} = {8BE4A2D1-A8CA-474E-B87A-E3799C176608}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {CE166307-D452-4CEE-A095-45EF435EEC30}

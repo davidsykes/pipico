@@ -10,3 +10,8 @@ class MockNetwork:
             data = x.read().decode('utf-8')
         print (data)
         return data
+
+    def put(self, url, headers, body):
+        print('Put to ', url)
+        print(headers)
+        print(body)
