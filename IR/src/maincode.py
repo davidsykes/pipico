@@ -33,7 +33,6 @@ def maincode(system, network_layer):
         network = Network(network_layer)
         network.initialise()
         network_options = network.get_network_options()
-        network.put()
 
     if (switch3.value()):
         while True:
@@ -49,7 +48,7 @@ def maincode(system, network_layer):
                     signal_times.append(ctime)
                 else:
                     if (len(signal_values) > 1):
-                        analyse(signal_times, signal_values, analyser)
+                        analyse(signal_times, signal_values, analyser, network)
                         #print(len(signal_values), "values")
                         #print('[', end='')
                         #for i in range(0, len(signal_values)):
@@ -60,7 +59,7 @@ def maincode(system, network_layer):
                         #print()
                     receiving = False
 
-def analyse(signal_times, signal_values, analyser):
+def analyse(signal_times, signal_values, analyser, network):
     data = []
     for i in range(0, len(signal_times)):
         d = []
@@ -70,3 +69,4 @@ def analyse(signal_times, signal_values, analyser):
     print('ddd', data)
     result = analyser.analyse(data)
     print('result', result)
+    network.put('key', result, data)

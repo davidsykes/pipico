@@ -11,8 +11,8 @@ class Network:
         options = self._network_layer.get(self.options_url)
         print('Network options', options)
 
-    def put(self):
+    def put(self, type, name, value):
         url = "http://192.168.1.87:5000/message"
         headers = {'content-type': 'application/json'}
-        data = {'message': 'myMessage'}
+        data = {'type': type, 'name' : name, 'value' : value}
         self._network_layer.put(url, headers, data)
