@@ -41,7 +41,7 @@ class MainCode:
                 signal_times = [0]
                 receiving = True
                 while(receiving):
-                    ctime = watcher.get_time_of_change(25000)
+                    ctime = watcher.get_time_of_change(2500000)
                     if (ctime is not None):
                         signal_values.append(watcher.value())
                         signal_times.append(ctime)
@@ -68,7 +68,7 @@ class MainCode:
 
     def dump_ir(self, signal_times, signal_values):
         data = self.convert_data(signal_times, signal_values)
-        self.network.put('ir', data)
+        self.network.put('dump', data)
 
     def convert_data(self, signal_times, signal_values):
         data = []

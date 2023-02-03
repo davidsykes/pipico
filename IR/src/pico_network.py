@@ -51,7 +51,10 @@ class PicoNetwork:
 
     def put(self, url, headers, data):
         jsonObj = json.dumps(data)
-        response = requests.put(url, data=jsonObj, headers=headers)
+        try:
+            response = requests.put(url, data=jsonObj, headers=headers)
+        except:
+            response = requests.put(url, data=jsonObj, headers=headers)
         print('put response', response.status_code)
         return response.status_code
 
