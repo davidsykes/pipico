@@ -32,6 +32,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Mock", "Mock", "{C517FF09-D
 		..\mock\mockpin.py = ..\mock\mockpin.py
 	EndProjectSection
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "plot", "plot", "{AAA7ACC1-99AC-4D4B-9936-8C4D299F128B}"
+	ProjectSection(SolutionItems) = preProject
+		..\plots\plot.py = ..\plots\plot.py
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -41,6 +46,7 @@ Global
 		{75C6D714-B0E6-4578-BFFF-A85456068F12} = {8BE4A2D1-A8CA-474E-B87A-E3799C176608}
 		{00D60B4D-0181-4033-8584-C01AC76582A7} = {8BE4A2D1-A8CA-474E-B87A-E3799C176608}
 		{C517FF09-DB07-45F9-806C-0F9F330070D3} = {8BE4A2D1-A8CA-474E-B87A-E3799C176608}
+		{AAA7ACC1-99AC-4D4B-9936-8C4D299F128B} = {8BE4A2D1-A8CA-474E-B87A-E3799C176608}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {CE166307-D452-4CEE-A095-45EF435EEC30}

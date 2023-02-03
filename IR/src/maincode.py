@@ -41,7 +41,7 @@ class MainCode:
                 signal_times = [0]
                 receiving = True
                 while(receiving):
-                    ctime = watcher.get_time_of_change(2500000)
+                    ctime = watcher.get_time_of_change(10000)
                     if (ctime is not None):
                         signal_values.append(watcher.value())
                         signal_times.append(ctime)
@@ -51,14 +51,6 @@ class MainCode:
                                 self.dump_ir(signal_times, signal_values)
                             else:
                                 self.analyse(signal_times, signal_values, analyser)
-                            #print(len(signal_values), "values")
-                            #print('[', end='')
-                            #for i in range(0, len(signal_values)):
-                            #    print('[',signal_times[i], ',', signal_values[i],']', end='')
-                            #    if (i < len(signal_values)-1):
-                            #        print(',', end='')
-                            #print(']')
-                            #print()
                         receiving = False
 
     def analyse(self, signal_times, signal_values, analyser):
