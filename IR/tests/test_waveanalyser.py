@@ -31,11 +31,11 @@ class Test:
             result = self.analyser.analyse(data)
 
     def test_the_tv_return_value(self):
-        result = self.analyser.analyse2(self.data_tv)
+        result = self.analyser.analyse(self.data_tv)
 
         assert result == 3772793023
 
     def test_the_sony_return_value(self):
-        result = self.analyser.analyse2(self.data_sony)
+        result = self.analyser.analyse(self.data_sony)
 
-        assert result == 3772793023
+        assert result == 527199

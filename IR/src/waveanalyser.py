@@ -3,7 +3,7 @@ from irexception import IrException
 
 
 class WaveAnalyser:
-	def analyse(self, data):
+	def analyse_old(self, data):
 		self.check_there_is_enough_data(data)
 		self.check_first_value_is_0_0(data)
 		i = 3
@@ -19,22 +19,18 @@ class WaveAnalyser:
 			i = i + 1
 		return result
 
-	def analyse2(self, data):
+	def analyse(self, data):
 		self.check_there_is_enough_data(data)
 		self.check_first_value_is_0_0(data)
-		skip_first_pulse = data[2:len(data)]
+		skip_first_pulse = data[3:len(data)]
 		minimum = self.find_minimum_width(skip_first_pulse)
 		data_compared_to_minimum = self.compare_data_to_minimum(skip_first_pulse, minimum)
-		print(data_compared_to_minimum)
 		ones = [d[0] for d in data_compared_to_minimum if d[1] == 1]
-		print('ones', ones)
 		zeros = [d[0] for d in data_compared_to_minimum if d[1] == 0]
-		print('zeros', zeros)
 		ones_value = self.convert_to_binary(ones)
 		zeros_value = self.convert_to_binary(zeros)
-		print('ong', ones_value, zeros_value)
 
-		return result
+		return max(ones_value, zeros_value)
 
 	def find_minimum_width(self, data):
 		minimum = data[1][0]
