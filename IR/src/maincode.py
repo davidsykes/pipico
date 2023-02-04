@@ -1,18 +1,14 @@
 from pinwatcher import PinWatcher
 from waveanalyser import WaveAnalyser
 from network_wrapper import Network
+from flasher import Flasher
 
 class MainCode:
-    led = None
-
-    def blink(self, timer):
-        self.led.toggle()
 
     def maincode(self, system, network_layer):
-        self.led = system.MakeOutputPin("LED")
+        self.flasher = Flasher(system)
         ir = system.MakeOutputPin(10)
         ir.on()
-        timer = system.MakeTimer()
         button = system.MakeInputPin(15)
         watcher = PinWatcher(system, button)
         analyser = WaveAnalyser()
@@ -23,9 +19,6 @@ class MainCode:
         switch3 = system.MakeInputPin(3, False)    #   Enable ir detector
         switch4 = system.MakeInputPin(2, False)    #   Send raw IR to the server
         print('Switches', switch1.value(), switch2.value(), switch3.value(), switch4.value())
-
-        if (switch1.value()):
-            system.init_timer(timer, 0.5, self.blink)
 
         network_options = None
         if (switch2.value()):
