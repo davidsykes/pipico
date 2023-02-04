@@ -8,10 +8,6 @@ class MockPin:
     def __init__(self, name, system):
         self._name = name
         self.system = system
-        self.enable_flash = True
-        self.enable_network = True
-        self.enable_ir = True
-        self.dump_ir = True
 
     def on(self):
         print("Turn pin", self._name, 'on')
@@ -26,13 +22,13 @@ class MockPin:
 
     def options_value(self):
         if (self._name == 5):
-            return self.enable_flash
+            return True
         if (self._name == 4):
-            return self.enable_network
+            return True
         if (self._name == 3):
-            return self.enable_ir
+            return False
         if (self._name == 2):
-            return self.dump_ir
+            return False
         return 0
 
     def next_value(self):

@@ -2,6 +2,12 @@ from pinwatcher import PinWatcher
 from waveanalyser import WaveAnalyser
 from network_wrapper import Network
 from flasher import Flasher
+from listener import Listener
+
+SWITCH_1_PIN = 5
+SWITCH_2_PIN = 4
+SWITCH_3_PIN = 3
+SWITCH_4_PIN = 2
 
 class MainCode:
 
@@ -14,19 +20,22 @@ class MainCode:
         analyser = WaveAnalyser()
         network = None
 
-        switch1 = system.MakeInputPin(5, False)    #   Enable flash
-        switch2 = system.MakeInputPin(4, False)    #   Enable network
-        switch3 = system.MakeInputPin(3, False)    #   Enable ir detector
-        switch4 = system.MakeInputPin(2, False)    #   Send raw IR to the server
-        print('Switches', switch1.value(), switch2.value(), switch3.value(), switch4.value())
+        network_switch = system.MakeInputPin(SWITCH_1_PIN, False)       #   Enable network
+        network_type_switch = system.MakeInputPin(SWITCH_2_PIN, False)  #   0 = dumper, 1 = listener
+        switch3 = system.MakeInputPin(SWITCH_3_PIN, False)              #   
+        switch4 = system.MakeInputPin(SWITCH_4_PIN, False)    #   Send raw IR to the server
+        print('Switches', network_switch.value(), network_type_switch.value(), switch3.value(), switch4.value())
 
         network_options = None
-        if (switch2.value()):
+        if (network_switch.value()):
             self.network = Network(network_layer)
             self.network.initialise()
             network_options = self.network.get_network_options()
 
-        if (switch3.value()):
+        if (network_type_switch.value()):
+            listener = Listener()
+            listener.listen(self.network)
+        else:
             while True:
                 print("Value = ", watcher.value())
                 watcher.wait_for_change()

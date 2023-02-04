@@ -20,3 +20,6 @@ class Network:
             headers = {'content-type': 'application/json'}
             body = {'type': type, 'data' : data}
             self._network_layer.put(self.put_url, headers, body)
+
+    def listen(self):
+        self._network_layer.listen()

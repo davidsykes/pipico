@@ -15,3 +15,6 @@ class MockNetwork:
         print('Put to ', url)
         print(headers)
         print(body)
+
+    def listen(self):
+        print("Listen to the network")
