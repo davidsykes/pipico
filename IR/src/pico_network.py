@@ -3,6 +3,7 @@ import network
 import urequests as requests
 from secretsausage import SecretSausage
 import json
+import socket
 
 class PicoNetwork:
     def initialise(self):
@@ -60,55 +61,39 @@ class PicoNetwork:
         print('put response', status_code)
         return status_code
 
-    def initialise_original(self):
-        ssid = SecretSausage.SSID
-        pwd = SecretSausage.Password
+    def listen(self):
+        html = """<!DOCTYPE html>
+            <html>
+                <head> <title>Hello Oliver</title> </head>
+                <body> <h1>Hello Oliver</h1>
+                    <p>Hello from Pico!</p>
+                </body>
+            </html>
+        """
+        # Open socket
+        addr = socket.getaddrinfo('0.0.0.0', 80)[0][-1]
+        s = socket.socket()
+        s.bind(addr)
+        s.listen(1)
+        
+        print('listening on', addr)
+        
+        # Listen for connections
+        while True:
+            try:
+                cl, addr = s.accept()
+                print('client connected from', addr)
 
-        wlan = network.WLAN(network.STA_IF)
-        wlan.active(True)
-        wlan.connect(ssid, password)
+                request = cl.recv(1024)
+                print(request)
 
-        # Wait for connect or fail
-        max_wait = 10
-        while max_wait > 0:
-            if wlan.status() < 0 or wlan.status() >= 3:
-                break
-            max_wait -= 1
-            print('waiting for connection...')
-            time.sleep(1)
-
-        # Handle connection error
-        if wlan.status() != 3:
-            raise RuntimeError('network connection failed')
-        else:
-            print('The internet is connected')
-            status = wlan.ifconfig()
-            print( 'ip = ' + status[0] )
-
-
-        try:
-            url = "http://192.168.1.125:5004/weatherforecast"
-            print ("About to get", url)
-            response = requests.get(url)
-            print('got response')
-            print('get response', response.json())
-            response.close()
-
-
-
-            #headers = 'headers'
-            #payload = 'payload'
-            #print("sending...")
-            #response = requests.post("A REMOTE END POINT", headers=headers, data=payload)
-            #print("sent (" + str(response.status_code) + "), status = " + str(wlan.status()) )
-            #response.close()
-        except:
-            print("could not connect (status =" + str(wlan.status()) + ")")
-            if wlan.status() < 0 or wlan.status() >= 3:
-                print("trying to reconnect...")
-                wlan.disconnect()
-                wlan.connect(ssid, password)
-            if wlan.status() == 3:
-                print('connected')
-            else:
-                print('failed')
+                request = str(request)
+                response = html
+                
+                cl.send('HTTP/1.0 200 OK\r\nContent-type: text/html\r\n\r\n')
+                cl.send(response)
+                cl.close()
+        
+            except OSError as e:
+                cl.close()
+                print('connection closed')
