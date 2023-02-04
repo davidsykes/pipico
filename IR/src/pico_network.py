@@ -55,8 +55,10 @@ class PicoNetwork:
             response = requests.put(url, data=jsonObj, headers=headers)
         except:
             response = requests.put(url, data=jsonObj, headers=headers)
-        print('put response', response.status_code)
-        return response.status_code
+        status_code = response.status_code
+        response.close()
+        print('put response', status_code)
+        return status_code
 
     def initialise_original(self):
         ssid = SecretSausage.SSID
