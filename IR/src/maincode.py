@@ -28,13 +28,13 @@ class MainCode:
 
         network_options = None
         if (network_switch.value()):
-            self.network = Network(network_layer)
+            self.network = Network(network_layer, 'http://192.168.1.87:5000')
             self.network.initialise()
             network_options = self.network.get_network_options()
 
         if (network_type_switch.value()):
-            listener = Listener()
-            listener.listen(self.network)
+            listener = Listener(self.network)
+            listener.listen()
         else:
             while True:
                 print("Value = ", watcher.value())

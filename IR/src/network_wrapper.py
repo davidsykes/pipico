@@ -14,6 +14,10 @@ class Network:
     def get_url(self, url):
         return self.base_url + '/' + url
 
+    def get(self, url):
+        if (self.connected):
+            return self._network_layer.get(url)
+
     def get_network_options(self):
         if (self.connected):
             options = self._network_layer.get(self.options_url)
