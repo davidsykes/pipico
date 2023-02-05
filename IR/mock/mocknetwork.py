@@ -6,6 +6,7 @@ class MockNetwork:
         return True
     
     def get(self, url):
+        print('Get', url)
         with urlopen(url) as x:
             data = x.read().decode('utf-8')
         print (data)

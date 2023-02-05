@@ -22,7 +22,7 @@ class MockSystem:
         self._time = self._time + 1
         return self._time
 
-def TestWaitForChangeWithTimeoutThatDoesntTimeOut():
+def test_wait_for_change_with_timeout_that_doesnt_time_out():
     system = MockSystem()
     pin_to_watch = MockPin(system, [[0,0],[10,1]])
 
@@ -32,7 +32,7 @@ def TestWaitForChangeWithTimeoutThatDoesntTimeOut():
 
     assert(val == 1)
 
-def TestWaitForChangeWithTimeoutThatDoesTimeOut():
+def test_wait_for_change_with_timeout_that_does_time_out():
     system = MockSystem()
     pin_to_watch = MockPin(system, [[0,0],[1000,1]])
 
@@ -42,7 +42,7 @@ def TestWaitForChangeWithTimeoutThatDoesTimeOut():
 
     assert(val == None)
 
-def TestWaitForChangeWithNoTimeout():
+def test_wait_for_change_with_no_timeout():
     system = MockSystem()
     pin_to_watch = MockPin(system, [[0,0],[10,1]])
 
@@ -52,7 +52,7 @@ def TestWaitForChangeWithNoTimeout():
 
     assert(val == 1)
 
-def TestGetTimeOfChange():
+def test_get_time_of_change():
     system = MockSystem()
     pin_to_watch = MockPin(system, [[0,0],[10,1]])
 
@@ -62,7 +62,7 @@ def TestGetTimeOfChange():
 
     assert(t == 10)
 
-def TestGetTimeOfChangeWithTimeout():
+def test_get_time_of_change_with_timeout():
     system = MockSystem()
     pin_to_watch = MockPin(system, [[0,0],[10,1]])
 
@@ -72,7 +72,7 @@ def TestGetTimeOfChangeWithTimeout():
 
     assert(t == None)
 
-def TestValue():
+def test_value():
     system = MockSystem()
     pin_to_watch = MockPin(system, [[0,0],[4,1]])
 
@@ -83,7 +83,7 @@ def TestValue():
     assert(pin_to_watch.value() == 1)
     assert(pin_to_watch.value() == 1)
 
-def get_time_of_change_gets_time_since_last_change_not_since_the_routine_was_called():
+def test_get_time_of_change_gets_time_since_last_change_not_since_the_routine_was_called():
     system = MockSystem()
     pin_to_watch = MockPin(system, [[0,0],[10,1],[20,0]])
 
@@ -95,11 +95,3 @@ def get_time_of_change_gets_time_since_last_change_not_since_the_routine_was_cal
     system.ticks_us()
     assert(watcher.get_time_of_change() == 10)
 
-def pinwatchertests():
-    TestWaitForChangeWithTimeoutThatDoesntTimeOut()
-    TestWaitForChangeWithTimeoutThatDoesTimeOut()
-    TestWaitForChangeWithNoTimeout()
-    TestGetTimeOfChange()
-    TestGetTimeOfChangeWithTimeout()
-    TestValue()
-    get_time_of_change_gets_time_since_last_change_not_since_the_routine_was_called()
