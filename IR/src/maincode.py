@@ -48,7 +48,7 @@ class MainCode:
                         signal_values.append(watcher.value())
                         signal_times.append(ctime)
                     else:
-                        if (len(signal_values) > 1):
+                        if (len(signal_values) > 4):
                             if (switch4.value()):
                                 self.dump_ir(signal_times, signal_values)
                             else:
