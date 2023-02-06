@@ -86,6 +86,9 @@ class PicoNetwork:
 
                 request = cl.recv(1024)
                 print(request)
+                print()
+                print(''.join([chr(int(x,2)) for x in request]))
+                print()
 
                 request = str(request)
                 response = html
