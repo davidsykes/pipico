@@ -85,12 +85,10 @@ class PicoNetwork:
                 print('client connected from', addr)
 
                 request = cl.recv(1024)
-                print(request)
-                print()
-                print(''.join([chr(int(x,2)) for x in request]))
-                print()
+                request_string = ''.join([chr(int(x)) for x in request])
+                #print(request_string)
 
-                action(request)
+                action(request_string)
 
                 request = str(request)
                 response = html
