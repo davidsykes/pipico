@@ -1,3 +1,5 @@
+import json
+
 class Listener:
 	def __init__(self, network):
 		self.network = network

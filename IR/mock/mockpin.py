@@ -15,16 +15,23 @@ class MockPin:
     def value(self):
         if (self._name < 6):
             return self.options_value()
-        time_since_change = self.system.ticks_us() - self.time_last_change
+
+        current_time = self.system.ticks_us()
+
+        time_since_change = current_time - self.time_last_change
+
         if time_since_change >= self.data[self.index][0]:
+            #print('current time', current_time)
+            #print('time_since_change', time_since_change)
             self.next_value()
+            #print('value', self.current_value)
         return self.current_value
 
     def options_value(self):
         if (self._name == 5):
             return True
         if (self._name == 4):
-            return True
+            return False
         if (self._name == 3):
             return False
         if (self._name == 2):

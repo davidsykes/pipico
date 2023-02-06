@@ -1,3 +1,4 @@
+import json
 from urllib.request import urlopen
 
 class MockNetwork:
@@ -15,7 +16,7 @@ class MockNetwork:
     def put(self, url, headers, body):
         print('Put to ', url)
         print(headers)
-        print(body)
+        print(json.dumps(body))
 
     def listen(self):
         print("Listen to the network")

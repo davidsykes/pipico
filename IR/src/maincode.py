@@ -23,7 +23,7 @@ class MainCode:
         network_switch = system.MakeInputPin(SWITCH_1_PIN, False)       #   Enable network
         network_type_switch = system.MakeInputPin(SWITCH_2_PIN, False)  #   0 = dumper, 1 = listener
         switch3 = system.MakeInputPin(SWITCH_3_PIN, False)              #   
-        switch4 = system.MakeInputPin(SWITCH_4_PIN, False)    #   Send raw IR to the server
+        switch4 = system.MakeInputPin(SWITCH_4_PIN, False)              #   Send raw IR to the server
         print('Switches', network_switch.value(), network_type_switch.value(), switch3.value(), switch4.value())
 
         network_options = None
@@ -56,9 +56,10 @@ class MainCode:
                         receiving = False
 
     def analyse(self, signal_times, signal_values, analyser):
-        data = self.convert_data(signal_times, signal_values)
-        result = analyser.analyse(data)
-        self.network.put('key', result)
+        wave_data = self.convert_data(signal_times, signal_values)
+        result = analyser.analyse(wave_data)
+        data = {'code': result, 'wavepoints' : wave_data}
+        self.network.put('code', data)
 
     def dump_ir(self, signal_times, signal_values):
         data = self.convert_data(signal_times, signal_values)
