@@ -18,5 +18,6 @@ class MockNetwork:
         print(headers)
         print(json.dumps(body))
 
-    def listen(self):
+    def listen(self, action):
         print("Listen to the network")
+        action("sfs")
