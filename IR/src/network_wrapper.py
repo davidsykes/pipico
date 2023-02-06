@@ -30,5 +30,5 @@ class Network:
             body = {'type': type, 'data' : data}
             self._network_layer.put(url, headers, body)
 
-    def listen(self):
-        self._network_layer.listen()
+    def listen(self, action):
+        self._network_layer.listen(action)

@@ -31,7 +31,7 @@ class MockPin:
         if (self._name == 5):
             return True
         if (self._name == 4):
-            return False
+            return True
         if (self._name == 3):
             return False
         if (self._name == 2):

@@ -61,7 +61,7 @@ class PicoNetwork:
         print('put response', status_code)
         return status_code
 
-    def listen(self):
+    def listen(self, action):
         html = """<!DOCTYPE html>
             <html>
                 <head> <title>Hello Oliver</title> </head>
@@ -89,6 +89,8 @@ class PicoNetwork:
                 print()
                 print(''.join([chr(int(x,2)) for x in request]))
                 print()
+
+                action(request)
 
                 request = str(request)
                 response = html
