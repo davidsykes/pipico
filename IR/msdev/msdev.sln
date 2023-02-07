@@ -14,6 +14,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{7AE1E3EC-45A
 		..\src\network_wrapper.py = ..\src\network_wrapper.py
 		..\src\pico_network.py = ..\src\pico_network.py
 		..\src\pinwatcher.py = ..\src\pinwatcher.py
+		..\tests\test_url_request_processor.py = ..\tests\test_url_request_processor.py
 		..\src\waveanalyser.py = ..\src\waveanalyser.py
 	EndProjectSection
 EndProject
