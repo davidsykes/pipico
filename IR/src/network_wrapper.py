@@ -1,6 +1,5 @@
 class Network:
     options_url = 'http://192.168.1.87:5000/option?option=oli'
-    #put_url = "http://192.168.1.87:5000/message"
     connected = False
 
     def __init__(self, network_layer, base_url):
@@ -31,4 +30,4 @@ class Network:
             self._network_layer.put(url, headers, body)
 
     def listen(self, action):
-        self._network_layer.listen(action)
+        return self._network_layer.listen(action)

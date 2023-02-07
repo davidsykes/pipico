@@ -88,7 +88,8 @@ class PicoNetwork:
                 request_string = ''.join([chr(int(x)) for x in request])
                 #print(request_string)
 
-                action(request_string)
+                html = action(request_string)
+                print(html)
 
                 request = str(request)
                 response = html
