@@ -19,7 +19,7 @@ class Listener:
 		if request.type == 'GET' and request.url == '/':
 			html = """<!DOCTYPE html>
 				<html>
-					<head> <title>Hello Oliver</title> </head>
+					<head> <link rel="icon" href="data:,"> <title>Hello Oliver</title> </head>
 					<body> <h1>Hello Oliver</h1>
 """
 			for code in self.codes:
