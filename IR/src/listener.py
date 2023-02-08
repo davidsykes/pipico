@@ -29,17 +29,20 @@ class Listener:
 				html = action(request)
 				#print(html)
 
-				cl.send('HTTP/1.0 200 OK\r\nContent-type: text/html\r\n\r\n')
-				cl.send(html)
-				cl.close()
+				if html is None:
+					cl.send('HTTP/1.0 404 Bad Request\r\nContent-type: text/html\r\n\r\n')
+				else:
+					cl.send('HTTP/1.0 200 OK\r\nContent-type: text/html\r\n\r\n')
+					cl.send(html)
         
 			except OSError as e:
-				cl.close()
 				print('connection closed')
 			except KeyboardInterrupt as e:
 				print("Close socket")
 				socket.close()
 				raise
+			finally:
+				cl.close()
 
 	def code(self, http_request):
 		request = self.request_decoder.decode_request(http_request)
