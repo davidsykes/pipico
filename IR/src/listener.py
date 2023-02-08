@@ -12,6 +12,29 @@ class Listener:
 	def listen(self):
 		self.network.listen(self.code)
 
+	def listen2(self, action):
+		socket = self.network.open_socket()
+
+		# Listen for connections
+		while True:
+			try:
+				cl, addr = self.network.accept(socket)
+				print('client connected from', addr)
+
+				request = self.network.recv(socket);
+				print(request)
+
+				html = action(request)
+				print(html)
+
+				cl.send('HTTP/1.0 200 OK\r\nContent-type: text/html\r\n\r\n')
+				cl.send(html)
+				cl.close()
+        
+			except OSError as e:
+				cl.close()
+				print('connection closed')
+
 	def code(self, http_request):
 		request = self.request_decoder.decode_request(http_request)
 		print("ACTION", request.type, request.url)

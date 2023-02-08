@@ -91,7 +91,6 @@ class PicoNetwork:
                 html = action(request_string)
                 print(html)
 
-                request = str(request)
                 response = html
                 
                 cl.send('HTTP/1.0 200 OK\r\nContent-type: text/html\r\n\r\n')
@@ -101,3 +100,19 @@ class PicoNetwork:
             except OSError as e:
                 cl.close()
                 print('connection closed')
+
+    def open_socket(self):
+        # Open socket
+        addr = socket.getaddrinfo('0.0.0.0', 80)[0][-1]
+        s = socket.socket()
+        s.bind(addr)
+        s.listen(1)
+        print('listening on', addr)
+        return s
+
+    def accetps(self, s):
+        return s.accept()
+
+    def recv(self, s):
+        request = cl.recv(1024)
+        request_string = ''.join([chr(int(x)) for x in request])
