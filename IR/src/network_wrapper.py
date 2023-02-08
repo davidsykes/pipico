@@ -8,7 +8,7 @@ class Network:
 
     def initialise(self):
         self.connected = self._network_layer.initialise()
-        print('Internet connected' if self.connected else 'Internet connection failed')
+        self.log('Internet connected' if self.connected else 'Internet connection failed')
 
     def get_url(self, url):
         return self.base_url + '/' + url
@@ -22,12 +22,21 @@ class Network:
             options = self._network_layer.get(self.options_url)
             print('Network options', options)
 
-    def put(self, type, data):
+    def put(self, url, data):
         if (self.connected):
-            url = self.get_url('message')
             headers = {'content-type': 'application/json'}
-            body = {'type': type, 'data' : data}
-            self._network_layer.put(url, headers, body)
+            self._network_layer.put(url, headers, data)
+
+#    def put_old(self, type, data):
+#        if (self.connected):
+#            url = self.get_url('message')
+#            headers = {'content-type': 'application/json'}
+#            body = {'type': type, 'data' : data}
+#            self._network_layer.put(url, headers, body)
+
+    def log(self, message):
+        url = self.get_url('log')
+        self.put(url, message)
 
     def listen(self, action):
         return self._network_layer.listen(action)
