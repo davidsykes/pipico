@@ -40,3 +40,13 @@ class Network:
 
     def listen(self, action):
         return self._network_layer.listen(action)
+
+
+    def open_socket(self):
+        return self._network_layer.open_socket()
+
+    def accept(self, s):
+        return self._network_layer.accept(s)
+
+    def recv(self, cl):
+        return self._network_layer.recv(cl)
