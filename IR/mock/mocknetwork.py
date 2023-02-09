@@ -1,10 +1,19 @@
 import json
 from urllib.request import urlopen
 
+class MockClientConnection:
+    def send(self, data):
+        print('Client send', data)
+    def close(self):
+        print('Client close')
+
 class MockNetwork:
     def initialise(self):
         print('Start the internet')
         return True
+
+    def get_url(self, path):
+        return 'url for ' + path
     
     def get(self, url):
         print('Get', url)
@@ -22,3 +31,11 @@ class MockNetwork:
         action("""GET / HTTP/1.1
 Host: 192.168.1.75
 Connection: keep-alive""")
+
+    def open_socket(self):
+        print('Open Socket for listening')
+    def accept(self, socket):
+        print('Socket accept')
+        return MockClientConnection(),'ip address'
+    def recv(self, cl):
+        return 'GET /code/527199'

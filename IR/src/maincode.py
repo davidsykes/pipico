@@ -3,6 +3,8 @@ from waveanalyser import WaveAnalyser
 from network_wrapper import Network
 from flasher import Flasher
 from listener import Listener
+from ir_transmitter import IrTransmitter
+from ir_codes_manager import IrCodesManager
 
 SWITCH_1_PIN = 5
 SWITCH_2_PIN = 4
@@ -33,7 +35,9 @@ class MainCode:
             network_options = self.network.get_network_options()
 
         if (network_type_switch.value()):
-            listener = Listener(self.network)
+            transmitter = IrTransmitter()
+            codes = IrCodesManager(self.network)
+            listener = Listener(self.network, transmitter, codes)
             listener.listen()
         else:
             while True:

@@ -9,20 +9,24 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{7AE1E3EC-45A
 	ProjectSection(SolutionItems) = preProject
 		..\src\flasher.py = ..\src\flasher.py
 		..\src\irexception.py = ..\src\irexception.py
+		..\src\ir_codes_manager.py = ..\src\ir_codes_manager.py
+		..\src\ir_transmitter.py = ..\src\ir_transmitter.py
 		..\src\listener.py = ..\src\listener.py
 		..\src\maincode.py = ..\src\maincode.py
 		..\src\network_wrapper.py = ..\src\network_wrapper.py
 		..\src\pico_network.py = ..\src\pico_network.py
 		..\src\pinwatcher.py = ..\src\pinwatcher.py
-		..\src\waveanalyser.py = ..\src\waveanalyser.py
 		..\src\url_request_decoder.py = ..\src\url_request_decoder.py
+		..\src\waveanalyser.py = ..\src\waveanalyser.py
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{75C6D714-B0E6-4578-BFFF-A85456068F12}"
 	ProjectSection(SolutionItems) = preProject
+		..\tests\test_ir_codes_manager.py = ..\tests\test_ir_codes_manager.py
+		..\tests\test_listener.py = ..\tests\test_listener.py
 		..\tests\test_pinwatcher.py = ..\tests\test_pinwatcher.py
-		..\tests\test_waveanalyser.py = ..\tests\test_waveanalyser.py
 		..\tests\test_url_request_decoder.py = ..\tests\test_url_request_decoder.py
+		..\tests\test_waveanalyser.py = ..\tests\test_waveanalyser.py
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Pico", "Pico", "{00D60B4D-0181-4033-8584-C01AC76582A7}"

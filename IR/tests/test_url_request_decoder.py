@@ -4,7 +4,7 @@ from url_request_decoder import UrlRequestDecoder
 
 class TestUrlRequestProcessor:
     def setup_method(self, test_method):
-        self._decoder = UrlRequestProcessor()
+        self._decoder = UrlRequestDecoder()
 
     def test_root_request(self):
         request = """GET / HTTP/1.1
