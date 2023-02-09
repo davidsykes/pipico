@@ -10,4 +10,7 @@ class IrCodesManager:
 
 		self.codes = {}
 		for code in codes:
-			self.codes[code['code']] =  code['waveform']
+			self.codes[str(code['code'])] =  code['waveform']
+
+	def get_code(self, code):
+		return self.codes[code]
