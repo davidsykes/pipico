@@ -1,16 +1,12 @@
-import json
 from url_request_decoder import UrlRequestDecoder
 
 class Listener:
-	def __init__(self, network):
+	def __init__(self, network, transmitter, codes):
 		self.network = network
 		self.request_decoder = UrlRequestDecoder()
-		codes_url = network.get_url('codes')
-		codes_json = network.get(codes_url)
-		self.codes = json.loads(codes_json)
+		self.codes = codes
 
 	def listen(self):
-		#self.network.listen(self.code)
 		self.listen2(self.code)
 
 	def listen2(self, action):
@@ -47,7 +43,10 @@ class Listener:
 	def code(self, http_request):
 		request = self.request_decoder.decode_request(http_request)
 		print("ACTION", request.type, request.url)
-		if request.type == 'GET' and request.url == '/':
+		return self.action(request.type, request.url)
+
+	def action(self, type, url):
+		if type == 'GET' and url == '/':
 			html = """<!DOCTYPE html>
 				<html>
 					<head> <link rel="icon" href="data:,"> <title>Hello Oliver</title> </head>
@@ -62,4 +61,4 @@ class Listener:
 			"""
 			#print(html)
 			return html
-		print('INVALID REQUEST', request.type, request.url)
+		print('INVALID REQUEST', type, url)
