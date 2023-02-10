@@ -33,20 +33,8 @@ class MainCode:
             self.flasher.flash_slow()
 
         if (network_type_switch.value()):
-            from listener import Listener
-            from ir_transmitter import IrTransmitter
-            from ir_codes_manager import IrCodesManager
-            from client_action_home import ClientActionHome
-            from client_action_codes import ClientActionCodes
-            from client_action_router import ClientActionRouter
-            transmitter = IrTransmitter()
-            codes = IrCodesManager(self.network)
-            home_action = ClientActionHome(codes)
-            transmitter = IrTransmitter()
-            codes_action = ClientActionCodes(codes, transmitter, home_action)
-            router = ClientActionRouter(home_action, codes_action)
-            listener = Listener(self.network, router)
-            listener.listen()
+            from controller import Controller
+            Controller(self.network, Logger(self.network).control()
         else:
             while True:
                 print("Value = ", watcher.value())

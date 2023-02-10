@@ -37,6 +37,7 @@ class MockNetwork:
 
     def open_socket(self):
         print('Open Socket for listening')
+        raise OSError('[Errno 98] EADDRINUSE')
     def accept(self, socket):
         print('Socket accept')
         return MockClientConnection(),'ip address'

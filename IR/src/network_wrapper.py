@@ -27,20 +27,12 @@ class Network:
             headers = {'content-type': 'application/json'}
             self._network_layer.put(url, headers, data)
 
-#    def put_old(self, type, data):
-#        if (self.connected):
-#            url = self.get_url('message')
-#            headers = {'content-type': 'application/json'}
-#            body = {'type': type, 'data' : data}
-#            self._network_layer.put(url, headers, body)
-
     def log(self, message):
         url = self.get_url('log')
         self.put(url, message)
 
     def listen(self, action):
         return self._network_layer.listen(action)
-
 
     def open_socket(self):
         return self._network_layer.open_socket()

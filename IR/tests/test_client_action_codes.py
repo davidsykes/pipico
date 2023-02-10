@@ -1,5 +1,4 @@
 import sys
-import pytest
 sys.path.append('../src')
 from client_action_codes import ClientActionCodes
 
