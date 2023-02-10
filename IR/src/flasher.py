@@ -8,3 +8,7 @@ class Flasher:
 
 	def blink(self, timer):
 		self.led.toggle()
+
+	def flash_slow(self):
+		pass
+		

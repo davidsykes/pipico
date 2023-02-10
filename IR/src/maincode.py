@@ -15,7 +15,7 @@ class MainCode:
 
     def maincode(self, system, network_layer):
         self.flasher = Flasher(system)
-        ir = system.MakeOutputPin(10)
+        ir = system.MakeOutputPin(14)
         ir.on()
         button = system.MakeInputPin(15)
         watcher = PinWatcher(system, button)
@@ -33,6 +33,7 @@ class MainCode:
             self.network = Network(network_layer, 'http://192.168.1.87:5000')
             self.network.initialise()
             network_options = self.network.get_network_options()
+            self.flasher.flash_slow()
 
         if (network_type_switch.value()):
             transmitter = IrTransmitter()
