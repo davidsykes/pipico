@@ -1,10 +1,10 @@
 from url_request_decoder import UrlRequestDecoder
 
 class Listener:
-	def __init__(self, network, transmitter, codes):
+	def __init__(self, network, router):
 		self.network = network
 		self.request_decoder = UrlRequestDecoder()
-		self.codes = codes
+		self.router = router
 
 	def listen(self):
 		self.listen2(self.code)
@@ -43,22 +43,4 @@ class Listener:
 	def code(self, http_request):
 		request = self.request_decoder.decode_request(http_request)
 		print("ACTION", request.type, request.url)
-		return self.action(request.type, request.url)
-
-	def action(self, type, url):
-		if type == 'GET' and url == '/':
-			html = """<!DOCTYPE html>
-				<html>
-					<head> <link rel="icon" href="data:,"> <title>Hello Oliver</title> </head>
-					<body> <h1>Hello Oliver</h1>
-"""
-			for code in self.codes:
-				#print(code)
-				html = html + '<p><a href="/code/' + str(code['code']) + '">Code ' + str(code['code']) + '</a></p>' + "\n"
-
-			html = html + """</body>
-				</html>
-			"""
-			#print(html)
-			return html
-		print('INVALID REQUEST', type, url)
+		return self.router.action(request.type, request.url)
