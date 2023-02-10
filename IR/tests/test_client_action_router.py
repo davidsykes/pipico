@@ -3,9 +3,9 @@ sys.path.append('../src')
 from client_action_router import ClientActionRouter
 
 class MockAction:
-    def action(self, action):
+    def action(self, action=None):
         self.action = action
-        return 'action ' + action
+        return 'action ' + ('' if action is None else action)
 
 class TestClientActionRouter:
     def setup_method(self, test_method):
@@ -15,8 +15,7 @@ class TestClientActionRouter:
 
     def test_home_response(self):
         response = self.router.action('GET', '/')
-        assert(self.home_action.action == '/')
-        assert(response == 'action /')
+        assert(response == 'action ')
 
     def test_code_request(self):
         response = self.router.action('GET', '/code/527199')

@@ -8,6 +8,9 @@ class MockClientConnection:
         print('Client close')
 
 class MockNetwork:
+    def __init__(self):
+        self.commands = ['GET /', 'GET /code/527199']
+        self.next = 0
     def initialise(self):
         print('Start the internet')
         return True
@@ -26,11 +29,11 @@ class MockNetwork:
         print(headers)
         print(json.dumps(body))
 
-    def listen(self, action):
-        print("Listen to the network")
-        action("""GET / HTTP/1.1
-Host: 192.168.1.75
-Connection: keep-alive""")
+#    def listen(self, action):
+#        print("Listen to the network")
+#        action("""GET / HTTP/1.1
+#Host: 192.168.1.75
+#Connection: keep-alive""")
 
     def open_socket(self):
         print('Open Socket for listening')
@@ -38,4 +41,8 @@ Connection: keep-alive""")
         print('Socket accept')
         return MockClientConnection(),'ip address'
     def recv(self, cl):
-        return 'GET /code/527199'
+        if self.next < len(self.commands):
+            command = self.commands[self.next]
+            self.next = self.next + 1
+            return command
+        exit()

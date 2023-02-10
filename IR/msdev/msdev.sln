@@ -7,6 +7,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{7AE1E3EC-45A4-454A-8F55-2BB3B1625CF2}"
 	ProjectSection(SolutionItems) = preProject
+		..\src\client_action_codes.py = ..\src\client_action_codes.py
 		..\src\client_action_home.py = ..\src\client_action_home.py
 		..\src\client_action_router.py = ..\src\client_action_router.py
 		..\src\flasher.py = ..\src\flasher.py
@@ -24,6 +25,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{7AE1E3EC-45A
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{75C6D714-B0E6-4578-BFFF-A85456068F12}"
 	ProjectSection(SolutionItems) = preProject
+		..\tests\test_client_action_codes.py = ..\tests\test_client_action_codes.py
 		..\tests\test_client_action_home.py = ..\tests\test_client_action_home.py
 		..\tests\test_client_action_router.py = ..\tests\test_client_action_router.py
 		..\tests\test_ir_codes_manager.py = ..\tests\test_ir_codes_manager.py
