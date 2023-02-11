@@ -17,7 +17,6 @@ class Listener:
 				print('client connected from', addr)
 
 				request = self.network.recv(cl)
-				print('Request',request)
 
 				html = self.code(request)
 

@@ -1,5 +1,5 @@
 class Network:
-    options_url = 'http://192.168.1.87:5000/option?option=oli'
+    options_url = 'http://192.168.1.87:5000/option?option=network'
     connected = False
 
     def __init__(self, network_layer, base_url):
@@ -30,9 +30,6 @@ class Network:
     def log(self, message):
         url = self.get_url('log')
         self.put(url, message)
-
-    def listen(self, action):
-        return self._network_layer.listen(action)
 
     def open_socket(self):
         return self._network_layer.open_socket()

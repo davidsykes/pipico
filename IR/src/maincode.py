@@ -7,7 +7,8 @@ from flasher import Flasher
 SWITCH_1_PIN = 5
 SWITCH_2_PIN = 4
 SWITCH_3_PIN = 3
-SWITCH_4_PIN = 2#
+SWITCH_4_PIN = 2
+IR_RECEIVE_PIN = 15
 
 class MainCode:
 
@@ -15,14 +16,15 @@ class MainCode:
         self.flasher = Flasher(system)
         ir = system.MakeOutputPin(14)
         ir.on()
-        button = system.MakeInputPin(15)
-        watcher = PinWatcher(system, button)
+        ir_receive_pin = system.MakeInputPin(IR_RECEIVE_PIN)
+        watcher = PinWatcher(system, ir_receive_pin)
         analyser = WaveAnalyser()
 
+        # Check configuration switches
         network_switch = system.MakeInputPin(SWITCH_1_PIN, False)       #   Enable network
         network_type_switch = system.MakeInputPin(SWITCH_2_PIN, False)  #   0 = dumper, 1 = listener
-        switch3 = system.MakeInputPin(SWITCH_3_PIN, False)              #   
-        switch4 = system.MakeInputPin(SWITCH_4_PIN, False)              #   Send raw IR to the server
+        switch3 = system.MakeInputPin(SWITCH_3_PIN, False)              #
+        switch4 = system.MakeInputPin(SWITCH_4_PIN, False)              #
         print('Switches', network_switch.value(), network_type_switch.value(), switch3.value(), switch4.value())
 
         network_options = None
