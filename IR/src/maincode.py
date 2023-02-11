@@ -7,7 +7,7 @@ from flasher import Flasher
 SWITCH_1_PIN = 5
 SWITCH_2_PIN = 4
 SWITCH_3_PIN = 3
-SWITCH_4_PIN = 2
+SWITCH_4_PIN = 2#
 
 class MainCode:
 
@@ -27,7 +27,7 @@ class MainCode:
 
         network_options = None
         if (network_switch.value()):
-            server_url = LocalSettings.ServerUrl # 'http://192.168.1.87:5000'
+            server_url = LocalSettings.ServerUrl
             self.network = Network(network_layer, server_url)
             self.network.initialise()
             network_options = self.network.get_network_options()
