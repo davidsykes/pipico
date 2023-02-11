@@ -7,9 +7,6 @@ class Listener:
 		self.router = router
 
 	def listen(self):
-		self.listen2(self.code)
-
-	def listen2(self, action):
 		socket = self.network.open_socket()
 
 		# Listen for connections
@@ -22,8 +19,7 @@ class Listener:
 				request = self.network.recv(cl)
 				print('Request',request)
 
-				html = action(request)
-				#print(html)
+				html = self.code(request)
 
 				if html is None:
 					cl.send('HTTP/1.0 404 Bad Request\r\nContent-type: text/html\r\n\r\n')
@@ -32,7 +28,7 @@ class Listener:
 					cl.send(html)
         
 			except OSError as e:
-				print('connection closed')
+				print('Connection closed')
 			except KeyboardInterrupt as e:
 				print("Close socket")
 				socket.close()

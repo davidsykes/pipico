@@ -1,14 +1,14 @@
 import time
 import network
 import urequests as requests
-from secretsausage import SecretSausage
+from localsettings import LocalSettings
 import json
 import socket
 
 class PicoNetwork:
     def initialise(self):
-        ssid = SecretSausage.SSID
-        password = SecretSausage.Password
+        ssid = LocalSettings.SSID
+        password = LocalSettings.Password
 
         wlan = network.WLAN(network.STA_IF)
         wlan.active(True)
@@ -36,19 +36,9 @@ class PicoNetwork:
     def get(self, url):
         try:
             response = requests.get(url)
-            #print(response.status_code)
             return response.text
         except:
             print('Get url failed:', url)
-            #print("could not connect (status =" + str(wlan.status()) + ")")
-            #if wlan.status() < 0 or wlan.status() >= 3:
-            #    print("trying to reconnect...")
-            #    wlan.disconnect()
-            #    wlan.connect(ssid, password)
-            #if wlan.status() == 3:
-            #    print('connected')
-            #else:
-            #    print('failed')
 
     def put(self, url, headers, data):
         jsonObj = json.dumps(data)
@@ -60,46 +50,6 @@ class PicoNetwork:
         response.close()
         print('put response', status_code)
         return status_code
-
-    def listen(self, action):
-        html = """<!DOCTYPE html>
-            <html>
-                <head> <title>Hello Oliver</title> </head>
-                <body> <h1>Hello Oliver</h1>
-                    <p>Hello from Pico!</p>
-                </body>
-            </html>
-        """
-        # Open socket
-        addr = socket.getaddrinfo('0.0.0.0', 80)[0][-1]
-        s = socket.socket()
-        s.bind(addr)
-        s.listen(1)
-        
-        print('listening on', addr)
-        
-        # Listen for connections
-        while True:
-            try:
-                cl, addr = s.accept()
-                print('client connected from', addr)
-
-                request = cl.recv(1024)
-                request_string = ''.join([chr(int(x)) for x in request])
-                #print(request_string)
-
-                html = action(request_string)
-                print(html)
-
-                response = html
-                
-                cl.send('HTTP/1.0 200 OK\r\nContent-type: text/html\r\n\r\n')
-                cl.send(response)
-                cl.close()
-        
-            except OSError as e:
-                cl.close()
-                print('connection closed')
 
     def open_socket(self):
         # Open socket

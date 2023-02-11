@@ -37,11 +37,6 @@ def analyse(data):
         if (data[i][0] < minval):
             minval = data[i][0]
         i = i + 1
-    print('Min', minval)
-    i = 1
-    while (i < len(data)):
-        print((int)(data[i][0] * 100 / minval))
-        i = i + 1
 
 analyse(data_tv)
 analyse(data_sony)

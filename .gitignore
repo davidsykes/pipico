@@ -1,6 +1,6 @@
 *.pyc
 
-secretsausage.py
+localsettings.py
 
 bin/
 obj/

@@ -1,5 +1,6 @@
 from pinwatcher import PinWatcher
 from waveanalyser import WaveAnalyser
+from localsettings import LocalSettings
 from network_wrapper import Network
 from flasher import Flasher
 
@@ -17,7 +18,6 @@ class MainCode:
         button = system.MakeInputPin(15)
         watcher = PinWatcher(system, button)
         analyser = WaveAnalyser()
-        network = None
 
         network_switch = system.MakeInputPin(SWITCH_1_PIN, False)       #   Enable network
         network_type_switch = system.MakeInputPin(SWITCH_2_PIN, False)  #   0 = dumper, 1 = listener
@@ -27,17 +27,19 @@ class MainCode:
 
         network_options = None
         if (network_switch.value()):
-            self.network = Network(network_layer, 'http://192.168.1.87:5000')
+            server_url = LocalSettings.ServerUrl # 'http://192.168.1.87:5000'
+            self.network = Network(network_layer, server_url)
             self.network.initialise()
             network_options = self.network.get_network_options()
             self.flasher.flash_slow()
 
         if (network_type_switch.value()):
             from controller import Controller
-            Controller(self.network, Logger(self.network).control()
+            from logger import Logger
+            Controller(self.network, Logger(self.network)).control()
         else:
             while True:
-                print("Value = ", watcher.value())
+                print("Wait for code")
                 watcher.wait_for_change()
                 signal_values = [watcher.value()]
                 signal_times = [0]

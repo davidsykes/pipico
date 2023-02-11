@@ -29,12 +29,6 @@ class MockNetwork:
         print(headers)
         print(json.dumps(body))
 
-#    def listen(self, action):
-#        print("Listen to the network")
-#        action("""GET / HTTP/1.1
-#Host: 192.168.1.75
-#Connection: keep-alive""")
-
     def open_socket(self):
         print('Open Socket for listening')
         raise OSError('[Errno 98] EADDRINUSE')
