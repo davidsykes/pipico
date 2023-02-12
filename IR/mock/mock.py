@@ -1,7 +1,8 @@
 import sys
+sys.path.append('../src')
+sys.path.append('../src/wave_forms')
 from mocksystem import MockSystem
 from mocknetwork import MockNetwork
-sys.path.append('../src')
 from maincode import MainCode
 
 system = MockSystem()

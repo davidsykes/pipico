@@ -22,7 +22,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{7AE1E3EC-45A
 		..\src\pico_network.py = ..\src\pico_network.py
 		..\src\pinwatcher.py = ..\src\pinwatcher.py
 		..\src\url_request_decoder.py = ..\src\url_request_decoder.py
-		..\src\waveanalyser.py = ..\src\waveanalyser.py
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{75C6D714-B0E6-4578-BFFF-A85456068F12}"
@@ -55,6 +54,18 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "plot", "plot", "{AAA7ACC1-9
 		..\plots\plot.py = ..\plots\plot.py
 	EndProjectSection
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "waveforms", "waveforms", "{CCB647E2-9D54-49DC-9C69-3A6DC1559494}"
+	ProjectSection(SolutionItems) = preProject
+		..\src\wave_forms\waveanalyser.py = ..\src\wave_forms\waveanalyser.py
+		..\src\wave_forms\waveform.py = ..\src\wave_forms\waveform.py
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "waveforms", "waveforms", "{1B40F82A-AF3D-47F7-8856-D5F36969102A}"
+	ProjectSection(SolutionItems) = preProject
+		..\tests\test_waveanalyser.py = ..\tests\test_waveanalyser.py
+		..\tests\test_waveform.py = ..\tests\test_waveform.py
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -65,6 +76,8 @@ Global
 		{00D60B4D-0181-4033-8584-C01AC76582A7} = {8BE4A2D1-A8CA-474E-B87A-E3799C176608}
 		{C517FF09-DB07-45F9-806C-0F9F330070D3} = {8BE4A2D1-A8CA-474E-B87A-E3799C176608}
 		{AAA7ACC1-99AC-4D4B-9936-8C4D299F128B} = {8BE4A2D1-A8CA-474E-B87A-E3799C176608}
+		{CCB647E2-9D54-49DC-9C69-3A6DC1559494} = {7AE1E3EC-45A4-454A-8F55-2BB3B1625CF2}
+		{1B40F82A-AF3D-47F7-8856-D5F36969102A} = {75C6D714-B0E6-4578-BFFF-A85456068F12}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {CE166307-D452-4CEE-A095-45EF435EEC30}

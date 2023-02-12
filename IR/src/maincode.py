@@ -14,8 +14,8 @@ class MainCode:
 
     def maincode(self, system, network_layer):
         self.flasher = Flasher(system)
-        ir = system.MakeOutputPin(14)
-        ir.on()
+        ir_output = system.MakeOutputPin(14)
+        ir_output.on()
         ir_receive_pin = system.MakeInputPin(IR_RECEIVE_PIN)
         watcher = PinWatcher(system, ir_receive_pin)
         analyser = WaveAnalyser()
@@ -38,7 +38,12 @@ class MainCode:
         if (network_type_switch.value()):
             from controller import Controller
             from logger import Logger
-            Controller(self.network, Logger(self.network)).control()
+            controller = Controller(system,
+                        self.network,
+                        Logger(self.network),
+                        ir_output,
+                        ir_receive_pin)
+            controller.control()
         else:
             while True:
                 print("Wait for code")
