@@ -1,10 +1,10 @@
-class WaveFormPoint:
+class WaveformPoint:
 	def __init__(self, time, value):
 		self.time = time
 		self.value = value
 
-class WaveForm:
+class Waveform:
 	def __init__(self, data):
-		self.code = data['code']
+		self.code = str(data['code'])
 		points = data['waveform']
-		self.points = [WaveFormPoint(p['t'], p['v']) for p in points]
+		self.points = [WaveformPoint(p['t'], p['v']) for p in points]

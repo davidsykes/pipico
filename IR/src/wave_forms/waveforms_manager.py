@@ -1,6 +1,7 @@
 import json
+from waveform import Waveform
 
-class IrCodesManager:
+class WaveformsManager:
 	def __init__(self, network):
 		self.network = network
 
@@ -11,9 +12,10 @@ class IrCodesManager:
 		self.codes = {}
 		self.names = []
 		for code in codes:
-			name = str(code['code'])
+			waveform = Waveform(code)
+			name = waveform.code
+			self.codes[name] = waveform
 			self.names.append(name)
-			self.codes[name] =  code['waveform']
 
 	def get_code(self, code):
 		return self.codes[code]

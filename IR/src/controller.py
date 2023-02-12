@@ -2,25 +2,24 @@ import traceback
 import sys
 from listener import Listener
 from ir_transmitter import IrTransmitter
-from ir_codes_manager import IrCodesManager
+from waveforms_manager import WaveformsManager
 from client_action_home import ClientActionHome
 from client_action_codes import ClientActionCodes
 from client_action_router import ClientActionRouter
 from localsettings import LocalSettings
 
 class Controller:
-	def __init__(self, system, network, logger, ir_output, ir_input):
+	def __init__(self, system, network, logger, ir_output):
 		self.system = system
 		self.network = network
 		self.logger = logger
 		self.ir_output = ir_output
-		self.ir_input = ir_input
 	def control(self):
 		try:
-			codes = IrCodesManager(self.network)
-			home_action = ClientActionHome(codes)
-			transmitter = IrTransmitter(self.system, self.ir_output, self.ir_input)
-			codes_action = ClientActionCodes(codes, transmitter, home_action)
+			waveforms = WaveformsManager(self.network)
+			home_action = ClientActionHome(waveforms)
+			transmitter = IrTransmitter(self.system, self.ir_output)
+			codes_action = ClientActionCodes(waveforms, transmitter, home_action)
 			router = ClientActionRouter(home_action, codes_action)
 			listener = Listener(self.network, router)
 			listener.listen()

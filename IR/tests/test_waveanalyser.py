@@ -1,6 +1,6 @@
 import sys
 import pytest
-sys.path.append('../src')
+sys.path.append('../src/wave_forms')
 from waveanalyser import WaveAnalyser
 from irexception import IrException
 

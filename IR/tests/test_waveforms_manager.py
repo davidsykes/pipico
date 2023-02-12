@@ -1,7 +1,7 @@
 import sys
 sys.path.append('../src')
 sys.path.append('../Mock')
-from ir_codes_manager import IrCodesManager
+from waveforms_manager import WaveformsManager
 
 class MockNetwork:
     def __init__(self, test_codes):
@@ -14,15 +14,19 @@ class MockNetwork:
         else:
             raise notimplemented
 
-class TestIrCodesManager:
+class TestWaveformsManager:
     def setup_method(self, test_method):
         self.test_codes = self.get_test_data()
         self.mock_network = MockNetwork(self.test_codes)
-        self.manager = IrCodesManager(self.mock_network)
+        self.manager = WaveformsManager(self.mock_network)
 
     def test_initialisation(self):
         code = self.manager.get_code('527199')
-        assert(len(code) == 42)
+        assert(code.code == '527199')
+        assert(len(code.points) == 42)
+        code = self.manager.get_code('2911')
+        assert(code.code == '2911')
+        assert(len(code.points) == 42)
 
     def test_get_code_names(self):
         names = self.manager.get_code_names()

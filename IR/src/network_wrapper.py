@@ -20,7 +20,6 @@ class Network:
     def get_network_options(self):
         if (self.connected):
             options = self._network_layer.get(self.options_url)
-            print('Network options', options)
 
     def put(self, url, data):
         if (self.connected):

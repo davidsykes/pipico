@@ -1,25 +1,37 @@
 import sys
 sys.path.append('../src')
+sys.path.append('../src/wave_forms')
 from ir_transmitter import IrTransmitter
+from waveform import Waveform
 
-class MockOutputPin:
-	pass
-
-class MockInputPin:
-	def __init__(self, input_pin):
-		self.input_pin = input_pin
+class MockPin:
+	def __init__(self, system):
+		self.system = system
+		self.start_time = system.time
 		self.trace = []
+	def value(self, value):
+		time = self.system.time - self.start_time
+		self.trace.append((time,value))
+
+class MockSystem:
+	def __init__(self):
+		self.time = 12345
+	def ticks_us(self):
+		self.time = self.time + 1
+		return self.time
 
 class TestIrTransmitter:
 	def setup_method(self, test_method):
-		self.ir_out = MockOutputPin()
-		self.ir_in = MockInputPin(self.ir_out)
-		self.tranmitter = IrTransmitter()
+		self.system = MockSystem()
+		self.pin = MockPin(self.system)
+		self.tranmitter = IrTransmitter(self.system, self.pin)
 
 	def test_transmission(self):
-		test_data = [{'t': 0, 'v': 0}, {'t': 10, 'v': 1}, {'t': 20, 'v': 0}, {'t': 40, 'v': 1}]
-		expected = [{'t': 0, 'v': 0}, {'t': 10, 'v': 1}, {'t': 30, 'v': 0}, {'t': 70, 'v': 1}]
+		test_waveform = Waveform({'code': 2911, 'waveform': [{'t': 0, 'v': 0}, {'t': 10, 'v': 1}, {'t': 20, 'v': 0}]})
 
-		self.tranmitter.transmit(test_data)
+		self.tranmitter.transmit(test_waveform)
 
-		assert(self.ir_in.trace == expected)
+		assert(len(self.pin.trace) == 3)
+		assert(self.pin.trace[0] == (1,0))
+		assert(self.pin.trace[1] == (11,1))
+		assert(self.pin.trace[2] == (31,0))

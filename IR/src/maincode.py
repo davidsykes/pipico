@@ -41,8 +41,7 @@ class MainCode:
             controller = Controller(system,
                         self.network,
                         Logger(self.network),
-                        ir_output,
-                        ir_receive_pin)
+                        ir_output)
             controller.control()
         else:
             while True:

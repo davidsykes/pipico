@@ -13,7 +13,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{7AE1E3EC-45A
 		..\src\controller.py = ..\src\controller.py
 		..\src\flasher.py = ..\src\flasher.py
 		..\src\irexception.py = ..\src\irexception.py
-		..\src\ir_codes_manager.py = ..\src\ir_codes_manager.py
 		..\src\ir_transmitter.py = ..\src\ir_transmitter.py
 		..\src\listener.py = ..\src\listener.py
 		..\src\logger.py = ..\src\logger.py
@@ -29,7 +28,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{75C6D714
 		..\tests\test_client_action_codes.py = ..\tests\test_client_action_codes.py
 		..\tests\test_client_action_home.py = ..\tests\test_client_action_home.py
 		..\tests\test_client_action_router.py = ..\tests\test_client_action_router.py
-		..\tests\test_ir_codes_manager.py = ..\tests\test_ir_codes_manager.py
 		..\tests\test_ir_transmitter.py = ..\tests\test_ir_transmitter.py
 		..\tests\test_logger.py = ..\tests\test_logger.py
 		..\tests\test_pinwatcher.py = ..\tests\test_pinwatcher.py
@@ -58,12 +56,14 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "waveforms", "waveforms", "{
 	ProjectSection(SolutionItems) = preProject
 		..\src\wave_forms\waveanalyser.py = ..\src\wave_forms\waveanalyser.py
 		..\src\wave_forms\waveform.py = ..\src\wave_forms\waveform.py
+		..\src\wave_forms\waveforms_manager.py = ..\src\wave_forms\waveforms_manager.py
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "waveforms", "waveforms", "{1B40F82A-AF3D-47F7-8856-D5F36969102A}"
 	ProjectSection(SolutionItems) = preProject
 		..\tests\test_waveanalyser.py = ..\tests\test_waveanalyser.py
 		..\tests\test_waveform.py = ..\tests\test_waveform.py
+		..\tests\test_waveforms_manager.py = ..\tests\test_waveforms_manager.py
 	EndProjectSection
 EndProject
 Global

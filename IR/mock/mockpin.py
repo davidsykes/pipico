@@ -12,7 +12,7 @@ class MockPin:
     def on(self):
         print("Turn pin", self._name, 'on')
 
-    def value(self):
+    def value(self, value=None):
         if (self._name < 6):
             return self.options_value()
 
@@ -21,10 +21,7 @@ class MockPin:
         time_since_change = current_time - self.time_last_change
 
         if time_since_change >= self.data[self.index][0]:
-            #print('current time', current_time)
-            #print('time_since_change', time_since_change)
             self.next_value()
-            #print('value', self.current_value)
         return self.current_value
 
     def options_value(self):
