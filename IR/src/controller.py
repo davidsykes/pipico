@@ -1,4 +1,3 @@
-import traceback
 import sys
 from listener import Listener
 from ir_transmitter import IrTransmitter
@@ -26,6 +25,7 @@ class Controller:
 		except Exception as e:
 			trace = traceback.format_exc()
 			if LocalSettings.LogExceptions:
-				self.logger.log('Exception: '+ trace)
+				#self.logger.log('Exception: '+ trace)
+				sys.print_exception(e)
 			else:
 				print(trace)
