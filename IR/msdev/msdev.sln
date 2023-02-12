@@ -31,6 +31,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{75C6D714
 		..\tests\test_client_action_home.py = ..\tests\test_client_action_home.py
 		..\tests\test_client_action_router.py = ..\tests\test_client_action_router.py
 		..\tests\test_ir_codes_manager.py = ..\tests\test_ir_codes_manager.py
+		..\tests\test_ir_transmitter.py = ..\tests\test_ir_transmitter.py
 		..\tests\test_logger.py = ..\tests\test_logger.py
 		..\tests\test_pinwatcher.py = ..\tests\test_pinwatcher.py
 		..\tests\test_url_request_decoder.py = ..\tests\test_url_request_decoder.py

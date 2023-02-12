@@ -1,3 +1,3 @@
 class IrTransmitter:
 	def transmit(self, code):
-		pass
+		print('Transmit', code)

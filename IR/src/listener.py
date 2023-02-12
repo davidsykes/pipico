@@ -10,6 +10,7 @@ class Listener:
 		socket = self.network.open_socket()
 
 		# Listen for connections
+		cl = None
 		while True:
 			try:
 				cl, addr = self.network.accept(socket)
@@ -28,12 +29,14 @@ class Listener:
         
 			except OSError as e:
 				print('Connection closed')
+				raise
 			except KeyboardInterrupt as e:
 				print("Close socket")
 				socket.close()
 				raise
 			finally:
-				cl.close()
+				if (cl is not None):
+					cl.close()
 
 	def code(self, http_request):
 		request = self.request_decoder.decode_request(http_request)
