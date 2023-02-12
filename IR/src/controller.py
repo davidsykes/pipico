@@ -20,7 +20,7 @@ class Controller:
 			home_action = ClientActionHome(waveforms)
 			transmitter = IrTransmitter(self.system, self.ir_output)
 			codes_action = ClientActionCodes(waveforms, transmitter, home_action)
-			router = ClientActionRouter(home_action, codes_action)
+			router = ClientActionRouter(home_action, codes_action, self.logger)
 			listener = Listener(self.network, router)
 			listener.listen()
 		except Exception as e:
