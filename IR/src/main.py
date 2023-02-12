@@ -1,3 +1,5 @@
+import sys
+sys.path.append('./wave_forms')
 from machine import Pin, Timer
 import time
 from maincode import MainCode
