@@ -24,7 +24,7 @@ class Controller:
 			listener = Listener(self.network, router)
 			listener.listen()
 		except Exception as e:
-			sys.print_exception(e, flo)
 			if LocalSettings.LogExceptions:
-				flo = io.StringIO('')
-				self.logger.log('Exception: '+ flo.getvalue())
+				string_stream = io.StringIO('')
+				sys.print_exception(e, string_stream)
+				self.logger.log('Exception: '+ string_stream.getvalue())
