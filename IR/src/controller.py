@@ -1,4 +1,5 @@
 import sys
+import io
 from listener import Listener
 from ir_transmitter import IrTransmitter
 from waveforms_manager import WaveformsManager
@@ -23,8 +24,7 @@ class Controller:
 			listener = Listener(self.network, router)
 			listener.listen()
 		except Exception as e:
+			sys.print_exception(e, flo)
 			if LocalSettings.LogExceptions:
-				#self.logger.log('Exception: '+ trace)
-				sys.print_exception(e)
-			else:
-				sys.print_exception(e)
+				flo = io.StringIO('')
+				self.logger.log('Exception: '+ flo.getvalue())
