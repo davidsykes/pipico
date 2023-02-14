@@ -8,6 +8,8 @@ class MockPin:
 		self.state = 0
 	def toggle(self):
 		self.state = 1 - self.state
+	def value(self, value):
+		self.state = value
 
 class MockSystem:
 	def __init__(self):
@@ -37,3 +39,36 @@ class TestFlasher:
 		self.mock_system.trigger()
 
 		assert(self.mock_system.sequence == [1,0,1,0,1,0])
+
+	def test_a_sequence_begins_with_the_led_on(self):
+		self.mock_system.pin.state = 0
+		self.flasher.set_sequence([1,1])
+
+		self.mock_system.trigger()
+		self.mock_system.trigger()
+
+		assert(self.mock_system.sequence == [1,0])
+
+	def test_more_complex_sequence(self):
+		self.flasher.set_sequence([1,2,3,4])
+
+		for _ in range(11):
+			self.mock_system.trigger()
+
+		assert(self.mock_system.sequence == [1,0,0,1,1,1,0,0,0,0,1])
+
+	def test_an_empty_sequence_does_nothing(self):
+		self.flasher.set_sequence([])
+
+		for _ in range(3):
+			self.mock_system.trigger()
+
+		assert(self.mock_system.sequence == [0,0,0])
+
+	def test_a_none_sequence_does_nothing(self):
+		self.flasher.set_sequence(None)
+
+		for _ in range(3):
+			self.mock_system.trigger()
+
+		assert(self.mock_system.sequence == [0,0,0])

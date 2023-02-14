@@ -33,7 +33,7 @@ class MainCode:
             self.network = Network(network_layer, server_url)
             self.network.initialise()
             network_options = self.network.get_network_options()
-            self.flasher.flash_slow()
+            self.flasher.set_sequence(5,5)
 
         if (network_type_switch.value()):
             from controller import Controller
