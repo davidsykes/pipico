@@ -14,17 +14,17 @@ class MainCode:
 
     def maincode(self, system, network_layer):
         self.flasher = Flasher(system)
-        ir_output = system.MakeOutputPin(14)
+        ir_output = system.make_output_pin(14)
         ir_output.on()
-        ir_receive_pin = system.MakeInputPin(IR_RECEIVE_PIN)
+        ir_receive_pin = system.make_input_pin(IR_RECEIVE_PIN)
         watcher = PinWatcher(system, ir_receive_pin)
         analyser = WaveAnalyser()
 
         # Check configuration switches
-        network_switch = system.MakeInputPin(SWITCH_1_PIN, False)       #   Enable network
-        network_type_switch = system.MakeInputPin(SWITCH_2_PIN, False)  #   0 = dumper, 1 = listener
-        switch3 = system.MakeInputPin(SWITCH_3_PIN, False)              #
-        switch4 = system.MakeInputPin(SWITCH_4_PIN, False)              #
+        network_switch = system.make_input_pin(SWITCH_1_PIN, False)       #   Enable network
+        network_type_switch = system.make_input_pin(SWITCH_2_PIN, False)  #   0 = dumper, 1 = listener
+        switch3 = system.make_input_pin(SWITCH_3_PIN, False)              #
+        switch4 = system.make_input_pin(SWITCH_4_PIN, False)              #
         print('Switches', network_switch.value(), network_type_switch.value(), switch3.value(), switch4.value())
 
         network_options = None

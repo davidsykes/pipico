@@ -10,13 +10,13 @@ class MockTimer:
 class MockSystem:
     _ticks = 0
 
-    def MakeOutputPin(self, name):
+    def make_output_pin(self, name):
         return MockPin(name, self)
 
-    def MakeInputPin(self, name, pullup=None):
+    def make_input_pin(self, name, pullup=None):
         return MockPin(name, self)
 
-    def MakeTimer(self):
+    def make_timer(self):
         return MockTimer()
 
     def ticks_us(self):

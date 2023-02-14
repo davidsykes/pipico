@@ -7,15 +7,15 @@ from pico_network import PicoNetwork
 
 
 class SystemWrapper:
-    def MakeOutputPin(self, name):
+    def make_output_pin(self, name):
         return Pin(name, Pin.OUT)
 
-    def MakeInputPin(self, name, pull = None):
+    def make_input_pin(self, name, pull = None):
         if (pull is None):
             return Pin(name, Pin.IN)
         return Pin(name, Pin.IN, Pin.PULL_UP if pull else Pin.PULL_DOWN)
 
-    def MakeTimer(self):
+    def make_timer(self):
         return Timer()
 
     def ticks_us(self):
