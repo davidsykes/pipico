@@ -8,7 +8,7 @@ class Network:
 
     def initialise(self):
         self.connected = self._network_layer.initialise()
-        self.log('Internet connected' if self.connected else 'Internet connection failed')
+        return self.connected
 
     def get_url(self, url):
         return self.base_url + '/' + url

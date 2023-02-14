@@ -31,9 +31,15 @@ class MainCode:
         if (network_switch.value()):
             server_url = LocalSettings.ServerUrl
             self.network = Network(network_layer, server_url)
-            self.network.initialise()
+            connected = self.network.initialise()
+            self.flasher.set_sequence([1,5])
+            if connected:
+                self.flasher.set_sequence([1,1,1,2])
+                self.network.log('Internet connected')
+            else:
+                return
             network_options = self.network.get_network_options()
-            self.flasher.set_sequence(5,5)
+            self.flasher.set_sequence([5,5])
 
         if (network_type_switch.value()):
             from controller import Controller
