@@ -28,3 +28,6 @@ class Controller:
 				string_stream = io.StringIO('')
 				sys.print_exception(e, string_stream)
 				self.logger.log('Exception: '+ string_stream.getvalue())
+			else:
+				import traceback
+				print(traceback.format_exc())

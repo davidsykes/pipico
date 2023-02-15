@@ -23,12 +23,14 @@ class TestClientActionRouter:
     def test_home_response(self):
         response = self.router.action('GET', '/')
         assert(response == 'action ')
+        assert(len(self.mock_logger.logs) == 0)
 
     def test_code_request(self):
         response = self.router.action('GET', '/code/527199')
 
         assert(self.codes_action.action == '/code/527199')
         assert(response == 'action /code/527199')
+        assert(len(self.mock_logger.logs) == 0)
 
     def test_invalid_route(self):
         response = self.router.action('GET', '/cude/527199')
@@ -41,3 +43,4 @@ class TestClientActionRouter:
         response = self.router.action('GET', '/favicon.ico')
 
         assert(response is None)
+        assert(len(self.mock_logger.logs) == 0)

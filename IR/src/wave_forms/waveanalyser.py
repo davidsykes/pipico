@@ -1,7 +1,5 @@
 from irexception import IrException
 
-
-
 class WaveAnalyser:
 	def analyse_old(self, data):
 		self.check_there_is_enough_data(data)
