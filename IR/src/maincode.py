@@ -11,7 +11,6 @@ SWITCH_4_PIN = 2
 IR_RECEIVE_PIN = 15
 
 class MainCode:
-
     def maincode(self, system, network_layer):
         self.flasher = Flasher(system)
         ir_output = system.make_output_pin(14)
