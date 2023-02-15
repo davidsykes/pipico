@@ -3,6 +3,7 @@ from waveanalyser import WaveAnalyser
 from localsettings import LocalSettings
 from network_wrapper import Network
 from flasher import Flasher
+from toggler import Toggler
 
 SWITCH_1_PIN = 5
 SWITCH_2_PIN = 4
@@ -15,7 +16,7 @@ class MainCode:
     def maincode(self, system, network_layer):
         self.flasher = Flasher(system)
         ir_output = system.make_output_pin(14)
-        ir_output.on()
+        self.toggler = Toggler(system, ir_output)
         ir_receive_pin = system.make_input_pin(IR_RECEIVE_PIN)
         watcher = PinWatcher(system, ir_receive_pin)
         analyser = WaveAnalyser()
