@@ -11,9 +11,7 @@ class MockNetwork:
     def __init__(self):
         self.commands = ['GET /', 'GET /code/527199']
         self.next = 0
-    def initialise(self):
-        print('Start the internet')
-        return True
+        self.connected = True
 
     def get_url(self, path):
         return 'url for ' + path

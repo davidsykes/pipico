@@ -1,7 +1,8 @@
 from pinwatcher import PinWatcher
 from waveanalyser import WaveAnalyser
 from localsettings import LocalSettings
-from network_wrapper import Network
+#from network_wrapper import Network
+from service_access import ServiceAccess
 from flasher import Flasher
 from toggler import Toggler
 
@@ -30,23 +31,21 @@ class MainCode:
         network_options = None
         if (network_switch.value()):
             server_url = LocalSettings.ServerUrl
-            self.network = Network(network_layer, server_url)
-            connected = self.network.initialise()
+            self.access = ServiceAccess(network_layer, server_url)
             self.flasher.set_sequence([1,5])
-            if connected:
+            if network_layer.connected:
                 self.flasher.set_sequence([1,1,1,5])
-                self.network.log('Internet connected')
+                self.access.log('Internet connected')
             else:
                 return
-            network_options = self.network.get_network_options()
+            network_options = self.access.get_network_options()
             self.flasher.set_sequence([10,10])
 
         if (network_type_switch.value()):
             from controller import Controller
-            from logger import Logger
             controller = Controller(system,
-                        self.network,
-                        Logger(self.network),
+                        network_layer,
+                        self.access,
                         ir_output)
             controller.control()
         else:

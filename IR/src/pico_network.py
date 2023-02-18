@@ -6,7 +6,8 @@ import json
 import socket
 
 class PicoNetwork:
-    def initialise(self):
+    def __init__(self):
+        self.connected = None
         ssid = LocalSettings.SSID
         password = LocalSettings.Password
 
@@ -26,12 +27,12 @@ class PicoNetwork:
         # Handle connection error
         if wlan.status() != 3:
             print('network connection failed')
-            return False
+            self.connected = False
         else:
             print('The internet is connected')
             status = wlan.ifconfig()
             print( 'ip = ' + status[0] )
-            return True
+            self.connected = True
 
     def get(self, url):
         try:
@@ -46,6 +47,16 @@ class PicoNetwork:
             response = requests.put(url, data=jsonObj, headers=headers)
         except:
             response = requests.put(url, data=jsonObj, headers=headers)
+        status_code = response.status_code
+        response.close()
+        print('put response', status_code)
+        return status_code
+
+    def put2(self, url, headers, data):
+        try:
+            response = requests.put(url, data=data, headers=headers)
+        except:
+            response = requests.put(url, data=data, headers=headers)
         status_code = response.status_code
         response.close()
         print('put response', status_code)
