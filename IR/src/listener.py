@@ -1,10 +1,12 @@
 from url_request_decoder import UrlRequestDecoder
+from ir_exception import IrException
 
 class Listener:
-	def __init__(self, network, router):
+	def __init__(self, network, router, logger):
 		self.network = network
 		self.request_decoder = UrlRequestDecoder()
 		self.router = router
+		self.logger = logger
 
 	def listen(self):
 		socket = self.network.open_socket()
@@ -34,6 +36,8 @@ class Listener:
 				print("Close socket")
 				socket.close()
 				raise
+			except IrException as e:
+				self.logger.log(''.join(['Request exception: ', str(e)]))
 			finally:
 				if (cl is not None):
 					cl.close()

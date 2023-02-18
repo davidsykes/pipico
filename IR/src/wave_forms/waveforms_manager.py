@@ -1,5 +1,6 @@
 import json
 from waveform import Waveform
+from ir_exception import IrException
 
 class WaveformsManager:
 	def __init__(self, network):
@@ -18,7 +19,9 @@ class WaveformsManager:
 			self.names.append(name)
 
 	def get_code(self, code):
-		return self.codes[code]
+		if code in self.codes:
+			return self.codes[code]
+		raise IrException(''.join(["Code '", code, "' not found'"]))
 
 	def get_code_names(self):
 		return self.names

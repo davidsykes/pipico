@@ -71,16 +71,10 @@ class MainCode:
     def analyse(self, signal_times, signal_values, analyser):
         wave_data = self.convert_data(signal_times, signal_values)
         result = analyser.analyse(wave_data)
-        #url = self.get_url('ir')
-        #data = {'code': result, 'wavepoints' : wave_data}
-        #self.network.put(url, data)
         self.service_access.send_ir_code(result, wave_data)
 
     def dump_ir(self, signal_times, signal_values):
         wave_data = self.convert_data(signal_times, signal_values)
-        #url = self.get_url('irdump')
-        #data = {'code': 0, 'wavepoints' : wave_data}
-        #self.network.put(url, data)
         self.service_access.send_ir_code(0, wave_data)
 
     def convert_data(self, signal_times, signal_values):
