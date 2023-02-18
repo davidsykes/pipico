@@ -12,7 +12,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{7AE1E3EC-45A
 		..\src\client_action_router.py = ..\src\client_action_router.py
 		..\src\controller.py = ..\src\controller.py
 		..\src\flasher.py = ..\src\flasher.py
-		..\src\irexception.py = ..\src\irexception.py
+		..\src\ir_exception.py = ..\src\ir_exception.py
 		..\src\ir_transmitter.py = ..\src\ir_transmitter.py
 		..\src\listener.py = ..\src\listener.py
 		..\src\logger.py = ..\src\logger.py
@@ -46,6 +46,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Mock", "Mock", "{C517FF09-D
 		..\mock\mock.py = ..\mock\mock.py
 		..\mock\mocknetwork.py = ..\mock\mocknetwork.py
 		..\mock\mockpin.py = ..\mock\mockpin.py
+		..\mock\mocksystem.py = ..\mock\mocksystem.py
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "plot", "plot", "{AAA7ACC1-99AC-4D4B-9936-8C4D299F128B}"

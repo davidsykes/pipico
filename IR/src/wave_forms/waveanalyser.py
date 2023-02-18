@@ -1,4 +1,4 @@
-from irexception import IrException
+from ir_exception import IrException
 
 class WaveAnalyser:
 	def analyse_old(self, data):

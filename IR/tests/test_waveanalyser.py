@@ -2,7 +2,7 @@ import sys
 import pytest
 sys.path.append('../src/wave_forms')
 from waveanalyser import WaveAnalyser
-from irexception import IrException
+from ir_exception import IrException
 
 
 class TestWaveAnalyser:
