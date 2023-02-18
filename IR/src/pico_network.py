@@ -49,7 +49,8 @@ class PicoNetwork:
             response = requests.put(url, data=jsonObj, headers=headers)
         status_code = response.status_code
         response.close()
-        print('put response', status_code)
+        if (status_code != 200):
+            print('put response', status_code)
         return status_code
 
     def put2(self, url, headers, data):
@@ -59,7 +60,8 @@ class PicoNetwork:
             response = requests.put(url, data=data, headers=headers)
         status_code = response.status_code
         response.close()
-        print('put response', status_code)
+        if (status_code != 200):
+            print('put2 response', status_code)
         return status_code
 
     def open_socket(self):

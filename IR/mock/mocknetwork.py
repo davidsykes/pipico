@@ -27,6 +27,11 @@ class MockNetwork:
         print(headers)
         print(json.dumps(body))
 
+    def put2(self, url, headers, body):
+        print('Put to ', url)
+        print(headers)
+        print(body)
+
     def open_socket(self):
         print('Open Socket for listening')
     def accept(self, socket):
