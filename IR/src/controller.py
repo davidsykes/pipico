@@ -1,5 +1,5 @@
 import sys
-import io
+from uio import StringIO
 from listener import Listener
 from ir_transmitter import IrTransmitter
 from waveforms_manager import WaveformsManager
@@ -29,7 +29,7 @@ class Controller:
 
 	def log_exception(self, message, e):
 			if LocalSettings.LogExceptions:
-				string_stream = io.StringIO('')
+				string_stream = StringIO('')
 				sys.print_exception(e, string_stream)
 				self.service_access.log(''.join([message, ': ', string_stream.getvalue()]))
 			else:

@@ -1,9 +1,8 @@
-import time
 import network
 import urequests as requests
-from localsettings import LocalSettings
 import json
-import socket
+from localsettings import LocalSettings
+from ir_exception import IrException
 
 class PicoNetwork:
     def __init__(self):
@@ -35,11 +34,13 @@ class PicoNetwork:
             self.connected = True
 
     def get(self, url):
-        try:
-            response = requests.get(url)
-            return response.text
-        except:
-            print('Get url failed:', url)
+        response = requests.get(url)
+        status_code = response.status_code
+        text = response.text
+        response.close()
+        if status_code == 200:
+            return text
+        raise IrException(''.join(['Error ', str(status_code), ' accessing url ', url]))
 
     def put(self, url, headers, data):
         jsonObj = json.dumps(data)
