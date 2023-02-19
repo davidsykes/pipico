@@ -1,6 +1,8 @@
 import sys
 sys.path.append('./wave_forms')
 sys.path.append('./service')
+sys.path.append('./io')
+sys.path.append('./logic')
 from machine import Pin, Timer
 import time
 from maincode import MainCode

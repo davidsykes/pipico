@@ -1,35 +1,27 @@
 from pinwatcher import PinWatcher
 from waveanalyser import WaveAnalyser
 from localsettings import LocalSettings
-#from network_wrapper import Network
 from service_access import ServiceAccess
 from flasher import Flasher
 from toggler import Toggler
+from configuration_switches import ConfigurationSwitches
 
-SWITCH_1_PIN = 5
-SWITCH_2_PIN = 4
-SWITCH_3_PIN = 3
-SWITCH_4_PIN = 2
 IR_RECEIVE_PIN = 15
+IR_TRANSMIT_PIN = 14
 
 class MainCode:
     def maincode(self, system, network_layer):
         self.flasher = Flasher(system)
-        ir_output = system.make_output_pin(14)
+        ir_output = system.make_output_pin(IR_TRANSMIT_PIN)
         self.toggler = Toggler(system, ir_output)
         ir_receive_pin = system.make_input_pin(IR_RECEIVE_PIN)
         watcher = PinWatcher(system, ir_receive_pin)
         analyser = WaveAnalyser()
-
-        # Check configuration switches
-        network_switch = system.make_input_pin(SWITCH_1_PIN, False)       #   Enable network
-        network_type_switch = system.make_input_pin(SWITCH_2_PIN, False)  #   0 = dumper, 1 = listener
-        switch3 = system.make_input_pin(SWITCH_3_PIN, False)              #
-        switch4 = system.make_input_pin(SWITCH_4_PIN, False)              #
-        print('Switches', network_switch.value(), network_type_switch.value(), switch3.value(), switch4.value())
-
         network_options = None
-        if (network_switch.value()):
+
+        configuration_switches = ConfigurationSwitches(system)
+
+        if configuration_switches.is_network_enabled:
             server_url = LocalSettings.ServerUrl
             self.service_access = ServiceAccess(network_layer, server_url)
             self.flasher.set_sequence([1,5])
@@ -41,7 +33,7 @@ class MainCode:
             network_options = self.service_access.get_network_options()
             self.flasher.set_sequence([10,10])
 
-        if (network_type_switch.value()):
+        if configuration_switches.are_we_a_listener:
             from controller import Controller
             controller = Controller(system,
                         network_layer,

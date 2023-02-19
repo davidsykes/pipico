@@ -5,6 +5,7 @@ from ir_exception import IrException
 class WaveformsManager:
 	def __init__(self, network):
 		self.network = network
+		self.load_sequence_data()
 
 		codes_url = self.network.get_url('codes')
 		codes_json = self.network.get(codes_url)
@@ -17,6 +18,11 @@ class WaveformsManager:
 			name = waveform.code
 			self.codes[name] = waveform
 			self.names.append(name)
+
+	def load_sequence_data(self):
+		sequences_url = self.network.get_url('sequences')
+		sequences_json = self.network.get(sequences_url)
+		self.sequences = json.loads(sequences_json)
 
 	def get_code(self, code):
 		if code in self.codes:

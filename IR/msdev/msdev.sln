@@ -15,10 +15,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{7AE1E3EC-45A
 		..\src\ir_exception.py = ..\src\ir_exception.py
 		..\src\ir_transmitter.py = ..\src\ir_transmitter.py
 		..\src\listener.py = ..\src\listener.py
-		..\src\logger.py = ..\src\logger.py
 		..\src\maincode.py = ..\src\maincode.py
 		..\src\pico_network.py = ..\src\pico_network.py
-		..\src\pinwatcher.py = ..\src\pinwatcher.py
 		..\src\toggler.py = ..\src\toggler.py
 		..\src\url_request_decoder.py = ..\src\url_request_decoder.py
 	EndProjectSection
@@ -30,10 +28,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{75C6D714
 		..\tests\test_client_action_router.py = ..\tests\test_client_action_router.py
 		..\tests\test_flasher.py = ..\tests\test_flasher.py
 		..\tests\test_ir_transmitter.py = ..\tests\test_ir_transmitter.py
-		..\tests\test_logger.py = ..\tests\test_logger.py
 		..\tests\test_pinwatcher.py = ..\tests\test_pinwatcher.py
 		..\tests\test_url_request_decoder.py = ..\tests\test_url_request_decoder.py
-		..\tests\test_waveanalyser.py = ..\tests\test_waveanalyser.py
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Pico", "Pico", "{00D60B4D-0181-4033-8584-C01AC76582A7}"
@@ -78,6 +74,12 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "service", "service", "{4AD2
 		..\src\service\service_access.py = ..\src\service\service_access.py
 	EndProjectSection
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "io", "io", "{67EBF6BD-61E1-47BF-ADDD-FD056F77CC70}"
+	ProjectSection(SolutionItems) = preProject
+		..\src\io\configuration_switches.py = ..\src\io\configuration_switches.py
+		..\src\io\pinwatcher.py = ..\src\io\pinwatcher.py
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -92,6 +94,7 @@ Global
 		{1B40F82A-AF3D-47F7-8856-D5F36969102A} = {75C6D714-B0E6-4578-BFFF-A85456068F12}
 		{4D98DF46-00E7-40BE-B3E8-7E0BF2B90A3E} = {75C6D714-B0E6-4578-BFFF-A85456068F12}
 		{4AD2AE22-CD71-4A00-BD44-A764B474032B} = {7AE1E3EC-45A4-454A-8F55-2BB3B1625CF2}
+		{67EBF6BD-61E1-47BF-ADDD-FD056F77CC70} = {7AE1E3EC-45A4-454A-8F55-2BB3B1625CF2}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {CE166307-D452-4CEE-A095-45EF435EEC30}
