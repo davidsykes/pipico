@@ -28,7 +28,7 @@ class Controller:
 
 	def log_exception(self, message, e):
 			if LocalSettings.LogExceptions:
-				self.system.log_exception(message, e)
+				self.system.log_exception(self.service_access, message, e)
 			else:
 				import traceback
 				print(message)

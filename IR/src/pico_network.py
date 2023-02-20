@@ -1,6 +1,8 @@
 import network
 import urequests as requests
 import json
+import socket
+import time
 from localsettings import LocalSettings
 from ir_exception import IrException
 

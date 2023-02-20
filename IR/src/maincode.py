@@ -19,15 +19,17 @@ class MainCode:
         analyser = WaveAnalyser()
         network_options = None
 
+        self.flasher.set_status(1)
         configuration_switches = ConfigurationSwitches(system)
 
         if configuration_switches.is_network_enabled:
-            network = system.initialise_network()
+            self.flasher.set_status(2)
+            network = system.initialise_network(self.flasher)
+            self.flasher.set_status(3)
             server_url = LocalSettings.ServerUrl
             self.service_access = ServiceAccess(network, server_url)
-            self.flasher.set_sequence([1,5])
             if network.connected:
-                self.flasher.set_sequence([1,1,1,5])
+                self.flasher.set_status(4)
                 self.service_access.log('Internet connected')
             else:
                 return

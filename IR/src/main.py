@@ -31,10 +31,10 @@ class SystemWrapper:
     def initialise_network(self):
         return PicoNetwork()
 
-    def log_exception(self, message, e):
+    def log_exception(self, service_access, message, e):
         string_stream = StringIO('')
         sys.print_exception(e, string_stream)
-        self.service_access.log(''.join([message, ': ', string_stream.getvalue()]))
+        service_access.log(''.join([message, ': ', string_stream.getvalue()]))
 
 
 system = SystemWrapper()
