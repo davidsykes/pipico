@@ -10,7 +10,7 @@ IR_RECEIVE_PIN = 15
 IR_TRANSMIT_PIN = 14
 
 class MainCode:
-    def maincode(self, system, network_layer):
+    def maincode(self, system):
         self.flasher = Flasher(system)
         ir_output = system.make_output_pin(IR_TRANSMIT_PIN)
         self.toggler = Toggler(system, ir_output)
@@ -22,10 +22,11 @@ class MainCode:
         configuration_switches = ConfigurationSwitches(system)
 
         if configuration_switches.is_network_enabled:
+            network = system.initialise_network()
             server_url = LocalSettings.ServerUrl
-            self.service_access = ServiceAccess(network_layer, server_url)
+            self.service_access = ServiceAccess(network, server_url)
             self.flasher.set_sequence([1,5])
-            if network_layer.connected:
+            if network.connected:
                 self.flasher.set_sequence([1,1,1,5])
                 self.service_access.log('Internet connected')
             else:
@@ -36,7 +37,7 @@ class MainCode:
         if configuration_switches.are_we_a_listener:
             from controller import Controller
             controller = Controller(system,
-                        network_layer,
+                        network,
                         self.service_access,
                         ir_output)
             controller.control()

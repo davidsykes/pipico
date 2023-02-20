@@ -7,6 +7,7 @@ from machine import Pin, Timer
 import time
 from maincode import MainCode
 from pico_network import PicoNetwork
+from uio import StringIO
 
 
 class SystemWrapper:
@@ -27,8 +28,15 @@ class SystemWrapper:
     def init_timer(self, timer, freq, callbackfn):
         timer.init(freq=freq, mode=Timer.PERIODIC, callback=callbackfn)
 
+    def initialise_network(self):
+        return PicoNetwork()
 
-network = PicoNetwork()
+    def log_exception(self, message, e):
+        string_stream = StringIO('')
+        sys.print_exception(e, string_stream)
+        self.service_access.log(''.join([message, ': ', string_stream.getvalue()]))
+
+
 system = SystemWrapper()
 maincode = MainCode()
-maincode.maincode(system, network)
+maincode.maincode(system)

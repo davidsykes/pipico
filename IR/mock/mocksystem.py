@@ -1,4 +1,5 @@
 from mockpin import MockInputPin, MockOutputPin, MockIrReceivePin
+from mocknetwork import MockNetwork
 
 class MockTimer:
     def __init__(self):
@@ -9,7 +10,7 @@ class MockTimer:
 
 class MockSystem:
     _ticks = 0
-    enable_network = True
+    enable_network = False
     transmit_ir_codes = True
 
     def __init__(self):
@@ -21,6 +22,9 @@ class MockSystem:
         self.pins['4'] = MockInputPin(self.transmit_ir_codes)
         self.pins['3'] = MockInputPin(False)
         self.pins['2'] = MockInputPin(False)
+
+    def initialise_network(self):
+        return MockNetwork()
 
     def make_output_pin(self, name):
         return self.make_pin(name)
