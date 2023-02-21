@@ -23,7 +23,7 @@ class MockSystem:
         self.pins['3'] = MockInputPin(False)
         self.pins['2'] = MockInputPin(False)
 
-    def initialise_network(self):
+    def initialise_network(self, flasher):
         return MockNetwork()
 
     def make_output_pin(self, name):

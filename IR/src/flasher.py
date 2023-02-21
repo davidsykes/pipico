@@ -39,3 +39,11 @@ class Flasher:
 	def set_sequence(self, sequence):
 		self.sequence = sequence
 		self.current_step = None
+
+	def set_status(self, count):
+		sequence = [1]
+		for i in range(1, count):
+			sequence.append(1)
+			sequence.append(1)
+		sequence.append(5)
+		self.set_sequence(sequence)

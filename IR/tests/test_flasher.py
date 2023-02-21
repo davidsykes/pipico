@@ -72,3 +72,18 @@ class TestFlasher:
 			self.mock_system.trigger()
 
 		assert(self.mock_system.sequence == [0,0,0])
+
+	def test_set_status_1_flashes_once(self):
+		self.flasher.set_status(1)
+
+		assert(self.flasher.sequence == [1,5])
+
+	def test_set_status_3_flashes_three_times(self):
+		self.flasher.set_status(3)
+
+		assert(self.flasher.sequence == [1,1,1,1,1,5])
+
+	def test_set_status_0_flashes_once(self):
+		self.flasher.set_status(0)
+
+		assert(self.flasher.sequence == [1,5])
