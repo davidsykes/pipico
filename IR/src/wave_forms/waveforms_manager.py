@@ -22,8 +22,17 @@ class WaveformsManager:
 	def load_sequence_data(self):
 		sequences_url = self.network.get_url('sequences')
 		sequences_json = self.network.get(sequences_url)
-		print('sequences_jsonsequences_json', sequences_json)
-		self.sequences = json.loads(sequences_json)
+		sequences = json.loads(sequences_json)['sequences']
+
+		self.sequences = {}
+		for s in sequences:
+			self.sequences[s['name']] = s['codes']
+
+	def get_sequence_names(self):
+		return list(self.sequences.keys())
+
+	def get_sequence(self, sequence_name):
+		return self.sequences[sequence_name]
 
 	def get_code(self, code):
 		if code in self.codes:
