@@ -1,5 +1,5 @@
 import sys
-sys.path.append('../src')
+sys.path.append('../src/io')
 sys.path.append('../src/wave_forms')
 from ir_transmitter import IrTransmitter
 from waveform import Waveform

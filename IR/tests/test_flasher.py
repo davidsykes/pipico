@@ -1,5 +1,5 @@
 import sys
-sys.path.append('../src')
+sys.path.append('../src/io')
 from flasher import Flasher
 
 class MockPin:

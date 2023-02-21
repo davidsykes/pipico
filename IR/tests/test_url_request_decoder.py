@@ -1,6 +1,6 @@
 import sys
-sys.path.append('../src')
 sys.path.append('../src/logic')
+sys.path.append('../src/server')
 from url_request_decoder import UrlRequestDecoder
 
 class TestUrlRequestProcessor:
