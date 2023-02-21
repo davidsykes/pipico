@@ -3,9 +3,11 @@ sys.path.append('../src/server')
 from client_action_router import ClientActionRouter
 
 class MockAction:
+    def __init__(self, name):
+        self.name = name
     def action(self, action=None):
         self.action = action
-        return 'action ' + ('' if action is None else action)
+        return self.name + ' action ' + ('' if action is None else action)
 
 class MockLogger:
     def __init__(self):
@@ -15,21 +17,21 @@ class MockLogger:
 
 class TestClientActionRouter:
     def setup_method(self, test_method):
-        self.codes_action = MockAction();
-        self.home_action = MockAction();
+        self.codes_action = MockAction('codes');
+        self.home_action = MockAction('home');
         self.mock_logger = MockLogger()
         self.router = ClientActionRouter(self.home_action, self.codes_action, self.mock_logger)
 
     def test_home_response(self):
         response = self.router.action('GET', '/')
-        assert(response == 'action ')
+        assert(response == 'home action ')
         assert(len(self.mock_logger.logs) == 0)
 
     def test_code_request(self):
         response = self.router.action('GET', '/code/527199')
 
         assert(self.codes_action.action == '/code/527199')
-        assert(response == 'action /code/527199')
+        assert(response == 'codes action /code/527199')
         assert(len(self.mock_logger.logs) == 0)
 
     def test_invalid_route(self):

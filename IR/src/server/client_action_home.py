@@ -1,8 +1,11 @@
+from urllib.parse import quote
+
 class ClientActionHome:
 	def __init__(self, codes):
-		self.codes = codes.get_code_names()
+		self.sequences = codes.get_sequence_names()
 	def action(self):
 		html = '<h1>Push My Button</h1>'
-		for code in self.codes:
-			html = html + ''.join(['<p><a href="/code/', code, '">Code ', code, '</a></p>'])
+		for sequence in self.sequences:
+			seqeunce_quoted = quote(sequence)
+			html = html + ''.join(['<p><a href="/sequence/', seqeunce_quoted, '">', sequence, '</a></p>'])
 		return html

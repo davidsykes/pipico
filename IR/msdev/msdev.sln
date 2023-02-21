@@ -7,30 +7,15 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{7AE1E3EC-45A4-454A-8F55-2BB3B1625CF2}"
 	ProjectSection(SolutionItems) = preProject
-		..\src\client_action_codes.py = ..\src\client_action_codes.py
-		..\src\client_action_home.py = ..\src\client_action_home.py
-		..\src\client_action_router.py = ..\src\client_action_router.py
-		..\src\controller.py = ..\src\controller.py
 		..\src\flasher.py = ..\src\flasher.py
 		..\src\ir_exception.py = ..\src\ir_exception.py
 		..\src\ir_transmitter.py = ..\src\ir_transmitter.py
-		..\src\listener.py = ..\src\listener.py
 		..\src\maincode.py = ..\src\maincode.py
 		..\src\pico_network.py = ..\src\pico_network.py
 		..\src\toggler.py = ..\src\toggler.py
-		..\src\url_request_decoder.py = ..\src\url_request_decoder.py
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{75C6D714-B0E6-4578-BFFF-A85456068F12}"
-	ProjectSection(SolutionItems) = preProject
-		..\tests\test_client_action_codes.py = ..\tests\test_client_action_codes.py
-		..\tests\test_client_action_home.py = ..\tests\test_client_action_home.py
-		..\tests\test_client_action_router.py = ..\tests\test_client_action_router.py
-		..\tests\test_flasher.py = ..\tests\test_flasher.py
-		..\tests\test_ir_transmitter.py = ..\tests\test_ir_transmitter.py
-		..\tests\test_pinwatcher.py = ..\tests\test_pinwatcher.py
-		..\tests\test_url_request_decoder.py = ..\tests\test_url_request_decoder.py
-	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Pico", "Pico", "{00D60B4D-0181-4033-8584-C01AC76582A7}"
 	ProjectSection(SolutionItems) = preProject
@@ -80,6 +65,31 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "io", "io", "{67EBF6BD-61E1-
 		..\src\io\pinwatcher.py = ..\src\io\pinwatcher.py
 	EndProjectSection
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "server", "server", "{52AE0862-6A04-4C28-8575-B541114D6BC9}"
+	ProjectSection(SolutionItems) = preProject
+		..\tests\test_client_action_codes.py = ..\tests\test_client_action_codes.py
+		..\tests\test_client_action_home.py = ..\tests\test_client_action_home.py
+		..\tests\test_client_action_router.py = ..\tests\test_client_action_router.py
+		..\tests\test_url_request_decoder.py = ..\tests\test_url_request_decoder.py
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "io", "io", "{BE568290-BEA7-4197-9685-9C9D17FA0A26}"
+	ProjectSection(SolutionItems) = preProject
+		..\tests\test_flasher.py = ..\tests\test_flasher.py
+		..\tests\test_ir_transmitter.py = ..\tests\test_ir_transmitter.py
+		..\tests\test_pinwatcher.py = ..\tests\test_pinwatcher.py
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "server", "server", "{08513137-33E4-4D9F-8D90-4B368C116A93}"
+	ProjectSection(SolutionItems) = preProject
+		..\src\server\client_action_codes.py = ..\src\server\client_action_codes.py
+		..\src\server\client_action_home.py = ..\src\server\client_action_home.py
+		..\src\server\client_action_router.py = ..\src\server\client_action_router.py
+		..\src\server\controller.py = ..\src\server\controller.py
+		..\src\server\listener.py = ..\src\server\listener.py
+		..\src\server\url_request_decoder.py = ..\src\server\url_request_decoder.py
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -95,6 +105,9 @@ Global
 		{4D98DF46-00E7-40BE-B3E8-7E0BF2B90A3E} = {75C6D714-B0E6-4578-BFFF-A85456068F12}
 		{4AD2AE22-CD71-4A00-BD44-A764B474032B} = {7AE1E3EC-45A4-454A-8F55-2BB3B1625CF2}
 		{67EBF6BD-61E1-47BF-ADDD-FD056F77CC70} = {7AE1E3EC-45A4-454A-8F55-2BB3B1625CF2}
+		{52AE0862-6A04-4C28-8575-B541114D6BC9} = {75C6D714-B0E6-4578-BFFF-A85456068F12}
+		{BE568290-BEA7-4197-9685-9C9D17FA0A26} = {75C6D714-B0E6-4578-BFFF-A85456068F12}
+		{08513137-33E4-4D9F-8D90-4B368C116A93} = {7AE1E3EC-45A4-454A-8F55-2BB3B1625CF2}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {CE166307-D452-4CEE-A095-45EF435EEC30}
