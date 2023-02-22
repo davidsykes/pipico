@@ -20,7 +20,7 @@ class Controller:
 			waveforms = WaveformsManager(self.service_access)
 			home_action = ClientActionHome(waveforms)
 			transmitter = IrTransmitter(self.system, self.ir_output)
-			sequences_action = ClientActionSequences()
+			sequences_action = ClientActionSequences(waveforms, transmitter, home_action)
 			codes_action = ClientActionCodes(waveforms, transmitter, home_action)
 			router = ClientActionRouter(home_action, sequences_action, codes_action, self.service_access)
 			listener = Listener(self.network, router, self.service_access)
