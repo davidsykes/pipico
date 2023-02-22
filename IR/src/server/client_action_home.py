@@ -6,6 +6,6 @@ class ClientActionHome:
 	def action(self):
 		html = '<h1>Push My Button</h1>'
 		for sequence in self.sequences:
-			seqeunce_quoted = quote(sequence)
-			html = html + ''.join(['<p><a href="/sequence/', seqeunce_quoted, '">', sequence, '</a></p>'])
+			sequence_quoted = quote(sequence)
+			html = html + ''.join(['<p><a href="/sequence/', sequence_quoted, '">', sequence, '</a></p>'])
 		return html

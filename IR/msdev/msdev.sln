@@ -70,6 +70,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "server", "server", "{52AE08
 		..\tests\test_client_action_codes.py = ..\tests\test_client_action_codes.py
 		..\tests\test_client_action_home.py = ..\tests\test_client_action_home.py
 		..\tests\test_client_action_router.py = ..\tests\test_client_action_router.py
+		..\tests\test_client_action_sequences.py = ..\tests\test_client_action_sequences.py
 		..\tests\test_url_request_decoder.py = ..\tests\test_url_request_decoder.py
 	EndProjectSection
 EndProject
@@ -85,6 +86,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "server", "server", "{085131
 		..\src\server\client_action_codes.py = ..\src\server\client_action_codes.py
 		..\src\server\client_action_home.py = ..\src\server\client_action_home.py
 		..\src\server\client_action_router.py = ..\src\server\client_action_router.py
+		..\src\server\client_action_sequences.py = ..\src\server\client_action_sequences.py
 		..\src\server\controller.py = ..\src\server\controller.py
 		..\src\server\listener.py = ..\src\server\listener.py
 		..\src\server\url_request_decoder.py = ..\src\server\url_request_decoder.py

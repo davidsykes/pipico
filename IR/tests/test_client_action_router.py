@@ -17,14 +17,22 @@ class MockLogger:
 
 class TestClientActionRouter:
     def setup_method(self, test_method):
-        self.codes_action = MockAction('codes');
         self.home_action = MockAction('home');
+        self.sequences_action = MockAction('sequence');
+        self.codes_action = MockAction('codes');
         self.mock_logger = MockLogger()
-        self.router = ClientActionRouter(self.home_action, self.codes_action, self.mock_logger)
+        self.router = ClientActionRouter(self.home_action, self.sequences_action, self.codes_action, self.mock_logger)
 
     def test_home_response(self):
         response = self.router.action('GET', '/')
         assert(response == 'home action ')
+        assert(len(self.mock_logger.logs) == 0)
+
+    def test_sequence_request(self):
+        response = self.router.action('GET', '/sequence/Sequence%201')
+
+        assert(self.sequences_action.action == '/sequence/Sequence%201')
+        assert(response == 'sequence action /sequence/Sequence%201')
         assert(len(self.mock_logger.logs) == 0)
 
     def test_code_request(self):

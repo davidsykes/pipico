@@ -37,7 +37,7 @@ class TestClientActionCodes:
 
 		assert(response == 'home action')
 
-	def test_invlid_action(self):
+	def test_invalid_action(self):
 		response = self.action.action('/coode/527199')
 
 		assert(response == '<h1>INVALID CODE /coode/527199</h1>')

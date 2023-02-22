@@ -3,6 +3,7 @@ from listener import Listener
 from ir_transmitter import IrTransmitter
 from waveforms_manager import WaveformsManager
 from client_action_home import ClientActionHome
+from client_action_sequences import ClientActionSequences
 from client_action_codes import ClientActionCodes
 from client_action_router import ClientActionRouter
 from localsettings import LocalSettings
@@ -19,8 +20,9 @@ class Controller:
 			waveforms = WaveformsManager(self.service_access)
 			home_action = ClientActionHome(waveforms)
 			transmitter = IrTransmitter(self.system, self.ir_output)
+			sequences_action = ClientActionSequences()
 			codes_action = ClientActionCodes(waveforms, transmitter, home_action)
-			router = ClientActionRouter(home_action, codes_action, self.service_access)
+			router = ClientActionRouter(home_action, sequences_action, codes_action, self.service_access)
 			listener = Listener(self.network, router, self.service_access)
 			listener.listen()
 		except Exception as e:

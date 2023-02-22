@@ -11,7 +11,7 @@ class MockClientConnection:
 
 class MockNetwork:
     def __init__(self):
-        self.commands = ['GET /', 'GET /code/527199']
+        self.commands = ['GET /', 'GET /sequence/Sequence%201']
         self.next = 0
         self.connected = True
 
