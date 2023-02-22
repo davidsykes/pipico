@@ -35,7 +35,7 @@ class MockNetwork:
         print('Open Socket for listening')
     def accept(self, socket):
         print('Socket accept')
-        return MockClientConnection(),'ip address'
+        return MockClientConnection(),'mock'
     def recv(self, cl):
         if self.next < len(self.commands):
             command = self.commands[self.next]

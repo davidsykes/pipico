@@ -11,7 +11,9 @@ class ClientActionSequences:
 		if x:
 			sequence_name_quoted = x.group(1)
 			sequence_name = unquote(sequence_name_quoted)
+			print('Run sequence', sequence_name)
 			sequence_codes = self.waveform_manager.get_sequence(sequence_name)
+			print('Sequence codes', sequence_codes)
 			for code_name in sequence_codes:
 				code = self.waveform_manager.get_code(code_name)
 				self.transmitter.transmit(code)
