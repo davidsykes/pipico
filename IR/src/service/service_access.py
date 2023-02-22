@@ -34,5 +34,4 @@ class ServiceAccess:
             url = self.get_url('ircode')
             headers = {'content-type': 'application/json'}
             data = {'code': str(code), 'wavepoints' : wave_data}
-            jsonData = json.dumps(data)
-            self.network.put2(url, headers, jsonData)
+            self.network.put(url, headers, data)

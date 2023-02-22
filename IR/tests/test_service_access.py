@@ -1,14 +1,15 @@
 import sys
+import json
 sys.path.append('../src/service')
 from service_access import ServiceAccess
 
 class MockNetwork:
     def __init__(self):
         self.connected = True
-    def put2(self,url, headers, json):
+    def put(self,url, headers, data):
         self.put_url = url
         self.put_headers = headers
-        self.put_data = json
+        self.put_data = json.dumps(data)
 
 class TestServiceAccess:
     def setup_method(self, test_method):

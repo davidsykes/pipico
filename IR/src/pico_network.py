@@ -56,17 +56,6 @@ class PicoNetwork:
             print('put response', status_code)
         return status_code
 
-    def put2(self, url, headers, data):
-        try:
-            response = requests.put(url, data=data, headers=headers)
-        except:
-            response = requests.put(url, data=data, headers=headers)
-        status_code = response.status_code
-        response.close()
-        if (status_code != 200):
-            print('put2 response', status_code)
-        return status_code
-
     def open_socket(self):
         # Open socket
         addr = socket.getaddrinfo('0.0.0.0', 80)[0][-1]

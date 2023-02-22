@@ -5,7 +5,7 @@ from ir_exception import IrException
 
 class MockClientConnection:
     def send(self, data):
-        print('Client send', data)
+        print(''.join(['Client send "', data, '"']))
     def close(self):
         print('Client close')
 
@@ -28,14 +28,8 @@ class MockNetwork:
             raise IrException(''.join(['HTTPError ', str(e.code), ' error accessing url ', url]))
 
     def put(self, url, headers, body):
-        print('Put to ', url)
-        print(headers)
+        print('Put to', url)
         print(json.dumps(body))
-
-    def put2(self, url, headers, body):
-        print('Put to ', url)
-        print(headers)
-        print(body)
 
     def open_socket(self):
         print('Open Socket for listening')
