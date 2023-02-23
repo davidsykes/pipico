@@ -9,6 +9,7 @@ from ir_exception import IrException
 class PicoNetwork:
     def __init__(self):
         self.connected = None
+        self.ip_address = 'not connected'
         ssid = LocalSettings.SSID
         password = LocalSettings.Password
 
@@ -34,6 +35,7 @@ class PicoNetwork:
             status = wlan.ifconfig()
             print( 'ip = ' + status[0] )
             self.connected = True
+            self.ip_address = status[0]
 
     def get(self, url):
         response = requests.get(url)
@@ -62,7 +64,6 @@ class PicoNetwork:
         s = socket.socket()
         s.bind(addr)
         s.listen(1)
-        print('listening on', addr)
         return s
 
     def accept(self, s):

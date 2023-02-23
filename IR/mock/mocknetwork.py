@@ -14,6 +14,7 @@ class MockNetwork:
         self.commands = ['GET /', 'GET /sequence/Sequence%201']
         self.next = 0
         self.connected = True
+        self.ip_address = 'mock connection'
 
     def get_url(self, path):
         return 'url for ' + path

@@ -30,7 +30,7 @@ class MainCode:
             self.service_access = ServiceAccess(network, server_url)
             if network.connected:
                 self.flasher.set_status(4)
-                self.service_access.log('Internet connected')
+                self.service_access.log('Internet connected on ip ' + network.ip_address)
             else:
                 return
             network_options = self.service_access.get_network_options()
@@ -44,6 +44,7 @@ class MainCode:
                         ir_output)
             controller.control()
         else:
+            self.service_access.log('Wait for an ir code')
             print("Wait for code")
             while True:
                 watcher.wait_for_change()

@@ -24,6 +24,7 @@ class Controller:
 			codes_action = ClientActionCodes(waveforms, transmitter, home_action)
 			router = ClientActionRouter(home_action, sequences_action, codes_action, self.service_access)
 			listener = Listener(self.network, router, self.service_access)
+			self.service_access.log('Wait for sequence requests')
 			listener.listen()
 		except Exception as e:
 			self.log_exception('Exception', e)
