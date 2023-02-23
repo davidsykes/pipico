@@ -10,7 +10,7 @@ class MockTimer:
 
 class MockSystem:
     _ticks = 0
-    enable_network = False
+    enable_network = True
     transmit_ir_codes = True
 
     def __init__(self):

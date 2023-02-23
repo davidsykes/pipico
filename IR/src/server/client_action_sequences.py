@@ -1,5 +1,5 @@
 import re
-from urllib.parse import unquote
+from url_parser import UrlParser
 
 class ClientActionSequences:
 	def __init__(self, waveform_manager, transmitter, home_action):
@@ -10,7 +10,7 @@ class ClientActionSequences:
 		x = re.search('/sequence/(.+)', url)
 		if x:
 			sequence_name_quoted = x.group(1)
-			sequence_name = unquote(sequence_name_quoted)
+			sequence_name = UrlParser.unquote(sequence_name_quoted)
 			print('Run sequence', sequence_name)
 			sequence_codes = self.waveform_manager.get_sequence(sequence_name)
 			print('Sequence codes', sequence_codes)

@@ -1,5 +1,6 @@
 import sys
 sys.path.append('../src/server')
+sys.path.append('../src/logic')
 from client_action_home import ClientActionHome
 
 class MockCodes:

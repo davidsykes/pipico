@@ -23,7 +23,7 @@ class MockWaveFormManager:
 	def get_code(self, code_name):
 		return self.codes[code_name]
 
-class TestClientActionCodes:
+class TestClientActionSequences:
 	def setup_method(self, test_method):
 		self.mock_waveform_manager = MockWaveFormManager()
 		self.mock_transmitter = MockTransmitter()
