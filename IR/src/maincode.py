@@ -24,7 +24,7 @@ class MainCode:
 
         if configuration_switches.is_network_enabled:
             self.flasher.set_status(2)
-            network = system.initialise_network(self.flasher)
+            network = system.initialise_network()
             self.flasher.set_status(3)
             server_url = LocalSettings.ServerUrl
             self.service_access = ServiceAccess(network, server_url)
