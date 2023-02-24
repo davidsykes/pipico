@@ -60,7 +60,7 @@ class MainCode:
                         signal_times.append(ctime)
                     else:
                         if (len(signal_values) > 4):
-                            if (switch4.value()):
+                            if configuration_switches.dump_raw_ir_codes:
                                 self.dump_ir(signal_times, signal_values)
                             else:
                                 self.analyse(signal_times, signal_values, analyser)

@@ -13,3 +13,4 @@ class ConfigurationSwitches:
 
         self.is_network_enabled = network_switch.value()
         self.are_we_a_listener = network_type_switch.value()
+        self.dump_raw_ir_codes = switch3.value()
