@@ -37,6 +37,7 @@ class MainCode:
             self.flasher.set_sequence([10,10])
 
         if configuration_switches.are_we_a_listener:
+            print('do the control')
             from controller import Controller
             controller = Controller(system,
                         network,
@@ -44,6 +45,7 @@ class MainCode:
                         ir_output)
             controller.control()
         else:
+            print('dont do the control')
             self.service_access.log('Wait for an ir code')
             print("Wait for code")
             while True:

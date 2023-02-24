@@ -11,5 +11,5 @@ class ConfigurationSwitches:
         switch4 = system.make_input_pin(SWITCH_4_PIN, False)              #
         print('Switches', network_switch.value(), network_type_switch.value(), switch3.value(), switch4.value())
 
-        self.is_network_enabled = network_switch
-        self.are_we_a_listener = network_type_switch
+        self.is_network_enabled = network_switch.value()
+        self.are_we_a_listener = network_type_switch.value()
