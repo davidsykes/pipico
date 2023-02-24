@@ -5,8 +5,13 @@ sys.path.append('./io')
 sys.path.append('./logic')
 sys.path.append('./server')
 sys.path.append('./recorder')
-from machine import Pin, Timer
+sys.path.append('./temperature')
+
 import time
+import machine
+#from machine import Pin, Timer
+
+
 from maincode import MainCode
 from pico_network import PicoNetwork
 from uio import StringIO
@@ -37,6 +42,9 @@ class SystemWrapper:
         string_stream = StringIO('')
         sys.print_exception(e, string_stream)
         service_access.log(''.join([message, ': ', string_stream.getvalue()]))
+
+    def get_internal_temperature_sensor(self):
+        return machine.ADC(machine.ADC.CORE_TEMP)
 
 
 system = SystemWrapper()

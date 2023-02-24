@@ -8,8 +8,13 @@ class MockTimer:
     def init(self, freq, mode, callback):
         pass
 
+class MockInternalTemperatureSensor:
+    def read_u16(self):
+        return 33
+
 class MockSystem:
     _ticks = 0
+    be_a_temperature_sensor = True
     transmit_ir_codes = True
     dump_ir_codes = False
 
@@ -18,7 +23,7 @@ class MockSystem:
         self.pins['LED'] = MockOutputPin()
         self.pins['14'] = MockOutputPin()
         self.pins['15'] = MockIrReceivePin(self)
-        self.pins['5'] = MockInputPin(False)
+        self.pins['5'] = MockInputPin(self.be_a_temperature_sensor)
         self.pins['4'] = MockInputPin(self.transmit_ir_codes)
         self.pins['3'] = MockInputPin(self.dump_ir_codes)
         self.pins['2'] = MockInputPin(False)
@@ -47,3 +52,6 @@ class MockSystem:
 
     def init_timer(self, timer, freq, callback):
         pass
+
+    def get_internal_temperature_sensor(self):
+        return MockInternalTemperatureSensor()

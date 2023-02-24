@@ -19,7 +19,11 @@ class MainCode:
         self.set_up_network()
         self.log_configuration_switches(configuration_switches.string_format)
 
-        if configuration_switches.are_we_a_listener:
+        if configuration_switches.be_a_temperature_sensor:
+            from temperature_sensor import TemperatureSensor
+            sensor = TemperatureSensor(system)
+            sensor.sense()
+        elif configuration_switches.are_we_a_listener:
             from controller import Controller
             ir_output = self.system.make_output_pin(IR_TRANSMIT_PIN)
             self.toggler = Toggler(self.system, ir_output)
