@@ -8,12 +8,12 @@ sys.path.append('./recorder')
 sys.path.append('./temperature')
 
 import time
-from machine import Pin, Timer, ADC
+from machine import Pin, Timer, ADC, unique_id
+from uio import StringIO
 
 
 from maincode import MainCode
 from pico_network import PicoNetwork
-from uio import StringIO
 
 
 class SystemWrapper:
@@ -45,6 +45,12 @@ class SystemWrapper:
     def get_internal_temperature_sensor(self):
         return ADC(ADC.CORE_TEMP)
 
+
+s = unique_id()
+print('unique=', s)
+for b in s:
+    print(hex(b)[2:],end=" ")
+print()
 
 system = SystemWrapper()
 maincode = MainCode()
