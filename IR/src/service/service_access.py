@@ -25,6 +25,7 @@ class ServiceAccess:
             self.network.put(url, headers, data)
 
     def log(self, message):
+        print(message)
         if (self.network.connected):
             url = self.get_url('log')
             self.put(url, message)

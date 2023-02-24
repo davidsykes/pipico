@@ -14,4 +14,3 @@ class ConfigurationSwitches:
         self.are_we_a_listener = network_type_switch.value()
         self.dump_raw_ir_codes = switch3.value()
         self.string_format = ','.join([str(temp_or_ir_function.value()), str(network_type_switch.value()), str(switch3.value()), str(switch4.value())])
-        print('Switches', self.string_format)

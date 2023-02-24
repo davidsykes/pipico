@@ -75,6 +75,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "server", "server", "{52AE08
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "io", "io", "{BE568290-BEA7-4197-9685-9C9D17FA0A26}"
 	ProjectSection(SolutionItems) = preProject
+		..\tests\test_configuration_switches.py = ..\tests\test_configuration_switches.py
 		..\tests\test_flasher.py = ..\tests\test_flasher.py
 		..\tests\test_ir_transmitter.py = ..\tests\test_ir_transmitter.py
 		..\tests\test_pinwatcher.py = ..\tests\test_pinwatcher.py

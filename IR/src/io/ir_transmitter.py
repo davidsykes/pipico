@@ -4,7 +4,6 @@ class IrTransmitter:
 		self.output_pin = output_pin
 
 	def transmit(self, waveform):
-		print('Transmit', waveform.code)
 		current_time = self.system.ticks_us()
 		points = waveform.points
 		point_count = len(points)

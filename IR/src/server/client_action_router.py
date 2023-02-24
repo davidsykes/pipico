@@ -13,5 +13,4 @@ class ClientActionRouter:
 			return self.codes_action.action(url)
 		elif (url == '/favicon.ico'):
 			return None
-		print('INVALID REQUEST', type, url)
 		self.logger.log(''.join(['Invalid request: ', type, ' ', url]))
