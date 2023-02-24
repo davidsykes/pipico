@@ -16,6 +16,7 @@ class Controller:
 		self.ir_output = ir_output
 
 	def control(self):
+		print('Set up the ir controller')
 		try:
 			waveforms = WaveformsManager(self.service_access)
 			home_action = ClientActionHome(waveforms)

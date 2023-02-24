@@ -4,6 +4,7 @@ sys.path.append('./service')
 sys.path.append('./io')
 sys.path.append('./logic')
 sys.path.append('./server')
+sys.path.append('./recorder')
 from machine import Pin, Timer
 import time
 from maincode import MainCode

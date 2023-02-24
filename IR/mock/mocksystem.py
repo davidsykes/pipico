@@ -10,8 +10,7 @@ class MockTimer:
 
 class MockSystem:
     _ticks = 0
-    enable_network = True
-    transmit_ir_codes = False
+    transmit_ir_codes = True
     dump_ir_codes = False
 
     def __init__(self):
@@ -19,7 +18,7 @@ class MockSystem:
         self.pins['LED'] = MockOutputPin()
         self.pins['14'] = MockOutputPin()
         self.pins['15'] = MockIrReceivePin(self)
-        self.pins['5'] = MockInputPin(self.enable_network)
+        self.pins['5'] = MockInputPin(False)
         self.pins['4'] = MockInputPin(self.transmit_ir_codes)
         self.pins['3'] = MockInputPin(self.dump_ir_codes)
         self.pins['2'] = MockInputPin(False)

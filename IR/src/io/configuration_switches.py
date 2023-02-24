@@ -9,8 +9,8 @@ class ConfigurationSwitches:
         network_type_switch = system.make_input_pin(SWITCH_2_PIN, False)  #   0 = dumper, 1 = listener
         switch3 = system.make_input_pin(SWITCH_3_PIN, False)              #
         switch4 = system.make_input_pin(SWITCH_4_PIN, False)              #
-        print('Switches', network_switch.value(), network_type_switch.value(), switch3.value(), switch4.value())
 
-        self.is_network_enabled = network_switch.value()
         self.are_we_a_listener = network_type_switch.value()
         self.dump_raw_ir_codes = switch3.value()
+        self.string_format = ','.join([str(network_switch.value()), str(network_type_switch.value()), str(switch3.value()), str(switch4.value())])
+        print('Switches', self.string_format)
