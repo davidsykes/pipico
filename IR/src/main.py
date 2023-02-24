@@ -8,8 +8,7 @@ sys.path.append('./recorder')
 sys.path.append('./temperature')
 
 import time
-import machine
-#from machine import Pin, Timer
+from machine import Pin, Timer, ADC
 
 
 from maincode import MainCode
@@ -44,7 +43,7 @@ class SystemWrapper:
         service_access.log(''.join([message, ': ', string_stream.getvalue()]))
 
     def get_internal_temperature_sensor(self):
-        return machine.ADC(machine.ADC.CORE_TEMP)
+        return ADC(ADC.CORE_TEMP)
 
 
 system = SystemWrapper()
