@@ -17,6 +17,9 @@ from pico_network import PicoNetwork
 
 
 class SystemWrapper:
+    def __init__(self, id):
+        self.id = id
+
     def make_output_pin(self, name):
         return Pin(name, Pin.OUT)
 
@@ -47,11 +50,11 @@ class SystemWrapper:
 
 
 s = unique_id()
-print('unique=', s)
+id = ''
 for b in s:
-    print(hex(b)[2:],end=" ")
-print()
+    id = id + hex(b)[2:]
+print('id', id)
 
-system = SystemWrapper()
+system = SystemWrapper(id)
 maincode = MainCode()
 maincode.maincode(system)
