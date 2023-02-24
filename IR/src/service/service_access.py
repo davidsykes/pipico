@@ -14,6 +14,13 @@ class ServiceAccess:
         if (self.network.connected):
             return self.network.get(url)
 
+    def get_option(self, name):
+        if (self.network.connected):
+            url = self.get_url('option?option=' + name)
+            opt = self.get(url)
+            print(''.join(['Option ', name, '=""', opt, '"''"']))
+            return opt
+
     def get_network_options(self):
         if (self.network.connected):
             url = self.get_url(self.options_url)

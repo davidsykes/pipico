@@ -19,6 +19,7 @@ class MockSystem:
     dump_ir_codes = False
 
     def __init__(self):
+        self.id = 'MockSystem'
         self.pins = {}
         self.pins['LED'] = MockOutputPin()
         self.pins['14'] = MockOutputPin()

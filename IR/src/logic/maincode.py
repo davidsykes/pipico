@@ -12,11 +12,11 @@ class MainCode:
         self.system = system
         self.set_up_flasher()
         network_options = None
+        self.set_up_network()
 
         self.flasher.set_status(1)
-        configuration_switches = ConfigurationSwitches(self.system)
+        configuration_switches = ConfigurationSwitches(self.system, self.service_access)
 
-        self.set_up_network()
         self.log_configuration_switches(configuration_switches.string_format)
 
         if configuration_switches.be_a_temperature_sensor:

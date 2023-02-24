@@ -10,6 +10,7 @@ class MockPin:
 
 class MockSystem:
 	def __init__(self):
+		self.id = 'id'
 		self.pins_values = {}
 		self.pins_values[5] = 0
 		self.pins_values[4] = 0
@@ -18,13 +19,24 @@ class MockSystem:
 	def make_input_pin(self, name, _):
 		return MockPin(self.pins_values[name])
 
+class MockServiceAccess:
+	def __init__(self):
+		self.options = {}
+	def get_option(self, option):
+		if option in self.options:
+			return self.options[option]
+		return ''
 
 class TestConfigurationSwitches:
 	def setup_method(self, test_method):
 		self.system = MockSystem()
+		self.access = MockServiceAccess()
+
+	def create_test_object(self):
+		return ConfigurationSwitches(self.system, self.access)
 
 	def test_off_values(self):
-		s = ConfigurationSwitches(self.system)
+		s = self.create_test_object()
 
 		assert(s.be_a_temperature_sensor == False)
 		assert(s.are_we_a_listener == False)
@@ -33,20 +45,34 @@ class TestConfigurationSwitches:
 	def test_pin_5_is_temperature_sensor(self):
 		self.system.pins_values[5] = 1
 
-		s = ConfigurationSwitches(self.system)
+		s = self.create_test_object()
 
 		assert(s.be_a_temperature_sensor == True)
 
 	def test_pin_4_is_ir_mode(self):
 		self.system.pins_values[4] = 1
 
-		s = ConfigurationSwitches(self.system)
+		s = self.create_test_object()
 
 		assert(s.are_we_a_listener == True)
 
 	def test_pin_3_is_ir_dump_mode(self):
 		self.system.pins_values[3] = 1
 
-		s = ConfigurationSwitches(self.system)
+		s = self.create_test_object()
 
 		assert(s.dump_raw_ir_codes == True)
+
+	def test_be_a_temperature_sensor_can_be_overridden_true(self):
+		self.access.options['id.temperature'] = '1'
+
+		s = self.create_test_object()
+
+		assert(s.be_a_temperature_sensor == True)
+
+	def test_be_a_temperature_sensor_can_be_overridden_false(self):
+		self.access.options['id.temperature'] = '0'
+
+		s = self.create_test_object()
+
+		assert(s.be_a_temperature_sensor == False)
