@@ -17,12 +17,13 @@ class ConfigurationSwitches:
         self.dump_raw_ir_codes = switch3.value()
         self.string_format = ','.join([str(temp_or_ir_function.value()), str(network_type_switch.value()), str(switch3.value()), str(switch4.value())])
 
+        self.are_we_a_listener = self.check_for_option('ir_transmitter', self.are_we_a_listener)
         self.be_a_temperature_sensor = self.check_for_option('temperature', self.be_a_temperature_sensor)
 
     def check_for_option(self, name, original_value):
         option_name = self.system.id + '.' + name
         opt = self.service_access.get_option(option_name)
-        print('""' + opt + '""')
+        print('"' + opt + '"')
         if len(opt) > 0:
             if opt == '1':
                 return True
