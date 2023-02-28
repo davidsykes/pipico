@@ -19,10 +19,10 @@ class ConfigurationSwitches:
 
         function = self.get_option('function')
         if function == 'irtransmitter':
-            self.are_we_a_listener = False
+            self.are_we_a_listener = True
             self.be_a_temperature_sensor = False
         elif function == 'irreceiver':
-            self.are_we_a_listener = True
+            self.are_we_a_listener = False
             self.be_a_temperature_sensor = False
         elif function == 'temperature':
             self.are_we_a_listener = False

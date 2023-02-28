@@ -18,8 +18,10 @@ while ap.active() == False:
 print('Connection is successful')
 print(ap.ifconfig())
 def web_page():
-  html = """<html><head><meta name="viewport" content="width=device-width, initial-scale=1"></head>
-  <body><h1>Welcome to microcontrollerslab!</h1></body></html>"""
+#  html = """<html><head><meta name="viewport" content="width=device-width, initial-scale=1"></head>
+#  <body><h1>Welcome to microcontrollerslab!</h1></body></html>"""
+  html = 'HTTP/1.0 200 OK\r\nContent-type: text/html\r\n\r\n'
+  html = html + '<h1>Push My Button</h1><p><a href="/sequence/Sequence%202">Sequence 2</a></p><p><a href="/sequence/Sequence%201">Sequence 1</a></p>'
   return html
 s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)   #creating socket object
 s.bind(('', 80))
