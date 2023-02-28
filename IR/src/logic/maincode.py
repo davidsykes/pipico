@@ -48,7 +48,11 @@ class MainCode:
         self.service_access = ServiceAccess(self.network, server_url)
         if self.network.connected:
             self.flasher.set_status(4)
-            self.service_access.log('Internet connected on ip ' + self.network.ip_address)
+            try:
+                self.service_access.log('Internet connected on ip ' + self.network.ip_address)
+            except OSError as e:
+                print('The service may be down:', e)
+                exit()
         else:
             return
         network_options = self.service_access.get_network_options()
