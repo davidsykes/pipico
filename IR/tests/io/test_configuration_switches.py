@@ -68,7 +68,7 @@ class TestConfigurationSwitches:
 
 		s = self.create_test_object()
 
-		assert(s.are_we_a_listener == False)
+		assert(s.are_we_a_listener == True)
 		assert(s.be_a_temperature_sensor == False)
 		assert(s.dump_raw_ir_codes == False)
 
@@ -77,7 +77,7 @@ class TestConfigurationSwitches:
 
 		s = self.create_test_object()
 
-		assert(s.are_we_a_listener == True)
+		assert(s.are_we_a_listener == False)
 		assert(s.be_a_temperature_sensor == False)
 		assert(s.dump_raw_ir_codes == False)
 

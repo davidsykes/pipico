@@ -59,7 +59,6 @@ class PicoNetwork:
         return status_code
 
     def open_socket(self):
-        # Open socket
         addr = socket.getaddrinfo('0.0.0.0', 80)[0][-1]
         s = socket.socket()
         s.bind(addr)
