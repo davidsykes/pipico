@@ -113,6 +113,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "temperature", "temperature"
 		..\src\temperature\temperature_sensor.py = ..\src\temperature\temperature_sensor.py
 	EndProjectSection
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "network", "network", "{DFDE44BB-D0E7-4EED-8563-358FDF748D28}"
+	ProjectSection(SolutionItems) = preProject
+		..\tests\network\test_network_initialiser.py = ..\tests\network\test_network_initialiser.py
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -135,6 +140,7 @@ Global
 		{273A437A-E058-4250-973B-FB289919AAB3} = {7AE1E3EC-45A4-454A-8F55-2BB3B1625CF2}
 		{A401D552-D5EF-4CD0-B6B3-700794BBD5E6} = {7AE1E3EC-45A4-454A-8F55-2BB3B1625CF2}
 		{EB2B087F-4CBB-48C6-A07F-ADBC7A1BDBCF} = {7AE1E3EC-45A4-454A-8F55-2BB3B1625CF2}
+		{DFDE44BB-D0E7-4EED-8563-358FDF748D28} = {75C6D714-B0E6-4578-BFFF-A85456068F12}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {CE166307-D452-4CEE-A095-45EF435EEC30}
