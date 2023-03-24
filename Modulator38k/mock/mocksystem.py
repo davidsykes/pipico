@@ -1,4 +1,4 @@
-from mockpin import MockInputPin, MockOutputPin, MockIrReceivePin
+from mockpin import MockInputPin, MockOutputPin
 
 class MockTimer:
     def __init__(self):
@@ -12,8 +12,9 @@ class MockSystem:
 
     def __init__(self):
         self.pins = {}
+        self.pins['LED'] = MockOutputPin()
         self.pins['14'] = MockOutputPin()
-        self.pins['15'] = MockIrReceivePin(self)
+        self.pins['15'] = MockInputPin(self)
 
     def make_output_pin(self, name):
         return self.make_pin(name)
