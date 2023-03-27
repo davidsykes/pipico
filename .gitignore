@@ -12,5 +12,10 @@ obj/
 *.sln.docstates
 .vs/
 
-# Compiled Python bytecode
-#*.py[cod]
+.idea
+.vscode
+_deps
+cmake-*
+build
+.DS_Store
+*.pdf
