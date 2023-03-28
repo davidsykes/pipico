@@ -4,6 +4,7 @@ localsettings.py
 
 bin/
 obj/
+debug/
 
 *.suo
 *.swp

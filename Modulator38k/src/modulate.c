@@ -1,23 +1,22 @@
-#include "pico/stdlib.h"
+#include "system.h"
 
 #define INPUT_PIN   14
 #define OUTPUT_PIN  15
 
-int main()
+int modulate(sSystem *system)
 {
-    gpio_init(INPUT_PIN);
-    gpio_set_dir(INPUT_PIN, GPIO_IN);
-    gpio_init(OUTPUT_PIN);
-    gpio_set_dir(OUTPUT_PIN, GPIO_OUT);
-    while (true)
+    system->initialise_input_pin(INPUT_PIN);
+    system->initialise_output_pin(OUTPUT_PIN);
+
+    while (!0)
     {
-        uint v = gpio_get(INPUT_PIN);
+        unsigned int v = system->gpio_get(INPUT_PIN);
         if (v != 99)
         {
-            gpio_put(OUTPUT_PIN, 1);
-            sleep_us(13);
-            gpio_put(OUTPUT_PIN, 0);
-            sleep_us(13);
+            system->gpio_put(OUTPUT_PIN, 1);
+            system->sleep_us(13);
+            system->gpio_put(OUTPUT_PIN, 0);
+            system->sleep_us(13);
         }
     }
 }
