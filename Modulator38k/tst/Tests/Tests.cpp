@@ -2,8 +2,12 @@
 //
 
 #include <iostream>
+extern "C"
+{
 #include "..\..\src\system.h"
 #include "..\..\src\modulate.h"
+}
+#include "test_modulator.hpp"
 
 void InitialiseInputPin(int pin_number);
 void InitialiseOutputPin(int pin_number);
@@ -15,7 +19,9 @@ int main()
 {
     std::cout << "Hello World!\n";
 
-    sSystem system;
+    run_modulator_tests();
+
+    sSystem system{};
 
     system.initialise_input_pin = &InitialiseInputPin;
     system.initialise_output_pin = &InitialiseOutputPin;
