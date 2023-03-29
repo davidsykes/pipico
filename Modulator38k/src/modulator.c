@@ -16,7 +16,10 @@ sModulator* create_modulator(sInputPin* input_pin, sPulser* pulsar)
 }
 
 
-void modulator_modulate(sModulator* this)
+void modulator_modulate(sModulator* self)
 {
-    this->pulser->pulse(this->pulser);
+    if (self->input_pin->gpio_get(self->input_pin) != 0)
+    {
+        self->pulser->pulse(self->pulser);
+    }
 }

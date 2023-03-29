@@ -1,11 +1,7 @@
 #pragma once
 
-typedef struct S_sInputPin
+typedef struct sInputPin
 {
-    void (*initialise_input_pin)(int pin_number);
-    void (*initialise_output_pin)(int pin_number);
-    int (*gpio_get)(int pin_number);
-    void (*gpio_put)(int pin_number, int value);
-    void (*sleep_us)(int useconds);
+    int (*gpio_get)(struct sInputPin* self);
 
 } sInputPin;

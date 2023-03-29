@@ -12,6 +12,8 @@ void mock_pulser_pulse(sPulser* self);
 void when_the_input_is_on_the_modulator_calls_the_pulse_function();
 void when_the_input_is_off_the_modulator_does_not_call_the_pulse_function();
 
+int _input_pin_value;
+
 void run_modulator_tests()
 {
 	when_the_input_is_on_the_modulator_calls_the_pulse_function();
@@ -21,6 +23,7 @@ void run_modulator_tests()
 
 void when_the_input_is_on_the_modulator_calls_the_pulse_function()
 {
+	_input_pin_value = 1;
 	sInputPin* input_pin = create_mock_input_pin();
 	sPulser* pulser = create_mock_pulser();
 	sModulator* modulator = create_modulator(input_pin, pulser);
@@ -35,6 +38,7 @@ void when_the_input_is_on_the_modulator_calls_the_pulse_function()
 
 void when_the_input_is_off_the_modulator_does_not_call_the_pulse_function()
 {
+	_input_pin_value = 0;
 	sInputPin* input_pin = create_mock_input_pin();
 	sPulser* pulser = create_mock_pulser();
 	sModulator* modulator = create_modulator(input_pin, pulser);
@@ -48,10 +52,15 @@ void when_the_input_is_off_the_modulator_does_not_call_the_pulse_function()
 }
 
 
+int mock_input_pin_gpio_get(sInputPin* self)
+{
+	return _input_pin_value;
+}
 
 sInputPin* create_mock_input_pin()
 {
 	sInputPin* pin = new sInputPin();
+	pin->gpio_get = &mock_input_pin_gpio_get;
 	return pin;
 }
 
