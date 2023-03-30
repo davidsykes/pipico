@@ -30,6 +30,12 @@
     <ClCompile Include="..\..\src\modulator.c">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="test_gpio_pin.cpp">
+      <Filter>Tests</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\gpio_pin.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\src\system.h">
@@ -48,6 +54,12 @@
       <Filter>Source Files</Filter>
     </ClInclude>
     <ClInclude Include="..\..\src\pulser.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="test_gpio_pin.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\gpio_pin.h">
       <Filter>Source Files</Filter>
     </ClInclude>
   </ItemGroup>

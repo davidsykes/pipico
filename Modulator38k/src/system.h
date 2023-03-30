@@ -1,6 +1,6 @@
 #pragma once
 
-typedef struct S_sSystem
+typedef struct sSystem
 {
     void (*initialise_input_pin)(int pin_number);
     void (*initialise_output_pin)(int pin_number);
