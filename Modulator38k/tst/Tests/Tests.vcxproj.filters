@@ -24,12 +24,6 @@
     <ClCompile Include="..\..\src\modulate.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="test_modulator.cpp">
-      <Filter>Tests</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\src\modulator.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="test_gpio_pin.cpp">
       <Filter>Tests</Filter>
     </ClCompile>
@@ -42,18 +36,6 @@
       <Filter>Source Files</Filter>
     </ClInclude>
     <ClInclude Include="..\..\src\modulate.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
-    <ClInclude Include="test_modulator.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\src\modulator.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\src\pins.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\src\pulser.h">
       <Filter>Source Files</Filter>
     </ClInclude>
     <ClInclude Include="test_gpio_pin.hpp">

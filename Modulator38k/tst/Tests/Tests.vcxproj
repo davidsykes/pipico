@@ -130,20 +130,14 @@
   <ItemGroup>
     <ClCompile Include="..\..\src\gpio_pin.c" />
     <ClCompile Include="..\..\src\modulate.c" />
-    <ClCompile Include="..\..\src\modulator.c" />
     <ClCompile Include="Tests.cpp" />
-    <ClCompile Include="test_modulator.cpp" />
     <ClCompile Include="test_gpio_pin.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\src\gpio_pin.h" />
     <ClInclude Include="..\..\src\modulate.h" />
-    <ClInclude Include="..\..\src\modulator.h" />
-    <ClInclude Include="..\..\src\pins.h" />
-    <ClInclude Include="..\..\src\pulser.h" />
     <ClInclude Include="..\..\src\system.h" />
     <ClInclude Include="test_gpio_pin.hpp" />
-    <ClInclude Include="test_modulator.hpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
