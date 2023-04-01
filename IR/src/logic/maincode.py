@@ -2,7 +2,6 @@ import sys
 from localsettings import LocalSettings
 from service_access import ServiceAccess
 from flasher import Flasher
-from toggler import Toggler
 from configuration_switches import ConfigurationSwitches
 
 IR_RECEIVE_PIN = 15
@@ -29,7 +28,6 @@ class MainCode:
             self.service_access.log('Be a listener')
             from controller import Controller
             ir_output = self.system.make_output_pin(IR_TRANSMIT_PIN)
-            self.toggler = Toggler(self.system, ir_output)
             controller = Controller(self.system,
                         self.network,
                         self.service_access,
@@ -59,7 +57,6 @@ class MainCode:
                 sys.exit()
         else:
             return
-        network_options = self.service_access.get_network_options()
         self.flasher.set_sequence([10,10])
 
     def log_configuration_switches(self, switches):

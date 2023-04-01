@@ -11,7 +11,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{7AE1E3EC-45A
 		..\src\ir_exception.py = ..\src\ir_exception.py
 		..\src\ir_transmitter.py = ..\src\ir_transmitter.py
 		..\src\pico_network.py = ..\src\pico_network.py
-		..\src\toggler.py = ..\src\toggler.py
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{75C6D714-B0E6-4578-BFFF-A85456068F12}"
