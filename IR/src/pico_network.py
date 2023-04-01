@@ -31,9 +31,8 @@ class PicoNetwork:
             print('network connection failed')
             self.connected = False
         else:
-            print('The internet is connected')
             status = wlan.ifconfig()
-            print( 'ip = ' + status[0] )
+            print('The internet is connected. ip = ' + status[0] )
             self.connected = True
             self.ip_address = status[0]
 

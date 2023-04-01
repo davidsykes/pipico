@@ -14,7 +14,7 @@ class MockInternalTemperatureSensor:
 
 class MockSystem:
     _ticks = 0
-    be_a_temperature_sensor = True
+    be_a_temperature_sensor = False
     transmit_ir_codes = True
     dump_ir_codes = False
 

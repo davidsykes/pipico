@@ -7,8 +7,8 @@ class ConfigurationSwitches:
     def __init__(self, system, service_access):
         self.system = system
         self.service_access = service_access
-        temp_or_ir_function = system.make_input_pin(SWITCH_1_PIN, False)
-        network_type_switch = system.make_input_pin(SWITCH_2_PIN, False)  #   0 = dumper, 1 = listener
+        temp_or_ir_function = system.make_input_pin(SWITCH_1_PIN, False)  # 0 = IR, 1 = Temperature
+        network_type_switch = system.make_input_pin(SWITCH_2_PIN, False)  # 0 = dumper, 1 = listener
         switch3 = system.make_input_pin(SWITCH_3_PIN, False)              #
         switch4 = system.make_input_pin(SWITCH_4_PIN, False)              #
 
@@ -31,7 +31,7 @@ class ConfigurationSwitches:
     def get_option(self, name):
         option_name = self.system.id + '.' + name
         opt = self.service_access.get_option(option_name)
-        print('opt', option_name, '="' + opt + '"')
+        self.service_access.log(''.join(['Option ', option_name, '="', opt, '"']))
         return opt
 
     def check_for_option(self, name, original_value):

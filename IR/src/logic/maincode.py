@@ -20,10 +20,12 @@ class MainCode:
         self.log_configuration_switches(configuration_switches.string_format)
 
         if configuration_switches.be_a_temperature_sensor:
+            self.service_access.log('Be a temperature sensor')
             from temperature_sensor import TemperatureSensor
             sensor = TemperatureSensor(system)
             sensor.sense()
         elif configuration_switches.are_we_a_listener:
+            self.service_access.log('Be a listener')
             from controller import Controller
             ir_output = self.system.make_output_pin(IR_TRANSMIT_PIN)
             self.toggler = Toggler(self.system, ir_output)
@@ -33,6 +35,7 @@ class MainCode:
                         ir_output)
             controller.control()
         else:
+            self.service_access.log('Be a recorder')
             from ir_recorder import IRRecorder
             recorder = IRRecorder(system, self.service_access, IR_RECEIVE_PIN)
             recorder.record(configuration_switches.dump_raw_ir_codes)
@@ -49,7 +52,7 @@ class MainCode:
         if self.network.connected:
             self.flasher.set_status(4)
             try:
-                self.service_access.log('Internet connected on ip ' + self.network.ip_address)
+                self.service_access.log('Pico available on ip ' + self.network.ip_address)
             except OSError as e:
                 print('The service may be down:', e)
                 exit()

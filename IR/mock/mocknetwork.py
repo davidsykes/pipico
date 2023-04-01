@@ -1,6 +1,7 @@
 import json
 from urllib.request import urlopen
 from urllib.error import HTTPError
+from urllib.error import URLError
 from ir_exception import IrException
 
 class MockClientConnection:
@@ -27,6 +28,8 @@ class MockNetwork:
             return data
         except HTTPError as e:
             raise IrException(''.join(['HTTPError ', str(e.code), ' error accessing url ', url]))
+        except URLError as e:
+            raise IrException(''.join(['URLError error accessing url ', url]))
 
     def put(self, url, headers, body):
         print('Put to', url)
