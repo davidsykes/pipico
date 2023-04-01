@@ -7,5 +7,5 @@ class ClientActionHome:
 		html = '<h1>Push My Button</h1>'
 		for sequence in self.sequences:
 			sequence_quoted = UrlParser.quote(sequence)
-			html = html + ''.join(['<p><a href="/sequence/', sequence_quoted, '">', sequence, '</a></p>'])
+			html = html + ''.join(['<p style="font-size:70pt"><a href="/sequence/', sequence_quoted, '">', sequence, '</a></p>'])
 		return html
