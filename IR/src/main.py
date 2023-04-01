@@ -53,7 +53,7 @@ s = unique_id()
 id = ''
 for b in s:
     id = id + hex(b)[2:]
-print('id', id)
+print('Pico id', id)
 
 system = SystemWrapper(id)
 maincode = MainCode()
