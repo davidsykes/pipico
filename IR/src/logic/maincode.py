@@ -1,3 +1,4 @@
+import sys
 from localsettings import LocalSettings
 from service_access import ServiceAccess
 from flasher import Flasher
@@ -55,7 +56,7 @@ class MainCode:
                 self.service_access.log('Pico available on ip ' + self.network.ip_address)
             except OSError as e:
                 print('The service may be down:', e)
-                exit()
+                sys.exit()
         else:
             return
         network_options = self.service_access.get_network_options()
