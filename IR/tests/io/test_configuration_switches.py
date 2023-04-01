@@ -26,6 +26,8 @@ class MockServiceAccess:
 		if option in self.options:
 			return self.options[option]
 		return ''
+	def log(self, m):
+		pass
 
 class TestConfigurationSwitches:
 	def setup_method(self, test_method):
