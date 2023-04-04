@@ -32,7 +32,9 @@ class WaveformsManager:
 		return list(self.sequences.keys())
 
 	def get_sequence(self, sequence_name):
-		return self.sequences[sequence_name]
+		if sequence_name in self.sequences:
+			return self.sequences[sequence_name]
+		raise IrException(''.join(["Sequence '", sequence_name, "' not found'"]))
 
 	def get_code(self, code):
 		if code in self.codes:

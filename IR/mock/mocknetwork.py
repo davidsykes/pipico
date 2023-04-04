@@ -12,7 +12,7 @@ class MockClientConnection:
 
 class MockNetwork:
     def __init__(self):
-        self.commands = ['GET /', 'GET /sequence/Sequence%201']
+        self.commands = ['GET /', 'GET /sequence/Sequence%201', 'GET /code/Code%202']
         self.next = 0
         self.connected = True
         self.ip_address = 'mock connection'

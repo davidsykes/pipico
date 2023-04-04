@@ -1,8 +1,10 @@
+import pytest
 import sys
 sys.path.append('../src')
 sys.path.append('../logic')
 sys.path.append('../Mock')
 from waveforms_manager import WaveformsManager
+from ir_exception import IrException
 
 class MockNetwork:
     def __init__(self, test_codes, test_sequences):
@@ -41,6 +43,21 @@ class TestWaveformsManager:
         sequence = self.manager.get_sequence("Sequence 1")
 
         assert(sequence == ['Code 1', 'Code 2'])
+
+    def test_a_missing_sequence_throws_an_exception(self):
+        with pytest.raises(IrException):
+            self.manager.get_sequence("Sequence 9")
+
+    def test_a_code_can_be_retrieved(self):
+        code = self.manager.get_code('527199')
+
+        assert(len(code.points) == 42)
+
+    def test_a_missing_code_throws_an_exception(self):
+        with pytest.raises(IrException):
+            self.manager.get_code("Code 9")
+
+
 
     def get_test_sequences_data(self):
         return '{"sequences":[{"name":"Sequence 1","codes":["Code 1","Code 2"]},{"name":"Sequence 2","codes":["Code 2","Code 1"]}]}'

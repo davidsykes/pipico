@@ -6,9 +6,9 @@ class MockCodes:
 	def __init__(self, data):
 		self.xmit_data = data
 	def get_code(self, code):
-		if code == '527199':
+		if code in ['527199','Code 1']:
 			return self.xmit_data
-		raise AssertionError
+		raise AssertionError('Invalid test code: ' + code)
 
 class MockTransmitter:
 	def __init__(self):
@@ -29,6 +29,11 @@ class TestClientActionCodes:
 
 	def test_action(self):
 		self.action.action('/code/527199')
+
+		assert(self.mock_transmitter.xmit == self.xmit_data)
+
+	def test_code_with_spaces(self):
+		self.action.action('/code/Code%201')
 
 		assert(self.mock_transmitter.xmit == self.xmit_data)
 
