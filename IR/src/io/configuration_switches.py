@@ -19,7 +19,7 @@ class ConfigurationSwitches:
         function = self.get_option('function')
         if function == 'irtransmitter':
             self.are_we_ir_transmitter = True
-        elif function == 'irreceiver':
+        elif function == 'irrecorder':
             self.are_we_ir_transmitter = False
 
     def get_option(self, name):
