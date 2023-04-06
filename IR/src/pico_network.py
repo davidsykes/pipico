@@ -59,7 +59,8 @@ class PicoNetwork:
 
     def open_socket(self):
         addr = socket.getaddrinfo('0.0.0.0', 80)[0][-1]
-        s = socket.socket()
+        s = socket.socket(socket.AF_INET,socket.SOCK_STREAM)
+        s.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
         s.bind(addr)
         s.listen(1)
         return s
