@@ -40,23 +40,15 @@ class TestConfigurationSwitches:
 	def test_off_values(self):
 		s = self.create_test_object()
 
-		assert(s.be_a_temperature_sensor == False)
-		assert(s.are_we_a_listener == False)
+		assert(s.are_we_ir_transmitter == False)
 		assert(s.dump_raw_ir_codes == False)
-
-	def test_pin_5_is_temperature_sensor(self):
-		self.system.pins_values[5] = 1
-
-		s = self.create_test_object()
-
-		assert(s.be_a_temperature_sensor == True)
 
 	def test_pin_4_is_ir_mode(self):
 		self.system.pins_values[4] = 1
 
 		s = self.create_test_object()
 
-		assert(s.are_we_a_listener == True)
+		assert(s.are_we_ir_transmitter == True)
 
 	def test_pin_3_is_ir_dump_mode(self):
 		self.system.pins_values[3] = 1
@@ -70,8 +62,7 @@ class TestConfigurationSwitches:
 
 		s = self.create_test_object()
 
-		assert(s.are_we_a_listener == True)
-		assert(s.be_a_temperature_sensor == False)
+		assert(s.are_we_ir_transmitter == True)
 		assert(s.dump_raw_ir_codes == False)
 
 	def test_override_with_ir_receiver(self):
@@ -79,15 +70,5 @@ class TestConfigurationSwitches:
 
 		s = self.create_test_object()
 
-		assert(s.are_we_a_listener == False)
-		assert(s.be_a_temperature_sensor == False)
-		assert(s.dump_raw_ir_codes == False)
-
-	def test_override_with_temperature(self):
-		self.access.options['id.function'] = 'temperature'
-
-		s = self.create_test_object()
-
-		assert(s.are_we_a_listener == False)
-		assert(s.be_a_temperature_sensor == True)
+		assert(s.are_we_ir_transmitter == False)
 		assert(s.dump_raw_ir_codes == False)

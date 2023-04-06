@@ -5,7 +5,6 @@ sys.path.append('./io')
 sys.path.append('./logic')
 sys.path.append('./server')
 sys.path.append('./recorder')
-sys.path.append('./temperature')
 
 import time
 from machine import Pin, Timer, ADC, unique_id
@@ -41,9 +40,6 @@ class SystemWrapper:
         string_stream = StringIO('')
         sys.print_exception(e, string_stream)
         service_access.log(''.join([message, ': ', string_stream.getvalue()]))
-
-    def get_internal_temperature_sensor(self):
-        return ADC(ADC.CORE_TEMP)
 
 s = unique_id()
 id = ''

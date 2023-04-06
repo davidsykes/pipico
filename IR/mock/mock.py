@@ -6,7 +6,6 @@ sys.path.append('../src/io')
 sys.path.append('../src/logic')
 sys.path.append('../src/server')
 sys.path.append('../src/recorder')
-sys.path.append('../src/temperature')
 from mocksystem import MockSystem
 from maincode import MainCode
 

@@ -7,26 +7,20 @@ class ConfigurationSwitches:
     def __init__(self, system, service_access):
         self.system = system
         self.service_access = service_access
-        temp_or_ir_function = system.make_input_pin(SWITCH_1_PIN, False)  # 0 = IR, 1 = Temperature
-        network_type_switch = system.make_input_pin(SWITCH_2_PIN, False)  # 0 = dumper, 1 = listener
+        switch1 = system.make_input_pin(SWITCH_1_PIN, False)              #
+        ir_type_switch = system.make_input_pin(SWITCH_2_PIN, False)  # 0 = ir recorder, 1 = if transmitter
         switch3 = system.make_input_pin(SWITCH_3_PIN, False)              #
         switch4 = system.make_input_pin(SWITCH_4_PIN, False)              #
 
-        self.be_a_temperature_sensor = temp_or_ir_function.value()
-        self.are_we_a_listener = network_type_switch.value()
+        self.are_we_ir_transmitter = ir_type_switch.value()
         self.dump_raw_ir_codes = switch3.value()
-        self.string_format = ','.join([str(temp_or_ir_function.value()), str(network_type_switch.value()), str(switch3.value()), str(switch4.value())])
+        self.string_format = ','.join([str(switch1.value()), str(ir_type_switch.value()), str(switch3.value()), str(switch4.value())])
 
         function = self.get_option('function')
         if function == 'irtransmitter':
-            self.are_we_a_listener = True
-            self.be_a_temperature_sensor = False
+            self.are_we_ir_transmitter = True
         elif function == 'irreceiver':
-            self.are_we_a_listener = False
-            self.be_a_temperature_sensor = False
-        elif function == 'temperature':
-            self.are_we_a_listener = False
-            self.be_a_temperature_sensor = True
+            self.are_we_ir_transmitter = False
 
     def get_option(self, name):
         option_name = self.system.id + '.' + name
