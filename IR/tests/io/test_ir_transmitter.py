@@ -26,12 +26,13 @@ class TestIrTransmitter:
 		self.pin = MockPin(self.system)
 		self.tranmitter = IrTransmitter(self.system, self.pin)
 
-	def test_transmission(self):
-		test_waveform = Waveform({'code': 2911, 'waveform': [{'t': 0, 'v': 0}, {'t': 10, 'v': 1}, {'t': 20, 'v': 0}]})
+	def test_transmission_format_of_time_from_start(self):
+		test_waveform = Waveform({'code': 2911, 'waveform': [{'t': 0, 'v': 0}, {'t': 10, 'v': 1}, {'t': 20, 'v': 0}, {'t': 67, 'v': 1}]})
 
 		self.tranmitter.transmit(test_waveform)
 
-		assert(len(self.pin.trace) == 3)
-		assert(self.pin.trace[0] == (1,0))
+		assert(len(self.pin.trace) == 4)
+		assert(self.pin.trace[0] == (2,0))
 		assert(self.pin.trace[1] == (11,1))
-		assert(self.pin.trace[2] == (31,0))
+		assert(self.pin.trace[2] == (21,0))
+		assert(self.pin.trace[3] == (68,1))
