@@ -1,6 +1,7 @@
 *.pyc
 
 localsettings.py
+IR/plots/codes.json
 
 bin/
 obj/

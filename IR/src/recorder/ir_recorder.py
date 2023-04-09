@@ -34,7 +34,6 @@ class IRRecorder:
     def analyse(self, signal_times, signal_values, analyser):
         wave_data = self.convert_data(signal_times, signal_values)
         result = analyser.analyse(wave_data)
-        print('Put data for code', result)
         self.service_access.send_ir_code(result, wave_data)
 
     def dump_ir(self, signal_times, signal_values):

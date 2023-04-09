@@ -1,0 +1,11 @@
+Set the pico up as an IR Recorder.
+ Set pico (e6614143f502f).function to be irrecorder
+
+Restart the pico
+
+Record the ir codes
+
+Set the pci up as an IR Transmitter
+ Set pico (e6614143f502f).function to be irtransmitter
+
+Restart the pico
