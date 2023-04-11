@@ -6,7 +6,6 @@ from client_action_home import ClientActionHome
 from client_action_sequences import ClientActionSequences
 from client_action_codes import ClientActionCodes
 from client_action_router import ClientActionRouter
-from localsettings import LocalSettings
 
 class Controller:
 	def __init__(self, system, network, service_access, ir_output):
@@ -31,9 +30,4 @@ class Controller:
 			self.log_exception('Exception', e)
 
 	def log_exception(self, message, e):
-			if LocalSettings.LogExceptions:
-				self.system.log_exception(self.service_access, message, e)
-			else:
-				import traceback
-				print(message)
-				print(traceback.format_exc())
+			self.system.log_exception(self.service_access, message, e)

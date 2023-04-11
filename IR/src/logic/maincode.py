@@ -1,11 +1,11 @@
 import sys
-from localsettings import LocalSettings
 from service_access import ServiceAccess
 from flasher import Flasher
 from configuration_switches import ConfigurationSwitches
 
 IR_RECEIVE_PIN = 15
 IR_TRANSMIT_PIN = 14
+ServerUrl = 'http://192.168.1.87:5000'
 
 class MainCode:
     def maincode(self, system):
@@ -41,8 +41,7 @@ class MainCode:
         self.flasher.set_status(2)
         self.network = self.system.initialise_network()
         self.flasher.set_status(3)
-        server_url = LocalSettings.ServerUrl
-        self.service_access = ServiceAccess(self.network, server_url)
+        self.service_access = ServiceAccess(self.network, ServerUrl)
         if self.network.connected:
             self.flasher.set_status(4)
             try:
