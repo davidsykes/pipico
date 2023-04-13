@@ -3,8 +3,12 @@ import json
 import socket
 import time
 from ir_exception import IrException
+from machine import Pin, Timer
 
 class SystemFunctions:
+    def __init__(self, id):
+        self.id = id
+
     def make_output_pin(self, name):
         return Pin(name, Pin.OUT)
 
