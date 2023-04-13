@@ -2,24 +2,24 @@ from url_request_decoder import UrlRequestDecoder
 from ir_exception import IrException
 
 class Listener:
-	def __init__(self, network, router, logger):
-		self.network = network
+	def __init__(self, system, router, logger):
+		self.system = system
 		self.request_decoder = UrlRequestDecoder()
 		self.router = router
 		self.logger = logger
 
 	def listen(self):
-		socket = self.network.open_socket()
+		socket = self.system.open_socket()
 
 		# Listen for connections
 		cl = None
 		while True:
 			try:
-				cl, addr = self.network.accept(socket)
+				cl, addr = self.system.accept(socket)
 				print('==================================')
 				print('client connected from', addr)
 
-				request = self.network.recv(cl)
+				request = self.system.recv(cl)
 
 				html = self.code(request)
 

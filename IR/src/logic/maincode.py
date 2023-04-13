@@ -11,8 +11,7 @@ class MainCode:
     def maincode(self, system):
         self.system = system
         self.set_up_flasher()
-        network_options = None
-        self.set_up_network()
+        self.service_access = ServiceAccess(system, ServerUrl)
 
         self.flasher.set_status(1)
         configuration_switches = ConfigurationSwitches(self.system, self.service_access)
@@ -24,7 +23,6 @@ class MainCode:
             from controller import Controller
             ir_output = self.system.make_output_pin(IR_TRANSMIT_PIN)
             controller = Controller(self.system,
-                        self.network,
                         self.service_access,
                         ir_output)
             controller.control()
@@ -36,22 +34,6 @@ class MainCode:
 
     def set_up_flasher(self):
         self.flasher = Flasher(self.system)
-
-    def set_up_network(self):
-        self.flasher.set_status(2)
-        self.network = self.system.initialise_network()
-        self.flasher.set_status(3)
-        self.service_access = ServiceAccess(self.network, ServerUrl)
-        if self.network.connected:
-            self.flasher.set_status(4)
-            try:
-                self.service_access.log('Pico available on ip ' + self.network.ip_address)
-            except OSError as e:
-                print('The service may be down:', e)
-                sys.exit()
-        else:
-            return
-        self.flasher.set_sequence([10,10])
 
     def log_configuration_switches(self, switches):
         self.service_access.log('Configuration switches: ' + switches)

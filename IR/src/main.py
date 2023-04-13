@@ -10,36 +10,8 @@ import time
 from machine import Pin, Timer, ADC, unique_id
 from uio import StringIO
 from maincode import MainCode
-from pico_network import PicoNetwork
+from system_functions import SystemFunctions
 
-class SystemWrapper:
-    def __init__(self, id):
-        self.id = id
-
-    def make_output_pin(self, name):
-        return Pin(name, Pin.OUT)
-
-    def make_input_pin(self, name, pull = None):
-        if (pull is None):
-            return Pin(name, Pin.IN)
-        return Pin(name, Pin.IN, Pin.PULL_UP if pull else Pin.PULL_DOWN)
-
-    def make_timer(self):
-        return Timer()
-
-    def ticks_us(self):
-        return time.ticks_us()
-
-    def init_timer(self, timer, freq, callbackfn):
-        timer.init(freq=freq, mode=Timer.PERIODIC, callback=callbackfn)
-
-    def initialise_network(self):
-        return PicoNetwork()
-
-    def log_exception(self, service_access, message, e):
-        string_stream = StringIO('')
-        sys.print_exception(e, string_stream)
-        service_access.log(''.join([message, ': ', string_stream.getvalue()]))
 
 s = unique_id()
 id = ''
@@ -47,6 +19,6 @@ for b in s:
     id = id + hex(b)[2:]
 print('Pico id', id)
 
-system = SystemWrapper(id)
+system = SystemFunctions(id)
 maincode = MainCode()
 maincode.maincode(system)

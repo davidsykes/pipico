@@ -6,9 +6,9 @@ sys.path.append('../src/io')
 sys.path.append('../src/logic')
 sys.path.append('../src/server')
 sys.path.append('../src/recorder')
-from mocksystem import MockSystem
+from mock_system_functions import MockSystemFunctions
 from maincode import MainCode
 
-system = MockSystem()
+system = MockSystemFunctions()
 maincode = MainCode()
 maincode.maincode(system)
