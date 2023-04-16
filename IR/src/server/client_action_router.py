@@ -4,7 +4,9 @@ class ClientActionRouter:
 		self.sequences_action = sequences_action
 		self.codes_action = codes_action
 		self.logger = logger
-	def action(self, type, url):
+	def action(self, action):
+		type = action.type
+		url = action.url
 		if (url == '/'):
 			return self.home_action.action()
 		elif (url[0:9] == '/sequence'):

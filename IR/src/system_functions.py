@@ -59,7 +59,7 @@ class SystemFunctions:
     def accept(self, s):
         return s.accept()
 
-    def recv(self, cl):
+    def connection_receive_string(self, cl):
         request = cl.recv(1024)
         request_string = ''.join([chr(int(x)) for x in request])
         return request_string

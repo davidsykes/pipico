@@ -1,11 +1,9 @@
-from url_request_decoder import UrlRequestDecoder
 from ir_exception import IrException
 
 class Listener:
-	def __init__(self, system, router, logger):
+	def __init__(self, system, connection_handler, logger):
 		self.system = system
-		self.request_decoder = UrlRequestDecoder()
-		self.router = router
+		self.connection_handler = connection_handler
 		self.logger = logger
 
 	def listen(self):
@@ -19,16 +17,8 @@ class Listener:
 				print('==================================')
 				print('client connected from', addr)
 
-				request = self.system.recv(cl)
-
-				html = self.code(request)
-
-				if html is None:
-					cl.send('HTTP/1.0 404 Bad Request\r\nContent-type: text/html\r\n\r\n')
-				else:
-					cl.send('HTTP/1.0 200 OK\r\nContent-type: text/html\r\n\r\n')
-					cl.send(html)
-        
+				self.connection_handler.request(cl)
+       
 			except OSError as e:
 				print('Connection closed')
 				raise
@@ -41,8 +31,3 @@ class Listener:
 			finally:
 				if (cl is not None):
 					cl.close()
-
-	def code(self, http_request):
-		request = self.request_decoder.decode_request(http_request)
-		print("ACTION", request.type, request.url)
-		return self.router.action(request.type, request.url)

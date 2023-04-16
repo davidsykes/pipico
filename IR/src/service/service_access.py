@@ -27,7 +27,6 @@ class ServiceAccess:
         self.put(url, message)
 
     def send_ir_code(self, code, wave_data):
-        print('Put data for code', code)
         url = self.get_url('ircode')
         headers = {'content-type': 'application/json'}
         data = {'code': str(code), 'wavepoints' : wave_data}

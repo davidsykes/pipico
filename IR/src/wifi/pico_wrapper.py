@@ -5,7 +5,6 @@ class PicoWrapper:
         try:
             file = open(path, 'r')
             content = file.read()
-            print('File content', content)
             file.close()
             return content
         except OSError:

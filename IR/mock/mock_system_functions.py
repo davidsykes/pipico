@@ -93,5 +93,5 @@ class MockSystemFunctions:
         print('Socket accept')
         return self.client_connection,'Mock'
 
-    def recv(self, cl):
+    def connection_receive_string(self, cl):
         return cl.next_request()

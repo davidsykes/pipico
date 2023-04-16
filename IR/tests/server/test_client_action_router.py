@@ -1,6 +1,7 @@
 import sys
 sys.path.append('../src/server')
 from client_action_router import ClientActionRouter
+from url_request_decoder import UrlRequest
 
 class MockAction:
     def __init__(self, name):
@@ -24,33 +25,33 @@ class TestClientActionRouter:
         self.router = ClientActionRouter(self.home_action, self.sequences_action, self.codes_action, self.mock_logger)
 
     def test_home_response(self):
-        response = self.router.action('GET', '/')
+        response = self.router.action(UrlRequest('GET', '/'))
         assert(response == 'home action ')
         assert(len(self.mock_logger.logs) == 0)
 
     def test_sequence_request(self):
-        response = self.router.action('GET', '/sequence/Sequence%201')
+        response = self.router.action(UrlRequest('GET', '/sequence/Sequence%201'))
 
         assert(self.sequences_action.action == '/sequence/Sequence%201')
         assert(response == 'sequence action /sequence/Sequence%201')
         assert(len(self.mock_logger.logs) == 0)
 
     def test_code_request(self):
-        response = self.router.action('GET', '/code/527199')
+        response = self.router.action(UrlRequest('GET', '/code/527199'))
 
         assert(self.codes_action.action == '/code/527199')
         assert(response == 'codes action /code/527199')
         assert(len(self.mock_logger.logs) == 0)
 
     def test_invalid_route(self):
-        response = self.router.action('GET', '/cude/527199')
+        response = self.router.action(UrlRequest('GET', '/cude/527199'))
 
         assert(response is None)
         assert(len(self.mock_logger.logs) == 1)
         assert(self.mock_logger.logs[0] == 'Invalid request: GET /cude/527199')
 
     def test_favicon(self):
-        response = self.router.action('GET', '/favicon.ico')
+        response = self.router.action(UrlRequest('GET', '/favicon.ico'))
 
         assert(response is None)
         assert(len(self.mock_logger.logs) == 0)

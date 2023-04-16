@@ -6,6 +6,8 @@ from client_action_home import ClientActionHome
 from client_action_sequences import ClientActionSequences
 from client_action_codes import ClientActionCodes
 from client_action_router import ClientActionRouter
+from connection_handler import ConnectionHandler
+from url_request_decoder import UrlRequestDecoder
 
 class Controller:
 	def __init__(self, system, service_access, ir_output):
@@ -22,7 +24,9 @@ class Controller:
 			sequences_action = ClientActionSequences(waveforms, transmitter, home_action)
 			codes_action = ClientActionCodes(waveforms, transmitter, home_action)
 			router = ClientActionRouter(home_action, sequences_action, codes_action, self.service_access)
-			listener = Listener(self.system, router, self.service_access)
+			request_decoder = UrlRequestDecoder()
+			connection_handler = ConnectionHandler(self.system, request_decoder, router)
+			listener = Listener(self.system, connection_handler, self.service_access)
 			self.service_access.log('Wait for sequence requests')
 			listener.listen()
 		except Exception as e:
