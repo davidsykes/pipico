@@ -1,10 +1,16 @@
+import sys
 import urequests as requests
 import json
 import socket
 import time
 from ir_exception import IrException
+from machine import Pin, Timer
+from uio import StringIO
 
 class SystemFunctions:
+    def __init__(self, id):
+        self.id = id
+
     def make_output_pin(self, name):
         return Pin(name, Pin.OUT)
 
@@ -50,7 +56,7 @@ class SystemFunctions:
 
     def open_socket(self):
         addr = socket.getaddrinfo('0.0.0.0', 80)[0][-1]
-        s = socket.socket(socket.AF_INET,socket.SOCK_STREAM)
+        s = socket.socket() #socket.AF_INET,socket.SOCK_STREAM)
         s.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
         s.bind(addr)
         s.listen(1)

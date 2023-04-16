@@ -5,13 +5,14 @@ sys.path.append('./io')
 sys.path.append('./logic')
 sys.path.append('./server')
 sys.path.append('./recorder')
+sys.path.append('./wifi')
 
-import time
-from machine import Pin, Timer, ADC, unique_id
-from uio import StringIO
+from machine import unique_id
 from maincode import MainCode
 from system_functions import SystemFunctions
+from network_initialiser import NetworkInitialiser
 
+NetworkInitialiser().initialise()
 
 s = unique_id()
 id = ''
