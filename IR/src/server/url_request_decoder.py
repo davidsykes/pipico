@@ -11,7 +11,7 @@ class UrlRequestDecoder:
             raise IrException('Url Request is None')
         lines = request.splitlines()
         if lines is None or len(lines) < 1:
-            raise IrException(''.join(["Url Request '", str(request), "' is empty"]))
+            raise IrException('Url Request is empty')
         words = lines[0].split()
         if (len(words) < 2):
             raise IrException("Invalid request url: '" + lines[0] + "'")
