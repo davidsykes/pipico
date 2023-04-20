@@ -1,7 +1,7 @@
 import sys
 from service_access import ServiceAccess
 from flasher import Flasher
-from configuration_switches import ConfigurationSwitches
+from configuration_retriever import ConfigurationRetriever
 
 IR_RECEIVE_PIN = 15
 IR_TRANSMIT_PIN = 14
@@ -14,11 +14,9 @@ class MainCode:
         self.service_access = ServiceAccess(system, ServerUrl)
 
         self.flasher.set_status(1)
-        configuration_switches = ConfigurationSwitches(self.system, self.service_access)
+        configuration = ConfigurationRetriever(self.service_access).retrieve_configuration()
 
-        self.log_configuration_switches(configuration_switches.string_format)
-
-        if configuration_switches.are_we_ir_transmitter:
+        if configuration == 'irtransmitter':
             self.service_access.log('IR Transmitter')
             from controller import Controller
             ir_output = self.system.make_output_pin(IR_TRANSMIT_PIN)
@@ -26,7 +24,7 @@ class MainCode:
                         self.service_access,
                         ir_output)
             controller.control()
-        else:
+        elif configuration == 'irrecorder':
             self.service_access.log('IR recorder')
             from ir_recorder import IRRecorder
             recorder = IRRecorder(system, self.service_access, IR_RECEIVE_PIN)
@@ -34,6 +32,3 @@ class MainCode:
 
     def set_up_flasher(self):
         self.flasher = Flasher(self.system)
-
-    def log_configuration_switches(self, switches):
-        self.service_access.log('Configuration switches: ' + switches)
