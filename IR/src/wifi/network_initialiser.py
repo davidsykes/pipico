@@ -18,7 +18,7 @@ class NetworkInitialiser:
     def initialise(self):
         credentials = self.read_credentials()
         if credentials is not None:
-            self.pico_wrapper.log(''.join(['Attempting to connect to ',credentials[0], '-', credentials[1]], '.'))
+            self.pico_wrapper.log(''.join(['Attempting to connect to ',credentials[0], '-', credentials[1], '.']))
             enabled = self.wifi_connector.connect_wifi(credentials[0], credentials[1])
             if enabled:
                 self.pico_wrapper.log('Connected.')
