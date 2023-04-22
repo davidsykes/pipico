@@ -11,13 +11,11 @@ class MockNetwork:
         self.test_codes = test_codes
         self.test_sequences = test_sequences
         self.get_urls = []
-    def get_url(self, url):
-        return 'mock ' + url
     def get(self, url):
         self.get_urls.append(url)
-        if url == 'mock codes':
+        if url == 'codes':
             return self.test_codes
-        elif url == 'mock sequences':
+        elif url == 'sequences':
             return self.test_sequences
         else:
             assert False, ''.join(['Url ', url, ' not recognised'])
@@ -28,10 +26,10 @@ class TestWaveformsManager:
         self.manager = WaveformsManager(self.mock_network)
 
     def test_on_initialising_the_sequences_are_retrieved(self):
-        assert(self.mock_network.get_urls[0] == "mock sequences")
+        assert(self.mock_network.get_urls[0] == "sequences")
 
     def test_on_initialising_the_codes_are_retrieved(self):
-        assert(self.mock_network.get_urls[1] == "mock codes")
+        assert(self.mock_network.get_urls[1] == "codes")
 
     def test_the_sequence_names_can_be_retreieved(self):
         names = self.manager.get_sequence_names()

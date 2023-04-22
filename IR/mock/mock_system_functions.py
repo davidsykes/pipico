@@ -67,9 +67,6 @@ class MockSystemFunctions:
 
     def init_timer(self, timer, freq, callback):
         pass
-
-    def get_url(self, path):
-        return 'url for ' + path
     
     def get(self, url):
         print('Get', url)

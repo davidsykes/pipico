@@ -14,8 +14,8 @@ class TestServiceAccess:
         self.mock_network = MockNetwork()
         self.access = ServiceAccess(self.mock_network, 'base url')
 
-    def test_get_url(self):
-        url = self.access.get_url('url path')
+    def test_format_url(self):
+        url = self.access.format_url('url path')
 
         assert(url == 'base url/url path')
 
