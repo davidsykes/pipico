@@ -6,9 +6,16 @@ sys.path.append('../src/io')
 sys.path.append('../src/logic')
 sys.path.append('../src/server')
 sys.path.append('../src/recorder')
-from mock_system_functions import MockSystemFunctions
 from maincode import MainCode
 
-system = MockSystemFunctions()
 maincode = MainCode()
+
+from mock_system_simple import SimplestMockSystem
+system = SimplestMockSystem()
+maincode.maincode(system)
+
+raise NotImplementedError
+
+from mock_system_functions import MockSystemFunctions
+system = MockSystemFunctions()
 maincode.maincode(system)
