@@ -1,6 +1,5 @@
 import sys
 import urequests as requests
-import json
 import socket
 import time
 from ir_exception import IrException
@@ -42,16 +41,14 @@ class SystemFunctions:
             return text
         raise IrException(''.join(['Error ', str(status_code), ' accessing url ', url]))
 
-    def put(self, url, headers, data):
-        jsonObj = json.dumps(data)
+    def put_json(self, url, data):
+        headers = {'content-type': 'application/json'}
         try:
-            response = requests.put(url, data=jsonObj, headers=headers)
+            response = requests.put(url, data=data, headers=headers)
         except:
-            response = requests.put(url, data=jsonObj, headers=headers)
+            response = requests.put(url, data=data, headers=headers)
         status_code = response.status_code
         response.close()
-        if (status_code != 200):
-            print('put response', status_code)
         return status_code
 
     def open_socket(self):

@@ -82,9 +82,9 @@ class MockSystemFunctions:
         except URLError as e:
             raise IrException(''.join(['URLError error accessing url ', url]))
 
-    def put(self, url, headers, body):
+    def put_json(self, url, data):
         print('Put to', url)
-        print(json.dumps(body))
+        print(json.dumps(data))
 
     def open_socket(self):
         print('Open Socket for listening')

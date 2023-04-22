@@ -1,15 +1,13 @@
 import sys
-import json
 sys.path.append('../src/service')
 from service_access import ServiceAccess
 
 class MockNetwork:
     def __init__(self):
         self.connected = True
-    def put(self,url, headers, data):
+    def put_json(self, url, data):
         self.put_url = url
-        self.put_headers = headers
-        self.put_data = json.dumps(data)
+        self.put_data = data
 
 class TestServiceAccess:
     def setup_method(self, test_method):
@@ -27,5 +25,4 @@ class TestServiceAccess:
         self.access.send_ir_code(123, wave_data)
 
         assert(self.mock_network.put_url == 'base url' + '/ircode')
-        assert(self.mock_network.put_headers == {'content-type': 'application/json'})
         assert(self.mock_network.put_data == '{"code": "123", "wavepoints": [[0, 1], [2, 3], [4, 5]]}')

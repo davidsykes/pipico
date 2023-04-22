@@ -1,3 +1,4 @@
+import json
 
 class ServiceAccess:
     options_url = 'option?option=system'
@@ -18,8 +19,8 @@ class ServiceAccess:
         return opt
 
     def put(self, url, data):
-        headers = {'content-type': 'application/json'}
-        self.system.put(url, headers, data)
+        json_data = json.dumps(data)
+        self.system.put_json(url, headers, json_data)
 
     def log(self, message):
         print(message)
@@ -28,6 +29,6 @@ class ServiceAccess:
 
     def send_ir_code(self, code, wave_data):
         url = self.get_url('ircode')
-        headers = {'content-type': 'application/json'}
         data = {'code': str(code), 'wavepoints' : wave_data}
-        self.system.put(url, headers, data)
+        json_data = json.dumps(data)
+        self.system.put_json(url, json_data)
