@@ -1,5 +1,5 @@
 from receiver import Receiver
-from poster import DataPoster
+from poster import Poster
 
 class MainCode:
     def maincode(self, system):
@@ -7,7 +7,7 @@ class MainCode:
         uart.write(b'Hello World')
 
         self.receiver = Receiver(system)
-        self.poster = DataPoster()
+        self.poster = Poster()
 
         while True:
             if uart.any():
