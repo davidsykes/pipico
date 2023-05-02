@@ -16,4 +16,4 @@ class TestPoster:
         self.poster.post_data(b'Hello World')
 
         assert(self.mock_system.put_url == 'server url/trace')
-        assert(self.mock_system.put_data == '{"title": "Yo", "trace": "SGVsbG8gV29ybGQ="}')
+        assert(self.mock_system.put_data == '{"title": "Yo", "trace": "48656c6c6f20576f726c64"}')

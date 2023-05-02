@@ -21,7 +21,7 @@ class ServiceAccess:
 
     def put(self, url, data):
         json_data = json.dumps(data)
-        self.system.put_json(url, headers, json_data)
+        self.system.put_json(url, json_data)
 
     def log(self, message):
         print(message)

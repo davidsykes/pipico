@@ -6,7 +6,7 @@ from maincode import MainCode
 from system_functions import SystemFunctions
 from network_initialiser import NetworkInitialiser
 
-NetworkInitialiser().initialise()
+connection_values = NetworkInitialiser().initialise()
 
 s = unique_id()
 id = ''
@@ -16,4 +16,4 @@ print('Pico id', id)
 
 system = SystemFunctions(id)
 maincode = MainCode()
-maincode.maincode(system)
+maincode.maincode(system, connection_values)

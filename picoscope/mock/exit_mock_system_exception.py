@@ -1,0 +1,3 @@
+
+class ExitMockSystemException(Exception):
+	pass

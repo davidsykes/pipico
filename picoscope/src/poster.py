@@ -1,4 +1,3 @@
-import base64
 import json
 
 class Poster:
@@ -8,7 +7,7 @@ class Poster:
 
     def post_data(self, data):
         url = self.server_ip + '/trace'
-        base64_data = base64.b64encode(data).decode('ascii')
-        body = {'title': 'Yo', 'trace' : base64_data}
+        hex_data = data.hex()
+        body = {'title': 'Yo', 'trace' : hex_data}
         body_json = json.dumps(body)
         self.system.put_json(url, body_json)

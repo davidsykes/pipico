@@ -1,4 +1,4 @@
-
+from exit_mock_system_exception import ExitMockSystemException
 
 class UART:
     def __init__(self):
@@ -15,7 +15,14 @@ class UART:
             return data
 
 class MockSystem:
+    def __init__(self):
+        self.time_to_run = 1
+        self.time_since_start = 0
     def initialise_uart(self, uart):
         return UART()
     def sleep(self, time):
-        pass
+        self.time_since_start += time
+        if self.time_since_start >= self.time_to_run:
+            raise ExitMockSystemException
+    def put_json(self, url, data):
+        print('Put json to', url, ':', data)
