@@ -10,13 +10,13 @@ class ServiceAccess:
     def format_url(self, url):
         return self.base_url + '/' + url
 
-    def get(self, url):
+    def network_api_get(self, url):
         url = self.format_url(url)
-        return self.system.get(url)
+        return self.system.network_api_get(url)
 
     def get_option(self, name):
         url = self.format_url('option?option=' + name)
-        opt = self.get(url)
+        opt = self.network_api_get(url)
         return opt
 
     def put(self, url, data):

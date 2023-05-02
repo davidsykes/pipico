@@ -6,6 +6,10 @@ from ir_exception import IrException
 from machine import Pin, Timer
 from uio import StringIO
 
+
+class NetworkApiException(Exception):
+	pass
+
 class SystemFunctions:
     def __init__(self, id):
         self.id = id
@@ -32,14 +36,14 @@ class SystemFunctions:
         sys.print_exception(e, string_stream)
         service_access.log(''.join([message, ': ', string_stream.getvalue()]))
 
-    def get(self, url):
+    def network_api_get(self, url):
         response = requests.get(url)
         status_code = response.status_code
         text = response.text
         response.close()
         if status_code == 200:
             return text
-        raise IrException(''.join(['Error ', str(status_code), ' accessing url ', url]))
+        raise NetworkApiException(''.join(['Error ', str(status_code), ' accessing url ', url]))
 
     def put_json(self, url, data):
         headers = {'content-type': 'application/json'}

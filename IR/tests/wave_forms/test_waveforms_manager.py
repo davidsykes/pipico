@@ -11,7 +11,7 @@ class MockNetwork:
         self.test_codes = test_codes
         self.test_sequences = test_sequences
         self.get_urls = []
-    def get(self, url):
+    def network_api_get(self, url):
         self.get_urls.append(url)
         if url == 'codes':
             return self.test_codes

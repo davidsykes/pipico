@@ -4,4 +4,4 @@ class ConfigurationRetriever:
 
     def retrieve_configuration(self):
         url = 'option?option=configuration'
-        return self.service_access.get(url)
+        return self.service_access.network_api_get(url)

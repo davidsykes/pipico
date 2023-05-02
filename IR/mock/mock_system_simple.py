@@ -8,7 +8,7 @@ class SimplestMockSystem:
         return None
     def init_timer(self, timer, freq, callback):
         pass
-    def get(self, url):
+    def network_api_get(self, url):
         if url == 'http://192.168.1.87:5000/option?option=configuration':
             return 'configuration'
         print('GET', url)

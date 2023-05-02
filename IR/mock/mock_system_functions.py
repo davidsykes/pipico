@@ -68,7 +68,7 @@ class MockSystemFunctions:
     def init_timer(self, timer, freq, callback):
         pass
     
-    def get(self, url):
+    def network_api_get(self, url):
         print('Get', url)
         try:
             with urlopen(url) as x:

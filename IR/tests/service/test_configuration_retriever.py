@@ -3,7 +3,7 @@ sys.path.append('../src/service')
 from configuration_retriever import ConfigurationRetriever
 
 class MockServiceAccess:
-	def get(self, url):
+	def network_api_get(self, url):
 		if url == 'option?option=configuration':
 			return 'configuration value'
 

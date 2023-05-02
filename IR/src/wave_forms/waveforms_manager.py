@@ -7,7 +7,7 @@ class WaveformsManager:
 		self.network = network
 		self.load_sequence_data()
 
-		codes_json = self.network.get('codes')
+		codes_json = self.network.network_api_get('codes')
 		codes = json.loads(codes_json)
 
 		self.codes = {}
@@ -19,7 +19,7 @@ class WaveformsManager:
 			self.names.append(name)
 
 	def load_sequence_data(self):
-		sequences_json = self.network.get('sequences')
+		sequences_json = self.network.network_api_get('sequences')
 		sequences = json.loads(sequences_json)['sequences']
 
 		self.sequences = {}
