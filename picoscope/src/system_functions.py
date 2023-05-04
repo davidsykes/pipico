@@ -2,8 +2,7 @@ import sys
 import urequests as requests
 import socket
 import time
-from ir_exception import IrException
-from machine import Pin, Timer
+from machine import Pin, Timer, UART
 from uio import StringIO
 
 
@@ -21,12 +20,18 @@ class SystemFunctions:
         if (pull is None):
             return Pin(name, Pin.IN)
         return Pin(name, Pin.IN, Pin.PULL_UP if pull else Pin.PULL_DOWN)
+    
+    def initialise_uart(self, number):
+        return UART(number)
 
     def make_timer(self):
         return Timer()
 
     def ticks_us(self):
         return time.ticks_us()
+    
+    def sleep(self, duration):
+        time.sleep(duration)
 
     def init_timer(self, timer, freq, callbackfn):
         timer.init(freq=freq, mode=Timer.PERIODIC, callback=callbackfn)

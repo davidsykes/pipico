@@ -4,9 +4,11 @@ sys.path.append('./wifi')
 from machine import unique_id
 from maincode import MainCode
 from system_functions import SystemFunctions
-from network_initialiser import NetworkInitialiser
+from network_initialiser import NetworkInitialiser, AccessPointOptions, AccessPointOption
 
-connection_values = NetworkInitialiser().initialise()
+server_url = AccessPointOption('server_url', 'Server URL')
+options = AccessPointOptions('PICO7', 'password', [server_url])
+connection_values = NetworkInitialiser().initialise(options)
 
 s = unique_id()
 id = ''

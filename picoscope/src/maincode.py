@@ -5,7 +5,7 @@ class MainCode:
     def maincode(self, system, connection_values):
         uart = system.initialise_uart(0)
         uart.write(b'Hello World')
-        server_ip = connection_values['serverip']
+        server_ip = connection_values['server_ip']
 
         self.receiver = Receiver(system)
         self.poster = Poster(system, server_ip)

@@ -2,7 +2,6 @@ import sys
 import urequests as requests
 import socket
 import time
-from ir_exception import IrException
 from machine import Pin, Timer
 from uio import StringIO
 

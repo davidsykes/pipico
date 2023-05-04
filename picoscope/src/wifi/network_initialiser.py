@@ -1,6 +1,7 @@
 from pico_wrapper import PicoWrapper
 from pico_access_point import PicoAccessPoint
 from program_options_reader import ProgramOptionsReader
+from access_point_option import AccessPointOption
 from access_point_options import AccessPointOptions
 from progress_indicator import ProgressIndicator
 from url_parameters_extractor import UrlParametersExtractor
