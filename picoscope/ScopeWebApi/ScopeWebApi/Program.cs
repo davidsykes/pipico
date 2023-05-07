@@ -1,4 +1,6 @@
-using Logic;
+using Logic.Logic;
+using Logic.Messaging;
+using ScopeWebApi;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -19,15 +21,16 @@ var app = builder.Build();
 try
 {
     var programParameters = new ProgramParameters();
-    var messageLogger = new MessageLogger(programParameters);
+    var hexDataConverter = new HexDataConverter();
+    var messageLogger = new MessageRouter(hexDataConverter);
 
     app.MapPut("/scope", (string jsonstring) =>
     {
         try
         {
-            var response = messageLogger.LogMessage(jsonstring);
+            var response = messageLogger.Route(jsonstring);
             Console.WriteLine(response);
-            return response;
+            return response ? "Ok" : "Not Ok";
         }
         catch (Exception ex)
         {

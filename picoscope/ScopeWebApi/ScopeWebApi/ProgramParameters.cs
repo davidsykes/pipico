@@ -1,6 +1,6 @@
 ﻿using ApplicationParameters;
 
-namespace Logic
+namespace ScopeWebApi
 {
     public class ProgramParameters
     {
