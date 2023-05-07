@@ -19,9 +19,9 @@ namespace Logic.Messaging
             _hexDataConverter = hexDataConverter;
         }
 
-        public bool Route(string jsonstring)
+        public bool Route(string jsonString)
         {
-            var messageObject = DeserialiseMessage(jsonstring);
+            var messageObject = DeserialiseMessage(jsonString);
 
             if (_handlers.ContainsKey(messageObject.Type))
             {
@@ -37,11 +37,11 @@ namespace Logic.Messaging
             throw new ScopeWebApiException($"The handler for messages with type '{messageObject.Type}' was not found.");
         }
 
-        private static Message DeserialiseMessage(string jsonstring)
+        private static Message DeserialiseMessage(string jsonString)
         {
             try
             {
-                var message = JsonSerializer.Deserialize<Message>(jsonstring);
+                var message = JsonSerializer.Deserialize<Message>(jsonString);
 
                 if (message != null)
                     return message;

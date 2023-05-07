@@ -1,0 +1,14 @@
+version: "3.1"
+services:
+  pipico:
+    container_name: ScopeWebApi
+    image: "192.168.1.125:5000/scopewebapi:latest"
+    ports:
+      - "5000:5000"
+    volumes:
+      - "/media/database:/media/database"
+      - "/media/logs:/media/logs"
+    environment:
+      - DatabasePath=/media/database/scopewebapi.sql
+      - LogFilePath=/media/logs/scopewebapi.log
+    #restart: always
