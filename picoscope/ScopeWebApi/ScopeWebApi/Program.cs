@@ -22,13 +22,13 @@ try
 {
     var programParameters = new ProgramParameters();
     var hexDataConverter = new HexDataConverter();
-    var messageLogger = new MessageRouter(hexDataConverter);
+    var messageRouter = new MessageRouter(hexDataConverter);
 
     app.MapPut("/scope", (string jsonstring) =>
     {
         try
         {
-            var response = messageLogger.Route(jsonstring);
+            var response = messageRouter.Route(jsonstring);
             Console.WriteLine(response);
             return response ? "Ok" : "Not Ok";
         }

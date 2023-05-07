@@ -7,7 +7,7 @@ namespace Logic.Messaging
     {
         readonly IHexDataConverter _hexDataConverter;
 
-        private IDictionary<string, IMessageHandler> _handlers = new Dictionary<string, IMessageHandler>();
+        private readonly IDictionary<string, IMessageHandler> _handlers = new Dictionary<string, IMessageHandler>();
 
         public void AddHandler(string type, IMessageHandler handler)
         {

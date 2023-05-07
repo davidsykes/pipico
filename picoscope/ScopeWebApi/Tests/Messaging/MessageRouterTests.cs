@@ -70,7 +70,7 @@ namespace Tests.Messaging
         }
 
         [Test]
-        public void IfThDataIsNotHexAnExceptionIsThrown()
+        public void IfTheDataIsNotHexAnExceptionIsThrown()
         {
             var message = "{\"Type\": \"type\", \"Data\": \"non hex data\"}";
 
