@@ -13,13 +13,12 @@ namespace Tests.Messaging
         IMessageRouter _router;
 
         Mock<IMessageHandler> _mockMessageHandler;
-        Mock<IHexDataConverter> _mockHexDataConverter;
         readonly byte[] _binaryData = Encoding.ASCII.GetBytes("Hello World");
 
         [Test]
         public void TheMessageRouterPassesTheMessageToARegisteredHandler()
         {
-            var message = "{\"Type\": \"type\", \"Data\": \"hex data\"}";
+            var message = "{\"type\": \"type\", \"data\": \"48656c6c6f20576f726c64\"}";
 
             _router.Route(message);
 
@@ -29,7 +28,7 @@ namespace Tests.Messaging
         [Test]
         public void TheMessageRouteConvertsTheMessageDataToBinary()
         {
-            var message = "{\"Type\": \"type\", \"Data\": \"hex data\"}";
+            var message = "{\"type\": \"type\", \"data\": \"48656c6c6f20576f726c64\"}";
 
             _router.Route(message);
 
@@ -39,7 +38,7 @@ namespace Tests.Messaging
         [Test]
         public void IfTheHandlerReturnsTrueTheRouterReturnsTrue()
         {
-            var message = "{\"Type\": \"type\", \"Data\": \"hex data\"}";
+            var message = "{\"type\": \"type\", \"data\": \"48656c6c6f20576f726c64\"}";
             _mockMessageHandler.Setup(m => m.ProcessMessage(It.IsAny<byte[]>())).Returns(true);
 
             var result = _router.Route(message);
@@ -50,7 +49,7 @@ namespace Tests.Messaging
         [Test]
         public void IfTheHandlerReturnsFalseTheRouterReturnsFalse()
         {
-            var message = "{\"Type\": \"type\", \"Data\": \"hex data\"}";
+            var message = "{\"type\": \"type\", \"data\": \"48656c6c6f20576f726c64\"}";
             _mockMessageHandler.Setup(m => m.ProcessMessage(It.IsAny<byte[]>())).Returns(false);
 
             var result = _router.Route(message);
@@ -61,7 +60,7 @@ namespace Tests.Messaging
         [Test]
         public void IfTheHandlerIsNotRegisteredAnExceptionIsThrown()
         {
-            var message = "{\"Type\": \"unknown\", \"Data\": \"hex data\"}";
+            var message = "{\"type\": \"unknown\", \"data\": \"48656c6c6f20576f726c64\"}";
 
             Action action = () => _router.Route(message);
 
@@ -72,7 +71,7 @@ namespace Tests.Messaging
         [Test]
         public void IfTheDataIsNotHexAnExceptionIsThrown()
         {
-            var message = "{\"Type\": \"type\", \"Data\": \"non hex data\"}";
+            var message = "{\"type\": \"type\", \"data\": \"non hex data\"}";
 
             Action action = () => _router.Route(message);
 
@@ -108,19 +107,12 @@ namespace Tests.Messaging
         {
             base.SetUpMocks();
             _mockMessageHandler = new Mock<IMessageHandler>();
-            _mockHexDataConverter = new Mock<IHexDataConverter>();
-        }
-
-        protected override void SetUpExpectations()
-        {
-            base.SetUpExpectations();
-            _mockHexDataConverter.Setup(m => m.HexStringToBinary("hex data")).Returns(_binaryData);
         }
 
         protected override void SetUpObjectUnderTest()
         {
             base.SetUpObjectUnderTest();
-            _router = new MessageRouter(_mockHexDataConverter.Object);
+            _router = new MessageRouter();
             _router.AddHandler("type", _mockMessageHandler.Object);
         }
 

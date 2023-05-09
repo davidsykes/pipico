@@ -1,5 +1,6 @@
 using Logic.Logic;
 using Logic.Messaging;
+using Logic.Trace;
 using ScopeWebApi;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -21,8 +22,9 @@ var app = builder.Build();
 try
 {
     var programParameters = new ProgramParameters();
-    var hexDataConverter = new HexDataConverter();
-    var messageRouter = new MessageRouter(hexDataConverter);
+    var messageRouter = new MessageRouter();
+    var scopeTraceHandler = new ScopeTraceHandler();
+    messageRouter.AddHandler("trace", scopeTraceHandler);
 
     app.MapPut("/scope", async delegate (HttpContext context)
     {
@@ -47,7 +49,7 @@ try
     {
         try
         {
-            jsonstring = @"{""data"": ""fe48656c6c6f20576f726c64"", ""type"": ""trace""}";
+            jsonstring = @"{""data"": ""48656c6c6f20576f726c64"", ""type"": ""trace""}";
             var response = messageRouter.Route(jsonstring);
             Console.WriteLine(response);
             return response ? "Ok" : "Not Ok";
