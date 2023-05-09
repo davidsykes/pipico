@@ -3,7 +3,7 @@ namespace Logic.Messaging
 {
     internal class Message
     {
-        public string Type { get; set; }
-        public string Data { get; set; }
+        public string type { get; set; }
+        public string data { get; set; }
     }
 }

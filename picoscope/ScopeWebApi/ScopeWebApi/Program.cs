@@ -24,8 +24,10 @@ try
     var hexDataConverter = new HexDataConverter();
     var messageRouter = new MessageRouter(hexDataConverter);
 
-    app.MapPut("/scope", (string jsonstring) =>
+    app.MapPut("/scope", async delegate (HttpContext context)
     {
+        string jsonstring = await Tools.GetJSONString(context);
+
         try
         {
             var response = messageRouter.Route(jsonstring);
@@ -40,6 +42,24 @@ try
         }
     })
     .WithName("Scope");
+
+    app.MapPut("/test", (string jsonstring) =>
+    {
+        try
+        {
+            jsonstring = @"{""data"": ""fe48656c6c6f20576f726c64"", ""type"": ""trace""}";
+            var response = messageRouter.Route(jsonstring);
+            Console.WriteLine(response);
+            return response ? "Ok" : "Not Ok";
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Error processing scope: {ex.Message}");
+            Console.WriteLine(jsonstring);
+            return "Not Ok";
+        }
+    })
+    .WithName("Test");
 
     app.Run();
 }

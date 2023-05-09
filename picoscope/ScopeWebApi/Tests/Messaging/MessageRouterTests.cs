@@ -14,7 +14,7 @@ namespace Tests.Messaging
 
         Mock<IMessageHandler> _mockMessageHandler;
         Mock<IHexDataConverter> _mockHexDataConverter;
-        byte[] _binaryData = Encoding.ASCII.GetBytes("Hello World");
+        readonly byte[] _binaryData = Encoding.ASCII.GetBytes("Hello World");
 
         [Test]
         public void TheMessageRouterPassesTheMessageToARegisteredHandler()
@@ -123,13 +123,6 @@ namespace Tests.Messaging
             _router = new MessageRouter(_mockHexDataConverter.Object);
             _router.AddHandler("type", _mockMessageHandler.Object);
         }
-
-        //protected override void SetUpData()
-        //{
-        //    base.SetUpData();
-        //    _dbConnection = new DBServices().OpenMemoryDatabase();
-        //    //_dbConnection = new DBServices().OpenFileConnection("D:\\SQLite\\TestDb.sql");
-        //}
 
         #endregion
     }

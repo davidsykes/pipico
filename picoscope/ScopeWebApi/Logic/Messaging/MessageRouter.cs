@@ -23,9 +23,9 @@ namespace Logic.Messaging
         {
             var messageObject = DeserialiseMessage(jsonString);
 
-            if (_handlers.ContainsKey(messageObject.Type))
+            if (_handlers.ContainsKey(messageObject.type))
             {
-                var data = _hexDataConverter.HexStringToBinary(messageObject.Data);
+                var data = _hexDataConverter.HexStringToBinary(messageObject.data);
 
                 if (data.Length > 0)
                 {
@@ -34,7 +34,7 @@ namespace Logic.Messaging
                 throw new ScopeWebApiException("The message data could not be converted.");
             }
 
-            throw new ScopeWebApiException($"The handler for messages with type '{messageObject.Type}' was not found.");
+            throw new ScopeWebApiException($"The handler for messages with type '{messageObject.type}' was not found.");
         }
 
         private static Message DeserialiseMessage(string jsonString)
