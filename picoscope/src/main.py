@@ -6,7 +6,7 @@ from maincode import MainCode
 from system_functions import SystemFunctions
 from network_initialiser import NetworkInitialiser, AccessPointOptions, AccessPointOption
 
-server_url = AccessPointOption('server_url', 'Server URL')
+server_url = AccessPointOption('server_ip', 'Server ip')
 options = AccessPointOptions('PICO7', 'password', [server_url])
 connection_values = NetworkInitialiser().initialise(options)
 

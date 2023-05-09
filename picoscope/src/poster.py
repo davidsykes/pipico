@@ -10,6 +10,6 @@ class Poster:
 
     def post_data(self, data):
         hex_data = data.hex()
-        body = {'title': 'Yo', 'trace' : hex_data}
+        body = {'type': 'trace', 'data' : hex_data}
         body_json = json.dumps(body)
         self.system.put_json(self.server_url, body_json)
