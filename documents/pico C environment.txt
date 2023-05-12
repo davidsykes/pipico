@@ -1,0 +1,14 @@
+Set up the pico C development environment
+
+wget https://raw.githubusercontent.com/raspberrypi/pico-setup/master/pico_setup.sh
+chmod +x pico_setup.sh
+./pico_setup.sh
+
+
+
+Setting a project u to build
+
+mkdir build
+cd build
+cmake .. -DPICO_BOARD=pico_w
+make
