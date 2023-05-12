@@ -42,6 +42,7 @@ class NetworkInitialiser:
             if ip:
                 self.pico_wrapper.log(''.join(['Connected as ', ip, '.']))
                 options['ip'] = ip
+                self.progress_indicator.stop()
                 return options
             else:
                 self.pico_wrapper.log('Connection failed.')
