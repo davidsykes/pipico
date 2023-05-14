@@ -1,4 +1,3 @@
-using Logic.Logic;
 using Logic.Messaging;
 using Logic.Trace;
 using ScopeWebApi;
@@ -45,11 +44,11 @@ try
     })
     .WithName("Scope");
 
-    app.MapPut("/test", (string jsonstring) =>
+    app.MapPut("/test", () =>
     {
+        var jsonstring = @"{""data"": ""48656c6c6f20576f726c64"", ""type"": ""trace""}";
         try
         {
-            jsonstring = @"{""data"": ""48656c6c6f20576f726c64"", ""type"": ""trace""}";
             var response = messageRouter.Route(jsonstring);
             Console.WriteLine(response);
             return response ? "Ok" : "Not Ok";
