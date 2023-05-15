@@ -1,56 +1,65 @@
-/**
- * Copyright (c) 2020 Raspberry Pi (Trading) Ltd.
- *
- * SPDX-License-Identifier: BSD-3-Clause
- */
-
-
 #include <stdio.h>
 #include "pico/stdlib.h"
 #include "hardware/uart.h"
-
-/// \tag::hello_uart[]
+#include "pico/cyw43_arch.h"
 
 #define UART_ID uart0
 #define BAUD_RATE 115200
 
-// We are using pins 0 and 1, but see the GPIO function select table in the
-// datasheet for information on which other pins can be used.
 #define UART_TX_PIN 0
 #define UART_RX_PIN 1
 
-int main() {
-
-    // Set up our UART with the required speed.
-    uart_init(UART_ID, BAUD_RATE);
-
-    // Set the TX and RX pins by using the function select on the GPIO
-    // Set datasheet for more information on function select
-    gpio_set_function(UART_TX_PIN, GPIO_FUNC_UART);
-    gpio_set_function(UART_RX_PIN, GPIO_FUNC_UART);
-
-    // Use some the various UART functions to send out data
-    // In a default system, printf will also output via the default UART
-
-    // Send out a character without any conversions
-    uart_putc_raw(UART_ID, 'A');
-
-    // Send out a character but do CR/LF conversions
-    uart_putc(UART_ID, 'B');
-
-    // Send out a string, with CR/LF conversions
-    uart_puts(UART_ID, " Hello, UART!\n");
-
-    int pins = gpio_get_all();
-    int newpins = pins;
-    long t = time_us_64();
-    int counter = 10;
-    while(counter > 0)
-    {
-        newpins = gpio_get_all();
-        counter--;
-    }
-    uart_puts(UART_ID, " Bye, UART!\n");
+char get_pins()
+{
+    return (char)(gpio_get_all() >> 8);
 }
 
-/// \end::hello_uart[]
+int main()
+{
+    if (cyw43_arch_init()) {
+        printf("Wi-Fi init failed");
+        return -1;
+    }
+//    while (true) {
+//        cyw43_arch_gpio_put(CYW43_WL_GPIO_LED_PIN, 1);
+//        sleep_ms(250);
+//        cyw43_arch_gpio_put(CYW43_WL_GPIO_LED_PIN, 0);
+//        sleep_ms(250);
+//    }
+
+    uart_init(UART_ID, BAUD_RATE);
+    uart_putc(UART_ID, 'x');
+
+    char current_pins = 42;
+
+    while(1)
+    {
+        cyw43_arch_gpio_put(CYW43_WL_GPIO_LED_PIN, 1);
+        uart_puts(UART_ID, "Waiting");
+        char new_pins;
+        do
+        {
+            new_pins = get_pins();
+        } while (new_pins == current_pins);
+        cyw43_arch_gpio_put(CYW43_WL_GPIO_LED_PIN, 0);
+
+        current_pins = new_pins;
+        long start_time = time_us_64();
+        long current_time = start_time;
+        long end_time = start_time + 1000000;
+
+        do
+        {
+            current_time = time_us_64();
+            new_pins = get_pins();
+            if (new_pins != current_pins)
+            {
+                current_pins = new_pins;
+                uart_putc_raw(UART_ID, current_pins);
+            }
+
+        } while (current_time < end_time);
+        
+        uart_puts(UART_ID, "Stop");
+    }
+}
