@@ -1,12 +1,12 @@
 from pico_wrapper import PicoWrapper
 from pico_access_point import PicoAccessPoint
 from program_options_reader import ProgramOptionsReader
-from access_point_option import AccessPointOption
 from access_point_options import AccessPointOptions
 from progress_indicator import ProgressIndicator
 from url_parameters_extractor import UrlParametersExtractor
 from access_point_form_creator import AccessPointFormCreator
 from wifi_connector import WiFiConnector
+from constants import RESET_PIN, PROGRAM_OPTIONS_FILE
 
 class NetworkInitialiser:
     def __init__(self, progress_indicator = None, di = None):
@@ -32,6 +32,7 @@ class NetworkInitialiser:
         return di
 
     def initialise(self, access_point_options = None):
+        self.reset_credentials_if_reset_pin_is_low()
         self.progress_indicator.set_progress(ProgressIndicator.LOOKING_FOR_EXISTING_DETAILS)
         options = self.program_options_reader.read_program_options()
         if options is not None:
@@ -55,3 +56,8 @@ class NetworkInitialiser:
         else:
             launcher = PicoAccessPoint(self.di, access_point_options or AccessPointOptions())
         launcher.launch()
+
+    def reset_credentials_if_reset_pin_is_low(self):
+        pin = self.pico_wrapper.create_input_pin_with_pullup(RESET_PIN)
+        if pin.value() == 0:
+            self.pico_wrapper.delete_file(PROGRAM_OPTIONS_FILE)
