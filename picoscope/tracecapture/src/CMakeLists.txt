@@ -13,8 +13,6 @@ pico_sdk_init()
 
 add_executable(modulator
     main.c
-    modulate.c
-    gpio_pin.c
 )
 
 # Add pico_stdlib library which aggregates commonly used features

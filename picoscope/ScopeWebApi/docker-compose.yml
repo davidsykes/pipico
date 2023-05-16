@@ -6,9 +6,7 @@ services:
     ports:
       - "5000:5000"
     volumes:
-      - "/media/database:/media/database"
-      - "/media/logs:/media/logs"
+      - "/media/tracefiles:/media/tracefiles"
     environment:
-      - DatabasePath=/media/database/scopewebapi.sql
-      - LogFilePath=/media/logs/scopewebapi.log
+      - TraceFilesPath=/media/tracefiles
     #restart: always
