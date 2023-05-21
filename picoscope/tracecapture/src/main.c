@@ -21,6 +21,7 @@ void send_bytes(unsigned char *p, int n)
     for (int i = 0 ; i < n ; i++)
     {
         uart_putc_raw(UART_ID, p[i]);
+        sleep_us(1000);
     }
 }
 
@@ -94,27 +95,23 @@ int main()
         do
         {
             new_pins = get_pins();
-        } while (new_pins == current_pins);
+        }
+        while (new_pins == current_pins);
         cyw43_arch_gpio_put(CYW43_WL_GPIO_LED_PIN, 0);
 
         uint64_t start_time = time_us_64();
         uint64_t current_time = start_time;
         uint64_t end_time = start_time + 1000000;
-        //send_uint64(0x0102030405060708);
-        //send_uint64(0x01020304);
-        //send_uint64(0x0102030405060708);
-        //send_data(current_time-start_time, current_pins);
 
         current_pins = new_pins;
         do
         {
             current_time = time_us_64();
             new_pins = get_pins();
-            //if (new_pins != current_pins)
+            if (new_pins != current_pins)
             {
                 current_pins = new_pins;
-                //send_data(current_time-start_time, current_pins);
-                trace_times[current_trace] = current_time-start_time;
+                trace_times[current_trace] = current_time - start_time;
                 trace_values[current_trace] = current_pins;
                 current_trace++;
             }
@@ -123,8 +120,5 @@ int main()
         while (current_time < end_time && current_trace < trace_count);
 
         send_all_data(trace_times, trace_values, current_trace);
-        
-        //send_uint64(0x0807060504030201);
-        //uart_puts(UART_ID, "Stop");
     }
 }

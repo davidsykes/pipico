@@ -1,0 +1,1 @@
+Remove the sleep(0.1) from the uart receiver so the transmitter delay can be removed
