@@ -3,7 +3,7 @@ sys.path.append('../src')
 from maincode import MainCode
 from exit_mock_system_exception import ExitMockSystemException
 
-connection_options = {'serverip': 'server ip'}
+connection_options = {'server_ip': 'server ip'}
 
 from mock_system import MockSystem
 system = MockSystem()

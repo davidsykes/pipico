@@ -20,4 +20,4 @@ class TestPoster:
     def test_post_data_posts_to_the_server_in_json(self):
         self.poster.post_data(b'Hello World')
 
-        assert(self.mock_system.put_data == '{"title": "Yo", "trace": "48656c6c6f20576f726c64"}')
+        assert(self.mock_system.put_data == '{"type": "trace", "data": "48656c6c6f20576f726c64"}')
