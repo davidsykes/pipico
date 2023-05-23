@@ -11,6 +11,9 @@
 #define UART_TX_PIN 0
 #define UART_RX_PIN 1
 
+#define TRACE_COUNT 1000
+#define ONE_SECOND 1000000
+
 char get_pins()
 {
     return (char)(gpio_get_all() >> 8);
@@ -40,19 +43,13 @@ void send_char(unsigned char i)
     send_bytes(&i, 1);
 }
 
-void send_data(uint64_t time, unsigned char pins)
-{
-    send_uint64(time);
-    send_bytes(&pins, 1);
-}
-
-void send_all_data(uint64_t* times, unsigned char *values, int count)
+void send_all_data(unsigned int* times, unsigned char *values, int count)
 {
     send_int(0x12345678);
     send_int(count);
     for (int i = 0 ; i < count ; i++)
     {
-        send_uint64(times[i]);
+        send_int(times[i]);
         send_char(values[i]);
     }
    send_int(0x87654321);
@@ -78,8 +75,8 @@ int main()
         gpio_pull_up(p);
     }
 
-    int trace_count = 50;
-    uint64_t *trace_times = malloc(trace_count * sizeof(uint64_t));
+    int trace_count = TRACE_COUNT;
+    unsigned int* trace_times = malloc(trace_count * sizeof(unsigned int));
     unsigned char* trace_values = malloc(trace_count * sizeof(unsigned char));
 
     while(1)
@@ -101,7 +98,7 @@ int main()
 
         uint64_t start_time = time_us_64();
         uint64_t current_time = start_time;
-        uint64_t end_time = start_time + 1000000;
+        uint64_t end_time = start_time + ONE_SECOND;
 
         current_pins = new_pins;
         do
@@ -111,7 +108,7 @@ int main()
             if (new_pins != current_pins)
             {
                 current_pins = new_pins;
-                trace_times[current_trace] = current_time - start_time;
+                trace_times[current_trace] = (unsigned int)(current_time - start_time);
                 trace_values[current_trace] = current_pins;
                 current_trace++;
             }
