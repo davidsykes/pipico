@@ -68,13 +68,18 @@ namespace Tests.Messaging
             base.SetUpExpectations();
 
             _mockSystemWrapper.Setup(m => m.EnumerateFiles("trace path"))
-                .Returns(_traceData.Select(m => m.TraceName));
-            _mockSystemWrapper.Setup(m => m.ReadBytes("trace path\\Trace 1", 12))
+                .Returns(MakeTracePaths());
+            _mockSystemWrapper.Setup(m => m.ReadBytes("C:\\trace path\\Trace 1", 12))
                 .Returns(MakeBytes(_traceData.Single(m => m.TraceName == "Trace 1")));
-            _mockSystemWrapper.Setup(m => m.ReadBytes("trace path\\Trace 2", 12))
+            _mockSystemWrapper.Setup(m => m.ReadBytes("C:\\trace path\\Trace 2", 12))
                 .Returns(MakeBytes(_traceData.Single(m => m.TraceName == "Trace 2")));
-            _mockSystemWrapper.Setup(m => m.ReadBytes("trace path\\Trace 3", 12))
+            _mockSystemWrapper.Setup(m => m.ReadBytes("C:\\trace path\\Trace 3", 12))
                 .Returns(MakeBytes(_traceData.Single(m => m.TraceName == "Trace 3")));
+        }
+
+        private IEnumerable<string> MakeTracePaths()
+        {
+            return _traceData.Select(m => $"C:\\trace path\\{m.TraceName}");
         }
 
         private static byte[] MakeBytes(TraceDefinition traceDefinition)
