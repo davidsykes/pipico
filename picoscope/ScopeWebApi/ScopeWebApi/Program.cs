@@ -1,3 +1,4 @@
+using Logic.Logic;
 using Logic.Messaging;
 using Logic.Trace;
 using ScopeWebApi;
@@ -22,8 +23,11 @@ try
 {
     var programParameters = new ProgramParameters();
     var messageRouter = new MessageRouter();
-    var scopeTraceHandler = new ScopeTraceHandler();
+    var traceFilesPath = programParameters.GetParameter("TraceFilesPath");
+    var scopeTraceHandler = new ScopeTraceHandler(traceFilesPath);
     messageRouter.AddHandler("trace", scopeTraceHandler);
+    ISystemWrapper systemWrapper = new SystemWrapper();
+    IScopeTraceDirectory scopeTraceDirectory = new ScopeTraceDirectory(traceFilesPath, systemWrapper);
 
     app.MapPut("/scope", async delegate (HttpContext context)
     {
@@ -32,7 +36,6 @@ try
         try
         {
             var response = messageRouter.Route(jsonstring);
-            Console.WriteLine(response);
             return response ? "Ok" : "Not Ok";
         }
         catch (Exception ex)
@@ -46,21 +49,27 @@ try
 
     app.MapPut("/test", () =>
     {
-        var jsonstring = @"{""data"": ""48656c6c6f20576f726c64"", ""type"": ""trace""}";
+        var jsonString = @"{""data"": ""48656c6c6f20576f726c64"", ""type"": ""trace""}";
         try
         {
-            var response = messageRouter.Route(jsonstring);
-            Console.WriteLine(response);
+            var response = messageRouter.Route(jsonString);
             return response ? "Ok" : "Not Ok";
         }
         catch (Exception ex)
         {
             Console.WriteLine($"Error processing scope: {ex.Message}");
-            Console.WriteLine(jsonstring);
+            Console.WriteLine(jsonString);
             return "Not Ok";
         }
     })
     .WithName("Test");
+
+    app.MapGet("/tracenames", () =>
+    {
+        return scopeTraceDirectory.GetTraceDetails();
+    })
+   .WithName("TraceNames")
+   .WithTags("Traces");
 
     app.Run();
 }

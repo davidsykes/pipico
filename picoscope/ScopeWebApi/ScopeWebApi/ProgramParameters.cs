@@ -12,9 +12,9 @@ namespace ScopeWebApi
             {
                 new ApplicationParameterDefinition
                 {
-                    Name = "DatabasePath",
+                    Name = "TraceFilesPath",
                     Type = ApplicationParameterType.RequiredParameter,
-                    UsageMessage = "The path to the database"
+                    UsageMessage = "The path to write the trace files"
                 }
             };
 
