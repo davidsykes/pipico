@@ -60,7 +60,7 @@ namespace Logic.Trace
                 var count = r.ReadInt32();
                 Console.WriteLine($"Found {count} samples");
                 var length = r.ReadInt32();
-                Console.WriteLine($"Sample is {count} uS long");
+                Console.WriteLine($"Sample is {length} uS long");
                 for (int i = 0; i < count; i++)
                 {
                     var t = r.ReadInt32();

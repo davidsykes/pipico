@@ -6,7 +6,7 @@
       "launchUrl": "swagger",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development",
-        "DatabasePath": "D:\\SQLite\\scope.sql"
+        "TraceFilesPath": "D:\\TestData"
       },
       "dotnetRunMessages": true,
       "applicationUrl": "http://localhost:5042"

@@ -69,19 +69,20 @@ namespace Tests.Messaging
 
             _mockSystemWrapper.Setup(m => m.EnumerateFiles("trace path"))
                 .Returns(_traceData.Select(m => m.TraceName));
-            _mockSystemWrapper.Setup(m => m.ReadBytes("trace path\\Trace 1", 8))
+            _mockSystemWrapper.Setup(m => m.ReadBytes("trace path\\Trace 1", 12))
                 .Returns(MakeBytes(_traceData.Single(m => m.TraceName == "Trace 1")));
-            _mockSystemWrapper.Setup(m => m.ReadBytes("trace path\\Trace 2", 8))
+            _mockSystemWrapper.Setup(m => m.ReadBytes("trace path\\Trace 2", 12))
                 .Returns(MakeBytes(_traceData.Single(m => m.TraceName == "Trace 2")));
-            _mockSystemWrapper.Setup(m => m.ReadBytes("trace path\\Trace 3", 8))
+            _mockSystemWrapper.Setup(m => m.ReadBytes("trace path\\Trace 3", 12))
                 .Returns(MakeBytes(_traceData.Single(m => m.TraceName == "Trace 3")));
         }
 
         private static byte[] MakeBytes(TraceDefinition traceDefinition)
         {
-            byte[] bytes1 = BitConverter.GetBytes(traceDefinition.TraceCount);
-            byte[] bytes2 = BitConverter.GetBytes(traceDefinition.TraceLength);
-            return Add(bytes1, bytes2);
+            return Add(BitConverter.GetBytes(0x12345678),
+                Add(
+                    BitConverter.GetBytes(traceDefinition.TraceCount),
+                    BitConverter.GetBytes(traceDefinition.TraceLength)));
         }
 
         private static byte[] Add(byte[] bytes1, byte[] bytes2)

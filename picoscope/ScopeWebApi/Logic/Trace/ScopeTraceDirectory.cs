@@ -30,9 +30,10 @@ namespace Logic.Trace
         private TraceDefinition GetTraceDefinition(string traceName)
         {
             var file = Path.Combine(_tracePath, traceName);
-            var header = _systemWrapper.ReadBytes(file, 8);
+            var header = _systemWrapper.ReadBytes(file, 12);
 
             using var r = new BinaryReader(new MemoryStream(header));
+            var h = r.ReadInt32();
             var count = r.ReadInt32();
             var us = r.ReadInt32();
             return new TraceDefinition
