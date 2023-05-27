@@ -1,3 +1,2 @@
-
 class IrException(Exception):
 	pass
