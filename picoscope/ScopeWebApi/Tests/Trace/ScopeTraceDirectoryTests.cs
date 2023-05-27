@@ -44,21 +44,24 @@ namespace Tests.Messaging
             {
                 new TraceDefinition
                 {
-                    TraceName = "Trace 1",
-                    TraceCount = 101,
-                    TraceLength = 102
+                    tracename = "Trace 1",
+                    tracepath = "Trace 1.trc",
+                    tracecount = 101,
+                    tracelength = 102
                 },
                 new TraceDefinition
                 {
-                    TraceName = "Trace 2",
-                    TraceCount = 201,
-                    TraceLength = 202
+                    tracename = "Trace 2",
+                    tracepath = "Trace 2.trc",
+                    tracecount = 201,
+                    tracelength = 202
                 },
                 new TraceDefinition
                 {
-                    TraceName = "Trace 3",
-                    TraceCount = 301,
-                    TraceLength = 302
+                    tracename = "Trace 3",
+                    tracepath = "Trace 3.trc",
+                    tracecount = 301,
+                    tracelength = 302
                 }
             };
         }
@@ -69,25 +72,25 @@ namespace Tests.Messaging
 
             _mockSystemWrapper.Setup(m => m.EnumerateFiles("trace path"))
                 .Returns(MakeTracePaths());
-            _mockSystemWrapper.Setup(m => m.ReadBytes("C:\\trace path\\Trace 1", 12))
-                .Returns(MakeBytes(_traceData.Single(m => m.TraceName == "Trace 1")));
-            _mockSystemWrapper.Setup(m => m.ReadBytes("C:\\trace path\\Trace 2", 12))
-                .Returns(MakeBytes(_traceData.Single(m => m.TraceName == "Trace 2")));
-            _mockSystemWrapper.Setup(m => m.ReadBytes("C:\\trace path\\Trace 3", 12))
-                .Returns(MakeBytes(_traceData.Single(m => m.TraceName == "Trace 3")));
+            _mockSystemWrapper.Setup(m => m.ReadBytes("C:\\trace path\\Trace 1.trc", 12))
+                .Returns(MakeBytes(_traceData.Single(m => m.tracename == "Trace 1")));
+            _mockSystemWrapper.Setup(m => m.ReadBytes("C:\\trace path\\Trace 2.trc", 12))
+                .Returns(MakeBytes(_traceData.Single(m => m.tracename == "Trace 2")));
+            _mockSystemWrapper.Setup(m => m.ReadBytes("C:\\trace path\\Trace 3.trc", 12))
+                .Returns(MakeBytes(_traceData.Single(m => m.tracename == "Trace 3")));
         }
 
         private IEnumerable<string> MakeTracePaths()
         {
-            return _traceData.Select(m => $"C:\\trace path\\{m.TraceName}");
+            return _traceData.Select(m => $"C:\\trace path\\{m.tracename}.trc");
         }
 
         private static byte[] MakeBytes(TraceDefinition traceDefinition)
         {
             return Add(BitConverter.GetBytes(0x12345678),
                 Add(
-                    BitConverter.GetBytes(traceDefinition.TraceCount),
-                    BitConverter.GetBytes(traceDefinition.TraceLength)));
+                    BitConverter.GetBytes(traceDefinition.tracecount),
+                    BitConverter.GetBytes(traceDefinition.tracelength)));
         }
 
         private static byte[] Add(byte[] bytes1, byte[] bytes2)

@@ -3,8 +3,9 @@ namespace Logic.DataObjects
 {
     public class TraceDefinition
     {
-        public string TraceName { get; set; }
-        public int TraceCount { get; set; }
-        public int TraceLength { get; set; }
+        public string tracename { get; set; }
+        public string tracepath { get; set; }
+        public int tracecount { get; set; }
+        public int tracelength { get; set; }
     }
 }
