@@ -6,7 +6,10 @@ from command_processor import CommandProcessor
 from argument_analyser import ArgumentAnalyser
 from trace_deletor import TraceDeletor
 
-system = System('http://192.168.1.142:5000')
+surl = 'http://192.168.1.142:5000'
+surl = 'http://localhost:5042'
+
+system = System(surl)
 trace_directory = TraceDirectory(system)
 argument_analyser = ArgumentAnalyser()
 trace_deletor = TraceDeletor(trace_directory, system)

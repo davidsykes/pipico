@@ -23,6 +23,14 @@ namespace Tests.Messaging
             traces.Should().BeEquivalentTo(_traceData);
         }
 
+        [Test]
+        public void DeleteTraceDeletesTheTrace()
+        {
+            _dir.DeleteTrace("trace file name");
+
+            _mockSystemWrapper.Verify(m => m.DeleteFile("trace path\\trace file name"));
+        }
+
         #region Support Code
 
         protected override void SetUpMocks()

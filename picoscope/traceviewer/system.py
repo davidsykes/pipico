@@ -21,6 +21,6 @@ class System:
 
         url = ''.join([self._server_url, '/', url])
         print('Post', url)
-        req = Request(url)
+        req = Request(url, method='POST')
         resp = urlopen(req)
         print(resp)

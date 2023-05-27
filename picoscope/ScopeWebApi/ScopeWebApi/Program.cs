@@ -71,6 +71,12 @@ try
    .WithName("TraceNames")
    .WithTags("Traces");
 
+    app.MapPost("/delete/{path}", (string path) =>
+    {
+        scopeTraceDirectory.DeleteTrace(path);
+        return path;
+    });
+
     app.Run();
 }
 catch (Exception ex)

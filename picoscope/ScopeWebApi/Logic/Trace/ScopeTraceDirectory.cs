@@ -46,5 +46,10 @@ namespace Logic.Trace
                 tracelength = us
             };
         }
+
+        public void DeleteTrace(string path)
+        {
+            _systemWrapper.DeleteFile(Path.Combine(_tracePath, path));
+        }
     }
 }

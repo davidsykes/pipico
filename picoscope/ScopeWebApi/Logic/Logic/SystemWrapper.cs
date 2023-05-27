@@ -20,5 +20,10 @@
             fs.Close();
             return buffer;
         }
+
+        public void DeleteFile(string filePath)
+        {
+            File.Delete(filePath);
+        }
     }
 }

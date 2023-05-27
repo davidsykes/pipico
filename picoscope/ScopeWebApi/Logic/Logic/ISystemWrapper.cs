@@ -5,5 +5,6 @@
         IEnumerable<string> EnumerateFiles(string directoryPath);
         byte[] FileReadAllBytes(string path);
         byte[] ReadBytes(string path, int byteCount);
+        void DeleteFile(string filePath);
     }
 }

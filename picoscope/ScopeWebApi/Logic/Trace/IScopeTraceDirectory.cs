@@ -5,5 +5,6 @@ namespace Logic.Trace
     public interface IScopeTraceDirectory
     {
         IList<TraceDefinition> GetTraceDetails();
+        void DeleteTrace(string path);
     }
 }
