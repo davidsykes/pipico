@@ -15,5 +15,13 @@ class TraceDirectory:
         self._traces.sort(key=self._trace_key)
         return self._traces
     
-    def get_trace_path(self, index):
-        return self._traces[index-1]['tracepath']
+    def get_trace_path_by_number(self, number):
+        index = int(number) - 1
+        return self._traces[index]['tracepath']
+    
+    def get_trace_data_by_number(self, number):
+        path = self.get_trace_path_by_number(number)
+        url = 'trace/' + path
+        trace_json = self._system.get(url)
+        trace = json.loads(trace_json)
+        return trace

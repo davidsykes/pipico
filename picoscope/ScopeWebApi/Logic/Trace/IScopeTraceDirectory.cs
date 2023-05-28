@@ -4,7 +4,8 @@ namespace Logic.Trace
 {
     public interface IScopeTraceDirectory
     {
-        IList<TraceDefinition> GetTraceDetails();
+        IList<TraceDetails> GetTraceDetails();
         void DeleteTrace(string path);
+        IList<TraceDataPoint> GetTraceData(string traceFileName);
     }
 }

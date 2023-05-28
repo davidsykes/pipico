@@ -75,7 +75,17 @@ try
     {
         scopeTraceDirectory.DeleteTrace(path);
         return path;
-    });
+    })
+   .WithName("Delete")
+   .WithTags("Traces");
+
+    app.MapGet("/trace/{path}", (string path) =>
+    {
+        var trace_data = scopeTraceDirectory.GetTraceData(path);
+        return trace_data;
+    })
+   .WithName("Trace")
+   .WithTags("Traces");
 
     app.Run();
 }

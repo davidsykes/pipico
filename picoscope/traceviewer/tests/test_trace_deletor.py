@@ -4,8 +4,8 @@ sys.path.append('../src')
 from trace_deletor import TraceDeletor
 
 class MockTraceDirectory:
-    def get_trace_path(self, trace):
-        return 'trace#' + str(trace+10)
+    def get_trace_path_by_number(self, trace):
+        return 'trace#' + str(int(trace)+10)
 
 class MockRestSystem:
     def __init__(self):

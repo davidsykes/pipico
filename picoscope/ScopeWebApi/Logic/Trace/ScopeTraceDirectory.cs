@@ -1,5 +1,6 @@
 ﻿using Logic.DataObjects;
 using Logic.Logic;
+using System.Reflection.PortableExecutable;
 
 namespace Logic.Trace
 {
@@ -14,9 +15,9 @@ namespace Logic.Trace
             _systemWrapper = systemWrapper;
         }
 
-        public IList<TraceDefinition> GetTraceDetails()
+        public IList<TraceDetails> GetTraceDetails()
         {
-            var details = new List<TraceDefinition>();
+            var details = new List<TraceDetails>();
             var files = _systemWrapper.EnumerateFiles(_tracePath);
 
             foreach (var file in files)
@@ -27,21 +28,18 @@ namespace Logic.Trace
             return details;
         }
 
-        private TraceDefinition GetTraceDefinition(string tracePath)
+        private TraceDetails GetTraceDefinition(string tracePath)
         {
-            var traceName = Path.GetFileNameWithoutExtension(tracePath);
-            var traceFileName = Path.GetFileName(tracePath);
-
             var header = _systemWrapper.ReadBytes(tracePath, 12);
             using var r = new BinaryReader(new MemoryStream(header));
             var h = r.ReadInt32();
             var count = r.ReadInt32();
             var us = r.ReadInt32();
 
-            return new TraceDefinition
+            return new TraceDetails
             {
-                tracename = traceName,
-                tracepath = traceFileName,
+                tracename = Path.GetFileNameWithoutExtension(tracePath),
+                tracepath = Path.GetFileName(tracePath),
                 tracecount = count,
                 tracelength = us
             };
@@ -50,6 +48,27 @@ namespace Logic.Trace
         public void DeleteTrace(string path)
         {
             _systemWrapper.DeleteFile(Path.Combine(_tracePath, path));
+        }
+
+        public IList<TraceDataPoint> GetTraceData(string traceFileName)
+        {
+            var filePath = Path.Combine(_tracePath, traceFileName);
+            var binary_data = _systemWrapper.FileReadAllBytes(filePath);
+            using var r = new BinaryReader(new MemoryStream(binary_data));
+
+            var header = r.ReadInt32();
+            var sample_count = r.ReadInt32();
+            var total_time = r.ReadInt32();
+            var points = new List<TraceDataPoint>();
+            for (int i = 0; i < sample_count; i++)
+            {
+                points.Add(new TraceDataPoint
+                {
+                    time = r.ReadInt32(),
+                    value = r.ReadByte()
+                });
+            }
+            return points;
         }
     }
 }
