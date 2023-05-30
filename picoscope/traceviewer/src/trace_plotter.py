@@ -13,8 +13,12 @@ class TracePlotter:
             print('Sample count:', sample_count)
             x = []
             y = []
+            previous_value = trace_data[0]['value']
             for s in trace_data:
                 x.append(s['time'])
+                y.append(previous_value)
+                x.append(s['time'])
                 y.append(s['value'])
+                previous_value = s['value']
             ax.plot(x, y)
         plt.show()
