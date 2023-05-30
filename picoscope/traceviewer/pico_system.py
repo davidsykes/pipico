@@ -1,6 +1,6 @@
 from urllib.request import urlopen, Request
 
-class System:
+class PicoSystem:
     def __init__(self, server_url):
         self._server_url = server_url
 
@@ -14,13 +14,11 @@ class System:
             return data
 
     def post(self, url):
-        # from urllib import request, parse
-        # data = parse.urlencode(<your data dict>).encode()
-        # req =  request.Request(<your url>, data=data) # this will make the method "POST"
-        # resp = request.urlopen(req)
-
         url = ''.join([self._server_url, '/', url])
         print('Post', url)
         req = Request(url, method='POST')
         resp = urlopen(req)
         print(resp)
+
+    def print(self, p):
+        print(p)

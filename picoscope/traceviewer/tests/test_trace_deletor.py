@@ -1,4 +1,3 @@
-import pytest
 import sys
 sys.path.append('../src')
 from trace_deletor import TraceDeletor
