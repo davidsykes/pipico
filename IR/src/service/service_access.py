@@ -12,7 +12,11 @@ class ServiceAccess:
 
     def network_api_get(self, url):
         url = self.format_url(url)
-        return self.system.network_api_get(url)
+        try:
+            return self.system.network_api_get(url)
+        except OSError as e:
+            self.log('OSError: ' + str(e))
+            raise
 
     def get_option(self, name):
         url = self.format_url('option?option=' + name)
