@@ -1,12 +1,12 @@
 from urllib.request import urlopen, Request
 
-class PicoSystem:
+class SystemWrapper:
     def __init__(self, server_url):
         self._server_url = server_url
 
     def get(self, url):
         url = ''.join([self._server_url, '/', url])
-        print('Get', url)
+        #print('Get', url)
         #try:
         if(True):
             with urlopen(url) as x:
