@@ -18,9 +18,9 @@ class MockLogger:
 
 class TestClientActionRouter:
     def setup_method(self, test_method):
-        self.home_action = MockAction('home');
-        self.sequences_action = MockAction('sequence');
-        self.codes_action = MockAction('codes');
+        self.home_action = MockAction('home')
+        self.sequences_action = MockAction('sequence')
+        self.codes_action = MockAction('codes')
         self.mock_logger = MockLogger()
         self.router = ClientActionRouter(self.home_action, self.sequences_action, self.codes_action, self.mock_logger)
 

@@ -1,7 +1,7 @@
 from machine import Pin, Timer
 
 class ProgressIndicator:
-	READ_CREDENTIALS = 1
+	LOOKING_FOR_EXISTING_DETAILS = 1
 	CONNECTING = 2
 	CONNECTED = 3
 	NETWORK_ERROR = 4
@@ -59,3 +59,6 @@ class ProgressIndicator:
 		self.led.value(1)
 		self.flash_count = self.progress
 		self.off_count = 2
+
+	def stop(self):
+		self.timer.deinit()

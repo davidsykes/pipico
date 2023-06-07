@@ -1,20 +1,19 @@
-import sys
 from service_access import ServiceAccess
 from flasher import Flasher
 from configuration_retriever import ConfigurationRetriever
 
 IR_RECEIVE_PIN = 15
 IR_TRANSMIT_PIN = 14
-ServerUrl = 'http://192.168.1.142:5001'
 
 class MainCode:
-    def maincode(self, system):
+    def maincode(self, system, connection_values):
         self.system = system
+        server_ip = connection_values['server_ip']
         self.set_up_flasher()
-        self.service_access = ServiceAccess(system, ServerUrl)
+        self.service_access = ServiceAccess(system, server_ip)
 
         self.flasher.set_status(1)
-        configuration = ConfigurationRetriever(self.service_access).retrieve_configuration()
+        configuration = ConfigurationRetriever(self.service_access, system.id).retrieve_configuration()
 
         if configuration == 'irrecorder':
             self.service_access.log('IR recorder')

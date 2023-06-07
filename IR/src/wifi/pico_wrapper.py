@@ -1,4 +1,5 @@
-from constants import CREDENTIALS_FILE, LOG_FILE
+from machine import Pin
+from constants import LOG_FILE
 
 class PicoWrapper:
     def read_file_data(self, path):
@@ -10,10 +11,15 @@ class PicoWrapper:
         except OSError:
             return None
         
-    def store_credentials(self, path, ssid, password):
+    def write_parameters_to_file(self, path, parameters):
         file = open(path, 'w')
-        file.write(ssid + "\n" + password)
+        for key, value in parameters.items():
+            file.write(''.join([key, '=', value, '\n']))
         file.close()
+
+    def delete_file(self, path):
+        import os
+        os.remove(path)
         
     def log(self, l, m=None):
         s = l + "\n" + ('' if m is None else (m + "\n"))
@@ -29,3 +35,6 @@ class PicoWrapper:
 
     def print(self, p):
         print(p)
+
+    def create_input_pin_with_pullup(self, number):
+        return Pin(number, Pin.IN, Pin.PULL_UP)

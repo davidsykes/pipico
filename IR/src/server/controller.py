@@ -1,4 +1,3 @@
-import sys
 from listener import Listener
 from ir_transmitter import IrTransmitter
 from waveforms_manager import WaveformsManager
@@ -16,7 +15,7 @@ class Controller:
 		self.ir_output = ir_output
 
 	def control(self):
-		print('Set up the ir controller')
+		print('Set up the ir transmitter')
 		try:
 			waveforms = WaveformsManager(self.service_access)
 			home_action = ClientActionHome(waveforms)

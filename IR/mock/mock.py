@@ -12,10 +12,10 @@ maincode = MainCode()
 
 from mock_system_simple import SimplestMockSystem
 system = SimplestMockSystem()
-maincode.maincode(system)
-
-raise NotImplementedError
+connection_values = {'server_ip': 'server ip'}
+maincode.maincode(system, connection_values)
 
 from mock_system_functions import MockSystemFunctions
 system = MockSystemFunctions()
-maincode.maincode(system)
+connection_values = {'server_ip': 'http://192.168.1.142:5001'}
+maincode.maincode(system, connection_values)

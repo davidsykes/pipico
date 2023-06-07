@@ -1,37 +1,65 @@
 from pico_wrapper import PicoWrapper
-from progress_indicator import ProgressIndicator
-from wifi_connector import WiFiConnector
 from pico_access_point import PicoAccessPoint
-from constants import CREDENTIALS_FILE
-from credentials_extractor import CredentialsExtractor
+from program_options_reader import ProgramOptionsReader
+from access_point_options import AccessPointOptions
+from access_point_option import AccessPointOption
+from progress_indicator import ProgressIndicator
+from url_parameters_extractor import UrlParametersExtractor
+from access_point_form_creator import AccessPointFormCreator
+from wifi_connector import WiFiConnector
+from constants import RESET_PIN, PROGRAM_OPTIONS_FILE
 
 class NetworkInitialiser:
-    def __init__(self, ssid = 'PICO', password = '12345678', pico_wrapper=None, progress=None, wifi_connector=None, access_point = None, credentials_extractor = None):
-        self.ssid = ssid
-        self.password = password
-        self.pico_wrapper = pico_wrapper or PicoWrapper()
-        self.progress = progress or ProgressIndicator()
-        self.wifi_connector = wifi_connector or WiFiConnector(self.progress)
-        self.access_point = access_point
-        self.credentials_extractor = credentials_extractor or CredentialsExtractor(self.pico_wrapper)
+    def __init__(self, progress_indicator = None, di = None):
+        self.di = self._initialise_dependency_injection(di, progress_indicator)
+        self.program_options_reader = self.di['ProgramOptionsReader']
+        self.pico_wrapper = self.di['PicoWrapper']
+        self.progress_indicator = self.di['ProgressIndicator']
 
-    def initialise(self):
-        credentials = self.read_credentials()
-        if credentials is not None:
-            self.pico_wrapper.log(''.join(['Attempting to connect to ',credentials[0], '-', credentials[1], '.']))
-            enabled = self.wifi_connector.connect_wifi(credentials[0], credentials[1])
-            if enabled:
-                self.pico_wrapper.log('Connected.')
-                return
+    def _initialise_dependency_injection(self, di, progress_indicator):
+        di = di or {}
+        if 'PicoWrapper' not in di:
+            di['PicoWrapper'] = PicoWrapper()
+        if 'ProgramOptionsReader' not in di:
+            di['ProgramOptionsReader'] = ProgramOptionsReader(di['PicoWrapper'])
+        if 'ProgressIndicator' not in di:
+            di['ProgressIndicator'] = progress_indicator or ProgressIndicator()
+        if 'UrlParametersExtractor' not in di:
+            di['UrlParametersExtractor'] = UrlParametersExtractor(di['PicoWrapper'])
+        if 'AccessPointFormCreator' not in di:
+            di['AccessPointFormCreator'] = AccessPointFormCreator()
+        if 'WiFiConnector' not in di:
+            di['WiFiConnector'] = WiFiConnector(di['ProgressIndicator'])
+        return di
+
+    def initialise(self, access_point_options = None):
+        self.reset_credentials_if_reset_pin_is_low()
+        self.progress_indicator.set_progress(ProgressIndicator.LOOKING_FOR_EXISTING_DETAILS)
+        options = self.program_options_reader.read_program_options()
+        if options is not None:
+            ssid = options['ssid']
+            password = options['password']
+            self.pico_wrapper.log(''.join(['Attempting to connect to ', ssid, '-', password]))
+            ip = self.di['WiFiConnector'].connect_wifi(ssid, password)
+            if ip:
+                self.pico_wrapper.log(''.join(['Connected as ', ip, '.']))
+                options['ip'] = ip
+                self.progress_indicator.stop()
+                return options
             else:
                 self.pico_wrapper.log('Connection failed.')
         else:
-            self.pico_wrapper.log('The credentials file was not found.')
-        access_point = self.access_point or PicoAccessPoint(self.ssid, self.password, self.pico_wrapper, self.progress, self.credentials_extractor)
-        access_point.launch()
+            self.pico_wrapper.log('The options file was not found.')
+        self._launch_access_point(access_point_options)
 
-    def read_credentials(self):
-        self.progress.set_progress(ProgressIndicator.READ_CREDENTIALS)
-        credential_text = self.pico_wrapper.read_file_data(CREDENTIALS_FILE)
-        if credential_text is not None:
-            return credential_text.splitlines()[0:2]
+    def _launch_access_point(self, access_point_options):
+        if 'PicoAccessPoint' in self.di:
+            launcher = self.di['PicoAccessPoint']
+        else:
+            launcher = PicoAccessPoint(self.di, access_point_options or AccessPointOptions())
+        launcher.launch()
+
+    def reset_credentials_if_reset_pin_is_low(self):
+        pin = self.pico_wrapper.create_input_pin_with_pullup(RESET_PIN)
+        if pin.value() == 0:
+            self.pico_wrapper.delete_file(PROGRAM_OPTIONS_FILE)
