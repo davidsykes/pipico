@@ -1,0 +1,36 @@
+Scope
+
+
+XXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+X                            X
+X xxxxxxxxxxxxxxxxxxxxxxxxxx X
+X x Trace Capture          x X
+X x picoscope/tracecapture x X
+X xxxxxxxxxxxxxxxxxxxxxxxxxx X
+X          |                 X
+X          V                 X
+X xxxxxxxxxxxxxxxxxxxxxxxxxx X     XXXXXXXXXXXXXXXXX     XXXXXXXXXXXXXXXXX
+X x Trace Sender           x X --> X Scope Web Api X --> X Trace viewer X
+X x picoscope/tracesender  x X     XXXXXXXXXXXXXXXXX     XXXXXXXXXXXXXXXXX
+X xxxxxxxxxxxxxxxxxxxxxxxxxx X
+X                            X
+XXXXXXXXXXXXXXXXXXXXXXXXXXXX X
+
+
+IR Transmitter
+
+
+XXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+X                            X
+X xxxxxxxxxxxxxxxxxxxxxxxxxx X
+X x Trace Capture          x X
+X x picoscope/tracecapture x X
+X xxxxxxxxxxxxxxxxxxxxxxxxxx X
+X          |                 X
+X          V                 X
+X xxxxxxxxxxxxxxxxxxxxxxxxxx X     XXXXXXXXXXXXXXXXX     XXXXXXXXXXXXXXXXX
+X x Trace Sender           x X --> X Scope Web Api X --> X Trace viewer X
+X x picoscope/tracesender  x X     XXXXXXXXXXXXXXXXX     XXXXXXXXXXXXXXXXX
+X xxxxxxxxxxxxxxxxxxxxxxxxxx X
+X                            X
+XXXXXXXXXXXXXXXXXXXXXXXXXXXX X

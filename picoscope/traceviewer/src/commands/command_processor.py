@@ -31,3 +31,4 @@ class CommandProcessor:
     def show_usage(self):
         for key, value in self._commandinfo.items():
             self._pico_system.print(''.join([key, ': ', value]))
+        print('Reference traces by numbers or ranges a-b')

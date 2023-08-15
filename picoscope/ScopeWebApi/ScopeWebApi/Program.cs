@@ -19,6 +19,9 @@ var app = builder.Build();
     app.UseSwaggerUI();
 }
 
+
+Console.WriteLine("===== Starting =====");
+
 try
 {
     var programParameters = new ProgramParameters();
@@ -31,17 +34,17 @@ try
 
     app.MapPut("/scope", async delegate (HttpContext context)
     {
-        string jsonstring = await Tools.GetJSONString(context);
+        string jsonString = await Tools.GetJSONString(context);
 
         try
         {
-            var response = messageRouter.Route(jsonstring);
+            var response = messageRouter.Route(jsonString);
             return response ? "Ok" : "Not Ok";
         }
         catch (Exception ex)
         {
             Console.WriteLine($"Error processing scope: {ex.Message}");
-            Console.WriteLine(jsonstring);
+            Console.WriteLine(jsonString);
             return "Not Ok";
         }
     })
@@ -74,6 +77,7 @@ try
     app.MapPost("/delete/{path}", (string path) =>
     {
         scopeTraceDirectory.DeleteTrace(path);
+        Console.WriteLine($"Delete trace {path}");
         return path;
     })
    .WithName("Delete")
@@ -87,6 +91,7 @@ try
    .WithName("Trace")
    .WithTags("Traces");
 
+    Console.WriteLine("===== Started =====");
     app.Run();
 }
 catch (Exception ex)

@@ -1,0 +1,25 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="ApplicationParameters" Version="1.0.1" />
+    <PackageReference Include="DSLogging" Version="3.1.4" />
+    <PackageReference Include="SQLiteLibrary" Version="5.5.0" />
+  </ItemGroup>
+
+<ItemGroup>
+  <AssemblyAttribute Include="System.Runtime.CompilerServices.InternalsVisibleTo">
+    <_Parameter1>Tests</_Parameter1>
+  </AssemblyAttribute>
+</ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Migrations\Migrations.csproj" />
+  </ItemGroup>
+
+</Project>

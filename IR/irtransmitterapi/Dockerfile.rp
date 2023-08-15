@@ -1,0 +1,7 @@
+FROM mcr.microsoft.com/dotnet/aspnet:6.0.2-bullseye-slim-arm32v7
+ENV DOTNET_CLI_TELEMETRY_OPTOUT 1
+
+COPY IrTransmitterApi/bin/Release/net6.0/publish /webapp
+WORKDIR /webapp
+ENTRYPOINT ["dotnet","IrTransmitterApi.dll", "--urls", "http://*:5000"]
+
