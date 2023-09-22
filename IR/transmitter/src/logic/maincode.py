@@ -21,7 +21,7 @@ class MainCode:
             recorder = IRRecorder(system, self.service_access, IR_RECEIVE_PIN)
             recorder.record(configuration_switches.dump_raw_ir_codes)
         else:
-            self.service_access.log('IR Transmitter')
+            self.service_access.log('IR Transmitter on ip '+str(connection_values['ip']))
             from controller import Controller
             ir_output = self.system.make_output_pin(IR_TRANSMIT_PIN)
             controller = Controller(self.system,
