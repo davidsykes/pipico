@@ -9,7 +9,7 @@
   <ItemGroup>
     <PackageReference Include="ApplicationParameters" Version="1.0.1" />
     <PackageReference Include="DSLogging" Version="3.1.4" />
-    <PackageReference Include="SQLiteLibrary" Version="5.5.0" />
+    <PackageReference Include="SQLiteLibrary" Version="5.6.0" />
   </ItemGroup>
 
 <ItemGroup>

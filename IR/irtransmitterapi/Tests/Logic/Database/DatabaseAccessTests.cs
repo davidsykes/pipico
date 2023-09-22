@@ -17,7 +17,8 @@ namespace Tests.Logic
         IDatabaseAccess _db;
 
         IDatabaseConnection _dbConnection;
-        readonly DateTime _now = new(2020, 3, 15, 1, 2, 3);
+        readonly DateTime _initialTime = new(2020, 3, 15, 1, 2, 3);
+        DateTime _now2;
         Mock<ISystemWrapper> _mockSystemWrapper;
 
         #region Options
@@ -208,12 +209,11 @@ namespace Tests.Logic
         {
             _db.Log("Message");
 
-            var logs = _db.GetLogs();
+            var logs = _db.GetLogs(1);
             logs.Should().BeEquivalentTo(new List<DBOLog>
             {
-                new DBOLog
-                {
-                    Time = _now,
+                new() {
+                    Time = _initialTime,
                     Text = "Message",
                 }
             });
@@ -224,7 +224,66 @@ namespace Tests.Logic
         {
             var log = _db.Log("Message");
 
-            log.Should().BeEquivalentTo(new DBOLog { Time = _now, Text = "Message"});
+            log.Should().BeEquivalentTo(new DBOLog { Time = _now2, Text = "Message"});
+        }
+
+        [Test]
+        public void LogsReturnsTheSpecifiedMostRecentNumberOfLogMessages()
+        {
+            Log("Message1");
+            Log("Message2");
+            Log("Message3");
+            Log("Message4");
+            Log("Message5");
+
+            var logs = _db.GetLogs(3);
+
+            logs.Should().BeEquivalentTo(new List<DBOLog>
+            {
+                new() {
+                    Time = _initialTime.AddSeconds(2),
+                    Text = "Message3",
+                },
+                new() {
+                    Time = _initialTime.AddSeconds(3),
+                    Text = "Message4",
+                },
+                new() {
+                    Time = _initialTime.AddSeconds(4),
+                    Text = "Message5",
+                },
+            });
+        }
+
+        [Test]
+        public void IfMoreLogsAreRequestedThanHaveBeenLoggedThenAllLogsAreReturned()
+        {
+            Log("Message1");
+            Log("Message2");
+            Log("Message3");
+            Log("Message4");
+
+            var logs = _db.GetLogs(4000);
+
+            logs.Should().BeEquivalentTo(new List<DBOLog>
+            {
+                new() {
+                    Time = _initialTime,
+                    Text = "Message1",
+                },
+                new() {
+                    Time = _initialTime.AddSeconds(1),
+                    Text = "Message2",
+                },
+                new() {
+                    Time = _initialTime.AddSeconds(2),
+                    Text = "Message3",
+                },
+                new() {
+                    Time = _initialTime.AddSeconds(3),
+                    Text = "Message4",
+                },
+            });
         }
 
         [Test]
@@ -235,7 +294,7 @@ namespace Tests.Logic
 
             _db.ClearLogs();
 
-            _db.GetLogs().Should().BeEmpty();
+            _db.GetLogs(2).Should().BeEmpty();
         }
 
         #endregion
@@ -291,7 +350,7 @@ namespace Tests.Logic
         protected override void SetUpExpectations()
         {
             base.SetUpExpectations();
-            _mockSystemWrapper.Setup(m => m.Now).Returns(_now);
+            _mockSystemWrapper.Setup(m => m.Now).Returns(_initialTime);
         }
 
         protected override void SetUpObjectUnderTest()
@@ -307,6 +366,7 @@ namespace Tests.Logic
             base.SetUpData();
             _dbConnection = new DBServices().OpenMemoryDatabase();
             //_dbConnection = new DBServices().OpenFileConnection("D:\\SQLite\\TestDb.sql");
+            _now2 = _initialTime;
         }
 
         private void SetUpDatabaseData(IDatabaseTransaction t)
@@ -339,6 +399,13 @@ namespace Tests.Logic
             _db.DeleteSequence("Sequence 1", "First", 2);
             _db.DeleteSequence("Sequence 1", "Second", 2);
             _db.DeleteSequence("Sequence 1", "Third", 2);
+        }
+
+        private void Log(string message)
+        {
+            _db.Log(message);
+            _now2 = _now2.AddSeconds(1);
+            _mockSystemWrapper.Setup(m => m.Now).Returns(_now2);
         }
 
         #endregion

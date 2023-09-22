@@ -8,7 +8,7 @@ namespace Logic.Database
         IList<IRCodeDefinition> GetCodes();
         string GetOption(string optionName);
         DBOLog Log(string text);
-        IList<DBOLog> GetLogs();
+        IList<DBOLog> GetLogs(int count);
         void ClearLogs();
         string SetIrCodeWavePoints(string irCodeJson);
         void SetOption(string optionName, string optionValue);

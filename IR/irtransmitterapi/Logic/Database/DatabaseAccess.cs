@@ -50,9 +50,11 @@ namespace Logic.Database
             return log;
         }
 
-        public IList<DBOLog> GetLogs()
+        public IList<DBOLog> GetLogs(int count)
         {
-            return _databaseConnection.Select<DBOLog>();
+            var logs =  _databaseConnection.Select<DBOLog>(endWith: $"ORDER BY Time DESC LIMIT {count}");
+            logs.Reverse();
+            return logs;
         }
 
         public void ClearLogs()
@@ -66,6 +68,7 @@ namespace Logic.Database
             var options = _databaseConnection.Select<DBOOption>(
                 null,
                 "Name=@Name",
+                null,
                 new { Name = optionName }
             );
             return options.SingleOrDefault()?.Value ?? "";
@@ -76,7 +79,7 @@ namespace Logic.Database
             try
             {
                 var irCode = JsonSerializer.Deserialize<WaveDefinitionFromPico>(irCodeJSON)
-                    ?? throw new IrTransmitterApiException("Invalid data for SetIrCode (1)");
+                    ?? throw new IrTransmitterApiException("Invalid data for SetIrCode");
                 var code = irCode.code;
                 var time = 0;
                 var wavePoints = irCode.wavepoints
@@ -99,7 +102,7 @@ namespace Logic.Database
             }
             catch (JsonException)
             {
-                throw new IrTransmitterApiException("Invalid data for SetIrCode (2)");
+                throw new IrTransmitterApiException("Invalid data for SetIrCode");
             }
         }
 
