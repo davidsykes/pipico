@@ -19,7 +19,7 @@ class MainCode:
             self.service_access.log('IR recorder')
             from ir_recorder import IRRecorder
             recorder = IRRecorder(system, self.service_access, IR_RECEIVE_PIN)
-            recorder.record(configuration_switches.dump_raw_ir_codes)
+            recorder.record(False)
         else:
             self.service_access.log('IR Transmitter on ip '+str(connection_values['ip']))
             from controller import Controller
