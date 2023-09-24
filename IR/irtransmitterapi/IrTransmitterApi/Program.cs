@@ -56,10 +56,10 @@ static void AddLoggingEndpoints(WebApplication app, ProgramServices programServi
     .WithName("Log")
     .WithTags("Logs");
 
-    app.MapGet("/logs", () =>
+    app.MapGet("/logs", (int count) =>
     {
-        var logs = programServices.DatabaseAccess.GetLogs();
-        //return logs;
+        var logs = programServices.DatabaseAccess.GetLogs(count);
+        return logs;
     })
     .WithName("Logs")
     .WithTags("Logs");
@@ -145,7 +145,7 @@ static void AddSequenceEndpoints(WebApplication app, ProgramServices programServ
         Console.WriteLine($"Set sequence {sequence} {code} {position}");
     })
     .WithName("SetSequence")
-    .WithTags("Codes");
+    .WithTags("Sequences");
 
     app.MapPut("/deletesequence", (string sequence, string code, int position) =>
     {
@@ -153,7 +153,7 @@ static void AddSequenceEndpoints(WebApplication app, ProgramServices programServ
         Console.WriteLine($"Delete sequence {sequence} {code} {position}");
     })
     .WithName("DeleteSequence")
-    .WithTags("Codes");
+    .WithTags("Sequences");
 
     app.MapGet("/sequences", () =>
     {
@@ -161,7 +161,7 @@ static void AddSequenceEndpoints(WebApplication app, ProgramServices programServ
         return value;
     })
     .WithName("Sequences")
-    .WithTags("Codes");
+    .WithTags("Sequences");
 }
 
 static void AddOptionEndpoints(WebApplication app, ProgramServices programServices)
