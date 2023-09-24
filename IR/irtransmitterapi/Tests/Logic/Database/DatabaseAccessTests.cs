@@ -252,7 +252,7 @@ namespace Tests.Logic
                     Time = _initialTime.AddSeconds(4),
                     Text = "Message5",
                 },
-            });
+            }, o => o.WithStrictOrdering());
         }
 
         [Test]

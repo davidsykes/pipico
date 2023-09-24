@@ -16,8 +16,9 @@ namespace Logic
             var databasePath = parameters.GetParameter("DatabasePath");
             var databaseConnection = new DBServices().OpenFileConnection(databasePath);
             IrTransmitterApiMigrations.RunMigrations(databaseConnection);
+            var lockingDatabaseConnection = new LockingDatabaseConnection(databaseConnection);
             var systemWrapper = new SystemWrapper.SystemWrapper();
-            DatabaseAccess = new DatabaseAccess(databaseConnection, systemWrapper);
+            DatabaseAccess = new DatabaseAccess(lockingDatabaseConnection, systemWrapper);
         }
 
         private static IDSLogger SetUpLogging(ProgramParameters parameters)

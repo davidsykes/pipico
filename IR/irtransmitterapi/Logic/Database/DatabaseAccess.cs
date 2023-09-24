@@ -52,9 +52,8 @@ namespace Logic.Database
 
         public IList<DBOLog> GetLogs(int count)
         {
-            var logs =  _databaseConnection.Select<DBOLog>(endWith: $"ORDER BY Time DESC LIMIT {count}");
-            logs.Reverse();
-            return logs;
+            var logs = _databaseConnection.Select<DBOLog>(endWith: $"ORDER BY Time DESC LIMIT {count}");
+            return logs.Reverse().ToList();
         }
 
         public void ClearLogs()
@@ -180,7 +179,7 @@ namespace Logic.Database
             => DeleteCode(t, code));
         }
 
-        private void DeleteCode(IDatabaseTransaction t, string code)
+        private static void DeleteCode(IDatabaseTransaction t, string code)
         {
             t.DeleteRows<DBOWavePoint>("Code=@Code", new { Code = code });
         }
