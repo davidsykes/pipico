@@ -12,15 +12,17 @@ class MainCode:
         self.set_up_flasher()
         self.service_access = ServiceAccess(system, server_ip)
 
-        self.flasher.set_status(1)
+        self.flasher.set_status(8)
         configuration = ConfigurationRetriever(self.service_access, system.id).retrieve_configuration()
 
         if configuration == 'irrecorder':
+            self.flasher.set_status(9)
             self.service_access.log('IR recorder')
             from ir_recorder import IRRecorder
             recorder = IRRecorder(system, self.service_access, IR_RECEIVE_PIN)
             recorder.record(False)
         else:
+            self.flasher.set_status(1)
             self.service_access.log('IR Transmitter on ip '+str(connection_values['ip']))
             from controller import Controller
             ir_output = self.system.make_output_pin(IR_TRANSMIT_PIN)
