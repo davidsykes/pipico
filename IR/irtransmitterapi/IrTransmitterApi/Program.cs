@@ -85,11 +85,11 @@ static void AddCodeEndpoints(WebApplication app, ProgramServices programServices
 
     app.MapPut("/ircode", async delegate (HttpContext context)
     {
-        string jsonstring = await Tools.GetJSONString(context);
+        string jsonString = await Tools.GetJSONString(context);
 
         try
         {
-            var code = programServices.DatabaseAccess.SetIrCodeWavePoints(jsonstring);
+            var code = programServices.DatabaseAccess.SetIrCodeWavePoints(jsonString);
             Console.WriteLine($"Updated ir code {code}.");
             programServices.Logger.Log(DSLogLevel.Information, $"Updated ir code {code}");
             programServices.DatabaseAccess.Log($"Updated ir code {code}");
@@ -98,10 +98,10 @@ static void AddCodeEndpoints(WebApplication app, ProgramServices programServices
         catch (Exception ex)
         {
             Console.WriteLine($"Error processing ircode: {ex.Message}");
-            Console.WriteLine(jsonstring);
+            Console.WriteLine(jsonString);
         }
 
-        return jsonstring;
+        return jsonString;
     })
     .WithName("IRCode")
     .WithTags("Codes");

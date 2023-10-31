@@ -19,7 +19,6 @@ var app = builder.Build();
     app.UseSwaggerUI();
 }
 
-
 Console.WriteLine("===== Starting =====");
 
 try

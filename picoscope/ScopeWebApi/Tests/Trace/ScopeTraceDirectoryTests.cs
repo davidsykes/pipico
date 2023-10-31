@@ -17,11 +17,12 @@ namespace Tests.Messaging
         IList<TraceDataPoint> _exampleTraceData;
 
         [Test]
-        public void GetTraceDetailsReturnsTraceNamesAndDetails()
+        public void GetTraceDetailsReturnsTraceNamesAndDetailsSortedByName()
         {
             var traces = _dir.GetTraceDetails();
 
-            traces.Should().BeEquivalentTo(_traceDetails);
+            traces.Should().BeEquivalentTo(_traceDetails.OrderBy(m => m.tracename),
+                options => options.WithStrictOrdering());
         }
 
         [Test]
@@ -59,27 +60,24 @@ namespace Tests.Messaging
             base.SetUpData();
             _traceDetails = new List<TraceDetails>
             {
-                new TraceDetails
-                {
+                new() {
                     tracename = "Trace 1",
                     tracepath = "Trace 1.trc",
                     tracecount = 101,
                     tracelength = 102
                 },
-                new TraceDetails
-                {
+                new() {
+                    tracename = "Trace 3",
+                    tracepath = "Trace 3.trc",
+                    tracecount = 301,
+                    tracelength = 302
+                },
+                new() {
                     tracename = "Trace 2",
                     tracepath = "Trace 2.trc",
                     tracecount = 201,
                     tracelength = 202
                 },
-                new TraceDetails
-                {
-                    tracename = "Trace 3",
-                    tracepath = "Trace 3.trc",
-                    tracecount = 301,
-                    tracelength = 302
-                }
             };
 
             _exampleTraceData = new List<TraceDataPoint>

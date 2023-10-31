@@ -15,7 +15,7 @@ namespace Logic.Trace
             _systemWrapper = systemWrapper;
         }
 
-        public IList<TraceDetails> GetTraceDetails()
+        public IEnumerable<TraceDetails> GetTraceDetails()
         {
             var details = new List<TraceDetails>();
             var files = _systemWrapper.EnumerateFiles(_tracePath);
@@ -25,7 +25,7 @@ namespace Logic.Trace
                 details.Add(GetTraceDefinition(file));
             }
 
-            return details;
+            return details.OrderBy(m => m.tracename);
         }
 
         private TraceDetails GetTraceDefinition(string tracePath)
