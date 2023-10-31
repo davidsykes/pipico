@@ -17,7 +17,6 @@ class ServiceAccess:
         except OSError as e:
             self.log('OSError: ' + str(e))
             raise
-        except raises exception that gets passed to the wifi ap. Test without http in the url
 
     def get_option(self, name):
         url = self.format_url('option?option=' + name)
