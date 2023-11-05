@@ -19,7 +19,6 @@ var app = builder.Build();
     app.UseSwaggerUI();
 }
 
-
 Console.WriteLine("===== Starting =====");
 
 try
@@ -89,6 +88,14 @@ try
         return trace_data;
     })
    .WithName("Trace")
+   .WithTags("Traces");
+
+    app.MapGet("/currenttrace", () =>
+    {
+        var trace_data = scopeTraceDirectory.GetCurrentTraceData();
+        return trace_data;
+    })
+   .WithName("Current Trace")
    .WithTags("Traces");
 
     Console.WriteLine("===== Started =====");
