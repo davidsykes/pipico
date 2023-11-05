@@ -19,7 +19,7 @@ class IRRecorder:
             signal_times = [0]
             receiving = True
             while(receiving):
-                ctime = self.watcher.get_time_of_change(10000)
+                ctime = self.watcher.get_time_of_change(30000)
                 if (ctime is not None):
                     signal_values.append(self.watcher.value())
                     signal_times.append(ctime)
