@@ -2,7 +2,9 @@ using FluentAssertions;
 using Logic.DataObjects;
 using Logic.Logic;
 using Logic.Trace;
+using Microsoft.VisualStudio.TestPlatform.CommunicationUtilities;
 using Moq;
+using System;
 using TestHelpers;
 
 #nullable disable
@@ -26,6 +28,17 @@ namespace Tests.Messaging
         }
 
         [Test]
+        public void GetTraceDetailsReturnsAnEmptyListWhenNoTracesExist()
+        {
+            _mockSystemWrapper.Setup(m => m.EnumerateFiles("trace path"))
+                .Returns(new List<string>());
+
+            var traces = _dir.GetTraceDetails();
+
+            traces.ToList().Should().BeEmpty();
+        }
+
+        [Test]
         public void DeleteTraceDeletesTheTrace()
         {
             _dir.DeleteTrace("trace file name");
@@ -34,11 +47,53 @@ namespace Tests.Messaging
         }
 
         [Test]
+        public void DeleteNonExistentTraceTraceTriesToDeletesTheTrace()
+        {
+            _dir.DeleteTrace("non existent trace file name");
+
+            _mockSystemWrapper.Verify(m => m.DeleteFile("trace path\\non existent trace file name"));
+        }
+
+        [Test]
         public void GetTraceDataGetsTraceData()
         {
-            var trace_data = _dir.GetTraceData("trace file name");
+            _mockSystemWrapper.Setup(m => m.FileReadAllBytes("trace path\\Trace 2.trc"))
+                .Returns(MakeTraceDataFile());
+
+            var trace_data = _dir.GetTraceData("Trace 2.trc");
 
             trace_data.Should().BeEquivalentTo(_exampleTraceData);
+        }
+
+        [Test]
+        public void GetTraceDataThrowsExceptionIfNoTraceExists()
+        {
+            Action action = () => _dir.GetTraceData("non existent trace file name");
+
+            action.Should().Throw<ScopeWebApiException>()
+                .WithMessage("Scope trace 'non existent trace file name' could not be found.");
+        }
+
+        [Test]
+        public void GetCurrentTraceDataGetsTheMostRecentTraceData()
+        {
+            _mockSystemWrapper.Setup(m => m.FileReadAllBytes("trace path\\Trace 3.trc"))
+                .Returns(MakeTraceDataFile());
+
+            var trace_data = _dir.GetCurrentTraceData();
+
+            trace_data.Should().BeEquivalentTo(_exampleTraceData);
+        }
+
+        [Test]
+        public void GetCurrentTraceDataReturnsEmptyListIfThereIsNoTrace()
+        {
+            _mockSystemWrapper.Setup(m => m.EnumerateFiles("trace path"))
+                .Returns(new List<string>());
+
+            var trace_data = _dir.GetCurrentTraceData();
+
+            trace_data.Should().BeEmpty();
         }
 
         #region Support Code
@@ -82,17 +137,17 @@ namespace Tests.Messaging
 
             _exampleTraceData = new List<TraceDataPoint>
             {
-                new TraceDataPoint
+                new()
                 {
                     time = 101,
                     value = 11
                 },
-                new TraceDataPoint
+                new()
                 {
                     time = 202,
                     value = 22
                 },
-                new TraceDataPoint
+                new()
                 {
                     time = 303,
                     value = 33
@@ -106,14 +161,17 @@ namespace Tests.Messaging
 
             _mockSystemWrapper.Setup(m => m.EnumerateFiles("trace path"))
                 .Returns(MakeTracePaths());
-            _mockSystemWrapper.Setup(m => m.ReadBytes("C:\\trace path\\Trace 1.trc", 12))
-                .Returns(MakeBytes(_traceDetails.Single(m => m.tracename == "Trace 1")));
-            _mockSystemWrapper.Setup(m => m.ReadBytes("C:\\trace path\\Trace 2.trc", 12))
-                .Returns(MakeBytes(_traceDetails.Single(m => m.tracename == "Trace 2")));
-            _mockSystemWrapper.Setup(m => m.ReadBytes("C:\\trace path\\Trace 3.trc", 12))
-                .Returns(MakeBytes(_traceDetails.Single(m => m.tracename == "Trace 3")));
-            _mockSystemWrapper.Setup(m => m.FileReadAllBytes("trace path\\trace file name"))
-                .Returns(MakeTraceDataFile());
+            _mockSystemWrapper.Setup(m => m.FileExists(It.IsAny<string>())).Returns(false);
+            SetUpMockFile("Trace 1");
+            SetUpMockFile("Trace 2");
+            SetUpMockFile("Trace 3");
+        }
+
+        private void SetUpMockFile(string name)
+        {
+            _mockSystemWrapper.Setup(m => m.ReadBytes($"C:\\trace path\\{name}.trc", 12))
+                .Returns(MakeBytes(_traceDetails.Single(m => m.tracename == name)));
+            _mockSystemWrapper.Setup(m => m.FileExists($"trace path\\{name}.trc")).Returns(true);
         }
 
         private IEnumerable<string> MakeTracePaths()

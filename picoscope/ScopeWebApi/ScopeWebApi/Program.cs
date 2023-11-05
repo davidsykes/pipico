@@ -90,6 +90,14 @@ try
    .WithName("Trace")
    .WithTags("Traces");
 
+    app.MapGet("/currenttrace", () =>
+    {
+        var trace_data = scopeTraceDirectory.GetCurrentTraceData();
+        return trace_data;
+    })
+   .WithName("Current Trace")
+   .WithTags("Traces");
+
     Console.WriteLine("===== Started =====");
     app.Run();
 }

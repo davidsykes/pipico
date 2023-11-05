@@ -1,6 +1,5 @@
 ﻿using Logic.DataObjects;
 using Logic.Logic;
-using System.Reflection.PortableExecutable;
 
 namespace Logic.Trace
 {
@@ -53,6 +52,8 @@ namespace Logic.Trace
         public IList<TraceDataPoint> GetTraceData(string traceFileName)
         {
             var filePath = Path.Combine(_tracePath, traceFileName);
+            if (!_systemWrapper.FileExists(filePath)) { RaiseNonExistentFileException(traceFileName); 
+            }
             var binary_data = _systemWrapper.FileReadAllBytes(filePath);
             using var r = new BinaryReader(new MemoryStream(binary_data));
 
@@ -69,6 +70,23 @@ namespace Logic.Trace
                 });
             }
             return points;
+        }
+
+        private static void RaiseNonExistentFileException(string traceFileName)
+        {
+            throw new ScopeWebApiException($"Scope trace '{traceFileName}' could not be found.");
+        }
+
+        public IList<TraceDataPoint> GetCurrentTraceData()
+        {
+            var traceDetails = GetTraceDetails().ToList();
+            if (traceDetails.Count > 0)
+            {
+                var latestTracePath = traceDetails.Last().tracepath;
+                return GetTraceData(latestTracePath);
+            }
+
+            return new List<TraceDataPoint>();
         }
     }
 }

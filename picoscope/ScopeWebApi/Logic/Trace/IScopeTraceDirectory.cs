@@ -7,5 +7,6 @@ namespace Logic.Trace
         IEnumerable<TraceDetails> GetTraceDetails();
         void DeleteTrace(string path);
         IList<TraceDataPoint> GetTraceData(string traceFileName);
+        IList<TraceDataPoint> GetCurrentTraceData();
     }
 }
