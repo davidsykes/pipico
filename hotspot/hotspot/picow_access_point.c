@@ -31,6 +31,7 @@ typedef struct TCP_SERVER_T_ {
     bool complete;
     ip_addr_t gw;
     async_context_t *context;
+    char *funtionality_seam;
 } TCP_SERVER_T;
 
 typedef struct TCP_CONNECT_STATE_T_ {
@@ -41,6 +42,7 @@ typedef struct TCP_CONNECT_STATE_T_ {
     int header_len;
     int result_len;
     ip_addr_t *gw;
+    char *funtionality_seam;
 } TCP_CONNECT_STATE_T;
 
 static err_t tcp_close_client_connection(TCP_CONNECT_STATE_T *con_state, struct tcp_pcb *client_pcb, err_t close_err) {
@@ -83,8 +85,9 @@ static err_t tcp_server_sent(void *arg, struct tcp_pcb *pcb, u16_t len) {
     return ERR_OK;
 }
 
-static int test_server_content(const char *request, const char *params, char *result, size_t max_result_len) {
+static int test_server_content(const char *request, const char *params, char *result, size_t max_result_len, char *funtionality_seam) {
     int len = 0;
+    DEBUG_printf("Seam found: %s", funtionality_seam);
     if (strncmp(request, LED_TEST, sizeof(LED_TEST) - 1) == 0) {
         // Get the state of the led
         bool value;
@@ -148,7 +151,7 @@ err_t tcp_server_recv(void *arg, struct tcp_pcb *pcb, struct pbuf *p, err_t err)
             }
 
             // Generate content
-            con_state->result_len = test_server_content(request, params, con_state->result, sizeof(con_state->result));
+            con_state->result_len = test_server_content(request, params, con_state->result, sizeof(con_state->result), con_state->funtionality_seam);
             DEBUG_printf("Request: %s?%s\n", request, params);
             DEBUG_printf("Result: %d\n", con_state->result_len);
 
@@ -226,6 +229,7 @@ static err_t tcp_server_accept(void *arg, struct tcp_pcb *client_pcb, err_t err)
     }
     con_state->pcb = client_pcb; // for checking
     con_state->gw = &state->gw;
+    con_state->funtionality_seam = state->funtionality_seam;
 
     // setup connection to client
     tcp_arg(client_pcb, con_state);
@@ -303,6 +307,8 @@ int main_hotspot() {
         DEBUG_printf("failed to initialise\n");
         return 1;
     }
+
+    state->funtionality_seam = "Here is a seam";
 
     // Get notified if the user presses a key
     state->context = cyw43_arch_async_context();
