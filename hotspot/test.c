@@ -3,6 +3,7 @@
  #include "hardware/gpio.h"
  #include "pico/cyw43_arch.h"
  #include "pico/binary_info.h"
+ #include "picow_access_point.h"
 
  const uint LED_PIN = 25;
 
@@ -11,6 +12,7 @@
 bi_decl(bi_program_description("This is a test binary."));
 bi_decl(bi_1pin_with_name(LED_PIN, "On-board LED"));
 
+main_hotspot();
 
 stdio_init_all();
 

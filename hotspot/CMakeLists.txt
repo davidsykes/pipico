@@ -5,9 +5,10 @@ set(CMAKE_C_STANDARD 11)
 set(CMAKE_CXX_STANDARD 17)
 pico_sdk_init()
 add_executable(test
-picow_access_point.c
-dhcpserver/dhcpserver.c
-dnsserver/dnsserver.c
+        test.c
+        picow_access_point.c
+        dhcpserver/dhcpserver.c
+        dnsserver/dnsserver.c
 )
 target_include_directories(test PRIVATE
         ${CMAKE_CURRENT_LIST_DIR}

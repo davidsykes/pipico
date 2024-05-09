@@ -290,7 +290,7 @@ void key_pressed_func(void *param) {
     }
 }
 
-int main() {
+int main_hotspot() {
     stdio_init_all();
 
     TCP_SERVER_T *state = calloc(1, sizeof(TCP_SERVER_T));
