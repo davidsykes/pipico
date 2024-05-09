@@ -6,15 +6,15 @@ set(CMAKE_CXX_STANDARD 17)
 pico_sdk_init()
 add_executable(test
         test.c
-        picow_access_point.c
-        dhcpserver/dhcpserver.c
-        dnsserver/dnsserver.c
+        hotspot/picow_access_point.c
+        hotspot/dhcpserver/dhcpserver.c
+        hotspot/dnsserver/dnsserver.c
 )
 target_include_directories(test PRIVATE
         ${CMAKE_CURRENT_LIST_DIR}
         ${CMAKE_CURRENT_LIST_DIR}/.. # for our common lwipopts
-        ${CMAKE_CURRENT_LIST_DIR}/dhcpserver
-        ${CMAKE_CURRENT_LIST_DIR}/dnsserver
+        ${CMAKE_CURRENT_LIST_DIR}/hotspot/dhcpserver
+        ${CMAKE_CURRENT_LIST_DIR}/hotspot/dnsserver
         )
 pico_enable_stdio_usb(test 1)
 pico_enable_stdio_uart(test 0)

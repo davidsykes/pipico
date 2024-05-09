@@ -3,7 +3,7 @@
  #include "hardware/gpio.h"
  #include "pico/cyw43_arch.h"
  #include "pico/binary_info.h"
- #include "picow_access_point.h"
+ #include "hotspot/picow_access_point.h"
 
  const uint LED_PIN = 25;
 
