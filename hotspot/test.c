@@ -7,12 +7,30 @@
 
  const uint LED_PIN = 25;
 
+ char * go()
+ {
+    puts("go go go");
+    return "hhg";
+ }
+
+int process_request(const char *request, const char *params, char *result, size_t max_result_len)
+ {
+    printf("Request: %s", request);
+    return 0;
+ }
+
+
  int main() {
 
 bi_decl(bi_program_description("This is a test binary."));
 bi_decl(bi_1pin_with_name(LED_PIN, "On-board LED"));
 
-main_hotspot();
+HOTSPOT_SEAM_T seam;
+seam.seam_name = "Mu seam";
+seam.go = &go;
+seam.process_request = &process_request;
+
+main_hotspot(&seam);
 
 stdio_init_all();
 

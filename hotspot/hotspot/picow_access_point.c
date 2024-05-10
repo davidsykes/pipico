@@ -12,6 +12,7 @@
 #include "lwip/pbuf.h"
 #include "lwip/tcp.h"
 
+#include "picow_access_point.h"
 #include "dhcpserver.h"
 #include "dnsserver.h"
 
@@ -31,7 +32,7 @@ typedef struct TCP_SERVER_T_ {
     bool complete;
     ip_addr_t gw;
     async_context_t *context;
-    char *funtionality_seam;
+    HOTSPOT_SEAM_T *funtionality_seam;
 } TCP_SERVER_T;
 
 typedef struct TCP_CONNECT_STATE_T_ {
@@ -42,7 +43,7 @@ typedef struct TCP_CONNECT_STATE_T_ {
     int header_len;
     int result_len;
     ip_addr_t *gw;
-    char *funtionality_seam;
+    HOTSPOT_SEAM_T *funtionality_seam;
 } TCP_CONNECT_STATE_T;
 
 static err_t tcp_close_client_connection(TCP_CONNECT_STATE_T *con_state, struct tcp_pcb *client_pcb, err_t close_err) {
@@ -85,10 +86,15 @@ static err_t tcp_server_sent(void *arg, struct tcp_pcb *pcb, u16_t len) {
     return ERR_OK;
 }
 
-static int test_server_content(const char *request, const char *params, char *result, size_t max_result_len, char *funtionality_seam) {
+static int test_server_content(const char *request, const char *params, char *result, size_t max_result_len, HOTSPOT_SEAM_T *funtionality_seam) {
     int len = 0;
-    DEBUG_printf("Seam found: %s", funtionality_seam);
-    if (strncmp(request, LED_TEST, sizeof(LED_TEST) - 1) == 0) {
+
+    len = funtionality_seam->process_request(request, params, result, max_result_len);
+    if (len > 0)
+    {
+        DEBUG_printf("Seam found: %s", funtionality_seam->go(2));
+    }
+    else if (strncmp(request, LED_TEST, sizeof(LED_TEST) - 1) == 0) {
         // Get the state of the led
         bool value;
         cyw43_gpio_get(&cyw43_state, LED_GPIO, &value);
@@ -294,7 +300,7 @@ void key_pressed_func(void *param) {
     }
 }
 
-int main_hotspot() {
+int main_hotspot(HOTSPOT_SEAM_T * seam) {
     stdio_init_all();
 
     TCP_SERVER_T *state = calloc(1, sizeof(TCP_SERVER_T));
@@ -308,7 +314,7 @@ int main_hotspot() {
         return 1;
     }
 
-    state->funtionality_seam = "Here is a seam";
+    state->funtionality_seam = seam;
 
     // Get notified if the user presses a key
     state->context = cyw43_arch_async_context();
