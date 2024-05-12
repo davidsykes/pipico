@@ -7,7 +7,7 @@
 
  const uint LED_PIN = 25;
 
- char * go()
+ const char * go(int t)
  {
     puts("go go go");
     return "hhg";
