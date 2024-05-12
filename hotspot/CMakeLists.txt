@@ -6,6 +6,7 @@ set(CMAKE_CXX_STANDARD 17)
 pico_sdk_init()
 add_executable(test
         test.cpp
+        interface.cpp
         hotspot/picow_access_point.c
         hotspot/dhcpserver/dhcpserver.c
         hotspot/dnsserver/dnsserver.c

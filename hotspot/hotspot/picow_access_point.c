@@ -32,7 +32,7 @@ typedef struct TCP_SERVER_T_ {
     bool complete;
     ip_addr_t gw;
     async_context_t *context;
-    HOTSPOT_SEAM_T *funtionality_seam;
+    HOTSPOT_CONFIGURATION_T *hotspot_configuration;
 } TCP_SERVER_T;
 
 typedef struct TCP_CONNECT_STATE_T_ {
@@ -43,7 +43,7 @@ typedef struct TCP_CONNECT_STATE_T_ {
     int header_len;
     int result_len;
     ip_addr_t *gw;
-    HOTSPOT_SEAM_T *funtionality_seam;
+    HOTSPOT_CONFIGURATION_T *hotspot_configuration;
 } TCP_CONNECT_STATE_T;
 
 static err_t tcp_close_client_connection(TCP_CONNECT_STATE_T *con_state, struct tcp_pcb *client_pcb, err_t close_err) {
@@ -86,13 +86,13 @@ static err_t tcp_server_sent(void *arg, struct tcp_pcb *pcb, u16_t len) {
     return ERR_OK;
 }
 
-static int test_server_content(const char *request, const char *params, char *result, size_t max_result_len, HOTSPOT_SEAM_T *funtionality_seam) {
+static int test_server_content(const char *request, const char *params, char *result, size_t max_result_len, HOTSPOT_CONFIGURATION_T *hotspot_configuration) {
     int len = 0;
 
-    len = funtionality_seam->process_request(request, params, result, max_result_len);
+    len = hotspot_configuration->process_request(request, params, result, max_result_len);
     if (len > 0)
     {
-        DEBUG_printf("Seam found: %s", funtionality_seam->go(2));
+        DEBUG_printf("Seam found: %s", hotspot_configuration->go(2));
     }
     else if (strncmp(request, LED_TEST, sizeof(LED_TEST) - 1) == 0) {
         // Get the state of the led
@@ -157,7 +157,7 @@ err_t tcp_server_recv(void *arg, struct tcp_pcb *pcb, struct pbuf *p, err_t err)
             }
 
             // Generate content
-            con_state->result_len = test_server_content(request, params, con_state->result, sizeof(con_state->result), con_state->funtionality_seam);
+            con_state->result_len = test_server_content(request, params, con_state->result, sizeof(con_state->result), con_state->hotspot_configuration);
             DEBUG_printf("Request: %s?%s\n", request, params);
             DEBUG_printf("Result: %d\n", con_state->result_len);
 
@@ -235,7 +235,7 @@ static err_t tcp_server_accept(void *arg, struct tcp_pcb *client_pcb, err_t err)
     }
     con_state->pcb = client_pcb; // for checking
     con_state->gw = &state->gw;
-    con_state->funtionality_seam = state->funtionality_seam;
+    con_state->hotspot_configuration = state->hotspot_configuration;
 
     // setup connection to client
     tcp_arg(client_pcb, con_state);
@@ -300,7 +300,7 @@ void key_pressed_func(void *param) {
     }
 }
 
-int main_hotspot(HOTSPOT_SEAM_T * seam) {
+int main_hotspot(HOTSPOT_CONFIGURATION_T * hotspot_configuration) {
     stdio_init_all();
 
     TCP_SERVER_T *state = calloc(1, sizeof(TCP_SERVER_T));
@@ -314,7 +314,7 @@ int main_hotspot(HOTSPOT_SEAM_T * seam) {
         return 1;
     }
 
-    state->funtionality_seam = seam;
+    state->hotspot_configuration = hotspot_configuration;
 
     // Get notified if the user presses a key
     state->context = cyw43_arch_async_context();
@@ -322,9 +322,9 @@ int main_hotspot(HOTSPOT_SEAM_T * seam) {
     async_context_add_when_pending_worker(cyw43_arch_async_context(), &key_pressed_worker);
     stdio_set_chars_available_callback(key_pressed_func, state);
 
-    const char *ap_name = "picow_test";
+    const char *ap_name = hotspot_configuration->hotspot_name;
 #if 1
-    const char *password = "password";
+    const char *password = hotspot_configuration->hotspot_password;
 #else
     const char *password = NULL;
 #endif

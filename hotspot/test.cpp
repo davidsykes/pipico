@@ -1,11 +1,5 @@
  #include <stdio.h>
- #include "pico/stdlib.h"
- #include "hardware/gpio.h"
- #include "pico/cyw43_arch.h"
- #include "pico/binary_info.h"
- #include "hotspot/picow_access_point.h"
-
- const uint LED_PIN = 25;
+#include "interface.h"
 
  const char * go(int t)
  {
@@ -22,29 +16,5 @@ int process_request(const char *request, const char *params, char *result, size_
 
  int main() {
 
-bi_decl(bi_program_description("This is a test binary."));
-bi_decl(bi_1pin_with_name(LED_PIN, "On-board LED"));
-
-HOTSPOT_SEAM_T seam;
-seam.seam_name = "Mu seam";
-seam.go = &go;
-seam.process_request = &process_request;
-
-main_hotspot(&seam);
-
-stdio_init_all();
-
-    if (cyw43_arch_init()) {
-        printf("Wi-Fi init failed");
-        return -1;
-    }
-while (1) {
-        cyw43_arch_gpio_put(CYW43_WL_GPIO_LED_PIN, 1);
-        sleep_ms(250);
-        cyw43_arch_gpio_put(CYW43_WL_GPIO_LED_PIN, 0);
-puts("Hello New World\n");
-
-
-sleep_ms(1000);
-}
+set_up_hotspot("Test Hotspot", "12345678", &process_request, &go);
  }
