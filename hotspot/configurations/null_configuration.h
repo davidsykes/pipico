@@ -7,6 +7,7 @@ class NullConfiguration : public Configuration
 {
     public:
         NullConfiguration();
+        virtual std::string process_request(const char *request, const char *params);
 };
 
 

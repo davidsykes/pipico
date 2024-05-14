@@ -14,7 +14,8 @@ int process_request(void *configuration, const char *request, const char *params
  {
     printf("Request balbal\n\n: %s\n", request);
     Configuration* config = (Configuration*)configuration;
-    printf("sdfdsfds %s\n", config->hotspot_name.c_str());
+    printf("sdfdsfds1 %x\n", config);
+    printf("sdfdsfds %s\n", config->process_request(request, params).c_str());
     return 0;
  }
 
