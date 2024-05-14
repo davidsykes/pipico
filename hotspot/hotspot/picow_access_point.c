@@ -89,10 +89,10 @@ static err_t tcp_server_sent(void *arg, struct tcp_pcb *pcb, u16_t len) {
 static int test_server_content(const char *request, const char *params, char *result, size_t max_result_len, HOTSPOT_CONFIGURATION_T *hotspot_configuration) {
     int len = 0;
 
-    len = hotspot_configuration->process_request(request, params, result, max_result_len);
+    len = hotspot_configuration->process_request(hotspot_configuration->configuration, request, params, result, max_result_len);
     if (len > 0)
     {
-        DEBUG_printf("Seam found: %s", hotspot_configuration->go(2));
+        DEBUG_printf("Seam found: %s", hotspot_configuration->go(hotspot_configuration->configuration, 2));
     }
     else if (strncmp(request, LED_TEST, sizeof(LED_TEST) - 1) == 0) {
         // Get the state of the led

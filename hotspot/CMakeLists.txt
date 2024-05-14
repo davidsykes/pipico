@@ -10,6 +10,7 @@ add_executable(test
         hotspot/picow_access_point.c
         hotspot/dhcpserver/dhcpserver.c
         hotspot/dnsserver/dnsserver.c
+        configurations/null_configuration.cpp
 )
 target_include_directories(test PRIVATE
         ${CMAKE_CURRENT_LIST_DIR}
