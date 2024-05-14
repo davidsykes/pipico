@@ -17,7 +17,7 @@ int process_request(const char *request, const char *params, char *result, size_
 int main()
 {
 
-   Configuration config = NullConfiguration();
+   Configuration *config = new NullConfiguration();
 
    set_up_hotspot(config);
 }

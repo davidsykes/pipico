@@ -18,12 +18,12 @@ int process_request(void *configuration, const char *request, const char *params
     return 0;
  }
 
-int set_up_hotspot(Configuration &configuration)
+int set_up_hotspot(Configuration *configuration)
 {
    HOTSPOT_CONFIGURATION_T config;
-   config.hotspot_name = configuration.hotspot_name.c_str();
-   config.hotspot_password = configuration.hotspot_password.c_str();
-   config.configuration = &configuration;
+   config.hotspot_name = configuration->hotspot_name.c_str();
+   config.hotspot_password = configuration->hotspot_password.c_str();
+   config.configuration = configuration;
    config.go = &go;
    config.process_request = &process_request;
 
