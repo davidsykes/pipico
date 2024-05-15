@@ -129,11 +129,14 @@
   <ItemGroup>
     <ClCompile Include="configurations\led_configuration.cpp" />
     <ClCompile Include="Tests.cpp" />
+    <ClCompile Include="Tests\Assert.cpp" />
     <ClCompile Include="Tests\LedConfigurationTests.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="configurations\configuration.h" />
     <ClInclude Include="configurations\led_configuration.h" />
+    <ClInclude Include="Header.h" />
+    <ClInclude Include="Tests\Assert.h" />
     <ClInclude Include="Tests\LedConfigurationTests.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
