@@ -1,8 +1,7 @@
 #include <stdio.h>
+#include <string.h>
 #include "interface.h"
 #include "hotspot/picow_access_point.h"
-
-
 
  const char * go(void *configuration, int t)
  {
@@ -12,10 +11,13 @@
 
 int process_request(void *configuration, const char *request, const char *params, char *result, size_t max_result_len)
  {
-    printf("Request balbal\n\n: %s\n", request);
     Configuration* config = (Configuration*)configuration;
-    printf("sdfdsfds1 %x\n", config);
-    printf("sdfdsfds %s\n", config->process_request(request, params).c_str());
+    std::string process_result = config->process_request(request, params);
+    if (process_result.length() < max_result_len - 1)
+    {
+      strcpy(result, process_result.c_str());
+      return process_result.length();
+    }
     return 0;
  }
 
