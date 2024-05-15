@@ -15,7 +15,7 @@ add_executable(test
 )
 target_include_directories(test PRIVATE
         ${CMAKE_CURRENT_LIST_DIR}
-        ${CMAKE_CURRENT_LIST_DIR}/.. # for our common lwipopts
+        ${CMAKE_CURRENT_LIST_DIR}/hotspot # for our common lwipopts
         ${CMAKE_CURRENT_LIST_DIR}/hotspot/dhcpserver
         ${CMAKE_CURRENT_LIST_DIR}/hotspot/dnsserver
         )
