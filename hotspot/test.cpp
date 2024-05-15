@@ -1,5 +1,5 @@
 #include <stdio.h>
-#include "interface.h"
+#include "interface/interface.h"
 #include "configurations/null_configuration.h"
 #include "configurations/led_configuration.h"
 
