@@ -10,7 +10,7 @@ int main()
 
    //Configuration *config = new NullConfiguration();
    //Configuration *config = new LedConfiguration();
-   Configuration *config = new HotSpotConfiguration(new HtmlRenderer());
+   Configuration *config = new HotSpotConfiguration("Pico Test Unit");
 
    set_up_hotspot(config);
 }

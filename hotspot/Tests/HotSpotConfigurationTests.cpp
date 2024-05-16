@@ -6,9 +6,9 @@
 void HotSpotConfigurationTests::RunTests()
 {
 	IHtmlRenderer* renderer = new MockHtmlRenderer();
-	HotSpotConfiguration* config = new HotSpotConfiguration(renderer);
+	Configuration* config = new HotSpotConfiguration("hellow", renderer);
 
 	std::string result = config->process_request("request", "params");
 
-	AssertEqual(result, "html(body(h1(hello)))");
+	AssertEqual(result, "html(body(h1(hellow)p(Enter Wifi Details)))");
 }

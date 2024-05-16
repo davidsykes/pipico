@@ -15,3 +15,8 @@ std::string MockHtmlRenderer::RenderHeader(std::string contents)
 {
 	return "h1(" + contents + ")";
 }
+
+std::string MockHtmlRenderer::RenderParagraph(std::string contents)
+{
+	return "p(" + contents + ")";
+}
