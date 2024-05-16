@@ -129,10 +129,11 @@
   <ItemGroup>
     <ClCompile Include="configurations\hotspot_configuration.cpp" />
     <ClCompile Include="configurations\led_configuration.cpp" />
-    <ClCompile Include="logic\HtmlRenderer.cpp" />
+    <ClCompile Include="logic\html_renderer.cpp" />
     <ClCompile Include="Tests.cpp" />
     <ClCompile Include="Tests\Assert.cpp" />
     <ClCompile Include="Tests\HotSpotConfigurationTests.cpp" />
+    <ClCompile Include="Tests\HtmlRendererTests.cpp" />
     <ClCompile Include="Tests\LedConfigurationTests.cpp" />
     <ClCompile Include="Tests\MockHtmlRenderer.cpp" />
   </ItemGroup>
@@ -141,9 +142,11 @@
     <ClInclude Include="configurations\hotspot_configuration.h" />
     <ClInclude Include="configurations\led_configuration.h" />
     <ClInclude Include="Header.h" />
-    <ClInclude Include="logic\IHtmlRenderer.h" />
+    <ClInclude Include="logic\html_renderer.h" />
+    <ClInclude Include="logic\ihtml_renderer.h" />
     <ClInclude Include="Tests\Assert.h" />
     <ClInclude Include="Tests\HotSpotConfigurationTests.h" />
+    <ClInclude Include="Tests\HtmlRendererTests.h" />
     <ClInclude Include="Tests\ITestModule.h" />
     <ClInclude Include="Tests\LedConfigurationTests.h" />
     <ClInclude Include="Tests\MockHtmlRenderer.h" />

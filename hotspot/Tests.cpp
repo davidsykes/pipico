@@ -1,6 +1,7 @@
 #include <iostream>
 #include "Tests\LedConfigurationTests.h"
 #include "Tests\HotSpotConfigurationTests.h"
+#include "Tests\HtmlRendererTests.h"
 
 int main()
 {
@@ -8,5 +9,6 @@ int main()
     lt->RunTests();
     lt = new HotSpotConfigurationTests();
     lt->RunTests();
+    (new HtmlRendererTests())->RunTests();
     std::cout << "Tests Complete\n";
 }

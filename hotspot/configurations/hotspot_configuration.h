@@ -1,6 +1,4 @@
-#ifndef HotSpotConfiguration_H
-#define HotSpotConfiguration_H
-
+#pragma once
 #include "configuration.h"
 #include "../logic/ihtml_renderer.h"
 
@@ -14,4 +12,3 @@ class HotSpotConfiguration : public Configuration
 };
 
 
-#endif

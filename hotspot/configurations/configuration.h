@@ -1,6 +1,4 @@
-#ifndef _CONFIGURATION_H
-#define _CONFIGURATION_H
-
+#pragma once
 #include <string>
 
 class Configuration
@@ -12,4 +10,4 @@ class Configuration
         virtual std::string process_request(const char *request, const char *params) = 0;
 };
 
-#endif
+

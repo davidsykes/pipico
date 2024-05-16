@@ -1,6 +1,4 @@
-#ifndef Led_Configuration_H
-#define Led_Configuration_H
-
+#pragma once
 #include "configuration.h"
 
 class LedConfiguration : public Configuration
@@ -11,4 +9,3 @@ class LedConfiguration : public Configuration
 };
 
 
-#endif
