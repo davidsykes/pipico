@@ -3,7 +3,7 @@
 using namespace std;
 
 
-class myexception : public exception
+class MyException : public exception
 {
 	virtual const char* what() const throw()
 	{
@@ -11,7 +11,7 @@ class myexception : public exception
 	}
 } myex;
 
-void AssertEqual(std::string& value, std::string& expected)
+void AssertEqual(const std::string& value, const std::string& expected)
 {
 	if (value != expected)
 	{

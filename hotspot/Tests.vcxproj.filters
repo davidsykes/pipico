@@ -19,6 +19,9 @@
     <Filter Include="Source Files\configurations">
       <UniqueIdentifier>{f4a35d3a-6fdf-4e82-8397-3736e7079c96}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\logic">
+      <UniqueIdentifier>{960cb8aa-e68e-432c-af0d-b8184629ed76}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Tests\LedConfigurationTests.cpp">
@@ -31,6 +34,18 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Tests\Assert.cpp">
+      <Filter>Source Files\Tests</Filter>
+    </ClCompile>
+    <ClCompile Include="Tests\HotSpotConfigurationTests.cpp">
+      <Filter>Source Files\Tests</Filter>
+    </ClCompile>
+    <ClCompile Include="configurations\hotspot_configuration.cpp">
+      <Filter>Source Files\configurations</Filter>
+    </ClCompile>
+    <ClCompile Include="logic\HtmlRenderer.cpp">
+      <Filter>Source Files\logic</Filter>
+    </ClCompile>
+    <ClCompile Include="Tests\MockHtmlRenderer.cpp">
       <Filter>Source Files\Tests</Filter>
     </ClCompile>
   </ItemGroup>
@@ -48,6 +63,21 @@
       <Filter>Source Files\Tests</Filter>
     </ClInclude>
     <ClInclude Include="Tests\Assert.h">
+      <Filter>Source Files\Tests</Filter>
+    </ClInclude>
+    <ClInclude Include="Tests\HotSpotConfigurationTests.h">
+      <Filter>Source Files\Tests</Filter>
+    </ClInclude>
+    <ClInclude Include="configurations\hotspot_configuration.h">
+      <Filter>Source Files\configurations</Filter>
+    </ClInclude>
+    <ClInclude Include="logic\IHtmlRenderer.h">
+      <Filter>Source Files\logic</Filter>
+    </ClInclude>
+    <ClInclude Include="Tests\MockHtmlRenderer.h">
+      <Filter>Source Files\Tests</Filter>
+    </ClInclude>
+    <ClInclude Include="Tests\ITestModule.h">
       <Filter>Source Files\Tests</Filter>
     </ClInclude>
   </ItemGroup>

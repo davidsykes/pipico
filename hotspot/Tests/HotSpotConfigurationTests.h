@@ -2,7 +2,8 @@
 #include "ITestModule.h"
 
 
-class LedConfigurationTests : public ITestModule
+
+class HotSpotConfigurationTests : public ITestModule
 {
 public:
 	void RunTests();
