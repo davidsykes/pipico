@@ -3,12 +3,6 @@
 #include "interface.h"
 #include "hotspot/picow_access_point.h"
 
- const char * go(void *configuration, int t)
- {
-    puts("go go go");
-    return "hhg";
- }
-
 int process_request(void *configuration, const char *request, const char *params, char *result, size_t max_result_len)
  {
     Configuration* config = (Configuration*)configuration;
@@ -27,7 +21,6 @@ int set_up_hotspot(Configuration *configuration)
    config.hotspot_name = configuration->hotspot_name.c_str();
    config.hotspot_password = configuration->hotspot_password.c_str();
    config.configuration = configuration;
-   config.go = &go;
    config.process_request = &process_request;
 
    main_hotspot(&config);

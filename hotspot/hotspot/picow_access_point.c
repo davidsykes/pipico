@@ -92,7 +92,7 @@ static int test_server_content(const char *request, const char *params, char *re
     len = hotspot_configuration->process_request(hotspot_configuration->configuration, request, params, result, max_result_len);
     if (len > 0)
     {
-        DEBUG_printf("Seam found: %s", hotspot_configuration->go(hotspot_configuration->configuration, 2));
+        return len;
     }
     else if (strncmp(request, LED_TEST, sizeof(LED_TEST) - 1) == 0) {
         // Get the state of the led
