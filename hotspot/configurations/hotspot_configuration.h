@@ -2,7 +2,7 @@
 #define HotSpotConfiguration_H
 
 #include "configuration.h"
-#include "../logic/IHtmlRenderer.h"
+#include "../logic/ihtml_renderer.h"
 
 class HotSpotConfiguration : public Configuration
 {

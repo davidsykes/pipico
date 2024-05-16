@@ -12,6 +12,8 @@ add_executable(test
         hotspot/dnsserver/dnsserver.c
         configurations/null_configuration.cpp
         configurations/led_configuration.cpp
+        configurations/hotspot_configuration.cpp
+        logic/html_renderer.cpp
 )
 target_include_directories(test PRIVATE
         ${CMAKE_CURRENT_LIST_DIR}

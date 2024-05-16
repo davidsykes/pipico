@@ -1,11 +1,10 @@
 #pragma once
+#include "ihtml_renderer.h"
 
-#include "../logic/ihtml_renderer.h"
-
-
-class MockHtmlRenderer : public IHtmlRenderer
+class HtmlRenderer : public IHtmlRenderer
 {
 	virtual std::string RenderHtml(std::string contents);
 	virtual std::string RenderBody(std::string contents);
 	virtual std::string RenderHeader(std::string contents);
 };
+
