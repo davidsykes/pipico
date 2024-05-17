@@ -18,5 +18,5 @@ std::string HtmlRenderer::RenderHeader(std::string contents)
 
 std::string HtmlRenderer::RenderParagraph(std::string contents)
 {
-	return "fich";
+	return "<p>" + contents + "</p>";
 }

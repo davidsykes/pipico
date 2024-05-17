@@ -1,7 +1,11 @@
 #include "hotspot_configuration.h"
 #include "../logic/html_renderer.h"
+#include "../logic/input_form_renderer.h"
 
-HotSpotConfiguration::HotSpotConfiguration(const char* description, IHtmlRenderer* html_renderer)
+HotSpotConfiguration::HotSpotConfiguration(
+    const char* description,
+    IHtmlRenderer* html_renderer,
+    IInputFormRenderer* input_form)
 {
     hotspot_description = description;
     hotspot_name = "hotspot";
@@ -14,6 +18,14 @@ HotSpotConfiguration::HotSpotConfiguration(const char* description, IHtmlRendere
     {
         _html_renderer = html_renderer;
     }
+    if (input_form == NULL)
+    {
+        _input_form = new InputFormRenderer();
+    }
+    else
+    {
+        _input_form = input_form;
+    }
 }
 
 //#define LED_TEST_BODY "<html><body><h1>Hello from Pico W.</h1><p>Led is OFF</p><p><a href=\"?led=1\">Turn led ON</a></body></html>"
@@ -23,7 +35,8 @@ std::string HotSpotConfiguration::process_request(const char *request, const cha
     std::string html = _html_renderer->RenderHtml(
         _html_renderer->RenderBody(
             _html_renderer->RenderHeader(hotspot_description) +
-        _html_renderer->RenderParagraph("Enter Wifi Details")));
+        _html_renderer->RenderParagraph("Enter Wifi Details") +
+        _input_form->Render()));
 
     return html;
 }

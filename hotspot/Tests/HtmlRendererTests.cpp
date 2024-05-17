@@ -8,6 +8,7 @@ void HtmlRendererTests::RunTests()
 	RenderHtmlTest();
 	RenderBodyTest();
 	RenderHeaderTest();
+	RenderParagraphTest();
 }
 
 void HtmlRendererTests::RenderHtmlTest()
@@ -34,4 +35,13 @@ void HtmlRendererTests::RenderHeaderTest()
 	std::string html = renderer->RenderHeader("contents");
 
 	AssertEqual(html, "<h1>contents</h1>");
+}
+
+void HtmlRendererTests::RenderParagraphTest()
+{
+	IHtmlRenderer* renderer = new HtmlRenderer();
+
+	std::string html = renderer->RenderParagraph("contents");
+
+	AssertEqual(html, "<p>contents</p>");
 }
