@@ -14,6 +14,7 @@ add_executable(test
         configurations/led_configuration.cpp
         configurations/hotspot_configuration.cpp
         logic/html_renderer.cpp
+        logic/input_form_renderer.cpp
 )
 target_include_directories(test PRIVATE
         ${CMAKE_CURRENT_LIST_DIR}
