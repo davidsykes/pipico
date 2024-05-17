@@ -1,6 +1,6 @@
 #include "hotspot_configuration.h"
-#include "../logic/html_renderer.h"
-#include "../logic/input_form_renderer.h"
+#include "../logic/input_form/html_renderer.h"
+#include "../logic/input_form/input_form_renderer.h"
 
 HotSpotConfiguration::HotSpotConfiguration(
     const char* description,
@@ -27,8 +27,6 @@ HotSpotConfiguration::HotSpotConfiguration(
         _input_form = input_form;
     }
 }
-
-//#define LED_TEST_BODY "<html><body><h1>Hello from Pico W.</h1><p>Led is OFF</p><p><a href=\"?led=1\">Turn led ON</a></body></html>"
 
 std::string HotSpotConfiguration::process_request(const char *request, const char *params)
 {

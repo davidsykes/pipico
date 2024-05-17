@@ -1,7 +1,7 @@
 #pragma once
 #include "configuration.h"
-#include "../logic/ihtml_renderer.h"
-#include "../logic/iinput_form_renderer.h"
+#include "../logic/input_form/ihtml_renderer.h"
+#include "../logic/input_form/iinput_form_renderer.h"
 
 class HotSpotConfiguration : public Configuration
 {
