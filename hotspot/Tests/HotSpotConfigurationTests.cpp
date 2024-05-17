@@ -9,7 +9,7 @@ void HotSpotConfigurationTests::SetUpObjectUnderTest()
 	IHtmlRenderer* renderer = new MockHtmlRenderer();
 	IInputFormRenderer* formRenderer = new MockInputFormRenderer();
 	mockCredentialsHandler = new MockCredentialsHandler();
-	config = new HotSpotConfiguration("description", renderer, formRenderer);
+	config = new HotSpotConfiguration("description", renderer, formRenderer, mockCredentialsHandler);
 }
 
 void HotSpotConfigurationTests::RunTests()
