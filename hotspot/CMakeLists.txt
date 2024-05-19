@@ -7,9 +7,11 @@ pico_sdk_init()
 add_executable(test
         test.cpp
         interface/interface.cpp
+        hotspot/logic.c
         hotspot/picow_access_point.c
         hotspot/dhcpserver/dhcpserver.c
         hotspot/dnsserver/dnsserver.c
+        hotspot/flash_program.c
         configurations/null_configuration.cpp
         configurations/led_configuration.cpp
         configurations/hotspot_configuration.cpp

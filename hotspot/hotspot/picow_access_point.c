@@ -275,7 +275,7 @@ static bool tcp_server_open(void *arg, const char *ap_name) {
     tcp_arg(state->server_pcb, state);
     tcp_accept(state->server_pcb, tcp_server_accept);
 
-    printf("Try connecting to '%s' (press 'd' to disable access point)\n", ap_name);
+    printf("Try connecting to '%s'\n", ap_name);
     return true;
 }
 
@@ -301,7 +301,6 @@ void key_pressed_func(void *param) {
 }
 
 int main_hotspot(HOTSPOT_CONFIGURATION_T * hotspot_configuration) {
-    stdio_init_all();
 
     TCP_SERVER_T *state = calloc(1, sizeof(TCP_SERVER_T));
     if (!state) {

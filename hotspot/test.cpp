@@ -12,5 +12,5 @@ int main()
    //Configuration *config = new LedConfiguration();
    Configuration *config = new HotSpotConfiguration("Pico Test Unit");
 
-   set_up_hotspot(config);
+   connect_to_wifi(config);
 }

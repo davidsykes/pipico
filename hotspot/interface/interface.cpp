@@ -2,23 +2,24 @@
 #include <string.h>
 #include "interface.h"
 #include "hotspot/picow_access_point.h"
+#include "hotspot/logic.h"
+#include "hotspot/flash_program.h"
 
 #define SIZE_ERROR "<html><body><h1>FORM CONTENT EXCEEDS BUFFER</h1></body></html>"
 
 int process_request(void *configuration, const char *request, const char *params, char *result, size_t max_result_len)
- {
-    Configuration* config = (Configuration*)configuration;
-    std::string process_result = config->process_request(request, params);
-    int result_length = process_result.length();
-    if (result_length < max_result_len - 1)
-    {
+{
+   Configuration* config = (Configuration*)configuration;
+   std::string process_result = config->process_request(request, params);
+   int result_length = process_result.length();
+   if (result_length < max_result_len - 1)
+   {
       strcpy(result, process_result.c_str());
       return result_length;
-    }
-    printf("Request size %d exceeded limit of %d\n", result_length, max_result_len);
-    strcpy(result, SIZE_ERROR);
-    return strlen(SIZE_ERROR);
- }
+   }
+   strcpy(result, SIZE_ERROR);
+   return strlen(SIZE_ERROR);
+}
 
 int set_up_hotspot(Configuration *configuration)
 {
@@ -30,4 +31,11 @@ int set_up_hotspot(Configuration *configuration)
 
    main_hotspot(&config);
    return 0;
+}
+
+int connect_to_wifi(Configuration *configuration)
+{
+   initialise_pico();
+   try_out_flash();
+   return set_up_hotspot(configuration);
 }
