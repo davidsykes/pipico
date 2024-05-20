@@ -3,7 +3,7 @@
 #include "configurations/null_configuration.h"
 #include "configurations/led_configuration.h"
 #include "configurations/hotspot_configuration.h"
-#include "logic/html_renderer.h"
+//#include "logic/input_form/html_renderer.h"
 
 int main()
 {

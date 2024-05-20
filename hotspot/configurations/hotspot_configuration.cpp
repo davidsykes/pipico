@@ -1,3 +1,4 @@
+#include <string.h>
 #include "hotspot_configuration.h"
 #include "../logic/input_form/html_renderer.h"
 #include "../logic/input_form/input_form_renderer.h"
