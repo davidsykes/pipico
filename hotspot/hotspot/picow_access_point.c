@@ -18,6 +18,7 @@
 
 #define TCP_PORT 80
 #define DEBUG_printf printf
+#define DEBUG_printf2
 #define POLL_TIME_S 5
 #define HTTP_GET "GET"
 #define HTTP_RESPONSE_HEADERS "HTTP/1.1 %d OK\nContent-Length: %d\nContent-Type: text/html; charset=utf-8\nConnection: close\n\n"
@@ -77,7 +78,7 @@ static void tcp_server_close(TCP_SERVER_T *state) {
 
 static err_t tcp_server_sent(void *arg, struct tcp_pcb *pcb, u16_t len) {
     TCP_CONNECT_STATE_T *con_state = (TCP_CONNECT_STATE_T*)arg;
-    DEBUG_printf("tcp_server_sent %u\n", len);
+    DEBUG_printf2("tcp_server_sent %u\n", len);
     con_state->sent_len += len;
     if (con_state->sent_len >= con_state->header_len + con_state->result_len) {
         DEBUG_printf("all done\n");
@@ -158,8 +159,8 @@ err_t tcp_server_recv(void *arg, struct tcp_pcb *pcb, struct pbuf *p, err_t err)
 
             // Generate content
             con_state->result_len = test_server_content(request, params, con_state->result, sizeof(con_state->result), con_state->hotspot_configuration);
-            DEBUG_printf("Request: %s?%s\n", request, params);
-            DEBUG_printf("Result: %d\n", con_state->result_len);
+            DEBUG_printf2("Request: %s?%s\n", request, params);
+            DEBUG_printf2("Result: %d\n", con_state->result_len);
 
             // Check we had enough buffer space
             if (con_state->result_len > sizeof(con_state->result) - 1) {

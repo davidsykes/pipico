@@ -36,6 +36,19 @@ int set_up_hotspot(Configuration *configuration)
 int connect_to_wifi(Configuration *configuration)
 {
    initialise_pico();
-   try_out_flash();
-   return set_up_hotspot(configuration);
+//   try_out_flash();
+
+   CREDENTIALS_T credentials;
+   if (read_flash_contents(&credentials))
+   {
+      printf("Found Credentials\n");
+      printf("Name %s\n", credentials.hotspot_name);
+      printf("Pswd %s\n", credentials.hotspot_password);
+      return 0;
+   }
+   else
+   {
+      printf("Credentials not found\n");
+      return set_up_hotspot(configuration);
+   }
 }
