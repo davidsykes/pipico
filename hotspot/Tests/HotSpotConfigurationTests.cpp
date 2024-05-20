@@ -30,7 +30,7 @@ void HotSpotConfigurationTests::GeneralRequestsReturnAnInputForm()
 
 void HotSpotConfigurationTests::CredentialsSubmissionCallsCredentialsHandler()
 {
-	std::string result = config->process_request("hotspotsubmit", "ssid=SSID&password=pass");
+	std::string result = config->process_request("/hotspotsubmit", "ssid=SSID&password=pass");
 
 	AssertEqual(result, "");
 	AssertEqual(mockCredentialsHandler->HandledCredentials, "ssid=SSID&password=pass");

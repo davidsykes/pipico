@@ -23,7 +23,7 @@ HotSpotConfiguration::HotSpotConfiguration(
 
 bool RequestMatchesCredentialsSubmission(const char* request)
 {
-    return strcmp(request, "hotspotsubmit") == 0;
+    return strcmp(request, "/hotspotsubmit") == 0;
 }
 
 std::string HotSpotConfiguration::process_request(const char *request, const char *params)

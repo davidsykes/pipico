@@ -16,7 +16,7 @@ void InputFormRendererTests::ASimpleFormCanBeRendered()
 
 	const char* expected = "<form action=\"/hotspotsubmit\" >"
 		"<label for=\"ssid\">SSID:</label><br>"
-		"<input type=\"text\" id=\"ssid\" name=\"ssid\"><br>"
+		"<input type=\"text\" id=\"ssid\" name=\"ssid\" autofocus autocomplete=\"on\"><br>"
 		"<label for=\"pass\">Password</label><br>"
 		"<input type=\"password\" id=\"pass\" name=\"password\" autocomplete=\"on\" required/><br><br>"
 		"<input type=\"submit\" value=\"Submit\">"
