@@ -1,6 +1,6 @@
 #include "Assert.h"
 #include "HtmlRendererTests.h"
-#include "..\logic\html_renderer.h"
+#include "..\logic\input_form\html_renderer.h"
 
 
 void HtmlRendererTests::RunTests()

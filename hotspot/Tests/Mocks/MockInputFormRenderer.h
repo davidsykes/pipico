@@ -1,6 +1,6 @@
 #pragma once
 
-#include "../logic/iinput_form_renderer.h"
+#include "../../logic/input_form/iinput_form_renderer.h"
 
 
 class MockInputFormRenderer : public IInputFormRenderer

@@ -1,6 +1,6 @@
 #pragma once
 
-#include "../logic/ihtml_renderer.h"
+#include "../../logic/input_form/ihtml_renderer.h"
 
 
 class MockHtmlRenderer : public IHtmlRenderer

@@ -22,6 +22,15 @@
     <Filter Include="Source Files\logic">
       <UniqueIdentifier>{960cb8aa-e68e-432c-af0d-b8184629ed76}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Tests\Mocks">
+      <UniqueIdentifier>{a88f8a72-ef0d-4c72-81b9-7dbfc6eb5a6d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\logic\input_form">
+      <UniqueIdentifier>{b3ffffc6-23ba-40f0-a49b-cd2570dd09ed}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\logic\credentials">
+      <UniqueIdentifier>{c28a13bd-2313-454b-9b52-1a3b945d77ae}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Tests\LedConfigurationTests.cpp">
@@ -42,23 +51,29 @@
     <ClCompile Include="configurations\hotspot_configuration.cpp">
       <Filter>Source Files\configurations</Filter>
     </ClCompile>
-    <ClCompile Include="Tests\MockHtmlRenderer.cpp">
-      <Filter>Source Files\Tests</Filter>
-    </ClCompile>
     <ClCompile Include="Tests\HtmlRendererTests.cpp">
       <Filter>Source Files\Tests</Filter>
     </ClCompile>
-    <ClCompile Include="logic\html_renderer.cpp">
-      <Filter>Source Files\logic</Filter>
-    </ClCompile>
-    <ClCompile Include="logic\input_form_renderer.cpp">
-      <Filter>Source Files\logic</Filter>
-    </ClCompile>
-    <ClCompile Include="Tests\MockInputFormRenderer.cpp">
+    <ClCompile Include="Tests\InputFormRendererTests.cpp">
       <Filter>Source Files\Tests</Filter>
     </ClCompile>
-    <ClCompile Include="Tests\FormRendererTests.cpp">
-      <Filter>Source Files\Tests</Filter>
+    <ClCompile Include="Tests\Mocks\MockCredentialsHandler.cpp">
+      <Filter>Source Files\Tests\Mocks</Filter>
+    </ClCompile>
+    <ClCompile Include="Tests\Mocks\MockHtmlRenderer.cpp">
+      <Filter>Source Files\Tests\Mocks</Filter>
+    </ClCompile>
+    <ClCompile Include="Tests\Mocks\MockInputFormRenderer.cpp">
+      <Filter>Source Files\Tests\Mocks</Filter>
+    </ClCompile>
+    <ClCompile Include="logic\input_form\html_renderer.cpp">
+      <Filter>Source Files\logic\input_form</Filter>
+    </ClCompile>
+    <ClCompile Include="logic\input_form\input_form_renderer.cpp">
+      <Filter>Source Files\logic\input_form</Filter>
+    </ClCompile>
+    <ClCompile Include="logic\credentials\credentials_handler.cpp">
+      <Filter>Source Files\logic\credentials</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -83,32 +98,41 @@
     <ClInclude Include="configurations\hotspot_configuration.h">
       <Filter>Source Files\configurations</Filter>
     </ClInclude>
-    <ClInclude Include="Tests\MockHtmlRenderer.h">
-      <Filter>Source Files\Tests</Filter>
-    </ClInclude>
     <ClInclude Include="Tests\ITestModule.h">
       <Filter>Source Files\Tests</Filter>
     </ClInclude>
     <ClInclude Include="Tests\HtmlRendererTests.h">
       <Filter>Source Files\Tests</Filter>
     </ClInclude>
-    <ClInclude Include="logic\html_renderer.h">
-      <Filter>Source Files\logic</Filter>
-    </ClInclude>
-    <ClInclude Include="logic\ihtml_renderer.h">
-      <Filter>Source Files\logic</Filter>
-    </ClInclude>
-    <ClInclude Include="logic\iinput_form_renderer.h">
-      <Filter>Source Files\logic</Filter>
-    </ClInclude>
-    <ClInclude Include="logic\input_form_renderer.h">
-      <Filter>Source Files\logic</Filter>
-    </ClInclude>
-    <ClInclude Include="Tests\MockInputFormRenderer.h">
+    <ClInclude Include="Tests\InputFormRendererTests.h">
       <Filter>Source Files\Tests</Filter>
     </ClInclude>
-    <ClInclude Include="Tests\FormRendererTests.h">
-      <Filter>Source Files\Tests</Filter>
+    <ClInclude Include="Tests\Mocks\MockCredentialsHandler.h">
+      <Filter>Source Files\Tests\Mocks</Filter>
+    </ClInclude>
+    <ClInclude Include="Tests\Mocks\MockHtmlRenderer.h">
+      <Filter>Source Files\Tests\Mocks</Filter>
+    </ClInclude>
+    <ClInclude Include="Tests\Mocks\MockInputFormRenderer.h">
+      <Filter>Source Files\Tests\Mocks</Filter>
+    </ClInclude>
+    <ClInclude Include="logic\input_form\html_renderer.h">
+      <Filter>Source Files\logic\input_form</Filter>
+    </ClInclude>
+    <ClInclude Include="logic\input_form\ihtml_renderer.h">
+      <Filter>Source Files\logic\input_form</Filter>
+    </ClInclude>
+    <ClInclude Include="logic\input_form\iinput_form_renderer.h">
+      <Filter>Source Files\logic\input_form</Filter>
+    </ClInclude>
+    <ClInclude Include="logic\input_form\input_form_renderer.h">
+      <Filter>Source Files\logic\input_form</Filter>
+    </ClInclude>
+    <ClInclude Include="logic\credentials\icredentials_handler.h">
+      <Filter>Source Files\logic\credentials</Filter>
+    </ClInclude>
+    <ClInclude Include="logic\credentials\credentials_handler.h">
+      <Filter>Source Files\logic\credentials</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

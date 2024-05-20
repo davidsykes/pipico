@@ -2,7 +2,7 @@
 #include "ITestModule.h"
 
 
-class FormRendererTests : public ITestModule
+class InputFormRendererTests : public ITestModule
 {
 	void ASimpleFormCanBeRendered();
 

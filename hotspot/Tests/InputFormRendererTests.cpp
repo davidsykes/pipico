@@ -1,14 +1,14 @@
 #include "Assert.h"
-#include "FormRendererTests.h"
-#include "..\logic\input_form_renderer.h"
+#include "InputFormRendererTests.h"
+#include "..\logic\input_form\input_form_renderer.h"
 
 
-void FormRendererTests::RunTests()
+void InputFormRendererTests::RunTests()
 {
 	ASimpleFormCanBeRendered();
 }
 
-void FormRendererTests::ASimpleFormCanBeRendered()
+void InputFormRendererTests::ASimpleFormCanBeRendered()
 {
 	IInputFormRenderer* renderer = new InputFormRenderer();
 
