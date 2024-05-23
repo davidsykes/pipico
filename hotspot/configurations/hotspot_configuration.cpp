@@ -21,7 +21,7 @@ HotSpotConfiguration::HotSpotConfiguration(
     if (_credentials_handler == NULL) _credentials_handler = new CredentialsHandler();
 }
 
-bool RequestMatchesCredentialsSubmission(const char* request)
+static bool RequestMatchesCredentialsSubmission(const char* request)
 {
     return strcmp(request, "/hotspotsubmit") == 0;
 }
