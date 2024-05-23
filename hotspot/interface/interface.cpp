@@ -2,7 +2,6 @@
 #include <string.h>
 #include "interface.h"
 #include "hotspot/picow_access_point.h"
-#include "hotspot/logic.h"
 #include "hotspot/flash_program.h"
 
 #define SIZE_ERROR "<html><body><h1>FORM CONTENT EXCEEDS BUFFER</h1></body></html>"
@@ -35,7 +34,6 @@ int set_up_hotspot(Configuration *configuration)
 
 int connect_to_wifi(Configuration *configuration)
 {
-   initialise_pico_stdio();
 //   try_out_flash();
 
    CREDENTIALS_T credentials;

@@ -1,7 +1,6 @@
 #include "common.h"
+#include "hotspot/logic.h"
 #include "interface/interface.h"
-#include "configurations/null_configuration.h"
-#include "configurations/led_configuration.h"
 #include "configurations/hotspot_configuration.h"
 #include "hotspot/system_interface.h"
 #include "logic/connecting/wifi_connector.h"
@@ -15,6 +14,7 @@ int main()
 
    SYSTEM_INTERFACE_T systemInterface;
    SetUpSystemInterface(&systemInterface);
+   initialise_pico_stdio();
    
    WifiConnector wifiConnector(&systemInterface);
    if (wifiConnector.CredentialsAreValid())
