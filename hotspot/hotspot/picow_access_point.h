@@ -8,7 +8,7 @@ typedef struct HOTSPOT_CONFIGURATION_T_ {
 #ifdef __cplusplus
 extern "C" {
 #endif
-   int main_hotspot(HOTSPOT_CONFIGURATION_T * hotspot_configuration);
+   int main_hotspot(HOTSPOT_CONFIGURATION_T* hotspot_configuration);
 #ifdef __cplusplus
 }
 #endif

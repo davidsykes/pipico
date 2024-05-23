@@ -8,6 +8,7 @@ add_executable(test
         test.cpp
         interface/interface.cpp
         hotspot/logic.c
+        hotspot/system_interface.c
         hotspot/picow_access_point.c
         hotspot/dhcpserver/dhcpserver.c
         hotspot/dnsserver/dnsserver.c
@@ -18,6 +19,7 @@ add_executable(test
         logic/input_form/html_renderer.cpp
         logic/input_form/input_form_renderer.cpp
         logic/credentials/credentials_handler.cpp
+        logic/connecting/wifi_connector.cpp
 )
 target_include_directories(test PRIVATE
         ${CMAKE_CURRENT_LIST_DIR}

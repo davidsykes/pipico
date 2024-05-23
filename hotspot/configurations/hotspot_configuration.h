@@ -16,9 +16,10 @@ class HotSpotConfiguration : public Configuration
     public:
         HotSpotConfiguration(
             const char* description,
-            IHtmlRenderer* html_renderer = 0,
-            IInputFormRenderer* input_form=0,
-            ICredentialsHandler* credentials_handler=0);
+            const char* lastErrorMessage,
+            IHtmlRenderer* html_renderer,
+            IInputFormRenderer* input_form,
+            ICredentialsHandler* credentials_handler);
 };
 
 

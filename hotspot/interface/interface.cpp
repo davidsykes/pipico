@@ -35,7 +35,7 @@ int set_up_hotspot(Configuration *configuration)
 
 int connect_to_wifi(Configuration *configuration)
 {
-   initialise_pico();
+   initialise_pico_stdio();
 //   try_out_flash();
 
    CREDENTIALS_T credentials;

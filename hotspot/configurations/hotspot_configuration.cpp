@@ -1,11 +1,9 @@
 #include <string.h>
 #include "hotspot_configuration.h"
-#include "../logic/input_form/html_renderer.h"
-#include "../logic/input_form/input_form_renderer.h"
-#include "../logic/credentials/credentials_handler.h"
 
 HotSpotConfiguration::HotSpotConfiguration(
     const char* description,
+    const char* lastErrorMessage,
     IHtmlRenderer* html_renderer,
     IInputFormRenderer* input_form,
     ICredentialsHandler* credentials_handler)
@@ -14,11 +12,8 @@ HotSpotConfiguration::HotSpotConfiguration(
     hotspot_name = "hotspot";
     hotspot_password = "password";
     _html_renderer = html_renderer;
-    if (_html_renderer == NULL) _html_renderer = new HtmlRenderer();
     _input_form = input_form;
-    if (_input_form == NULL) _input_form = new InputFormRenderer();
     _credentials_handler = credentials_handler;
-    if (_credentials_handler == NULL) _credentials_handler = new CredentialsHandler();
 }
 
 static bool RequestMatchesCredentialsSubmission(const char* request)
@@ -28,7 +23,7 @@ static bool RequestMatchesCredentialsSubmission(const char* request)
 
 std::string HotSpotConfiguration::process_request(const char *request, const char *params)
 {
-    printf("process request: '%s' '%s'\n", request, params);
+    printf("process request: '%s' '%s'\n---\n", request, params);
     if (RequestMatchesCredentialsSubmission(request))
     {
         _credentials_handler->HandleCredentials(params);
