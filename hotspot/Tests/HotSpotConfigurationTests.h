@@ -6,7 +6,7 @@
 
 class HotSpotConfigurationTests : public ITestModule
 {
-	Configuration* config;
+	Configuration* config{};
 	MockCredentialsHandler* mockCredentialsHandler;
 	void SetUpObjectUnderTest();
 	void GeneralRequestsReturnAnInputForm();

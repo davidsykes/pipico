@@ -104,6 +104,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>D:\Development\pipico\hotspot\Tests\TestFramework;D:\Development\pipico\hotspot\hotspot;D:\Development\pipico\hotspot\Tests;D:\Development\pipico\hotspot;D:\Development\pipico\hotspot\logic\connecting;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -129,39 +130,43 @@
   <ItemGroup>
     <ClCompile Include="configurations\hotspot_configuration.cpp" />
     <ClCompile Include="configurations\led_configuration.cpp" />
+    <ClCompile Include="logic\connecting\wifi_connector.cpp" />
     <ClCompile Include="logic\credentials\credentials_handler.cpp" />
     <ClCompile Include="logic\input_form\html_renderer.cpp" />
     <ClCompile Include="logic\input_form\input_form_renderer.cpp" />
     <ClCompile Include="Tests.cpp" />
-    <ClCompile Include="Tests\Assert.cpp" />
-    <ClCompile Include="Tests\InputFormRendererTests.cpp" />
     <ClCompile Include="Tests\HotSpotConfigurationTests.cpp" />
-    <ClCompile Include="Tests\HtmlRendererTests.cpp" />
     <ClCompile Include="Tests\LedConfigurationTests.cpp" />
+    <ClCompile Include="Tests\logic\connecting\WIIFIConnectorTests.cpp" />
+    <ClCompile Include="Tests\logic\input_form\HtmlRendererTests.cpp" />
+    <ClCompile Include="Tests\logic\input_form\InputFormRendererTests.cpp" />
     <ClCompile Include="Tests\Mocks\MockCredentialsHandler.cpp" />
     <ClCompile Include="Tests\Mocks\MockHtmlRenderer.cpp" />
     <ClCompile Include="Tests\Mocks\MockInputFormRenderer.cpp" />
+    <ClCompile Include="Tests\TestFramework\Assert.cpp" />
+    <ClCompile Include="Tests\TestFramework\TestModule.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="configurations\configuration.h" />
     <ClInclude Include="configurations\hotspot_configuration.h" />
     <ClInclude Include="configurations\led_configuration.h" />
-    <ClInclude Include="Header.h" />
+    <ClInclude Include="logic\connecting\wifi_connector.h" />
     <ClInclude Include="logic\credentials\credentials_handler.h" />
     <ClInclude Include="logic\credentials\icredentials_handler.h" />
     <ClInclude Include="logic\input_form\html_renderer.h" />
     <ClInclude Include="logic\input_form\ihtml_renderer.h" />
     <ClInclude Include="logic\input_form\iinput_form_renderer.h" />
     <ClInclude Include="logic\input_form\input_form_renderer.h" />
-    <ClInclude Include="Tests\Assert.h" />
-    <ClInclude Include="Tests\InputFormRendererTests.h" />
     <ClInclude Include="Tests\HotSpotConfigurationTests.h" />
-    <ClInclude Include="Tests\HtmlRendererTests.h" />
-    <ClInclude Include="Tests\ITestModule.h" />
     <ClInclude Include="Tests\LedConfigurationTests.h" />
+    <ClInclude Include="Tests\logic\connecting\WIFIConnectorTests.h" />
+    <ClInclude Include="Tests\logic\input_form\HtmlRendererTests.h" />
+    <ClInclude Include="Tests\logic\input_form\InputFormRendererTests.h" />
     <ClInclude Include="Tests\Mocks\MockCredentialsHandler.h" />
     <ClInclude Include="Tests\Mocks\MockHtmlRenderer.h" />
     <ClInclude Include="Tests\Mocks\MockInputFormRenderer.h" />
+    <ClInclude Include="Tests\TestFramework\Assert.h" />
+    <ClInclude Include="Tests\TestFramework\ITestModule.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

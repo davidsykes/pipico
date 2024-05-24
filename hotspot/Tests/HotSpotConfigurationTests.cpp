@@ -9,7 +9,7 @@ void HotSpotConfigurationTests::SetUpObjectUnderTest()
 	IHtmlRenderer* renderer = new MockHtmlRenderer();
 	IInputFormRenderer* formRenderer = new MockInputFormRenderer();
 	mockCredentialsHandler = new MockCredentialsHandler();
-	config = new HotSpotConfiguration("description", renderer, formRenderer, mockCredentialsHandler);
+	config = new HotSpotConfiguration("description", "last error", renderer, formRenderer, mockCredentialsHandler);
 }
 
 void HotSpotConfigurationTests::RunTests()
@@ -24,7 +24,7 @@ void HotSpotConfigurationTests::GeneralRequestsReturnAnInputForm()
 {
 	std::string result = config->process_request("request", "params");
 
-	AssertEqual(result, "html(body(h1(description)p(Enter Wifi Details){Form}))");
+	AssertEqual(result, "html(body(h1(description)p(Enter WiFi Details){Form}))");
 	AssertEqual(mockCredentialsHandler->HandledCredentials, "");
 }
 

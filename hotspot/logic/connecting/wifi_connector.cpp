@@ -1,24 +1,24 @@
 #include "wifi_connector.h"
 #include "common.h"
 
-    WifiConnector::WifiConnector(SYSTEM_INTERFACE_T* systemInterface)
+    WiFiConnector::WiFiConnector(SYSTEM_INTERFACE_T* systemInterface)
     {
-        DEBUG_printf("WifiConnector NOT IMPLEMENTED");
+        DEBUG_printf("WiFiConnector NOT IMPLEMENTED");
     }
 
-	bool WifiConnector::CredentialsAreValid()
+	bool WiFiConnector::CredentialsAreValid()
     {
-        DEBUG_printf("WifiConnector NOT IMPLEMENTED");
+        DEBUG_printf("WiFiConnector NOT IMPLEMENTED");
         return false;
     }
-    bool WifiConnector::ConnectToWifi()
+    bool WiFiConnector::ConnectToWiFi()
     {
-        DEBUG_printf("WifiConnector NOT IMPLEMENTED");
+        DEBUG_printf("WiFiConnector NOT IMPLEMENTED");
         return false;
     }
-    const char* WifiConnector::GetErrorMessage()
+    const char* WiFiConnector::GetErrorMessage()
     {
-        DEBUG_printf("WifiConnector NOT IMPLEMENTED");
-        return "WifiConnector not implemented";
+        DEBUG_printf("WiFiConnector NOT IMPLEMENTED");
+        return "WiFiConnector not implemented";
     }
     

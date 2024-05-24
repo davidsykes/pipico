@@ -1,11 +1,11 @@
 #pragma once
 #include "system_interface.h"
 
-class WifiConnector
+class WiFiConnector
 {
 public:
-    WifiConnector(SYSTEM_INTERFACE_T* systemInterface);
+    WiFiConnector(SYSTEM_INTERFACE_T* systemInterface);
 	bool CredentialsAreValid();
-    bool ConnectToWifi();
+    bool ConnectToWiFi();
     const char* GetErrorMessage();
 };

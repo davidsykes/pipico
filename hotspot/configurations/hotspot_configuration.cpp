@@ -34,7 +34,7 @@ std::string HotSpotConfiguration::process_request(const char *request, const cha
         std::string html = _html_renderer->RenderHtml(
             _html_renderer->RenderBody(
                 _html_renderer->RenderHeader(hotspot_description) +
-                _html_renderer->RenderParagraph("Enter Wifi Details") +
+                _html_renderer->RenderParagraph("Enter WiFi Details") +
                 _input_form->Render()));
 
         return html;
