@@ -1,4 +1,4 @@
-#include "Assert.h"
+#include "TestFramework.h"
 #include "HtmlRendererTests.h"
 #include "..\logic\input_form\html_renderer.h"
 

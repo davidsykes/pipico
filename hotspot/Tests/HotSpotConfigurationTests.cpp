@@ -1,4 +1,4 @@
-#include "Assert.h"
+#include "TestFramework.h"
 #include "HotSpotConfigurationTests.h"
 #include "..\configurations\hotspot_configuration.h"
 #include "Mocks/MockHtmlRenderer.h"

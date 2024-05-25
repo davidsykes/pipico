@@ -99,6 +99,9 @@
     <ClCompile Include="Tests\TestFramework\TestModule.cpp">
       <Filter>Source Files\Tests\TestFramework</Filter>
     </ClCompile>
+    <ClCompile Include="Tests\TestFramework\TestFramework.cpp">
+      <Filter>Source Files\Tests\TestFramework</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Tests\LedConfigurationTests.h">
@@ -159,6 +162,9 @@
       <Filter>Source Files\Tests\TestFramework</Filter>
     </ClInclude>
     <ClInclude Include="Tests\TestFramework\ITestModule.h">
+      <Filter>Source Files\Tests\TestFramework</Filter>
+    </ClInclude>
+    <ClInclude Include="Tests\TestFramework\TestFramework.h">
       <Filter>Source Files\Tests\TestFramework</Filter>
     </ClInclude>
   </ItemGroup>

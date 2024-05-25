@@ -1,5 +1,5 @@
 #pragma once
-#include "ITestModule.h"
+#include "TestFramework.h"
 #include "Mocks/MockCredentialsHandler.h"
 #include "../configurations/hotspot_configuration.h"
 
@@ -7,7 +7,7 @@
 class HotSpotConfigurationTests : public ITestModule
 {
 	Configuration* config{};
-	MockCredentialsHandler* mockCredentialsHandler;
+	MockCredentialsHandler* mockCredentialsHandler{};
 	void SetUpObjectUnderTest();
 	void GeneralRequestsReturnAnInputForm();
 	void CredentialsSubmissionCallsCredentialsHandler();

@@ -32,6 +32,11 @@ void AssertTrue(bool value)
 	}
 }
 
+void AssertFalse(bool value)
+{
+	AssertTrue(!value);
+}
+
 void AssertEqual(const char* value, const char* expected)
 {
 	if (strcmp(value, expected) != 0)

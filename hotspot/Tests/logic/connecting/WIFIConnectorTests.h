@@ -1,10 +1,10 @@
 #pragma once
-#include "ITestModule.h"
+#include "TestFramework.h"
 
 
-class WIFIConnectorTests : public ITestModule2
+class WIFIConnectorTests : public ITestModule
 {
-	virtual void* SetUpObjectUnderTest();
+	virtual void TearDownObjectUnderTest();
 public:
-	WIFIConnectorTests();
+	virtual void RunTests();
 };

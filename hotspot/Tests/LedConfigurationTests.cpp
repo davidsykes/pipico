@@ -1,4 +1,4 @@
-#include "Assert.h"
+#include "TestFramework.h"
 #include "LedConfigurationTests.h"
 #include "..\configurations\led_configuration.h"
 

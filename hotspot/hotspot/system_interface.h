@@ -1,7 +1,9 @@
 #pragma once
+#include  <stdint.h>
 
 typedef struct SYSTEM_INTERFACE_T_ {
     int (*fn)(void *p);
+    uint8_t* (*load_flash_data)();
 } SYSTEM_INTERFACE_T;
 
 #ifdef __cplusplus

@@ -1,5 +1,5 @@
 #pragma once
-#include "ITestModule.h"
+#include "TestFramework.h"
 
 
 class LedConfigurationTests : public ITestModule

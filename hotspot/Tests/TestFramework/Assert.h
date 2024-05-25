@@ -2,6 +2,7 @@
 #include <string>
 
 void AssertTrue(bool value);
+void AssertFalse(bool value);
 void AssertEqual(const char* value, const char* expected);
 void AssertEqual(std::string &value, const char* expected);
 void AssertEqual(std::string &value, std::string &expected);
