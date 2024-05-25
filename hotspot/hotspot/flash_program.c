@@ -19,7 +19,12 @@
 
 const uint8_t *flash_target_contents = (const uint8_t *) (XIP_BASE + FLASH_TARGET_OFFSET);
 
-bool read_flash_contents(CREDENTIALS_T* credentials)
+const uint8_t* load_flash_data()
+{
+    return flash_target_contents;
+}
+
+int read_flash_contents(CREDENTIALS_T* credentials)
 {
     if (strncmp(flash_target_contents, DATA_PREFIX, DATA_PREFIX_LEN) == 0)
     {

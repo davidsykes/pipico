@@ -16,10 +16,10 @@ int main()
    SetUpSystemInterface(&systemInterface);
    initialise_pico_stdio();
    
-   WifiConnector wifiConnector(&systemInterface);
+   WiFiConnector wifiConnector(&systemInterface);
    if (wifiConnector.CredentialsAreValid())
    {
-      if (wifiConnector.ConnectToWifi())
+      if (wifiConnector.ConnectToWiFi())
       {
          DEBUG_printf("Connected");
          return 0;
@@ -34,7 +34,7 @@ int main()
    //Configuration *config = new LedConfiguration();
    Configuration *config = new HotSpotConfiguration(
       hotSpotName,
-      wifiConnector.GetErrorMessage(),
+      wifiConnector.lastErrorMessage.c_str(),
       &htmlRenderer,
       &inputFormRenderer,
       &credentialsHandler);

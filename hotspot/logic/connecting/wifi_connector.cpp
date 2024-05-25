@@ -1,3 +1,4 @@
+#include <string.h>
 #include "wifi_connector.h"
 #include "common.h"
 
