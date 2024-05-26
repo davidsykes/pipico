@@ -15,21 +15,21 @@ void CredentialsHandler::HandleCredentials(std::string credentials)
 {
     if (strncmp(credentials.c_str(), SSID_PREFIX, SSID_PREFIX_LEN) != 0)
     {
-        SetError("SSID not found?");
+        SetError("SSID not found.");
         return;
     }
 
     size_t ampersand = credentials.find('&');
-    if (ampersand <= 0)
+    if (ampersand == std::string::npos)
     {
-        SetError("Password not found?");
+        SetError("Password not found.");
         return;
     }
     std::string unconvertedSSID = credentials.substr(SSID_PREFIX_LEN, ampersand - SSID_PREFIX_LEN);
 
     if (strncmp(credentials.c_str() + ampersand + 1, PASSWORD_PREFIX, PASSWORD_PREFIX_LEN) != 0)
     {
-        SetError("Password not found?");
+        SetError("Password not found.");
         return;
     }
 
@@ -45,10 +45,10 @@ void CredentialsHandler::ConvertAndWriteCredentials(const std::string& SSID, con
 
 void CredentialsHandler::WriteCredentials(const std::string& SSID, const std::string& password)
 {
-    _flashManager->WriteToFlash(SSID, password);
+    _flashManager->WriteToFlash(SSID, password, "");
 }
 
 void CredentialsHandler::SetError(const std::string& error)
 {
-
+    _flashManager->WriteToFlash("", "", error);
 }

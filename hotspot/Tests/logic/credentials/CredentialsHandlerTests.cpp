@@ -10,10 +10,11 @@ class MockPercentDecoder : public IPercentDecoder
 
 class MockFlashManager : public IFlashManager
 {
-	virtual void WriteToFlash(const std::string& SSID, const std::string& password);
+	virtual void WriteToFlash(const std::string& SSID, const std::string& password, const std::string& error);
 public:
 	std::string SSID;
 	std::string password;
+	std::string error;
 };
 
 static std::unique_ptr<MockPercentDecoder> mockPercentDecoder;
@@ -37,35 +38,51 @@ static void ConvertedCredentialsAreStoredInTheFlash()
 
 	AssertEqual(mockFlashManager.get()->SSID, "converted ssid name");
 	AssertEqual(mockFlashManager.get()->password, "converted 123456");
+	AssertEqual(mockFlashManager.get()->error, "");
 }
 
 static void MissingSSIDGeneratesAnError()
 {
-	AssertTrue(false);
+	std::string credentialsString = "NOssid=ssid name&password=123456";
+	CredentialsHandler* handler = CreateTestObject();
+
+	handler->HandleCredentials(credentialsString);
+
+	AssertEqual(mockFlashManager.get()->SSID, "");
+	AssertEqual(mockFlashManager.get()->password, "");
+	AssertEqual(mockFlashManager.get()->error, "SSID not found.");
+}
+
+static void MissingAmpersandGeneratesAnError()
+{
+	std::string credentialsString = "ssid=ssid name password=123456";
+	CredentialsHandler* handler = CreateTestObject();
+
+	handler->HandleCredentials(credentialsString);
+
+	AssertEqual(mockFlashManager.get()->SSID, "");
+	AssertEqual(mockFlashManager.get()->password, "");
+	AssertEqual(mockFlashManager.get()->error, "Password not found.");
 }
 
 static void MissingPasswordGeneratesAnError()
 {
-	AssertTrue(false);
-}
+	std::string credentialsString = "ssid=ssid name&NOpassword=123456";
+	CredentialsHandler* handler = CreateTestObject();
 
-static void CredentialDataCanFillAFlashPage()
-{
-	AssertTrue(false);
-}
+	handler->HandleCredentials(credentialsString);
 
-static void CredentialDataCannotExceedAFlashPage()
-{
-	AssertTrue(false);
+	AssertEqual(mockFlashManager.get()->SSID, "");
+	AssertEqual(mockFlashManager.get()->password, "");
+	AssertEqual(mockFlashManager.get()->error, "Password not found.");
 }
 
 void CredentialsHandlerTests::RunTests()
 {
 	ConvertedCredentialsAreStoredInTheFlash();
 	MissingSSIDGeneratesAnError();
+	MissingAmpersandGeneratesAnError();
 	MissingPasswordGeneratesAnError();
-	CredentialDataCanFillAFlashPage();
-	CredentialDataCannotExceedAFlashPage();
 }
 
 
@@ -75,10 +92,11 @@ void CredentialsHandlerTests::TearDownObjectUnderTest()
 }
 
 
-void MockFlashManager::WriteToFlash(const std::string& SSID, const std::string& password)
+void MockFlashManager::WriteToFlash(const std::string& SSID, const std::string& password, const std::string& error)
 {
 	this->SSID = SSID;
 	this->password = password;
+	this->error = error;
 }
 
 
