@@ -13,21 +13,29 @@ CredentialsHandler::CredentialsHandler(IPercentDecoder* percentDecoder, IFlashMa
 
 void CredentialsHandler::HandleCredentials(std::string credentials)
 {
-    size_t begin = credentials.find(SSID_PREFIX);
-    size_t separator = credentials.find('&');
-    if (begin == 0 &&
-        separator > 0)
+    if (strncmp(credentials.c_str(), SSID_PREFIX, SSID_PREFIX_LEN) != 0)
     {
-        std::string unconvertedSSID = credentials.substr(SSID_PREFIX_LEN, separator - SSID_PREFIX_LEN);
-
-        std::string p2 = credentials.substr(separator + 1);
-        size_t pword = credentials.find(PASSWORD_PREFIX, separator);
-        if (pword == 0)
-        {
-            std::string unconvertedPassword = p2.substr(PASSWORD_PREFIX_LEN);
-            ConvertAndWriteCredentials(unconvertedSSID, unconvertedPassword);
-        }
+        SetError("SSID not found?");
+        return;
     }
+
+    size_t ampersand = credentials.find('&');
+    if (ampersand <= 0)
+    {
+        SetError("Password not found?");
+        return;
+    }
+    std::string unconvertedSSID = credentials.substr(SSID_PREFIX_LEN, ampersand - SSID_PREFIX_LEN);
+
+    if (strncmp(credentials.c_str() + ampersand + 1, PASSWORD_PREFIX, PASSWORD_PREFIX_LEN) != 0)
+    {
+        SetError("Password not found?");
+        return;
+    }
+
+    std::string unconvertedPassword = credentials.substr(ampersand + 1 + PASSWORD_PREFIX_LEN);
+
+    ConvertAndWriteCredentials(unconvertedSSID, unconvertedPassword);
 }
 
 void CredentialsHandler::ConvertAndWriteCredentials(const std::string& SSID, const std::string& password)
@@ -38,4 +46,9 @@ void CredentialsHandler::ConvertAndWriteCredentials(const std::string& SSID, con
 void CredentialsHandler::WriteCredentials(const std::string& SSID, const std::string& password)
 {
     _flashManager->WriteToFlash(SSID, password);
+}
+
+void CredentialsHandler::SetError(const std::string& error)
+{
+
 }

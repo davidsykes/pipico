@@ -13,6 +13,7 @@ class CredentialsHandler : public ICredentialsHandler
 
 	void ConvertAndWriteCredentials(const std::string& SSID, const std::string& password);
 	void WriteCredentials(const std::string& SSID, const std::string& password);
+	void SetError(const std::string& error);
 
 public:
 	CredentialsHandler(IPercentDecoder* percentDecoder, IFlashManager* flashManager);

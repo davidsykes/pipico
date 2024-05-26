@@ -35,8 +35,8 @@ static void ConvertedCredentialsAreStoredInTheFlash()
 
 	handler->HandleCredentials(credentialsString);
 
-	AssertEqual(mockFlashManager.get()->SSID, "converted ssid");
-	AssertEqual(mockFlashManager.get()->password, "converted password");
+	AssertEqual(mockFlashManager.get()->SSID, "converted ssid name");
+	AssertEqual(mockFlashManager.get()->password, "converted 123456");
 }
 
 static void MissingSSIDGeneratesAnError()
@@ -84,6 +84,6 @@ void MockFlashManager::WriteToFlash(const std::string& SSID, const std::string& 
 
 std::string MockPercentDecoder::Decode(const std::string& value)
 {
-	return "not imple";
+	return "converted " + value;
 }
 
