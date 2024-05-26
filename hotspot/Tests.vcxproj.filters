@@ -46,6 +46,9 @@
     <Filter Include="Source Files\Tests\TestFramework">
       <UniqueIdentifier>{a15c73a7-6781-40e9-a01e-6e386b351422}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Tests\logic\credentials">
+      <UniqueIdentifier>{c703e3aa-3d4a-44cb-8f7e-e673fbc233dc}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Tests\LedConfigurationTests.cpp">
@@ -101,6 +104,15 @@
     </ClCompile>
     <ClCompile Include="Tests\TestFramework\TestFramework.cpp">
       <Filter>Source Files\Tests\TestFramework</Filter>
+    </ClCompile>
+    <ClCompile Include="Tests\logic\credentials\CredentialsHandlerTests.cpp">
+      <Filter>Source Files\Tests\logic\credentials</Filter>
+    </ClCompile>
+    <ClCompile Include="Tests\logic\FlashManagerTests.cpp">
+      <Filter>Source Files\Tests\logic</Filter>
+    </ClCompile>
+    <ClCompile Include="logic\flash_manager.cpp">
+      <Filter>Source Files\logic</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -166,6 +178,18 @@
     </ClInclude>
     <ClInclude Include="Tests\TestFramework\TestFramework.h">
       <Filter>Source Files\Tests\TestFramework</Filter>
+    </ClInclude>
+    <ClInclude Include="Tests\logic\credentials\CredentialsHandlerTests.h">
+      <Filter>Source Files\Tests\logic\credentials</Filter>
+    </ClInclude>
+    <ClInclude Include="logic\credentials\percent_decoder.h">
+      <Filter>Source Files\logic\credentials</Filter>
+    </ClInclude>
+    <ClInclude Include="logic\flash_manager.h">
+      <Filter>Source Files\logic</Filter>
+    </ClInclude>
+    <ClInclude Include="Tests\logic\FlashManagerTests.h">
+      <Filter>Source Files\Tests\logic</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

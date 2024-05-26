@@ -4,11 +4,11 @@
 #include "wifi_connector.h"
 
 
-std::unique_ptr<SYSTEM_INTERFACE_T> systemInterface(new SYSTEM_INTERFACE_T);
-std::unique_ptr<WiFiConnector> wiFiConnector;
-uint8_t flashContents[256];
+static std::unique_ptr<SYSTEM_INTERFACE_T> systemInterface;
+static std::unique_ptr<WiFiConnector> wiFiConnector;
+static uint8_t flashContents[256];
 
-static uint8_t* load_flash_data()
+static const uint8_t* load_flash_data()
 {
 	return flashContents;
 }
