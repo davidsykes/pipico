@@ -2,6 +2,11 @@
 #include <string>
 #include "system_interface.h"
 
+
+constexpr auto FLASH_PAGE_SIZE = 256;
+#define FLASH_CREDENTIALS_PREFIX		"CRED"
+#define FLASH_CREDENTIALS_PREFIX_LEN	4
+
 class IFlashManager
 {
 public:
@@ -10,6 +15,8 @@ public:
 
 class FlashManager : public IFlashManager
 {
+	SYSTEM_INTERFACE_T* _systemInterface;
+
 	virtual void WriteToFlash(const std::string& SSID, const std::string& password, const std::string& error);
 
 public:
