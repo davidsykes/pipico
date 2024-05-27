@@ -1,4 +1,5 @@
 #include "credentials_handler.h"
+#include <memory.h>
 
 constexpr auto SSID_PREFIX = "ssid=";
 constexpr auto SSID_PREFIX_LEN = 5;

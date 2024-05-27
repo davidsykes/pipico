@@ -7,6 +7,7 @@
 #include "../logic/input_form/html_renderer.h"
 #include "../logic/input_form/input_form_renderer.h"
 #include "../logic/credentials/credentials_handler.h"
+#include "../logic/credentials/percent_decoder.h"
 
 int main()
 {
@@ -28,7 +29,8 @@ int main()
 
    HtmlRenderer htmlRenderer;
    InputFormRenderer inputFormRenderer;
-   CredentialsHandler credentialsHandler;
+   PercentDecoder percentDecoder;
+   CredentialsHandler credentialsHandler(&percentDecoder);
 
    //Configuration *config = new NullConfiguration();
    //Configuration *config = new LedConfiguration();

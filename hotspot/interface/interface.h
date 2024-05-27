@@ -1,3 +1,3 @@
-#include "configurations/configuration.h"
+// #include "configurations/configuration.h"
 
-int connect_to_wifi(Configuration *configuration);
+// int connect_to_wifi(Configuration *configuration);
