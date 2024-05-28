@@ -4,7 +4,7 @@
 
 class InputFormRendererTests : public ITestModule
 {
-	void ASimpleFormCanBeRendered();
+	virtual void CleanUpAfterTests();
 
 public:
 	void RunTests();

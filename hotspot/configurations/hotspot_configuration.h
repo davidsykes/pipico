@@ -2,7 +2,7 @@
 #include "configuration.h"
 #include "../logic/input_form/ihtml_renderer.h"
 #include "../logic/input_form/iinput_form_renderer.h"
-#include "../logic/credentials/icredentials_handler.h"
+#include "../logic/credentials/credentials_handler.h"
 
 class HotSpotConfiguration : public Configuration
 {

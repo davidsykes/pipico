@@ -2,9 +2,9 @@
 #include "TestFramework.h"
 
 
-class CredentialsHandlerTests : public ITestModule
+class FlashManagerTests : public ITestModule
 {
 	virtual void CleanUpAfterTests();
 public:
-	virtual void RunTests();
+	void RunTests();
 };

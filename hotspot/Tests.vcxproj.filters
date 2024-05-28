@@ -49,19 +49,22 @@
     <Filter Include="Source Files\Tests\logic\credentials">
       <UniqueIdentifier>{c703e3aa-3d4a-44cb-8f7e-e673fbc233dc}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\logic\flash">
+      <UniqueIdentifier>{9611ecae-476a-48fd-9ec4-913e58db68be}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Tests\logic\flash">
+      <UniqueIdentifier>{e5e2c4d9-5529-46cb-aef8-027f9bc8e8d7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Tests\configurations">
+      <UniqueIdentifier>{b1bd991a-79b0-4143-9b3a-ceae5850db40}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Tests\LedConfigurationTests.cpp">
-      <Filter>Source Files\Tests</Filter>
-    </ClCompile>
     <ClCompile Include="configurations\led_configuration.cpp">
       <Filter>Source Files\configurations</Filter>
     </ClCompile>
     <ClCompile Include="Tests.cpp">
       <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Tests\HotSpotConfigurationTests.cpp">
-      <Filter>Source Files\Tests</Filter>
     </ClCompile>
     <ClCompile Include="configurations\hotspot_configuration.cpp">
       <Filter>Source Files\configurations</Filter>
@@ -108,25 +111,37 @@
     <ClCompile Include="Tests\logic\credentials\CredentialsHandlerTests.cpp">
       <Filter>Source Files\Tests\logic\credentials</Filter>
     </ClCompile>
-    <ClCompile Include="Tests\logic\FlashManagerTests.cpp">
-      <Filter>Source Files\Tests\logic</Filter>
+    <ClCompile Include="logic\flash\flash_manager.cpp">
+      <Filter>Source Files\logic\flash</Filter>
     </ClCompile>
-    <ClCompile Include="logic\flash_manager.cpp">
-      <Filter>Source Files\logic</Filter>
+    <ClCompile Include="logic\flash\logging.cpp">
+      <Filter>Source Files\logic\flash</Filter>
+    </ClCompile>
+    <ClCompile Include="Tests\logic\flash\FlashManagerTests.cpp">
+      <Filter>Source Files\Tests\logic\flash</Filter>
+    </ClCompile>
+    <ClCompile Include="Tests\logic\flash\LoggerTests.cpp">
+      <Filter>Source Files\Tests\logic\flash</Filter>
+    </ClCompile>
+    <ClCompile Include="Tests\logic\credentials\PercentDecoderTests.cpp">
+      <Filter>Source Files\Tests\logic\credentials</Filter>
+    </ClCompile>
+    <ClCompile Include="Tests\configurations\HotSpotConfigurationTests.cpp">
+      <Filter>Source Files\Tests\configurations</Filter>
+    </ClCompile>
+    <ClCompile Include="Tests\configurations\LedConfigurationTests.cpp">
+      <Filter>Source Files\Tests\configurations</Filter>
+    </ClCompile>
+    <ClCompile Include="logic\credentials\percent_decoder.cpp">
+      <Filter>Source Files\logic\credentials</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Tests\LedConfigurationTests.h">
-      <Filter>Source Files\Tests</Filter>
-    </ClInclude>
     <ClInclude Include="configurations\configuration.h">
       <Filter>Source Files\configurations</Filter>
     </ClInclude>
     <ClInclude Include="configurations\led_configuration.h">
       <Filter>Source Files\configurations</Filter>
-    </ClInclude>
-    <ClInclude Include="Tests\HotSpotConfigurationTests.h">
-      <Filter>Source Files\Tests</Filter>
     </ClInclude>
     <ClInclude Include="configurations\hotspot_configuration.h">
       <Filter>Source Files\configurations</Filter>
@@ -151,9 +166,6 @@
     </ClInclude>
     <ClInclude Include="logic\input_form\input_form_renderer.h">
       <Filter>Source Files\logic\input_form</Filter>
-    </ClInclude>
-    <ClInclude Include="logic\credentials\icredentials_handler.h">
-      <Filter>Source Files\logic\credentials</Filter>
     </ClInclude>
     <ClInclude Include="logic\credentials\credentials_handler.h">
       <Filter>Source Files\logic\credentials</Filter>
@@ -185,11 +197,26 @@
     <ClInclude Include="logic\credentials\percent_decoder.h">
       <Filter>Source Files\logic\credentials</Filter>
     </ClInclude>
-    <ClInclude Include="logic\flash_manager.h">
-      <Filter>Source Files\logic</Filter>
+    <ClInclude Include="logic\flash\flash_manager.h">
+      <Filter>Source Files\logic\flash</Filter>
     </ClInclude>
-    <ClInclude Include="Tests\logic\FlashManagerTests.h">
-      <Filter>Source Files\Tests\logic</Filter>
+    <ClInclude Include="logic\flash\logging.h">
+      <Filter>Source Files\logic\flash</Filter>
+    </ClInclude>
+    <ClInclude Include="Tests\logic\flash\FlashManagerTests.h">
+      <Filter>Source Files\Tests\logic\flash</Filter>
+    </ClInclude>
+    <ClInclude Include="Tests\logic\flash\LoggerTests.h">
+      <Filter>Source Files\Tests\logic\flash</Filter>
+    </ClInclude>
+    <ClInclude Include="Tests\logic\credentials\PercentDecoderTests.h">
+      <Filter>Source Files\Tests\logic\credentials</Filter>
+    </ClInclude>
+    <ClInclude Include="Tests\configurations\HotSpotConfigurationTests.h">
+      <Filter>Source Files\Tests\configurations</Filter>
+    </ClInclude>
+    <ClInclude Include="Tests\configurations\LedConfigurationTests.h">
+      <Filter>Source Files\Tests\configurations</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

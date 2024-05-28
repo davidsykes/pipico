@@ -1,6 +1,5 @@
 #pragma once
-
-#include "../../logic/credentials/icredentials_handler.h"
+#include "../../logic/credentials/credentials_handler.h"
 
 class MockCredentialsHandler : public ICredentialsHandler
 {

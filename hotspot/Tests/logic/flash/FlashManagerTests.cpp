@@ -58,13 +58,17 @@ static void IfValuesExceedSizeOfFlashPageAnErrorIsWritten()
 	AssertEqual(0, memcmp(flashContents, FLASH_CREDENTIALS_PREFIX "\0\0Data size error.\0", FLASH_CREDENTIALS_PREFIX_LEN + 19));
 }
 
-
-
 void FlashManagerTests::RunTests()
 {
 	BasicValuesCanBeWrittenToTheFlash();
 	CredentialDataCanFillAFlashPage();
 	IfValuesExceedSizeOfFlashPageAnErrorIsWritten();
+}
+
+void FlashManagerTests::CleanUpAfterTests()
+{
+	systemInterface.release();
+	flashManager.release();
 }
 
 std::string MakeStringWithLength(int len)

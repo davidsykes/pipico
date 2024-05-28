@@ -1,6 +1,6 @@
 #pragma once
 #include <string>
-#include "system_interface.h"
+#include "../../interface/system_interface.h"
 
 class WiFiConnector
 {

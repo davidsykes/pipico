@@ -56,7 +56,7 @@ void WIFIConnectorTests::RunTests()
 }
 
 
-void WIFIConnectorTests::TearDownObjectUnderTest()
+void WIFIConnectorTests::CleanUpAfterTests()
 {
 	systemInterface.release();
 	wiFiConnector.release();

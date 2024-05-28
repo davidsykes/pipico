@@ -4,7 +4,7 @@
 
 class WIFIConnectorTests : public ITestModule
 {
-	virtual void TearDownObjectUnderTest();
+	virtual void CleanUpAfterTests();
 public:
 	virtual void RunTests();
 };

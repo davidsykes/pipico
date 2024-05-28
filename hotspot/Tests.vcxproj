@@ -104,7 +104,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>D:\Development\pipico\hotspot\Tests\TestFramework;D:\Development\pipico\hotspot\hotspot;D:\Development\pipico\hotspot\Tests;D:\Development\pipico\hotspot;D:\Development\pipico\hotspot\logic\connecting;D:\Development\pipico\hotspot\logic\credentials;D:\Development\pipico\hotspot\logic;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>D:\Development\pipico\hotspot\Tests\TestFramework;D:\Development\pipico\hotspot\Tests;D:\Development\pipico\hotspot\interface;D:\Development\pipico\hotspot\logic\connecting;D:\Development\pipico\hotspot\logic\credentials;D:\Development\pipico\hotspot\logic\flash;D:\Development\pipico\hotspot;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -132,15 +132,19 @@
     <ClCompile Include="configurations\led_configuration.cpp" />
     <ClCompile Include="logic\connecting\wifi_connector.cpp" />
     <ClCompile Include="logic\credentials\credentials_handler.cpp" />
-    <ClCompile Include="logic\flash_manager.cpp" />
+    <ClCompile Include="logic\credentials\percent_decoder.cpp" />
+    <ClCompile Include="logic\flash\flash_manager.cpp" />
+    <ClCompile Include="logic\flash\logging.cpp" />
     <ClCompile Include="logic\input_form\html_renderer.cpp" />
     <ClCompile Include="logic\input_form\input_form_renderer.cpp" />
     <ClCompile Include="Tests.cpp" />
-    <ClCompile Include="Tests\HotSpotConfigurationTests.cpp" />
-    <ClCompile Include="Tests\LedConfigurationTests.cpp" />
+    <ClCompile Include="Tests\configurations\HotSpotConfigurationTests.cpp" />
+    <ClCompile Include="Tests\configurations\LedConfigurationTests.cpp" />
     <ClCompile Include="Tests\logic\connecting\WIIFIConnectorTests.cpp" />
     <ClCompile Include="Tests\logic\credentials\CredentialsHandlerTests.cpp" />
-    <ClCompile Include="Tests\logic\FlashManagerTests.cpp" />
+    <ClCompile Include="Tests\logic\credentials\PercentDecoderTests.cpp" />
+    <ClCompile Include="Tests\logic\flash\FlashManagerTests.cpp" />
+    <ClCompile Include="Tests\logic\flash\LoggerTests.cpp" />
     <ClCompile Include="Tests\logic\input_form\HtmlRendererTests.cpp" />
     <ClCompile Include="Tests\logic\input_form\InputFormRendererTests.cpp" />
     <ClCompile Include="Tests\Mocks\MockCredentialsHandler.cpp" />
@@ -156,18 +160,20 @@
     <ClInclude Include="configurations\led_configuration.h" />
     <ClInclude Include="logic\connecting\wifi_connector.h" />
     <ClInclude Include="logic\credentials\credentials_handler.h" />
-    <ClInclude Include="logic\credentials\icredentials_handler.h" />
     <ClInclude Include="logic\credentials\percent_decoder.h" />
-    <ClInclude Include="logic\flash_manager.h" />
+    <ClInclude Include="logic\flash\flash_manager.h" />
+    <ClInclude Include="logic\flash\logging.h" />
     <ClInclude Include="logic\input_form\html_renderer.h" />
     <ClInclude Include="logic\input_form\ihtml_renderer.h" />
     <ClInclude Include="logic\input_form\iinput_form_renderer.h" />
     <ClInclude Include="logic\input_form\input_form_renderer.h" />
-    <ClInclude Include="Tests\HotSpotConfigurationTests.h" />
-    <ClInclude Include="Tests\LedConfigurationTests.h" />
+    <ClInclude Include="Tests\configurations\HotSpotConfigurationTests.h" />
+    <ClInclude Include="Tests\configurations\LedConfigurationTests.h" />
     <ClInclude Include="Tests\logic\connecting\WIFIConnectorTests.h" />
     <ClInclude Include="Tests\logic\credentials\CredentialsHandlerTests.h" />
-    <ClInclude Include="Tests\logic\FlashManagerTests.h" />
+    <ClInclude Include="Tests\logic\credentials\PercentDecoderTests.h" />
+    <ClInclude Include="Tests\logic\flash\FlashManagerTests.h" />
+    <ClInclude Include="Tests\logic\flash\LoggerTests.h" />
     <ClInclude Include="Tests\logic\input_form\HtmlRendererTests.h" />
     <ClInclude Include="Tests\logic\input_form\InputFormRendererTests.h" />
     <ClInclude Include="Tests\Mocks\MockCredentialsHandler.h" />

@@ -4,10 +4,7 @@
 
 class HtmlRendererTests : public ITestModule
 {
-	void RenderHtmlTest();
-	void RenderBodyTest();
-	void RenderHeaderTest();
-	void RenderParagraphTest();
+	virtual void CleanUpAfterTests();
 
 public:
 	void RunTests();

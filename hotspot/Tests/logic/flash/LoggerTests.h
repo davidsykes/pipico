@@ -2,7 +2,7 @@
 #include "TestFramework.h"
 
 
-class FlashManagerTests : public ITestModule
+class LoggerTests : public ITestModule
 {
 public:
 	void RunTests();

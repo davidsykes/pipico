@@ -2,7 +2,7 @@
 #include "TestFramework.h"
 
 
-class CredentialsHandlerTests : public ITestModule
+class PercentDecoderTests : public ITestModule
 {
 	virtual void CleanUpAfterTests();
 public:

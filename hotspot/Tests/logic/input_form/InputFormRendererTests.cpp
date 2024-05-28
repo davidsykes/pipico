@@ -1,16 +1,19 @@
+#include <memory>
 #include "TestFramework.h"
 #include "InputFormRendererTests.h"
 #include "..\logic\input_form\input_form_renderer.h"
 
+static std::unique_ptr<IInputFormRenderer> renderer;
 
-void InputFormRendererTests::RunTests()
+static IInputFormRenderer* CreateTestObject()
 {
-	ASimpleFormCanBeRendered();
+	renderer.reset(new InputFormRenderer);
+	return renderer.get();
 }
 
-void InputFormRendererTests::ASimpleFormCanBeRendered()
+void ASimpleFormCanBeRendered()
 {
-	IInputFormRenderer* renderer = new InputFormRenderer();
+	IInputFormRenderer* renderer = CreateTestObject();
 
 	std::string html = renderer->Render();
 
@@ -24,4 +27,14 @@ void InputFormRendererTests::ASimpleFormCanBeRendered()
 
 
 	AssertEqualNonWhitespace(html.c_str(), expected);
+}
+
+void InputFormRendererTests::RunTests()
+{
+	ASimpleFormCanBeRendered();
+}
+
+void InputFormRendererTests::CleanUpAfterTests()
+{
+	renderer.release();
 }

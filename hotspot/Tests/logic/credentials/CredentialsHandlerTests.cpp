@@ -86,8 +86,10 @@ void CredentialsHandlerTests::RunTests()
 }
 
 
-void CredentialsHandlerTests::TearDownObjectUnderTest()
+void CredentialsHandlerTests::CleanUpAfterTests()
 {
+	mockPercentDecoder.release();
+	mockFlashManager.release();
 	handler.release();
 }
 

@@ -1,9 +1,14 @@
 #pragma once
 #include <string>
-#include "icredentials_handler.h"
-#include "system_interface.h"
+#include "../../interface/system_interface.h"
 #include "percent_decoder.h"
-#include "../interface/flash_manager.h"
+#include "../flash/flash_manager.h"
+
+class ICredentialsHandler
+{
+public:
+	virtual void HandleCredentials(std::string credentials) = 0;
+};
 
 class CredentialsHandler : public ICredentialsHandler
 {
