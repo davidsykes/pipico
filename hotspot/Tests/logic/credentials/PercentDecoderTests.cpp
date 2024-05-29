@@ -22,12 +22,33 @@ static void ASimpleValueIsUnchanged()
 
 static void SpacesCanBeConverted()
 {
-	AssertEqual(1, 0);
+	auto decoder = CreateTestObject();
+
+	auto result = decoder->Decode("a%20b%20c");
+
+	AssertEqual(result, "a b c");
 }
 
 static void AmpersandValuesCanBeConverted()
 {
-	AssertEqual(1, 0);
+	auto decoder = CreateTestObject();
+
+	auto result = decoder->Decode("a%26b%26c");
+
+	AssertEqual(result, "a&b&c");
+}
+
+static void InvalidPercentValuesAreIgnored()
+{
+	auto decoder = CreateTestObject();
+
+	auto s = "a%b%c";
+	auto result = decoder->Decode(s);
+	AssertEqual(result, "a%b%c");
+
+	s = "a%b%";
+	result = decoder->Decode(s);
+	AssertEqual(result, "a%b%");
 }
 
 void PercentDecoderTests::RunTests()
@@ -35,6 +56,7 @@ void PercentDecoderTests::RunTests()
 	ASimpleValueIsUnchanged();
 	SpacesCanBeConverted();
 	AmpersandValuesCanBeConverted();
+	InvalidPercentValuesAreIgnored();
 }
 
 void PercentDecoderTests::CleanUpAfterTests()
