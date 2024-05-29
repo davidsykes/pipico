@@ -7,7 +7,7 @@
 #include "Tests\logic\credentials\CredentialsHandlerTests.h"
 #include "Tests\logic\credentials\PercentDecoderTests.h"
 #include "Tests\logic\flash\FlashManagerTests.h"
-#include "Tests\logic\flash\LoggerTests.h"
+#include "Tests\logic\flash\MessageLoggerTests.h"
 
 int main()
 {
@@ -19,6 +19,6 @@ int main()
     CredentialsHandlerTests().RunTests();
     FlashManagerTests().RunTests();
     PercentDecoderTests().RunTests();
-    LoggerTests().RunTests();
+    MessageLoggerTests().RunTests();
     std::cout << "Tests Complete\n";
 }

@@ -48,7 +48,7 @@ void AssertEqual(const char* value, const char* expected)
 void AssertEqual(std::string value, const char* expected) { AssertEqual(value.c_str(), expected); }
 void AssertEqual(std::string value, std::string expected) { AssertEqual(value.c_str(), expected.c_str()); }
 
-void AssertEqual(const char value, const char expected)
+void AssertEqual(const size_t value, const size_t expected)
 {
 	if (value != expected)
 	{

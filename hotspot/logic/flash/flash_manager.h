@@ -3,7 +3,6 @@
 #include "../../interface/system_interface.h"
 
 
-constexpr auto FLASH_PAGE_SIZE = 256;
 #define FLASH_CREDENTIALS_PREFIX		"CRED"
 #define FLASH_CREDENTIALS_PREFIX_LEN	4
 

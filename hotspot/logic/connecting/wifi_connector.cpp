@@ -4,7 +4,7 @@
 
 WiFiConnector::WiFiConnector(SYSTEM_INTERFACE_T* systemInterface)
 {
-    const char* credentials = (const char* )systemInterface->load_flash_data();
+    const char* credentials = (const char* )systemInterface->read_flash_data();
     if (strncmp(credentials, "CRED", 4) == 0)
     {
         loadCredentialsFromString(credentials + 4);

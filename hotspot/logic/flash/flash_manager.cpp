@@ -5,7 +5,7 @@ FlashManager::FlashManager(SYSTEM_INTERFACE_T* systemInterface)
 	_systemInterface = systemInterface;
 }
 
-size_t AddStringIfItWillFit(uint8_t* flashPage, size_t position, const std::string& s)
+static size_t AddStringIfItWillFit(uint8_t* flashPage, size_t position, const std::string& s)
 {
 	size_t length = s.length() + 1;
 	size_t new_postion = position + length;

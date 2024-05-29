@@ -8,7 +8,7 @@ static std::unique_ptr<SYSTEM_INTERFACE_T> systemInterface;
 static std::unique_ptr<WiFiConnector> wiFiConnector;
 static uint8_t flashContents[256];
 
-static const uint8_t* load_flash_data()
+static const uint8_t* read_flash_data()
 {
 	return flashContents;
 }
@@ -16,7 +16,7 @@ static const uint8_t* load_flash_data()
 static WiFiConnector* CreateTestObject()
 {
 	systemInterface.reset(new SYSTEM_INTERFACE_T);
-	systemInterface.get()->load_flash_data = &load_flash_data;
+	systemInterface.get()->read_flash_data = &read_flash_data;
 	WiFiConnector* wc = new WiFiConnector(systemInterface.get());
 	wiFiConnector.reset(wc);
 
