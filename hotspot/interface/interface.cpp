@@ -1,8 +1,7 @@
-// #include <stdio.h>
-// #include <string.h>
-// #include "interface.h"
-// #include "hotspot/picow_access_point.h"
-// #include "hotspot/flash_program.h"
+#include <stdio.h>
+#include <string.h>
+#include"../configurations/configuration.h"
+#include "hotspot/picow_access_point.h"
 
 #define SIZE_ERROR "<html><body><h1>FORM CONTENT EXCEEDS BUFFER</h1></body></html>"
 
@@ -31,23 +30,3 @@ int set_up_hotspot(Configuration *configuration)
    main_hotspot(&config);
    return 0;
 }
-
-// int connect_to_wifi(Configuration *configuration)
-// {
-// //   try_out_flash();
-
-//    CREDENTIALS_T credentials;
-//    if (read_flash_contents(&credentials))
-//    {
-//       printf("Found Credentials\n");
-//       printf("Name %s\n", credentials.hotspot_name);
-//       printf("Pswd %s\n", credentials.hotspot_password);
-//       return 0;
-//    }
-//    else
-//    {
-//       printf("Credentials not found\n");
-//       return set_up_hotspot(configuration);
-//    }
-// }
-

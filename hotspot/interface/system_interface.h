@@ -1,7 +1,7 @@
 #pragma once
 #include  <stdint.h>
 
-constexpr auto FLASH_PAGE_SIZE = 256;
+#define FLASH_PAGE_SIZE 256
 
 typedef struct SYSTEM_INTERFACE_T_ {
     const uint8_t* (*read_flash_data)();

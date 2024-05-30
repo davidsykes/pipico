@@ -1,3 +1,4 @@
+#include <cstring>
 #include "flash_manager.h"
 
 FlashManager::FlashManager(SYSTEM_INTERFACE_T* systemInterface)

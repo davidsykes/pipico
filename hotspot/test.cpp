@@ -1,13 +1,14 @@
 #include "common.h"
-#include "hotspot/logic.h"
-#include "interface/interface.h"
+#include "hotspot/pico_logic.h"
 #include "configurations/hotspot_configuration.h"
-#include "hotspot/system_interface.h"
+#include "interface/interface.h"
+#include "interface/system_interface.h"
 #include "logic/connecting/wifi_connector.h"
-#include "../logic/input_form/html_renderer.h"
-#include "../logic/input_form/input_form_renderer.h"
-#include "../logic/credentials/credentials_handler.h"
-#include "../logic/credentials/percent_decoder.h"
+#include "logic/credentials/credentials_handler.h"
+#include "logic/credentials/percent_decoder.h"
+#include "logic/flash/flash_manager.h"
+#include "logic/input_form/html_renderer.h"
+#include "logic/input_form/input_form_renderer.h"
 
 int main()
 {
@@ -30,7 +31,8 @@ int main()
    HtmlRenderer htmlRenderer;
    InputFormRenderer inputFormRenderer;
    PercentDecoder percentDecoder;
-   CredentialsHandler credentialsHandler(&percentDecoder);
+   FlashManager flashManager(&systemInterface);
+   CredentialsHandler credentialsHandler(&percentDecoder, &flashManager);
 
    //Configuration *config = new NullConfiguration();
    //Configuration *config = new LedConfiguration();
@@ -41,5 +43,5 @@ int main()
       &inputFormRenderer,
       &credentialsHandler);
 
-   connect_to_wifi(config);
+   set_up_hotspot(config);
 }

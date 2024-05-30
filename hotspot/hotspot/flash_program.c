@@ -19,7 +19,7 @@
 
 const uint8_t *flash_target_contents = (const uint8_t *) (XIP_BASE + FLASH_TARGET_OFFSET);
 
-const uint8_t* load_flash_data()
+const uint8_t* read_flash_data()
 {
     return flash_target_contents;
 }
@@ -37,7 +37,7 @@ void print_buf(const uint8_t *buf, size_t len) {
 void write_flash_data(const uint8_t* flash_data)
 {
     printf("\nProgramming target region...\n");
-    interrupts = save_and_disable_interrupts();
+    uint32_t interrupts = save_and_disable_interrupts();
     flash_range_program(FLASH_TARGET_OFFSET, flash_data, FLASH_PAGE_SIZE);
     restore_interrupts(interrupts);
     printf("Done. Read back target region:\n");
