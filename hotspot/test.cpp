@@ -10,14 +10,17 @@
 #include "logic/input_form/html_renderer.h"
 #include "logic/input_form/input_form_renderer.h"
 
+
 int main()
 {
-   const char* hotSpotName = "Pico Test Unit";
+   const char* input_form_hotspot_name = "Pico Test Unit";
 
    SYSTEM_INTERFACE_T systemInterface;
    SetUpSystemInterface(&systemInterface);
    initialise_pico_stdio();
-   
+
+//   flash_test();
+
    WiFiConnector wifiConnector(&systemInterface);
    if (wifiConnector.CredentialsAreValid())
    {
@@ -37,7 +40,7 @@ int main()
    //Configuration *config = new NullConfiguration();
    //Configuration *config = new LedConfiguration();
    Configuration *config = new HotSpotConfiguration(
-      hotSpotName,
+      input_form_hotspot_name,
       wifiConnector.lastErrorMessage.c_str(),
       &htmlRenderer,
       &inputFormRenderer,

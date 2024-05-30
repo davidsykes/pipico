@@ -6,7 +6,7 @@
 
 class HotSpotConfiguration : public Configuration
 {
-    std::string hotspot_description;
+    std::string input_form_hotspot_name;
     IHtmlRenderer* _html_renderer;
     IInputFormRenderer* _input_form;
     ICredentialsHandler* _credentials_handler;

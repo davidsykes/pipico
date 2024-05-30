@@ -2,13 +2,13 @@
 #include "hotspot_configuration.h"
 
 HotSpotConfiguration::HotSpotConfiguration(
-    const char* description,
+    const char* input_form_hotspot_name,
     const char* lastErrorMessage,
     IHtmlRenderer* html_renderer,
     IInputFormRenderer* input_form,
     ICredentialsHandler* credentials_handler)
 {
-    hotspot_description = description;
+    this->input_form_hotspot_name = input_form_hotspot_name;
     hotspot_name = "hotspot";
     hotspot_password = "password";
     _html_renderer = html_renderer;
@@ -33,7 +33,7 @@ std::string HotSpotConfiguration::process_request(const char *request, const cha
     {
         std::string html = _html_renderer->RenderHtml(
             _html_renderer->RenderBody(
-                _html_renderer->RenderHeader(hotspot_description) +
+                _html_renderer->RenderHeader(input_form_hotspot_name) +
                 _html_renderer->RenderParagraph("Enter WiFi Details") +
                 _input_form->Render()));
 
