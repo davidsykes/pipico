@@ -8,6 +8,7 @@ WiFiConnector::WiFiConnector(SYSTEM_INTERFACE_T* systemInterface)
     if (strncmp(credentials, "CRED", 4) == 0)
     {
         loadCredentialsFromString(credentials + 4);
+        DEBUG_printf("Found credentials '%s' '%s'", userName.c_str(), password.c_str());
     }
 }
 
@@ -26,6 +27,6 @@ bool WiFiConnector::CredentialsAreValid()
 }
 bool WiFiConnector::ConnectToWiFi()
 {
-    DEBUG_printf("WiFiConnector NOT IMPLEMENTED");
+    DEBUG_printf("WiFiConnector NOT IMPLEMENTED\n");
     return false;
 }

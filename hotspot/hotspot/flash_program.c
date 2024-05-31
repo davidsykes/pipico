@@ -100,7 +100,7 @@ void write_flash_data(const uint8_t* flash_data)
             mismatch = true;
     }
     if (mismatch)
-        printf("Programming failed!\n");
+        DEBUG_printf("Programming failed!\n");
     else
-        printf("Programming successful!\n");
+        DEBUG_printf("Programming successful!\n");
 }

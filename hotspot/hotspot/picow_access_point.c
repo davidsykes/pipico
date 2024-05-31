@@ -276,14 +276,14 @@ static bool tcp_server_open(void *arg, const char *ap_name) {
     tcp_arg(state->server_pcb, state);
     tcp_accept(state->server_pcb, tcp_server_accept);
 
-    printf("Try connecting to '%s'\n", ap_name);
+    DEBUG_printf("Try connecting to '%s'\n", ap_name);
     return true;
 }
 
 // This "worker" function is called to safely perform work when instructed by key_pressed_func
 void key_pressed_worker_func(async_context_t *context, async_when_pending_worker_t *worker) {
     assert(worker->user_data);
-    printf("Disabling wifi\n");
+    DEBUG_printf("Disabling wifi\n");
     cyw43_arch_disable_ap_mode();
     ((TCP_SERVER_T*)(worker->user_data))->complete = true;
 }

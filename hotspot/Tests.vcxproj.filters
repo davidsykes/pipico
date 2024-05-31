@@ -114,13 +114,7 @@
     <ClCompile Include="logic\flash\flash_manager.cpp">
       <Filter>Source Files\logic\flash</Filter>
     </ClCompile>
-    <ClCompile Include="logic\flash\message_logger.cpp">
-      <Filter>Source Files\logic\flash</Filter>
-    </ClCompile>
     <ClCompile Include="Tests\logic\flash\FlashManagerTests.cpp">
-      <Filter>Source Files\Tests\logic\flash</Filter>
-    </ClCompile>
-    <ClCompile Include="Tests\logic\flash\MessageLoggerTests.cpp">
       <Filter>Source Files\Tests\logic\flash</Filter>
     </ClCompile>
     <ClCompile Include="Tests\logic\credentials\PercentDecoderTests.cpp">
@@ -200,13 +194,7 @@
     <ClInclude Include="logic\flash\flash_manager.h">
       <Filter>Source Files\logic\flash</Filter>
     </ClInclude>
-    <ClInclude Include="logic\flash\message_logger.h">
-      <Filter>Source Files\logic\flash</Filter>
-    </ClInclude>
     <ClInclude Include="Tests\logic\flash\FlashManagerTests.h">
-      <Filter>Source Files\Tests\logic\flash</Filter>
-    </ClInclude>
-    <ClInclude Include="Tests\logic\flash\MessageLoggerTests.h">
       <Filter>Source Files\Tests\logic\flash</Filter>
     </ClInclude>
     <ClInclude Include="Tests\logic\credentials\PercentDecoderTests.h">
