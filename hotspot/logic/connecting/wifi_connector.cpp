@@ -1,6 +1,6 @@
 #include <string.h>
 #include "wifi_connector.h"
-#include "common.h"
+#include "../common.h"
 
 WiFiConnector::WiFiConnector(SYSTEM_INTERFACE_T* systemInterface)
 {
