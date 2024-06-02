@@ -1,6 +1,6 @@
 #pragma once
 #include <string>
-#include "../../hotspot/flash_program.h"
+#include "../../hotspot/flash_hardware.h"
 
 
 #define FLASH_CREDENTIALS_PREFIX		"CRED"
@@ -14,10 +14,10 @@ public:
 
 class FlashManager : public IFlashManager
 {
-	SYSTEM_INTERFACE_T* _systemInterface;
+	IFlashHardware* flashHardware;
 
 	virtual void WriteToFlash(const std::string& SSID, const std::string& password, const std::string& error);
 
 public:
-	FlashManager(SYSTEM_INTERFACE_T* systemInterface);
+	FlashManager(IFlashHardware* flashHardware);
 };

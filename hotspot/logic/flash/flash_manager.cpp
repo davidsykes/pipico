@@ -1,9 +1,9 @@
 #include <cstring>
 #include "flash_manager.h"
 
-FlashManager::FlashManager(SYSTEM_INTERFACE_T* systemInterface)
+FlashManager::FlashManager(IFlashHardware* flashHardware)
 {
-	_systemInterface = systemInterface;
+	this->flashHardware = flashHardware;
 }
 
 static size_t AddStringIfItWillFit(uint8_t* flashPage, size_t position, const std::string& s)
@@ -34,5 +34,5 @@ void FlashManager::WriteToFlash(const std::string& SSID, const std::string& pass
 		memcpy(flashContents + FLASH_CREDENTIALS_PREFIX_LEN, "\0\0Data size error.\0", 19);
 	}
 
-	_systemInterface->write_flash_data(flashContents);
+	flashHardware->WriteFlash(flashContents);
 }

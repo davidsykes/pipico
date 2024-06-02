@@ -4,20 +4,23 @@
 #include "wifi_connector.h"
 
 
-static std::unique_ptr<SYSTEM_INTERFACE_T> systemInterface;
+static std::unique_ptr<IFlashHardware> flashHardware;
 static std::unique_ptr<WiFiConnector> wiFiConnector;
 static uint8_t flashContents[256];
 
-static const uint8_t* read_flash_data()
+class MockWCFlashHardware : public IFlashHardware
 {
-	return flashContents;
-}
+	virtual const uint8_t* ReadFlash()
+	{
+		return flashContents;
+	}
+	virtual void WriteFlash(const uint8_t*) {}
+};
 
 static WiFiConnector* CreateTestObject()
 {
-	systemInterface.reset(new SYSTEM_INTERFACE_T);
-	systemInterface.get()->read_flash_data = &read_flash_data;
-	WiFiConnector* wc = new WiFiConnector(systemInterface.get());
+	flashHardware.reset(new MockWCFlashHardware());
+	WiFiConnector* wc = new WiFiConnector(flashHardware.get());
 	wiFiConnector.reset(wc);
 
 	return wiFiConnector.get();
@@ -58,6 +61,6 @@ void WIFIConnectorTests::RunTests()
 
 void WIFIConnectorTests::CleanUpAfterTests()
 {
-	systemInterface.release();
+	flashHardware.release();
 	wiFiConnector.release();
 }

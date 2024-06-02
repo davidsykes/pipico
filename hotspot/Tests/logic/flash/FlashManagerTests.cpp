@@ -1,25 +1,24 @@
 #include <memory>
 #include "FlashManagerTests.h"
 #include "flash_manager.h"
-#include "system_interface.h"
 
 
-static std::unique_ptr<SYSTEM_INTERFACE_T> systemInterface;
+static std::unique_ptr<IFlashHardware> flashHardware;
 static uint8_t flashContents[FLASH_PAGE_SIZE];
 static std::unique_ptr<FlashManager> flashManager;
 
 std::string MakeStringWithLength(int len);
 
-static void write_flash_data(const uint8_t* data)
+class MockFMFlashHardware : public IFlashHardware
 {
-	memcpy(flashContents, data, FLASH_PAGE_SIZE);
-}
+	virtual const uint8_t* ReadFlash() { return 0; }
+	virtual void WriteFlash(const uint8_t*data) { memcpy(flashContents, data, FLASH_PAGE_SIZE); }
+};
 
 static IFlashManager* CreateTestObject()
 {
-	systemInterface.reset(new SYSTEM_INTERFACE_T);
-	systemInterface.get()->write_flash_data = &write_flash_data;
-	flashManager.reset(new FlashManager(systemInterface.get()));
+	flashHardware.reset(new MockFMFlashHardware());
+	flashManager.reset(new FlashManager(flashHardware.get()));
 	return flashManager.get();
 }
 
@@ -67,7 +66,7 @@ void FlashManagerTests::RunTests()
 
 void FlashManagerTests::CleanUpAfterTests()
 {
-	systemInterface.release();
+	flashHardware.release();
 	flashManager.release();
 }
 

@@ -2,9 +2,9 @@
 #include "wifi_connector.h"
 #include "../common.h"
 
-WiFiConnector::WiFiConnector(SYSTEM_INTERFACE_T* systemInterface)
+WiFiConnector::WiFiConnector(IFlashHardware* flashHardware)
 {
-    const char* credentials = (const char* )systemInterface->read_flash_data();
+    const char* credentials = (const char* )flashHardware->ReadFlash();
     if (strncmp(credentials, "CRED", 4) == 0)
     {
         loadCredentialsFromString(credentials + 4);

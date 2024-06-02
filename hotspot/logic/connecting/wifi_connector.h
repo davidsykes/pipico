@@ -1,6 +1,6 @@
 #pragma once
 #include <string>
-#include "../../interface/system_interface.h"
+#include "../hotspot/flash_hardware.h"
 
 class WiFiConnector
 {
@@ -12,7 +12,7 @@ class WiFiConnector
 public:
     std::string lastErrorMessage;
 
-    WiFiConnector(SYSTEM_INTERFACE_T* systemInterface);
+    WiFiConnector(IFlashHardware* flashHardware);
 	bool CredentialsAreValid();
     bool ConnectToWiFi();
 };
