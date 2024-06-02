@@ -1,16 +1,23 @@
+#define FLASH_PAGE_SIZE 256
 
-
-typedef struct CREDENTIALS_T_ {
-    const char *hotspot_name;
-    const char *hotspot_password;
-} CREDENTIALS_T;
-
+typedef struct SYSTEM_INTERFACE_T_ {
+    const uint8_t* (*read_flash_data)();
+    void (*write_flash_data)(const uint8_t* data);
+} SYSTEM_INTERFACE_T;
 
 #ifdef __cplusplus
 extern "C" {
 #endif
-    const uint8_t* read_flash_data();
-    void write_flash_data(const uint8_t* flash_data);
+void SetUpSystemInterface(SYSTEM_INTERFACE_T* systemInterface);
+    // const uint8_t* read_flash_data();
+    // void write_flash_data(const uint8_t* flash_data);
 #ifdef __cplusplus
 }
 #endif
+
+// #ifdef __cplusplus
+// extern "C" {
+// #endif
+// #ifdef __cplusplus
+// }
+// #endif

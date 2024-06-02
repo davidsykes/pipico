@@ -1,6 +1,6 @@
 #pragma once
 #include <string>
-#include "../../interface/system_interface.h"
+#include "../../hotspot/flash_program.h"
 
 
 #define FLASH_CREDENTIALS_PREFIX		"CRED"

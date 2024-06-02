@@ -104,3 +104,10 @@ void write_flash_data(const uint8_t* flash_data)
     else
         DEBUG_printf("Programming successful!\n");
 }
+
+
+void SetUpSystemInterface(SYSTEM_INTERFACE_T* systemInterface)
+{
+    systemInterface->read_flash_data = &read_flash_data;
+    systemInterface->write_flash_data = &write_flash_data;
+}

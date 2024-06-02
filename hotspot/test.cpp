@@ -1,4 +1,4 @@
-#include "common.h"
+#include "logic/common.h"
 #include "hotspot/pico_logic.h"
 #include "configurations/hotspot_configuration.h"
 #include "interface/interface.h"
