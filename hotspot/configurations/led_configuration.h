@@ -1,5 +1,5 @@
 #pragma once
-#include "configuration.h"
+#include "../logic/requests/configuration.h"
 
 class LedConfiguration : public Configuration
 {

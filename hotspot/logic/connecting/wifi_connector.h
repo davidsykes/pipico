@@ -1,6 +1,6 @@
 #pragma once
 #include <string>
-#include "../hotspot/flash_hardware.h"
+#include "../flash/flash_hardware.h"
 
 class WiFiConnector
 {

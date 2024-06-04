@@ -16,6 +16,7 @@
 #define DATA_PREFIX         "CRD1"
 #define DATA_PREFIX_LEN     4
 #define MAX_STRING_LENGTH   100
+#define DEBUG_printf printf
 
 const uint8_t *flash_target_contents = (const uint8_t *) (XIP_BASE + FLASH_TARGET_OFFSET);
 
@@ -103,11 +104,4 @@ void write_flash_data(const uint8_t* flash_data)
         DEBUG_printf("Programming failed!\n");
     else
         DEBUG_printf("Programming successful!\n");
-}
-
-
-void SetUpSystemInterface(SYSTEM_INTERFACE_T* systemInterface)
-{
-    systemInterface->read_flash_data = &read_flash_data;
-    systemInterface->write_flash_data = &write_flash_data;
 }

@@ -1,7 +1,4 @@
 #pragma once
-#include <cstdint>
-
-#define FLASH_PAGE_SIZE 256
 
 class IFlashHardware
 {

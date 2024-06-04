@@ -1,7 +1,5 @@
-#include <stdio.h>
 #include <string.h>
-#include"../configurations/configuration.h"
-#include "hotspot/picow_access_point.h"
+#include "configuration.h"
 
 #define SIZE_ERROR "<html><body><h1>FORM CONTENT EXCEEDS BUFFER</h1></body></html>"
 
@@ -19,14 +17,3 @@ int process_request(void *configuration, const char *request, const char *params
    return strlen(SIZE_ERROR);
 }
 
-int set_up_hotspot(Configuration *configuration)
-{
-   HOTSPOT_CONFIGURATION_T config;
-   config.hotspot_name = configuration->hotspot_name.c_str();
-   config.hotspot_password = configuration->hotspot_password.c_str();
-   config.configuration = configuration;
-   config.process_request = &process_request;
-
-   main_hotspot(&config);
-   return 0;
-}

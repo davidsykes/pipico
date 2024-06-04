@@ -1,7 +1,7 @@
 #ifndef NullConfiguration_H
 #define NullConfiguration_H
 
-#include "configuration.h"
+#include "../logic/requests/configuration.h"
 
 class NullConfiguration : public Configuration
 {

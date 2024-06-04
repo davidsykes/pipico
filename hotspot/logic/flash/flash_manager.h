@@ -1,8 +1,8 @@
 #pragma once
 #include <string>
-#include "../../hotspot/flash_hardware.h"
+#include "flash_hardware.h"
 
-
+#define FLASH_PAGE_SIZE 256
 #define FLASH_CREDENTIALS_PREFIX		"CRED"
 #define FLASH_CREDENTIALS_PREFIX_LEN	4
 

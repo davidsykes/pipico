@@ -6,22 +6,20 @@ set(CMAKE_CXX_STANDARD 17)
 pico_sdk_init()
 add_executable(test
         test.cpp
-        interface/interface.cpp
-        interface/system_interface.c
         hotspot/dhcpserver/dhcpserver.c
         hotspot/dnsserver/dnsserver.c
         hotspot/flash_program.c
         hotspot/pico_logic.c
         hotspot/picow_access_point.c
-        configurations/null_configuration.cpp
-        configurations/led_configuration.cpp
-        configurations/hotspot_configuration.cpp
+        logic/flash/flash_hardware.cpp
         logic/flash/flash_manager.cpp
         logic/input_form/html_renderer.cpp
         logic/input_form/input_form_renderer.cpp
         logic/credentials/credentials_handler.cpp
         logic/credentials/percent_decoder.cpp
         logic/connecting/wifi_connector.cpp
+        logic/requests/process_request.cpp
+        logic/requests/hotspot_configuration.cpp
 )
 target_include_directories(test PRIVATE
         ${CMAKE_CURRENT_LIST_DIR}
