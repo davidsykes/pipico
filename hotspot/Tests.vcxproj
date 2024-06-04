@@ -128,7 +128,6 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="configurations\hotspot_configuration.cpp" />
     <ClCompile Include="configurations\led_configuration.cpp" />
     <ClCompile Include="logic\connecting\wifi_connector.cpp" />
     <ClCompile Include="logic\credentials\credentials_handler.cpp" />
@@ -136,6 +135,8 @@
     <ClCompile Include="logic\flash\flash_manager.cpp" />
     <ClCompile Include="logic\input_form\html_renderer.cpp" />
     <ClCompile Include="logic\input_form\input_form_renderer.cpp" />
+    <ClCompile Include="logic\requests\hotspot_configuration.cpp" />
+    <ClCompile Include="logic\requests\process_request.cpp" />
     <ClCompile Include="Tests.cpp" />
     <ClCompile Include="Tests\configurations\HotSpotConfigurationTests.cpp" />
     <ClCompile Include="Tests\configurations\LedConfigurationTests.cpp" />
@@ -154,7 +155,6 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="configurations\configuration.h" />
-    <ClInclude Include="configurations\hotspot_configuration.h" />
     <ClInclude Include="configurations\led_configuration.h" />
     <ClInclude Include="logic\connecting\wifi_connector.h" />
     <ClInclude Include="logic\credentials\credentials_handler.h" />
@@ -164,6 +164,9 @@
     <ClInclude Include="logic\input_form\ihtml_renderer.h" />
     <ClInclude Include="logic\input_form\iinput_form_renderer.h" />
     <ClInclude Include="logic\input_form\input_form_renderer.h" />
+    <ClInclude Include="logic\requests\configuration.h" />
+    <ClInclude Include="logic\requests\hotspot_configuration.h" />
+    <ClInclude Include="logic\requests\process_request.h" />
     <ClInclude Include="Tests\configurations\HotSpotConfigurationTests.h" />
     <ClInclude Include="Tests\configurations\LedConfigurationTests.h" />
     <ClInclude Include="Tests\logic\connecting\WIFIConnectorTests.h" />

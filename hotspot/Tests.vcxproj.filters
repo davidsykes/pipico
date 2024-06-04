@@ -58,6 +58,9 @@
     <Filter Include="Source Files\Tests\configurations">
       <UniqueIdentifier>{b1bd991a-79b0-4143-9b3a-ceae5850db40}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\logic\requests">
+      <UniqueIdentifier>{eed558ab-4f35-49a5-b3a9-66e372c9764c}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="configurations\led_configuration.cpp">
@@ -65,9 +68,6 @@
     </ClCompile>
     <ClCompile Include="Tests.cpp">
       <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="configurations\hotspot_configuration.cpp">
-      <Filter>Source Files\configurations</Filter>
     </ClCompile>
     <ClCompile Include="Tests\Mocks\MockCredentialsHandler.cpp">
       <Filter>Source Files\Tests\Mocks</Filter>
@@ -129,15 +129,18 @@
     <ClCompile Include="logic\credentials\percent_decoder.cpp">
       <Filter>Source Files\logic\credentials</Filter>
     </ClCompile>
+    <ClCompile Include="logic\requests\hotspot_configuration.cpp">
+      <Filter>Source Files\logic\requests</Filter>
+    </ClCompile>
+    <ClCompile Include="logic\requests\process_request.cpp">
+      <Filter>Source Files\logic\requests</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="configurations\configuration.h">
       <Filter>Source Files\configurations</Filter>
     </ClInclude>
     <ClInclude Include="configurations\led_configuration.h">
-      <Filter>Source Files\configurations</Filter>
-    </ClInclude>
-    <ClInclude Include="configurations\hotspot_configuration.h">
       <Filter>Source Files\configurations</Filter>
     </ClInclude>
     <ClInclude Include="Tests\Mocks\MockCredentialsHandler.h">
@@ -205,6 +208,15 @@
     </ClInclude>
     <ClInclude Include="Tests\configurations\LedConfigurationTests.h">
       <Filter>Source Files\Tests\configurations</Filter>
+    </ClInclude>
+    <ClInclude Include="logic\requests\configuration.h">
+      <Filter>Source Files\logic\requests</Filter>
+    </ClInclude>
+    <ClInclude Include="logic\requests\hotspot_configuration.h">
+      <Filter>Source Files\logic\requests</Filter>
+    </ClInclude>
+    <ClInclude Include="logic\requests\process_request.h">
+      <Filter>Source Files\logic\requests</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
