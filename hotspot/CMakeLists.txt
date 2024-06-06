@@ -6,6 +6,7 @@ set(CMAKE_CXX_STANDARD 17)
 pico_sdk_init()
 add_executable(test
         test.cpp
+        WiFiConnector.cpp
         hotspot/dhcpserver/dhcpserver.c
         hotspot/dnsserver/dnsserver.c
         hotspot/flash_program.c
@@ -17,7 +18,7 @@ add_executable(test
         logic/input_form/input_form_renderer.cpp
         logic/credentials/credentials_handler.cpp
         logic/credentials/percent_decoder.cpp
-        logic/connecting/wifi_connector.cpp
+        logic/connecting/wifi_connection_maker.cpp
         logic/requests/process_request.cpp
         logic/requests/hotspot_configuration.cpp
 )

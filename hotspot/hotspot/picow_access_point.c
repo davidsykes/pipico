@@ -12,7 +12,6 @@
 #include "lwip/pbuf.h"
 #include "lwip/tcp.h"
 #include "c_interface.h"
-#include "picow_access_point.h"
 #include "dhcpserver.h"
 #include "dnsserver.h"
 
