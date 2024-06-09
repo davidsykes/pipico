@@ -1,8 +1,8 @@
 #include <string.h>
-#include "wifi_connector.h"
+#include "wifi_connection_maker.h"
 #include "../common.h"
 
-WiFiConnector::WiFiConnector(IFlashHardware* flashHardware)
+WiFiConnectionMaker::WiFiConnectionMaker(IFlashHardware* flashHardware)
 {
     const char* credentials = (const char* )flashHardware->ReadFlash();
     if (strncmp(credentials, "CRED", 4) == 0)
@@ -12,7 +12,7 @@ WiFiConnector::WiFiConnector(IFlashHardware* flashHardware)
     }
 }
 
-void WiFiConnector::loadCredentialsFromString(const char* credentials)
+void WiFiConnectionMaker::loadCredentialsFromString(const char* credentials)
 {
     userName = credentials;
     credentials += userName.length() + 1;
@@ -21,12 +21,12 @@ void WiFiConnector::loadCredentialsFromString(const char* credentials)
     lastErrorMessage = credentials;
 }
 
-bool WiFiConnector::CredentialsAreValid()
+bool WiFiConnectionMaker::CredentialsAreValid()
 {
     return userName.length() > 0;
 }
-bool WiFiConnector::ConnectToWiFi()
+bool WiFiConnectionMaker::ConnectToWiFi()
 {
-    DEBUG_printf("WiFiConnector NOT IMPLEMENTED\n");
+    DEBUG_printf("WiFiConnectionMaker NOT IMPLEMENTED\n");
     return false;
 }

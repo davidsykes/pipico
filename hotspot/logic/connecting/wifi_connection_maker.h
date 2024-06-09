@@ -2,7 +2,7 @@
 #include <string>
 #include "../flash/flash_hardware.h"
 
-class WiFiConnector
+class WiFiConnectionMaker
 {
     std::string userName;
     std::string password;
@@ -12,7 +12,7 @@ class WiFiConnector
 public:
     std::string lastErrorMessage;
 
-    WiFiConnector(IFlashHardware* flashHardware);
+    WiFiConnectionMaker(IFlashHardware* flashHardware);
 	bool CredentialsAreValid();
     bool ConnectToWiFi();
 };

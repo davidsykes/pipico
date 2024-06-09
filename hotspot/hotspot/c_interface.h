@@ -1,4 +1,5 @@
 #pragma once
+#include <stdlib.h>
 
 #ifdef __cplusplus
 extern "C" {
@@ -15,7 +16,7 @@ extern "C" {
 
 typedef struct REQUEST_PROCESSOR_T_ {
     void *configuration;
-    int (*process_request)(void *configuration, const char *request, const char *params, char *result, size_t max_result_len);
+    size_t (*process_request)(void *configuration, const char *request, const char *params, char *result, size_t max_result_len);
 } REQUEST_PROCESSOR_T;
 
 
