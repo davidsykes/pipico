@@ -1,2 +1,9 @@
 Pico IR
 Projects for the infra red controller
+
+NOTE THAT the python transmitter code has proved to be too slow to be accurate
+
+docker				Contains the docker yml file for the irtransmitterapi web api
+irtransmitterapi	The web api server
+plots				python code to show plot data
+transmitter			python implementation of the transmitter
