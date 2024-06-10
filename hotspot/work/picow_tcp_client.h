@@ -8,7 +8,8 @@ typedef struct REQUEST_PROCESSOR_T_ {
 #ifdef __cplusplus
 extern "C" {
 #endif
-int tcp_client_main(REQUEST_PROCESSOR_T* processor);
+int tcp_client_initialise(const char* ssid, const char* password);
+int tcp_client_run(REQUEST_PROCESSOR_T* processor, const char* server_ip, uint port);
 #ifdef __cplusplus
 }
 #endif

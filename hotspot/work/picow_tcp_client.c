@@ -14,15 +14,6 @@
 #include "lwip/tcp.h"
 #include "picow_tcp_client.h"
 
-#define WIFI_SSID "a907"
-#define WIFI_PASSWORD "?thisistheWIFIyouhavebeenlookingfor1398"
-#define TEST_TCP_SERVER_IP "192.168.1.87"
-#define TCP_PORT 5001
-
-#if !defined(TEST_TCP_SERVER_IP)
-#error TEST_TCP_SERVER_IP not defined
-#endif
-
 #define DEBUG_printf printf
 #define BUF_SIZE 2048
 
@@ -47,10 +38,10 @@ static void dump_bytes(const uint8_t *bptr, uint32_t len) {
 #define DUMP_BYTES dump_bytes
 #else
 #define DUMP_BYTES(A,B)
-//#define DUMP_BYTES(A,B) printf("--- Packet ---\n%s\n --- end ---\n", A)
 #endif
 
 typedef struct TCP_CLIENT_T_ {
+    uint port;
     struct tcp_pcb *tcp_pcb;
     ip_addr_t remote_addr;
     uint8_t buffer[BUF_SIZE];
@@ -109,7 +100,7 @@ static err_t tcp_client_sent(void *arg, struct tcp_pcb *tpcb, u16_t len) {
         // We should receive a new buffer from the server
         state->buffer_len = 0;
         state->sent_len = 0;
-        DEBUG_printf("Waiting for buffer from server 2\n");
+        DEBUG_printf("Waiting for buffer from server\n");
     }
 
     return ERR_OK;
@@ -122,7 +113,7 @@ static err_t tcp_client_connected(void *arg, struct tcp_pcb *tpcb, err_t err) {
         return tcp_result(arg, err, "conn 1");
     }
     state->connected = true;
-    DEBUG_printf("Waiting for buffer from server 1\n");
+    DEBUG_printf("Waiting for buffer from server\n");
     return ERR_OK;
 }
 
@@ -160,21 +151,12 @@ err_t tcp_client_recv(void *arg, struct tcp_pcb *tpcb, struct pbuf *p, err_t err
     }
     pbuf_free(p);
 
-    // // If we have received the whole buffer, send it back to the server
-    // if (state->buffer_len == BUF_SIZE) {
-    //     DEBUG_printf("Writing %d bytes to server\n", state->buffer_len);
-    //     err_t err = tcp_write(tpcb, state->buffer, state->buffer_len, TCP_WRITE_FLAG_COPY);
-    //     if (err != ERR_OK) {
-    //         DEBUG_printf("Failed to write data %d\n", err);
-    //         return tcp_result(arg, -1, "recv 6");
-    //     }
-    // }
     return ERR_OK;
 }
 
 static bool tcp_client_open(void *arg) {
     TCP_CLIENT_T *state = (TCP_CLIENT_T*)arg;
-    DEBUG_printf("Connecting to %s port %u\n", ip4addr_ntoa(&state->remote_addr), TCP_PORT);
+    DEBUG_printf("Connecting to %s port %u\n", ip4addr_ntoa(&state->remote_addr), state->port);
     state->tcp_pcb = tcp_new_ip_type(IP_GET_TYPE(&state->remote_addr));
     if (!state->tcp_pcb) {
         DEBUG_printf("failed to create pcb\n");
@@ -194,25 +176,26 @@ static bool tcp_client_open(void *arg) {
     // these calls are a no-op and can be omitted, but it is a good practice to use them in
     // case you switch the cyw43_arch type later.
     cyw43_arch_lwip_begin();
-    err_t err = tcp_connect(state->tcp_pcb, &state->remote_addr, TCP_PORT, tcp_client_connected);
+    err_t err = tcp_connect(state->tcp_pcb, &state->remote_addr, state->port, tcp_client_connected);
     cyw43_arch_lwip_end();
 
     return err == ERR_OK;
 }
 
 // Perform initialisation
-static TCP_CLIENT_T* tcp_client_init(void) {
+static TCP_CLIENT_T* tcp_client_init(const char* server_ip, uint port) {
     TCP_CLIENT_T *state = calloc(1, sizeof(TCP_CLIENT_T));
     if (!state) {
         DEBUG_printf("failed to allocate state\n");
         return NULL;
     }
-    ip4addr_aton(TEST_TCP_SERVER_IP, &state->remote_addr);
+    ip4addr_aton(server_ip, &state->remote_addr);
+    state->port = port;
     return state;
 }
 
-void run_tcp_client_test(REQUEST_PROCESSOR_T* processor) {
-    TCP_CLIENT_T *state = tcp_client_init();
+void run_tcp_client_test(REQUEST_PROCESSOR_T* processor, const char* server_ip, uint port) {
+    TCP_CLIENT_T *state = tcp_client_init(server_ip, port);
     if (!state) {
         return;
     }
@@ -220,16 +203,6 @@ void run_tcp_client_test(REQUEST_PROCESSOR_T* processor) {
         tcp_result(state, -1, "test1");
         return;
     }
-
-// const char* data = "GET /codes HTTP/1.1\r\n"
-// "Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7\r\n"
-// "Accept-Encoding: gzip, deflate\r\n"
-// "Accept-Language: en-GB,en-US;q=0.9,en;q=0.8\r\n"
-// "Connection: keep-alive\r\n"
-// "Host: 192.168.1.87:5001\r\n"
-// "Upgrade-Insecure-Requests: 1\r\n"
-// "User-Agent: Mozilla/5.0 (X11; CrOS x86_64 14541.0.0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36\r\n";
-
     const char* data = "GET /codes HTTP/1.1\r\nHost: test.com\r\nAccept: */*\r\n\r\n";
     DEBUG_printf("Write Data %d\n", tcp_write(state->tcp_pcb, data, strlen(data), 0));
 
@@ -255,7 +228,6 @@ void run_tcp_client_test(REQUEST_PROCESSOR_T* processor) {
         // choose to sleep until either a specified time, or cyw43_arch_poll() has work to do:
         cyw43_arch_wait_for_work_until(make_timeout_time_ms(1000));
 #else
-#error not poll
         // if you are not using pico_cyw43_arch_poll, then WiFI driver and lwIP work
         // is done via interrupt in the background. This sleep is just an example of some (blocking)
         // work you might be doing.
@@ -265,7 +237,9 @@ void run_tcp_client_test(REQUEST_PROCESSOR_T* processor) {
     free(state);
 }
 
-int tcp_client_main(REQUEST_PROCESSOR_T* processor) {
+int tcp_client_initialise(
+    const char* ssid,
+    const char* password) {
     stdio_init_all();
 
     if (cyw43_arch_init()) {
@@ -274,14 +248,17 @@ int tcp_client_main(REQUEST_PROCESSOR_T* processor) {
     }
     cyw43_arch_enable_sta_mode();
 
-    printf("Connecting to Wi-Fi %s %s...\n", WIFI_SSID, WIFI_PASSWORD);
-    if (cyw43_arch_wifi_connect_timeout_ms(WIFI_SSID, WIFI_PASSWORD, CYW43_AUTH_WPA2_AES_PSK, 30000)) {
+    printf("Connecting to Wi-Fi %s %s...\n", ssid, password);
+    if (cyw43_arch_wifi_connect_timeout_ms(ssid, password, CYW43_AUTH_WPA2_AES_PSK, 30000)) {
         printf("failed to connect.\n");
         return 1;
     } else {
         printf("Connected.\n");
     }
-    run_tcp_client_test(processor);
+}
+
+int tcp_client_run(REQUEST_PROCESSOR_T* processor, const char* server_ip, uint port) {
+    run_tcp_client_test(processor, server_ip, port);
     cyw43_arch_deinit();
     return 0;
 }
