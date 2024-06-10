@@ -1,6 +1,7 @@
 #include "logic/common.h"
 #include "hotspot/c_interface.h"
 #include "WiFiConnector.h"
+#include "work/work.h"
 
 int main()
 {
@@ -8,8 +9,10 @@ int main()
 
    initialise_pico_stdio();
 
+   do_work();
+
    WiFiConnector connector;
    connector.ConnectToWiFi(input_form_hotspot_name);
 
-   DEBUG_printf("Connected");
+   DEBUG_printf("Ended..");
 }

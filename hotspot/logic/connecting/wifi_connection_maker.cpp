@@ -8,7 +8,7 @@ WiFiConnectionMaker::WiFiConnectionMaker(IFlashHardware* flashHardware)
     if (strncmp(credentials, "CRED", 4) == 0)
     {
         loadCredentialsFromString(credentials + 4);
-        DEBUG_printf("Found credentials '%s' '%s'", userName.c_str(), password.c_str());
+        DEBUG_printf("Found credentials '%s' '%s'\n", userName.c_str(), password.c_str());
     }
 }
 

@@ -19,7 +19,7 @@ void WiFiConnector::ConnectToWiFi(const char* input_form_hotspot_name)
    {
       if (wifiConnectionMaker.ConnectToWiFi())
       {
-         DEBUG_printf("Connected");
+         DEBUG_printf("wifiConnectionMaker Connected");
          return;
       }
    }

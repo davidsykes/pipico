@@ -23,7 +23,6 @@ static bool RequestMatchesCredentialsSubmission(const char* request)
 
 std::string HotSpotConfiguration::process_request(const char *request, const char *params)
 {
-    //DEBUG_printf("process request: '%s' '%s'\n---\n", request, params);
     if (RequestMatchesCredentialsSubmission(request))
     {
         _credentials_handler->HandleCredentials(params);
