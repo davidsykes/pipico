@@ -194,7 +194,7 @@ static TCP_CLIENT_T* tcp_client_init(const char* server_ip, uint port) {
     return state;
 }
 
-void run_tcp_client_test(REQUEST_PROCESSOR_T* processor, const char* server_ip, uint port, const char*request) {
+void run_tcp_client_test(REQUEST_PROCESSOR_T* processor, const char* server_ip, unsigned int port, const char*request, char* result, int max_result_length) {
     TCP_CLIENT_T *state = tcp_client_init(server_ip, port);
     if (!state) {
         return;
@@ -211,6 +211,8 @@ void run_tcp_client_test(REQUEST_PROCESSOR_T* processor, const char* server_ip, 
 
         if (state->buffer_len > 0)
         {
+            strncpy(result, state->buffer, max_result_length);
+
             char* data = malloc(BUF_SIZE+1);
             strncpy(data, state->buffer, state->buffer_len);
             data[state->buffer_len] = 0;
@@ -269,10 +271,10 @@ int tcp_client_initialise(
     }
 }
 
-int tcp_client_run(REQUEST_PROCESSOR_T* processor, const char* server_ip, uint port, const char* request) {
-    run_tcp_client_test(processor, server_ip, port, request);
-    return 0;
-}
+// int tcp_client_run(REQUEST_PROCESSOR_T* processor, const char* server_ip, uint port, const char* request) {
+//     run_tcp_client_test(processor, server_ip, port, request);
+//     return 0;
+// }
 
 void tcp_client_uninit() {
     cyw43_arch_deinit();

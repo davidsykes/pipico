@@ -7,6 +7,7 @@
 #define WIFI_PASSWORD "?thisistheWIFIyouhavebeenlookingfor1398"
 #define TEST_TCP_SERVER_IP "192.168.1.87"
 #define TCP_PORT 5001
+#define BUFFER_LENGTH   2048
 
 const char* get_message(void *data_object)
 {
@@ -29,11 +30,15 @@ int do_work()
     processor.get_message = &get_message;
     processor.process_data = &process_data;
 
+    char buffer[BUFFER_LENGTH];
+
     tcp_client_initialise(WIFI_SSID, WIFI_PASSWORD);
 
-    tcp_client_run(&processor, TEST_TCP_SERVER_IP, TCP_PORT, "GET /codes HTTP/1.1\r\nHost: test.com\r\nAccept: */*\r\n\r\n");
+    run_tcp_client_test(&processor, TEST_TCP_SERVER_IP, TCP_PORT, "GET /codes HTTP/1.1\r\nHost: test.com\r\nAccept: */*\r\n\r\n", buffer, BUFFER_LENGTH);
+    printf("--Restule 1--\n%s\n+++", buffer);
 
-    tcp_client_run(&processor, TEST_TCP_SERVER_IP, TCP_PORT, "GET /codes HTTP/1.1\r\nHost: test.com\r\nAccept: */*\r\n\r\n");
+    run_tcp_client_test(&processor, TEST_TCP_SERVER_IP, TCP_PORT, "GET /codes HTTP/1.1\r\nHost: test.com\r\nAccept: */*\r\n\r\n", buffer, BUFFER_LENGTH);
+    printf("--Restule 2--\n%s\n+++", buffer);
 
     tcp_client_uninit();
     return 0;
