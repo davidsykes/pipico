@@ -21,7 +21,7 @@ add_executable(test
         logic/connecting/wifi_connection_maker.cpp
         logic/requests/process_request.cpp
         logic/requests/hotspot_configuration.cpp
-        work/work.c
+        work/work.cpp
         work/picow_tcp_client.c
 )
 target_include_directories(test PRIVATE

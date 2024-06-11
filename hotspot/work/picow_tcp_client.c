@@ -125,7 +125,7 @@ static err_t tcp_client_poll(void *arg, struct tcp_pcb *tpcb) {
 static void tcp_client_err(void *arg, err_t err) {
     if (err != ERR_ABRT) {
         DEBUG_printf("tcp_client_err %d\n", err);
-        tcp_result(arg, err, "err 1");
+        tcp_result(arg, err, "tcp client error");
     }
 }
 
@@ -194,7 +194,7 @@ static TCP_CLIENT_T* tcp_client_init(const char* server_ip, uint port) {
     return state;
 }
 
-void run_tcp_client_test(REQUEST_PROCESSOR_T* processor, const char* server_ip, uint port) {
+void run_tcp_client_test(REQUEST_PROCESSOR_T* processor, const char* server_ip, uint port, const char*request) {
     TCP_CLIENT_T *state = tcp_client_init(server_ip, port);
     if (!state) {
         return;
@@ -204,6 +204,7 @@ void run_tcp_client_test(REQUEST_PROCESSOR_T* processor, const char* server_ip, 
         return;
     }
     const char* data = "GET /codes HTTP/1.1\r\nHost: test.com\r\nAccept: */*\r\n\r\n";
+    data = request;
     DEBUG_printf("Write Data %d\n", tcp_write(state->tcp_pcb, data, strlen(data), 0));
 
     while(!state->complete) {
@@ -216,6 +217,17 @@ void run_tcp_client_test(REQUEST_PROCESSOR_T* processor, const char* server_ip, 
             state->buffer_len = 0;
             processor->process_data(processor, data);
             free(data);
+
+            state->complete = true;
+            tcp_client_close(state);
+        }
+        else
+        {
+            const char* data = processor->get_message(processor);
+            if(strlen(data) > 0)
+            {
+                DEBUG_printf("Write Message %d\n", tcp_write(state->tcp_pcb, data, strlen(data), 0));
+            }
         }
 
         // the following #ifdef is only here so this same example can be used in multiple modes;
@@ -257,8 +269,11 @@ int tcp_client_initialise(
     }
 }
 
-int tcp_client_run(REQUEST_PROCESSOR_T* processor, const char* server_ip, uint port) {
-    run_tcp_client_test(processor, server_ip, port);
-    cyw43_arch_deinit();
+int tcp_client_run(REQUEST_PROCESSOR_T* processor, const char* server_ip, uint port, const char* request) {
+    run_tcp_client_test(processor, server_ip, port, request);
     return 0;
+}
+
+void tcp_client_uninit() {
+    cyw43_arch_deinit();
 }

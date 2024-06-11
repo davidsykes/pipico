@@ -1,6 +1,7 @@
 
 typedef struct REQUEST_PROCESSOR_T_ {
     void *data_object;
+    const char* (*get_message)(void *data_object);
     void (*process_data)(void *data_object, const char *data);
 } REQUEST_PROCESSOR_T;
 
@@ -9,7 +10,8 @@ typedef struct REQUEST_PROCESSOR_T_ {
 extern "C" {
 #endif
 int tcp_client_initialise(const char* ssid, const char* password);
-int tcp_client_run(REQUEST_PROCESSOR_T* processor, const char* server_ip, uint port);
+int tcp_client_run(REQUEST_PROCESSOR_T* processor, const char* server_ip, uint port, const char* request);
+void tcp_client_uninit();
 #ifdef __cplusplus
 }
 #endif
