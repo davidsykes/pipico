@@ -23,6 +23,8 @@ add_executable(test
         logic/requests/hotspot_configuration.cpp
         work/work.cpp
         work/picow_tcp_client.c
+        work/hardware_interface.c
+        work/hardware_interface.cpp
         work/gpiotest.c
 )
 target_include_directories(test PRIVATE

@@ -3,6 +3,7 @@
 #include "worker.h"
 #include "picow_tcp_client.h"
 #include "gpiotest.h"
+#include "hardware_interface.hpp"
 
 #define WIFI_SSID "a907"
 #define WIFI_PASSWORD "?thisistheWIFIyouhavebeenlookingfor1398"
@@ -25,7 +26,20 @@ void process_data(void *data_object, const char *data)
 
 int do_work()
 {
-    main_gpio();
+    PicoHardwareInterface ph = PicoHardwareInterface();
+    IHardwareInterface& hwif = ph;
+
+    int count = 6;
+    while (count-- > 0)
+    {
+        hwif.set_led(1);
+        hwif.sleep_us(100000);
+        hwif.set_led(0);
+        hwif.sleep_us(100000);
+    }
+
+    // sSystem* hw_if = create_hardware_interface();
+    // main_gpio(hw_if);
 
     Worker worker;
     REQUEST_PROCESSOR_T processor;
