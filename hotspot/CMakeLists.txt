@@ -25,7 +25,6 @@ add_executable(test
         work/picow_tcp_client.c
         work/hardware_interface.c
         work/hardware_interface.cpp
-        work/gpiotest.c
 )
 target_include_directories(test PRIVATE
         ${CMAKE_CURRENT_LIST_DIR}

@@ -2,7 +2,6 @@
 #include "work.h"
 #include "worker.h"
 #include "picow_tcp_client.h"
-#include "gpiotest.h"
 #include "hardware_interface.hpp"
 
 #define WIFI_SSID "a907"
@@ -38,8 +37,21 @@ int do_work()
         hwif.sleep_us(100000);
     }
 
-    // sSystem* hw_if = create_hardware_interface();
-    // main_gpio(hw_if);
+    int config = -1;
+    while(true)
+    {
+        int nconfig =
+        hwif.gpio_get(5) * 8 +
+        hwif.gpio_get(4) * 4 +
+        hwif.gpio_get(3) * 2 +
+        hwif.gpio_get(2);
+
+        if (nconfig != config)
+        {
+            config = nconfig;
+            printf("Config %d\n", config);
+        }
+    }
 
     Worker worker;
     REQUEST_PROCESSOR_T processor;

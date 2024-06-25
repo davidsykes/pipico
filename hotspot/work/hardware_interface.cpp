@@ -5,8 +5,6 @@ PicoHardwareInterface::PicoHardwareInterface()
 {
     hardware_interface = create_hardware_interface();
     hardware_interface->cyw43_arch_init();
-
-    //main_gpio(hardware_interface);
 }
 
 void PicoHardwareInterface::initialise_input_pin(int pin_number)
