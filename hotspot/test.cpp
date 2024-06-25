@@ -9,6 +9,7 @@ int main()
 
    initialise_pico_stdio();
 
+   printf("Aboutt to do work\n");
    do_work();
 
    WiFiConnector connector;

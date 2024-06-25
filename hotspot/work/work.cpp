@@ -2,6 +2,7 @@
 #include "work.h"
 #include "worker.h"
 #include "picow_tcp_client.h"
+#include "gpiotest.h"
 
 #define WIFI_SSID "a907"
 #define WIFI_PASSWORD "?thisistheWIFIyouhavebeenlookingfor1398"
@@ -24,6 +25,8 @@ void process_data(void *data_object, const char *data)
 
 int do_work()
 {
+    main_gpio();
+
     Worker worker;
     REQUEST_PROCESSOR_T processor;
     processor.data_object = &worker;
