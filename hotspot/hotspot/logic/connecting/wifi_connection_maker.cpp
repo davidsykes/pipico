@@ -1,6 +1,6 @@
 #include <string.h>
 #include "wifi_connection_maker.h"
-#include "../common.h"
+#include "../../xxxcommon.h"
 
 WiFiConnectionMaker::WiFiConnectionMaker(IFlashHardware* flashHardware)
 {
@@ -27,6 +27,6 @@ bool WiFiConnectionMaker::CredentialsAreValid()
 }
 bool WiFiConnectionMaker::ConnectToWiFi()
 {
-    DEBUG_printf("WiFiConnectionMaker NOT IMPLEMENTED\n");
+    printf("WiFiConnectionMaker NOT IMPLEMENTED\n");
     return false;
 }

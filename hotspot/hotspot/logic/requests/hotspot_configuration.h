@@ -1,8 +1,8 @@
 #pragma once
 #include "configuration.h"
-#include "../logic/input_form/ihtml_renderer.h"
-#include "../logic/input_form/iinput_form_renderer.h"
-#include "../logic/credentials/credentials_handler.h"
+#include "../input_form/ihtml_renderer.h"
+#include "../input_form/iinput_form_renderer.h"
+#include "../credentials/credentials_handler.h"
 
 class HotSpotConfiguration : public Configuration
 {

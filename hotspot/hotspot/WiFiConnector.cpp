@@ -1,4 +1,4 @@
-#include "logic/common.h"
+#include "xxxcommon.h"
 #include "hotspot/c_interface.h"
 #include "WiFiConnector.h"
 #include "logic/flash/flash_hardware.h"

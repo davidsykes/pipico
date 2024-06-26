@@ -1,4 +1,4 @@
-#include "logic/common.h"
+#include <stdio.h>
 #include "hotspot/c_interface.h"
 #include "WiFiConnector.h"
 #include "work/work.h"
@@ -9,11 +9,11 @@ int main()
 
    initialise_pico_stdio();
 
-   printf("Aboutt to do work\n");
+   printf("About to do work\n");
    do_work();
 
    WiFiConnector connector;
    connector.ConnectToWiFi(input_form_hotspot_name);
 
-   DEBUG_printf("Ended..");
+   printf("Ended..");
 }

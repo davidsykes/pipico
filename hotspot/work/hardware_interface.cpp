@@ -1,5 +1,4 @@
 #include "hardware_interface.hpp"
-#include "gpiotest.h"
 
 PicoHardwareInterface::PicoHardwareInterface()
 {

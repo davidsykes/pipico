@@ -12,8 +12,8 @@
 #include "lwip/pbuf.h"
 #include "lwip/tcp.h"
 #include "c_interface.h"
-#include "dhcpserver.h"
-#include "dnsserver.h"
+#include "dhcpserver/dhcpserver.h"
+#include "dnsserver/dnsserver.h"
 
 #define TCP_PORT 80
 #define DEBUG_printf
