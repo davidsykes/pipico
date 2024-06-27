@@ -23,11 +23,8 @@ void process_data(void *data_object, const char *data)
     printf("Worker %d\n", worker->number());
 }
 
-int do_work()
+int do_work(IHardwareInterface& hwif)
 {
-    PicoHardwareInterface ph = PicoHardwareInterface();
-    IHardwareInterface& hwif = ph;
-
     int count = 6;
     while (count-- > 0)
     {

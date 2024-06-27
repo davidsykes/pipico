@@ -11,7 +11,6 @@ add_executable(test
         hotspot/low_level/dnsserver/dnsserver.c
         hotspot/low_level/flash_program.c
         hotspot/low_level/picow_access_point.c
-        hotspot/pico_logic.c
         hotspot/logic/flash/flash_hardware.cpp
         hotspot/logic/flash/flash_manager.cpp
         hotspot/logic/input_form/html_renderer.cpp
@@ -21,14 +20,16 @@ add_executable(test
         hotspot/logic/connecting/wifi_connection_maker.cpp
         hotspot/logic/requests/process_request.cpp
         hotspot/logic/requests/hotspot_configuration.cpp
+        hw_if/hardware_interface.c
+        hw_if/hardware_interface.cpp
+        work/gpio/gpio.cpp
         work/work.cpp
         work/picow_tcp_client.c
-        work/hardware_interface.c
-        work/hardware_interface.cpp
 )
 target_include_directories(test PRIVATE
         ${CMAKE_CURRENT_LIST_DIR}
         ${CMAKE_CURRENT_LIST_DIR}/hotspot # for our common lwipopts
+        hw_if
         )
 pico_enable_stdio_usb(test 1)
 pico_enable_stdio_uart(test 0)

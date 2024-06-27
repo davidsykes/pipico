@@ -6,6 +6,11 @@ PicoHardwareInterface::PicoHardwareInterface()
     hardware_interface->cyw43_arch_init();
 }
 
+void PicoHardwareInterface::initialise_pico_stdio()
+{
+    hardware_interface->initialise_pico_stdio();
+}
+
 void PicoHardwareInterface::initialise_input_pin(int pin_number)
 {
     hardware_interface->initialise_input_pin(pin_number);

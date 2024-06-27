@@ -1,7 +1,3 @@
-#ifdef __cplusplus
-extern "C" {
-#endif
-int do_work();
-#ifdef __cplusplus
-}
-#endif
+#include "hardware_interface.hpp"
+
+int do_work(IHardwareInterface& hwif);

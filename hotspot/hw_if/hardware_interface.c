@@ -1,11 +1,21 @@
 #include "hardware_interface.h"
 #include "pico/cyw43_arch.h"
+#include "tusb.h"
+
+void _initialise_pico_stdio()
+{
+    stdio_init_all();
+    while (!tud_cdc_connected()) sleep_ms(100);
+    printf("Stdio initialised\n");
+}
 
 void _cyw43_arch_init()
 {
+   printf("1esss\n");
     if (cyw43_arch_init()) {
         printf("Wi-Fi init failed");
     }
+   printf("1edddd\n");
 }
 
 void _initialise_input_pin(int pin_number)
@@ -44,6 +54,7 @@ sHardwareInterface* create_hardware_interface()
 {
     sHardwareInterface* hwif = calloc(1, sizeof(sHardwareInterface));
 
+    hwif->initialise_pico_stdio = &_initialise_pico_stdio;
     hwif->cyw43_arch_init = &_cyw43_arch_init;
     hwif->initialise_input_pin = &_initialise_input_pin;
     hwif->initialise_output_pin = &_initialise_output_pin;
