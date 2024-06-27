@@ -1,6 +1,6 @@
 #include <string.h>
 #include "wifi_connection_maker.h"
-#include "../../xxxcommon.h"
+#include "../../debugprintf.h"
 
 WiFiConnectionMaker::WiFiConnectionMaker(IFlashHardware* flashHardware)
 {
