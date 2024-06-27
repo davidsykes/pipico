@@ -6,27 +6,30 @@ set(CMAKE_CXX_STANDARD 17)
 pico_sdk_init()
 add_executable(test
         test.cpp
-        WiFiConnector.cpp
-        hotspot/dhcpserver/dhcpserver.c
-        hotspot/dnsserver/dnsserver.c
-        hotspot/flash_program.c
-        hotspot/pico_logic.c
-        hotspot/picow_access_point.c
-        logic/flash/flash_hardware.cpp
-        logic/flash/flash_manager.cpp
-        logic/input_form/html_renderer.cpp
-        logic/input_form/input_form_renderer.cpp
-        logic/credentials/credentials_handler.cpp
-        logic/credentials/percent_decoder.cpp
-        logic/connecting/wifi_connection_maker.cpp
-        logic/requests/process_request.cpp
-        logic/requests/hotspot_configuration.cpp
+        hotspot/WiFiConnector.cpp
+        hotspot/low_level/dhcpserver/dhcpserver.c
+        hotspot/low_level/dnsserver/dnsserver.c
+        hotspot/low_level/flash_program.c
+        hotspot/low_level/picow_access_point.c
+        hotspot/logic/flash/flash_hardware.cpp
+        hotspot/logic/flash/flash_manager.cpp
+        hotspot/logic/input_form/html_renderer.cpp
+        hotspot/logic/input_form/input_form_renderer.cpp
+        hotspot/logic/credentials/credentials_handler.cpp
+        hotspot/logic/credentials/percent_decoder.cpp
+        hotspot/logic/connecting/wifi_connection_maker.cpp
+        hotspot/logic/requests/process_request.cpp
+        hotspot/logic/requests/hotspot_configuration.cpp
+        hw_if/hardware_interface.c
+        hw_if/hardware_interface.cpp
+        work/gpio/gpio.cpp
+        work/work.cpp
+        work/picow_tcp_client.c
 )
 target_include_directories(test PRIVATE
         ${CMAKE_CURRENT_LIST_DIR}
         ${CMAKE_CURRENT_LIST_DIR}/hotspot # for our common lwipopts
-        ${CMAKE_CURRENT_LIST_DIR}/hotspot/dhcpserver
-        ${CMAKE_CURRENT_LIST_DIR}/hotspot/dnsserver
+        hw_if
         )
 pico_enable_stdio_usb(test 1)
 pico_enable_stdio_uart(test 0)

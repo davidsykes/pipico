@@ -1,4 +1,4 @@
-#include "logic/common.h"
+#include "debugprintf.h"
 #include "hotspot/c_interface.h"
 #include "WiFiConnector.h"
 #include "logic/flash/flash_hardware.h"
@@ -19,7 +19,7 @@ void WiFiConnector::ConnectToWiFi(const char* input_form_hotspot_name)
    {
       if (wifiConnectionMaker.ConnectToWiFi())
       {
-         DEBUG_printf("Connected");
+         DEBUG_printf("wifiConnectionMaker Connected");
          return;
       }
    }
