@@ -1,5 +1,4 @@
 #include <iostream>
-#include "Tests\configurations\LedConfigurationTests.h"
 #include "Tests\configurations\HotSpotConfigurationTests.h"
 #include "Tests\logic\input_form\HtmlRendererTests.h"
 #include "Tests\logic\input_form\InputFormRendererTests.h"
@@ -10,7 +9,6 @@
 
 int main()
 {
-    LedConfigurationTests().RunTests();
     HotSpotConfigurationTests().RunTests();
     HtmlRendererTests().RunTests();
     InputFormRendererTests().RunTests();
@@ -18,5 +16,6 @@ int main()
     CredentialsHandlerTests().RunTests();
     FlashManagerTests().RunTests();
     PercentDecoderTests().RunTests();
+    GPIOTests().RunTests();
     std::cout << "Tests Complete\n";
 }

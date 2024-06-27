@@ -1,7 +1,7 @@
 #include <memory>
 #include "TestFramework.h"
 #include "HotSpotConfigurationTests.h"
-#include "../logic/requests/hotspot_configuration.h"
+#include "hotspot_configuration.h"
 #include "Mocks/MockHtmlRenderer.h"
 #include "Mocks/MockInputFormRenderer.h"
 

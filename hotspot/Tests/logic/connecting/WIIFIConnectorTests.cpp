@@ -1,7 +1,8 @@
 #include <memory>
 #include "TestFramework.h"
 #include "WiFiConnectorTests.h"
-#include "wifi_connector.h"
+#include "WiFiConnector.h"
+#include "flash_hardware.h"
 
 
 static std::unique_ptr<IFlashHardware> flashHardware;

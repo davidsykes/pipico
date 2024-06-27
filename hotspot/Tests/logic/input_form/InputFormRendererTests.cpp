@@ -1,7 +1,7 @@
 #include <memory>
 #include "TestFramework.h"
 #include "InputFormRendererTests.h"
-#include "..\logic\input_form\input_form_renderer.h"
+#include "input_form_renderer.h"
 
 static std::unique_ptr<IInputFormRenderer> renderer;
 

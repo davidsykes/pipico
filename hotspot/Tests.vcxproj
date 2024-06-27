@@ -104,7 +104,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>D:\Development\pipico\hotspot\Tests\TestFramework;D:\Development\pipico\hotspot\Tests;D:\Development\pipico\hotspot\interface;D:\Development\pipico\hotspot\logic\connecting;D:\Development\pipico\hotspot\logic\credentials;D:\Development\pipico\hotspot\logic\flash;D:\Development\pipico\hotspot;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>D:\Development\pipico\hotspot\hotspot\logic\credentials;D:\Development\pipico\hotspot\hotspot;D:\Development\pipico\hotspot\Tests\TestFramework;D:\Development\pipico\hotspot\Tests;D:\Development\pipico\hotspot\hw_if;D:\Development\pipico\hotspot\hotspot\logic\flash;D:\Development\pipico\hotspot\hotspot\logic\input_form;D:\Development\pipico\hotspot\hotspot\logic\requests;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -128,18 +128,18 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="configurations\led_configuration.cpp" />
-    <ClCompile Include="logic\connecting\wifi_connector.cpp" />
-    <ClCompile Include="logic\credentials\credentials_handler.cpp" />
-    <ClCompile Include="logic\credentials\percent_decoder.cpp" />
-    <ClCompile Include="logic\flash\flash_manager.cpp" />
-    <ClCompile Include="logic\input_form\html_renderer.cpp" />
-    <ClCompile Include="logic\input_form\input_form_renderer.cpp" />
-    <ClCompile Include="logic\requests\hotspot_configuration.cpp" />
-    <ClCompile Include="logic\requests\process_request.cpp" />
+    <ClCompile Include="hotspot\logic\connecting\wifi_connection_maker.cpp" />
+    <ClCompile Include="hotspot\logic\credentials\credentials_handler.cpp" />
+    <ClCompile Include="hotspot\logic\credentials\percent_decoder.cpp" />
+    <ClCompile Include="hotspot\logic\flash\flash_hardware.cpp" />
+    <ClCompile Include="hotspot\logic\flash\flash_manager.cpp" />
+    <ClCompile Include="hotspot\logic\input_form\html_renderer.cpp" />
+    <ClCompile Include="hotspot\logic\input_form\input_form_renderer.cpp" />
+    <ClCompile Include="hotspot\logic\requests\hotspot_configuration.cpp" />
+    <ClCompile Include="hotspot\logic\requests\process_request.cpp" />
     <ClCompile Include="Tests.cpp" />
     <ClCompile Include="Tests\configurations\HotSpotConfigurationTests.cpp" />
-    <ClCompile Include="Tests\configurations\LedConfigurationTests.cpp" />
+    <ClCompile Include="Tests\gpio\GPIOTests.cpp" />
     <ClCompile Include="Tests\logic\connecting\WIIFIConnectorTests.cpp" />
     <ClCompile Include="Tests\logic\credentials\CredentialsHandlerTests.cpp" />
     <ClCompile Include="Tests\logic\credentials\PercentDecoderTests.cpp" />
@@ -154,21 +154,20 @@
     <ClCompile Include="Tests\TestFramework\TestModule.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="configurations\configuration.h" />
-    <ClInclude Include="configurations\led_configuration.h" />
-    <ClInclude Include="logic\connecting\wifi_connector.h" />
-    <ClInclude Include="logic\credentials\credentials_handler.h" />
-    <ClInclude Include="logic\credentials\percent_decoder.h" />
-    <ClInclude Include="logic\flash\flash_manager.h" />
-    <ClInclude Include="logic\input_form\html_renderer.h" />
-    <ClInclude Include="logic\input_form\ihtml_renderer.h" />
-    <ClInclude Include="logic\input_form\iinput_form_renderer.h" />
-    <ClInclude Include="logic\input_form\input_form_renderer.h" />
-    <ClInclude Include="logic\requests\configuration.h" />
-    <ClInclude Include="logic\requests\hotspot_configuration.h" />
-    <ClInclude Include="logic\requests\process_request.h" />
+    <ClInclude Include="hotspot\logic\connecting\wifi_connection_maker.h" />
+    <ClInclude Include="hotspot\logic\credentials\credentials_handler.h" />
+    <ClInclude Include="hotspot\logic\credentials\percent_decoder.h" />
+    <ClInclude Include="hotspot\logic\flash\flash_hardware.h" />
+    <ClInclude Include="hotspot\logic\flash\flash_manager.h" />
+    <ClInclude Include="hotspot\logic\input_form\html_renderer.h" />
+    <ClInclude Include="hotspot\logic\input_form\ihtml_renderer.h" />
+    <ClInclude Include="hotspot\logic\input_form\iinput_form_renderer.h" />
+    <ClInclude Include="hotspot\logic\input_form\input_form_renderer.h" />
+    <ClInclude Include="hotspot\logic\requests\configuration.h" />
+    <ClInclude Include="hotspot\logic\requests\hotspot_configuration.h" />
+    <ClInclude Include="hotspot\logic\requests\process_request.h" />
     <ClInclude Include="Tests\configurations\HotSpotConfigurationTests.h" />
-    <ClInclude Include="Tests\configurations\LedConfigurationTests.h" />
+    <ClInclude Include="Tests\gpio\GPIOTests.h" />
     <ClInclude Include="Tests\logic\connecting\WIFIConnectorTests.h" />
     <ClInclude Include="Tests\logic\credentials\CredentialsHandlerTests.h" />
     <ClInclude Include="Tests\logic\credentials\PercentDecoderTests.h" />

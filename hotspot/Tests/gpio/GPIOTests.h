@@ -1,8 +1,7 @@
 #pragma once
 #include "TestFramework.h"
 
-
-class LedConfigurationTests : public ITestModule
+class GPIOTests : public ITestModule
 {
 	virtual void CleanUpAfterTests();
 public:

@@ -1,7 +1,7 @@
 #include <memory>
 #include "TestFramework.h"
 #include "HtmlRendererTests.h"
-#include "..\logic\input_form\html_renderer.h"
+#include "html_renderer.h"
 
 static std::unique_ptr<IHtmlRenderer> htmlRenderer;
 

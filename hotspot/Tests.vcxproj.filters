@@ -16,23 +16,8 @@
     <Filter Include="Source Files\Tests">
       <UniqueIdentifier>{264c17fd-4f1e-4f32-a6d6-ff336c0992e5}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\configurations">
-      <UniqueIdentifier>{f4a35d3a-6fdf-4e82-8397-3736e7079c96}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\logic">
-      <UniqueIdentifier>{960cb8aa-e68e-432c-af0d-b8184629ed76}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Source Files\Tests\Mocks">
       <UniqueIdentifier>{a88f8a72-ef0d-4c72-81b9-7dbfc6eb5a6d}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\logic\input_form">
-      <UniqueIdentifier>{b3ffffc6-23ba-40f0-a49b-cd2570dd09ed}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\logic\credentials">
-      <UniqueIdentifier>{c28a13bd-2313-454b-9b52-1a3b945d77ae}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\logic\connecting">
-      <UniqueIdentifier>{0b60d068-edea-476a-b700-b6815b6fcfae}</UniqueIdentifier>
     </Filter>
     <Filter Include="Source Files\Tests\logic">
       <UniqueIdentifier>{1cbfab07-31fd-4524-96ad-b6cd85976173}</UniqueIdentifier>
@@ -43,14 +28,8 @@
     <Filter Include="Source Files\Tests\logic\connecting">
       <UniqueIdentifier>{066d8bb7-50a3-491f-8ea2-4b5a3d3116ec}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\Tests\TestFramework">
-      <UniqueIdentifier>{a15c73a7-6781-40e9-a01e-6e386b351422}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Source Files\Tests\logic\credentials">
       <UniqueIdentifier>{c703e3aa-3d4a-44cb-8f7e-e673fbc233dc}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\logic\flash">
-      <UniqueIdentifier>{9611ecae-476a-48fd-9ec4-913e58db68be}</UniqueIdentifier>
     </Filter>
     <Filter Include="Source Files\Tests\logic\flash">
       <UniqueIdentifier>{e5e2c4d9-5529-46cb-aef8-027f9bc8e8d7}</UniqueIdentifier>
@@ -58,14 +37,35 @@
     <Filter Include="Source Files\Tests\configurations">
       <UniqueIdentifier>{b1bd991a-79b0-4143-9b3a-ceae5850db40}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\logic\requests">
-      <UniqueIdentifier>{eed558ab-4f35-49a5-b3a9-66e372c9764c}</UniqueIdentifier>
+    <Filter Include="Source Files\Tests\TestFramework">
+      <UniqueIdentifier>{a15c73a7-6781-40e9-a01e-6e386b351422}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Tests\gpio">
+      <UniqueIdentifier>{6042fd35-6f7e-42ce-aeeb-56b662fa6e6f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\hotspot">
+      <UniqueIdentifier>{1edd5930-c78b-4b55-8a2a-c74bce583438}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\hotspot\logic">
+      <UniqueIdentifier>{3e1aff8c-b767-4de4-837f-b41d71701943}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\hotspot\logic\requests">
+      <UniqueIdentifier>{ab4261f7-2b2f-41ae-86c3-06a8fd77de7f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\hotspot\logic\input_form">
+      <UniqueIdentifier>{1c50af89-5b48-4a21-8aa1-799412a75c46}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\hotspot\logic\connecting">
+      <UniqueIdentifier>{e7170d7d-770f-4cb4-ab86-364b06fa708c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\hotspot\logic\credentials">
+      <UniqueIdentifier>{7860a865-60b2-417f-ae23-94c3adc08a9d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\hotspot\logic\flash">
+      <UniqueIdentifier>{47e37eb7-2d9c-4d4d-90be-1e3641e69c96}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="configurations\led_configuration.cpp">
-      <Filter>Source Files\configurations</Filter>
-    </ClCompile>
     <ClCompile Include="Tests.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -78,23 +78,11 @@
     <ClCompile Include="Tests\Mocks\MockInputFormRenderer.cpp">
       <Filter>Source Files\Tests\Mocks</Filter>
     </ClCompile>
-    <ClCompile Include="logic\input_form\html_renderer.cpp">
-      <Filter>Source Files\logic\input_form</Filter>
-    </ClCompile>
-    <ClCompile Include="logic\input_form\input_form_renderer.cpp">
-      <Filter>Source Files\logic\input_form</Filter>
-    </ClCompile>
-    <ClCompile Include="logic\credentials\credentials_handler.cpp">
-      <Filter>Source Files\logic\credentials</Filter>
-    </ClCompile>
     <ClCompile Include="Tests\logic\input_form\HtmlRendererTests.cpp">
       <Filter>Source Files\Tests\logic\input_form</Filter>
     </ClCompile>
     <ClCompile Include="Tests\logic\input_form\InputFormRendererTests.cpp">
       <Filter>Source Files\Tests\logic\input_form</Filter>
-    </ClCompile>
-    <ClCompile Include="logic\connecting\wifi_connector.cpp">
-      <Filter>Source Files\logic\connecting</Filter>
     </ClCompile>
     <ClCompile Include="Tests\logic\connecting\WIIFIConnectorTests.cpp">
       <Filter>Source Files\Tests\logic\connecting</Filter>
@@ -111,9 +99,6 @@
     <ClCompile Include="Tests\logic\credentials\CredentialsHandlerTests.cpp">
       <Filter>Source Files\Tests\logic\credentials</Filter>
     </ClCompile>
-    <ClCompile Include="logic\flash\flash_manager.cpp">
-      <Filter>Source Files\logic\flash</Filter>
-    </ClCompile>
     <ClCompile Include="Tests\logic\flash\FlashManagerTests.cpp">
       <Filter>Source Files\Tests\logic\flash</Filter>
     </ClCompile>
@@ -123,26 +108,38 @@
     <ClCompile Include="Tests\configurations\HotSpotConfigurationTests.cpp">
       <Filter>Source Files\Tests\configurations</Filter>
     </ClCompile>
-    <ClCompile Include="Tests\configurations\LedConfigurationTests.cpp">
-      <Filter>Source Files\Tests\configurations</Filter>
+    <ClCompile Include="Tests\gpio\GPIOTests.cpp">
+      <Filter>Source Files\Tests\gpio</Filter>
     </ClCompile>
-    <ClCompile Include="logic\credentials\percent_decoder.cpp">
-      <Filter>Source Files\logic\credentials</Filter>
+    <ClCompile Include="hotspot\logic\requests\hotspot_configuration.cpp">
+      <Filter>Source Files\hotspot\logic\requests</Filter>
     </ClCompile>
-    <ClCompile Include="logic\requests\hotspot_configuration.cpp">
-      <Filter>Source Files\logic\requests</Filter>
+    <ClCompile Include="hotspot\logic\requests\process_request.cpp">
+      <Filter>Source Files\hotspot\logic\requests</Filter>
     </ClCompile>
-    <ClCompile Include="logic\requests\process_request.cpp">
-      <Filter>Source Files\logic\requests</Filter>
+    <ClCompile Include="hotspot\logic\input_form\html_renderer.cpp">
+      <Filter>Source Files\hotspot\logic\input_form</Filter>
+    </ClCompile>
+    <ClCompile Include="hotspot\logic\input_form\input_form_renderer.cpp">
+      <Filter>Source Files\hotspot\logic\input_form</Filter>
+    </ClCompile>
+    <ClCompile Include="hotspot\logic\connecting\wifi_connection_maker.cpp">
+      <Filter>Source Files\hotspot\logic\connecting</Filter>
+    </ClCompile>
+    <ClCompile Include="hotspot\logic\credentials\credentials_handler.cpp">
+      <Filter>Source Files\hotspot\logic\credentials</Filter>
+    </ClCompile>
+    <ClCompile Include="hotspot\logic\credentials\percent_decoder.cpp">
+      <Filter>Source Files\hotspot\logic\credentials</Filter>
+    </ClCompile>
+    <ClCompile Include="hotspot\logic\flash\flash_hardware.cpp">
+      <Filter>Source Files\hotspot\logic\flash</Filter>
+    </ClCompile>
+    <ClCompile Include="hotspot\logic\flash\flash_manager.cpp">
+      <Filter>Source Files\hotspot\logic\flash</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="configurations\configuration.h">
-      <Filter>Source Files\configurations</Filter>
-    </ClInclude>
-    <ClInclude Include="configurations\led_configuration.h">
-      <Filter>Source Files\configurations</Filter>
-    </ClInclude>
     <ClInclude Include="Tests\Mocks\MockCredentialsHandler.h">
       <Filter>Source Files\Tests\Mocks</Filter>
     </ClInclude>
@@ -152,29 +149,11 @@
     <ClInclude Include="Tests\Mocks\MockInputFormRenderer.h">
       <Filter>Source Files\Tests\Mocks</Filter>
     </ClInclude>
-    <ClInclude Include="logic\input_form\html_renderer.h">
-      <Filter>Source Files\logic\input_form</Filter>
-    </ClInclude>
-    <ClInclude Include="logic\input_form\ihtml_renderer.h">
-      <Filter>Source Files\logic\input_form</Filter>
-    </ClInclude>
-    <ClInclude Include="logic\input_form\iinput_form_renderer.h">
-      <Filter>Source Files\logic\input_form</Filter>
-    </ClInclude>
-    <ClInclude Include="logic\input_form\input_form_renderer.h">
-      <Filter>Source Files\logic\input_form</Filter>
-    </ClInclude>
-    <ClInclude Include="logic\credentials\credentials_handler.h">
-      <Filter>Source Files\logic\credentials</Filter>
-    </ClInclude>
     <ClInclude Include="Tests\logic\input_form\HtmlRendererTests.h">
       <Filter>Source Files\Tests\logic\input_form</Filter>
     </ClInclude>
     <ClInclude Include="Tests\logic\input_form\InputFormRendererTests.h">
       <Filter>Source Files\Tests\logic\input_form</Filter>
-    </ClInclude>
-    <ClInclude Include="logic\connecting\wifi_connector.h">
-      <Filter>Source Files\logic\connecting</Filter>
     </ClInclude>
     <ClInclude Include="Tests\logic\connecting\WIFIConnectorTests.h">
       <Filter>Source Files\Tests\logic\connecting</Filter>
@@ -191,12 +170,6 @@
     <ClInclude Include="Tests\logic\credentials\CredentialsHandlerTests.h">
       <Filter>Source Files\Tests\logic\credentials</Filter>
     </ClInclude>
-    <ClInclude Include="logic\credentials\percent_decoder.h">
-      <Filter>Source Files\logic\credentials</Filter>
-    </ClInclude>
-    <ClInclude Include="logic\flash\flash_manager.h">
-      <Filter>Source Files\logic\flash</Filter>
-    </ClInclude>
     <ClInclude Include="Tests\logic\flash\FlashManagerTests.h">
       <Filter>Source Files\Tests\logic\flash</Filter>
     </ClInclude>
@@ -206,17 +179,44 @@
     <ClInclude Include="Tests\configurations\HotSpotConfigurationTests.h">
       <Filter>Source Files\Tests\configurations</Filter>
     </ClInclude>
-    <ClInclude Include="Tests\configurations\LedConfigurationTests.h">
-      <Filter>Source Files\Tests\configurations</Filter>
+    <ClInclude Include="Tests\gpio\GPIOTests.h">
+      <Filter>Source Files\Tests\gpio</Filter>
     </ClInclude>
-    <ClInclude Include="logic\requests\configuration.h">
-      <Filter>Source Files\logic\requests</Filter>
+    <ClInclude Include="hotspot\logic\requests\configuration.h">
+      <Filter>Source Files\hotspot\logic\requests</Filter>
     </ClInclude>
-    <ClInclude Include="logic\requests\hotspot_configuration.h">
-      <Filter>Source Files\logic\requests</Filter>
+    <ClInclude Include="hotspot\logic\requests\hotspot_configuration.h">
+      <Filter>Source Files\hotspot\logic\requests</Filter>
     </ClInclude>
-    <ClInclude Include="logic\requests\process_request.h">
-      <Filter>Source Files\logic\requests</Filter>
+    <ClInclude Include="hotspot\logic\requests\process_request.h">
+      <Filter>Source Files\hotspot\logic\requests</Filter>
+    </ClInclude>
+    <ClInclude Include="hotspot\logic\input_form\html_renderer.h">
+      <Filter>Source Files\hotspot\logic\input_form</Filter>
+    </ClInclude>
+    <ClInclude Include="hotspot\logic\input_form\ihtml_renderer.h">
+      <Filter>Source Files\hotspot\logic\input_form</Filter>
+    </ClInclude>
+    <ClInclude Include="hotspot\logic\input_form\iinput_form_renderer.h">
+      <Filter>Source Files\hotspot\logic\input_form</Filter>
+    </ClInclude>
+    <ClInclude Include="hotspot\logic\input_form\input_form_renderer.h">
+      <Filter>Source Files\hotspot\logic\input_form</Filter>
+    </ClInclude>
+    <ClInclude Include="hotspot\logic\connecting\wifi_connection_maker.h">
+      <Filter>Source Files\hotspot\logic\connecting</Filter>
+    </ClInclude>
+    <ClInclude Include="hotspot\logic\credentials\credentials_handler.h">
+      <Filter>Source Files\hotspot\logic\credentials</Filter>
+    </ClInclude>
+    <ClInclude Include="hotspot\logic\credentials\percent_decoder.h">
+      <Filter>Source Files\hotspot\logic\credentials</Filter>
+    </ClInclude>
+    <ClInclude Include="hotspot\logic\flash\flash_hardware.h">
+      <Filter>Source Files\hotspot\logic\flash</Filter>
+    </ClInclude>
+    <ClInclude Include="hotspot\logic\flash\flash_manager.h">
+      <Filter>Source Files\hotspot\logic\flash</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
