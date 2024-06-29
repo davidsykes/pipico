@@ -252,14 +252,10 @@ void run_tcp_client_test(REQUEST_PROCESSOR_T* processor, const char* server_ip, 
 }
 
 int tcp_client_initialise(
+    sHardwareInterface* hw_if,
     const char* ssid,
     const char* password) {
     stdio_init_all();
-
-    if (cyw43_arch_init()) {
-        DEBUG_printf("failed to initialise\n");
-        return 1;
-    }
     cyw43_arch_enable_sta_mode();
 
     printf("Connecting to Wi-Fi %s %s...\n", ssid, password);
@@ -270,11 +266,6 @@ int tcp_client_initialise(
         printf("Connected.\n");
     }
 }
-
-// int tcp_client_run(REQUEST_PROCESSOR_T* processor, const char* server_ip, uint port, const char* request) {
-//     run_tcp_client_test(processor, server_ip, port, request);
-//     return 0;
-// }
 
 void tcp_client_uninit() {
     cyw43_arch_deinit();

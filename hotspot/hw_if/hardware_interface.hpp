@@ -5,6 +5,7 @@
 class IHardwareInterface
 {
 public:
+    virtual sHardwareInterface* raw_if()=0;
     virtual void initialise_pico_stdio()=0;
     virtual void initialise_input_pin(int pin_number)=0;
     virtual void initialise_output_pin(int pin_number)=0;
@@ -29,4 +30,5 @@ class PicoHardwareInterface : public IHardwareInterface
 
 public:
     PicoHardwareInterface();
+    virtual sHardwareInterface* raw_if(){return hardware_interface;}
 };

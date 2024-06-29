@@ -23,6 +23,8 @@ add_executable(test
         hw_if/hardware_interface.c
         hw_if/hardware_interface.cpp
         gpio/gpio_input.cpp
+        pico_scope/pico_scope.cpp
+        pico_scope/pico_scope_trace.cpp
         work/work.cpp
         work/picow_tcp_client.c
 )

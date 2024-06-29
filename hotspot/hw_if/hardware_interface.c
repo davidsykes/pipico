@@ -9,13 +9,14 @@ void _initialise_pico_stdio()
     printf("Stdio initialised\n");
 }
 
-void _cyw43_arch_init()
+int _cyw43_arch_init()
 {
-   printf("1esss\n");
-    if (cyw43_arch_init()) {
+   int err = cyw43_arch_init();
+    if (err) {
         printf("Wi-Fi init failed");
+        return err;
     }
-   printf("1edddd\n");
+   return 0;
 }
 
 void _initialise_input_pin(int pin_number)

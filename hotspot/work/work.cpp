@@ -3,6 +3,7 @@
 #include "worker.h"
 #include "picow_tcp_client.h"
 #include "hardware_interface.hpp"
+#include "pico_scope/pico_scope.h"
 
 #define WIFI_SSID "a907"
 #define WIFI_PASSWORD "?thisistheWIFIyouhavebeenlookingfor1398"
@@ -25,30 +26,18 @@ void process_data(void *data_object, const char *data)
 
 int do_work(IHardwareInterface& hwif)
 {
-    int count = 6;
-    while (count-- > 0)
-    {
-        hwif.set_led(1);
-        hwif.sleep_us(100000);
-        hwif.set_led(0);
-        hwif.sleep_us(100000);
-    }
-
-    int config = -1;
-    while(true)
-    {
-        int nconfig =
+    hwif.set_led(1);
+    
+    int config =
         hwif.gpio_get(5) * 8 +
         hwif.gpio_get(4) * 4 +
         hwif.gpio_get(3) * 2 +
-        hwif.gpio_get(2);
-
-        if (nconfig != config)
-        {
-            config = nconfig;
-            printf("Config %d\n", config);
-        }
-    }
+        hwif.gpio_get(15);
+    printf("Config %d\n", config);
+    
+    PicoScope scope = PicoScope();
+    PicoScopeTrace trace = scope.FetchTrace();
+    printf("Trace %s\n", trace.gethtml());
 
     Worker worker;
     REQUEST_PROCESSOR_T processor;
@@ -57,8 +46,7 @@ int do_work(IHardwareInterface& hwif)
     processor.process_data = &process_data;
 
     char buffer[BUFFER_LENGTH];
-
-    tcp_client_initialise(WIFI_SSID, WIFI_PASSWORD);
+    tcp_client_initialise(hwif.raw_if(), WIFI_SSID, WIFI_PASSWORD);
 
     run_tcp_client_test(&processor, TEST_TCP_SERVER_IP, TCP_PORT, "GET /codes HTTP/1.1\r\nHost: test.com\r\nAccept: */*\r\n\r\n", buffer, BUFFER_LENGTH);
     printf("--Restule 1--\n%s\n+++", buffer);
