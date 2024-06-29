@@ -128,6 +128,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="gpio\gpio_input.cpp" />
     <ClCompile Include="hotspot\logic\connecting\wifi_connection_maker.cpp" />
     <ClCompile Include="hotspot\logic\credentials\credentials_handler.cpp" />
     <ClCompile Include="hotspot\logic\credentials\percent_decoder.cpp" />
@@ -153,6 +154,7 @@
     <ClCompile Include="Tests\TestFramework\TestModule.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="gpio\gpio.h" />
     <ClInclude Include="hotspot\logic\connecting\wifi_connection_maker.h" />
     <ClInclude Include="hotspot\logic\credentials\credentials_handler.h" />
     <ClInclude Include="hotspot\logic\credentials\percent_decoder.h" />
