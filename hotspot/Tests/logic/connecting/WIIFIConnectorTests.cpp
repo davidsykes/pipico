@@ -1,12 +1,12 @@
 #include <memory>
 #include "TestFramework.h"
 #include "WiFiConnectorTests.h"
-#include "WiFiConnector.h"
+#include "wifi_connection_maker.h"
 #include "flash_hardware.h"
 
 
 static std::unique_ptr<IFlashHardware> flashHardware;
-static std::unique_ptr<WiFiConnector> wiFiConnector;
+static std::unique_ptr<WiFiConnectionMaker> wiFiConnector;
 static uint8_t flashContents[256];
 
 class MockWCFlashHardware : public IFlashHardware
@@ -18,10 +18,10 @@ class MockWCFlashHardware : public IFlashHardware
 	virtual void WriteFlash(const uint8_t*) {}
 };
 
-static WiFiConnector* CreateTestObject()
+static WiFiConnectionMaker* CreateTestObject()
 {
 	flashHardware.reset(new MockWCFlashHardware());
-	WiFiConnector* wc = new WiFiConnector(flashHardware.get());
+	WiFiConnectionMaker* wc = new WiFiConnectionMaker(flashHardware.get());
 	wiFiConnector.reset(wc);
 
 	return wiFiConnector.get();
@@ -41,14 +41,14 @@ static void MakeSimpleCredentials()
 static void IfNoCredentialsExistThenCredentialsAreValidIsFalse()
 {
 	MakeEmptyFlashContents();
-	WiFiConnector* testObject = CreateTestObject();
+	WiFiConnectionMaker* testObject = CreateTestObject();
 	AssertFalse(testObject->CredentialsAreValid());
 }
 
 static void IfCredentialsExistThenCredentialsAreValidIsTrue()
 {
 	MakeSimpleCredentials();
-	WiFiConnector* testObject = CreateTestObject();
+	WiFiConnectionMaker* testObject = CreateTestObject();
 	AssertTrue(testObject->CredentialsAreValid());
 }
 

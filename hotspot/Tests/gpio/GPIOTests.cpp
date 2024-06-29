@@ -1,12 +1,59 @@
+#include <memory>
 #include "GPIOTests.h"
 #include "../../work/gpio/gpio.h"
 
-
-void GPIOTests::RunTests()
+class MockHardwareInterface : public IHardwareInterface
 {
+	virtual void initialise_pico_stdio() {}
+	virtual void initialise_input_pin(int pin_number) { initialised_pin_number = pin_number; }
+	virtual void initialise_output_pin(int pin_number) {}
+	virtual int gpio_get(int pin_number) { return 0; }
+	virtual void gpio_put(int pin_number, int value) {}
+	virtual void set_led(bool value) {}
+	virtual void sleep_us(int useconds) {}
+public:
+	int initialised_pin_number = 0;
+};
+
+static std::unique_ptr<MockHardwareInterface> hardwareInterface;
+
+
+MockHardwareInterface& CreateHardwareInterface()
+{
+	hardwareInterface.reset(new MockHardwareInterface());
+	return *hardwareInterface.get();
+}
+
+void GPIOInputPinInitialisesTheInputPin()
+{
+	MockHardwareInterface& hw_if = CreateHardwareInterface();
+
+	GPIOInputPin ip(5, hw_if);
+
+	AssertEqual(5, hw_if.initialised_pin_number);
+}
+
+void GPIOInputPinReturnsHardwareValues()
+{
+	MockHardwareInterface& hw_if = CreateHardwareInterface();
+
 	GPIOInputPin ip(5, hw_if);
 
 	bool result = ip.Value();
 
 	AssertTrue(result);
+}
+
+
+void GPIOTests::RunTests()
+{
+	GPIOInputPinInitialisesTheInputPin();
+	GPIOInputPinReturnsHardwareValues();
+}
+
+
+
+void GPIOTests::CleanUpAfterTests()
+{
+	hardwareInterface.release();
 }

@@ -132,9 +132,6 @@
     <ClCompile Include="hotspot\logic\credentials\percent_decoder.cpp">
       <Filter>Source Files\hotspot\logic\credentials</Filter>
     </ClCompile>
-    <ClCompile Include="hotspot\logic\flash\flash_hardware.cpp">
-      <Filter>Source Files\hotspot\logic\flash</Filter>
-    </ClCompile>
     <ClCompile Include="hotspot\logic\flash\flash_manager.cpp">
       <Filter>Source Files\hotspot\logic\flash</Filter>
     </ClCompile>

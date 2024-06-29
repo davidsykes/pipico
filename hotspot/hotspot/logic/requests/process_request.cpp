@@ -3,10 +3,13 @@
 
 #define SIZE_ERROR "<html><body><h1>FORM CONTENT EXCEEDS BUFFER</h1></body></html>"
 
+#ifdef _CONSOLE
+#else
 void strcpy_s(char *dest, size_t max, const char*source)
 {
    strcpy(dest, source);
 }
+#endif
 
 size_t process_request(void *configuration, const char *request, const char *params, char *result, size_t max_result_len)
 {

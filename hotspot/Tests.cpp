@@ -6,6 +6,7 @@
 #include "Tests\logic\credentials\CredentialsHandlerTests.h"
 #include "Tests\logic\credentials\PercentDecoderTests.h"
 #include "Tests\logic\flash\FlashManagerTests.h"
+#include "Tests\gpio\GPIOTests.h"
 
 int main()
 {
