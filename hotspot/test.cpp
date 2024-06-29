@@ -2,7 +2,7 @@
 #include "hotspot/c_interface.h"
 #include "WiFiConnector.h"
 #include "hw_if/hardware_interface.hpp"
-#include "work/gpio/gpio.h"
+#include "gpio/gpio.h"
 #include "work/work.h"
 
 int main()

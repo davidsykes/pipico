@@ -22,7 +22,7 @@ add_executable(test
         hotspot/logic/requests/hotspot_configuration.cpp
         hw_if/hardware_interface.c
         hw_if/hardware_interface.cpp
-        work/gpio/gpio.cpp
+        gpio/gpio_input.cpp
         work/work.cpp
         work/picow_tcp_client.c
 )
