@@ -49,7 +49,7 @@ uint64_t _wait_value(int pin_number, int required_value, uint64_t timeout)
         }
         if (now - start >= timeout)
         {
-            return 012;
+            return 0;
         }
     }
 }

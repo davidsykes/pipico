@@ -1,5 +1,6 @@
 #pragma once
 #include <string>
+#include "hardware_interface.hpp"
 
 
 class PicoScopeTrace
@@ -11,5 +12,6 @@ public:
 class PicoScope
 {
 public:
+    PicoScope(IHardwareInterface& hw_if);
     PicoScopeTrace& FetchTrace();
 };

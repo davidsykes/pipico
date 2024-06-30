@@ -67,6 +67,12 @@
     <Filter Include="Source Files\gpio">
       <UniqueIdentifier>{0299247f-f829-4ebc-84db-3a23336f45fe}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\pico_scope">
+      <UniqueIdentifier>{1e960e3a-ed63-4345-814e-a05439e4cdee}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Tests\pico_scope">
+      <UniqueIdentifier>{66a97076-c406-4977-ae8d-78f32b369bbf}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Tests.cpp">
@@ -140,6 +146,15 @@
     </ClCompile>
     <ClCompile Include="gpio\gpio_input.cpp">
       <Filter>Source Files\gpio</Filter>
+    </ClCompile>
+    <ClCompile Include="pico_scope\pico_scope.cpp">
+      <Filter>Source Files\pico_scope</Filter>
+    </ClCompile>
+    <ClCompile Include="pico_scope\pico_scope_trace.cpp">
+      <Filter>Source Files\pico_scope</Filter>
+    </ClCompile>
+    <ClCompile Include="Tests\pico_scope\PicoScopeTests.cpp">
+      <Filter>Source Files\Tests\pico_scope</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -223,6 +238,15 @@
     </ClInclude>
     <ClInclude Include="gpio\gpio.h">
       <Filter>Source Files\gpio</Filter>
+    </ClInclude>
+    <ClInclude Include="pico_scope\pico_scope.h">
+      <Filter>Source Files\pico_scope</Filter>
+    </ClInclude>
+    <ClInclude Include="Tests\pico_scope\PicoScopeTests.h">
+      <Filter>Source Files\Tests\pico_scope</Filter>
+    </ClInclude>
+    <ClInclude Include="Tests\Mocks\MockHardwareInteface.h">
+      <Filter>Source Files\Tests\Mocks</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

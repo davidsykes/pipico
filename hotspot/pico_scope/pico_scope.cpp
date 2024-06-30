@@ -2,6 +2,10 @@
 
 
 
+PicoScope::PicoScope(IHardwareInterface& hw_if)
+{
+
+}
 
 PicoScopeTrace& PicoScope::FetchTrace()
 {

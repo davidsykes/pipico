@@ -137,6 +137,8 @@
     <ClCompile Include="hotspot\logic\input_form\input_form_renderer.cpp" />
     <ClCompile Include="hotspot\logic\requests\hotspot_configuration.cpp" />
     <ClCompile Include="hotspot\logic\requests\process_request.cpp" />
+    <ClCompile Include="pico_scope\pico_scope.cpp" />
+    <ClCompile Include="pico_scope\pico_scope_trace.cpp" />
     <ClCompile Include="Tests.cpp" />
     <ClCompile Include="Tests\configurations\HotSpotConfigurationTests.cpp" />
     <ClCompile Include="Tests\gpio\GPIOTests.cpp" />
@@ -149,6 +151,7 @@
     <ClCompile Include="Tests\Mocks\MockCredentialsHandler.cpp" />
     <ClCompile Include="Tests\Mocks\MockHtmlRenderer.cpp" />
     <ClCompile Include="Tests\Mocks\MockInputFormRenderer.cpp" />
+    <ClCompile Include="Tests\pico_scope\PicoScopeTests.cpp" />
     <ClCompile Include="Tests\TestFramework\Assert.cpp" />
     <ClCompile Include="Tests\TestFramework\TestFramework.cpp" />
     <ClCompile Include="Tests\TestFramework\TestModule.cpp" />
@@ -167,6 +170,7 @@
     <ClInclude Include="hotspot\logic\requests\configuration.h" />
     <ClInclude Include="hotspot\logic\requests\hotspot_configuration.h" />
     <ClInclude Include="hotspot\logic\requests\process_request.h" />
+    <ClInclude Include="pico_scope\pico_scope.h" />
     <ClInclude Include="Tests\configurations\HotSpotConfigurationTests.h" />
     <ClInclude Include="Tests\gpio\GPIOTests.h" />
     <ClInclude Include="Tests\logic\connecting\WIFIConnectorTests.h" />
@@ -176,8 +180,10 @@
     <ClInclude Include="Tests\logic\input_form\HtmlRendererTests.h" />
     <ClInclude Include="Tests\logic\input_form\InputFormRendererTests.h" />
     <ClInclude Include="Tests\Mocks\MockCredentialsHandler.h" />
+    <ClInclude Include="Tests\Mocks\MockHardwareInteface.h" />
     <ClInclude Include="Tests\Mocks\MockHtmlRenderer.h" />
     <ClInclude Include="Tests\Mocks\MockInputFormRenderer.h" />
+    <ClInclude Include="Tests\pico_scope\PicoScopeTests.h" />
     <ClInclude Include="Tests\TestFramework\Assert.h" />
     <ClInclude Include="Tests\TestFramework\ITestModule.h" />
     <ClInclude Include="Tests\TestFramework\TestFramework.h" />
