@@ -36,6 +36,24 @@ int _gpio_get(int pin_number)
     return gpio_get(pin_number);
 }
 
+uint64_t _wait_value(int pin_number, int required_value, uint64_t timeout)
+{
+    uint64_t start = time_us_64();
+    while (true)
+    {
+        int value = gpio_get(pin_number);
+        uint64_t now = time_us_64();
+        if ( value == required_value)
+        {
+            return now;
+        }
+        if (now - start >= timeout)
+        {
+            return 012;
+        }
+    }
+}
+
 void _gpio_put(int pin_number, int value)
 {
     gpio_put(pin_number, value);
@@ -60,6 +78,7 @@ sHardwareInterface* create_hardware_interface()
     hwif->initialise_input_pin = &_initialise_input_pin;
     hwif->initialise_output_pin = &_initialise_output_pin;
     hwif->gpio_get = &_gpio_get;
+    hwif->wait_value = &_wait_value;
     hwif->gpio_put = &_gpio_put;
     hwif->set_led = &_set_led;
     hwif->sleep_us = &_sleep_us;

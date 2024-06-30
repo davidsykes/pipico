@@ -26,6 +26,11 @@ int PicoHardwareInterface::gpio_get(int pin_number)
     return hardware_interface->gpio_get(pin_number);
 }
 
+uint64_t PicoHardwareInterface::wait_value(int pin_number, int value, uint64_t timeout)
+{
+    return hardware_interface->wait_value(pin_number, value, timeout);
+}
+
 void PicoHardwareInterface::gpio_put(int pin_number, int value)
 {
     hardware_interface->gpio_put(pin_number, value);

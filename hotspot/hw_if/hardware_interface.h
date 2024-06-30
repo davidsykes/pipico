@@ -1,4 +1,5 @@
 #pragma once
+#include "pico/stdlib.h"
 
 typedef struct sHardwareInterface
 {
@@ -7,6 +8,7 @@ typedef struct sHardwareInterface
     void (*initialise_input_pin)(int pin_number);
     void (*initialise_output_pin)(int pin_number);
     int (*gpio_get)(int pin_number);
+    uint64_t (*wait_value)(int pin_number, int value, uint64_t timeout);
     void (*gpio_put)(int pin_number, int value);
     void (*set_led)(int value);
     void (*sleep_us)(int useconds);
@@ -23,4 +25,3 @@ sHardwareInterface* create_hardware_interface();
 #ifdef __cplusplus
 }
 #endif
-

@@ -17,7 +17,7 @@
 char get_pins()
 {
     return (char)(gpio_get_all() >> 8);
-}
+}sHardwareInterface
 
 void send_bytes(unsigned char *p, int n)
 {
@@ -47,7 +47,7 @@ void send_all_data(unsigned int* times, unsigned char *values, int count)
 {
     send_int(0x12345678);
     send_int(count);
-    for (int i = 0 ; i < count ; i++)
+    for (int i = 0 ; i < count ; i++)sHardwareInterface
     {
         send_int(times[i]);
         send_char(values[i]);
