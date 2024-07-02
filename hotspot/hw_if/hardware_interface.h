@@ -1,5 +1,5 @@
 #pragma once
-#ifdef VISUAL_STUDIO
+#ifdef _CONSOLE
 #include <cinttypes>
 #else
 #include "pico/types.h"

@@ -33,7 +33,7 @@ static void ASimpleTraceCanBeCaptured()
 {
 	MockHardwareInterface& hw_if = CreateHardwareInterface();
 	hw_if.Initialise(0, { 1, 5, 11, 23 });
-	PicoScope scope(hw_if);
+	PicoScope scope(hw_if, 1000);
 
 	PicoScopeTrace trace = scope.FetchTrace(trace_pin);
 
@@ -45,7 +45,7 @@ static void ATraceCanTriggerOnAFallingSignal()
 {
 	MockHardwareInterface& hw_if = CreateHardwareInterface();
 	hw_if.Initialise(1, { 1, 5, 11, 23 });
-	PicoScope scope(hw_if);
+	PicoScope scope(hw_if, 1000);
 
 	PicoScopeTrace trace = scope.FetchTrace(trace_pin);
 
@@ -56,7 +56,7 @@ static void ATraceCanTriggerOnAFallingSignal()
 static void OnlyTheMostRecentTraceIsRetained()
 {
 	MockHardwareInterface& hw_if = CreateHardwareInterface();
-	PicoScope scope(hw_if);
+	PicoScope scope(hw_if, 1000);
 
 	hw_if.Initialise(1, { 1, 5, 11, 23 });
 	PicoScopeTrace trace = scope.FetchTrace(trace_pin);
@@ -67,11 +67,37 @@ static void OnlyTheMostRecentTraceIsRetained()
 	AssertEqual("0,14,110,122", html);
 }
 
+static void ATimeOutReturnsAPartialTrace()
+{
+	MockHardwareInterface& hw_if = CreateHardwareInterface();
+	hw_if.Initialise(1, { 1, 5, 11});
+	PicoScope scope(hw_if, 1000);
+
+	PicoScopeTrace trace = scope.FetchTrace(trace_pin);
+
+	std::string html = trace.gethtml();
+	AssertEqual("0,4,10", html);
+}
+
+static void TimeoutWithoutValuesReturnsAnEmptyTrace()
+{
+	MockHardwareInterface& hw_if = CreateHardwareInterface();
+	hw_if.Initialise(1, { 1 });
+	PicoScope scope(hw_if, 1000);
+
+	PicoScopeTrace trace = scope.FetchTrace(trace_pin);
+
+	std::string html = trace.gethtml();
+	AssertEqual("0", html);
+}
+
 void PicoScopeTests::RunTests()
 {
 	ASimpleTraceCanBeCaptured();
 	ATraceCanTriggerOnAFallingSignal();
 	OnlyTheMostRecentTraceIsRetained();
+	ATimeOutReturnsAPartialTrace();
+	TimeoutWithoutValuesReturnsAnEmptyTrace();
 }
 
 
