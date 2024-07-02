@@ -1,5 +1,9 @@
 #pragma once
+#ifdef VISUAL_STUDIO
 #include <cinttypes>
+#else
+#include "pico/types.h"
+#endif
 
 typedef struct sHardwareInterface
 {

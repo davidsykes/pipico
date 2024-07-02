@@ -21,7 +21,7 @@ int _cyw43_arch_init()
 
 uint64_t _get_time_us()
 {
-    return get_time_us();
+    return time_us_64();
 }
 
 void _initialise_input_pin(int pin_number)

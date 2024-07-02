@@ -40,9 +40,9 @@ int do_work(IHardwareInterface& hwif)
     uint64_t t = hwif.wait_value(15, 1-value, 10000000);
     printf("Change %d\n", (int)t);
 
-    PicoScope scope = PicoScope();
-    PicoScopeTrace trace = scope.FetchTrace();
-    printf("Trace %s\n", trace.gethtml());
+    PicoScope scope = PicoScope(hwif);
+    PicoScopeTrace trace = scope.FetchTrace(15);
+    printf("Trace %s\n", trace.gethtml().c_str());
 
     Worker worker;
     REQUEST_PROCESSOR_T processor;
