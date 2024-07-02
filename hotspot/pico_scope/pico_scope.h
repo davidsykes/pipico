@@ -1,14 +1,19 @@
 #pragma once
 #include <string>
+#include <vector>
 #include "hardware_interface.hpp"
 
+#define GPIO_ON_VALUE   1
 
 class PicoScopeTrace
 {
+    int start_value = 0;
+    std::vector<int> changes;
+
 public:
     void Reset(int start_value);
     void AddChange(int time);
-    const char* gethtml();
+    std::string gethtml();
 };
 
 class PicoScope

@@ -37,7 +37,7 @@ void AssertFalse(bool value)
 	AssertTrue(!value);
 }
 
-void AssertEqual(const char* value, const char* expected)
+void AssertEqual(const char* expected, const char* value)
 {
 	if (strcmp(value, expected) != 0)
 	{
@@ -45,10 +45,10 @@ void AssertEqual(const char* value, const char* expected)
 	}
 }
 
-void AssertEqual(std::string value, const char* expected) { AssertEqual(value.c_str(), expected); }
-void AssertEqual(std::string value, std::string expected) { AssertEqual(value.c_str(), expected.c_str()); }
+void AssertEqual(std::string expected, const char* value) { AssertEqual(expected.c_str(), value); }
+void AssertEqual(std::string expected, std::string value) { AssertEqual(expected.c_str(), value.c_str()); }
 
-void AssertEqual(const size_t value, const size_t expected)
+void AssertEqual(const size_t expected, const size_t value)
 {
 	if (value != expected)
 	{
@@ -64,7 +64,7 @@ static const char* SkipWhitespace(const char* p)
 	return p;
 }
 
-void AssertEqualNonWhitespace(const char* value, const char* expected)
+void AssertEqualNonWhitespace(const char* expected, const char* value)
 {
 	const char* valuep = value;
 	const char* expectedp = expected;
