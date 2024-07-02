@@ -5,6 +5,7 @@ class IMockHardwareInterface : public IHardwareInterface
 {
 	virtual sHardwareInterface* raw_if() { return 0; }
 	virtual void initialise_pico_stdio() {}
+	virtual uint64_t get_time_us() { return 0; }
 	virtual void initialise_input_pin(int pin_number) {}
 	virtual void initialise_output_pin(int pin_number) {}
 	virtual int gpio_get(int pin_number) { return 0; }

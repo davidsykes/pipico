@@ -1,6 +1,5 @@
 #pragma once
 #include "TestFramework.h"
-#include "Mocks/MockCredentialsHandler.h"
 
 
 class HotSpotConfigurationTests : public ITestModule

@@ -148,9 +148,6 @@
     <ClCompile Include="Tests\logic\flash\FlashManagerTests.cpp" />
     <ClCompile Include="Tests\logic\input_form\HtmlRendererTests.cpp" />
     <ClCompile Include="Tests\logic\input_form\InputFormRendererTests.cpp" />
-    <ClCompile Include="Tests\Mocks\MockCredentialsHandler.cpp" />
-    <ClCompile Include="Tests\Mocks\MockHtmlRenderer.cpp" />
-    <ClCompile Include="Tests\Mocks\MockInputFormRenderer.cpp" />
     <ClCompile Include="Tests\pico_scope\PicoScopeTests.cpp" />
     <ClCompile Include="Tests\TestFramework\Assert.cpp" />
     <ClCompile Include="Tests\TestFramework\TestFramework.cpp" />
@@ -179,10 +176,7 @@
     <ClInclude Include="Tests\logic\flash\FlashManagerTests.h" />
     <ClInclude Include="Tests\logic\input_form\HtmlRendererTests.h" />
     <ClInclude Include="Tests\logic\input_form\InputFormRendererTests.h" />
-    <ClInclude Include="Tests\Mocks\MockCredentialsHandler.h" />
     <ClInclude Include="Tests\Mocks\MockHardwareInteface.h" />
-    <ClInclude Include="Tests\Mocks\MockHtmlRenderer.h" />
-    <ClInclude Include="Tests\Mocks\MockInputFormRenderer.h" />
     <ClInclude Include="Tests\pico_scope\PicoScopeTests.h" />
     <ClInclude Include="Tests\TestFramework\Assert.h" />
     <ClInclude Include="Tests\TestFramework\ITestModule.h" />

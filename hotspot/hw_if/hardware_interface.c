@@ -19,6 +19,11 @@ int _cyw43_arch_init()
    return 0;
 }
 
+uint64_t _get_time_us()
+{
+    return get_time_us();
+}
+
 void _initialise_input_pin(int pin_number)
 {
      gpio_init(pin_number);
@@ -75,6 +80,7 @@ sHardwareInterface* create_hardware_interface()
 
     hwif->initialise_pico_stdio = &_initialise_pico_stdio;
     hwif->cyw43_arch_init = &_cyw43_arch_init;
+    hwif->get_time_us = &_get_time_us;
     hwif->initialise_input_pin = &_initialise_input_pin;
     hwif->initialise_output_pin = &_initialise_output_pin;
     hwif->gpio_get = &_gpio_get;

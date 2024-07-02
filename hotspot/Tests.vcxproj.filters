@@ -78,15 +78,6 @@
     <ClCompile Include="Tests.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Tests\Mocks\MockCredentialsHandler.cpp">
-      <Filter>Source Files\Tests\Mocks</Filter>
-    </ClCompile>
-    <ClCompile Include="Tests\Mocks\MockHtmlRenderer.cpp">
-      <Filter>Source Files\Tests\Mocks</Filter>
-    </ClCompile>
-    <ClCompile Include="Tests\Mocks\MockInputFormRenderer.cpp">
-      <Filter>Source Files\Tests\Mocks</Filter>
-    </ClCompile>
     <ClCompile Include="Tests\logic\input_form\HtmlRendererTests.cpp">
       <Filter>Source Files\Tests\logic\input_form</Filter>
     </ClCompile>
@@ -158,15 +149,6 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Tests\Mocks\MockCredentialsHandler.h">
-      <Filter>Source Files\Tests\Mocks</Filter>
-    </ClInclude>
-    <ClInclude Include="Tests\Mocks\MockHtmlRenderer.h">
-      <Filter>Source Files\Tests\Mocks</Filter>
-    </ClInclude>
-    <ClInclude Include="Tests\Mocks\MockInputFormRenderer.h">
-      <Filter>Source Files\Tests\Mocks</Filter>
-    </ClInclude>
     <ClInclude Include="Tests\logic\input_form\HtmlRendererTests.h">
       <Filter>Source Files\Tests\logic\input_form</Filter>
     </ClInclude>

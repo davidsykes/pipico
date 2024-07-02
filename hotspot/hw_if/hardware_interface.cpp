@@ -11,6 +11,11 @@ void PicoHardwareInterface::initialise_pico_stdio()
     hardware_interface->initialise_pico_stdio();
 }
 
+uint64_t PicoHardwareInterface::get_time_us()
+{
+    return hardware_interface->get_time_us();
+}
+
 void PicoHardwareInterface::initialise_input_pin(int pin_number)
 {
     hardware_interface->initialise_input_pin(pin_number);

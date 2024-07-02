@@ -1,22 +1,19 @@
 #include <memory>
 #include "GPIOTests.h"
 #include "../../gpio/gpio.h"
+#include "../Mocks/MockHardwareInteface.h"
 
-class MockHardwareInterface : public IHardwareInterface
+namespace
 {
-	virtual sHardwareInterface* raw_if() { return 0; }
-	virtual void initialise_pico_stdio() {}
-	virtual void initialise_input_pin(int pin_number) { initialised_pin_number = pin_number; }
-	virtual void initialise_output_pin(int pin_number) {}
-	virtual int gpio_get(int pin_number) { return pin_value; }
-	virtual uint64_t wait_value(int pin_number, int value, uint64_t timeout) { return 0; }
-	virtual void gpio_put(int pin_number, int value) {}
-	virtual void set_led(bool value) {}
-	virtual void sleep_us(int useconds) {}
-public:
-	int initialised_pin_number = 0;
-	int pin_value = 0;
-};
+	class MockHardwareInterface : public IMockHardwareInterface
+	{
+		virtual void initialise_input_pin(int pin_number) { initialised_pin_number = pin_number; }
+		virtual int gpio_get(int pin_number) { return pin_value; }
+	public:
+		int initialised_pin_number = 0;
+		int pin_value = 0;
+	};
+}
 
 static std::unique_ptr<MockHardwareInterface> hardwareInterface;
 

@@ -2,8 +2,6 @@
 #include "TestFramework.h"
 #include "HotSpotConfigurationTests.h"
 #include "hotspot_configuration.h"
-#include "Mocks/MockHtmlRenderer.h"
-#include "Mocks/MockInputFormRenderer.h"
 
 class MockCredentialsHandler : public ICredentialsHandler
 {

@@ -5,6 +5,7 @@ typedef struct sHardwareInterface
 {
     void (*initialise_pico_stdio)();
     int (*cyw43_arch_init)();
+    uint64_t (*get_time_us)();
     void (*initialise_input_pin)(int pin_number);
     void (*initialise_output_pin)(int pin_number);
     int (*gpio_get)(int pin_number);
