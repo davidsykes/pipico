@@ -5,6 +5,7 @@
 #include "../Mocks/MockHardwareInteface.h"
 
 const int trace_pin = 17;
+const std::string pf = "{\"code\":\"code\",\"wavepoints\":[";
 
 class MockHardwareInterface : public IMockHardwareInterface
 {
@@ -38,7 +39,8 @@ static void ASimpleTraceCanBeCaptured()
 	PicoScopeTrace trace = scope.FetchTrace(trace_pin);
 
 	std::string html = trace.gethtml();
-	AssertEqual("1,4,10,22", html);
+	std::string expected = pf + "[1,0],[0,4],[1,10],[0,22]]}";
+	AssertEqual(expected, html);
 }
 
 static void ATraceCanTriggerOnAFallingSignal()
