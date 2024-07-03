@@ -1,0 +1,1 @@
+curl -X PUT -d @data.txt http://localhost:5051/ircode

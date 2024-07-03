@@ -98,7 +98,7 @@ static void AddCodeEndpoints(WebApplication app, ProgramServices programServices
         catch (Exception ex)
         {
             Console.WriteLine($"Error processing ircode: {ex.Message}");
-            Console.WriteLine(jsonString);
+            Console.WriteLine("\"" + jsonString + "\"");
         }
 
         return jsonString;

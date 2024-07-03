@@ -1,0 +1,5 @@
+
+
+curl -X PUT -d argument=value -d argument2=value2 http://localhost:8080
+
+curl -X PUT -d "this is the data" http://localhost:5051/ircode
