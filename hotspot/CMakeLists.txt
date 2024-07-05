@@ -27,6 +27,7 @@ add_executable(test
         pico_scope/pico_scope_trace.cpp
         rest/picow_tcp_client.c
         rest/rest.cpp
+        tools/hex_dump.cpp
         work/work.cpp
 )
 target_include_directories(test PRIVATE

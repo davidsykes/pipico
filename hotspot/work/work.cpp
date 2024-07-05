@@ -5,6 +5,7 @@
 #include "hardware_interface.hpp"
 #include "pico_scope/pico_scope.h"
 #include "rest.h"
+#include "../tools/hex_dump.h"
 
 #define WIFI_SSID "a907"
 #define WIFI_PASSWORD "?thisistheWIFIyouhavebeenlookingfor1398"
@@ -52,8 +53,12 @@ int do_work(IHardwareInterface& hwif)
 
     RestHandler rest;
     std::string response = rest.Get("/codes");
-    printf("Response:\n%s---\n", response.c_str());
+    printf("Get Response:\n%s---\n", response.c_str());
 
+    std::string hexd = HexDump().Dump(response);
+    printf("hexd %s\n", hexd.c_str());
+    response = rest.Put("/log");
+    printf("Put Response:\n%s---\n", response.c_str());
 
 
     // #define TEST_TCP_SERVER_IP "192.168.1.87"
