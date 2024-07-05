@@ -2,6 +2,7 @@ using DSLogging;
 using DSLogging.Loggers;
 using Logic;
 using IrTransmitterApi;
+using ApplicationParameters;
 
 IDSLogger logger = new ConsoleLogger();
 
@@ -39,6 +40,11 @@ try
     app.Run();
 }
 catch (IrTransmitterApiException ex)
+{
+    logger.Log(DSLogLevel.Error, ex.Message);
+    Console.WriteLine(ex.Message);
+}
+catch (ApplicationParameterException ex)
 {
     logger.Log(DSLogLevel.Error, ex.Message);
     Console.WriteLine(ex.Message);

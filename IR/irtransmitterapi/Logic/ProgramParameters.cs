@@ -10,14 +10,12 @@ namespace Logic
         {
             var definitions = new List<ApplicationParameterDefinition>
             {
-                new ApplicationParameterDefinition
-                {
+                new() {
                     Name = "DatabasePath",
                     Type = ApplicationParameterType.RequiredParameter,
                     UsageMessage = "The path to the database"
                 },
-                new ApplicationParameterDefinition
-                {
+                new() {
                     Name = "LogFilePath",
                     Type = ApplicationParameterType.RequiredParameter,
                     UsageMessage = "The path to the application log file"
