@@ -25,13 +25,15 @@ add_executable(test
         gpio/gpio_input.cpp
         pico_scope/pico_scope.cpp
         pico_scope/pico_scope_trace.cpp
+        rest/picow_tcp_client.c
+        rest/rest.cpp
         work/work.cpp
-        work/picow_tcp_client.c
 )
 target_include_directories(test PRIVATE
         ${CMAKE_CURRENT_LIST_DIR}
         ${CMAKE_CURRENT_LIST_DIR}/hotspot # for our common lwipopts
         hw_if
+        rest
         )
 pico_enable_stdio_usb(test 1)
 pico_enable_stdio_uart(test 0)

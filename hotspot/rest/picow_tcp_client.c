@@ -194,7 +194,7 @@ static TCP_CLIENT_T* tcp_client_init(const char* server_ip, uint port) {
     return state;
 }
 
-void run_tcp_client_test(REQUEST_PROCESSOR_T* processor, const char* server_ip, unsigned int port, const char*request, char* result, int max_result_length) {
+void run_tcp_client_test(REQUEST_PROCESSOR_T* processor2, const char* server_ip, unsigned int port, const char*request, char* result, int max_result_length) {
     TCP_CLIENT_T *state = tcp_client_init(server_ip, port);
     if (!state) {
         return;
@@ -217,7 +217,10 @@ void run_tcp_client_test(REQUEST_PROCESSOR_T* processor, const char* server_ip, 
             strncpy(data, state->buffer, state->buffer_len);
             data[state->buffer_len] = 0;
             state->buffer_len = 0;
-            processor->process_data(processor, data);
+            if (processor2 != 0)
+            {
+                processor2->process_data(processor2, data);
+            }
             free(data);
 
             state->complete = true;
@@ -225,10 +228,13 @@ void run_tcp_client_test(REQUEST_PROCESSOR_T* processor, const char* server_ip, 
         }
         else
         {
-            const char* data = processor->get_message(processor);
-            if(strlen(data) > 0)
+            if (processor2 != 0)
             {
-                DEBUG_printf("Write Message %d\n", tcp_write(state->tcp_pcb, data, strlen(data), 0));
+                const char* data = processor2->get_message(processor2);
+                if(strlen(data) > 0)
+                {
+                    DEBUG_printf("Write Message %d\n", tcp_write(state->tcp_pcb, data, strlen(data), 0));
+                }
             }
         }
 

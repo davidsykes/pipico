@@ -4,12 +4,10 @@
 #include "picow_tcp_client.h"
 #include "hardware_interface.hpp"
 #include "pico_scope/pico_scope.h"
+#include "rest.h"
 
 #define WIFI_SSID "a907"
 #define WIFI_PASSWORD "?thisistheWIFIyouhavebeenlookingfor1398"
-#define TEST_TCP_SERVER_IP "192.168.1.87"
-#define TCP_PORT 5000
-#define BUFFER_LENGTH   2048
 
 const char* get_message(void *data_object)
 {
@@ -50,11 +48,20 @@ int do_work(IHardwareInterface& hwif)
     processor.get_message = &get_message;
     processor.process_data = &process_data;
 
-    char buffer[BUFFER_LENGTH];
     tcp_client_initialise(hwif.raw_if(), WIFI_SSID, WIFI_PASSWORD);
 
-    run_tcp_client_test(&processor, TEST_TCP_SERVER_IP, TCP_PORT, "GET /codes HTTP/1.1\r\nHost: test.com\r\nAccept: */*\r\n\r\n", buffer, BUFFER_LENGTH);
-    printf("--Restule 1--\n%s\n+++\n", buffer);
+    RestHandler rest;
+    std::string response = rest.Get("/codes");
+    printf("Response:\n%s---\n", response.c_str());
+
+
+
+    // #define TEST_TCP_SERVER_IP "192.168.1.87"
+    // #define TCP_PORT 5000
+    // #define BUFFER_LENGTH   2048
+    // char buffer[BUFFER_LENGTH];
+    // run_tcp_client_test(&processor, TEST_TCP_SERVER_IP, TCP_PORT, "GET /codes HTTP/1.1\r\nHost: test.com\r\nAccept: */*\r\n\r\n", buffer, BUFFER_LENGTH);
+    // printf("--Restule 1--\n%s\n+++\n", buffer);
 
 //    run_tcp_client_test(&processor, TEST_TCP_SERVER_IP, TCP_PORT, "GET /codes HTTP/1.1\r\nHost: test.com\r\nAccept: */*\r\n\r\n", buffer, BUFFER_LENGTH);
 //    printf("--Restule 2--\n%s\n+++\n", buffer);
