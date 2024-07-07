@@ -1,7 +1,5 @@
 #include "hardware_interface.hpp"
 
-#define TEST_TCP_SERVER_IP "192.168.1.87"
-#define TCP_PORT 5000
 #define TCP_BUFFER_LENGTH   2048
 
 PicoHardwareInterface::PicoHardwareInterface()
@@ -60,11 +58,11 @@ void PicoHardwareInterface::sleep_us(int useconds)
     hardware_interface->sleep_us(useconds);
 }
 
-std::string PicoHardwareInterface::tcp_request(const char* request)
+std::string PicoHardwareInterface::tcp_request(const char* server, unsigned int port, const char* request)
 {
     printf("---TCP REQUEST---\n%s\n", request);
     char buffer[TCP_BUFFER_LENGTH];
-    hardware_interface->tcp_request(TEST_TCP_SERVER_IP, TCP_PORT, request, buffer, TCP_BUFFER_LENGTH);
+    hardware_interface->tcp_request(server, port, request, buffer, TCP_BUFFER_LENGTH);
     printf("---TCP RESPONSE---\n%s\n", buffer);
     return buffer;
 }

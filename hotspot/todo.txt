@@ -1,4 +1,3 @@
-Remove unecessary #include "picow_tcp_client.h"
 
 Tidy up the defines
 #define TEST_TCP_SERVER_IP "192.168.1.87"

@@ -16,7 +16,7 @@ public:
     virtual void gpio_put(int pin_number, int value)=0;
     virtual void set_led(bool value)=0;
     virtual void sleep_us(int useconds)=0;
-    virtual std::string tcp_request(const char* request)=0;
+    virtual std::string tcp_request(const char* server, unsigned int port, const char* request)=0;
     virtual void tcp_client_uninit()=0;
 };
 
@@ -35,7 +35,7 @@ class PicoHardwareInterface : public IHardwareInterface
     virtual void gpio_put(int pin_number, int value);
     virtual void set_led(bool value);
     virtual void sleep_us(int useconds);
-    virtual std::string tcp_request(const char* request);
+    virtual std::string tcp_request(const char* server, unsigned int port, const char* request);
     virtual void tcp_client_uninit();
 
 public:

@@ -4,11 +4,6 @@
 #include "picow_tcp_client.h"
 
 
-
-#define TEST_TCP_SERVER_IP "192.168.1.87"
-#define TCP_PORT 5000
-#define TCP_BUFFER_LENGTH   2048
-
 void _initialise_pico_stdio()
 {
     stdio_init_all();
