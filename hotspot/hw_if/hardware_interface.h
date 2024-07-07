@@ -19,7 +19,7 @@ typedef struct sHardwareInterface
     void (*set_led)(int value);
     void (*sleep_us)(int useconds);
     void (*tcp_request)(const char* server_ip,
-                         uint port,
+                         unsigned int port,
                          const char* request,
                          char*result,
                          int max_result_length);

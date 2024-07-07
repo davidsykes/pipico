@@ -52,7 +52,8 @@ static void ATraceCanTriggerOnAFallingSignal()
 	PicoScopeTrace trace = scope.FetchTrace(trace_pin);
 
 	std::string html = trace.gethtml();
-	AssertEqual("0,4,10,22", html);
+	std::string expected = pf + "[0,0],[1,4],[0,10],[1,22]]}";
+	AssertEqual(expected, html);
 }
 
 static void OnlyTheMostRecentTraceIsRetained()
@@ -66,7 +67,8 @@ static void OnlyTheMostRecentTraceIsRetained()
 	trace = scope.FetchTrace(trace_pin);
 
 	std::string html = trace.gethtml();
-	AssertEqual("0,14,110,122", html);
+	std::string expected = pf + "[0,0],[1,14],[0,110],[1,122]]}";
+	AssertEqual(expected, html);
 }
 
 static void ATimeOutReturnsAPartialTrace()
@@ -78,7 +80,8 @@ static void ATimeOutReturnsAPartialTrace()
 	PicoScopeTrace trace = scope.FetchTrace(trace_pin);
 
 	std::string html = trace.gethtml();
-	AssertEqual("0,4,10", html);
+	std::string expected = pf + "[0,0],[1,4],[0,10]]}";
+	AssertEqual(expected, html);
 }
 
 static void TimeoutWithoutValuesReturnsAnEmptyTrace()
@@ -90,7 +93,8 @@ static void TimeoutWithoutValuesReturnsAnEmptyTrace()
 	PicoScopeTrace trace = scope.FetchTrace(trace_pin);
 
 	std::string html = trace.gethtml();
-	AssertEqual("0", html);
+	std::string expected = pf + "[0,0]]}";
+	AssertEqual(expected, html);
 }
 
 void PicoScopeTests::RunTests()

@@ -8,6 +8,7 @@
 #include "Tests\logic\flash\FlashManagerTests.h"
 #include "Tests\gpio\GPIOTests.h"
 #include "Tests\pico_scope\PicoScopeTests.h"
+#include "Tests\rest\RestTests.h"
 
 int main()
 {
@@ -20,5 +21,6 @@ int main()
     PercentDecoderTests().RunTests();
     GPIOTests().RunTests();
     PicoScopeTests().RunTests();
+    RestTests().RunTests();
     std::cout << "Tests Complete\n";
 }

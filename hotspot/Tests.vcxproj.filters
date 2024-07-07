@@ -73,6 +73,12 @@
     <Filter Include="Source Files\Tests\pico_scope">
       <UniqueIdentifier>{66a97076-c406-4977-ae8d-78f32b369bbf}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\rest">
+      <UniqueIdentifier>{d91b72ed-d749-4763-ae21-c5dd7bb0d494}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Tests\rest">
+      <UniqueIdentifier>{69aa7548-317b-45b6-8baf-7ae685161556}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Tests.cpp">
@@ -146,6 +152,12 @@
     </ClCompile>
     <ClCompile Include="Tests\pico_scope\PicoScopeTests.cpp">
       <Filter>Source Files\Tests\pico_scope</Filter>
+    </ClCompile>
+    <ClCompile Include="rest\rest.cpp">
+      <Filter>Source Files\rest</Filter>
+    </ClCompile>
+    <ClCompile Include="Tests\rest\RestTests.cpp">
+      <Filter>Source Files\Tests\rest</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -229,6 +241,12 @@
     </ClInclude>
     <ClInclude Include="Tests\Mocks\MockHardwareInteface.h">
       <Filter>Source Files\Tests\Mocks</Filter>
+    </ClInclude>
+    <ClInclude Include="rest\rest.h">
+      <Filter>Source Files\rest</Filter>
+    </ClInclude>
+    <ClInclude Include="Tests\rest\RestTests.h">
+      <Filter>Source Files\Tests\rest</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
