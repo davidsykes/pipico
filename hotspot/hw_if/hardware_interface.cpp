@@ -62,8 +62,10 @@ void PicoHardwareInterface::sleep_us(int useconds)
 
 std::string PicoHardwareInterface::tcp_request(const char* request)
 {
+    printf("---TCP REQUEST---\n%s\n", request);
     char buffer[TCP_BUFFER_LENGTH];
-    hardware_interface->tcp_request(TEST_TCP_SERVER_IP, TCP_PORT, "PUT /log HTTP/1.1\r\nHost: test.com\r\nAccept: */*\r\n\r\n", buffer, TCP_BUFFER_LENGTH);
+    hardware_interface->tcp_request(TEST_TCP_SERVER_IP, TCP_PORT, request, buffer, TCP_BUFFER_LENGTH);
+    printf("---TCP RESPONSE---\n%s\n", buffer);
     return buffer;
 }
 

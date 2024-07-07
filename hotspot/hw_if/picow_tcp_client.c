@@ -14,7 +14,8 @@
 #include "lwip/tcp.h"
 #include "picow_tcp_client.h"
 
-#define DEBUG_printf printf
+//#define DEBUG_printf printf
+#define DEBUG_printf
 #define BUF_SIZE 2048
 
 #define TEST_ITERATIONS 10
