@@ -66,3 +66,8 @@ std::string PicoHardwareInterface::tcp_request(const char* request)
     hardware_interface->tcp_request(TEST_TCP_SERVER_IP, TCP_PORT, "PUT /log HTTP/1.1\r\nHost: test.com\r\nAccept: */*\r\n\r\n", buffer, TCP_BUFFER_LENGTH);
     return buffer;
 }
+
+void PicoHardwareInterface::tcp_client_uninit()
+{
+    hardware_interface->tcp_client_uninit();
+}

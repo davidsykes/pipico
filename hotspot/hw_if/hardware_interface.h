@@ -23,6 +23,7 @@ typedef struct sHardwareInterface
                          const char* request,
                          char*result,
                          int max_result_length);
+    void (*tcp_client_uninit)();
 
 } sHardwareInterface;
 

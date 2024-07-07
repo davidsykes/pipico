@@ -100,6 +100,11 @@ void _tcp_request(const char* server_ip,
                          max_result_length);
 }
 
+void _tcp_client_uninit()
+{
+    tcp_client_uninit();
+}
+
 sHardwareInterface* create_hardware_interface()
 {
     sHardwareInterface* hwif = calloc(1, sizeof(sHardwareInterface));
@@ -116,6 +121,7 @@ sHardwareInterface* create_hardware_interface()
     hwif->set_led = &_set_led;
     hwif->sleep_us = &_sleep_us;
     hwif->tcp_request = &_tcp_request;
+    hwif->tcp_client_uninit = &_tcp_client_uninit;
 
     return hwif;
 }
