@@ -1,12 +1,25 @@
 #include "hardware_interface.h"
 #include "pico/cyw43_arch.h"
 #include "tusb.h"
+#include "picow_tcp_client.h"
+
+
+
+#define TEST_TCP_SERVER_IP "192.168.1.87"
+#define TCP_PORT 5000
+#define TCP_BUFFER_LENGTH   2048
 
 void _initialise_pico_stdio()
 {
     stdio_init_all();
     while (!tud_cdc_connected()) sleep_ms(100);
     printf("Stdio initialised\n");
+}
+
+
+int _initialise_wifi(const char* ssid, const char* password)
+{
+    return tcp_client_initialise(ssid, password);
 }
 
 int _cyw43_arch_init()
@@ -74,12 +87,31 @@ void _sleep_us(int useconds)
     sleep_us(useconds);
 }
 
+void _tcp_request(const char* server_ip,
+                         uint port,
+                         const char* request,
+                         char*result,
+                         int max_result_length)
+{
+    run_tcp_client_test(server_ip,
+                         port,
+                         request,
+                         result,
+                         max_result_length);
+}
+
+void _tcp_client_uninit()
+{
+    tcp_client_uninit();
+}
+
 sHardwareInterface* create_hardware_interface()
 {
     sHardwareInterface* hwif = calloc(1, sizeof(sHardwareInterface));
 
     hwif->initialise_pico_stdio = &_initialise_pico_stdio;
     hwif->cyw43_arch_init = &_cyw43_arch_init;
+    hwif->initialise_wifi = &_initialise_wifi;
     hwif->get_time_us = &_get_time_us;
     hwif->initialise_input_pin = &_initialise_input_pin;
     hwif->initialise_output_pin = &_initialise_output_pin;
@@ -88,6 +120,8 @@ sHardwareInterface* create_hardware_interface()
     hwif->gpio_put = &_gpio_put;
     hwif->set_led = &_set_led;
     hwif->sleep_us = &_sleep_us;
+    hwif->tcp_request = &_tcp_request;
+    hwif->tcp_client_uninit = &_tcp_client_uninit;
 
     return hwif;
 }

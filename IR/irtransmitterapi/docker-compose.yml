@@ -4,8 +4,9 @@ services:
     image: "192.168.1.125:5000/irtransmitterapi:latest"
     ports:
       - "5000:5000"
-#    volumes:
-#      - "/media/Music:/media/mp3"
-#    environment:
-#      - MP3Player=mpg123
+    volumes:
+      - "/home/pi/Documents:/data"
+    environment:
+      - DatabasePath=/data/ir.dat
+      - LogFilePath=/data/ir.log
     #restart: always
