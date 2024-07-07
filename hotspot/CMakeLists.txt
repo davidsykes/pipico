@@ -22,10 +22,10 @@ add_executable(test
         hotspot/logic/requests/hotspot_configuration.cpp
         hw_if/hardware_interface.c
         hw_if/hardware_interface.cpp
+        hw_if/picow_tcp_client.c
         gpio/gpio_input.cpp
         pico_scope/pico_scope.cpp
         pico_scope/pico_scope_trace.cpp
-        rest/picow_tcp_client.c
         rest/rest.cpp
         tools/hex_dump.cpp
         work/work.cpp

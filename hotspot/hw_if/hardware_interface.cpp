@@ -1,5 +1,9 @@
 #include "hardware_interface.hpp"
 
+#define TEST_TCP_SERVER_IP "192.168.1.87"
+#define TCP_PORT 5000
+#define TCP_BUFFER_LENGTH   2048
+
 PicoHardwareInterface::PicoHardwareInterface()
 {
     hardware_interface = create_hardware_interface();
@@ -9,6 +13,11 @@ PicoHardwareInterface::PicoHardwareInterface()
 void PicoHardwareInterface::initialise_pico_stdio()
 {
     hardware_interface->initialise_pico_stdio();
+}
+
+int PicoHardwareInterface::initialise_wifi(const char* ssid, const char* password)
+{
+    return hardware_interface->initialise_wifi(ssid, password);
 }
 
 uint64_t PicoHardwareInterface::get_time_us()
@@ -49,4 +58,11 @@ void PicoHardwareInterface::set_led(bool value)
 void PicoHardwareInterface::sleep_us(int useconds)
 {
     hardware_interface->sleep_us(useconds);
+}
+
+std::string PicoHardwareInterface::tcp_request(const char* request)
+{
+    char buffer[TCP_BUFFER_LENGTH];
+    hardware_interface->tcp_request(TEST_TCP_SERVER_IP, TCP_PORT, "PUT /log HTTP/1.1\r\nHost: test.com\r\nAccept: */*\r\n\r\n", buffer, TCP_BUFFER_LENGTH);
+    return buffer;
 }

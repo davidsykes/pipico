@@ -1,7 +1,15 @@
 #include <stdio.h>
 #include "work.h"
 #include "worker.h"
+
+#ifdef __cplusplus
+extern "C" {
+#endif
 #include "picow_tcp_client.h"
+#ifdef __cplusplus
+}
+#endif
+
 #include "hardware_interface.hpp"
 #include "pico_scope/pico_scope.h"
 #include "rest.h"
@@ -49,7 +57,8 @@ int do_work(IHardwareInterface& hwif)
     processor.get_message = &get_message;
     processor.process_data = &process_data;
 
-    tcp_client_initialise(hwif.raw_if(), WIFI_SSID, WIFI_PASSWORD);
+    //tcp_client_initialise(WIFI_SSID, WIFI_PASSWORD);
+    hwif.initialise_wifi(WIFI_SSID, WIFI_PASSWORD);
 
     RestHandler rest;
     std::string response = rest.Get("/codes");
