@@ -8,5 +8,5 @@ class RestHandler
 public:
     RestHandler(IHardwareInterface& hwif);
     std::string Get(const char*url);
-    std::string Put(const char*url);
+    std::string Put(const char*url, const char* body);
 };
