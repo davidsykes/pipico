@@ -1,16 +1,17 @@
-#include "rest.h"
 #include <cstring>
 #include <sstream>
+#include "rest.h"
 
 
-RestHandler::RestHandler(IHardwareInterface& hwif) : hwif(hwif)
+RestHandler::RestHandler(IHardwareInterface& hwif, const char* server, unsigned int port)
+    : hwif(hwif), server(server), port(port)
 {
 
 }
 
-std::string RestHandler::Get(const char*url)
+std::string RestHandler::Get(const char* url)
 {
-    return hwif.tcp_request(url);
+    return hwif.tcp_request(server.c_str(), port, url);
 
     // char buffer[TCP_BUFFER_LENGTH];
     // run_tcp_client_test("GET /codes HTTP/1.1\r\nHost: test.com\r\nAccept: */*\r\n\r\n", buffer, TCP_BUFFER_LENGTH);
@@ -26,5 +27,5 @@ std::string RestHandler::Put(const char* url, const char* body)
     s << "\r\n";
     s << body;
 
-    return hwif.tcp_request(s.str().c_str());
+    return hwif.tcp_request(server.c_str(), port, s.str().c_str());
 }
