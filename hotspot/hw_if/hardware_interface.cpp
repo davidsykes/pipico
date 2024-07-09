@@ -38,6 +38,11 @@ int PicoHardwareInterface::gpio_get(int pin_number)
     return hardware_interface->gpio_get(pin_number);
 }
 
+char PicoHardwareInterface::get_pins()
+{
+    return hardware_interface->get_pins();
+}
+
 uint64_t PicoHardwareInterface::wait_value(int pin_number, int value, uint64_t timeout)
 {
     return hardware_interface->wait_value(pin_number, value, timeout);
@@ -62,8 +67,9 @@ std::string PicoHardwareInterface::tcp_request(const char* server, unsigned int 
 {
     printf("---TCP REQUEST---\n%s\n", request);
     char buffer[TCP_BUFFER_LENGTH];
+    buffer[0] = 0;
     hardware_interface->tcp_request(server, port, request, buffer, TCP_BUFFER_LENGTH);
-    printf("---TCP RESPONSE---\n%s\n", buffer);
+    printf("---TCP RESPONSE---\n%s\n^^^\n", buffer);
     return buffer;
 }
 

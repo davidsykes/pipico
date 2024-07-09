@@ -14,32 +14,12 @@
 #include "lwip/tcp.h"
 #include "picow_tcp_client.h"
 
-//#define DEBUG_printf printf
-#define DEBUG_printf
+#define DEBUG_printf printf
+//#define DEBUG_printf
 #define BUF_SIZE 2048
 
 #define TEST_ITERATIONS 10
 #define POLL_TIME_S 5
-
-#if 0
-static void dump_bytes(const uint8_t *bptr, uint32_t len) {
-    unsigned int i = 0;
-
-    printf("dump_bytes %d", len);
-    for (i = 0; i < len;) {
-        if ((i & 0x0f) == 0) {
-            printf("\n");
-        } else if ((i & 0x07) == 0) {
-            printf(" ");
-        }
-        printf("%02x ", bptr[i++]);
-    }
-    printf("\n");
-}
-#define DUMP_BYTES dump_bytes
-#else
-#define DUMP_BYTES(A,B)
-#endif
 
 typedef struct TCP_CLIENT_T_ {
     uint port;
@@ -79,7 +59,7 @@ static err_t tcp_result(void *arg, int status, const char* where) {
     if (status == 0) {
         DEBUG_printf("test success\n");
     } else {
-        DEBUG_printf("test failed %d %s\n", status, where);
+        printf("test failed %d %s\n", status, where);
     }
     state->complete = true;
     return tcp_client_close(arg);
@@ -141,9 +121,6 @@ err_t tcp_client_recv(void *arg, struct tcp_pcb *tpcb, struct pbuf *p, err_t err
     cyw43_arch_lwip_check();
     if (p->tot_len > 0) {
         DEBUG_printf("recv %d err %d\n", p->tot_len, err);
-        for (struct pbuf *q = p; q != NULL; q = q->next) {
-            DUMP_BYTES(q->payload, q->len);
-        }
         // Receive the buffer
         const uint16_t buffer_left = BUF_SIZE - state->buffer_len;
         state->buffer_len += pbuf_copy_partial(p, state->buffer + state->buffer_len,
@@ -195,18 +172,17 @@ static TCP_CLIENT_T* tcp_client_init(const char* server_ip, uint port) {
     return state;
 }
 
-void run_tcp_client_test(const char* server_ip, unsigned int port, const char*request, char* result, int max_result_length) {
+int run_tcp_client_test(const char* server_ip, unsigned int port, const char*request, char* result, int max_result_length) {
     TCP_CLIENT_T *state = tcp_client_init(server_ip, port);
     if (!state) {
-        return;
+        return -1;
     }
     if (!tcp_client_open(state)) {
-        tcp_result(state, -1, "test1");
-        return;
+        tcp_result(state, -1, "tcp_client_open");
+        return -1;
     }
-    const char* data = "GET /codes HTTP/1.1\r\nHost: test.com\r\nAccept: */*\r\n\r\n";
-    data = request;
-    DEBUG_printf("Write Data %d\n", tcp_write(state->tcp_pcb, data, strlen(data), 0));
+    //HTF does this work when DEBUG_printf is compiled out
+    DEBUG_printf("Write Data %d\n", tcp_write(state->tcp_pcb, request, strlen(request), 0));
 
     while(!state->complete) {
 
@@ -241,6 +217,8 @@ void run_tcp_client_test(const char* server_ip, unsigned int port, const char*re
 #endif
     }
     free(state);
+
+    return 0;
 }
 
 int tcp_client_initialise(

@@ -19,10 +19,10 @@ public:
 class PicoScope
 {
     IHardwareInterface& hw_if;
-    int timeout;
+    int timeout_us;
     PicoScopeTrace trace;
 
 public:
-    PicoScope(IHardwareInterface& hw_if, int timeout);
-    PicoScopeTrace& FetchTrace(int pin);
+    PicoScope(IHardwareInterface& hw_if, int timeout_us);
+    PicoScopeTrace& FetchTrace();
 };

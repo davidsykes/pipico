@@ -24,14 +24,17 @@ int do_work(IHardwareInterface& hwif)
     uint64_t t = hwif.wait_value(15, 1-value, 10000000);
     printf("Change %d\n", (int)t);
 
-    PicoScope scope = PicoScope(hwif, 100000);
-    PicoScopeTrace trace = scope.FetchTrace(15);
-    printf("Trace %s\n", trace.gethtml().c_str());
+    // PicoScope scope = PicoScope(hwif, 100000);
+    // PicoScopeTrace trace = scope.FetchTrace(15);
+    // printf("Trace %s\n", trace.gethtml().c_str());
 
     hwif.initialise_wifi(WIFI_SSID, WIFI_PASSWORD);
 
-    RestHandler rest(hwif);
-    rest.Put("/ircode", trace.gethtml().c_str());
+#define TEST_TCP_SERVER_IP "192.168.1.87"
+#define TCP_PORT 5000
+
+    // RestHandler rest(hwif, TEST_TCP_SERVER_IP, TCP_PORT);
+    // rest.Put("/ircode", trace.gethtml().c_str());
 
     // std::string response = rest.Get("/codes");
     // printf("Get Response:\n%s---\n", response.c_str());

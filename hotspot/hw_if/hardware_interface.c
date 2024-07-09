@@ -49,6 +49,11 @@ int _gpio_get(int pin_number)
     return gpio_get(pin_number);
 }
 
+char _get_pins()
+{
+    return (char)gpio_get_all();
+}
+
 uint64_t _wait_value(int pin_number, int required_value, uint64_t timeout)
 {
     uint64_t start = time_us_64();
@@ -82,13 +87,13 @@ void _sleep_us(int useconds)
     sleep_us(useconds);
 }
 
-void _tcp_request(const char* server_ip,
+int _tcp_request(const char* server_ip,
                          uint port,
                          const char* request,
                          char*result,
                          int max_result_length)
 {
-    run_tcp_client_test(server_ip,
+    return run_tcp_client_test(server_ip,
                          port,
                          request,
                          result,
@@ -111,6 +116,7 @@ sHardwareInterface* create_hardware_interface()
     hwif->initialise_input_pin = &_initialise_input_pin;
     hwif->initialise_output_pin = &_initialise_output_pin;
     hwif->gpio_get = &_gpio_get;
+    hwif->get_pins = &_get_pins;
     hwif->wait_value = &_wait_value;
     hwif->gpio_put = &_gpio_put;
     hwif->set_led = &_set_led;

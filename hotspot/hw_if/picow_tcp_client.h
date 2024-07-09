@@ -7,7 +7,7 @@ typedef struct REQUEST_PROCESSOR_T_ {
 } REQUEST_PROCESSOR_T;
 
 int tcp_client_initialise(const char* ssid, const char* password);
-void run_tcp_client_test(const char* server_ip,
+int run_tcp_client_test(const char* server_ip,
                          uint port,
                          const char* request,
                          char*result,

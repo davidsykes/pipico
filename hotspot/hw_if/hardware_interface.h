@@ -14,11 +14,12 @@ typedef struct sHardwareInterface
     void (*initialise_input_pin)(int pin_number);
     void (*initialise_output_pin)(int pin_number);
     int (*gpio_get)(int pin_number);
+    char (*get_pins)();
     uint64_t (*wait_value)(int pin_number, int value, uint64_t timeout);
     void (*gpio_put)(int pin_number, int value);
     void (*set_led)(int value);
     void (*sleep_us)(int useconds);
-    void (*tcp_request)(const char* server_ip,
+    int (*tcp_request)(const char* server_ip,
                          unsigned int port,
                          const char* request,
                          char*result,

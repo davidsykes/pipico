@@ -5,7 +5,7 @@ set(CMAKE_C_STANDARD 11)
 set(CMAKE_CXX_STANDARD 17)
 pico_sdk_init()
 add_executable(test
-        test.cpp
+        main.cpp
         hotspot/WiFiConnector.cpp
         hotspot/low_level/dhcpserver/dhcpserver.c
         hotspot/low_level/dnsserver/dnsserver.c
@@ -24,6 +24,7 @@ add_executable(test
         hw_if/hardware_interface.cpp
         hw_if/picow_tcp_client.c
         gpio/gpio_input.cpp
+        pico_scope/pico_scope_main.cpp
         pico_scope/pico_scope.cpp
         pico_scope/pico_scope_trace.cpp
         rest/rest.cpp
