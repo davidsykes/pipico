@@ -2,6 +2,7 @@
 #include "pico_scope_main.h"
 #include "rest.h"
 #include "pico_scope.h"
+#include "response_processor.h"
 
 
 #define SCOPE_API_SERVER_IP "192.168.1.87"
@@ -11,7 +12,8 @@ void run_scope(IHardwareInterface& hwif)
 {
     printf("Run scope\n");
 
-    RestHandler rest(hwif, SCOPE_API_SERVER_IP, SCOPE_API_PORT);
+    ResponseProcessor responseProcessor;
+    RestHandler rest(hwif, SCOPE_API_SERVER_IP, SCOPE_API_PORT, responseProcessor);
     PicoScope scope(hwif, 100000);
 
     //while(1)
@@ -20,7 +22,8 @@ void run_scope(IHardwareInterface& hwif)
         PicoScopeTrace& trace = scope.FetchTrace();
 
         hwif.set_led(0);
-        rest.Put("/scope", trace.gethtml().c_str());
+        std::string result = rest.Put("/scope", trace.gethtml().c_str());
+        printf("Scope result %s\n", result.c_str());
     }
 }
 

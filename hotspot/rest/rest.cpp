@@ -3,8 +3,11 @@
 #include "rest.h"
 
 
-RestHandler::RestHandler(IHardwareInterface& hwif, const char* server, unsigned int port)
-    : hwif(hwif), server(server), port(port)
+RestHandler::RestHandler(IHardwareInterface& hwif,
+                            const char* server,
+                            unsigned int port,
+                            ResponseProcessor& responseProcessor)
+    : hwif(hwif), server(server), port(port), responseProcessor(responseProcessor)
 {
 
 }
@@ -27,5 +30,6 @@ std::string RestHandler::Put(const char* url, const char* body)
     s << "\r\n";
     s << body;
 
-    return hwif.tcp_request(server.c_str(), port, s.str().c_str());
+    std::string response = hwif.tcp_request(server.c_str(), port, s.str().c_str());
+    return responseProcessor.ProcessResponse(response);
 }

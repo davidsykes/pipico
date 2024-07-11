@@ -14,8 +14,8 @@
 #include "lwip/tcp.h"
 #include "picow_tcp_client.h"
 
-#define DEBUG_printf printf
-//#define DEBUG_printf
+//#define DEBUG_printf printf
+#define DEBUG_printf
 #define BUF_SIZE 2048
 
 #define TEST_ITERATIONS 10
@@ -181,8 +181,8 @@ int run_tcp_client_test(const char* server_ip, unsigned int port, const char*req
         tcp_result(state, -1, "tcp_client_open");
         return -1;
     }
-    //HTF does this work when DEBUG_printf is compiled out
-    DEBUG_printf("Write Data %d\n", tcp_write(state->tcp_pcb, request, strlen(request), 0));
+    int write_result = tcp_write(state->tcp_pcb, request, strlen(request), 0);
+    DEBUG_printf("Write Data %d\n", write_result);
 
     while(!state->complete) {
 
