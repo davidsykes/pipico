@@ -8,10 +8,8 @@ PicoScope::PicoScope(IHardwareInterface& hw_if, int timeout_us)
 }
 
 
-PicoScopeTrace& PicoScope::FetchTrace()
+PicoScopeTrace& PicoScope::FetchTrace(int pin)
 {
-    int pin = 15;
-
     int next_trace_value = GPIO_ON_VALUE - hw_if.gpio_get(pin);
     trace.Reset(next_trace_value);
 

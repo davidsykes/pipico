@@ -5,9 +5,8 @@
 
 RestHandler::RestHandler(IHardwareInterface& hwif,
                             const char* server,
-                            unsigned int port,
-                            ResponseProcessor& responseProcessor)
-    : hwif(hwif), server(server), port(port), responseProcessor(responseProcessor)
+                            unsigned int port)
+    : hwif(hwif), server(server), port(port)
 {
 
 }
@@ -29,7 +28,16 @@ std::string RestHandler::Put(const char* url, const char* body)
     s << "Content-Length: " << strlen(body) << "\r\n";
     s << "\r\n";
     s << body;
+    last_request = s.str();
 
-    std::string response = hwif.tcp_request(server.c_str(), port, s.str().c_str());
-    return responseProcessor.ProcessResponse(response);
+    last_response = hwif.tcp_request(server.c_str(), port, last_request.c_str());
+    return last_response;
+}
+
+void RestHandler::Log()
+{
+    std::stringstream s;
+    s << last_request << "\r\n\r\n" << last_response;
+
+    Put("log", s.str().c_str());
 }

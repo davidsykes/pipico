@@ -41,6 +41,13 @@ void AssertEqual(const char* expected, const char* value)
 {
 	if (strcmp(value, expected) != 0)
 	{
+		const char* cexpected = expected;
+		const char* cvalue = value;
+		while (*cexpected == *cvalue)
+		{
+			++cexpected;
+			++cvalue;
+		}
 		throw AssertException("Values differ");
 	}
 }

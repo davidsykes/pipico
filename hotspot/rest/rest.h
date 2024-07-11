@@ -1,7 +1,6 @@
 #pragma once
 #include <string>
 #include "hardware_interface.hpp"
-#include "response_processor.h"
 
 
 class RestHandler
@@ -9,10 +8,12 @@ class RestHandler
     IHardwareInterface& hwif;
     std::string server;
     unsigned int port;
-    ResponseProcessor& responseProcessor;
+    std::string last_request;
+    std::string last_response;
 
 public:
-    RestHandler(IHardwareInterface& hwif, const char* server, unsigned int port, ResponseProcessor& responseProcessor);
+    RestHandler(IHardwareInterface& hwif, const char* server, unsigned int port);
     std::string Get(const char*url);
     std::string Put(const char*url, const char* body);
+    void Log();
 };
