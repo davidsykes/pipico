@@ -39,5 +39,5 @@ void RestHandler::Log()
     std::stringstream s;
     s << last_request << "\r\n\r\n" << last_response;
 
-    Put("log", s.str().c_str());
+    Put("/log", s.str().c_str());
 }
