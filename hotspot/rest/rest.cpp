@@ -22,8 +22,7 @@ std::string RestHandler::Get(const char* url)
 std::string RestHandler::Put(const char* url, const char* body)
 {
     std::stringstream s;
-    s << "PUT " << url;
-    s << " HTTP/1.1\r\nHost: ir.api\r\nAccept: */*\r\n";
+    s << "PUT " << url << " HTTP/1.1\r\nHost: ir.api\r\nAccept: */*\r\n";
     s << "Content-Type: application/json\r\n";
     s << "Content-Length: " << strlen(body) << "\r\n";
     s << "\r\n";

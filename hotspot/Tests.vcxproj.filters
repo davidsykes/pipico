@@ -159,6 +159,12 @@
     <ClCompile Include="Tests\rest\RestTests.cpp">
       <Filter>Source Files\Tests\rest</Filter>
     </ClCompile>
+    <ClCompile Include="Tests\pico_scope\TraceDataFormatterTests.cpp">
+      <Filter>Source Files\Tests\pico_scope</Filter>
+    </ClCompile>
+    <ClCompile Include="pico_scope\trace_data_formatter.cpp">
+      <Filter>Source Files\pico_scope</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Tests\logic\input_form\HtmlRendererTests.h">
@@ -247,6 +253,9 @@
     </ClInclude>
     <ClInclude Include="Tests\rest\RestTests.h">
       <Filter>Source Files\Tests\rest</Filter>
+    </ClInclude>
+    <ClInclude Include="Tests\pico_scope\TraceDataFormatterTests.h">
+      <Filter>Source Files\Tests\pico_scope</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

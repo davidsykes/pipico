@@ -8,6 +8,7 @@
 #include "Tests\logic\flash\FlashManagerTests.h"
 #include "Tests\gpio\GPIOTests.h"
 #include "Tests\pico_scope\PicoScopeTests.h"
+#include "Tests\pico_scope\TraceDataFormatterTests.h"
 #include "Tests\rest\RestTests.h"
 
 int main()
@@ -22,5 +23,6 @@ int main()
     GPIOTests().RunTests();
     PicoScopeTests().RunTests();
     RestTests().RunTests();
+    TraceDataFormatterTests().RunTests();
     std::cout << "Tests Complete\n";
 }
