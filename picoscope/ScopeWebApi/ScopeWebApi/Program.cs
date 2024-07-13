@@ -35,6 +35,17 @@ try
     {
         string jsonString = await Tools.GetJSONString(context);
 
+        // Message Format
+        // {"type":"trace","data":"785634120102030442"}
+        // data format:
+        //  78563412        - 0x12345678
+        //  xxxx            - Number of samples
+        //  llll            - Length of sample (us)
+        //   tttt           - Sample time
+        //   v              - Sample value
+        //  xxxxxxxx        - Terminating value
+        // jsonString = "{\"type\":\"trace\",\"data\":\"7856341202000000320000000300000005150000000921436587\"}";
+
         try
         {
             var response = messageRouter.Route(jsonString);
@@ -52,9 +63,9 @@ try
     app.MapPut("/log", async delegate (HttpContext context)
     {
         string jsonString = await Tools.GetJSONString(context);
-        Console.WriteLine($"--- Log ---");
+        Console.WriteLine($"--- Log {DateTime.Now} ---");
         Console.WriteLine(jsonString);
-        Console.WriteLine($"--- Log ---");
+        Console.WriteLine($"--- Log end ---");
         return "Ok";
     })
     .WithName("Log");

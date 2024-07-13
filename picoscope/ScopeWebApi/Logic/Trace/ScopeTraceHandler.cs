@@ -24,7 +24,6 @@ namespace Logic.Trace
                 file.Write(bytes);
                 file.Close();
 
-
                 var r = new BinaryReader(new MemoryStream(bytes));
 
                 var id = r.ReadInt32();
