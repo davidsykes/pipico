@@ -49,6 +49,16 @@ try
     })
     .WithName("Scope");
 
+    app.MapPut("/log", async delegate (HttpContext context)
+    {
+        string jsonString = await Tools.GetJSONString(context);
+        Console.WriteLine($"--- Log ---");
+        Console.WriteLine(jsonString);
+        Console.WriteLine($"--- Log ---");
+        return "Ok";
+    })
+    .WithName("Log");
+
     app.MapPut("/test", () =>
     {
         var jsonString = @"{""data"": ""48656c6c6f20576f726c64"", ""type"": ""trace""}";
