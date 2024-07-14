@@ -27,6 +27,7 @@ add_executable(test
         pico_scope/pico_scope_main.cpp
         pico_scope/pico_scope.cpp
         pico_scope/pico_scope_trace.cpp
+        pico_scope/trace_data_formatter.cpp
         rest/rest.cpp
         tools/hex_dump.cpp
         work/work.cpp
