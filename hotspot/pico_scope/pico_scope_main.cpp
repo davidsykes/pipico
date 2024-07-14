@@ -13,6 +13,7 @@ void run_scope(IHardwareInterface& hwif)
 
     RestHandler rest(hwif, SCOPE_API_SERVER_IP, SCOPE_API_PORT);
     PicoScope scope(hwif, 100000);
+    TraceDataFormatter traceFormatter;
 
     //while(1)
     {
@@ -20,7 +21,8 @@ void run_scope(IHardwareInterface& hwif)
         PicoScopeTrace& trace = scope.FetchTrace(15);
 
         hwif.set_led(0);
-        std::string result = rest.Put("/scope", trace.gethtml().c_str());
+        std::string traceData = traceFormatter.FormatTraceData(trace);
+        std::string result = rest.Put("/scope", traceData.c_str());
         printf("Scope result %s\n", result.c_str());
         if (result != "Ok")
         {
