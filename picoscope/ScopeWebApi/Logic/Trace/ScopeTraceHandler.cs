@@ -24,32 +24,49 @@ namespace Logic.Trace
                 file.Write(bytes);
                 file.Close();
 
-                var r = new BinaryReader(new MemoryStream(bytes));
-
-                var id = r.ReadInt32();
-                Console.WriteLine($"First int is {id:X}");
-                if (id == 0x12345678)
-                {
-                    Decompose(r);
-                }
-                else
-                {
-                    for (int i = 0; i < bytes.Length && i < 100; i++)
-                    {
-                        var b = bytes[i];
-                        if (b < 32 || b > 127)
-                        {
-                            Console.Write(Convert.ToHexString(bytes, i, 1));
-                        }
-                        else
-                        {
-                            Console.Write(Convert.ToChar(b));
-                        }
-                    }
-                    Console.WriteLine("");
-                }
+                DebugPrintTraceData(bytes);
             }
             return true;
+        }
+
+        static void DebugPrintTraceData(byte[] bytes)
+        {
+            try
+            {
+                TryDebugPrintTraceData(bytes);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine($"Error debugging trace data {e.Message}");
+            }
+        }
+
+        static void TryDebugPrintTraceData(byte[] bytes)
+        {
+            var r = new BinaryReader(new MemoryStream(bytes));
+
+            var id = r.ReadInt32();
+            Console.WriteLine($"First int is {id:X}");
+            if (id == 0x12345678)
+            {
+                Decompose(r);
+            }
+            else
+            {
+                for (int i = 0; i < bytes.Length && i < 100; i++)
+                {
+                    var b = bytes[i];
+                    if (b < 32 || b > 127)
+                    {
+                        Console.Write(Convert.ToHexString(bytes, i, 1));
+                    }
+                    else
+                    {
+                        Console.Write(Convert.ToChar(b));
+                    }
+                }
+                Console.WriteLine("");
+            }
         }
 
         private static void Decompose(BinaryReader r)
@@ -58,16 +75,19 @@ namespace Logic.Trace
             {
                 var count = r.ReadInt32();
                 Console.WriteLine($"Found {count} samples");
-                var length = r.ReadInt32();
-                Console.WriteLine($"Sample is {length} uS long");
-                for (int i = 0; i < count; i++)
+                if (count > 0)
                 {
-                    var t = r.ReadInt32();
-                    int v = r.ReadByte();
-                    Console.WriteLine($"v={t} - {v}");
+                    var length = r.ReadInt32();
+                    Console.WriteLine($"Sample is {length} uS long");
+                    for (int i = 0; i < count; i++)
+                    {
+                        var t = r.ReadInt32();
+                        int v = r.ReadByte();
+                        Console.WriteLine($"v={t} - {v}");
+                    }
+                    var e = r.ReadInt32();
+                    Console.WriteLine($"e={e:x}");
                 }
-                var e = r.ReadInt32();
-                Console.WriteLine($"e={e:x}");
             }
             catch (Exception ex)
             {

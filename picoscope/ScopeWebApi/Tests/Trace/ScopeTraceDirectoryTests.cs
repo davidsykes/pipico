@@ -2,9 +2,7 @@ using FluentAssertions;
 using Logic.DataObjects;
 using Logic.Logic;
 using Logic.Trace;
-using Microsoft.VisualStudio.TestPlatform.CommunicationUtilities;
 using Moq;
-using System;
 using TestHelpers;
 
 #nullable disable
