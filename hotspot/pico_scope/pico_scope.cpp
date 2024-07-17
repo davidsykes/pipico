@@ -8,25 +8,26 @@ PicoScope::PicoScope(IHardwareInterface& hw_if, int timeout_us)
 }
 
 
-PicoScopeTrace& PicoScope::FetchTrace(int pin)
+PicoScopeTrace& PicoScope::FetchTrace()
 {
-    int next_trace_value = GPIO_ON_VALUE - hw_if.gpio_get(pin);
-    trace.Reset(next_trace_value);
-
-    uint64_t start_time = hw_if.get_time_us();
-
-    while (true)
+    int pin_values_before_signal = hw_if.get_pins();
+    int first_signal_value;
+    do
     {
-        uint64_t change = hw_if.wait_value(pin, next_trace_value, timeout_us);
-        if (change > 0)
-        {
-            trace.AddChange((int)(change - start_time));
-            next_trace_value = GPIO_ON_VALUE - next_trace_value;
-        }
-        else
-        {
-            break;
-        }
+        first_signal_value = hw_if.get_pins();
+    } while (pin_values_before_signal == first_signal_value);
+
+    uint64_t signal_start = hw_if.get_time_us();
+    trace.Reset(pin_values_before_signal, first_signal_value);
+
+    sPinsChangeData cd{};
+    cd.current_value = first_signal_value;
+    cd.time_us = signal_start;
+
+    while (hw_if.wait_pins_change(&cd, timeout_us))
+    {
+        trace.AddChange(cd.new_value, (int)(cd.time_us - signal_start));
+        cd.current_value = cd.new_value;
     }
 
     return trace;

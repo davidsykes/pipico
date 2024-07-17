@@ -4,21 +4,19 @@
 #include "../../pico_scope/pico_scope.h"
 #include "../Mocks/MockHardwareInteface.h"
 
-const int trace_pin = 17;
-const std::string pf = "{\"code\":\"code\",\"wavepoints\":[";
-
 class MockHardwareInterface : public IMockHardwareInterface
 {
-	int pin_value = 0;
-	std::vector<int> timings;
-	int next_timing = 0;
+	std::vector<int> values;
+	std::vector<int> value_times;
+	int next_value_index = 0;
+	int next_value_time = 0;
 
-	virtual int gpio_get(int pin_number) { return pin_value; }
 	virtual uint64_t get_time_us();
-	virtual uint64_t wait_value(int pin_number, int value, uint64_t timeout);
+	virtual int get_pins();
+    virtual int wait_pins_change(sPinsChangeData* pinsChangeData, uint64_t timeout);
 
 public:
-	void Initialise(int value, std::vector<int> timings);
+	void Initialise(std::vector<int> values, std::vector<int> value_times);
 };
 
 static std::unique_ptr<MockHardwareInterface> hardwareInterface;
@@ -33,31 +31,22 @@ static MockHardwareInterface& CreateHardwareInterface()
 static void ASimpleTraceCanBeCaptured()
 {
 	MockHardwareInterface& hw_if = CreateHardwareInterface();
-	hw_if.Initialise(0, { 1, 5, 11, 23 });
+	hw_if.Initialise({11, 42, 51, 63, 77}, {1, 5, 11, 23, 45});
 	PicoScope scope(hw_if, 1000);
 
-	PicoScopeTrace trace = scope.FetchTrace(trace_pin);
+	PicoScopeTrace trace = scope.FetchTrace();
 
-	AssertEqual(1, trace.start_value);
-	AssertEqual(3, trace.changes.size());
-	AssertEqual(4, trace.changes[0]);
-	AssertEqual(10, trace.changes[1]);
-	AssertEqual(22, trace.changes[2]);
-}
-
-static void ATraceCanTriggerOnAFallingSignal()
-{
-	MockHardwareInterface& hw_if = CreateHardwareInterface();
-	hw_if.Initialise(1, { 1, 5, 11, 23 });
-	PicoScope scope(hw_if, 1000);
-
-	PicoScopeTrace trace = scope.FetchTrace(trace_pin);
-
-	AssertEqual(0, trace.start_value);
-	AssertEqual(3, trace.changes.size());
-	AssertEqual(4, trace.changes[0]);
-	AssertEqual(10, trace.changes[1]);
-	AssertEqual(22, trace.changes[2]);
+	AssertEqual(11, trace.initial_value);
+	AssertEqual(4, trace.values.size());
+	AssertEqual(4, trace.value_times.size());
+	AssertEqual(42, trace.values[0]);
+	AssertEqual(0, trace.value_times[0]);
+	AssertEqual(51, trace.values[1]);
+	AssertEqual(6, trace.value_times[1]);
+	AssertEqual(63, trace.values[2]);
+	AssertEqual(18, trace.value_times[2]);
+	AssertEqual(77, trace.values[3]);
+	AssertEqual(40, trace.value_times[3]);
 }
 
 static void OnlyTheMostRecentTraceIsRetained()
@@ -65,51 +54,48 @@ static void OnlyTheMostRecentTraceIsRetained()
 	MockHardwareInterface& hw_if = CreateHardwareInterface();
 	PicoScope scope(hw_if, 1000);
 
-	hw_if.Initialise(1, { 1, 5, 11, 23 });
-	PicoScopeTrace trace = scope.FetchTrace(trace_pin);
-	hw_if.Initialise(1, { 1, 15, 111, 123 });
-	trace = scope.FetchTrace(trace_pin);
+	hw_if.Initialise({ 11, 42, 51, 63, 77 }, { 1, 5, 11, 23, 45 });
+	PicoScopeTrace trace = scope.FetchTrace();
+	hw_if.Initialise({ 111, 142, 151, 163, 177 }, { 1, 5, 11, 23, 45 });
+	trace = scope.FetchTrace();
 
-	AssertEqual(0, trace.start_value);
-	AssertEqual(3, trace.changes.size());
-	AssertEqual(14, trace.changes[0]);
-	AssertEqual(110, trace.changes[1]);
-	AssertEqual(122, trace.changes[2]);
+	AssertEqual(111, trace.initial_value);
+	AssertEqual(4, trace.values.size());
+	AssertEqual(4, trace.value_times.size());
+	AssertEqual(142, trace.values[0]);
+	AssertEqual(0, trace.value_times[0]);
+	AssertEqual(151, trace.values[1]);
+	AssertEqual(6, trace.value_times[1]);
+	AssertEqual(163, trace.values[2]);
+	AssertEqual(18, trace.value_times[2]);
+	AssertEqual(177, trace.values[3]);
+	AssertEqual(40, trace.value_times[3]);
 }
 
 static void ATimeOutReturnsAPartialTrace()
 {
 	MockHardwareInterface& hw_if = CreateHardwareInterface();
-	hw_if.Initialise(1, { 1, 5, 11});
+	hw_if.Initialise({ 11, 42, 51, 63, 77 }, { 1, 5, 11, 23, 45000 });
 	PicoScope scope(hw_if, 1000);
 
-	PicoScopeTrace trace = scope.FetchTrace(trace_pin);
+	PicoScopeTrace trace = scope.FetchTrace();
 
-	AssertEqual(0, trace.start_value);
-	AssertEqual(2, trace.changes.size());
-	AssertEqual(4, trace.changes[0]);
-	AssertEqual(10, trace.changes[1]);
-}
-
-static void TimeoutWithoutValuesReturnsAnEmptyTrace()
-{
-	MockHardwareInterface& hw_if = CreateHardwareInterface();
-	hw_if.Initialise(1, { 1 });
-	PicoScope scope(hw_if, 1000);
-
-	PicoScopeTrace trace = scope.FetchTrace(trace_pin);
-
-	AssertEqual(0, trace.start_value);
-	AssertEqual(0, trace.changes.size());
+	AssertEqual(11, trace.initial_value);
+	AssertEqual(3, trace.values.size());
+	AssertEqual(3, trace.value_times.size());
+	AssertEqual(42, trace.values[0]);
+	AssertEqual(0, trace.value_times[0]);
+	AssertEqual(51, trace.values[1]);
+	AssertEqual(6, trace.value_times[1]);
+	AssertEqual(63, trace.values[2]);
+	AssertEqual(18, trace.value_times[2]);
 }
 
 void PicoScopeTests::RunTests()
 {
 	ASimpleTraceCanBeCaptured();
-	ATraceCanTriggerOnAFallingSignal();
 	OnlyTheMostRecentTraceIsRetained();
 	ATimeOutReturnsAPartialTrace();
-	TimeoutWithoutValuesReturnsAnEmptyTrace();
 }
 
 void PicoScopeTests::CleanUpAfterTests()
@@ -117,28 +103,47 @@ void PicoScopeTests::CleanUpAfterTests()
 	hardwareInterface.release();
 }
 
-void MockHardwareInterface::Initialise(int value, std::vector<int> timings)
+void MockHardwareInterface::Initialise(std::vector<int> values, std::vector<int> value_times)
 {
-	this->pin_value = value;
-	this->timings = timings;
-	next_timing = 0;
+	this->values = values;
+	this->value_times = value_times;
+	next_value_index = 0;
 }
 
 uint64_t MockHardwareInterface::get_time_us()
 {
-	if (next_timing < timings.size())
-	{
-		return timings[next_timing++];
-	}
-	return -1;
+	return next_value_time;
 }
 
-uint64_t MockHardwareInterface::wait_value(int pin_number, int value, uint64_t timeout)
+
+int MockHardwareInterface::get_pins()
 {
-	pin_value = GPIO_ON_VALUE - pin_value;
-	if (pin_number == trace_pin && pin_value == value && next_timing < timings.size())
+	if (next_value_index < values.size())
 	{
-		return timings[next_timing++];
+		int next_value = values[next_value_index];
+		next_value_time = value_times[next_value_index];
+		++next_value_index;
+		return next_value;
 	}
-	return 0;
+	next_value_time += 1000000;
+	return values.back();
+
+}
+
+int MockHardwareInterface::wait_pins_change(sPinsChangeData* pinsChangeData, uint64_t timeout)
+{
+	while (true)
+	{
+		int pins_value = get_pins();
+		if ((next_value_time - pinsChangeData->time_us) > timeout)
+		{
+			return 0;
+		}
+		if (pins_value != pinsChangeData->current_value)
+		{
+			pinsChangeData->new_value = pins_value;
+			pinsChangeData->time_us = next_value_time;
+			return 1;
+		}
+	}
 }

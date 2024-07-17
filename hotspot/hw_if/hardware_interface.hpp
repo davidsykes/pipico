@@ -12,8 +12,8 @@ public:
     virtual void initialise_input_pin(int pin_number)=0;
     virtual void initialise_output_pin(int pin_number)=0;
     virtual int gpio_get(int pin_number)=0;
-    virtual char get_pins()=0;
-    virtual uint64_t wait_value(int pin_number, int value, uint64_t timeout)=0;
+    virtual int get_pins()=0;
+    virtual int wait_pins_change(sPinsChangeData* pinsChangeData, uint64_t timeout)=0;
     virtual void gpio_put(int pin_number, int value)=0;
     virtual void set_led(bool value)=0;
     virtual void sleep_us(int useconds)=0;
@@ -32,8 +32,8 @@ class PicoHardwareInterface : public IHardwareInterface
     virtual void initialise_input_pin(int pin_number);
     virtual void initialise_output_pin(int pin_number);
     virtual int gpio_get(int pin_number);
-    virtual char get_pins();
-    virtual uint64_t wait_value(int pin_number, int value, uint64_t timeout);
+    virtual int get_pins();
+    virtual int wait_pins_change(sPinsChangeData* pinsChangeData, uint64_t timeout);
     virtual void gpio_put(int pin_number, int value);
     virtual void set_led(bool value);
     virtual void sleep_us(int useconds);

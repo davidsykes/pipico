@@ -3,16 +3,15 @@
 #include <vector>
 #include "hardware_interface.hpp"
 
-#define GPIO_ON_VALUE   1
-
 class PicoScopeTrace
 {
 public:
-    int start_value = 0;
-    std::vector<int> changes;
+    int initial_value = 0;
+    std::vector<int> values;
+    std::vector<int> value_times;
 
-    void Reset(int start_value);
-    void AddChange(int time);
+    void Reset(int initial_value, int first_value);
+    void AddChange(int value, int time);
 };
 
 class PicoScope
@@ -23,7 +22,7 @@ class PicoScope
 
 public:
     PicoScope(IHardwareInterface& hw_if, int timeout_us);
-    PicoScopeTrace& FetchTrace(int pin);
+    PicoScopeTrace& FetchTrace();
 };
 
 class TraceDataFormatter
