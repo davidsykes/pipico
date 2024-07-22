@@ -18,7 +18,7 @@ void run_scope(IHardwareInterface& hwif)
     //while(1)
     {
         hwif.set_led(1);
-        PicoScopeTrace& trace = scope.FetchTrace(15);
+        PicoScopeTrace& trace = scope.FetchTrace();
 
         hwif.set_led(0);
         std::string traceData = traceFormatter.FormatTraceData(trace);

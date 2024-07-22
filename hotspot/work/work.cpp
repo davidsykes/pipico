@@ -21,8 +21,8 @@ int do_work(IHardwareInterface& hwif)
     
     int value = hwif.gpio_get(15);
     printf("Start value %d\n");
-    uint64_t t = hwif.wait_pins_change(15, 1-value, 20000000);
-    printf("Change %d\n", (int)t);
+    //uint64_t t = hwif.wait_pins_change(15, 1-value, 20000000);
+    //printf("Change %d\n", (int)t);
 
     // PicoScope scope = PicoScope(hwif, 100000);
     // PicoScopeTrace trace = scope.FetchTrace(15);

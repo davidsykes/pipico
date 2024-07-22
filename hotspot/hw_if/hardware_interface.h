@@ -5,7 +5,7 @@
 #include "pico/types.h"
 #endif
 
-typedef struct sPinsChangeData
+typedef struct _sPinsChangeData
 {
     int current_value;
     int new_value;

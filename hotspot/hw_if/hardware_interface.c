@@ -54,20 +54,19 @@ int _get_pins()
     return gpio_get_all();
 }
 
-int _wait_pins_change(PINS_CHANGE_DATA* pins_change_data, uint64_t timeout)
+int _wait_pins_change(sPinsChangeData* pins_change_data, uint64_t timeout)
 {
-    //uint64_t start = time_us_64();
     while (true)
     {
         int value = _get_pins();
         uint64_t now = time_us_64();
-        if ( value != pcd->cur)
+        if ( value != pins_change_data->current_value)
         {
-            pcd->new = 
-            pcd->time = now
-            return 1
+            pins_change_data->new_value = value;
+            pins_change_data->time_us = now;
+            return 1;
         }
-        if (now - pcd->ti >= timeout)
+        if ((now - pins_change_data->time_us) >= timeout)
         {
             return 0;
         }
@@ -119,7 +118,7 @@ sHardwareInterface* create_hardware_interface()
     hwif->initialise_output_pin = &_initialise_output_pin;
     hwif->gpio_get = &_gpio_get;
     hwif->get_pins = &_get_pins;
-    hwif->wait_pins_change = &wait_pins_change;
+    hwif->wait_pins_change = &_wait_pins_change;
     hwif->gpio_put = &_gpio_put;
     hwif->set_led = &_set_led;
     hwif->sleep_us = &_sleep_us;
