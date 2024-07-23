@@ -5,8 +5,11 @@
 PicoScope::PicoScope(IHardwareInterface& hw_if, int timeout_us)
     : hw_if(hw_if), timeout_us(timeout_us)
 {
-    for(int x = 0 ; x < 16 ; x++)
-    hw_if.initialise_input_pin(x);
+    for (int x = 0; x < 16; x++)
+    {
+        hw_if.initialise_input_pin(x);
+        hw_if.gpio_set_pull_up(x, 1);
+    }
 }
 
 #define SIGNAL_MASK 0xff00
@@ -37,8 +40,8 @@ PicoScopeTrace& PicoScope::FetchTrace()
 
     while (hw_if.wait_pins_change(&cd, SIGNAL_MASK, timeout_us))
     {
-        //int new_value = 
-        trace.AddChange(cd.new_value, (int)(cd.time_us - signal_start));
+        int new_value = cd.new_value >> SIGNAL_SHIFT;
+        trace.AddChange(new_value, (int)(cd.time_us - signal_start));
         cd.current_value = cd.new_value;
     }
 

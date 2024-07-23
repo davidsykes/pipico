@@ -10,6 +10,7 @@ public:
     virtual int initialise_wifi(const char* ssid, const char* password)=0;
     virtual uint64_t get_time_us()=0;
     virtual void initialise_input_pin(int pin_number)=0;
+    virtual void gpio_set_pull_up(int pin_number, int value)=0;
     virtual void initialise_output_pin(int pin_number)=0;
     virtual int gpio_get(int pin_number)=0;
     virtual int get_pins()=0;
@@ -30,6 +31,7 @@ class PicoHardwareInterface : public IHardwareInterface
     virtual int initialise_wifi(const char* ssid, const char* password);
     virtual uint64_t get_time_us();
     virtual void initialise_input_pin(int pin_number);
+    virtual void gpio_set_pull_up(int pin_number, int value);
     virtual void initialise_output_pin(int pin_number);
     virtual int gpio_get(int pin_number);
     virtual int get_pins();

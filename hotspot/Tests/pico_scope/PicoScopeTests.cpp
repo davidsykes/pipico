@@ -118,23 +118,28 @@ uint64_t MockHardwareInterface::get_time_us()
 
 int MockHardwareInterface::get_pins()
 {
+	int next_value;
+
 	if (next_value_index < values.size())
 	{
-		int next_value = values[next_value_index];
+		next_value = values[next_value_index];
 		next_value_time = value_times[next_value_index];
 		++next_value_index;
-		return next_value;
 	}
-	next_value_time += 1000000;
-	return values.back();
+	else
+	{
+		next_value_time += 1000000;
+		next_value = values.back();
+	}
 
+	return next_value << 8;
 }
 
 int MockHardwareInterface::wait_pins_change(sPinsChangeData* pinsChangeData, int mask, uint64_t timeout)
 {
 	while (true)
 	{
-		int pins_value = get_pins() + 999;
+		int pins_value = get_pins();
 		if ((next_value_time - pinsChangeData->time_us) > timeout)
 		{
 			return 0;

@@ -36,10 +36,19 @@ void _initialise_input_pin(int pin_number)
 {
      gpio_init(pin_number);
      gpio_set_dir(pin_number, GPIO_IN);
-     gpio_pull_up(pin_number);
 }
 
-TODO SET_PULL_UP
+void _gpio_set_pull_up(int pin_number, int value)
+{
+    if (value == 0)
+    {
+        gpio_pull_down(pin_number);
+    }
+    else
+    {
+        gpio_pull_up(pin_number);
+    }
+}
 
 void _initialise_output_pin(int pin_number)
 {
@@ -118,6 +127,7 @@ sHardwareInterface* create_hardware_interface()
     hwif->initialise_wifi = &_initialise_wifi;
     hwif->get_time_us = &_get_time_us;
     hwif->initialise_input_pin = &_initialise_input_pin;
+    hwif->gpio_set_pull_up = &_gpio_set_pull_up;
     hwif->initialise_output_pin = &_initialise_output_pin;
     hwif->gpio_get = &_gpio_get;
     hwif->get_pins = &_get_pins;

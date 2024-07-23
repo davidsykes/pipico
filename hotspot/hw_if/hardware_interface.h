@@ -19,6 +19,7 @@ typedef struct sHardwareInterface
     int (*initialise_wifi)(const char* ssid, const char* password);
     uint64_t (*get_time_us)();
     void (*initialise_input_pin)(int pin_number);
+    void (*gpio_set_pull_up)(int pin_number, int value);
     void (*initialise_output_pin)(int pin_number);
     int (*gpio_get)(int pin_number);
     int (*get_pins)();

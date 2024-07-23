@@ -8,6 +8,7 @@ class IMockHardwareInterface : public IHardwareInterface
 	virtual int initialise_wifi(const char* ssid, const char* password) { return 0; }
 	virtual uint64_t get_time_us() { return 0; }
 	virtual void initialise_input_pin(int pin_number) {}
+	virtual void gpio_set_pull_up(int pin_number, int value) {}
 	virtual void initialise_output_pin(int pin_number) {}
 	virtual int gpio_get(int pin_number) { return 0; }
 	virtual int get_pins() { return 0; }
