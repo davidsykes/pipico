@@ -28,6 +28,12 @@ int main()
    {
       run_scope(hw_if);
    }
+   else if (config == 4)
+   {
+      printf("Pulling...\n");
+      hw_if.initialise_input_pin(6);
+      hw_if.gpio_set_pull_up(6, 1);
+   }
    else
    {
       GPIOInputPin config0(2, hw_if);

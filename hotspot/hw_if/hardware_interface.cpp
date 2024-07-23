@@ -28,9 +28,9 @@ void PicoHardwareInterface::initialise_input_pin(int pin_number)
     hardware_interface->initialise_input_pin(pin_number);
 }
 
-void ::gpio_set_pull_up(int pin_number, int value)
+void PicoHardwareInterface::gpio_set_pull_up(int pin_number, int value)
 {
-    sHardwareInterface->gpio_set_pull_up(pin_number, value);
+    hardware_interface->gpio_set_pull_up(pin_number, value);
 }
 
 void PicoHardwareInterface::initialise_output_pin(int pin_number)
