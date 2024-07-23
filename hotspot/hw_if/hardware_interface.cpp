@@ -43,9 +43,9 @@ int PicoHardwareInterface::get_pins()
     return hardware_interface->get_pins();
 }
 
-int PicoHardwareInterface::wait_pins_change(sPinsChangeData* pinsChangeData, uint64_t timeout)
+int PicoHardwareInterface::wait_pins_change(sPinsChangeData* pinsChangeData, int mask, uint64_t timeout)
 {
-    return hardware_interface->wait_pins_change(pinsChangeData, timeout);
+    return hardware_interface->wait_pins_change(pinsChangeData, mask, timeout);
 }
 
 void PicoHardwareInterface::gpio_put(int pin_number, int value)

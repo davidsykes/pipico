@@ -20,6 +20,8 @@ class PicoScope
     int timeout_us;
     PicoScopeTrace trace;
 
+    int GetSignalPins();
+
 public:
     PicoScope(IHardwareInterface& hw_if, int timeout_us);
     PicoScopeTrace& FetchTrace();

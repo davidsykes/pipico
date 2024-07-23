@@ -36,7 +36,10 @@ void _initialise_input_pin(int pin_number)
 {
      gpio_init(pin_number);
      gpio_set_dir(pin_number, GPIO_IN);
+     gpio_pull_up(pin_number);
 }
+
+TODO SET_PULL_UP
 
 void _initialise_output_pin(int pin_number)
 {
@@ -54,11 +57,11 @@ int _get_pins()
     return gpio_get_all();
 }
 
-int _wait_pins_change(sPinsChangeData* pins_change_data, uint64_t timeout)
+int _wait_pins_change(sPinsChangeData* pins_change_data, int mask, uint64_t timeout)
 {
     while (true)
     {
-        int value = _get_pins();
+        int value = _get_pins() & mask;
         uint64_t now = time_us_64();
         if ( value != pins_change_data->current_value)
         {

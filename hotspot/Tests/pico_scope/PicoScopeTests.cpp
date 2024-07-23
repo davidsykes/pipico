@@ -13,7 +13,7 @@ class MockHardwareInterface : public IMockHardwareInterface
 
 	virtual uint64_t get_time_us();
 	virtual int get_pins();
-    virtual int wait_pins_change(sPinsChangeData* pinsChangeData, uint64_t timeout);
+    virtual int wait_pins_change(sPinsChangeData* pinsChangeData, int mask, uint64_t timeout);
 
 public:
 	void Initialise(std::vector<int> values, std::vector<int> value_times);
@@ -130,11 +130,11 @@ int MockHardwareInterface::get_pins()
 
 }
 
-int MockHardwareInterface::wait_pins_change(sPinsChangeData* pinsChangeData, uint64_t timeout)
+int MockHardwareInterface::wait_pins_change(sPinsChangeData* pinsChangeData, int mask, uint64_t timeout)
 {
 	while (true)
 	{
-		int pins_value = get_pins();
+		int pins_value = get_pins() + 999;
 		if ((next_value_time - pinsChangeData->time_us) > timeout)
 		{
 			return 0;
