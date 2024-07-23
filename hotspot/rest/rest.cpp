@@ -4,9 +4,10 @@
 
 
 RestHandler::RestHandler(IHardwareInterface& hwif,
+                            ITcpResponseAnalyser& tcp_analyser,
                             const char* server,
                             unsigned int port)
-    : hwif(hwif), server(server), port(port)
+    : hwif(hwif), tcp_analyser(tcp_analyser), server(server), port(port)
 {
 
 }
@@ -30,6 +31,9 @@ std::string RestHandler::Put(const char* url, const char* body)
     last_request = s.str();
 
     last_response = hwif.tcp_request(server.c_str(), port, last_request.c_str());
+    
+    tcp_analyser.AnalyseTcpResponse(last_request, last_response);
+    
     return last_response;
 }
 

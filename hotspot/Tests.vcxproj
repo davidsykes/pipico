@@ -172,6 +172,7 @@
     <ClInclude Include="hotspot\logic\requests\hotspot_configuration.h" />
     <ClInclude Include="hotspot\logic\requests\process_request.h" />
     <ClInclude Include="pico_scope\pico_scope.h" />
+    <ClInclude Include="rest\itcpresponseanalyser.h" />
     <ClInclude Include="rest\rest.h" />
     <ClInclude Include="Tests\configurations\HotSpotConfigurationTests.h" />
     <ClInclude Include="Tests\gpio\GPIOTests.h" />

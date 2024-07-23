@@ -2,6 +2,7 @@
 #include <sstream>
 #include "RestTests.h"
 #include "../../rest/rest.h"
+#include "../../rest/itcpresponseanalyser.h"
 #include "../Mocks/MockHardwareInteface.h"
 #include <vector>
 
@@ -15,17 +16,27 @@ public:
 	std::vector<std::string> sent_data;
 };
 
-static std::unique_ptr<RestHardwareInterface> hardwareInterface;
+class MockTcpResponseAnalyser : public ITcpResponseAnalyser
+{
+	virtual void AnalyseTcpResponse(const std::string& request, const std::string& response) { this->request = request; this->response = response; }
+public:
+	std::string request;
+	std::string response;
+};
+
 static std::unique_ptr<RestHandler> testObject;
+static std::unique_ptr<RestHardwareInterface> mockHardwareInterface;
+static std::unique_ptr<MockTcpResponseAnalyser> mockTcpResponseAnalyser;
 
 static RestHandler& CreateTestObject()
 {
-	hardwareInterface.reset(new RestHardwareInterface());
-	testObject.reset(new RestHandler(*hardwareInterface.get(), "server", 123));
+	mockHardwareInterface.reset(new RestHardwareInterface());
+	mockTcpResponseAnalyser.reset(new MockTcpResponseAnalyser());
+	testObject.reset(new RestHandler(*mockHardwareInterface.get(), *mockTcpResponseAnalyser.get(), "server", 123));
 	return *testObject.get();
 }
 
-std::string MakePutRequest(const std::string& url, const std::string& body)
+static std::string MakePutRequest(const std::string& url, const std::string& body)
 {
 	std::stringstream s;
 	s << "PUT " << url;
@@ -40,13 +51,27 @@ static void PutCombinesUrlAndBody()
 
 	rest.Put("url", "body");
 
-	RestHardwareInterface& hwif = *hardwareInterface.get();
+	RestHardwareInterface& hwif = *mockHardwareInterface.get();
 	std::string data = hwif.sent_data[0];
 	std::string expected = MakePutRequest("url", "body");
 
 	AssertEqual(expected, data);
 	AssertEqual("server", hwif.server);
 	AssertEqual(123, hwif.port);
+}
+
+static void PutPassesRequestAndResponseToTCPResponseAnalyser()
+{
+	RestHandler& rest = CreateTestObject();
+
+	rest.Put("url", "body");
+
+	RestHardwareInterface& hwif = *mockHardwareInterface.get();
+	std::string data = hwif.sent_data[0];
+	std::string expected = MakePutRequest("url", "body");
+
+	AssertEqual(expected, mockTcpResponseAnalyser.get()->request);
+	AssertEqual("response", mockTcpResponseAnalyser.get()->response);
 }
 
 static void LogPostsLogWithLastRequestAndResponse()
@@ -56,7 +81,7 @@ static void LogPostsLogWithLastRequestAndResponse()
 	rest.Put("url", "body");
 	rest.Log();
 
-	RestHardwareInterface& hwif = *hardwareInterface.get();
+	RestHardwareInterface& hwif = *mockHardwareInterface.get();
 	AssertEqual(2, hwif.sent_data.size());
 	std::string data = hwif.sent_data[1];
 	std::string expected =
@@ -68,6 +93,7 @@ static void LogPostsLogWithLastRequestAndResponse()
 void RestTests::RunTests()
 {
 	PutCombinesUrlAndBody();
+	PutPassesRequestAndResponseToTCPResponseAnalyser();
 	LogPostsLogWithLastRequestAndResponse();
 }
 
@@ -82,6 +108,6 @@ std::string RestHardwareInterface::tcp_request(const char* server, unsigned int 
 
 void RestTests::CleanUpAfterTests()
 {
-	hardwareInterface.release();
+	mockHardwareInterface.release();
 	testObject.release();
 }

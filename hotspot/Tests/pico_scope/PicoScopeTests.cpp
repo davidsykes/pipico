@@ -19,13 +19,13 @@ public:
 	void Initialise(std::vector<int> values, std::vector<int> value_times);
 };
 
-static std::unique_ptr<MockHardwareInterface> hardwareInterface;
+static std::unique_ptr<MockHardwareInterface> mockHardwareInterface;
 
 
 static MockHardwareInterface& CreateHardwareInterface()
 {
-	hardwareInterface.reset(new MockHardwareInterface());
-	return *hardwareInterface.get();
+	mockHardwareInterface.reset(new MockHardwareInterface());
+	return *mockHardwareInterface.get();
 }
 
 static void ASimpleTraceCanBeCaptured()
@@ -100,7 +100,7 @@ void PicoScopeTests::RunTests()
 
 void PicoScopeTests::CleanUpAfterTests()
 {
-	hardwareInterface.release();
+	mockHardwareInterface.release();
 }
 
 void MockHardwareInterface::Initialise(std::vector<int> values, std::vector<int> value_times)

@@ -257,5 +257,8 @@
     <ClInclude Include="Tests\pico_scope\TraceDataFormatterTests.h">
       <Filter>Source Files\Tests\pico_scope</Filter>
     </ClInclude>
+    <ClInclude Include="rest\itcpresponseanalyser.h">
+      <Filter>Source Files\rest</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
