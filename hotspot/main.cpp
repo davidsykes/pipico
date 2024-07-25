@@ -3,7 +3,6 @@
 #include "WiFiConnector.h"
 #include "hw_if/hardware_interface.hpp"
 #include "gpio/gpio.h"
-#include "work/work.h"
 #include "pico_scope/pico_scope_main.h"
 
 
@@ -18,29 +17,32 @@ int main()
 
    hw_if.initialise_wifi(WIFI_SSID, WIFI_PASSWORD);
 
-   int config =
-      hw_if.gpio_get(5) * 8 +
-      hw_if.gpio_get(4) * 4 +
-      hw_if.gpio_get(3) * 2 +
-      hw_if.gpio_get(15);
-   printf("Config %d\n", config);
-   if (config == 8)
+   GPIOInputPin actionPin(2, hw_if);
+   actionPin.SetPullUp(0);
+   printf("Action %d\n", actionPin.Value());
+
+   if (actionPin.Value() == 0)
    {
       run_scope(hw_if);
    }
    else
    {
-      GPIOInputPin config0(2, hw_if);
-      printf("Config pin %d\n", config0.Value());
-
-      const char* input_form_hotspot_name = "Pico Test Unit";
-
-      printf("About to do work\n");
-      do_work(hw_if);
-
-      WiFiConnector connector;
-      connector.ConnectToWiFi(input_form_hotspot_name);
+      GPIOInputPin inputPin(5, hw_if);
+      GPIOInputPin pullingPin(3, hw_if);
+      printf("Pulling %d.\n", pullingPin.Value());
+      if (pullingPin.Value())
+      {
+         inputPin.SetPullUp(1);
+      }
+      int value = -1;
+      while(true)
+      {
+         while (value == inputPin.Value()) {}
+         printf("Value %d\n", inputPin.Value());
+         value = inputPin.Value();
+      }
    }
 
+   hw_if.tcp_client_uninit();
    printf("Ended..");
 }

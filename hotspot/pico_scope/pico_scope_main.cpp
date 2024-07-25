@@ -11,6 +11,9 @@ void run_scope(IHardwareInterface& hwif)
 {
     printf("Run scope\n");
 
+    hwif.initialise_input_pin(5);
+    hwif.gpio_set_pull_up(5,1);
+
     RestHandler rest(hwif, SCOPE_API_SERVER_IP, SCOPE_API_PORT);
     PicoScope scope(hwif, 100000);
     TraceDataFormatter traceFormatter;
