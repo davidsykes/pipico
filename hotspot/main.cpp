@@ -32,7 +32,7 @@ int main()
       printf("Pulling %d.\n", pullingPin.Value());
       if (pullingPin.Value())
       {
-         inputPin.SetPullUp(0);
+         inputPin.SetPullUp(1);
       }
       int value = -1;
       while(true)
