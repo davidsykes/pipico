@@ -5,11 +5,6 @@
 PicoScope::PicoScope(IHardwareInterface& hw_if, int timeout_us)
     : hw_if(hw_if), timeout_us(timeout_us)
 {
-    for (int x = 0; x < 16; x++)
-    {
-        hw_if.initialise_input_pin(x);
-        hw_if.gpio_set_pull_up(x, 1);
-    }
 }
 
 #define SIGNAL_MASK 0xff00

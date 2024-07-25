@@ -52,6 +52,7 @@ void GPIOTests::RunTests()
 {
 	GPIOInputPinInitialisesTheInputPin();
 	GPIOInputPinReturnsHardwareValues();
+	SetPullUpCallsHardwareSetPullUp();
 }
 
 

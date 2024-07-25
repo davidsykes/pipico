@@ -8,5 +8,6 @@ class GPIOInputPin
     IHardwareInterface& hw_if;
 public:
     GPIOInputPin(int pin, IHardwareInterface& hw_if);
+    void SetPullUp(bool value);
     bool Value();
 };
