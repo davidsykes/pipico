@@ -1,6 +1,6 @@
 #include <cstring>
 #include <sstream>
-#include "rest.h"
+#include "resthandler.h"
 
 
 RestHandler::RestHandler(IHardwareInterface& hwif,
@@ -37,7 +37,7 @@ std::string RestHandler::Put(const char* url, const char* body)
     return last_response;
 }
 
-void RestHandler::Log()
+void RestHandler::LogLastRequest()
 {
     std::stringstream s;
     s << last_request << "\r\n\r\n" << last_response;

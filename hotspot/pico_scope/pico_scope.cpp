@@ -7,7 +7,7 @@ PicoScope::PicoScope(IHardwareInterface& hw_if, int timeout_us)
 {
 }
 
-#define SIGNAL_MASK 0xff
+#define SIGNAL_MASK 0xff0
 #define SIGNAL_SHIFT 4
 
 int PicoScope::GetSignalPins()

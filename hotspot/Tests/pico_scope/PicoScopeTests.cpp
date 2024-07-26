@@ -132,7 +132,7 @@ int MockHardwareInterface::get_pins()
 		next_value = values.back();
 	}
 
-	return next_value << 8;
+	return next_value << 4;
 }
 
 int MockHardwareInterface::wait_pins_change(sPinsChangeData* pinsChangeData, int mask, uint64_t timeout)

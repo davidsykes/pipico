@@ -1,7 +1,7 @@
 #include <memory>
 #include <sstream>
 #include "RestTests.h"
-#include "../../rest/rest.h"
+#include "../../rest/resthandler.h"
 #include "../../rest/itcpresponseanalyser.h"
 #include "../Mocks/MockHardwareInteface.h"
 #include <vector>
@@ -47,7 +47,7 @@ static std::string MakePutRequest(const std::string& url, const std::string& bod
 
 static void PutCombinesUrlAndBody()
 {
-	RestHandler& rest = CreateTestObject();
+	IRestHandler& rest = CreateTestObject();
 
 	rest.Put("url", "body");
 
@@ -62,7 +62,7 @@ static void PutCombinesUrlAndBody()
 
 static void PutPassesRequestAndResponseToTCPResponseAnalyser()
 {
-	RestHandler& rest = CreateTestObject();
+	IRestHandler& rest = CreateTestObject();
 
 	rest.Put("url", "body");
 
@@ -76,10 +76,10 @@ static void PutPassesRequestAndResponseToTCPResponseAnalyser()
 
 static void LogPostsLogWithLastRequestAndResponse()
 {
-	RestHandler& rest = CreateTestObject();
+	IRestHandler& rest = CreateTestObject();
 
 	rest.Put("url", "body");
-	rest.Log();
+	rest.LogLastRequest();
 
 	RestHardwareInterface& hwif = *mockHardwareInterface.get();
 	AssertEqual(2, hwif.sent_data.size());

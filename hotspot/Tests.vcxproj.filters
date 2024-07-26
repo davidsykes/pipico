@@ -79,6 +79,9 @@
     <Filter Include="Source Files\Tests\rest">
       <UniqueIdentifier>{69aa7548-317b-45b6-8baf-7ae685161556}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\hw_if">
+      <UniqueIdentifier>{cb133ce9-863d-4ff2-98f2-fd47eba6e403}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Tests.cpp">
@@ -153,9 +156,6 @@
     <ClCompile Include="Tests\pico_scope\PicoScopeTests.cpp">
       <Filter>Source Files\Tests\pico_scope</Filter>
     </ClCompile>
-    <ClCompile Include="rest\rest.cpp">
-      <Filter>Source Files\rest</Filter>
-    </ClCompile>
     <ClCompile Include="Tests\rest\RestTests.cpp">
       <Filter>Source Files\Tests\rest</Filter>
     </ClCompile>
@@ -164,6 +164,15 @@
     </ClCompile>
     <ClCompile Include="pico_scope\trace_data_formatter.cpp">
       <Filter>Source Files\pico_scope</Filter>
+    </ClCompile>
+    <ClCompile Include="Tests\rest\TcpResponseAnalyserTests.cpp">
+      <Filter>Source Files\Tests\rest</Filter>
+    </ClCompile>
+    <ClCompile Include="rest\tcpresponseanalyser.cpp">
+      <Filter>Source Files\rest</Filter>
+    </ClCompile>
+    <ClCompile Include="rest\resthandler.cpp">
+      <Filter>Source Files\rest</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -248,9 +257,6 @@
     <ClInclude Include="Tests\Mocks\MockHardwareInteface.h">
       <Filter>Source Files\Tests\Mocks</Filter>
     </ClInclude>
-    <ClInclude Include="rest\rest.h">
-      <Filter>Source Files\rest</Filter>
-    </ClInclude>
     <ClInclude Include="Tests\rest\RestTests.h">
       <Filter>Source Files\Tests\rest</Filter>
     </ClInclude>
@@ -259,6 +265,21 @@
     </ClInclude>
     <ClInclude Include="rest\itcpresponseanalyser.h">
       <Filter>Source Files\rest</Filter>
+    </ClInclude>
+    <ClInclude Include="Tests\rest\TcpResponseAnalyserTests.h">
+      <Filter>Source Files\Tests\rest</Filter>
+    </ClInclude>
+    <ClInclude Include="rest\tcpresponseanalyser.h">
+      <Filter>Source Files\rest</Filter>
+    </ClInclude>
+    <ClInclude Include="rest\iresthandler.h">
+      <Filter>Source Files\rest</Filter>
+    </ClInclude>
+    <ClInclude Include="rest\resthandler.h">
+      <Filter>Source Files\rest</Filter>
+    </ClInclude>
+    <ClInclude Include="hw_if\hardware_interface.hpp">
+      <Filter>Source Files\hw_if</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

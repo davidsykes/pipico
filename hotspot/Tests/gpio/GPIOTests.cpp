@@ -9,22 +9,24 @@ namespace
 	{
 		virtual void initialise_input_pin(int pin_number) { initialised_pin_number = pin_number; }
 		virtual int gpio_get(int pin_number) { return pin_value; }
+		virtual void gpio_set_pull_up(int pin_number, int value);
 	public:
 		int initialised_pin_number = 0;
 		int pin_value = 0;
+		int pull_up_value_for_initialised_pin = 0;
 	};
 }
 
 static std::unique_ptr<MockHardwareInterface> hardwareInterface;
 
 
-MockHardwareInterface& CreateHardwareInterface()
+static MockHardwareInterface& CreateHardwareInterface()
 {
 	hardwareInterface.reset(new MockHardwareInterface());
 	return *hardwareInterface.get();
 }
 
-void GPIOInputPinInitialisesTheInputPin()
+static void GPIOInputPinInitialisesTheInputPin()
 {
 	MockHardwareInterface& hw_if = CreateHardwareInterface();
 
@@ -33,7 +35,7 @@ void GPIOInputPinInitialisesTheInputPin()
 	AssertEqual(5, hw_if.initialised_pin_number);
 }
 
-void GPIOInputPinReturnsHardwareValues()
+static void GPIOInputPinReturnsHardwareValues()
 {
 	MockHardwareInterface& hw_if = CreateHardwareInterface();
 	GPIOInputPin ip(5, hw_if);
@@ -47,6 +49,15 @@ void GPIOInputPinReturnsHardwareValues()
 	AssertFalse(value);
 }
 
+static void SetPullUpCallsHardwareSetPullUp()
+{
+	MockHardwareInterface& hw_if = CreateHardwareInterface();
+	GPIOInputPin ip(5, hw_if);
+	ip.SetPullUp(1);
+
+	AssertEqual(1, hw_if.pull_up_value_for_initialised_pin);
+
+}
 
 void GPIOTests::RunTests()
 {
@@ -55,7 +66,13 @@ void GPIOTests::RunTests()
 	SetPullUpCallsHardwareSetPullUp();
 }
 
-
+void MockHardwareInterface::gpio_set_pull_up(int pin_number, int value)
+{
+	if (pin_number == initialised_pin_number)
+	{
+		pull_up_value_for_initialised_pin = value;
+	}
+}
 
 void GPIOTests::CleanUpAfterTests()
 {

@@ -1,5 +1,5 @@
 #pragma once
-#include "hardware_interface.h"
+#include "hardware_interface.hpp"
 
 class IMockHardwareInterface : public IHardwareInterface
 {
@@ -13,7 +13,7 @@ class IMockHardwareInterface : public IHardwareInterface
 	virtual int gpio_get(int pin_number) { return 0; }
 	virtual int get_pins() { return 0; }
     virtual int wait_pins_change(sPinsChangeData* pinsChangeData, int mask, uint64_t timeout) { return 0;}
-	virtual void gpio_put(int pin_number, int value) {}
+	virtual void gpio_put(int pin_number, bool value) {}
 	virtual void set_led(bool value) {}
 	virtual void sleep_us(int useconds) {}
 	virtual std::string tcp_request(const char* server, unsigned int port, const char* request) { return ""; };

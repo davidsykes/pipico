@@ -7,7 +7,7 @@ GPIOInputPin::GPIOInputPin(int pin, IHardwareInterface& hw_if) : hw_if(hw_if)
     hw_if.initialise_input_pin(pin);
 }
 
-void GPIOInputPin::SetPullUp(bool value)
+void GPIOInputPin::SetPullUp(int value)
 {
     hw_if.gpio_set_pull_up(pin, value);
 }

@@ -53,7 +53,7 @@ int PicoHardwareInterface::wait_pins_change(sPinsChangeData* pinsChangeData, int
     return hardware_interface->wait_pins_change(pinsChangeData, mask, timeout);
 }
 
-void PicoHardwareInterface::gpio_put(int pin_number, int value)
+void PicoHardwareInterface::gpio_put(int pin_number, bool value)
 {
     hardware_interface->gpio_put(pin_number, value);
 }

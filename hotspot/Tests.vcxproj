@@ -140,7 +140,8 @@
     <ClCompile Include="pico_scope\pico_scope.cpp" />
     <ClCompile Include="pico_scope\pico_scope_trace.cpp" />
     <ClCompile Include="pico_scope\trace_data_formatter.cpp" />
-    <ClCompile Include="rest\rest.cpp" />
+    <ClCompile Include="rest\resthandler.cpp" />
+    <ClCompile Include="rest\tcpresponseanalyser.cpp" />
     <ClCompile Include="Tests.cpp" />
     <ClCompile Include="Tests\configurations\HotSpotConfigurationTests.cpp" />
     <ClCompile Include="Tests\gpio\GPIOTests.cpp" />
@@ -153,6 +154,7 @@
     <ClCompile Include="Tests\pico_scope\PicoScopeTests.cpp" />
     <ClCompile Include="Tests\pico_scope\TraceDataFormatterTests.cpp" />
     <ClCompile Include="Tests\rest\RestTests.cpp" />
+    <ClCompile Include="Tests\rest\TcpResponseAnalyserTests.cpp" />
     <ClCompile Include="Tests\TestFramework\Assert.cpp" />
     <ClCompile Include="Tests\TestFramework\TestFramework.cpp" />
     <ClCompile Include="Tests\TestFramework\TestModule.cpp" />
@@ -171,9 +173,12 @@
     <ClInclude Include="hotspot\logic\requests\configuration.h" />
     <ClInclude Include="hotspot\logic\requests\hotspot_configuration.h" />
     <ClInclude Include="hotspot\logic\requests\process_request.h" />
+    <ClInclude Include="hw_if\hardware_interface.hpp" />
     <ClInclude Include="pico_scope\pico_scope.h" />
+    <ClInclude Include="rest\iresthandler.h" />
     <ClInclude Include="rest\itcpresponseanalyser.h" />
-    <ClInclude Include="rest\rest.h" />
+    <ClInclude Include="rest\resthandler.h" />
+    <ClInclude Include="rest\tcpresponseanalyser.h" />
     <ClInclude Include="Tests\configurations\HotSpotConfigurationTests.h" />
     <ClInclude Include="Tests\gpio\GPIOTests.h" />
     <ClInclude Include="Tests\logic\connecting\WIFIConnectorTests.h" />
@@ -186,6 +191,7 @@
     <ClInclude Include="Tests\pico_scope\PicoScopeTests.h" />
     <ClInclude Include="Tests\pico_scope\TraceDataFormatterTests.h" />
     <ClInclude Include="Tests\rest\RestTests.h" />
+    <ClInclude Include="Tests\rest\TcpResponseAnalyserTests.h" />
     <ClInclude Include="Tests\TestFramework\Assert.h" />
     <ClInclude Include="Tests\TestFramework\ITestModule.h" />
     <ClInclude Include="Tests\TestFramework\TestFramework.h" />
