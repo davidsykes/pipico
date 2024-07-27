@@ -4,10 +4,5 @@
 
 class TcpResponseAnalyser : public ITcpResponseAnalyser
 {
-	IRestHandler& restHandler;
-
-	virtual void AnalyseTcpResponse(const std::string& request, const std::string& response);
-
-public:
-	TcpResponseAnalyser(IRestHandler& restHandler) : restHandler(restHandler) {}
+	virtual bool AnalyseTcpResponse(const std::string& request, const std::string& response);
 };

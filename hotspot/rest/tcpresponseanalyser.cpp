@@ -3,7 +3,7 @@
 
 
 
-void TcpResponseAnalyser::AnalyseTcpResponse(const std::string& request, const std::string& response)
+bool TcpResponseAnalyser::AnalyseTcpResponse(const std::string& request, const std::string& response)
 {
-	restHandler.LogLastRequest();
+	return false;
 }

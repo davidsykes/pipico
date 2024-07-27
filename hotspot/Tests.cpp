@@ -9,7 +9,7 @@
 #include "Tests\gpio\GPIOTests.h"
 #include "Tests\pico_scope\PicoScopeTests.h"
 #include "Tests\pico_scope\TraceDataFormatterTests.h"
-#include "Tests\rest\RestTests.h"
+#include "Tests\rest\RestHandlerTests.h"
 #include "Tests\rest\TcpResponseAnalyserTests.h"
 
 int main()
@@ -23,7 +23,7 @@ int main()
     PercentDecoderTests().RunTests();
     GPIOTests().RunTests();
     PicoScopeTests().RunTests();
-    RestTests().RunTests();
+    RestHandlerTests().RunTests();
     TraceDataFormatterTests().RunTests();
     TcpResponseAnalyserTests().RunTests();
     std::cout << "Tests Complete\n";

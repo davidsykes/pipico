@@ -1,6 +1,6 @@
 #include <memory>
 #include <sstream>
-#include "RestTests.h"
+#include "RestHandlerTests.h"
 #include "../../rest/resthandler.h"
 #include "../../rest/itcpresponseanalyser.h"
 #include "../Mocks/MockHardwareInteface.h"
@@ -18,10 +18,11 @@ public:
 
 class MockTcpResponseAnalyser : public ITcpResponseAnalyser
 {
-	virtual void AnalyseTcpResponse(const std::string& request, const std::string& response) { this->request = request; this->response = response; }
+	virtual bool AnalyseTcpResponse(const std::string& request, const std::string& response) { this->request = request; this->response = response; return analyse_result; }
 public:
 	std::string request;
 	std::string response;
+	bool analyse_result = true;
 };
 
 static std::unique_ptr<RestHandler> testObject;
@@ -74,12 +75,12 @@ static void PutPassesRequestAndResponseToTCPResponseAnalyser()
 	AssertEqual("response", mockTcpResponseAnalyser.get()->response);
 }
 
-static void LogPostsLogWithLastRequestAndResponse()
+static void PutLogsTheLastRequestIfTheAnalyserReturnsFalse()
 {
 	IRestHandler& rest = CreateTestObject();
+	mockTcpResponseAnalyser.get()->analyse_result = false;
 
 	rest.Put("url", "body");
-	rest.LogLastRequest();
 
 	RestHardwareInterface& hwif = *mockHardwareInterface.get();
 	AssertEqual(2, hwif.sent_data.size());
@@ -90,11 +91,11 @@ static void LogPostsLogWithLastRequestAndResponse()
 	AssertEqual(expected, data);
 }
 
-void RestTests::RunTests()
+void RestHandlerTests::RunTests()
 {
 	PutCombinesUrlAndBody();
 	PutPassesRequestAndResponseToTCPResponseAnalyser();
-	LogPostsLogWithLastRequestAndResponse();
+	PutLogsTheLastRequestIfTheAnalyserReturnsFalse();
 }
 
 std::string RestHardwareInterface::tcp_request(const char* server, unsigned int port, const char* request)
@@ -106,7 +107,7 @@ std::string RestHardwareInterface::tcp_request(const char* server, unsigned int 
 };
 
 
-void RestTests::CleanUpAfterTests()
+void RestHandlerTests::CleanUpAfterTests()
 {
 	mockHardwareInterface.release();
 	testObject.release();

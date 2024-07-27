@@ -10,12 +10,13 @@ class RestHandler : public IRestHandler
     ITcpResponseAnalyser& tcp_analyser;
     std::string server;
     unsigned int port;
-    std::string last_request;
-    std::string last_response;
+
+    std::string MakeRequest(const char* url, const char* body);
+    std::string PutRaw(const std::string& request);
+    void LogLastRequest(const std::string& request, const std::string& response);
 
     virtual std::string Get(const char* url);
     virtual std::string Put(const char* url, const char* body);
-    virtual void LogLastRequest();
 
 public:
     RestHandler(IHardwareInterface& hwif, ITcpResponseAnalyser& tcp_analyser, const char* server, unsigned int port);

@@ -3,56 +3,44 @@
 #include "../../rest/iresthandler.h"
 #include "../../rest/tcpresponseanalyser.h"
 
-class MockRestHandler : public IRestHandler
-{
-	virtual std::string Get(const char* url) { return ""; };
-	virtual std::string Put(const char* url, const char* body) { return ""; };
-	virtual void LogLastRequest() { logLastRequestCalled = true; }
-public:
-	bool logLastRequestCalled = false;
-};
-
 static std::unique_ptr<TcpResponseAnalyser> testObject;
-static std::unique_ptr<MockRestHandler> mockRestHandler;
 
 static TcpResponseAnalyser& CreateTestObject()
 {
-	mockRestHandler.reset(new MockRestHandler());
-	testObject.reset(new TcpResponseAnalyser(*mockRestHandler.get()));
+	testObject.reset(new TcpResponseAnalyser());
 	return *testObject.get();
 }
 
 static std::string MakeNotOkResponse();
 static std::string MakeOkResponse();
 
-static void AnInvalidResponsePassesRequestAndResponseToTheLog()
+static void AnInvalidResponseReturnsFalse()
 {
 	ITcpResponseAnalyser& analyser = CreateTestObject();
 
-	analyser.AnalyseTcpResponse("Request", MakeNotOkResponse());
+	bool result = analyser.AnalyseTcpResponse("Request", MakeNotOkResponse());
 
-	AssertTrue(mockRestHandler.get()->logLastRequestCalled);
+	AssertFalse(result);
 }
 
-static void AValidResponseDoesNotPassRequestAndResponseToTheLog()
+static void AValidResponseReturnsTrue()
 {
 	ITcpResponseAnalyser& analyser = CreateTestObject();
 
-	analyser.AnalyseTcpResponse("Request", MakeOkResponse());
+	bool result = analyser.AnalyseTcpResponse("Request", MakeOkResponse());
 
-	AssertFalse(mockRestHandler.get()->logLastRequestCalled);
+	AssertTrue(result);
 }
 
 void TcpResponseAnalyserTests::RunTests()
 {
-	AnInvalidResponsePassesRequestAndResponseToTheLog();
-	AValidResponseDoesNotPassRequestAndResponseToTheLog();
+	AnInvalidResponseReturnsFalse();
+	AValidResponseReturnsTrue();
 }
 
 void TcpResponseAnalyserTests::CleanUpAfterTests()
 {
 	testObject.release();
-	mockRestHandler.release();
 }
 
 static std::string MakeNotOkResponse()

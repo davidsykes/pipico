@@ -1,7 +1,7 @@
 #pragma once
 #include "TestFramework.h"
 
-class RestTests : public ITestModule
+class RestHandlerTests : public ITestModule
 {
 	virtual void CleanUpAfterTests();
 public:

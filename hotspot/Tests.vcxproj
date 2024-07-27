@@ -153,7 +153,7 @@
     <ClCompile Include="Tests\logic\input_form\InputFormRendererTests.cpp" />
     <ClCompile Include="Tests\pico_scope\PicoScopeTests.cpp" />
     <ClCompile Include="Tests\pico_scope\TraceDataFormatterTests.cpp" />
-    <ClCompile Include="Tests\rest\RestTests.cpp" />
+    <ClCompile Include="Tests\rest\RestHandlerTests.cpp" />
     <ClCompile Include="Tests\rest\TcpResponseAnalyserTests.cpp" />
     <ClCompile Include="Tests\TestFramework\Assert.cpp" />
     <ClCompile Include="Tests\TestFramework\TestFramework.cpp" />
@@ -190,7 +190,7 @@
     <ClInclude Include="Tests\Mocks\MockHardwareInteface.h" />
     <ClInclude Include="Tests\pico_scope\PicoScopeTests.h" />
     <ClInclude Include="Tests\pico_scope\TraceDataFormatterTests.h" />
-    <ClInclude Include="Tests\rest\RestTests.h" />
+    <ClInclude Include="Tests\rest\RestHandlerTests.h" />
     <ClInclude Include="Tests\rest\TcpResponseAnalyserTests.h" />
     <ClInclude Include="Tests\TestFramework\Assert.h" />
     <ClInclude Include="Tests\TestFramework\ITestModule.h" />

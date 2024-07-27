@@ -156,7 +156,7 @@
     <ClCompile Include="Tests\pico_scope\PicoScopeTests.cpp">
       <Filter>Source Files\Tests\pico_scope</Filter>
     </ClCompile>
-    <ClCompile Include="Tests\rest\RestTests.cpp">
+    <ClCompile Include="Tests\rest\RestHandlerTests.cpp">
       <Filter>Source Files\Tests\rest</Filter>
     </ClCompile>
     <ClCompile Include="Tests\pico_scope\TraceDataFormatterTests.cpp">
@@ -257,7 +257,7 @@
     <ClInclude Include="Tests\Mocks\MockHardwareInteface.h">
       <Filter>Source Files\Tests\Mocks</Filter>
     </ClInclude>
-    <ClInclude Include="Tests\rest\RestTests.h">
+    <ClInclude Include="Tests\rest\RestHandlerTests.h">
       <Filter>Source Files\Tests\rest</Filter>
     </ClInclude>
     <ClInclude Include="Tests\pico_scope\TraceDataFormatterTests.h">
