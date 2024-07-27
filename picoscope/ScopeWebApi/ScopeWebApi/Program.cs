@@ -60,6 +60,25 @@ try
     })
     .WithName("Scope");
 
+    app.MapPut("/trace", async delegate (HttpContext context)
+    {
+        string jsonString = await Tools.GetJSONString(context);
+        var handler = new ScopeTraceHandler2();
+
+        try
+        {
+            var response = ScopeTraceHandler2.HandleTrace(jsonString);
+            return string.IsNullOrEmpty(response) ? "Ok" : $"Not Ok: {response}";
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Error processing scope: {ex.Message}");
+            Console.WriteLine(jsonString);
+            return "Not Ok";
+        }
+    })
+    .WithName("Create Trace");
+
     app.MapPut("/log", async delegate (HttpContext context)
     {
         string jsonString = await Tools.GetJSONString(context);
