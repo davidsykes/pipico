@@ -1,6 +1,6 @@
 #pragma once
-#include "itcpresponseanalyser.h"
-#include "iresthandler.h"
+#include "itcp_response_analyser.h"
+#include "irest_handler.h"
 
 class TcpResponseAnalyser : public ITcpResponseAnalyser
 {

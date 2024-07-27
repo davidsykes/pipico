@@ -1,8 +1,8 @@
 #pragma once
 #include <string>
-#include "iresthandler.h"
+#include "irest_handler.h"
 #include "hardware_interface.hpp"
-#include "itcpresponseanalyser.h"
+#include "itcp_response_analyser.h"
 
 class RestHandler : public IRestHandler
 {

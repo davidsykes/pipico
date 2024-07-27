@@ -28,7 +28,8 @@ add_executable(test
         pico_scope/pico_scope.cpp
         pico_scope/pico_scope_trace.cpp
         pico_scope/trace_data_formatter.cpp
-        rest/rest.cpp
+        rest/rest_handler.cpp
+        rest/tcp_response_analyser.cpp
         tools/hex_dump.cpp
 )
 target_include_directories(test PRIVATE

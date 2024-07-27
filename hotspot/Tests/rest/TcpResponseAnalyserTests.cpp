@@ -1,7 +1,7 @@
 #include <memory>
 #include "TcpResponseAnalyserTests.h"
-#include "../../rest/iresthandler.h"
-#include "../../rest/tcpresponseanalyser.h"
+#include "../../rest/irest_handler.h"
+#include "../../rest/tcp_response_analyser.h"
 
 static std::unique_ptr<TcpResponseAnalyser> testObject;
 

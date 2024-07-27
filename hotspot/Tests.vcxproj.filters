@@ -168,10 +168,10 @@
     <ClCompile Include="Tests\rest\TcpResponseAnalyserTests.cpp">
       <Filter>Source Files\Tests\rest</Filter>
     </ClCompile>
-    <ClCompile Include="rest\tcpresponseanalyser.cpp">
+    <ClCompile Include="rest\tcp_response_analyser.cpp">
       <Filter>Source Files\rest</Filter>
     </ClCompile>
-    <ClCompile Include="rest\resthandler.cpp">
+    <ClCompile Include="rest\rest_handler.cpp">
       <Filter>Source Files\rest</Filter>
     </ClCompile>
   </ItemGroup>
@@ -263,19 +263,19 @@
     <ClInclude Include="Tests\pico_scope\TraceDataFormatterTests.h">
       <Filter>Source Files\Tests\pico_scope</Filter>
     </ClInclude>
-    <ClInclude Include="rest\itcpresponseanalyser.h">
+    <ClInclude Include="rest\itcp_response_analyser.h">
       <Filter>Source Files\rest</Filter>
     </ClInclude>
     <ClInclude Include="Tests\rest\TcpResponseAnalyserTests.h">
       <Filter>Source Files\Tests\rest</Filter>
     </ClInclude>
-    <ClInclude Include="rest\tcpresponseanalyser.h">
+    <ClInclude Include="rest\tcp_response_analyser.h">
       <Filter>Source Files\rest</Filter>
     </ClInclude>
-    <ClInclude Include="rest\iresthandler.h">
+    <ClInclude Include="rest\irest_handler.h">
       <Filter>Source Files\rest</Filter>
     </ClInclude>
-    <ClInclude Include="rest\resthandler.h">
+    <ClInclude Include="rest\rest_handler.h">
       <Filter>Source Files\rest</Filter>
     </ClInclude>
     <ClInclude Include="hw_if\hardware_interface.hpp">

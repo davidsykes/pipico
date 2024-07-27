@@ -1,6 +1,6 @@
 #include <cstring>
 #include <sstream>
-#include "resthandler.h"
+#include "rest_handler.h"
 
 
 RestHandler::RestHandler(IHardwareInterface& hwif,

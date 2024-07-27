@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include "pico_scope_main.h"
-#include "rest.h"
+#include "rest_handler.h"
+#include "tcp_response_analyser.h"
 #include "pico_scope.h"
 
 
@@ -15,7 +16,11 @@ void run_scope(IHardwareInterface& hwif)
     hwif.initialise_input_pin(5);
     hwif.gpio_set_pull_up(5,1);
 
-    RestHandler rest(hwif, SCOPE_API_SERVER_IP, SCOPE_API_PORT);
+    TcpResponseAnalyser tcpResponseAnalyser;
+    RestHandler rest_imp(hwif,
+                     tcpResponseAnalyser,
+                     SCOPE_API_SERVER_IP, SCOPE_API_PORT);
+    IRestHandler& rest = rest_imp;
     PicoScope scope(hwif, 100000);
     TraceDataFormatter traceFormatter;
 
@@ -30,7 +35,7 @@ void run_scope(IHardwareInterface& hwif)
         printf("Scope result %s\n", result.c_str());
         if (result != "Ok")
         {
-            rest.Log();
+            //rest.Log();
         }
     }
 }

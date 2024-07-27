@@ -1,8 +1,8 @@
 #include <memory>
 #include <sstream>
 #include "RestHandlerTests.h"
-#include "../../rest/resthandler.h"
-#include "../../rest/itcpresponseanalyser.h"
+#include "../../rest/rest_handler.h"
+#include "../../rest/itcp_response_analyser.h"
 #include "../Mocks/MockHardwareInteface.h"
 #include <vector>
 

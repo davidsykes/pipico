@@ -140,8 +140,8 @@
     <ClCompile Include="pico_scope\pico_scope.cpp" />
     <ClCompile Include="pico_scope\pico_scope_trace.cpp" />
     <ClCompile Include="pico_scope\trace_data_formatter.cpp" />
-    <ClCompile Include="rest\resthandler.cpp" />
-    <ClCompile Include="rest\tcpresponseanalyser.cpp" />
+    <ClCompile Include="rest\rest_handler.cpp" />
+    <ClCompile Include="rest\tcp_response_analyser.cpp" />
     <ClCompile Include="Tests.cpp" />
     <ClCompile Include="Tests\configurations\HotSpotConfigurationTests.cpp" />
     <ClCompile Include="Tests\gpio\GPIOTests.cpp" />
@@ -175,10 +175,10 @@
     <ClInclude Include="hotspot\logic\requests\process_request.h" />
     <ClInclude Include="hw_if\hardware_interface.hpp" />
     <ClInclude Include="pico_scope\pico_scope.h" />
-    <ClInclude Include="rest\iresthandler.h" />
-    <ClInclude Include="rest\itcpresponseanalyser.h" />
-    <ClInclude Include="rest\resthandler.h" />
-    <ClInclude Include="rest\tcpresponseanalyser.h" />
+    <ClInclude Include="rest\irest_handler.h" />
+    <ClInclude Include="rest\itcp_response_analyser.h" />
+    <ClInclude Include="rest\rest_handler.h" />
+    <ClInclude Include="rest\tcp_response_analyser.h" />
     <ClInclude Include="Tests\configurations\HotSpotConfigurationTests.h" />
     <ClInclude Include="Tests\gpio\GPIOTests.h" />
     <ClInclude Include="Tests\logic\connecting\WIFIConnectorTests.h" />
