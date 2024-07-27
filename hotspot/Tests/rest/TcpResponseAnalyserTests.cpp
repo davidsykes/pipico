@@ -45,28 +45,28 @@ void TcpResponseAnalyserTests::CleanUpAfterTests()
 
 static std::string MakeNotOkResponse()
 {
-	return """HTTP/1.1 200 OK\
-Content - Type: text / plain; charset = utf - 8\
-Date: Thu, 25 Jul 2024 06 : 28 : 24 GMT\
-Server : Kestrel\
-Transfer - Encoding : chunked\
-\
-6\
-Not Ok\
-0\
+	return """HTTP/1.1 200 OK\r\n\
+Content - Type: text / plain; charset = utf - 8\r\n\
+Date: Thu, 25 Jul 2024 06 : 28 : 24 GMT\r\n\
+Server : Kestrel\r\n\
+Transfer - Encoding : chunked\r\n\
+\r\n\
+6\r\n\
+Not Ok\r\n\
+0\r\n\
 ";
 }
 
 static std::string MakeOkResponse()
 {
-	return """HTTP/1.1 200 OK\
-Content - Type: text / plain; charset = utf - 8\
-Date: Thu, 25 Jul 2024 06 : 28 : 24 GMT\
-Server : Kestrel\
-Transfer - Encoding : chunked\
-\
-6\
-Not Ok\
-0\
+	return """HTTP/1.1 200 OK\r\n\
+Content - Type: text / plain; charset = utf - 8\r\n\
+Date: Sat, 27 Jul 2024 06 : 24 : 40 GMT\r\n\
+Server : Kestrel\r\n\
+Transfer - Encoding : chunked\r\n\
+\r\n\
+2\r\n\
+Ok\r\n\
+0\r\n\
 ";
 }
