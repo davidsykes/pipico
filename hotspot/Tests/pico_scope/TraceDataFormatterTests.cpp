@@ -1,7 +1,7 @@
 #include "TraceDataFormatterTests.h"
 #include "../../pico_scope/pico_scope.h"
 
-const char* prefix = "{\"InitialValue\":11,\"values\":";
+const char* prefix = "{\"InitialValue\":11,\"Values\":";
 
 std::string FormatTraceDataAndRemovePrefix(const PicoScopeTrace& trace);
 
@@ -29,7 +29,7 @@ static void ASimpleTraceCanBeFormatted()
 
 	std::string data = FormatTraceDataAndRemovePrefix(trace);
 
-	AssertEqual("{{42,0},{21,10},{34,20}}}", data);
+	AssertEqual("[[42,0],[21,10],[34,20]]}", data);
 }
 
 

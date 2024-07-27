@@ -6,6 +6,7 @@
 
 #define SCOPE_API_SERVER_IP "192.168.1.87"
 #define SCOPE_API_PORT 5000
+#define TRACE_DATA_CREATE_URL "/trace"
 
 void run_scope(IHardwareInterface& hwif)
 {
@@ -25,7 +26,7 @@ void run_scope(IHardwareInterface& hwif)
 
         hwif.set_led(0);
         std::string traceData = traceFormatter.FormatTraceData(trace);
-        std::string result = rest.Put("/scope", traceData.c_str());
+        std::string result = rest.Put(TRACE_DATA_CREATE_URL, traceData.c_str());
         printf("Scope result %s\n", result.c_str());
         if (result != "Ok")
         {

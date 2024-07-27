@@ -53,7 +53,7 @@ try
         }
         catch (Exception ex)
         {
-            Console.WriteLine($"Error processing scope: {ex.Message}");
+            Console.WriteLine($"Error processing legacy scope url: {ex.Message}");
             Console.WriteLine(jsonString);
             return "Not Ok";
         }
@@ -72,7 +72,7 @@ try
         }
         catch (Exception ex)
         {
-            Console.WriteLine($"Error processing scope: {ex.Message}");
+            Console.WriteLine($"Error processing trace data: {ex.Message}");
             Console.WriteLine(jsonString);
             return "Not Ok";
         }
@@ -99,7 +99,7 @@ try
         }
         catch (Exception ex)
         {
-            Console.WriteLine($"Error processing scope: {ex.Message}");
+            Console.WriteLine($"Error processing log: {ex.Message}");
             Console.WriteLine(jsonString);
             return "Not Ok";
         }

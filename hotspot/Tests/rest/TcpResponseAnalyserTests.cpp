@@ -23,6 +23,7 @@ static TcpResponseAnalyser& CreateTestObject()
 }
 
 static std::string MakeNotOkResponse();
+static std::string MakeOkResponse();
 
 static void AnInvalidResponsePassesRequestAndResponseToTheLog()
 {
@@ -33,9 +34,19 @@ static void AnInvalidResponsePassesRequestAndResponseToTheLog()
 	AssertTrue(mockRestHandler.get()->logLastRequestCalled);
 }
 
+static void AValidResponseDoesNotPassRequestAndResponseToTheLog()
+{
+	ITcpResponseAnalyser& analyser = CreateTestObject();
+
+	analyser.AnalyseTcpResponse("Request", MakeOkResponse());
+
+	AssertFalse(mockRestHandler.get()->logLastRequestCalled);
+}
+
 void TcpResponseAnalyserTests::RunTests()
 {
 	AnInvalidResponsePassesRequestAndResponseToTheLog();
+	AValidResponseDoesNotPassRequestAndResponseToTheLog();
 }
 
 void TcpResponseAnalyserTests::CleanUpAfterTests()
@@ -45,6 +56,20 @@ void TcpResponseAnalyserTests::CleanUpAfterTests()
 }
 
 static std::string MakeNotOkResponse()
+{
+	return """HTTP/1.1 200 OK\
+Content - Type: text / plain; charset = utf - 8\
+Date: Thu, 25 Jul 2024 06 : 28 : 24 GMT\
+Server : Kestrel\
+Transfer - Encoding : chunked\
+\
+6\
+Not Ok\
+0\
+";
+}
+
+static std::string MakeOkResponse()
 {
 	return """HTTP/1.1 200 OK\
 Content - Type: text / plain; charset = utf - 8\
