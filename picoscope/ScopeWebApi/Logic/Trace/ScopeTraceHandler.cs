@@ -1,8 +1,20 @@
-﻿using Logic.Messaging;
+﻿using Logic.Logic;
+using System.Text.Json;
 
 namespace Logic.Trace
 {
-    public class ScopeTraceHandler : IMessageHandler
+    class TraceData
+    {
+        public int InitialValue { get; set; }
+        public List<List<int>> Values { get; set; }
+
+        public TraceData()
+        {
+            Values = new List<List<int>>();
+        }
+    }
+
+    public class ScopeTraceHandler
     {
         private readonly string _traceFilePath;
 
@@ -11,88 +23,48 @@ namespace Logic.Trace
             _traceFilePath = traceFilePath;
         }
 
-        public bool ProcessMessage(byte[] bytes)
+        public string HandleTrace(string json)
         {
-            Console.WriteLine($"Received {bytes.Length} bytes");
-
-            if (bytes.Length >= 4)
+            if (string.IsNullOrEmpty(json))
             {
-                var fileName = DateTime.Now.ToString("yyyyMMddHHmmss") + ".bin";
-                var filePath = Path.Combine(_traceFilePath, fileName);
-                Console.WriteLine($"Write data to {filePath}");
-                var file = File.Open(filePath, FileMode.Create);
-                file.Write(bytes);
-                file.Close();
+                var exampleTraceData = new TraceData();
+                exampleTraceData.InitialValue = 2;
+                exampleTraceData.Values.Add(new List<int>());
+                exampleTraceData.Values[0].Add(1);
+                exampleTraceData.Values[0].Add(2);
+                exampleTraceData.Values.Add(new List<int>());
+                exampleTraceData.Values[1].Add(1);
+                exampleTraceData.Values[1].Add(2);
 
-                DebugPrintTraceData(bytes);
+                Console.WriteLine(JsonSerializer.Serialize(exampleTraceData));
+
+                return "Not ok";
             }
-            return true;
+
+            DeserialiseMessage(json);
+            Console.WriteLine("Trace Received");
+
+            var fileName = DateTime.Now.ToString("yyyyMMddHHmmss") + ".trc";
+            var filePath = Path.Combine(_traceFilePath, fileName);
+            Console.WriteLine($"Write data to {filePath}");
+            File.WriteAllText(filePath, json);
+
+            return "";
         }
 
-        static void DebugPrintTraceData(byte[] bytes)
+        private static TraceData DeserialiseMessage(string jsonString)
         {
             try
             {
-                TryDebugPrintTraceData(bytes);
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine($"Error debugging trace data {e.Message}");
-            }
-        }
+                var traceData = JsonSerializer.Deserialize<TraceData>(jsonString);
 
-        static void TryDebugPrintTraceData(byte[] bytes)
-        {
-            var r = new BinaryReader(new MemoryStream(bytes));
-
-            var id = r.ReadInt32();
-            Console.WriteLine($"First int is {id:X}");
-            if (id == 0x12345678)
-            {
-                Decompose(r);
+                if (traceData != null)
+                    return traceData;
             }
-            else
+            catch (JsonException)
             {
-                for (int i = 0; i < bytes.Length && i < 100; i++)
-                {
-                    var b = bytes[i];
-                    if (b < 32 || b > 127)
-                    {
-                        Console.Write(Convert.ToHexString(bytes, i, 1));
-                    }
-                    else
-                    {
-                        Console.Write(Convert.ToChar(b));
-                    }
-                }
-                Console.WriteLine("");
             }
-        }
-
-        private static void Decompose(BinaryReader r)
-        {
-            try
-            {
-                var count = r.ReadInt32();
-                Console.WriteLine($"Found {count} samples");
-                if (count > 0)
-                {
-                    var length = r.ReadInt32();
-                    Console.WriteLine($"Sample is {length} uS long");
-                    for (int i = 0; i < count; i++)
-                    {
-                        var t = r.ReadInt32();
-                        int v = r.ReadByte();
-                        Console.WriteLine($"v={t} - {v}");
-                    }
-                    var e = r.ReadInt32();
-                    Console.WriteLine($"e={e:x}");
-                }
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine($"Exception {ex.Message}");
-            }
+            throw new ScopeWebApiException("The trace data has not been recognised.");
         }
     }
 }
