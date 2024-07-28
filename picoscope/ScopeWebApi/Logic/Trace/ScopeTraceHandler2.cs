@@ -16,7 +16,14 @@ namespace Logic.Trace
 
     public class ScopeTraceHandler2
     {
-        public static string HandleTrace(string json)
+        private readonly string _traceFilePath;
+
+        public ScopeTraceHandler2(string traceFilePath)
+        {
+            _traceFilePath = traceFilePath;
+        }
+
+        public string HandleTrace(string json)
         {
             if (string.IsNullOrEmpty(json))
             {
@@ -34,10 +41,15 @@ namespace Logic.Trace
                 return "Not ok";
             }
 
-                var traceData = DeserialiseMessage(json);
-                Console.WriteLine("Received");
+            DeserialiseMessage(json);
+            Console.WriteLine("Trace Received");
 
-                return "";
+            var fileName = DateTime.Now.ToString("yyyyMMddHHmmss") + ".trc";
+            var filePath = Path.Combine(_traceFilePath, fileName);
+            Console.WriteLine($"Write data to {filePath}");
+            File.WriteAllText(filePath, json);
+
+            return "";
         }
 
         private static TraceData DeserialiseMessage(string jsonString)

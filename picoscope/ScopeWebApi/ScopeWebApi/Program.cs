@@ -27,6 +27,7 @@ try
     var messageRouter = new MessageRouter();
     var traceFilesPath = programParameters.GetParameter("TraceFilesPath");
     var scopeTraceHandler = new ScopeTraceHandler(traceFilesPath);
+    var scopeTraceHandler2 = new ScopeTraceHandler2(traceFilesPath);
     messageRouter.AddHandler("trace", scopeTraceHandler);
     ISystemWrapper systemWrapper = new SystemWrapper();
     IScopeTraceDirectory scopeTraceDirectory = new ScopeTraceDirectory(traceFilesPath, systemWrapper);
@@ -63,11 +64,10 @@ try
     app.MapPut("/trace", async delegate (HttpContext context)
     {
         string jsonString = await Tools.GetJSONString(context);
-        var handler = new ScopeTraceHandler2();
 
         try
         {
-            var response = ScopeTraceHandler2.HandleTrace(jsonString);
+            var response = scopeTraceHandler2.HandleTrace(jsonString);
             return string.IsNullOrEmpty(response) ? "Ok" : $"Not Ok: {response}";
         }
         catch (Exception ex)
