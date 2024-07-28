@@ -1,18 +1,8 @@
-﻿using Logic.Logic;
+﻿using Logic.DataObjects;
 using System.Text.Json;
 
 namespace Logic.Trace
 {
-    class TraceData
-    {
-        public int InitialValue { get; set; }
-        public List<List<int>> Values { get; set; }
-
-        public TraceData()
-        {
-            Values = new List<List<int>>();
-        }
-    }
 
     public class ScopeTraceHandler
     {
@@ -27,7 +17,7 @@ namespace Logic.Trace
         {
             if (string.IsNullOrEmpty(json))
             {
-                var exampleTraceData = new TraceData();
+                var exampleTraceData = new RawScopeTraceData();
                 exampleTraceData.InitialValue = 2;
                 exampleTraceData.Values.Add(new List<int>());
                 exampleTraceData.Values[0].Add(1);
@@ -41,7 +31,7 @@ namespace Logic.Trace
                 return "Not ok";
             }
 
-            DeserialiseMessage(json);
+            RawScopeTraceData.DeserialiseMessage(json);
             Console.WriteLine("Trace Received");
 
             var fileName = DateTime.Now.ToString("yyyyMMddHHmmss") + ".trc";
@@ -50,21 +40,6 @@ namespace Logic.Trace
             File.WriteAllText(filePath, json);
 
             return "";
-        }
-
-        private static TraceData DeserialiseMessage(string jsonString)
-        {
-            try
-            {
-                var traceData = JsonSerializer.Deserialize<TraceData>(jsonString);
-
-                if (traceData != null)
-                    return traceData;
-            }
-            catch (JsonException)
-            {
-            }
-            throw new ScopeWebApiException("The trace data has not been recognised.");
         }
     }
 }

@@ -1,7 +1,7 @@
 ﻿#nullable disable
 namespace Logic.DataObjects
 {
-    public class TraceDetails
+    public class ScopeTraceDetails
     {
         public string tracename { get; set; }
         public string tracepath { get; set; }

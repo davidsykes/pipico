@@ -7,5 +7,6 @@
         byte[] ReadBytes(string path, int byteCount);
         void DeleteFile(string filePath);
         bool FileExists(string filePath);
+        string FileReadAllText(string filePath);
     }
 }

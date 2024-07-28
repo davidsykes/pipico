@@ -3,18 +3,18 @@ using Logic.DataObjects;
 using Logic.Logic;
 using Logic.Trace;
 using Moq;
+using System.Text.Json;
 using TestHelpers;
 
 #nullable disable
-namespace Tests.Messaging
+namespace Tests.TraceDirectory
 {
     public class ScopeTraceDirectoryTests : TestBase
     {
         IScopeTraceDirectory _dir;
 
         Mock<ISystemWrapper> _mockSystemWrapper;
-        IList<TraceDetails> _traceDetails;
-        IList<TraceDataPoint> _exampleTraceData;
+        IList<ScopeTraceDetails> _traceDetails;
 
         [Test]
         public void GetTraceDetailsReturnsTraceNamesAndDetailsSortedByName()
@@ -53,20 +53,22 @@ namespace Tests.Messaging
         }
 
         [Test]
-        public void GetTraceDataGetsTraceData()
+        public void GetTraceDataWithDetailsGetsTraceDataWithDetails()
         {
-            _mockSystemWrapper.Setup(m => m.FileReadAllBytes("trace path\\Trace 2.trc"))
-                .Returns(MakeTraceDataFile());
+            var scopeDataWithDetails = MakeScopeTraceDataWithDetails();
 
-            var trace_data = _dir.GetTraceData("Trace 2.trc");
+            _mockSystemWrapper.Setup(m => m.FileReadAllText("trace path\\Trace 2.trc"))
+                .Returns(JsonSerializer.Serialize(scopeDataWithDetails.RawScopeTraceData));
 
-            trace_data.Should().BeEquivalentTo(_exampleTraceData);
+            var trace_data = _dir.GetScopeTraceDataWithDetails("Trace 2.trc");
+
+            trace_data.Should().BeEquivalentTo(scopeDataWithDetails);
         }
 
         [Test]
         public void GetTraceDataThrowsExceptionIfNoTraceExists()
         {
-            Action action = () => _dir.GetTraceData("non existent trace file name");
+            Action action = () => _dir.GetScopeTraceDataWithDetails("non existent trace file name");
 
             action.Should().Throw<ScopeWebApiException>()
                 .WithMessage("Scope trace 'non existent trace file name' could not be found.");
@@ -75,12 +77,11 @@ namespace Tests.Messaging
         [Test]
         public void GetCurrentTraceDataGetsTheMostRecentTraceData()
         {
-            _mockSystemWrapper.Setup(m => m.FileReadAllBytes("trace path\\Trace 3.trc"))
-                .Returns(MakeTraceDataFile());
+            var scopeDataWithDetails = MakeScopeTraceDataWithDetails();
 
             var trace_data = _dir.GetCurrentTraceData();
 
-            trace_data.Should().BeEquivalentTo(_exampleTraceData);
+            trace_data.Should().BeEquivalentTo(scopeDataWithDetails);
         }
 
         [Test]
@@ -91,7 +92,7 @@ namespace Tests.Messaging
 
             var trace_data = _dir.GetCurrentTraceData();
 
-            trace_data.Should().BeEmpty();
+            trace_data.ScopeTraceDetails.tracecount.Should().Be(0);
         }
 
         #region Support Code
@@ -111,7 +112,7 @@ namespace Tests.Messaging
         protected override void SetUpData()
         {
             base.SetUpData();
-            _traceDetails = new List<TraceDetails>
+            _traceDetails = new List<ScopeTraceDetails>
             {
                 new() {
                     tracename = "Trace 1",
@@ -132,25 +133,6 @@ namespace Tests.Messaging
                     tracelength = 202
                 },
             };
-
-            _exampleTraceData = new List<TraceDataPoint>
-            {
-                new()
-                {
-                    time = 101,
-                    value = 11
-                },
-                new()
-                {
-                    time = 202,
-                    value = 22
-                },
-                new()
-                {
-                    time = 303,
-                    value = 33
-                }
-            };
         }
 
         protected override void SetUpExpectations()
@@ -167,49 +149,47 @@ namespace Tests.Messaging
 
         private void SetUpMockFile(string name)
         {
-            _mockSystemWrapper.Setup(m => m.ReadBytes($"C:\\trace path\\{name}.trc", 12))
-                .Returns(MakeBytes(_traceDetails.Single(m => m.tracename == name)));
+            _mockSystemWrapper.Setup(m => m.FileReadAllText($"C:\\trace path\\{name}.trc"))
+                .Returns(MakeSerialisedRawTraceDataFromDetails(_traceDetails.Single(m => m.tracename == name)));
             _mockSystemWrapper.Setup(m => m.FileExists($"trace path\\{name}.trc")).Returns(true);
+        }
+
+        private static string MakeSerialisedRawTraceDataFromDetails(ScopeTraceDetails traceDetails)
+        {
+            return JsonSerializer.Serialize(MakeRawTraceDataFromDetails(traceDetails));
+        }
+
+        private static RawScopeTraceData MakeRawTraceDataFromDetails(ScopeTraceDetails traceDetails)
+        {
+            var scopeData = new RawScopeTraceData();
+            for (int i = 0; i < traceDetails.tracecount; i++)
+            {
+                scopeData.Values.Add(new List<int> { i, i });
+            }
+            scopeData.Values.Last()[0] = traceDetails.tracelength;
+            return scopeData;
+        }
+
+        private ScopeTraceDataWithDetails MakeScopeTraceDataWithDetails()
+        {
+            ScopeTraceDetails traceDetails = new ScopeTraceDetails
+            {
+                tracename = "Trace 2",
+                tracepath = "Trace 2.trc",
+                tracecount = 6,
+                tracelength = 16
+            };
+            var rawData = MakeRawTraceDataFromDetails(traceDetails);
+            return new ScopeTraceDataWithDetails
+            {
+                ScopeTraceDetails = traceDetails,
+                RawScopeTraceData = rawData
+            };
         }
 
         private IEnumerable<string> MakeTracePaths()
         {
             return _traceDetails.Select(m => $"C:\\trace path\\{m.tracename}.trc");
-        }
-
-        private static byte[] MakeBytes(TraceDetails traceDefinition)
-        {
-            return AddTwoByteArrays(BitConverter.GetBytes(0x12345678),
-                AddTwoByteArrays(
-                    BitConverter.GetBytes(traceDefinition.tracecount),
-                    BitConverter.GetBytes(traceDefinition.tracelength)));
-        }
-
-        private static byte[] AddTwoByteArrays(byte[] bytes1, byte[] bytes2)
-        {
-            var newArray = new byte[bytes1.Length + bytes2.Length];
-            bytes1.CopyTo(newArray, 0);
-            bytes2.CopyTo(newArray, bytes1.Length);
-            return newArray;
-        }
-
-        private byte[] MakeTraceDataFile()
-        {
-            using MemoryStream stream = new();
-            using (BinaryWriter writer = new(stream))
-            {
-                writer.Write(0x12345678);
-                writer.Write(3);
-                writer.Write(3);
-                foreach (var s in _exampleTraceData)
-                {
-                    writer.Write(s.time);
-                    writer.Write(s.value);
-                }
-            }
-            stream.Flush();
-            byte[] bytes = stream.GetBuffer();
-            return bytes;
         }
 
         #endregion

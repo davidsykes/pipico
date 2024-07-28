@@ -14,9 +14,9 @@ namespace Logic.Trace
             _systemWrapper = systemWrapper;
         }
 
-        public IEnumerable<TraceDetails> GetTraceDetails()
+        public IEnumerable<ScopeTraceDetails> GetTraceDetails()
         {
-            var details = new List<TraceDetails>();
+            var details = new List<ScopeTraceDetails>();
             var files = _systemWrapper.EnumerateFiles(_tracePath);
 
             foreach (var file in files)
@@ -27,20 +27,32 @@ namespace Logic.Trace
             return details.OrderBy(m => m.tracename);
         }
 
-        private TraceDetails GetTraceDefinition(string tracePath)
+        private ScopeTraceDetails GetTraceDefinition(string tracePath)
         {
-            var header = _systemWrapper.ReadBytes(tracePath, 12);
-            using var r = new BinaryReader(new MemoryStream(header));
-            var h = r.ReadInt32();
-            var count = r.ReadInt32();
-            var us = r.ReadInt32();
+            var scopeData = GetRawScopeTraceData(tracePath);
 
-            return new TraceDetails
+            return GetScopeTraceDetailsFromRawScopeTraceData(tracePath, scopeData);
+        }
+
+        private RawScopeTraceData GetRawScopeTraceData(string tracePath)
+        {
+            var filePath = Path.Combine(_tracePath, tracePath);
+            var json = _systemWrapper.FileReadAllText(filePath);
+            if (json == null)
             {
-                tracename = Path.GetFileNameWithoutExtension(tracePath),
+                RaiseNonExistentFileException(tracePath);
+            }
+            return RawScopeTraceData.DeserialiseMessage(json!);
+        }
+
+        private static ScopeTraceDetails GetScopeTraceDetailsFromRawScopeTraceData(string tracePath, RawScopeTraceData rawScopeTraceData)
+        {
+            return new ScopeTraceDetails
+            {
                 tracepath = Path.GetFileName(tracePath),
-                tracecount = count,
-                tracelength = us
+                tracename = Path.GetFileNameWithoutExtension(tracePath),
+                tracecount = rawScopeTraceData.Values.Count,
+                tracelength = rawScopeTraceData.Values.Last()[0]
             };
         }
 
@@ -49,27 +61,15 @@ namespace Logic.Trace
             _systemWrapper.DeleteFile(Path.Combine(_tracePath, path));
         }
 
-        public IList<TraceDataPoint> GetTraceData(string traceFileName)
+        public ScopeTraceDataWithDetails GetScopeTraceDataWithDetails(string tracePath)
         {
-            var filePath = Path.Combine(_tracePath, traceFileName);
-            if (!_systemWrapper.FileExists(filePath)) { RaiseNonExistentFileException(traceFileName); 
-            }
-            var binary_data = _systemWrapper.FileReadAllBytes(filePath);
-            using var r = new BinaryReader(new MemoryStream(binary_data));
-
-            var header = r.ReadInt32();
-            var sample_count = r.ReadInt32();
-            var total_time = r.ReadInt32();
-            var points = new List<TraceDataPoint>();
-            for (int i = 0; i < sample_count; i++)
+            var scopeData = GetRawScopeTraceData(tracePath);
+            var traceDetails = GetScopeTraceDetailsFromRawScopeTraceData(tracePath, scopeData);
+            return new ScopeTraceDataWithDetails
             {
-                points.Add(new TraceDataPoint
-                {
-                    time = r.ReadInt32(),
-                    value = r.ReadByte()
-                });
-            }
-            return points;
+                RawScopeTraceData = scopeData,
+                ScopeTraceDetails = traceDetails
+            };
         }
 
         private static void RaiseNonExistentFileException(string traceFileName)
@@ -77,16 +77,9 @@ namespace Logic.Trace
             throw new ScopeWebApiException($"Scope trace '{traceFileName}' could not be found.");
         }
 
-        public IList<TraceDataPoint> GetCurrentTraceData()
+        public ScopeTraceDataWithDetails GetCurrentTraceData()
         {
-            var traceDetails = GetTraceDetails().ToList();
-            if (traceDetails.Count > 0)
-            {
-                var latestTracePath = traceDetails.Last().tracepath;
-                return GetTraceData(latestTracePath);
-            }
-
-            return new List<TraceDataPoint>();
+            return new ScopeTraceDataWithDetails();
         }
     }
 }

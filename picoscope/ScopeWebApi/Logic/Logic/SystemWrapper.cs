@@ -30,5 +30,10 @@
         {
             return File.Exists(filePath);
         }
+
+        public string FileReadAllText(string filePath)
+        {
+            return File.ReadAllText(filePath);
+        }
     }
 }
