@@ -7,11 +7,11 @@ class PicoScopeTrace
 {
 public:
     int initial_value = 0;
-    std::vector<int> values;
     std::vector<int> value_times;
+    std::vector<int> values;
 
     void Reset(int initial_value, int first_value);
-    void AddChange(int value, int time);
+    void AddChange(int time, int value);
 };
 
 class PicoScope

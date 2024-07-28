@@ -9,8 +9,8 @@ static void TheDataBeginsWithAStandardHeader()
 {
 	PicoScopeTrace trace;
 	trace.Reset(11, 42);
-	trace.AddChange(21, 10);
-	trace.AddChange(34, 20);
+	trace.AddChange(10, 21);
+	trace.AddChange(20, 34);
 
 	TraceDataFormatter formatter;
 
@@ -24,12 +24,12 @@ static void ASimpleTraceCanBeFormatted()
 {
 	PicoScopeTrace trace;
 	trace.Reset(11, 42);
-	trace.AddChange(21, 10);
-	trace.AddChange(34, 20);
+	trace.AddChange(10, 21);
+	trace.AddChange(20, 34);
 
 	std::string data = FormatTraceDataAndRemovePrefix(trace);
 
-	AssertEqual("[[42,0],[21,10],[34,20]]}", data);
+	AssertEqual("[[0,42],[10,21],[20,34]]}", data);
 }
 
 

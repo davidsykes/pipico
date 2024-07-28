@@ -16,7 +16,7 @@ std::string TraceDataFormatter::FormatTraceData(const PicoScopeTrace& trace)
         {
             s << ",";
         }
-        s << "[" << trace.values[v] << "," << trace.value_times[v] << "]";
+        s << "[" << trace.value_times[v] << "," << trace.values[v] << "]";
     }
 
     s << "]}";

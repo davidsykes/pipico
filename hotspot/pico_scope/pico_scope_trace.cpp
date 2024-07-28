@@ -11,8 +11,8 @@ void PicoScopeTrace::Reset(int initial_value, int first_value)
     value_times.push_back(0);
 }
 
-void PicoScopeTrace::AddChange(int value, int time)
+void PicoScopeTrace::AddChange(int time, int value)
 {
-    values.push_back(value);
     value_times.push_back(time);
+    values.push_back(value);
 }

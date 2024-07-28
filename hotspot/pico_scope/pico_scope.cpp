@@ -36,7 +36,7 @@ PicoScopeTrace& PicoScope::FetchTrace()
     while (hw_if.wait_pins_change(&cd, SIGNAL_MASK, timeout_us))
     {
         int new_value = cd.new_value >> SIGNAL_SHIFT;
-        trace.AddChange(new_value, (int)(cd.time_us - signal_start));
+        trace.AddChange((int)(cd.time_us - signal_start), new_value);
         cd.current_value = cd.new_value;
     }
 
