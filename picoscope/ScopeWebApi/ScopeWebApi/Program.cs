@@ -74,7 +74,7 @@ try
 
     app.MapGet("/trace/{path}", (string path) =>
     {
-        var trace_data = "scopeTraceDirectory.GetTraceData(path)";
+        var trace_data = scopeTraceDirectory.GetScopeTraceDataWithDetails(path);
         return trace_data;
     })
    .WithName("Trace")
