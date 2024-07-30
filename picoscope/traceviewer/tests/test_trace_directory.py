@@ -11,7 +11,7 @@ trace_2_data = '"data for trace 2"'
 
 class MockSystem:
     def get(self, url):
-        if url == 'tracenames':
+        if url == 'tracedetails':
             return data
         elif url == 'trace/20230525055404.trc':
             return trace_2_data

@@ -8,7 +8,7 @@ class ArgumentAnalyser:
         return arg_list
     
     def _add_args(self, arg_list, arg):
-        match = re.match('([0-9]+)-([0-9]+)', arg)
+        match = re.match('\\s*([0-9]+)-([0-9]+)', arg)
         if match and len(match.groups()) == 2:
             groups = match.groups()
             self._add_argument_range(arg_list, groups[0], groups[1])
