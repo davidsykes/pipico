@@ -13,7 +13,7 @@ class ArgumentAnalyser:
             groups = match.groups()
             self._add_argument_range(arg_list, groups[0], groups[1])
         else:
-            arg_list.append(arg)
+            arg_list.append(arg.lstrip())
 
     def _add_argument_range(self, arg_list, value_from, value_to):
         for v in range(int(value_from), int(value_to)+1):

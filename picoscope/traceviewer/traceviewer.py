@@ -2,7 +2,6 @@ import sys
 sys.path.append('./src')
 sys.path.append('./src/commands')
 sys.path.append('./src/logic')
-from plot_system import PlotSystem
 from trace_directory import TraceDirectory
 from command_processor import CommandProcessor
 from program_quit_exception import ProgramQuitException
@@ -14,18 +13,17 @@ from command_d import CommandD
 from command_p import CommandP
 from command_l import CommandL
 
-surl = 'http://192.168.1.142:5000'
+surl = 'http://192.168.1.87:5000'
 #surl = 'http://localhost:5042'
 
 system_wrapper = SystemWrapper(surl)
-plot_system = PlotSystem()
 trace_directory = TraceDirectory(system_wrapper)
 argument_analyser = ArgumentAnalyser()
 command_processor = CommandProcessor(system_wrapper, argument_analyser)
 trace_deletor = TraceDeletor(trace_directory, system_wrapper)
 command_d = CommandD(trace_deletor)
 command_processor.add_command('d', command_d, 'Delete trace file(s)')
-trace_plotter = TracePlotter(trace_directory, plot_system)
+trace_plotter = TracePlotter(trace_directory)
 command_p = CommandP(trace_plotter)
 command_processor.add_command('p', command_p, 'Plot trace file(s)')
 command_l = CommandL(trace_directory)

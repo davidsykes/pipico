@@ -1,9 +1,8 @@
 import matplotlib.pyplot as plt
 
 class TracePlotter:
-    def __init__(self, trace_directory, plot_system):
+    def __init__(self, trace_directory):
         self._trace_directory = trace_directory
-        self._plot_system = plot_system
 
     def plot_traces(self, list_of_traces_to_plot):
         fig, ax = plt.subplots()

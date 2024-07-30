@@ -9,7 +9,7 @@ class TraceDirectory:
         return item['tracename']
 
     def update_trace_list(self):
-        url = 'tracenames'
+        url = 'tracedetails'
         traces_json = self._system.get(url)
         self._traces = json.loads(traces_json)
         self._traces.sort(key=self._trace_key)
@@ -22,6 +22,8 @@ class TraceDirectory:
     def get_trace_data_by_number(self, number):
         path = self.get_trace_path_by_number(number)
         url = 'trace/' + path
+        print('get trace', url)
         trace_json = self._system.get(url)
+        print('got trace', trace_json)
         trace = json.loads(trace_json)
         return trace

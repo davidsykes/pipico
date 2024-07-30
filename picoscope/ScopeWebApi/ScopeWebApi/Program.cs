@@ -63,30 +63,30 @@ try
    .WithName("TraceNames")
    .WithTags("Traces");
 
-    // app.MapPost("/delete/{path}", (string path) =>
-    // {
-    //     scopeTraceDirectory.DeleteTrace(path);
-    //     Console.WriteLine($"Delete trace {path}");
-    //     return path;
-    // })
-    //.WithName("Delete")
-    //.WithTags("Traces");
+    app.MapPost("/delete/{path}", (string path) =>
+    {
+        scopeTraceDirectory.DeleteTrace(path);
+        Console.WriteLine($"Delete trace {path}");
+        return path;
+    })
+   .WithName("Delete")
+   .WithTags("Traces");
 
-    // app.MapGet("/trace/{path}", (string path) =>
-    // {
-    //     var trace_data = scopeTraceDirectory.GetTraceData(path);
-    //     return trace_data;
-    // })
-    //.WithName("Trace")
-    //.WithTags("Traces");
+    app.MapGet("/trace/{path}", (string path) =>
+    {
+        var trace_data = "scopeTraceDirectory.GetTraceData(path)";
+        return trace_data;
+    })
+   .WithName("Trace")
+   .WithTags("Traces");
 
-    // app.MapGet("/currenttrace", () =>
-    // {
-    //     var trace_data = scopeTraceDirectory.GetCurrentTraceData();
-    //     return trace_data;
-    // })
-    //.WithName("Current Trace")
-    //.WithTags("Traces");
+    app.MapGet("/currenttrace", () =>
+    {
+        var trace_data = scopeTraceDirectory.GetCurrentTraceData();
+        return trace_data;
+    })
+   .WithName("Current Trace")
+   .WithTags("Traces");
 
     Console.WriteLine("===== Started =====");
     app.Run();

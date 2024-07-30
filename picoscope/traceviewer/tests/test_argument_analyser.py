@@ -13,7 +13,13 @@ class TestArgumentAnalyser:
         assert(len(args) == 1)
         assert(args[0] == '3')
 
-    def test_multiple_numeric_values_can_be_used(self):
+    def test_initial_whitespace_is_removed(self):
+        args = self.analyser.analyse_arguments(' 3')
+
+        assert(len(args) == 1)
+        assert(args[0] == '3')
+
+    def test_a_range_of_values_can_be_specified(self):
         args = self.analyser.analyse_arguments('3-5')
 
         assert(len(args) == 3)

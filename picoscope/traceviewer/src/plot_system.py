@@ -1,2 +1,0 @@
-class PlotSystem:
-    pass
