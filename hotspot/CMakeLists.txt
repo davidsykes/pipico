@@ -30,7 +30,7 @@ add_executable(test
         pico_scope/trace_data_formatter.cpp
         rest/rest_handler.cpp
         rest/tcp_response_analyser.cpp
-        tools/hex_dump.cpp
+        ir/ir_main.cpp
 )
 target_include_directories(test PRIVATE
         ${CMAKE_CURRENT_LIST_DIR}

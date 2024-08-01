@@ -4,6 +4,7 @@
 #include "hw_if/hardware_interface.hpp"
 #include "gpio/gpio.h"
 #include "pico_scope/pico_scope_main.h"
+#include "ir/ir_main.h"
 
 
 #define WIFI_SSID "a907"
@@ -23,24 +24,12 @@ int main()
 
    if (actionPin.Value() == 0)
    {
-      run_scope(hw_if);
+      PicoScopeConfiguration scope_config(5);
+      run_scope(hw_if, scope_config);
    }
    else
    {
-      GPIOInputPin inputPin(5, hw_if);
-      GPIOInputPin pullingPin(3, hw_if);
-      printf("Pulling %d.\n", pullingPin.Value());
-      if (pullingPin.Value())
-      {
-         inputPin.SetPullUp(1);
-      }
-      int value = -1;
-      while(true)
-      {
-         while (value == inputPin.Value()) {}
-         printf("Value %d\n", inputPin.Value());
-         value = inputPin.Value();
-      }
+      run_ir_main(hw_if);
    }
 
    hw_if.tcp_client_uninit();

@@ -9,27 +9,27 @@
 #define SCOPE_API_PORT 5000
 #define TRACE_DATA_CREATE_URL "/trace"
 
-void run_scope(IHardwareInterface& hwif)
+void run_scope(IHardwareInterface& hw_if, PicoScopeConfiguration& config)
 {
-    printf("Run scope\n");
+    printf("Run scope on pin %d\n", config.pin);
 
-    hwif.initialise_input_pin(5);
-    hwif.gpio_set_pull_up(5,1);
+    hw_if.initialise_input_pin(config.pin);
+    hw_if.gpio_set_pull_up(config.pin, 1);
 
     TcpResponseAnalyser tcpResponseAnalyser;
-    RestHandler rest_imp(hwif,
+    RestHandler rest_imp(hw_if,
                      tcpResponseAnalyser,
                      SCOPE_API_SERVER_IP, SCOPE_API_PORT);
     IRestHandler& rest = rest_imp;
-    PicoScope scope(hwif, 100000);
+    PicoScope scope(hw_if, 100000);
     TraceDataFormatter traceFormatter;
 
     //while(1)
     {
-        hwif.set_led(1);
+        hw_if.set_led(1);
         PicoScopeTrace& trace = scope.FetchTrace();
 
-        hwif.set_led(0);
+        hw_if.set_led(0);
         std::string traceData = traceFormatter.FormatTraceData(trace);
         std::string result = rest.Put(TRACE_DATA_CREATE_URL, traceData.c_str());
         printf("Scope result %s\n", result.c_str());
