@@ -73,51 +73,63 @@ namespace Logic.Database
             return options.SingleOrDefault()?.Value ?? "";
         }
 
-        public string SetIrCodeWavePoints(string irCodeJSON)
-        {
-            try
-            {
-                var irCode = JsonSerializer.Deserialize<WaveDefinitionFromPico>(irCodeJSON)
-                    ?? throw new IrTransmitterApiException("Invalid data for SetIrCode");
-                var code = irCode.code;
-                var time = 0;
-                var wavePoints = irCode.wavepoints
-                    .Select(w =>
-                    {
-                        time += w[0];
-                        return
-                    new DBOWavePoint
-                    {
-                        Code = code.ToString(),
-                        Time = time,
-                        Value = w[1]
-                    };
-                    }
-                    );
+        //public string SetIrCodeWavePoints(string irCodeJSON)
+        //{
+        //    try
+        //    {
+        //        var irCode = JsonSerializer.Deserialize<WaveDefinitionFromPico>(irCodeJSON)
+        //            ?? throw new IrTransmitterApiException("Invalid data for SetIrCode");
+        //        var code = irCode.code;
+        //        var time = 0;
+        //        var wavePoints = irCode.wavepoints
+        //            .Select(w =>
+        //            {
+        //                time += w[0];
+        //                return
+        //            new DBOWavePoint
+        //            {
+        //                Code = code.ToString(),
+        //                Time = time,
+        //                Value = w[1]
+        //            };
+        //            }
+        //            );
 
-                UpdateIrCodeWavePoints(code, wavePoints);
+        //        UpdateIrCodeDefinition(new IRCodeDefinition { Code = code, Waveform = wavePoints.ToList() });
 
-                return code;
-            }
-            catch (JsonException)
-            {
-                throw new IrTransmitterApiException("Invalid data for SetIrCode");
-            }
-        }
+        //        return code;
+        //    }
+        //    catch (JsonException)
+        //    {
+        //        throw new IrTransmitterApiException("Invalid data for SetIrCode");
+        //    }
+        //}
 
-        private void UpdateIrCodeWavePoints(string code, IEnumerable<DBOWavePoint> wavePoints)
-        {
-            _databaseConnection.RunInTransaction((IDatabaseTransaction t)
-                =>
-            {
-                DeleteCode(t, code);
-                t.InsertRows(wavePoints);
-            });
-        }
+        //private void UpdateIrCodeWavePoints(string code, IEnumerable<DBOWavePoint> wavePoints)
+        //{
+        //    _databaseConnection.RunInTransaction((IDatabaseTransaction t)
+        //        =>
+        //    {
+        //        DeleteCode(t, code);
+        //        t.InsertRows(wavePoints);
+        //    });
+        //}
 
         public void UpdateIrCodeDefinition(IRCodeDefinition iRCodeDefinition)
         {
-            throw new NotImplementedException();
+            var dboWavePoints = iRCodeDefinition.Waveform.Select(w => new DBOWavePoint
+            {
+                Code = iRCodeDefinition.Code,
+                Time = w.T,
+                Value = w.V
+            });
+
+            _databaseConnection.RunInTransaction((IDatabaseTransaction t)
+                =>
+            {
+                DeleteCode(t, iRCodeDefinition.Code);
+                t.InsertRows(dboWavePoints);
+            });
         }
 
         public void SetOption(string optionName, string optionValue)

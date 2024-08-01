@@ -134,7 +134,7 @@ static string CreateNewIrCode(string jsonString, ProgramServices programServices
     }
     catch (Exception ex)
     {
-        Console.WriteLine($"Error processing ircode: {ex.Message}");
+        Console.WriteLine($"Error processing a new ircode: {ex.Message}");
         Console.WriteLine("\"" + jsonString + "\"");
     }
 
