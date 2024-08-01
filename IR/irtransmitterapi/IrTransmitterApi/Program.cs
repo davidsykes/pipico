@@ -89,27 +89,19 @@ static void AddCodeEndpoints(WebApplication app, ProgramServices programServices
    .WithName("Codes")
    .WithTags("Codes");
 
-    app.MapPut("/ircode", async delegate (HttpContext context)
+    app.MapPut("/trace", async delegate (HttpContext context)
     {
         string jsonString = await Tools.GetJSONString(context);
-
-        try
-        {
-            var code = programServices.DatabaseAccess.SetIrCodeWavePoints(jsonString);
-            Console.WriteLine($"Updated ir code {code}.");
-            programServices.Logger.Log(DSLogLevel.Information, $"Updated ir code {code}");
-            programServices.DatabaseAccess.Log($"Updated ir code {code}");
-            return "Ok";
-        }
-        catch (Exception ex)
-        {
-            Console.WriteLine($"Error processing ircode: {ex.Message}");
-            Console.WriteLine("\"" + jsonString + "\"");
-        }
-
-        return jsonString;
+        return CreateNewIrCode(jsonString, programServices);
     })
-    .WithName("IRCode")
+    .WithName("Trace")
+    .WithTags("Codes");
+
+    app.MapPut("/manualsetcodedata", (string jsonString) =>
+    {
+        return CreateNewIrCode(jsonString, programServices);
+    })
+    .WithName("SetCodeNameManually")
     .WithTags("Codes");
 
     app.MapPut("/setcodename", (string code, string name) =>
@@ -126,21 +118,27 @@ static void AddCodeEndpoints(WebApplication app, ProgramServices programServices
     })
     .WithName("DeleteCode")
     .WithTags("Codes");
+}
 
-    app.MapPut("/manualsetcodedata", (string jsonstring) =>
+static string CreateNewIrCode(string jsonString, ProgramServices programServices)
+{
+    try
     {
-        try
-        {
-            programServices.DatabaseAccess.SetIrCodeWavePoints(jsonstring);
-        }
-        catch (Exception ex)
-        {
-            Console.WriteLine($"Error processing manualsetcodedata: {ex.Message}");
-            Console.WriteLine(jsonstring);
-        }
-    })
-    .WithName("SetCodeNameManually")
-    .WithTags("Codes");
+        var irCodeDefinition = Logic.Codes.TraceJsonToIrCodeDefinitionConverter.Convert(jsonString);
+
+        programServices.DatabaseAccess.UpdateIrCodeDefinition(irCodeDefinition);
+        Console.WriteLine($"Updated ir code {irCodeDefinition.Code}.");
+        programServices.Logger.Log(DSLogLevel.Information, $"Updated ir code {irCodeDefinition.Code}");
+        programServices.DatabaseAccess.Log($"Updated ir code {irCodeDefinition.Code}");
+        return "Ok";
+    }
+    catch (Exception ex)
+    {
+        Console.WriteLine($"Error processing ircode: {ex.Message}");
+        Console.WriteLine("\"" + jsonString + "\"");
+    }
+
+    return jsonString;
 }
 
 static void AddSequenceEndpoints(WebApplication app, ProgramServices programServices)

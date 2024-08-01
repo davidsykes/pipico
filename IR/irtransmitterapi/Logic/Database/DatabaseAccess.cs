@@ -108,10 +108,16 @@ namespace Logic.Database
         private void UpdateIrCodeWavePoints(string code, IEnumerable<DBOWavePoint> wavePoints)
         {
             _databaseConnection.RunInTransaction((IDatabaseTransaction t)
-                => {
-                    DeleteCode(t, code);
-                    t.InsertRows(wavePoints);
-                });
+                =>
+            {
+                DeleteCode(t, code);
+                t.InsertRows(wavePoints);
+            });
+        }
+
+        public void UpdateIrCodeDefinition(IRCodeDefinition iRCodeDefinition)
+        {
+            throw new NotImplementedException();
         }
 
         public void SetOption(string optionName, string optionValue)
