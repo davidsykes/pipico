@@ -9,12 +9,12 @@
 #define SCOPE_API_PORT 5000
 #define TRACE_DATA_CREATE_URL "/trace"
 
-void run_scope(IHardwareInterface& hw_if)
+void run_scope(IHardwareInterface& hw_if, PicoScopeConfiguration& config)
 {
-    printf("Run scope\n");
+    printf("Run scope on pin %d\n", config.pin);
 
-    hw_if.initialise_input_pin(5);
-    hw_if.gpio_set_pull_up(5,1);
+    hw_if.initialise_input_pin(config.pin);
+    hw_if.gpio_set_pull_up(config.pin, 1);
 
     TcpResponseAnalyser tcpResponseAnalyser;
     RestHandler rest_imp(hw_if,

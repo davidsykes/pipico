@@ -1,8 +1,7 @@
 #include <stdio.h>
 #include "ir_main.h"
 #include "gpio/gpio.h"
-//#include "rest_handler.h"
-//#include "tcp_response_analyser.h"
+#include "pico_scope/pico_scope_main.h"
 
 
 #define IR_API_SERVER_IP "192.168.1.87"
@@ -19,6 +18,20 @@ void run_ir_main(IHardwareInterface& hw_if)
 
     if (actionPin.Value() == 0)
     {
+        hw_if.initialise_output_pin(6);
+        while (1)
+        {
+            hw_if.gpio_put(6,1);
+            hw_if.sleep_us(2000);
+            hw_if.gpio_put(6,0);
+            hw_if.sleep_us(2000);
+        }
+        
+    }
+    else
+    {
+        PicoScopeConfiguration ir_scope_configuration(6);
+        run_scope(hw_if, ir_scope_configuration);
     }
 
 }

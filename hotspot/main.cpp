@@ -24,7 +24,8 @@ int main()
 
    if (actionPin.Value() == 0)
    {
-      run_scope(hw_if);
+      PicoScopeConfiguration scope_config(5);
+      run_scope(hw_if, scope_config);
    }
    else
    {
