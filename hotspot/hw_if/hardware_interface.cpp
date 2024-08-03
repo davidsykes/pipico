@@ -78,7 +78,7 @@ std::string PicoHardwareInterface::tcp_request(const char* server, unsigned int 
     return buffer;
 }
 
-void PicoHardwareInterface::tcp_client_uninit()
+void PicoHardwareInterface::cyw43_arch_deinit()
 {
-    hardware_interface->tcp_client_uninit();
+    hardware_interface->cyw43_arch_deinit();
 }

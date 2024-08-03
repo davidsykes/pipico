@@ -31,6 +31,7 @@ add_executable(test
         rest/rest_handler.cpp
         rest/tcp_response_analyser.cpp
         ir/ir_main.cpp
+        tcp_server/tcp_server.c
 )
 target_include_directories(test PRIVATE
         ${CMAKE_CURRENT_LIST_DIR}

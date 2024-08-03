@@ -32,6 +32,6 @@ int main()
       run_ir_main(hw_if);
    }
 
-   hw_if.tcp_client_uninit();
+   hw_if.cyw43_arch_deinit();
    printf("Ended..");
 }

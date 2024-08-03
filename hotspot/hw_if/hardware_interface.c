@@ -11,10 +11,20 @@ void _initialise_pico_stdio()
     printf("Stdio initialised\n");
 }
 
-
 int _initialise_wifi(const char* ssid, const char* password)
 {
-    return tcp_client_initialise(ssid, password);
+
+    stdio_init_all();
+    cyw43_arch_enable_sta_mode();
+
+    printf("Connecting to Wi-Fi %s %s...\n", ssid, password);
+    if (cyw43_arch_wifi_connect_timeout_ms(ssid, password, CYW43_AUTH_WPA2_AES_PSK, 30000)) {
+        printf("failed to connect.\n");
+        return 1;
+    } else {
+        printf("Connected.\n");
+    }
+    return 0;
 }
 
 int _cyw43_arch_init()
@@ -113,9 +123,9 @@ int _tcp_request(const char* server_ip,
                          max_result_length);
 }
 
-void _tcp_client_uninit()
+void _cyw43_arch_deinit()
 {
-    tcp_client_uninit();
+    cyw43_arch_deinit();
 }
 
 sHardwareInterface* create_hardware_interface()
@@ -136,7 +146,7 @@ sHardwareInterface* create_hardware_interface()
     hwif->set_led = &_set_led;
     hwif->sleep_us = &_sleep_us;
     hwif->tcp_request = &_tcp_request;
-    hwif->tcp_client_uninit = &_tcp_client_uninit;
+    hwif->cyw43_arch_deinit = &_cyw43_arch_deinit;
 
     return hwif;
 }

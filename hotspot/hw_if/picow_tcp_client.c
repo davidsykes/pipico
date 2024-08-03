@@ -220,22 +220,3 @@ int run_tcp_client_test(const char* server_ip, unsigned int port, const char*req
 
     return 0;
 }
-
-int tcp_client_initialise(
-    const char* ssid,
-    const char* password) {
-    stdio_init_all();
-    cyw43_arch_enable_sta_mode();
-
-    printf("Connecting to Wi-Fi %s %s...\n", ssid, password);
-    if (cyw43_arch_wifi_connect_timeout_ms(ssid, password, CYW43_AUTH_WPA2_AES_PSK, 30000)) {
-        printf("failed to connect.\n");
-        return 1;
-    } else {
-        printf("Connected.\n");
-    }
-}
-
-void tcp_client_uninit() {
-    cyw43_arch_deinit();
-}

@@ -19,7 +19,7 @@ public:
     virtual void set_led(bool value)=0;
     virtual void sleep_us(int useconds)=0;
     virtual std::string tcp_request(const char* server, unsigned int port, const char* request)=0;
-    virtual void tcp_client_uninit()=0;
+    virtual void cyw43_arch_deinit()=0;
 };
 
 
@@ -40,7 +40,7 @@ class PicoHardwareInterface : public IHardwareInterface
     virtual void set_led(bool value);
     virtual void sleep_us(int useconds);
     virtual std::string tcp_request(const char* server, unsigned int port, const char* request);
-    virtual void tcp_client_uninit();
+    virtual void cyw43_arch_deinit();
 
 public:
     PicoHardwareInterface();
