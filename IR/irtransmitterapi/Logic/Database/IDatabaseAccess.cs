@@ -11,7 +11,7 @@ namespace Logic.Database
         IList<DBOLog> GetLogs(int count);
         void ClearLogs();
         void UpdateIrCodeDefinition(IRCodeDefinition iRCodeDefinition);
-        string SetIrCodeWavePoints(string irCodeJson);
+        //string SetIrCodeWavePoints(string irCodeJson);
         void SetOption(string optionName, string optionValue);
         void UpdateCodeName(string code, string newName);
         void UpdateSequence(string sequence, string code, int position);

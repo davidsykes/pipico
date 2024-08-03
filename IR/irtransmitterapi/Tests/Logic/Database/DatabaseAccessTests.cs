@@ -90,49 +90,61 @@ namespace Tests.Logic
         }
 
         [Test]
-        public void SetIrCodeWavePointsSetsTheCodeDefinitionFromJSON()
+        public void UpdateIrCodeDefinitionTest()
         {
-            var data = "{\"code\": \"3772793023\", \"wavepoints\": [[0, 0], [4526, 1], [4500, 0], [546, 1], [1698, 0]]}";
+            var testCode = new IRCodeDefinition
+            {
+                Code = "3772793023",
+                Waveform = new List<WavePoint>
+                    {
+                        new() { T = 0, V = 0 },
+                        new() { T = 4526, V = 1 },
+                        new() { T = 9026, V = 0 },
+                        new() { T = 9572, V = 1 },
+                        new() { T = 11270, V = 0 }
+                    }
+            };
 
-            var code = _db.SetIrCodeWavePoints(data);
+            _db.UpdateIrCodeDefinition(testCode);
 
             var codes = _db.GetCodes();
-            code.Should().Be("3772793023");
             codes.Count.Should().Be(3);
             codes.Single(m => m.Code == "3772793023")
-                .Should().BeEquivalentTo(
-                new IRCodeDefinition
-                {
-                    Code = "3772793023",
-                    Waveform = new List<WavePoint>
-                    {
-                        new WavePoint { T = 0, V = 0 },
-                        new WavePoint { T = 4526, V = 1 },
-                        new WavePoint { T = 9026, V = 0 },
-                        new WavePoint { T = 9572, V = 1 },
-                        new WavePoint { T = 11270, V = 0 }
-                    }
-                }
-                );
-        }
-
-        [Test]
-        public void SetIrCodeWavePointsWithInvalidJSONThrowsAnException()
-        {
-            var data = "{ 'type': 'code', 'something': 'code' }";
-
-            var action = () => _db.SetIrCodeWavePoints(data);
-
-            action.Should().Throw<IrTransmitterApiException>()
-                .WithMessage("Invalid data for SetIrCode");
+                .Should().BeEquivalentTo(testCode);
         }
 
         [Test]
         public void UpdatingAnExistingCodeRemovesOldData()
         {
-            _db.SetIrCodeWavePoints("{\"code\": \"3772793023\", \"wavepoints\": [[0, 0], [4526, 1], [4500, 0], [546, 1], [1698, 0]]}");
+            var testCode1 = new IRCodeDefinition
+            {
+                Code = "3772793023",
+                Waveform = new List<WavePoint>
+                    {
+                        new() { T = 0, V = 0 },
+                        new() { T = 4526, V = 1 },
+                        new() { T = 9026, V = 0 },
+                        new() { T = 9572, V = 1 },
+                        new() { T = 11270, V = 0 }
+                    }
+            };
 
-            _db.SetIrCodeWavePoints("{\"code\": \"3772793023\", \"wavepoints\": [[0, 0], [4527, 1], [4500, 0], [546, 1], [1698, 0]]}");
+            _db.UpdateIrCodeDefinition(testCode1);
+
+            var testCode2 = new IRCodeDefinition
+            {
+                Code = "3772793023",
+                Waveform = new List<WavePoint>
+                    {
+                        new() { T = 0, V = 0 },
+                        new() { T = 4527, V = 1 },
+                        new() { T = 9027, V = 0 },
+                        new() { T = 9573, V = 1 },
+                        new() { T = 11271, V = 0 }
+                    }
+            };
+
+            _db.UpdateIrCodeDefinition(testCode2);
 
             var codes = _db.GetCodes();
             codes.Count.Should().Be(3);
@@ -156,26 +168,28 @@ namespace Tests.Logic
         [Test]
         public void UpdateCodeNameUpdatesTheCodeName()
         {
-            _db.SetIrCodeWavePoints("{\"code\": \"3772793023\", \"wavepoints\": [[0, 0], [4526, 1], [4500, 0], [546, 1], [1698, 0]]}");
-            _db.SetIrCodeWavePoints("{\"code\": \"3772793024\", \"wavepoints\": [[0, 0], [4526, 1], [4500, 0], [546, 1], [1698, 0]]}");
+            var testCode = new IRCodeDefinition
+            {
+                Code = "3772793023",
+                Waveform = new List<WavePoint>
+                    {
+                        new() { T = 0, V = 0 },
+                        new() { T = 4526, V = 1 },
+                        new() { T = 9026, V = 0 },
+                        new() { T = 9572, V = 1 },
+                        new() { T = 11270, V = 0 }
+                    }
+            };
+
+            _db.UpdateIrCodeDefinition(testCode);
 
             _db.UpdateCodeName("3772793023", "Code 1");
+            testCode.Code = "Code 1";
 
-            _db.GetCodes().Single(m => m.Code == "Code 1")
-                .Should().BeEquivalentTo(
-                new IRCodeDefinition
-                {
-                    Code = "Code 1",
-                    Waveform = new List<WavePoint>
-                    {
-                        new WavePoint { T = 0, V = 0 },
-                        new WavePoint { T = 4526, V = 1 },
-                        new WavePoint { T = 9026, V = 0 },
-                        new WavePoint { T = 9572, V = 1 },
-                        new WavePoint { T = 11270, V = 0 }
-                    }
-                }
-                );
+            var codes = _db.GetCodes();
+            
+            codes.Single(m => m.Code == "Code 1")
+                .Should().BeEquivalentTo(testCode);
         }
 
         [Test]
