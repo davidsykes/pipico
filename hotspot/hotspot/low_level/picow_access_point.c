@@ -15,8 +15,10 @@
 #include "dhcpserver/dhcpserver.h"
 #include "dnsserver/dnsserver.h"
 
+// TODO Rationalise the printf output and remove the led headers
+
 #define TCP_PORT 80
-#define DEBUG_printf
+#define DEBUG_printf printf
 #define DEBUG_printf2
 #define POLL_TIME_S 5
 #define HTTP_GET "GET"
@@ -370,6 +372,94 @@ int main_hotspot(const char *hotspot_name,
     tcp_server_close(state);
     dns_server_deinit(&dns_server);
     dhcp_server_deinit(&dhcp_server);
+    cyw43_arch_deinit();
+    return 0;
+}
+
+
+int main_hotspot_two(const char *hotspot_name,
+    const char *hotspot_password,
+    void* request_processor) {
+
+    TCP_SERVER_T *state = calloc(1, sizeof(TCP_SERVER_T));
+    if (!state) {
+        DEBUG_printf("failed to allocate state\n");
+        return 1;
+    }
+
+    // if (cyw43_arch_init()) {
+    //     DEBUG_printf("failed to initialise\n");
+    //     return 1;
+    // }
+
+    state->request_processor = request_processor;
+
+    // Get notified if the user presses a key
+    state->context = cyw43_arch_async_context();
+    key_pressed_worker.user_data = state;
+    async_context_add_when_pending_worker(cyw43_arch_async_context(), &key_pressed_worker);
+    stdio_set_chars_available_callback(key_pressed_func, state);
+
+    const char *ap_name = hotspot_name;
+#if 1
+    const char *password = hotspot_password;
+#else
+    const char *password = NULL;
+#endif
+
+#if 1
+    cyw43_arch_enable_sta_mode();
+
+    printf("Connecting to Wi-Fi...\n");
+    if (cyw43_arch_wifi_connect_timeout_ms(hotspot_name, hotspot_password, CYW43_AUTH_WPA2_AES_PSK, 30000)) {
+        printf("failed to connect.\n");
+        return 1;
+    } else {
+        printf("Connected.\n");
+    }
+#else
+    cyw43_arch_enable_ap_mode(ap_name, password, CYW43_AUTH_WPA2_AES_PSK);
+#endif
+    // ip4_addr_t mask;
+    // IP4_ADDR(ip_2_ip4(&state->gw), 192, 168, 4, 1);
+    // IP4_ADDR(ip_2_ip4(&mask), 255, 255, 255, 0);
+
+    // // Start the dhcp server
+    // dhcp_server_t dhcp_server;
+    // dhcp_server_init(&dhcp_server, &state->gw, &mask);
+
+    // // Start the dns server
+    // dns_server_t dns_server;
+    // dns_server_init(&dns_server, &state->gw);
+
+    printf("open.\n");
+    if (!tcp_server_open(state, ap_name)) {
+        DEBUG_printf("failed to open server\n");
+        return 1;
+    }
+    printf("openrd.\n");
+
+    state->complete = false;
+    while(!state->complete) {
+        // the following #ifdef is only here so this same example can be used in multiple modes;
+        // you do not need it in your code
+#if PICO_CYW43_ARCH_POLL
+        // if you are using pico_cyw43_arch_poll, then you must poll periodically from your
+        // main loop (not from a timer interrupt) to check for Wi-Fi driver or lwIP work that needs to be done.
+        cyw43_arch_poll();
+        // you can poll as often as you like, however if you have nothing else to do you can
+        // choose to sleep until either a specified time, or cyw43_arch_poll() has work to do:
+        cyw43_arch_wait_for_work_until(make_timeout_time_ms(1000));
+#else
+        // if you are not using pico_cyw43_arch_poll, then Wi-FI driver and lwIP work
+        // is done via interrupt in the background. This sleep is just an example of some (blocking)
+        // work you might be doing.
+        sleep_ms(1000);
+#endif
+    }
+    tcp_server_close(state);
+    // dns_server_deinit(&dns_server);
+    // dhcp_server_deinit(&dhcp_server);
     cyw43_arch_deinit();
     return 0;
 }

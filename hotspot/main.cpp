@@ -16,6 +16,10 @@ int main()
    IHardwareInterface& hw_if = phw_if;
    hw_if.initialise_pico_stdio();
 
+   WiFiConnector connector;
+   connector.ConnectToWiFiTestServer();
+   printf("Connected..\n");
+
    hw_if.initialise_wifi(WIFI_SSID, WIFI_PASSWORD);
 
    GPIOInputPin actionPin(2, hw_if);

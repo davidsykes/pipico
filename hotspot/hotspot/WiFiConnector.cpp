@@ -46,3 +46,32 @@ void WiFiConnector::ConnectToWiFi(const char* input_form_hotspot_name)
       config->hotspot_password.c_str(),
       &processor);
 }
+
+// TODO Factor this out to a server object
+void WiFiConnector::ConnectToWiFiTestServer()
+{
+   FlashHardware flashHardware;
+   HtmlRenderer htmlRenderer;
+   InputFormRenderer inputFormRenderer;
+   PercentDecoder percentDecoder;
+   FlashManager flashManager(&flashHardware);
+   CredentialsHandler credentialsHandler(&percentDecoder, &flashManager);
+
+   Configuration *config = new HotSpotConfiguration(
+      "input_form_hotspot_name",
+      "wifiConnectionMaker.lastErrorMessage.c_str()",
+      &htmlRenderer,
+      &inputFormRenderer,
+      &credentialsHandler);
+
+   REQUEST_PROCESSOR_T processor;
+   processor.configuration = config;
+   processor.process_request = &process_request;
+
+#define WIFI_SSID "a907"
+#define WIFI_PASSWORD "?thisistheWIFIyouhavebeenlookingfor1398"
+   main_hotspot_two(
+      WIFI_SSID,
+      WIFI_PASSWORD,
+      &processor);
+}

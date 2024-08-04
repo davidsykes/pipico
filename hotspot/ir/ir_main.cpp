@@ -19,7 +19,7 @@ void run_ir_main(IHardwareInterface& hw_if)
 
     if (actionPin.Value() == 0)
     {
-        run_tcp_server_test();
+        //run_tcp_server_test();
     }
     else
     {

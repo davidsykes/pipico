@@ -9,6 +9,12 @@ extern "C" {
      const char *hotspot_password,
      void *configuration
      );
+     // TODO Factor this out to a server object
+    int main_hotspot_two(
+     const char *hotspot_name,
+     const char *hotspot_password,
+     void *configuration
+     );
 #ifdef __cplusplus
 }
 #endif
