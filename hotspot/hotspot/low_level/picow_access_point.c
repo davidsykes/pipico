@@ -310,10 +310,10 @@ int main_hotspot(const char *hotspot_name,
         return 1;
     }
 
-    if (cyw43_arch_init()) {
-        DEBUG_printf("failed to initialise\n");
-        return 1;
-    }
+    // if (cyw43_arch_init()) {
+    //     DEBUG_printf("failed to initialise\n");
+    //     return 1;
+    // }
 
     state->request_processor = request_processor;
 
