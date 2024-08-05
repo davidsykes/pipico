@@ -47,6 +47,12 @@ void WiFiConnector::ConnectToWiFi(const char* input_form_hotspot_name)
       &processor);
 }
 
+
+void WiFiConnector::ConnectToWiFiDirect(IHardwareInterface& hw_if, const char* ssid, const char* password)
+{
+   hw_if.initialise_wifi(ssid, password);
+}
+
 // TODO Factor this out to a server object
 void WiFiConnector::ConnectToWiFiTestServer()
 {
@@ -68,10 +74,5 @@ void WiFiConnector::ConnectToWiFiTestServer()
    processor.configuration = config;
    processor.process_request = &process_request;
 
-#define WIFI_SSID "a907"
-#define WIFI_PASSWORD "?thisistheWIFIyouhavebeenlookingfor1398"
-   main_hotspot_two(
-      WIFI_SSID,
-      WIFI_PASSWORD,
-      &processor);
+   main_hotspot_two(&processor);
 }

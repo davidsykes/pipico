@@ -377,9 +377,7 @@ int main_hotspot(const char *hotspot_name,
 }
 
 
-int main_hotspot_two(const char *hotspot_name,
-    const char *hotspot_password,
-    void* request_processor) {
+int main_hotspot_two(void* request_processor) {
 
     TCP_SERVER_T *state = calloc(1, sizeof(TCP_SERVER_T));
     if (!state) {
@@ -400,44 +398,31 @@ int main_hotspot_two(const char *hotspot_name,
     async_context_add_when_pending_worker(cyw43_arch_async_context(), &key_pressed_worker);
     stdio_set_chars_available_callback(key_pressed_func, state);
 
-    const char *ap_name = hotspot_name;
-#if 1
-    const char *password = hotspot_password;
-#else
-    const char *password = NULL;
-#endif
+//     const char *ap_name = hotspot_name;
+// #if 1
+//     const char *password = hotspot_password;
+// #else
+//     const char *password = NULL;
+// #endif
 
-#if 1
-    cyw43_arch_enable_sta_mode();
+// #if 1
+//     cyw43_arch_enable_sta_mode();
 
-    printf("Connecting to Wi-Fi...\n");
-    if (cyw43_arch_wifi_connect_timeout_ms(hotspot_name, hotspot_password, CYW43_AUTH_WPA2_AES_PSK, 30000)) {
-        printf("failed to connect.\n");
-        return 1;
-    } else {
-        printf("Connected.\n");
-    }
-#else
-    cyw43_arch_enable_ap_mode(ap_name, password, CYW43_AUTH_WPA2_AES_PSK);
-#endif
-    // ip4_addr_t mask;
-    // IP4_ADDR(ip_2_ip4(&state->gw), 192, 168, 4, 1);
-    // IP4_ADDR(ip_2_ip4(&mask), 255, 255, 255, 0);
+//     printf("Connecting to Wi-Fi...\n");
+//     if (cyw43_arch_wifi_connect_timeout_ms(hotspot_name, hotspot_password, CYW43_AUTH_WPA2_AES_PSK, 30000)) {
+//         printf("failed to connect.\n");
+//         return 1;
+//     } else {
+//         printf("Connected.\n");
+//     }
+// #else
+//     cyw43_arch_enable_ap_mode(ap_name, password, CYW43_AUTH_WPA2_AES_PSK);
+// #endif
 
-    // // Start the dhcp server
-    // dhcp_server_t dhcp_server;
-    // dhcp_server_init(&dhcp_server, &state->gw, &mask);
-
-    // // Start the dns server
-    // dns_server_t dns_server;
-    // dns_server_init(&dns_server, &state->gw);
-
-    printf("open.\n");
-    if (!tcp_server_open(state, ap_name)) {
+    if (!tcp_server_open(state, "localhost")) {
         DEBUG_printf("failed to open server\n");
         return 1;
     }
-    printf("openrd.\n");
 
     state->complete = false;
     while(!state->complete) {

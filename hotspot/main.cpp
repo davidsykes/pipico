@@ -16,25 +16,27 @@ int main()
    IHardwareInterface& hw_if = phw_if;
    hw_if.initialise_pico_stdio();
 
-   WiFiConnector connector;
-   connector.ConnectToWiFiTestServer();
-   printf("Connected..\n");
-
-   hw_if.initialise_wifi(WIFI_SSID, WIFI_PASSWORD);
-
    GPIOInputPin actionPin(2, hw_if);
    actionPin.SetPullUp(0);
    printf("Action %d\n", actionPin.Value());
 
+   WiFiConnector connector;
    if (actionPin.Value() == 0)
    {
-      PicoScopeConfiguration scope_config(5);
-      run_scope(hw_if, scope_config);
+      connector.ConnectToWiFi("Ye hot spot");
+      // PicoScopeConfiguration scope_config(5);
+      // run_scope(hw_if, scope_config);
    }
    else
    {
-      run_ir_main(hw_if);
+   connector.ConnectToWiFiDirect(hw_if, WIFI_SSID, WIFI_PASSWORD);
+   connector.ConnectToWiFiTestServer();
+//      run_ir_main(hw_if);
    }
+
+   // printf("BAD BAD Connected..\n");
+
+   // hw_if.initialise_wifi(WIFI_SSID, WIFI_PASSWORD);
 
    hw_if.cyw43_arch_deinit();
    printf("Ended..");
