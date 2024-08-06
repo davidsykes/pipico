@@ -1,10 +1,12 @@
 #pragma once
-#include "configuration.h"
+#include "../tcp_server/tcp_server.h"
 #include "../input_form/ihtml_renderer.h"
 #include "../input_form/iinput_form_renderer.h"
 #include "../credentials/credentials_handler.h"
 
-class HotSpotConfiguration : public Configuration
+// TODO Rename to WifiCredentialsHotSpot
+
+class HotSpotConfiguration : public TcpServer
 {
     std::string input_form_hotspot_name;
     IHtmlRenderer* _html_renderer;

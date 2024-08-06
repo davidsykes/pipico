@@ -1,5 +1,5 @@
 #include <string.h>
-#include "configuration.h"
+#include "../tcp_server/tcp_server.h"
 
 #define SIZE_ERROR "<html><body><h1>FORM CONTENT EXCEEDS BUFFER</h1></body></html>"
 
@@ -13,7 +13,7 @@ void strcpy_s(char *dest, size_t max, const char*source)
 
 size_t process_request(void *configuration, const char *request, const char *params, char *result, size_t max_result_len)
 {
-   Configuration* config = (Configuration*)configuration;
+   TcpServer* config = (TcpServer*)configuration;
    std::string process_result = config->process_request(request, params);
    size_t result_length = process_result.length();
    if (result_length < max_result_len - 1)

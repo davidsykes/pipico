@@ -10,14 +10,13 @@ extern "C" {
      void *configuration
      );
      // TODO Factor this out to a server object
-    int main_hotspot_two(void *configuration
-     );
+    int run_tcp_server(void *request_processor);
 #ifdef __cplusplus
 }
 #endif
 
 typedef struct REQUEST_PROCESSOR_T_ {
-    void *configuration;
+    void *configuration; // TODO Rename to request_processor
     size_t (*process_request)(void *configuration, const char *request, const char *params, char *result, size_t max_result_len);
 } REQUEST_PROCESSOR_T;
 

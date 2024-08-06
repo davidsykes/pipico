@@ -377,7 +377,7 @@ int main_hotspot(const char *hotspot_name,
 }
 
 
-int main_hotspot_two(void* request_processor) {
+int run_tcp_server(void* request_processor) {
 
     TCP_SERVER_T *state = calloc(1, sizeof(TCP_SERVER_T));
     if (!state) {
@@ -385,39 +385,13 @@ int main_hotspot_two(void* request_processor) {
         return 1;
     }
 
-    // if (cyw43_arch_init()) {
-    //     DEBUG_printf("failed to initialise\n");
-    //     return 1;
-    // }
-
     state->request_processor = request_processor;
 
-    // Get notified if the user presses a key
+    // Get notified if the user presses a key TODO See if this can be removed
     state->context = cyw43_arch_async_context();
     key_pressed_worker.user_data = state;
     async_context_add_when_pending_worker(cyw43_arch_async_context(), &key_pressed_worker);
     stdio_set_chars_available_callback(key_pressed_func, state);
-
-//     const char *ap_name = hotspot_name;
-// #if 1
-//     const char *password = hotspot_password;
-// #else
-//     const char *password = NULL;
-// #endif
-
-// #if 1
-//     cyw43_arch_enable_sta_mode();
-
-//     printf("Connecting to Wi-Fi...\n");
-//     if (cyw43_arch_wifi_connect_timeout_ms(hotspot_name, hotspot_password, CYW43_AUTH_WPA2_AES_PSK, 30000)) {
-//         printf("failed to connect.\n");
-//         return 1;
-//     } else {
-//         printf("Connected.\n");
-//     }
-// #else
-//     cyw43_arch_enable_ap_mode(ap_name, password, CYW43_AUTH_WPA2_AES_PSK);
-// #endif
 
     if (!tcp_server_open(state, "localhost")) {
         DEBUG_printf("failed to open server\n");

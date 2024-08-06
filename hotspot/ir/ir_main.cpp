@@ -2,7 +2,6 @@
 #include "ir_main.h"
 #include "gpio/gpio.h"
 #include "pico_scope/pico_scope_main.h"
-#include "tcp_server/tcp_server.h"
 
 
 // #define IR_API_SERVER_IP "192.168.1.87"

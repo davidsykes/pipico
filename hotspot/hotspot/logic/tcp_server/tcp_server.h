@@ -1,7 +1,7 @@
 #pragma once
 #include <string>
 
-class Configuration
+class TcpServer
 {
     public:
         std::string hotspot_name;
