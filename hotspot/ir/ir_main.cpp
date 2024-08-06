@@ -3,10 +3,13 @@
 #include "gpio/gpio.h"
 #include "pico_scope/pico_scope_main.h"
 #include "ir_code_repository.h"
+#include "../rest/itcp_response_analyser.h"
+#include "../rest/tcp_response_analyser.h"
+#include "../rest/rest_handler.h"
 
 
-// #define IR_API_SERVER_IP "192.168.1.87"
-// #define IR_API_PORT 5000
+#define IR_API_SERVER_IP "192.168.1.87"
+#define IR_API_PORT 5000
 // #define IR_DATA_CREATE_URL "/trace"
 
 void run_ir_main(IHardwareInterface& hw_if)
@@ -19,7 +22,12 @@ void run_ir_main(IHardwareInterface& hw_if)
 
     if (actionPin.Value() == 0)
     {
-        IrCodeRepository codeRepository;
+        TcpResponseAnalyser responseAnalyser;
+        RestHandler restHandler(hw_if,
+                                responseAnalyser,
+                                IR_API_SERVER_IP,
+                                IR_API_PORT);
+        IrCodeRepository codeRepository(restHandler);
         codeRepository.RetrieveCodes();
         //run_tcp_server_test();
     }
