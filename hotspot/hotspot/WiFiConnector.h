@@ -1,5 +1,5 @@
 #pragma once
-#include "hw_if/hardware_interface.hpp"
+#include "hw_if/pico_hardware_interface.h"
 #include "logic/tcp_server/tcp_server.h"
 
 class WiFiConnector

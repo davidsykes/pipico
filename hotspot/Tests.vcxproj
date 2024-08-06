@@ -173,7 +173,7 @@
     <ClInclude Include="hotspot\logic\requests\configuration.h" />
     <ClInclude Include="hotspot\logic\requests\hotspot_configuration.h" />
     <ClInclude Include="hotspot\logic\requests\process_request.h" />
-    <ClInclude Include="hw_if\hardware_interface.hpp" />
+    <ClInclude Include="hw_if\pico_hardware_interface.h" />
     <ClInclude Include="pico_scope\pico_scope.h" />
     <ClInclude Include="rest\irest_handler.h" />
     <ClInclude Include="rest\itcp_response_analyser.h" />

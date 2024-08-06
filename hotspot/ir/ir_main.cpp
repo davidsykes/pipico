@@ -2,6 +2,7 @@
 #include "ir_main.h"
 #include "gpio/gpio.h"
 #include "pico_scope/pico_scope_main.h"
+#include "ir_code_repository.h"
 
 
 // #define IR_API_SERVER_IP "192.168.1.87"
@@ -18,6 +19,8 @@ void run_ir_main(IHardwareInterface& hw_if)
 
     if (actionPin.Value() == 0)
     {
+        IrCodeRepository codeRepository;
+        codeRepository.RetrieveCodes();
         //run_tcp_server_test();
     }
     else

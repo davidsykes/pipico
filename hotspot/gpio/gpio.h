@@ -1,5 +1,5 @@
 #pragma once
-#include "hardware_interface.hpp"
+#include "pico_hardware_interface.h"
 
 
 class GPIOInputPin

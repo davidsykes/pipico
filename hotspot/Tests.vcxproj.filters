@@ -278,7 +278,7 @@
     <ClInclude Include="rest\rest_handler.h">
       <Filter>Source Files\rest</Filter>
     </ClInclude>
-    <ClInclude Include="hw_if\hardware_interface.hpp">
+    <ClInclude Include="hw_if\pico_hardware_interface.h">
       <Filter>Source Files\hw_if</Filter>
     </ClInclude>
   </ItemGroup>

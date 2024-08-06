@@ -1,4 +1,4 @@
-#include "hardware_interface.hpp"
+#include "pico_hardware_interface.h"
 
 #define TCP_BUFFER_LENGTH   2048
 

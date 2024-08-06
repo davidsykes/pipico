@@ -1,7 +1,7 @@
 #pragma once
 #include <string>
 #include "irest_handler.h"
-#include "hardware_interface.hpp"
+#include "pico_hardware_interface.h"
 #include "itcp_response_analyser.h"
 
 class RestHandler : public IRestHandler

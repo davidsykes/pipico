@@ -1,12 +1,8 @@
-// #include <stdio.h>
-// #include "hotspot/c_interface.h"
 #include "WiFiConnector.h"
-#include "hw_if/hardware_interface.hpp"
+#include "hw_if/pico_hardware_interface.h"
 #include "gpio/gpio.h"
-// #include "pico_scope/pico_scope_main.h"
-// #include "ir/ir_main.h"
 #include "ir/infrared_tcp_request_handler.h"
-
+#include "ir/ir_main.h"
 
 #define WIFI_SSID "a907"
 #define WIFI_PASSWORD "?thisistheWIFIyouhavebeenlookingfor1398"
@@ -30,10 +26,10 @@ int main()
    }
    else
    {
-   connector.ConnectToWiFiDirect(hw_if, WIFI_SSID, WIFI_PASSWORD);
-   InfraRedTcpRequestHandler tcpServer;
-   connector.ConnectToWiFiTestServer(tcpServer);
-//      run_ir_main(hw_if);
+      connector.ConnectToWiFiDirect(hw_if, WIFI_SSID, WIFI_PASSWORD);
+      run_ir_main(hw_if);
+      InfraRedTcpRequestHandler tcpServer;
+      connector.ConnectToWiFiTestServer(tcpServer);
    }
 
    // printf("BAD BAD Connected..\n");
