@@ -11,6 +11,7 @@
 #include "Tests\pico_scope\TraceDataFormatterTests.h"
 #include "Tests\rest\RestHandlerTests.h"
 #include "Tests\rest\TcpResponseAnalyserTests.h"
+#include "Tests\ir\codes\ir_code_repository_tests.h"
 
 int main()
 {
@@ -26,5 +27,6 @@ int main()
     RestHandlerTests().RunTests();
     TraceDataFormatterTests().RunTests();
     TcpResponseAnalyserTests().RunTests();
+    IrCodeRepositoryTests().RunTests();
     std::cout << "Tests Complete\n";
 }

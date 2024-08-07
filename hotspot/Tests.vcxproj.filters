@@ -82,6 +82,18 @@
     <Filter Include="Source Files\hw_if">
       <UniqueIdentifier>{cb133ce9-863d-4ff2-98f2-fd47eba6e403}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Tests\ir">
+      <UniqueIdentifier>{8a766033-927f-4791-bc0b-c15e5553e263}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\ir">
+      <UniqueIdentifier>{005012a1-b330-4a16-8649-5b940f4917a4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\ir\codes">
+      <UniqueIdentifier>{3113dee5-8cfd-491d-bae8-d3d8f52cf9aa}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Tests\ir\codes">
+      <UniqueIdentifier>{61f08f1b-36b6-4ac1-b33a-b79a3e180842}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Tests.cpp">
@@ -173,6 +185,12 @@
     </ClCompile>
     <ClCompile Include="rest\rest_handler.cpp">
       <Filter>Source Files\rest</Filter>
+    </ClCompile>
+    <ClCompile Include="ir\codes\ir_code_repository.cpp">
+      <Filter>Source Files\ir\codes</Filter>
+    </ClCompile>
+    <ClCompile Include="Tests\ir\codes\ir_code_repository_tests.cpp">
+      <Filter>Source Files\Tests\ir\codes</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -280,6 +298,15 @@
     </ClInclude>
     <ClInclude Include="hw_if\pico_hardware_interface.h">
       <Filter>Source Files\hw_if</Filter>
+    </ClInclude>
+    <ClInclude Include="ir\codes\ir_code.h">
+      <Filter>Source Files\ir\codes</Filter>
+    </ClInclude>
+    <ClInclude Include="ir\codes\ir_code_repository.h">
+      <Filter>Source Files\ir\codes</Filter>
+    </ClInclude>
+    <ClInclude Include="Tests\ir\codes\ir_code_repository_tests.h">
+      <Filter>Source Files\Tests\ir\codes</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

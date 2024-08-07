@@ -18,13 +18,11 @@ int PicoScope::GetSignalPins()
 PicoScopeTrace& PicoScope::FetchTrace()
 {
     int pin_values_before_signal = GetSignalPins();
-    printf("Pins before %d\n", pin_values_before_signal);
     int first_signal_value;
     do
     {
         first_signal_value = GetSignalPins();
     } while (pin_values_before_signal == first_signal_value);
-    //printf("Pins after %d\n", first_signal_value);
 
     uint64_t signal_start = hw_if.get_time_us();
     trace.Reset(pin_values_before_signal, first_signal_value);
