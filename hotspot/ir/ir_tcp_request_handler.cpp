@@ -4,5 +4,6 @@ std::string IrRedTcpRequestHandler::process_request(const char *request, const c
 {
     printf("tcp server reqest %s", request);
 
-    return "bioo";
+    return codesDisplayRequestHandler.HandleRequest(request) +
+        codesRecordRequestHandler.HandleRequest(request);
 }

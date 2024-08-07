@@ -181,6 +181,8 @@
     <ClInclude Include="ir\codes\ir_code.h" />
     <ClInclude Include="ir\codes\ir_code_repository.h" />
     <ClInclude Include="ir\ir_tcp_request_handler.h" />
+    <ClInclude Include="ir\server_responses\codes_display_request_handler.h" />
+    <ClInclude Include="ir\server_responses\codes_record_request_handler.h" />
     <ClInclude Include="pico_scope\pico_scope.h" />
     <ClInclude Include="rest\irest_handler.h" />
     <ClInclude Include="rest\itcp_response_analyser.h" />
