@@ -3,7 +3,7 @@
 #include "server_responses/codes_display_request_handler.h"
 #include "server_responses/codes_record_request_handler.h"
 
-class IrRedTcpRequestHandler : public TcpServer
+class IrTcpRequestHandler : public TcpServer
 {
     ICodesDisplayRequestHandler& codesDisplayRequestHandler;
     ICodesRecordRequestHandler& codesRecordRequestHandler;
@@ -11,7 +11,7 @@ class IrRedTcpRequestHandler : public TcpServer
     virtual std::string process_request(const char *request, const char *params);
 
 public:
-    IrRedTcpRequestHandler(ICodesDisplayRequestHandler& codesDisplayRequestHandler,
+    IrTcpRequestHandler(ICodesDisplayRequestHandler& codesDisplayRequestHandler,
         ICodesRecordRequestHandler& codesRecordRequestHandler)
         : codesDisplayRequestHandler(codesDisplayRequestHandler),
         codesRecordRequestHandler(codesRecordRequestHandler) {}

@@ -1,7 +1,7 @@
 #include "WiFiConnector.h"
 #include "hw_if/pico_hardware_interface.h"
 #include "gpio/gpio.h"
-#include "ir/infrared_tcp_request_handler.h"
+#include "ir/ir_tcp_request_handler.h"
 #include "ir/ir_main.h"
 
 #define WIFI_SSID "a907"
