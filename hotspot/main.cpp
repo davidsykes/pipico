@@ -27,9 +27,7 @@ int main()
    else
    {
       connector.ConnectToWiFiDirect(hw_if, WIFI_SSID, WIFI_PASSWORD);
-      run_ir_main(hw_if);
-      InfraRedTcpRequestHandler tcpServer;
-      connector.ConnectToWiFiTestServer(tcpServer);
+      run_ir_main(hw_if, connector);
    }
 
    // printf("BAD BAD Connected..\n");

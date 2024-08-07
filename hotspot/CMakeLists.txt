@@ -32,7 +32,7 @@ add_executable(test
         rest/tcp_response_analyser.cpp
         ir/ir_main.cpp
         ir/infrared_tcp_request_handler.cpp
-        ir/ir_code_repository.cpp
+        ir/codes/ir_code_repository.cpp
 )
 target_include_directories(test PRIVATE
         ${CMAKE_CURRENT_LIST_DIR}

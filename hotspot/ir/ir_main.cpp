@@ -2,17 +2,17 @@
 #include "ir_main.h"
 #include "gpio/gpio.h"
 #include "pico_scope/pico_scope_main.h"
-#include "ir_code_repository.h"
+#include "codes/ir_code_repository.h"
 #include "../rest/itcp_response_analyser.h"
 #include "../rest/tcp_response_analyser.h"
 #include "../rest/rest_handler.h"
-
+#include "infrared_tcp_request_handler.h"
 
 #define IR_API_SERVER_IP "192.168.1.87"
 #define IR_API_PORT 5000
 // #define IR_DATA_CREATE_URL "/trace"
 
-void run_ir_main(IHardwareInterface& hw_if)
+void run_ir_main(IHardwareInterface& hw_if, WiFiConnector& connector)
 {
     printf("Run IR\n");
 
@@ -29,6 +29,10 @@ void run_ir_main(IHardwareInterface& hw_if)
                                 IR_API_PORT);
         IrCodeRepository codeRepository(restHandler);
         codeRepository.RetrieveCodes();
+
+        InfraRedTcpRequestHandler tcpServer;
+        connector.ConnectToWiFiTestServer(tcpServer);
+
         //run_tcp_server_test();
     }
     else
