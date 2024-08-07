@@ -97,6 +97,9 @@
     <Filter Include="Source Files\ir\server_responses">
       <UniqueIdentifier>{1cbb920c-9344-4046-b34f-181897f3c24c}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Tests\ir\server_responses">
+      <UniqueIdentifier>{80c51e13-c256-4bda-9549-0c61b011d8ea}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Tests.cpp">
@@ -200,6 +203,12 @@
     </ClCompile>
     <ClCompile Include="ir\ir_tcp_request_handler.cpp">
       <Filter>Source Files\ir</Filter>
+    </ClCompile>
+    <ClCompile Include="Tests\ir\server_responses\codes_record_request_handler_tests.cpp">
+      <Filter>Source Files\Tests\ir\server_responses</Filter>
+    </ClCompile>
+    <ClCompile Include="ir\server_responses\codes_record_request_handler.cpp">
+      <Filter>Source Files\ir\server_responses</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -328,6 +337,9 @@
     </ClInclude>
     <ClInclude Include="ir\server_responses\codes_record_request_handler.h">
       <Filter>Source Files\ir\server_responses</Filter>
+    </ClInclude>
+    <ClInclude Include="Tests\ir\server_responses\codes_record_request_handler_tests.h">
+      <Filter>Source Files\Tests\ir\server_responses</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

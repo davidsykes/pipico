@@ -139,6 +139,7 @@
     <ClCompile Include="hotspot\logic\requests\process_request.cpp" />
     <ClCompile Include="ir\codes\ir_code_repository.cpp" />
     <ClCompile Include="ir\ir_tcp_request_handler.cpp" />
+    <ClCompile Include="ir\server_responses\codes_record_request_handler.cpp" />
     <ClCompile Include="pico_scope\pico_scope.cpp" />
     <ClCompile Include="pico_scope\pico_scope_trace.cpp" />
     <ClCompile Include="pico_scope\trace_data_formatter.cpp" />
@@ -149,6 +150,7 @@
     <ClCompile Include="Tests\gpio\GPIOTests.cpp" />
     <ClCompile Include="Tests\ir\codes\ir_code_repository_tests.cpp" />
     <ClCompile Include="Tests\ir\ir_tcp_request_handler_tests.cpp" />
+    <ClCompile Include="Tests\ir\server_responses\codes_record_request_handler_tests.cpp" />
     <ClCompile Include="Tests\logic\connecting\WIIFIConnectorTests.cpp" />
     <ClCompile Include="Tests\logic\credentials\CredentialsHandlerTests.cpp" />
     <ClCompile Include="Tests\logic\credentials\PercentDecoderTests.cpp" />
@@ -192,6 +194,7 @@
     <ClInclude Include="Tests\gpio\GPIOTests.h" />
     <ClInclude Include="Tests\ir\codes\ir_code_repository_tests.h" />
     <ClInclude Include="Tests\ir\ir_tcp_request_handler_tests.h" />
+    <ClInclude Include="Tests\ir\server_responses\codes_record_request_handler_tests.h" />
     <ClInclude Include="Tests\logic\connecting\WIFIConnectorTests.h" />
     <ClInclude Include="Tests\logic\credentials\CredentialsHandlerTests.h" />
     <ClInclude Include="Tests\logic\credentials\PercentDecoderTests.h" />
