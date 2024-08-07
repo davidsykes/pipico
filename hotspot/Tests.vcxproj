@@ -138,6 +138,7 @@
     <ClCompile Include="hotspot\logic\requests\hotspot_configuration.cpp" />
     <ClCompile Include="hotspot\logic\requests\process_request.cpp" />
     <ClCompile Include="ir\codes\ir_code_repository.cpp" />
+    <ClCompile Include="ir\ir_tcp_request_handler.cpp" />
     <ClCompile Include="pico_scope\pico_scope.cpp" />
     <ClCompile Include="pico_scope\pico_scope_trace.cpp" />
     <ClCompile Include="pico_scope\trace_data_formatter.cpp" />
@@ -147,6 +148,7 @@
     <ClCompile Include="Tests\configurations\HotSpotConfigurationTests.cpp" />
     <ClCompile Include="Tests\gpio\GPIOTests.cpp" />
     <ClCompile Include="Tests\ir\codes\ir_code_repository_tests.cpp" />
+    <ClCompile Include="Tests\ir\ir_tcp_request_handler_tests.cpp" />
     <ClCompile Include="Tests\logic\connecting\WIIFIConnectorTests.cpp" />
     <ClCompile Include="Tests\logic\credentials\CredentialsHandlerTests.cpp" />
     <ClCompile Include="Tests\logic\credentials\PercentDecoderTests.cpp" />
@@ -178,6 +180,7 @@
     <ClInclude Include="hw_if\pico_hardware_interface.h" />
     <ClInclude Include="ir\codes\ir_code.h" />
     <ClInclude Include="ir\codes\ir_code_repository.h" />
+    <ClInclude Include="ir\ir_tcp_request_handler.h" />
     <ClInclude Include="pico_scope\pico_scope.h" />
     <ClInclude Include="rest\irest_handler.h" />
     <ClInclude Include="rest\itcp_response_analyser.h" />
@@ -186,6 +189,7 @@
     <ClInclude Include="Tests\configurations\HotSpotConfigurationTests.h" />
     <ClInclude Include="Tests\gpio\GPIOTests.h" />
     <ClInclude Include="Tests\ir\codes\ir_code_repository_tests.h" />
+    <ClInclude Include="Tests\ir\ir_tcp_request_handler_tests.h" />
     <ClInclude Include="Tests\logic\connecting\WIFIConnectorTests.h" />
     <ClInclude Include="Tests\logic\credentials\CredentialsHandlerTests.h" />
     <ClInclude Include="Tests\logic\credentials\PercentDecoderTests.h" />

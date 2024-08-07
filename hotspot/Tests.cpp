@@ -12,6 +12,7 @@
 #include "Tests\rest\RestHandlerTests.h"
 #include "Tests\rest\TcpResponseAnalyserTests.h"
 #include "Tests\ir\codes\ir_code_repository_tests.h"
+#include "Tests\ir\ir_tcp_request_handler_tests.h"
 
 int main()
 {
@@ -28,5 +29,6 @@ int main()
     TraceDataFormatterTests().RunTests();
     TcpResponseAnalyserTests().RunTests();
     IrCodeRepositoryTests().RunTests();
+    IrTcpRequestHandlerTests().RunTests();
     std::cout << "Tests Complete\n";
 }
