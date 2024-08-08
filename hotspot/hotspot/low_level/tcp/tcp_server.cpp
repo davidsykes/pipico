@@ -1,5 +1,4 @@
-#include <string.h>
-#include "../tcp_server/tcp_server.h"
+#include "tcp_server.h"
 
 #define SIZE_ERROR "<html><body><h1>FORM CONTENT EXCEEDS BUFFER</h1></body></html>"
 
@@ -24,4 +23,3 @@ size_t process_request(void *configuration, const char *request, const char *par
    strcpy_s(result, max_result_len, SIZE_ERROR);
    return strlen(SIZE_ERROR);
 }
-

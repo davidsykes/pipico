@@ -1,5 +1,4 @@
 #include "debugprintf.h"
-#include "hotspot/low_level/tcp/c_interface.h"
 #include "WiFiConnector.h"
 #include "logic/flash/flash_hardware.h"
 #include "logic/connecting/wifi_connection_maker.h"
@@ -9,7 +8,6 @@
 #include "logic/flash/flash_manager.h"
 #include "logic/input_form/html_renderer.h"
 #include "logic/input_form/input_form_renderer.h"
-#include "logic/requests/process_request.h"
 
 void WiFiConnector::ConnectToWiFi(const char* input_form_hotspot_name)
 {

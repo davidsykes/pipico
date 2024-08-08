@@ -1,5 +1,6 @@
 #pragma once
-#include <stdlib.h>
+#include <string.h>
+//#include <stdlib.h>
 
 #ifdef __cplusplus
 extern "C" {
@@ -21,3 +22,4 @@ typedef struct TCP_REQUEST_PROCESSOR_T_ {
 } TCP_REQUEST_PROCESSOR_T;
 
 
+size_t process_request(void *configuration, const char *request, const char *params, char *result, size_t max_result_len);

@@ -1,6 +1,6 @@
 #pragma once
 #include "hw_if/pico_hardware_interface.h"
-#include "logic/tcp_server/tcp_server.h"
+#include "low_level/tcp/tcp_server.h"
 
 class WiFiConnector
 {

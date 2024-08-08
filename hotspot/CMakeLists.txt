@@ -9,7 +9,8 @@ add_executable(test
         hotspot/WiFiConnector.cpp
         hotspot/low_level/tcp/dhcpserver/dhcpserver.c
         hotspot/low_level/tcp/dnsserver/dnsserver.c
-        hotspot/low_level/tcp/picow_access_point.c
+        hotspot/low_level/tcp/tcp_server_implementation.c
+        hotspot/low_level/tcp/tcp_server.cpp
         hotspot/low_level/flash_program.c
         hotspot/logic/flash/flash_hardware.cpp
         hotspot/logic/flash/flash_manager.cpp
@@ -18,7 +19,6 @@ add_executable(test
         hotspot/logic/credentials/credentials_handler.cpp
         hotspot/logic/credentials/percent_decoder.cpp
         hotspot/logic/connecting/wifi_connection_maker.cpp
-        hotspot/logic/requests/process_request.cpp
         hotspot/logic/requests/hotspot_configuration.cpp
         hw_if/hardware_interface.c
         hw_if/pico_hardware_interface.cpp
