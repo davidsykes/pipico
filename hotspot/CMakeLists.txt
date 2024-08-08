@@ -7,10 +7,10 @@ pico_sdk_init()
 add_executable(test
         main.cpp
         hotspot/WiFiConnector.cpp
-        hotspot/low_level/dhcpserver/dhcpserver.c
-        hotspot/low_level/dnsserver/dnsserver.c
+        hotspot/low_level/tcp/dhcpserver/dhcpserver.c
+        hotspot/low_level/tcp/dnsserver/dnsserver.c
+        hotspot/low_level/tcp/picow_access_point.c
         hotspot/low_level/flash_program.c
-        hotspot/low_level/picow_access_point.c
         hotspot/logic/flash/flash_hardware.cpp
         hotspot/logic/flash/flash_manager.cpp
         hotspot/logic/input_form/html_renderer.cpp

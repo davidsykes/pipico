@@ -1,5 +1,5 @@
 #include "debugprintf.h"
-#include "hotspot/c_interface.h"
+#include "hotspot/low_level/tcp/c_interface.h"
 #include "WiFiConnector.h"
 #include "logic/flash/flash_hardware.h"
 #include "logic/connecting/wifi_connection_maker.h"
