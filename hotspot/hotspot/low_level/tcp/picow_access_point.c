@@ -34,7 +34,7 @@ typedef struct TCP_SERVER_T_ {
     bool complete;
     ip_addr_t gw;
     async_context_t *context;
-    REQUEST_PROCESSOR_T* request_processor;
+    TCP_REQUEST_PROCESSOR_T* request_processor;
 } TCP_SERVER_T;
 
 typedef struct TCP_CONNECT_STATE_T_ {
@@ -45,7 +45,7 @@ typedef struct TCP_CONNECT_STATE_T_ {
     int header_len;
     int result_len;
     ip_addr_t *gw;
-    REQUEST_PROCESSOR_T* request_processor;
+    TCP_REQUEST_PROCESSOR_T* request_processor;
 } TCP_CONNECT_STATE_T;
 
 static err_t tcp_close_client_connection(TCP_CONNECT_STATE_T *con_state, struct tcp_pcb *client_pcb, err_t close_err) {
@@ -88,7 +88,7 @@ static err_t tcp_server_sent(void *arg, struct tcp_pcb *pcb, u16_t len) {
     return ERR_OK;
 }
 
-static int test_server_content(const char *request, const char *params, char *result, size_t max_result_len, REQUEST_PROCESSOR_T *request_processor) {
+static int test_server_content(const char *request, const char *params, char *result, size_t max_result_len, TCP_REQUEST_PROCESSOR_T *request_processor) {
     int len = 0;
 
     len = request_processor->process_request(request_processor->configuration, request, params, result, max_result_len);
