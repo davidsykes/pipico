@@ -3,5 +3,5 @@
 
 std::string CodesDisplayRequestHandler::HandleRequest(const std::string& request)
 {
-	return "<form action=\"/display\"><input type = \"submit\" value = \"Display\" / >< / form>";
+	return "<form action=\"/display\"><input type = \"submit\" value = \"Display\" /></form>";
 }
