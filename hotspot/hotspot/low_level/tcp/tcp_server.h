@@ -1,5 +1,7 @@
 #pragma once
 #include <string>
+#include <stdlib.h>
+#include "tcp_server_implementation.h"
 
 class TcpServer
 {
@@ -9,5 +11,4 @@ class TcpServer
 
         virtual std::string process_request(const char *request, const char *params) = 0;
 };
-
 

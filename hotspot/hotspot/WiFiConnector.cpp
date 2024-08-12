@@ -1,5 +1,4 @@
 #include "debugprintf.h"
-#include "hotspot/c_interface.h"
 #include "WiFiConnector.h"
 #include "logic/flash/flash_hardware.h"
 #include "logic/connecting/wifi_connection_maker.h"
@@ -9,7 +8,6 @@
 #include "logic/flash/flash_manager.h"
 #include "logic/input_form/html_renderer.h"
 #include "logic/input_form/input_form_renderer.h"
-#include "logic/requests/process_request.h"
 
 void WiFiConnector::ConnectToWiFi(const char* input_form_hotspot_name)
 {
@@ -37,7 +35,7 @@ void WiFiConnector::ConnectToWiFi(const char* input_form_hotspot_name)
       &inputFormRenderer,
       &credentialsHandler);
 
-   REQUEST_PROCESSOR_T processor;
+   TCP_REQUEST_PROCESSOR_T processor;
    processor.configuration = config;
    processor.process_request = &process_request;
 
@@ -56,21 +54,10 @@ void WiFiConnector::ConnectToWiFiDirect(IHardwareInterface& hw_if, const char* s
 // TODO Factor this out to a server object
 void WiFiConnector::ConnectToWiFiTestServer(TcpServer& tcp_server_processor)
 {
-   //FlashHardware flashHardware;
    HtmlRenderer htmlRenderer;
    InputFormRenderer inputFormRenderer;
-   //PercentDecoder percentDecoder;
-   //FlashManager flashManager(&flashHardware);
-   //CredentialsHandler credentialsHandler(&percentDecoder, &flashManager);
 
-   //TcpServer *config = new HotSpotConfiguration(
-   //   "input_form_hotspot_name",
-   //   "wifiConnectionMaker.lastErrorMessage.c_str()",
-   //   &htmlRenderer,
-   //   &inputFormRenderer,
-   //   &credentialsHandler);
-
-   REQUEST_PROCESSOR_T processor;
+   TCP_REQUEST_PROCESSOR_T processor;
    processor.configuration = &tcp_server_processor;
    processor.process_request = &process_request;
 

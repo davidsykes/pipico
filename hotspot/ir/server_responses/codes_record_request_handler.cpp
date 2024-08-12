@@ -3,5 +3,5 @@
 
 std::string CodesRecordRequestHandler::HandleRequest(const std::string& request)
 {
-	return "<form action=\"/record\"><input type = \"submit\" value = \"Record\" / >< / form>";
+	return "<form action=\"/record\"><input type = \"submit\" value = \"Record\" /></form>";
 }

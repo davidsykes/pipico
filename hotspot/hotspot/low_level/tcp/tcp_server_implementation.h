@@ -1,5 +1,6 @@
 #pragma once
-#include <stdlib.h>
+#include <string.h>
+//#include <stdlib.h>
 
 #ifdef __cplusplus
 extern "C" {
@@ -15,9 +16,10 @@ extern "C" {
 }
 #endif
 
-typedef struct REQUEST_PROCESSOR_T_ {
+typedef struct TCP_REQUEST_PROCESSOR_T_ {
     void *configuration; // TODO Rename to request_processor
     size_t (*process_request)(void *configuration, const char *request, const char *params, char *result, size_t max_result_len);
-} REQUEST_PROCESSOR_T;
+} TCP_REQUEST_PROCESSOR_T;
 
 
+size_t process_request(void *configuration, const char *request, const char *params, char *result, size_t max_result_len);

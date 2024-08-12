@@ -7,10 +7,11 @@ pico_sdk_init()
 add_executable(test
         main.cpp
         hotspot/WiFiConnector.cpp
-        hotspot/low_level/dhcpserver/dhcpserver.c
-        hotspot/low_level/dnsserver/dnsserver.c
+        hotspot/low_level/tcp/dhcpserver/dhcpserver.c
+        hotspot/low_level/tcp/dnsserver/dnsserver.c
+        hotspot/low_level/tcp/tcp_server_implementation.c
+        hotspot/low_level/tcp/tcp_server.cpp
         hotspot/low_level/flash_program.c
-        hotspot/low_level/picow_access_point.c
         hotspot/logic/flash/flash_hardware.cpp
         hotspot/logic/flash/flash_manager.cpp
         hotspot/logic/input_form/html_renderer.cpp
@@ -18,7 +19,6 @@ add_executable(test
         hotspot/logic/credentials/credentials_handler.cpp
         hotspot/logic/credentials/percent_decoder.cpp
         hotspot/logic/connecting/wifi_connection_maker.cpp
-        hotspot/logic/requests/process_request.cpp
         hotspot/logic/requests/hotspot_configuration.cpp
         hw_if/hardware_interface.c
         hw_if/pico_hardware_interface.cpp
@@ -31,8 +31,10 @@ add_executable(test
         rest/rest_handler.cpp
         rest/tcp_response_analyser.cpp
         ir/ir_main.cpp
-        ir/infrared_tcp_request_handler.cpp
+        ir/ir_tcp_request_handler.cpp
         ir/codes/ir_code_repository.cpp
+        ir/server_responses/codes_display_request_handler.cpp
+        ir/server_responses/codes_record_request_handler.cpp
 )
 target_include_directories(test PRIVATE
         ${CMAKE_CURRENT_LIST_DIR}

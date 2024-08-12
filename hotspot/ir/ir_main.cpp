@@ -6,7 +6,9 @@
 #include "../rest/itcp_response_analyser.h"
 #include "../rest/tcp_response_analyser.h"
 #include "../rest/rest_handler.h"
-#include "infrared_tcp_request_handler.h"
+#include "ir_tcp_request_handler.h"
+#include "server_responses/codes_display_request_handler.h"
+#include "server_responses/codes_record_request_handler.h"
 
 #define IR_API_SERVER_IP "192.168.1.87"
 #define IR_API_PORT 5000
@@ -30,7 +32,10 @@ void run_ir_main(IHardwareInterface& hw_if, WiFiConnector& connector)
         IrCodeRepository codeRepository(restHandler);
         codeRepository.RetrieveCodes();
 
-        InfraRedTcpRequestHandler tcpServer;
+        CodesDisplayRequestHandler codesDisplayRequestHandler;
+        CodesRecordRequestHandler codesRecordRequestHandler;
+
+        IrTcpRequestHandler tcpServer(codesDisplayRequestHandler, codesRecordRequestHandler);
         connector.ConnectToWiFiTestServer(tcpServer);
 
         //run_tcp_server_test();

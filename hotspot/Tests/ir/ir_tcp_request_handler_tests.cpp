@@ -14,13 +14,13 @@ class MockCodesRecordRequestHandler : public ICodesRecordRequestHandler
 
 static std::unique_ptr<ICodesDisplayRequestHandler> mockCodesDisplayRequestHandler;
 static std::unique_ptr<ICodesRecordRequestHandler> mockCodesRecordRequestHandler;
-static std::unique_ptr<IrRedTcpRequestHandler> objectUnderTest;
+static std::unique_ptr<IrTcpRequestHandler> objectUnderTest;
 
-static IrRedTcpRequestHandler& CreateObjectUnderTest()
+static IrTcpRequestHandler& CreateObjectUnderTest()
 {
 	mockCodesDisplayRequestHandler.reset(new MockCodesDisplayRequestHandler());
 	mockCodesRecordRequestHandler.reset(new MockCodesRecordRequestHandler());
-	objectUnderTest.reset(new IrRedTcpRequestHandler(*mockCodesDisplayRequestHandler.get(),*mockCodesRecordRequestHandler.get()));
+	objectUnderTest.reset(new IrTcpRequestHandler(*mockCodesDisplayRequestHandler.get(),*mockCodesRecordRequestHandler.get()));
 	return *objectUnderTest.get();
 }
 
