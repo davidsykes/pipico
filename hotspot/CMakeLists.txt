@@ -36,6 +36,7 @@ add_executable(test
         ir/server_responses/codes_display_request_handler.cpp
         ir/server_responses/codes_record_request_handler.cpp
         3rd_party/pico_tcp_server.c
+        3rd_party/pico_tcp_server.cpp
 )
 target_include_directories(test PRIVATE
         ${CMAKE_CURRENT_LIST_DIR}
