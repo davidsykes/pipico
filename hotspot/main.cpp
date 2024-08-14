@@ -14,11 +14,6 @@ int main_pico_tcp_server(const char* ssid, const char* pwd);
 
 int main()
 {
-   main_pico_tcp_server(WIFI_SSID, WIFI_PASSWORD);
-
-
-
-
    PicoHardwareInterface phw_if;
    IHardwareInterface& hw_if = phw_if;
    hw_if.initialise_pico_stdio();
@@ -37,6 +32,7 @@ int main()
    else
    {
       connector.ConnectToWiFiDirect(hw_if, WIFI_SSID, WIFI_PASSWORD);
+      main_pico_tcp_server(WIFI_SSID, WIFI_PASSWORD);
       run_ir_main(hw_if, connector);
    }
 

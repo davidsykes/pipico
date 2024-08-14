@@ -123,51 +123,6 @@ err_t tcp_server_recv(void *arg, struct tcp_pcb *pcb, struct pbuf *p, err_t err)
         {
 
         }
-        // Handle GET request
-        else if (strncmp(HTTP_GET, con_state->headers, sizeof(HTTP_GET) - 1) == 0) {
-            char *request = con_state->headers + sizeof(HTTP_GET); // + space
-            char *params = strchr(request, '?');
-            if (params) {
-                if (*params) {
-                    char *space = strchr(request, ' ');
-                    *params++ = 0;
-                    if (space) {
-                        *space = 0;
-                    }
-                } else {
-                    params = NULL;
-                }
-            }
-
-            // // Generate content
-            // con_state->result_len = test_server_content(request, params, con_state->result, sizeof(con_state->result));
-            // DEBUG_printf("Request: %s?%s\n", request, params);
-            // DEBUG_printf("Result: %d\n", con_state->result_len);
-
-            // // Check we had enough buffer space
-            // if (con_state->result_len > sizeof(con_state->result) - 1) {
-            //     DEBUG_printf("Too much result data %d\n", con_state->result_len);
-            //     return tcp_close_client_connection(con_state, pcb, ERR_CLSD);
-            // }
-
-            // // Generate web page
-            // if (con_state->result_len > 0) {
-            //     con_state->header_len = snprintf(con_state->headers, sizeof(con_state->headers), HTTP_RESPONSE_HEADERS,
-            //         200, con_state->result_len);
-            //     if (con_state->header_len > sizeof(con_state->headers) - 1) {
-            //         DEBUG_printf("Too much header data %d\n", con_state->header_len);
-            //         return tcp_close_client_connection(con_state, pcb, ERR_CLSD);
-            //     }
-            // } else {
-            //     // Send redirect
-            //     con_state->header_len = snprintf(con_state->headers, sizeof(con_state->headers), HTTP_RESPONSE_REDIRECT,
-            //         ipaddr_ntoa(con_state->gw));
-            //     DEBUG_printf("Sending redirect %s", con_state->headers);
-            // }
-
-            con_state->header_len = snprintf(con_state->headers, sizeof(con_state->headers), "HTTP/1.1 404\r\nContent-Length: 0");
-            con_state->result_len = snprintf(con_state->result, sizeof(con_state->result), "");
-        }
         else
         {
             con_state->header_len = snprintf(con_state->headers, sizeof(con_state->headers), "HTTP/1.1 404\r\nContent-Length: 0");
@@ -238,9 +193,8 @@ static err_t tcp_server_accept(void *arg, struct tcp_pcb *client_pcb, err_t err)
     return ERR_OK;
 }
 
-static bool tcp_server_open(void *arg, const char *ap_name) {
+static bool tcp_server_open(void *arg) {
     TCP_SERVER_T *state = (TCP_SERVER_T*)arg;
-    DEBUG_printf("starting server on port %d\n", TCP_PORT);
 
     struct tcp_pcb *pcb = tcp_new_ip_type(IPADDR_TYPE_ANY);
     if (!pcb) {
@@ -266,33 +220,33 @@ static bool tcp_server_open(void *arg, const char *ap_name) {
     tcp_arg(state->server_pcb, state);
     tcp_accept(state->server_pcb, tcp_server_accept);
 
-    printf("Try connecting to '%s' (press 'd' to disable access point)\n", ap_name);
+    DEBUG_printf("Started server at %s on port %u\n", ip4addr_ntoa(netif_ip4_addr(netif_list)), TCP_PORT);
     return true;
 }
 
-// This "worker" function is called to safely perform work when instructed by key_pressed_func
-void key_pressed_worker_func(async_context_t *context, async_when_pending_worker_t *worker) {
-    assert(worker->user_data);
-    printf("Disabling wifi\n");
-    cyw43_arch_disable_ap_mode();
-    ((TCP_SERVER_T*)(worker->user_data))->complete = true;
-}
+// // This "worker" function is called to safely perform work when instructed by key_pressed_func
+// void key_pressed_worker_func(async_context_t *context, async_when_pending_worker_t *worker) {
+//     assert(worker->user_data);
+//     printf("Disabling wifi\n");
+//     cyw43_arch_disable_ap_mode();
+//     ((TCP_SERVER_T*)(worker->user_data))->complete = true;
+// }
 
-static async_when_pending_worker_t key_pressed_worker = {
-        .do_work = key_pressed_worker_func
-};
+// static async_when_pending_worker_t key_pressed_worker = {
+//         .do_work = key_pressed_worker_func
+// };
 
-void key_pressed_func(void *param) {
-    assert(param);
-    int key = getchar_timeout_us(0); // get any pending key press but don't wait
-    if (key == 'd' || key == 'D') {
-        // We are probably in irq context so call wifi in a "worker"
-        async_context_set_work_pending(((TCP_SERVER_T*)param)->context, &key_pressed_worker);
-    }
-}
+// void key_pressed_func(void *param) {
+//     assert(param);
+//     int key = getchar_timeout_us(0); // get any pending key press but don't wait
+//     if (key == 'd' || key == 'D') {
+//         // We are probably in irq context so call wifi in a "worker"
+//         async_context_set_work_pending(((TCP_SERVER_T*)param)->context, &key_pressed_worker);
+//     }
+// }
 
 int main_pico_tcp_server(const char* WIFI_SSID, const char* WIFI_PASSWORD) {
-    stdio_init_all();
+    //stdio_init_all();
 
     TCP_SERVER_T *state = calloc(1, sizeof(TCP_SERVER_T));
     if (!state) {
@@ -300,51 +254,22 @@ int main_pico_tcp_server(const char* WIFI_SSID, const char* WIFI_PASSWORD) {
         return 1;
     }
 
-    if (cyw43_arch_init()) {
-        DEBUG_printf("failed to initialise\n");
-        return 1;
-    }
+    // if (cyw43_arch_init()) {
+    //     DEBUG_printf("failed to initialise\n");
+    //     return 1;
+    // }
 
-    cyw43_arch_enable_sta_mode();
+    // cyw43_arch_enable_sta_mode();
 
-    printf("Connecting to Wi-Fi...\n");
-    if (cyw43_arch_wifi_connect_timeout_ms(WIFI_SSID, WIFI_PASSWORD, CYW43_AUTH_WPA2_AES_PSK, 30000)) {
-        printf("failed to connect.\n");
-        return 1;
-    } else {
-        printf("Connected.\n");
-    }
+    // printf("Connecting to Wi-Fi...\n");
+    // if (cyw43_arch_wifi_connect_timeout_ms(WIFI_SSID, WIFI_PASSWORD, CYW43_AUTH_WPA2_AES_PSK, 30000)) {
+    //     printf("failed to connect.\n");
+    //     return 1;
+    // } else {
+    //     printf("Connected.\n");
+    // }
 
-
-
-//     // Get notified if the user presses a key
-//     state->context = cyw43_arch_async_context();
-//     key_pressed_worker.user_data = state;
-//     async_context_add_when_pending_worker(cyw43_arch_async_context(), &key_pressed_worker);
-//     stdio_set_chars_available_callback(key_pressed_func, state);
-
-     const char *ap_name = "picow_test";
-// #if 1
-//     const char *password = "password";
-// #else
-//     const char *password = NULL;
-// #endif
-
-//     cyw43_arch_enable_ap_mode(ap_name, password, CYW43_AUTH_WPA2_AES_PSK);
-
-//     ip4_addr_t mask;
-//     IP4_ADDR(ip_2_ip4(&state->gw), 192, 168, 4, 1);
-//     IP4_ADDR(ip_2_ip4(&mask), 255, 255, 255, 0);
-
-//     // Start the dhcp server
-//     dhcp_server_t dhcp_server;
-//     dhcp_server_init(&dhcp_server, &state->gw, &mask);
-
-//     // Start the dns server
-//     dns_server_t dns_server;
-//     dns_server_init(&dns_server, &state->gw);
-
-    if (!tcp_server_open(state, ap_name)) {
+    if (!tcp_server_open(state)) {
         DEBUG_printf("failed to open server\n");
         return 1;
     }
@@ -369,8 +294,6 @@ int main_pico_tcp_server(const char* WIFI_SSID, const char* WIFI_PASSWORD) {
 #endif
     }
     tcp_server_close(state);
-    // dns_server_deinit(&dns_server);
-    // dhcp_server_deinit(&dhcp_server);
     cyw43_arch_deinit();
     return 0;
 }
