@@ -7,8 +7,18 @@
 #define WIFI_SSID "a907"
 #define WIFI_PASSWORD "?thisistheWIFIyouhavebeenlookingfor1398"
 
+
+extern "C" {
+int main_pico_tcp_server(const char* ssid, const char* pwd);
+}
+
 int main()
 {
+   main_pico_tcp_server(WIFI_SSID, WIFI_PASSWORD);
+
+
+
+
    PicoHardwareInterface phw_if;
    IHardwareInterface& hw_if = phw_if;
    hw_if.initialise_pico_stdio();

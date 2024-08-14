@@ -4,19 +4,6 @@
  * SPDX-License-Identifier: BSD-3-Clause
  */
 
-#if 1
-int main_hotspot(const char *hotspot_name,
-    const char *hotspot_password,
-    void* request_processor) {
-        return 0;
-    }
-
-int run_tcp_server(void* request_processor) {
-    return 0;
-}
-
-#else
-
 #include <string.h>
 
 #include "pico/cyw43_arch.h"
@@ -24,17 +11,14 @@ int run_tcp_server(void* request_processor) {
 
 #include "lwip/pbuf.h"
 #include "lwip/tcp.h"
-#include "tcp_server_implementation.h"
-#include "dhcpserver/dhcpserver.h"
-#include "dnsserver/dnsserver.h"
 
-// TODO Rationalise the printf output and remove the led headers
+// #include "dhcpserver.h"
+// #include "dnsserver.h"
 
 #define TCP_PORT 80
 #define DEBUG_printf printf
-#define DEBUG_printf2
 #define POLL_TIME_S 5
-#define HTTP_GET "GET"
+#define HTTP_GET "GET /api"
 #define HTTP_RESPONSE_HEADERS "HTTP/1.1 %d OK\nContent-Length: %d\nContent-Type: text/html; charset=utf-8\nConnection: close\n\n"
 #define LED_TEST_BODY "<html><body><h1>Hello from Pico W.</h1><p>Led is %s</p><p><a href=\"?led=%d\">Turn led %s</a></body></html>"
 #define LED_PARAM "led=%d"
@@ -47,18 +31,16 @@ typedef struct TCP_SERVER_T_ {
     bool complete;
     ip_addr_t gw;
     async_context_t *context;
-    TCP_REQUEST_PROCESSOR_T* request_processor;
 } TCP_SERVER_T;
 
 typedef struct TCP_CONNECT_STATE_T_ {
     struct tcp_pcb *pcb;
     int sent_len;
     char headers[128];
-    char result[1024];
+    char result[256];
     int header_len;
     int result_len;
     ip_addr_t *gw;
-    TCP_REQUEST_PROCESSOR_T* request_processor;
 } TCP_CONNECT_STATE_T;
 
 static err_t tcp_close_client_connection(TCP_CONNECT_STATE_T *con_state, struct tcp_pcb *client_pcb, err_t close_err) {
@@ -92,24 +74,18 @@ static void tcp_server_close(TCP_SERVER_T *state) {
 
 static err_t tcp_server_sent(void *arg, struct tcp_pcb *pcb, u16_t len) {
     TCP_CONNECT_STATE_T *con_state = (TCP_CONNECT_STATE_T*)arg;
-    DEBUG_printf2("tcp_server_sent %u\n", len);
+    DEBUG_printf("tcp_server_sent %u\n", len);
     con_state->sent_len += len;
     if (con_state->sent_len >= con_state->header_len + con_state->result_len) {
-        DEBUG_printf2("all done\n");
+        DEBUG_printf("all done\n");
         return tcp_close_client_connection(con_state, pcb, ERR_OK);
     }
     return ERR_OK;
 }
 
-static int test_server_content(const char *request, const char *params, char *result, size_t max_result_len, TCP_REQUEST_PROCESSOR_T *request_processor) {
+static int test_server_content(const char *request, const char *params, char *result, size_t max_result_len) {
     int len = 0;
-
-    len = request_processor->process_request(request_processor->configuration, request, params, result, max_result_len);
-    if (len > 0)
-    {
-        return len;
-    }
-    else if (strncmp(request, LED_TEST, sizeof(LED_TEST) - 1) == 0) {
+    if (strncmp(request, LED_TEST, sizeof(LED_TEST) - 1) == 0) {
         // Get the state of the led
         bool value;
         cyw43_gpio_get(&cyw43_state, LED_GPIO, &value);
@@ -138,8 +114,6 @@ static int test_server_content(const char *request, const char *params, char *re
     return len;
 }
 
-#error "Disabled"
-
 err_t tcp_server_recv(void *arg, struct tcp_pcb *pcb, struct pbuf *p, err_t err) {
     TCP_CONNECT_STATE_T *con_state = (TCP_CONNECT_STATE_T*)arg;
     if (!p) {
@@ -156,6 +130,8 @@ err_t tcp_server_recv(void *arg, struct tcp_pcb *pcb, struct pbuf *p, err_t err)
 #endif
         // Copy the request into the buffer
         pbuf_copy_partial(p, con_state->headers, p->tot_len > sizeof(con_state->headers) - 1 ? sizeof(con_state->headers) - 1 : p->tot_len, 0);
+
+        printf("vvv\n%s\n^^^\n", con_state->headers);
 
         // Handle GET request
         if (strncmp(HTTP_GET, con_state->headers, sizeof(HTTP_GET) - 1) == 0) {
@@ -174,9 +150,9 @@ err_t tcp_server_recv(void *arg, struct tcp_pcb *pcb, struct pbuf *p, err_t err)
             }
 
             // Generate content
-            con_state->result_len = test_server_content(request, params, con_state->result, sizeof(con_state->result), con_state->request_processor);
-            DEBUG_printf2("Request: %s?%s\n", request, params);
-            DEBUG_printf2("Result: %d\n", con_state->result_len);
+            con_state->result_len = test_server_content(request, params, con_state->result, sizeof(con_state->result));
+            DEBUG_printf("Request: %s?%s\n", request, params);
+            DEBUG_printf("Result: %d\n", con_state->result_len);
 
             // Check we had enough buffer space
             if (con_state->result_len > sizeof(con_state->result) - 1) {
@@ -199,23 +175,32 @@ err_t tcp_server_recv(void *arg, struct tcp_pcb *pcb, struct pbuf *p, err_t err)
                 DEBUG_printf("Sending redirect %s", con_state->headers);
             }
 
-            // Send the headers to the client
-            con_state->sent_len = 0;
-            err_t err = tcp_write(pcb, con_state->headers, con_state->header_len, 0);
+            con_state->header_len = snprintf(con_state->headers, sizeof(con_state->headers), "HTTP/1.1 404\r\nContent-Length: 0");
+            con_state->result_len = snprintf(con_state->result, sizeof(con_state->result), "");
+        }
+        else
+        {
+            con_state->header_len = snprintf(con_state->headers, sizeof(con_state->headers), "HTTP/1.1 404\r\nContent-Length: 0");
+            con_state->result_len = snprintf(con_state->result, sizeof(con_state->result), "");
+        }
+
+        // Send the headers to the client
+        con_state->sent_len = 0;
+        err_t err = tcp_write(pcb, con_state->headers, con_state->header_len, 0);
+        if (err != ERR_OK) {
+            DEBUG_printf("failed to write header data %d\n", err);
+            return tcp_close_client_connection(con_state, pcb, err);
+        }
+
+        // Send the body to the client
+        if (con_state->result_len) {
+            err = tcp_write(pcb, con_state->result, con_state->result_len, 0);
             if (err != ERR_OK) {
-                DEBUG_printf("failed to write header data %d\n", err);
+                DEBUG_printf("failed to write result data %d\n", err);
                 return tcp_close_client_connection(con_state, pcb, err);
             }
-
-            // Send the body to the client
-            if (con_state->result_len) {
-                err = tcp_write(pcb, con_state->result, con_state->result_len, 0);
-                if (err != ERR_OK) {
-                    DEBUG_printf("failed to write result data %d\n", err);
-                    return tcp_close_client_connection(con_state, pcb, err);
-                }
-            }
         }
+
         tcp_recved(pcb, p->tot_len);
     }
     pbuf_free(p);
@@ -252,7 +237,6 @@ static err_t tcp_server_accept(void *arg, struct tcp_pcb *client_pcb, err_t err)
     }
     con_state->pcb = client_pcb; // for checking
     con_state->gw = &state->gw;
-    con_state->request_processor = state->request_processor;
 
     // setup connection to client
     tcp_arg(client_pcb, con_state);
@@ -292,14 +276,14 @@ static bool tcp_server_open(void *arg, const char *ap_name) {
     tcp_arg(state->server_pcb, state);
     tcp_accept(state->server_pcb, tcp_server_accept);
 
-    DEBUG_printf("Try connecting to '%s'\n", ap_name);
+    printf("Try connecting to '%s' (press 'd' to disable access point)\n", ap_name);
     return true;
 }
 
 // This "worker" function is called to safely perform work when instructed by key_pressed_func
 void key_pressed_worker_func(async_context_t *context, async_when_pending_worker_t *worker) {
     assert(worker->user_data);
-    DEBUG_printf("Disabling wifi\n");
+    printf("Disabling wifi\n");
     cyw43_arch_disable_ap_mode();
     ((TCP_SERVER_T*)(worker->user_data))->complete = true;
 }
@@ -317,9 +301,8 @@ void key_pressed_func(void *param) {
     }
 }
 
-int main_hotspot(const char *hotspot_name,
-    const char *hotspot_password,
-    void* request_processor) {
+int main_pico_tcp_server(const char* WIFI_SSID, const char* WIFI_PASSWORD) {
+    stdio_init_all();
 
     TCP_SERVER_T *state = calloc(1, sizeof(TCP_SERVER_T));
     if (!state) {
@@ -327,39 +310,49 @@ int main_hotspot(const char *hotspot_name,
         return 1;
     }
 
-    // if (cyw43_arch_init()) {
-    //     DEBUG_printf("failed to initialise\n");
-    //     return 1;
-    // }
+    if (cyw43_arch_init()) {
+        DEBUG_printf("failed to initialise\n");
+        return 1;
+    }
 
-    state->request_processor = request_processor;
+    cyw43_arch_enable_sta_mode();
 
-    // Get notified if the user presses a key
-    state->context = cyw43_arch_async_context();
-    key_pressed_worker.user_data = state;
-    async_context_add_when_pending_worker(cyw43_arch_async_context(), &key_pressed_worker);
-    stdio_set_chars_available_callback(key_pressed_func, state);
+    printf("Connecting to Wi-Fi...\n");
+    if (cyw43_arch_wifi_connect_timeout_ms(WIFI_SSID, WIFI_PASSWORD, CYW43_AUTH_WPA2_AES_PSK, 30000)) {
+        printf("failed to connect.\n");
+        return 1;
+    } else {
+        printf("Connected.\n");
+    }
 
-    const char *ap_name = hotspot_name;
-#if 1
-    const char *password = hotspot_password;
-#else
-    const char *password = NULL;
-#endif
 
-    cyw43_arch_enable_ap_mode(ap_name, password, CYW43_AUTH_WPA2_AES_PSK);
 
-    ip4_addr_t mask;
-    IP4_ADDR(ip_2_ip4(&state->gw), 192, 168, 4, 1);
-    IP4_ADDR(ip_2_ip4(&mask), 255, 255, 255, 0);
+//     // Get notified if the user presses a key
+//     state->context = cyw43_arch_async_context();
+//     key_pressed_worker.user_data = state;
+//     async_context_add_when_pending_worker(cyw43_arch_async_context(), &key_pressed_worker);
+//     stdio_set_chars_available_callback(key_pressed_func, state);
 
-    // Start the dhcp server
-    dhcp_server_t dhcp_server;
-    dhcp_server_init(&dhcp_server, &state->gw, &mask);
+     const char *ap_name = "picow_test";
+// #if 1
+//     const char *password = "password";
+// #else
+//     const char *password = NULL;
+// #endif
 
-    // Start the dns server
-    dns_server_t dns_server;
-    dns_server_init(&dns_server, &state->gw);
+//     cyw43_arch_enable_ap_mode(ap_name, password, CYW43_AUTH_WPA2_AES_PSK);
+
+//     ip4_addr_t mask;
+//     IP4_ADDR(ip_2_ip4(&state->gw), 192, 168, 4, 1);
+//     IP4_ADDR(ip_2_ip4(&mask), 255, 255, 255, 0);
+
+//     // Start the dhcp server
+//     dhcp_server_t dhcp_server;
+//     dhcp_server_init(&dhcp_server, &state->gw, &mask);
+
+//     // Start the dns server
+//     dns_server_t dns_server;
+//     dns_server_init(&dns_server, &state->gw);
 
     if (!tcp_server_open(state, ap_name)) {
         DEBUG_printf("failed to open server\n");
@@ -381,53 +374,7 @@ int main_hotspot(const char *hotspot_name,
         // if you are not using pico_cyw43_arch_poll, then Wi-FI driver and lwIP work
         // is done via interrupt in the background. This sleep is just an example of some (blocking)
         // work you might be doing.
-        sleep_ms(1000);
-#endif
-    }
-    tcp_server_close(state);
-    dns_server_deinit(&dns_server);
-    dhcp_server_deinit(&dhcp_server);
-    cyw43_arch_deinit();
-    return 0;
-}
-
-
-int run_tcp_server(void* request_processor) {
-
-    TCP_SERVER_T *state = calloc(1, sizeof(TCP_SERVER_T));
-    if (!state) {
-        DEBUG_printf("failed to allocate state\n");
-        return 1;
-    }
-
-    state->request_processor = request_processor;
-
-    // Get notified if the user presses a key TODO See if this can be removed
-    state->context = cyw43_arch_async_context();
-    key_pressed_worker.user_data = state;
-    async_context_add_when_pending_worker(cyw43_arch_async_context(), &key_pressed_worker);
-    stdio_set_chars_available_callback(key_pressed_func, state);
-
-    if (!tcp_server_open(state, "localhost")) {
-        DEBUG_printf("failed to open server\n");
-        return 1;
-    }
-
-    state->complete = false;
-    while(!state->complete) {
-        // the following #ifdef is only here so this same example can be used in multiple modes;
-        // you do not need it in your code
-#if PICO_CYW43_ARCH_POLL
-        // if you are using pico_cyw43_arch_poll, then you must poll periodically from your
-        // main loop (not from a timer interrupt) to check for Wi-Fi driver or lwIP work that needs to be done.
-        cyw43_arch_poll();
-        // you can poll as often as you like, however if you have nothing else to do you can
-        // choose to sleep until either a specified time, or cyw43_arch_poll() has work to do:
-        cyw43_arch_wait_for_work_until(make_timeout_time_ms(1000));
-#else
-        // if you are not using pico_cyw43_arch_poll, then Wi-FI driver and lwIP work
-        // is done via interrupt in the background. This sleep is just an example of some (blocking)
-        // work you might be doing.
+        #error
         sleep_ms(1000);
 #endif
     }
@@ -437,5 +384,3 @@ int run_tcp_server(void* request_processor) {
     cyw43_arch_deinit();
     return 0;
 }
-
-#endif
