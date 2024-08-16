@@ -15,6 +15,7 @@
 
 #define TCP_PORT 80
 #define DEBUG_printf printf
+#define DEBUG_printf2
 #define POLL_TIME_S 5
 #define HTTP_GET "GET /api"
 #define HTTP_RESPONSE_HEADERS "HTTP/1.1 %d OK\nContent-Length: %d\nContent-Type: text/html; charset=utf-8\nConnection: close\n\n"
@@ -29,6 +30,7 @@ typedef struct TCP_SERVER_T_ {
     bool complete;
     ip_addr_t gw;
     async_context_t *context;
+    void* http_request_handler;
 } TCP_SERVER_T;
 
 static err_t tcp_close_client_connection(TCP_CONNECT_STATE_T *con_state, struct tcp_pcb *client_pcb, err_t close_err) {
@@ -110,7 +112,7 @@ err_t tcp_server_recv(void *arg, struct tcp_pcb *pcb, struct pbuf *p, err_t err)
     }
     assert(con_state && con_state->pcb == pcb);
     if (p->tot_len > 0) {
-        DEBUG_printf("tcp_server_recv %d err %d\n", p->tot_len, err);
+        DEBUG_printf2("tcp_server_recv %d err %d\n", p->tot_len, err);
 #if 0
         for (struct pbuf *q = p; q != NULL; q = q->next) {
             DEBUG_printf("in: %.*s\n", q->len, q->payload);
@@ -182,6 +184,7 @@ static err_t tcp_server_accept(void *arg, struct tcp_pcb *client_pcb, err_t err)
     }
     con_state->pcb = client_pcb; // for checking
     con_state->gw = &state->gw;
+    con_state->http_request_handler = state->http_request_handler;
 
     // setup connection to client
     tcp_arg(client_pcb, con_state);
@@ -245,29 +248,14 @@ static bool tcp_server_open(void *arg) {
 //     }
 // }
 
-int main_pico_tcp_server(const char* WIFI_SSID, const char* WIFI_PASSWORD) {
-    //stdio_init_all();
+int main_pico_tcp_server(void* http_request_handler) {
 
     TCP_SERVER_T *state = calloc(1, sizeof(TCP_SERVER_T));
     if (!state) {
         DEBUG_printf("failed to allocate state\n");
         return 1;
     }
-
-    // if (cyw43_arch_init()) {
-    //     DEBUG_printf("failed to initialise\n");
-    //     return 1;
-    // }
-
-    // cyw43_arch_enable_sta_mode();
-
-    // printf("Connecting to Wi-Fi...\n");
-    // if (cyw43_arch_wifi_connect_timeout_ms(WIFI_SSID, WIFI_PASSWORD, CYW43_AUTH_WPA2_AES_PSK, 30000)) {
-    //     printf("failed to connect.\n");
-    //     return 1;
-    // } else {
-    //     printf("Connected.\n");
-    // }
+    state->http_request_handler = http_request_handler;
 
     if (!tcp_server_open(state)) {
         DEBUG_printf("failed to open server\n");

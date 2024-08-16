@@ -9,6 +9,7 @@ typedef struct TCP_CONNECT_STATE_T_ {
     int header_len;
     int result_len;
     ip_addr_t *gw;
+    void* http_request_handler;
 } TCP_CONNECT_STATE_T;
 
 #ifdef __cplusplus
@@ -17,4 +18,21 @@ extern "C" {
 int process_http_request(TCP_CONNECT_STATE_T* con_state);
 #ifdef __cplusplus
 }
+#endif
+
+
+#ifdef __cplusplus
+#include <string>
+
+extern "C" {
+int main_pico_tcp_server(void* http_request_handler);
+}
+
+
+class HttpRequestRouter
+{
+public:
+    int HandleHttpRequest(const char* request, std::string& header, std::string& body);
+};
+
 #endif
