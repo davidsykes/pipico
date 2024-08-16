@@ -4,6 +4,19 @@
  * SPDX-License-Identifier: BSD-3-Clause
  */
 
+#if 1
+int main_hotspot(const char *hotspot_name,
+    const char *hotspot_password,
+    void* request_processor) {
+        return 0;
+    }
+
+int run_tcp_server(void* request_processor) {
+    return 0;
+}
+
+#else
+
 #include <string.h>
 
 #include "pico/cyw43_arch.h"
@@ -124,6 +137,8 @@ static int test_server_content(const char *request, const char *params, char *re
     }
     return len;
 }
+
+#error "Disabled"
 
 err_t tcp_server_recv(void *arg, struct tcp_pcb *pcb, struct pbuf *p, err_t err) {
     TCP_CONNECT_STATE_T *con_state = (TCP_CONNECT_STATE_T*)arg;
@@ -422,3 +437,5 @@ int run_tcp_server(void* request_processor) {
     cyw43_arch_deinit();
     return 0;
 }
+
+#endif

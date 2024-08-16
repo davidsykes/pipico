@@ -13,8 +13,7 @@ void _initialise_pico_stdio()
 
 int _initialise_wifi(const char* ssid, const char* password)
 {
-
-    stdio_init_all();
+ //   stdio_init_all();
     cyw43_arch_enable_sta_mode();
 
     printf("Connecting to Wi-Fi %s %s...\n", ssid, password);

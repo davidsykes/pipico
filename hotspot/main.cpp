@@ -3,9 +3,12 @@
 #include "gpio/gpio.h"
 #include "ir/ir_tcp_request_handler.h"
 #include "ir/ir_main.h"
+#include "3rd_party/pico_tcp_server.h"
 
 #define WIFI_SSID "a907"
 #define WIFI_PASSWORD "?thisistheWIFIyouhavebeenlookingfor1398"
+
+
 
 int main()
 {
@@ -27,6 +30,8 @@ int main()
    else
    {
       connector.ConnectToWiFiDirect(hw_if, WIFI_SSID, WIFI_PASSWORD);
+      HttpRequestRouter httpRequestRouter;
+      main_pico_tcp_server(&httpRequestRouter);
       run_ir_main(hw_if, connector);
    }
 
