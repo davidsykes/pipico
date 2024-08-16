@@ -15,7 +15,7 @@ static void AnEmptyRequestReturnsARecordButton()
 	ICodesRecordRequestHandler& handler = CreateObjectUnderTest();
 	std::string response = handler.HandleRequest("");
 
-	AssertEqual("<form action=\"/record\"><input type = \"submit\" value = \"Record\" / >< / form>", response);
+	AssertEqual("<form action=\"/record\"><input type = \"submit\" value = \"Record\" /></form>", response);
 }
 
 void CodesRecordHandlerTests::RunTests()
