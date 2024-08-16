@@ -33,6 +33,7 @@ add_executable(test
         ir/ir_main.cpp
         ir/ir_tcp_request_handler.cpp
         ir/codes/ir_code_repository.cpp
+        ir/server/http_request_router.cpp
         ir/server_responses/codes_display_request_handler.cpp
         ir/server_responses/codes_record_request_handler.cpp
         3rd_party/pico_tcp_server.c

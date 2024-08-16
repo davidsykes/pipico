@@ -1,5 +1,6 @@
 #include "pico_tcp_server.h"
 #include <cstring>
+#include "ihttp_request_router.h"
 
 
 int make_error(TCP_CONNECT_STATE_T* con_state, int error, const char*message)
@@ -16,7 +17,7 @@ int process_http_request(TCP_CONNECT_STATE_T* con_state)
     std::string request = headers.substr(0, headers.find('\r'));
     printf("Request: %s\n", request.c_str());
 
-    HttpRequestRouter* router = (HttpRequestRouter*)con_state->http_request_handler;
+    IHttpRequestRouter* router = (IHttpRequestRouter*)con_state->http_request_handler;
     std::string header;
     std::string body;
     if (router->HandleHttpRequest(con_state->headers, header, body))
@@ -32,13 +33,4 @@ int process_http_request(TCP_CONNECT_STATE_T* con_state)
         return 1;
     }
     return 0;
-}
-
-int HttpRequestRouter::HandleHttpRequest(const char* request, std::string& header, std::string& body)
-{
-
-    header = "the header";
-    body = "the body";
-
-    return 1;
 }

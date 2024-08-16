@@ -3,6 +3,7 @@
 #include "gpio/gpio.h"
 #include "ir/ir_tcp_request_handler.h"
 #include "ir/ir_main.h"
+#include "ir/server/http_request_router.h"
 #include "3rd_party/pico_tcp_server.h"
 
 #define WIFI_SSID "a907"
