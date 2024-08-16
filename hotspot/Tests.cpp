@@ -14,6 +14,7 @@
 #include "Tests\ir\codes\ir_code_repository_tests.h"
 #include "Tests\ir\ir_tcp_request_handler_tests.h"
 #include "Tests\ir\server_responses\codes_record_request_handler_tests.h"
+#include "Tests\ir\server\http_request_router_tests.h"
 
 int main()
 {
@@ -32,5 +33,6 @@ int main()
     IrCodeRepositoryTests().RunTests();
     IrTcpRequestHandlerTests().RunTests();
     CodesRecordHandlerTests().RunTests();
+    HttpRequestRouterTests().RunTests();
     std::cout << "Tests Complete\n";
 }

@@ -100,6 +100,12 @@
     <Filter Include="Source Files\Tests\ir\server_responses">
       <UniqueIdentifier>{80c51e13-c256-4bda-9549-0c61b011d8ea}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Tests\ir\server">
+      <UniqueIdentifier>{5c25c0ad-2cc7-46d7-9506-f6d09c0f683b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\ir\server">
+      <UniqueIdentifier>{b42e1cb3-dceb-4e74-a5a6-77dbb3d05788}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Tests.cpp">
@@ -139,9 +145,6 @@
       <Filter>Source Files\Tests\gpio</Filter>
     </ClCompile>
     <ClCompile Include="hotspot\logic\requests\hotspot_configuration.cpp">
-      <Filter>Source Files\hotspot\logic\requests</Filter>
-    </ClCompile>
-    <ClCompile Include="hotspot\logic\requests\process_request.cpp">
       <Filter>Source Files\hotspot\logic\requests</Filter>
     </ClCompile>
     <ClCompile Include="hotspot\logic\input_form\html_renderer.cpp">
@@ -210,6 +213,12 @@
     <ClCompile Include="ir\server_responses\codes_record_request_handler.cpp">
       <Filter>Source Files\ir\server_responses</Filter>
     </ClCompile>
+    <ClCompile Include="Tests\ir\server\http_request_router_tests.cpp">
+      <Filter>Source Files\Tests\ir\server</Filter>
+    </ClCompile>
+    <ClCompile Include="ir\server\http_request_router.cpp">
+      <Filter>Source Files\ir\server</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Tests\logic\input_form\HtmlRendererTests.h">
@@ -245,13 +254,7 @@
     <ClInclude Include="Tests\gpio\GPIOTests.h">
       <Filter>Source Files\Tests\gpio</Filter>
     </ClInclude>
-    <ClInclude Include="hotspot\logic\requests\configuration.h">
-      <Filter>Source Files\hotspot\logic\requests</Filter>
-    </ClInclude>
     <ClInclude Include="hotspot\logic\requests\hotspot_configuration.h">
-      <Filter>Source Files\hotspot\logic\requests</Filter>
-    </ClInclude>
-    <ClInclude Include="hotspot\logic\requests\process_request.h">
       <Filter>Source Files\hotspot\logic\requests</Filter>
     </ClInclude>
     <ClInclude Include="hotspot\logic\input_form\html_renderer.h">
@@ -340,6 +343,12 @@
     </ClInclude>
     <ClInclude Include="Tests\ir\server_responses\codes_record_request_handler_tests.h">
       <Filter>Source Files\Tests\ir\server_responses</Filter>
+    </ClInclude>
+    <ClInclude Include="Tests\ir\server\http_request_router_tests.h">
+      <Filter>Source Files\Tests\ir\server</Filter>
+    </ClInclude>
+    <ClInclude Include="ir\server\http_request_router.h">
+      <Filter>Source Files\ir\server</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

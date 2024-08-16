@@ -29,7 +29,7 @@ static void TheIrTcpRequestHandlerReturnsTheSumOfTheCodesDisplayHandlerAndTheCod
 	TcpServer& tcp = CreateObjectUnderTest();
 	std::string response = tcp.process_request("", "");
 
-	AssertEqual("codes displaycodes record", response);
+	AssertEqual("codes display<br><br>codes record", response);
 }
 
 void IrTcpRequestHandlerTests::RunTests()

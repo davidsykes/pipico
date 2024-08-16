@@ -22,17 +22,11 @@ int process_http_request(TCP_CONNECT_STATE_T* con_state);
 
 
 #ifdef __cplusplus
-#include <string>
 
 extern "C" {
 int main_pico_tcp_server(void* http_request_handler);
 }
 
-
-class HttpRequestRouter
-{
-public:
-    int HandleHttpRequest(const char* request, std::string& header, std::string& body);
-};
+#include "ihttp_request_router.h"
 
 #endif
