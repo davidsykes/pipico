@@ -35,7 +35,7 @@ void run_ir_main(IHardwareInterface& hw_if, WiFiConnector& connector)
         CodesDisplayRequestHandler codesDisplayRequestHandler;
         CodesRecordRequestHandler codesRecordRequestHandler;
 
-        IrTcpRequestHandler tcpServer(codesDisplayRequestHandler, codesRecordRequestHandler);
+        HttpServerHomeHandler tcpServer(codesDisplayRequestHandler, codesRecordRequestHandler);
         connector.ConnectToWiFiTestServer(tcpServer);
 
         //run_tcp_server_test();

@@ -6,7 +6,7 @@
 
 // TODO Rename to WifiCredentialsHotSpot
 
-class HotSpotConfiguration : public TcpServer
+class HotSpotConfiguration : public HotSpotTcpServer
 {
     std::string input_form_hotspot_name;
     IHtmlRenderer* _html_renderer;

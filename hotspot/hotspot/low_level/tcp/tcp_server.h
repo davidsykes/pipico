@@ -3,7 +3,7 @@
 #include <stdlib.h>
 #include "tcp_server_implementation.h"
 
-class TcpServer
+class HotSpotTcpServer
 {
     public:
         std::string hotspot_name;

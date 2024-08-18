@@ -2,7 +2,7 @@
 #include "http_request_router_tests.h"
 #include "../../ir/server/http_request_router.h"
 
-class MockRequestHandler : public IHttpRequestHandler
+class MockRequestHandler : public IHttpRequestRouter
 {
 	std::string requestType;
 

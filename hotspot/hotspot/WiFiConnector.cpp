@@ -28,7 +28,7 @@ void WiFiConnector::ConnectToWiFi(const char* input_form_hotspot_name)
    FlashManager flashManager(&flashHardware);
    CredentialsHandler credentialsHandler(&percentDecoder, &flashManager);
 
-   TcpServer *config = new HotSpotConfiguration(
+   HotSpotTcpServer *config = new HotSpotConfiguration(
       input_form_hotspot_name,
       wifiConnectionMaker.lastErrorMessage.c_str(),
       &htmlRenderer,
@@ -52,7 +52,7 @@ void WiFiConnector::ConnectToWiFiDirect(IHardwareInterface& hw_if, const char* s
 }
 
 // TODO Factor this out to a server object
-void WiFiConnector::ConnectToWiFiTestServer(TcpServer& tcp_server_processor)
+void WiFiConnector::ConnectToWiFiTestServer(HotSpotTcpServer& tcp_server_processor)
 {
    HtmlRenderer htmlRenderer;
    InputFormRenderer inputFormRenderer;

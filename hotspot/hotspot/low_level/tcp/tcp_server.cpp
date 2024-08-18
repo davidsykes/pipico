@@ -12,7 +12,7 @@ void strcpy_s(char *dest, size_t max, const char*source)
 
 size_t process_request(void *configuration, const char *request, const char *params, char *result, size_t max_result_len)
 {
-   TcpServer* config = (TcpServer*)configuration;
+   HotSpotTcpServer* config = (HotSpotTcpServer*)configuration;
    std::string process_result = config->process_request(request, params);
    size_t result_length = process_result.length();
    if (result_length < max_result_len - 1)

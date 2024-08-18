@@ -12,7 +12,7 @@
 #include "Tests\rest\RestHandlerTests.h"
 #include "Tests\rest\TcpResponseAnalyserTests.h"
 #include "Tests\ir\codes\ir_code_repository_tests.h"
-#include "Tests\ir\ir_tcp_request_handler_tests.h"
+#include "Tests\ir\server\http_server_home_handler_tests.h"
 #include "Tests\ir\server_responses\codes_record_request_handler_tests.h"
 #include "Tests\ir\server\http_request_router_tests.h"
 
@@ -31,7 +31,7 @@ int main()
     TraceDataFormatterTests().RunTests();
     TcpResponseAnalyserTests().RunTests();
     IrCodeRepositoryTests().RunTests();
-    IrTcpRequestHandlerTests().RunTests();
+    HttpServerHomeHandlerTests().RunTests();
     CodesRecordHandlerTests().RunTests();
     HttpRequestRouterTests().RunTests();
     std::cout << "Tests Complete\n";

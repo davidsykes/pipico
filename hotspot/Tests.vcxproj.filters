@@ -201,12 +201,6 @@
     <ClCompile Include="Tests\ir\codes\ir_code_repository_tests.cpp">
       <Filter>Source Files\Tests\ir\codes</Filter>
     </ClCompile>
-    <ClCompile Include="Tests\ir\ir_tcp_request_handler_tests.cpp">
-      <Filter>Source Files\Tests\ir</Filter>
-    </ClCompile>
-    <ClCompile Include="ir\ir_tcp_request_handler.cpp">
-      <Filter>Source Files\ir</Filter>
-    </ClCompile>
     <ClCompile Include="Tests\ir\server_responses\codes_record_request_handler_tests.cpp">
       <Filter>Source Files\Tests\ir\server_responses</Filter>
     </ClCompile>
@@ -218,6 +212,12 @@
     </ClCompile>
     <ClCompile Include="ir\server\http_request_router.cpp">
       <Filter>Source Files\ir\server</Filter>
+    </ClCompile>
+    <ClCompile Include="ir\server\http_server_home_handler.cpp">
+      <Filter>Source Files\ir\server</Filter>
+    </ClCompile>
+    <ClCompile Include="Tests\ir\server\http_server_home_handler_tests.cpp">
+      <Filter>Source Files\Tests\ir\server</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -329,12 +329,6 @@
     <ClInclude Include="Tests\ir\codes\ir_code_repository_tests.h">
       <Filter>Source Files\Tests\ir\codes</Filter>
     </ClInclude>
-    <ClInclude Include="Tests\ir\ir_tcp_request_handler_tests.h">
-      <Filter>Source Files\Tests\ir</Filter>
-    </ClInclude>
-    <ClInclude Include="ir\ir_tcp_request_handler.h">
-      <Filter>Source Files\ir</Filter>
-    </ClInclude>
     <ClInclude Include="ir\server_responses\codes_display_request_handler.h">
       <Filter>Source Files\ir\server_responses</Filter>
     </ClInclude>
@@ -349,6 +343,12 @@
     </ClInclude>
     <ClInclude Include="ir\server\http_request_router.h">
       <Filter>Source Files\ir\server</Filter>
+    </ClInclude>
+    <ClInclude Include="ir\server\http_server_home_handler.h">
+      <Filter>Source Files\ir\server</Filter>
+    </ClInclude>
+    <ClInclude Include="Tests\ir\server\http_server_home_handler_tests.h">
+      <Filter>Source Files\Tests\ir\server</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

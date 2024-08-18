@@ -26,7 +26,7 @@ static std::unique_ptr<IInputFormRenderer> formRenderer;
 static std::unique_ptr<MockCredentialsHandler> mockCredentialsHandler;
 static std::unique_ptr<HotSpotConfiguration> hotSpotConfiguration;
 
-static TcpServer* CreateTestObject()
+static HotSpotTcpServer* CreateTestObject()
 {
 	htmlRenderer.reset(new MockHtmlRenderer);
 	formRenderer.reset(new MockInputFormRenderer);
