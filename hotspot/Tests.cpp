@@ -15,6 +15,7 @@
 #include "Tests\ir\server\http_server_home_handler_tests.h"
 #include "Tests\ir\server_responses\codes_record_request_handler_tests.h"
 #include "Tests\ir\server\http_request_router_tests.h"
+#include "Tests\ir\server\http_response_packager_tests.h"
 
 int main()
 {
@@ -34,5 +35,6 @@ int main()
     HttpServerHomeHandlerTests().RunTests();
     CodesRecordHandlerTests().RunTests();
     HttpRequestRouterTests().RunTests();
+    HttpResponsePackagerTests().RunTests();
     std::cout << "Tests Complete\n";
 }

@@ -219,6 +219,12 @@
     <ClCompile Include="Tests\ir\server\http_server_home_handler_tests.cpp">
       <Filter>Source Files\Tests\ir\server</Filter>
     </ClCompile>
+    <ClCompile Include="ir\server\http_response_packager.cpp">
+      <Filter>Source Files\ir\server</Filter>
+    </ClCompile>
+    <ClCompile Include="Tests\ir\server\http_response_packager_tests.cpp">
+      <Filter>Source Files\Tests\ir\server</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Tests\logic\input_form\HtmlRendererTests.h">
@@ -348,6 +354,18 @@
       <Filter>Source Files\ir\server</Filter>
     </ClInclude>
     <ClInclude Include="Tests\ir\server\http_server_home_handler_tests.h">
+      <Filter>Source Files\Tests\ir\server</Filter>
+    </ClInclude>
+    <ClInclude Include="ir\server\http_raw_request_receiver_and_packager.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ir\server\ihttp_request_handler.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ir\server\http_response_packager.h">
+      <Filter>Source Files\ir\server</Filter>
+    </ClInclude>
+    <ClInclude Include="Tests\ir\server\http_response_packager_tests.h">
       <Filter>Source Files\Tests\ir\server</Filter>
     </ClInclude>
   </ItemGroup>

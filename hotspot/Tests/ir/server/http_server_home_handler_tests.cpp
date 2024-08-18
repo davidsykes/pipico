@@ -15,8 +15,6 @@ class MockCodesRecordRequestHandler : public ICodesRecordRequestHandler
 static std::unique_ptr<ICodesDisplayRequestHandler> mockCodesDisplayRequestHandler;
 static std::unique_ptr<ICodesRecordRequestHandler> mockCodesRecordRequestHandler;
 static std::unique_ptr<HttpServerHomeHandler> objectUnderTest;
-//static std::unique_ptr<HttpServerHomeHandler> objectUnderTest(
-//	*mockCodesDisplayRequestHandler.get(), *mockCodesRecordRequestHandler.get());
 
 static HttpServerHomeHandler& CreateObjectUnderTest()
 {
@@ -28,10 +26,10 @@ static HttpServerHomeHandler& CreateObjectUnderTest()
 
 static void TheHandlerReturnsTheSumOfTheCodesDisplayHandlerAndTheCodesRecordHandler()
 {
-	HttpServerHomeHandler& handler = CreateObjectUnderTest();
-	//std::string response = handler.HandleHttpRequest("", "");
+	IHttpRequestHandler& handler = CreateObjectUnderTest();
+	std::string response = handler.HandleHttpRequest("");
 
-	AssertEqual("codes display<br><br>codes record", "response");
+	AssertEqual("codes display<br><br>codes record", response);
 }
 
 void HttpServerHomeHandlerTests::RunTests()

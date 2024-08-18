@@ -1,12 +1,12 @@
 #include "http_request_router.h"
 
-int HttpRequestRouter::HandleHttpRequest(const char* request, std::string& header, std::string& body)
+std::string HttpRequestRouter::HandleHttpRequest(const char* request)
 {
 	if (strncmp(request, "/ ", 2) == 0)
 	{
-		return homeRequestHandler.HandleHttpRequest(request, header, body);
+		return homeRequestHandler.HandleHttpRequest(request);
 	}
 
-	return 0;
+	return "";
 }
 

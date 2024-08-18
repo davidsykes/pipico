@@ -2,11 +2,11 @@
 #include "http_request_router_tests.h"
 #include "../../ir/server/http_request_router.h"
 
-class MockRequestHandler : public IHttpRequestRouter
+class MockRequestHandler : public IHttpRequestHandler
 {
 	std::string requestType;
 
-	virtual int HandleHttpRequest(const char* request, std::string& header, std::string& body) { body = requestType; return 1; };
+	virtual std::string HandleHttpRequest(const char* request) { return requestType; };
 
 public:
 	MockRequestHandler(const char* type) : requestType(type) {}
@@ -24,23 +24,20 @@ static HttpRequestRouter& CreateObjectUnderTest()
 
 static void ARootRequestPassesTheRequestToTheHomeHandler()
 {
-	IHttpRequestRouter& router = CreateObjectUnderTest();
-	std::string header, body;
+	IHttpRequestHandler& router = CreateObjectUnderTest();
 
-	int result = router.HandleHttpRequest("/ bla", header, body);
+	std::string result = router.HandleHttpRequest("/ bla");
 
-	AssertEqual(1, result);
-	AssertEqual("Home", body);
+	AssertEqual("Home", result);
 }
 
 static void FaviconRequestReturnsNotFound()
 {
-	IHttpRequestRouter& router = CreateObjectUnderTest();
-	std::string header, body;
+	IHttpRequestHandler& router = CreateObjectUnderTest();
 
-	int result = router.HandleHttpRequest("/favicon", header, body);
+	std::string result = router.HandleHttpRequest("/favicon");
 
-	AssertEqual(0, result);
+	AssertTrue(result.empty());
 }
 
 void HttpRequestRouterTests::RunTests()
