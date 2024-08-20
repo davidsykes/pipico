@@ -9,7 +9,7 @@ class HttpServerHomeHandler : public IHttpRequestHandler
      ICodesRecordRequestHandler& codesRecordRequestHandler;
 
 
-     virtual std::string HandleHttpRequest(const char* request);
+     virtual std::string ProcessHttpRequest(const char* request);
 
  public:
      HttpServerHomeHandler(ICodesDisplayRequestHandler& codesDisplayRequestHandler,

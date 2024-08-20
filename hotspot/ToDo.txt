@@ -1,5 +1,3 @@
-::HttpServerHomeHandler::HandleHttpRequest
-    Return a simple string
 
 HotSpotTcpServer => new message interface
 

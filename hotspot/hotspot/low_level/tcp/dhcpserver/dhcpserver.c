@@ -111,7 +111,6 @@ static void dhcp_socket_free(struct udp_pcb **udp) {
 }
 
 static int dhcp_socket_bind(struct udp_pcb **udp, uint16_t port) {
-    // TODO convert lwIP errors to errno
     return udp_bind(*udp, IP_ANY_TYPE, port);
 }
 
