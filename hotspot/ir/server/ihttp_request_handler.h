@@ -4,6 +4,6 @@
 class IHttpRequestHandler
 {
 public:
-    virtual std::string HandleHttpRequest(const char* request) = 0;
+    virtual std::string ProcessHttpRequest(const char* request) = 0;
 };
 

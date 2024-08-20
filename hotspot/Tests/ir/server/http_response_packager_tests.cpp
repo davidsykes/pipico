@@ -1,26 +1,27 @@
 #include <memory>
 #include "http_response_packager_tests.h"
+#include "../../ir/server/ihttp_request_router.h"
 #include "../../ir/server/http_response_packager.h"
 
-class MockRequestHandler : public IHttpRequestHandler
+class MockRequestRouter : public IHttpRequestRouter
 {
 	std::string requestType;
 
-	virtual std::string HandleHttpRequest(const char* request) { return requestType; };
+	virtual std::string RouteHttpRequest(const char* request) { return requestType; };
 
 public:
-	MockRequestHandler(const char* type) : requestType(type) {}
+	MockRequestRouter(const char* type) : requestType(type) {}
 
 	void SetResponse(const char* response) { requestType = response; }
 };
 
-static std::unique_ptr<MockRequestHandler> mockRequestHandler;
+static std::unique_ptr<MockRequestRouter> mockRequestRouter;
 static std::unique_ptr<HttpResponsePackager> objectUnderTest;
 
 static HttpResponsePackager& CreateObjectUnderTest()
 {
-	mockRequestHandler.reset(new MockRequestHandler("Router result"));
-	objectUnderTest.reset(new HttpResponsePackager(*mockRequestHandler.get()));
+	mockRequestRouter.reset(new MockRequestRouter("Router result"));
+	objectUnderTest.reset(new HttpResponsePackager(*mockRequestRouter.get()));
 	return *objectUnderTest.get();
 }
 
@@ -49,7 +50,7 @@ static void TheHeaderIsTerminatedByTwoCRLF()
 static void TheHeaderIsCreatedWithTheCorrectContentLength()
 {
 	IHttpResponsePackager& packager = CreateObjectUnderTest();
-	mockRequestHandler.get()->SetResponse("a much longer response");
+	mockRequestRouter.get()->SetResponse("a much longer response");
 	std::string header, body;
 
 	int result = packager.RouteRequestAndPackageResponse("/favicon", header, body);
@@ -61,7 +62,7 @@ static void TheHeaderIsCreatedWithTheCorrectContentLength()
 static void IfTheRouterDoesNotRouteThen404IsReturned()
 {
 	IHttpResponsePackager& packager = CreateObjectUnderTest();
-	mockRequestHandler.get()->SetResponse("");
+	mockRequestRouter.get()->SetResponse("");
 	std::string header, body;
 
 	int result = packager.RouteRequestAndPackageResponse("/favicon", header, body);
@@ -80,5 +81,5 @@ void HttpResponsePackagerTests::RunTests()
 void HttpResponsePackagerTests::CleanUpAfterTests()
 {
 	objectUnderTest.release();
-	mockRequestHandler.release();
+	mockRequestRouter.release();
 }

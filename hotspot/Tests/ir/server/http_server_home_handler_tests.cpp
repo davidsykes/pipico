@@ -27,7 +27,7 @@ static HttpServerHomeHandler& CreateObjectUnderTest()
 static void TheHandlerReturnsTheSumOfTheCodesDisplayHandlerAndTheCodesRecordHandler()
 {
 	IHttpRequestHandler& handler = CreateObjectUnderTest();
-	std::string response = handler.HandleHttpRequest("");
+	std::string response = handler.ProcessHttpRequest("");
 
 	AssertEqual("codes display<br><br>codes record", response);
 }

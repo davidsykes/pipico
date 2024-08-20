@@ -1,12 +1,18 @@
 #pragma once
+#include "ihttp_request_router.h"
 #include "ihttp_request_handler.h"
 
-class HttpRequestRouter : public IHttpRequestHandler
+class HttpRequestRouter : public IHttpRequestRouter
 {
     IHttpRequestHandler& homeRequestHandler;
+    IHttpRequestHandler& recordequestHandler;
 
-    virtual std::string HandleHttpRequest(const char* request);
+    virtual std::string RouteHttpRequest(const char* request);
 
 public:
-    HttpRequestRouter(IHttpRequestHandler& homeHandler) : homeRequestHandler(homeHandler) {}
+    HttpRequestRouter(IHttpRequestHandler& homeHandler,
+        IHttpRequestHandler& recordHandler)
+        : homeRequestHandler(homeHandler),
+        recordequestHandler(recordHandler)
+    {}
 };
