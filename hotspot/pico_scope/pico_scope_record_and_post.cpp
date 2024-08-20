@@ -11,7 +11,7 @@
 std::string PicoScopeRecordAndPost::RecordAndPostTrace()
 {
     printf("RECORD AND POST\n");
-
+    run_scope(hw_if, config);
     return "RECORD AND POST";
 }
 
