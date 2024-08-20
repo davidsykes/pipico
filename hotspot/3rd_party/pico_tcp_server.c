@@ -8,9 +8,7 @@
 
 #include "pico/cyw43_arch.h"
 #include "pico/stdlib.h"
-
 #include "lwip/pbuf.h"
-
 #include "pico_tcp_server.h"
 
 #define TCP_PORT 80
@@ -19,11 +17,6 @@
 #define POLL_TIME_S 5
 #define HTTP_GET "GET /api"
 #define HTTP_RESPONSE_HEADERS "HTTP/1.1 %d OK\nContent-Length: %d\nContent-Type: text/html; charset=utf-8\nConnection: close\n\n"
-//#define LED_TEST_BODY "<html><body><h1>Hello from Pico W.</h1><p>Led is %s</p><p><a href=\"?led=%d\">Turn led %s</a></body></html>"
-//#define LED_PARAM "led=%d"
-//#define LED_TEST "/ledtest"
-//#define LED_GPIO 0
-//#define HTTP_RESPONSE_REDIRECT "HTTP/1.1 302 Redirect\nLocation: http://%s" LED_TEST "\n\n"
 
 typedef struct TCP_SERVER_T_ {
     struct tcp_pcb *server_pcb;
@@ -73,37 +66,6 @@ static err_t tcp_server_sent(void *arg, struct tcp_pcb *pcb, u16_t len) {
     return ERR_OK;
 }
 
-// static int test_server_content(const char *request, const char *params, char *result, size_t max_result_len) {
-//     int len = 0;
-//     if (strncmp(request, LED_TEST, sizeof(LED_TEST) - 1) == 0) {
-//         // Get the state of the led
-//         bool value;
-//         cyw43_gpio_get(&cyw43_state, LED_GPIO, &value);
-//         int led_state = value;
-
-//         // See if the user changed it
-//         if (params) {
-//             int led_param = sscanf(params, LED_PARAM, &led_state);
-//             if (led_param == 1) {
-//                 if (led_state) {
-//                     // Turn led on
-//                     cyw43_gpio_set(&cyw43_state, 0, true);
-//                 } else {
-//                     // Turn led off
-//                     cyw43_gpio_set(&cyw43_state, 0, false);
-//                 }
-//             }
-//         }
-//         // Generate result
-//         if (led_state) {
-//             len = snprintf(result, max_result_len, LED_TEST_BODY, "ON", 0, "OFF");
-//         } else {
-//             len = snprintf(result, max_result_len, LED_TEST_BODY, "OFF", 1, "ON");
-//         }
-//     }
-//     return len;
-// }
-
 err_t tcp_server_recv(void *arg, struct tcp_pcb *pcb, struct pbuf *p, err_t err) {
     TCP_CONNECT_STATE_T *con_state = (TCP_CONNECT_STATE_T*)arg;
     if (!p) {
@@ -132,6 +94,7 @@ err_t tcp_server_recv(void *arg, struct tcp_pcb *pcb, struct pbuf *p, err_t err)
         }
 
         // Send the headers to the client
+        //DEBUG_printf("Send Head %d '%s'\n^^^\n", con_state->header_len, con_state->headers);
         con_state->sent_len = 0;
         err_t err = tcp_write(pcb, con_state->headers, con_state->header_len, 0);
         if (err != ERR_OK) {
@@ -140,6 +103,7 @@ err_t tcp_server_recv(void *arg, struct tcp_pcb *pcb, struct pbuf *p, err_t err)
         }
 
         // Send the body to the client
+        //DEBUG_printf("Send Body %d '%s'\n^^^\n", con_state->result_len, con_state->result);
         if (con_state->result_len) {
             err = tcp_write(pcb, con_state->result, con_state->result_len, 0);
             if (err != ERR_OK) {
