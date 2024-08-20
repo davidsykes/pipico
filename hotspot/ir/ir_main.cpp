@@ -6,9 +6,9 @@
 #include "../rest/itcp_response_analyser.h"
 #include "../rest/tcp_response_analyser.h"
 #include "../rest/rest_handler.h"
-#include "ir_tcp_request_handler.h"
 #include "server_responses/codes_display_request_handler.h"
 #include "server_responses/codes_record_request_handler.h"
+#include "server/http_server_home_handler.h"
 
 #define IR_API_SERVER_IP "192.168.1.87"
 #define IR_API_PORT 5000
@@ -36,7 +36,7 @@ void run_ir_main(IHardwareInterface& hw_if, WiFiConnector& connector)
         CodesRecordRequestHandler codesRecordRequestHandler;
 
         HttpServerHomeHandler tcpServer(codesDisplayRequestHandler, codesRecordRequestHandler);
-        connector.ConnectToWiFiTestServer(tcpServer);
+        //connector.ConnectToWiFiTestServer(tcpServer);
 
         //run_tcp_server_test();
     }

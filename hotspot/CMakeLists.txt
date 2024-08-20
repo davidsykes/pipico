@@ -31,9 +31,10 @@ add_executable(test
         rest/rest_handler.cpp
         rest/tcp_response_analyser.cpp
         ir/ir_main.cpp
-        ir/ir_tcp_request_handler.cpp
         ir/codes/ir_code_repository.cpp
         ir/server/http_request_router.cpp
+        ir/server/http_server_home_handler.cpp
+        ir/server/http_response_packager.cpp
         ir/server_responses/codes_display_request_handler.cpp
         ir/server_responses/codes_record_request_handler.cpp
         3rd_party/pico_tcp_server.c

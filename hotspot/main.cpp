@@ -1,10 +1,12 @@
 #include "WiFiConnector.h"
 #include "hw_if/pico_hardware_interface.h"
 #include "gpio/gpio.h"
-#include "ir/ir_tcp_request_handler.h"
-#include "ir/ir_main.h"
 #include "ir/server/http_request_router.h"
 #include "3rd_party/pico_tcp_server.h"
+#include "ir/server/http_request_router.h"
+#include "ir/server/http_server_home_handler.h"
+#include "ir/server/http_response_packager.h"
+#include "ir/ir_main.h"
 
 #define WIFI_SSID "a907"
 #define WIFI_PASSWORD "?thisistheWIFIyouhavebeenlookingfor1398"
@@ -31,8 +33,13 @@ int main()
    else
    {
       connector.ConnectToWiFiDirect(hw_if, WIFI_SSID, WIFI_PASSWORD);
-      HttpRequestRouter httpRequestRouter;
-      main_pico_tcp_server(&httpRequestRouter);
+
+      CodesDisplayRequestHandler codesDisplayRequestHandler;
+      CodesRecordRequestHandler codesRecordRequestHandler;
+      HttpServerHomeHandler homehandler(codesDisplayRequestHandler, codesRecordRequestHandler);
+      HttpRequestRouter httpRequestRouter(homehandler);
+      HttpResponsePackager httpResponsePackager(httpRequestRouter);
+      main_pico_tcp_server(&httpResponsePackager);
       run_ir_main(hw_if, connector);
    }
 

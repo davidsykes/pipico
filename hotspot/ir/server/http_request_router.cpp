@@ -1,4 +1,5 @@
 #include "http_request_router.h"
+#include <string.h>
 
 std::string HttpRequestRouter::HandleHttpRequest(const char* request)
 {

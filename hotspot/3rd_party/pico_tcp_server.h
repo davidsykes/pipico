@@ -27,6 +27,4 @@ extern "C" {
 int main_pico_tcp_server(void* http_request_handler);
 }
 
-#include "ihttp_request_router.h"
-
 #endif
