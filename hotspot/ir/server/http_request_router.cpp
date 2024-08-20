@@ -9,7 +9,7 @@ std::string HttpRequestRouter::RouteHttpRequest(const char* request)
 	}
 	if (strncmp(request, "GET /record", 11) == 0)
 	{
-		return recordequestHandler.ProcessHttpRequest(request);
+		return recordRequestHandler.ProcessHttpRequest(request);
 	}
 
 	return "";

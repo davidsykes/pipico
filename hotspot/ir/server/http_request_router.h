@@ -5,7 +5,7 @@
 class HttpRequestRouter : public IHttpRequestRouter
 {
     IHttpRequestHandler& homeRequestHandler;
-    IHttpRequestHandler& recordequestHandler;
+    IHttpRequestHandler& recordRequestHandler;
 
     virtual std::string RouteHttpRequest(const char* request);
 
@@ -13,6 +13,6 @@ public:
     HttpRequestRouter(IHttpRequestHandler& homeHandler,
         IHttpRequestHandler& recordHandler)
         : homeRequestHandler(homeHandler),
-        recordequestHandler(recordHandler)
+        recordRequestHandler(recordHandler)
     {}
 };
