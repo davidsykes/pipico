@@ -26,7 +26,7 @@ static void ARootRequestPassesTheRequestToTheHomeHandler()
 {
 	IHttpRequestHandler& router = CreateObjectUnderTest();
 
-	std::string result = router.HandleHttpRequest("/ bla");
+	std::string result = router.HandleHttpRequest("GET / bla");
 
 	AssertEqual("Home", result);
 }
@@ -35,7 +35,7 @@ static void FaviconRequestReturnsNotFound()
 {
 	IHttpRequestHandler& router = CreateObjectUnderTest();
 
-	std::string result = router.HandleHttpRequest("/favicon");
+	std::string result = router.HandleHttpRequest("GET /favicon");
 
 	AssertTrue(result.empty());
 }
