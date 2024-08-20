@@ -7,12 +7,18 @@ class IPicoScopeRecordAndPost
 public:
     virtual std::string RecordAndPostTrace() = 0;
 };
+
 class PicoScopeRecordAndPost : public IPicoScopeRecordAndPost
 {
     IHardwareInterface& hw_if;
     PicoScopeConfiguration& config;
 
     virtual std::string RecordAndPostTrace();
+
+public:
+    PicoScopeRecordAndPost(IHardwareInterface& hw_if,
+                            PicoScopeConfiguration& config)
+                            : hw_if(hw_if), config(config) {}
 };
 
 

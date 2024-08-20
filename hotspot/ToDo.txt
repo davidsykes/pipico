@@ -1,3 +1,5 @@
+run_ir_main can go
+
 
 HotSpotTcpServer => new message interface
 

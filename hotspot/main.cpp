@@ -5,6 +5,7 @@
 #include "3rd_party/pico_tcp_server.h"
 #include "ir/server/http_request_router.h"
 #include "ir/server/http_server_home_handler.h"
+#include "ir/server/http_server_record_handler.h"
 #include "ir/server/http_response_packager.h"
 #include "ir/ir_main.h"
 
@@ -36,8 +37,11 @@ int main()
 
       CodesDisplayRequestHandler codesDisplayRequestHandler;
       CodesRecordRequestHandler codesRecordRequestHandler;
-      HttpServerHomeHandler homehandler(codesDisplayRequestHandler, codesRecordRequestHandler);
-      HttpRequestRouter httpRequestRouter(homehandler);
+      HttpServerHomeHandler homeHandler(codesDisplayRequestHandler, codesRecordRequestHandler);
+      PicoScopeConfiguration ir_scope_configuration(6);
+      PicoScopeRecordAndPost picoScopeRecordAndPost(hw_if, ir_scope_configuration);
+      HttpServerRecordHandler recordHandler(picoScopeRecordAndPost);
+      HttpRequestRouter httpRequestRouter(homeHandler, recordHandler);
       HttpResponsePackager httpResponsePackager(httpRequestRouter);
       main_pico_tcp_server(&httpResponsePackager);
       run_ir_main(hw_if, connector);

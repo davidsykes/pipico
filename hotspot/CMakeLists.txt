@@ -24,7 +24,7 @@ add_executable(test
         hw_if/pico_hardware_interface.cpp
         hw_if/picow_tcp_client.c
         gpio/gpio_input.cpp
-        pico_scope/pico_scope_main.cpp
+        pico_scope/pico_scope_record_and_post.cpp
         pico_scope/pico_scope.cpp
         pico_scope/pico_scope_trace.cpp
         pico_scope/trace_data_formatter.cpp
@@ -34,6 +34,7 @@ add_executable(test
         ir/codes/ir_code_repository.cpp
         ir/server/http_request_router.cpp
         ir/server/http_server_home_handler.cpp
+        ir/server/http_server_record_handler.cpp
         ir/server/http_response_packager.cpp
         ir/server_responses/codes_display_request_handler.cpp
         ir/server_responses/codes_record_request_handler.cpp
