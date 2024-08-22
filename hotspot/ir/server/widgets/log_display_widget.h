@@ -1,6 +1,6 @@
 #pragma once
 #include "iwidget.h"
-#include "../../tools/message_logger.h"
+#include "../../../tools/message_logger.h"
 
 class LogDisplayWidget : public IWidget
 {

@@ -1,17 +1,21 @@
 #include "WiFiConnector.h"
+#include "3rd_party/pico_tcp_server.h"
 #include "hw_if/pico_hardware_interface.h"
 #include "gpio/gpio.h"
+#include "ir/codes/ir_code_repository.h"
 #include "ir/server/http_request_router.h"
-#include "3rd_party/pico_tcp_server.h"
 #include "ir/server/http_request_router.h"
-#include "ir/server/http_server_home_handler.h"
+#include "ir/server/pages/http_server_home_page.h"
 #include "ir/server/http_server_record_handler.h"
 #include "ir/server/http_response_packager.h"
+#include "ir/server/widgets/log_display_widget.h"
 #include "ir/ir_main.h"
+#include "rest/rest_handler.h"
+#include "rest/tcp_response_analyser.h"
+#include "tools/message_logger.h"
 
 #define WIFI_SSID "a907"
 #define WIFI_PASSWORD "?thisistheWIFIyouhavebeenlookingfor1398"
-
 
 
 int main()
@@ -39,11 +43,11 @@ int main()
 
       #define SCOPE_API_SERVER_IP "192.168.1.87"
       #define SCOPE_API_PORT 5000
-      TcpResponseAnalyser& tcp_analyser;
+      TcpResponseAnalyser tcp_analyser;
       RestHandler restHandler(hw_if, tcp_analyser, SCOPE_API_SERVER_IP, SCOPE_API_PORT);
 
-      IrCodesCollection irCodesCollection;
-      IrCodesFetcher.FetchCodes(restHandler, irCodesCollection);
+      IrCodeRepository irCodeRepository(restHandler);
+      irCodeRepository.RetrieveCodes();
 
       CodesDisplayRequestHandler codesDisplayRequestHandler;
       CodesRecordRequestHandler codesRecordRequestHandler;

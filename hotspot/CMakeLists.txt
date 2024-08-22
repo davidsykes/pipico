@@ -6,6 +6,8 @@ set(CMAKE_CXX_STANDARD 17)
 pico_sdk_init()
 add_executable(test
         main.cpp
+        3rd_party/pico_tcp_server.c
+        3rd_party/pico_tcp_server.cpp
         hotspot/WiFiConnector.cpp
         hotspot/low_level/tcp/dhcpserver/dhcpserver.c
         hotspot/low_level/tcp/dnsserver/dnsserver.c
@@ -33,13 +35,13 @@ add_executable(test
         ir/ir_main.cpp
         ir/codes/ir_code_repository.cpp
         ir/server/http_request_router.cpp
-        ir/server/http_server_home_handler.cpp
         ir/server/http_server_record_handler.cpp
         ir/server/http_response_packager.cpp
+        ir/server/pages/http_server_home_page.cpp
+        ir/server/widgets/log_display_widget.cpp
         ir/server_responses/codes_display_request_handler.cpp
         ir/server_responses/codes_record_request_handler.cpp
-        3rd_party/pico_tcp_server.c
-        3rd_party/pico_tcp_server.cpp
+        tools/message_logger.cpp
 )
 target_include_directories(test PRIVATE
         ${CMAKE_CURRENT_LIST_DIR}
