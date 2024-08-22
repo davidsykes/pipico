@@ -4,5 +4,6 @@ std::string HttpServerHomePage::ProcessHttpRequest(const char* request)
 {
     std::string display = codesDisplayRequestHandler.HandleRequest(request);
     std::string record = codesRecordRequestHandler.HandleRequest(request);
-    return display + "<br><br>" + record;
+    std::string logs = logsDisplayWidget.RenderWidget();
+    return display + "<br><br>" + record + "<br><br>" + logs;
 }

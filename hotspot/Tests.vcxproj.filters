@@ -118,6 +118,12 @@
     <Filter Include="Source Files\Tests\tools">
       <UniqueIdentifier>{85630568-c253-4c26-b6f4-a8e059c2d8b3}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Tests\ir\server\widgets">
+      <UniqueIdentifier>{400345fe-e6df-47fe-bab3-f392126f6fa6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\ir\server\widgets">
+      <UniqueIdentifier>{bd7b194f-6d07-4982-be89-d09a3fdb89fa}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Tests.cpp">
@@ -248,6 +254,12 @@
     </ClCompile>
     <ClCompile Include="Tests\ir\server\pages\HttpServerHomePageTests.cpp">
       <Filter>Source Files\Tests\ir\server\pages</Filter>
+    </ClCompile>
+    <ClCompile Include="Tests\ir\server\widgets\logs_display_widget_tests.cpp">
+      <Filter>Source Files\Tests\ir\server\widgets</Filter>
+    </ClCompile>
+    <ClCompile Include="ir\server\widgets\log_display_widget.cpp">
+      <Filter>Source Files\ir\server\widgets</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -403,6 +415,15 @@
     </ClInclude>
     <ClInclude Include="Tests\ir\server\pages\HttpServerHomePageTests.h">
       <Filter>Source Files\Tests\ir\server\pages</Filter>
+    </ClInclude>
+    <ClInclude Include="Tests\ir\server\widgets\logs_display_widget_tests.h">
+      <Filter>Source Files\Tests\ir\server\widgets</Filter>
+    </ClInclude>
+    <ClInclude Include="ir\server\widgets\iwidget.h">
+      <Filter>Source Files\ir\server\widgets</Filter>
+    </ClInclude>
+    <ClInclude Include="ir\server\widgets\log_display_widget.h">
+      <Filter>Source Files\ir\server\widgets</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

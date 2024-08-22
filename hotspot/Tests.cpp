@@ -17,6 +17,7 @@
 #include "Tests\ir\server_responses\codes_record_request_handler_tests.h"
 #include "Tests\ir\server\http_request_router_tests.h"
 #include "Tests\ir\server\http_response_packager_tests.h"
+#include "Tests\ir\server\widgets\logs_display_widget_tests.h"
 #include "Tests\tools\MessageLoggerTests.h"
 
 int main()
@@ -40,5 +41,6 @@ int main()
     HttpResponsePackagerTests().RunTests();
     HttpServerRecordHandlerTests().RunTests();
     MessageLoggerTests().RunTests();
+    LogsDisplayWidgetTests().RunTests();
     std::cout << "Tests Complete\n";
 }
