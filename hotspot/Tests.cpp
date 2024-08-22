@@ -12,11 +12,12 @@
 #include "Tests\rest\RestHandlerTests.h"
 #include "Tests\rest\TcpResponseAnalyserTests.h"
 #include "Tests\ir\codes\ir_code_repository_tests.h"
-#include "Tests\ir\server\http_server_home_handler_tests.h"
+#include "Tests\ir\server\pages\HttpServerHomePageTests.h"
 #include "Tests\ir\server\http_server_record_handler_tests.h"
 #include "Tests\ir\server_responses\codes_record_request_handler_tests.h"
 #include "Tests\ir\server\http_request_router_tests.h"
 #include "Tests\ir\server\http_response_packager_tests.h"
+#include "Tests\tools\MessageLoggerTests.h"
 
 int main()
 {
@@ -33,10 +34,11 @@ int main()
     TraceDataFormatterTests().RunTests();
     TcpResponseAnalyserTests().RunTests();
     IrCodeRepositoryTests().RunTests();
-    HttpServerHomeHandlerTests().RunTests();
+    HttpServerHomePageTests().RunTests();
     CodesRecordHandlerTests().RunTests();
     HttpRequestRouterTests().RunTests();
     HttpResponsePackagerTests().RunTests();
     HttpServerRecordHandlerTests().RunTests();
+    MessageLoggerTests().RunTests();
     std::cout << "Tests Complete\n";
 }

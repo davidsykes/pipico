@@ -1,6 +1,6 @@
-#include "http_server_home_handler.h"
+#include "http_server_home_page.h"
 
-std::string HttpServerHomeHandler::ProcessHttpRequest(const char* request)
+std::string HttpServerHomePage::ProcessHttpRequest(const char* request)
 {
     std::string display = codesDisplayRequestHandler.HandleRequest(request);
     std::string record = codesRecordRequestHandler.HandleRequest(request);

@@ -139,8 +139,8 @@
     <ClCompile Include="ir\codes\ir_code_repository.cpp" />
     <ClCompile Include="ir\server\http_request_router.cpp" />
     <ClCompile Include="ir\server\http_response_packager.cpp" />
-    <ClCompile Include="ir\server\http_server_home_handler.cpp" />
     <ClCompile Include="ir\server\http_server_record_handler.cpp" />
+    <ClCompile Include="ir\server\pages\http_server_home_page.cpp" />
     <ClCompile Include="ir\server_responses\codes_record_request_handler.cpp" />
     <ClCompile Include="pico_scope\pico_scope.cpp" />
     <ClCompile Include="pico_scope\pico_scope_trace.cpp" />
@@ -153,8 +153,8 @@
     <ClCompile Include="Tests\ir\codes\ir_code_repository_tests.cpp" />
     <ClCompile Include="Tests\ir\server\http_request_router_tests.cpp" />
     <ClCompile Include="Tests\ir\server\http_response_packager_tests.cpp" />
-    <ClCompile Include="Tests\ir\server\http_server_home_handler_tests.cpp" />
     <ClCompile Include="Tests\ir\server\http_server_record_handler_tests.cpp" />
+    <ClCompile Include="Tests\ir\server\pages\HttpServerHomePageTests.cpp" />
     <ClCompile Include="Tests\ir\server_responses\codes_record_request_handler_tests.cpp" />
     <ClCompile Include="Tests\logic\connecting\WIIFIConnectorTests.cpp" />
     <ClCompile Include="Tests\logic\credentials\CredentialsHandlerTests.cpp" />
@@ -169,6 +169,8 @@
     <ClCompile Include="Tests\TestFramework\Assert.cpp" />
     <ClCompile Include="Tests\TestFramework\TestFramework.cpp" />
     <ClCompile Include="Tests\TestFramework\TestModule.cpp" />
+    <ClCompile Include="Tests\tools\MessageLoggerTests.cpp" />
+    <ClCompile Include="tools\message_logger.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="gpio\gpio.h" />
@@ -188,9 +190,9 @@
     <ClInclude Include="ir\server\http_raw_request_receiver_and_packager.h" />
     <ClInclude Include="ir\server\http_request_router.h" />
     <ClInclude Include="ir\server\http_response_packager.h" />
-    <ClInclude Include="ir\server\http_server_home_handler.h" />
     <ClInclude Include="ir\server\http_server_record_handler.h" />
     <ClInclude Include="ir\server\ihttp_request_handler.h" />
+    <ClInclude Include="ir\server\pages\http_server_home_page.h" />
     <ClInclude Include="ir\server_responses\codes_display_request_handler.h" />
     <ClInclude Include="ir\server_responses\codes_record_request_handler.h" />
     <ClInclude Include="pico_scope\pico_scope.h" />
@@ -203,8 +205,8 @@
     <ClInclude Include="Tests\ir\codes\ir_code_repository_tests.h" />
     <ClInclude Include="Tests\ir\server\http_request_router_tests.h" />
     <ClInclude Include="Tests\ir\server\http_response_packager_tests.h" />
-    <ClInclude Include="Tests\ir\server\http_server_home_handler_tests.h" />
     <ClInclude Include="Tests\ir\server\http_server_record_handler_tests.h" />
+    <ClInclude Include="Tests\ir\server\pages\HttpServerHomePageTests.h" />
     <ClInclude Include="Tests\ir\server_responses\codes_record_request_handler_tests.h" />
     <ClInclude Include="Tests\logic\connecting\WIFIConnectorTests.h" />
     <ClInclude Include="Tests\logic\credentials\CredentialsHandlerTests.h" />
@@ -220,6 +222,8 @@
     <ClInclude Include="Tests\TestFramework\Assert.h" />
     <ClInclude Include="Tests\TestFramework\ITestModule.h" />
     <ClInclude Include="Tests\TestFramework\TestFramework.h" />
+    <ClInclude Include="Tests\tools\MessageLoggerTests.h" />
+    <ClInclude Include="tools\message_logger.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

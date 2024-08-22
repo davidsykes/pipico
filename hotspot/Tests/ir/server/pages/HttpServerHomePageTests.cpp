@@ -1,6 +1,6 @@
 #include <memory>
-#include "http_server_home_handler_tests.h"
-#include "../../../ir/server/http_server_home_handler.h"
+#include "HttpServerHomePageTests.h"
+#include "../../../ir/server/pages/http_server_home_page.h"
 
 class MockCodesDisplayRequestHandler : public ICodesDisplayRequestHandler
 {
@@ -14,13 +14,13 @@ class MockCodesRecordRequestHandler : public ICodesRecordRequestHandler
 
 static std::unique_ptr<ICodesDisplayRequestHandler> mockCodesDisplayRequestHandler;
 static std::unique_ptr<ICodesRecordRequestHandler> mockCodesRecordRequestHandler;
-static std::unique_ptr<HttpServerHomeHandler> objectUnderTest;
+static std::unique_ptr<HttpServerHomePage> objectUnderTest;
 
-static HttpServerHomeHandler& CreateObjectUnderTest()
+static HttpServerHomePage& CreateObjectUnderTest()
 {
 	mockCodesDisplayRequestHandler.reset(new MockCodesDisplayRequestHandler());
 	mockCodesRecordRequestHandler.reset(new MockCodesRecordRequestHandler());
-	objectUnderTest.reset(new HttpServerHomeHandler(*mockCodesDisplayRequestHandler.get(),*mockCodesRecordRequestHandler.get()));
+	objectUnderTest.reset(new HttpServerHomePage(*mockCodesDisplayRequestHandler.get(),*mockCodesRecordRequestHandler.get()));
 	return *objectUnderTest.get();
 }
 
@@ -32,12 +32,12 @@ static void TheHandlerReturnsTheSumOfTheCodesDisplayHandlerAndTheCodesRecordHand
 	AssertEqual("codes display<br><br>codes record", response);
 }
 
-void HttpServerHomeHandlerTests::RunTests()
+void HttpServerHomePageTests::RunTests()
 {
 	TheHandlerReturnsTheSumOfTheCodesDisplayHandlerAndTheCodesRecordHandler();
 }
 
-void HttpServerHomeHandlerTests::CleanUpAfterTests()
+void HttpServerHomePageTests::CleanUpAfterTests()
 {
 	mockCodesDisplayRequestHandler.release();
 	mockCodesRecordRequestHandler.release();

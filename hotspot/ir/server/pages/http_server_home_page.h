@@ -1,9 +1,9 @@
 #pragma once
-#include "ihttp_request_handler.h"
-#include "../server_responses/codes_display_request_handler.h"
-#include "../server_responses/codes_record_request_handler.h"
+#include "../ihttp_request_handler.h"
+#include "../../server_responses/codes_display_request_handler.h"
+#include "../../server_responses/codes_record_request_handler.h"
 
-class HttpServerHomeHandler : public IHttpRequestHandler
+class HttpServerHomePage : public IHttpRequestHandler
 {
      ICodesDisplayRequestHandler& codesDisplayRequestHandler;
      ICodesRecordRequestHandler& codesRecordRequestHandler;
@@ -12,7 +12,7 @@ class HttpServerHomeHandler : public IHttpRequestHandler
      virtual std::string ProcessHttpRequest(const char* request);
 
  public:
-     HttpServerHomeHandler(ICodesDisplayRequestHandler& codesDisplayRequestHandler,
+     HttpServerHomePage(ICodesDisplayRequestHandler& codesDisplayRequestHandler,
          ICodesRecordRequestHandler& codesRecordRequestHandler)
          : codesDisplayRequestHandler(codesDisplayRequestHandler),
          codesRecordRequestHandler(codesRecordRequestHandler) {}
