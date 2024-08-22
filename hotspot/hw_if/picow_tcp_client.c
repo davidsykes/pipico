@@ -14,11 +14,9 @@
 #include "lwip/tcp.h"
 #include "picow_tcp_client.h"
 
-//#define DEBUG_printf printf
 #define DEBUG_printf
+#define DEBUG_printf2 printf
 #define BUF_SIZE 2048
-
-#define TEST_ITERATIONS 10
 #define POLL_TIME_S 5
 
 typedef struct TCP_CLIENT_T_ {
@@ -29,7 +27,7 @@ typedef struct TCP_CLIENT_T_ {
     int buffer_len;
     int sent_len;
     bool complete;
-    int run_count;
+    int error_code;
     bool connected;
 } TCP_CLIENT_T;
 
@@ -60,6 +58,7 @@ static err_t tcp_result(void *arg, int status, const char* where) {
         DEBUG_printf("test success\n");
     } else {
         printf("test failed %d %s\n", status, where);
+        state->error_code = status;
     }
     state->complete = true;
     return tcp_client_close(arg);
@@ -71,13 +70,6 @@ static err_t tcp_client_sent(void *arg, struct tcp_pcb *tpcb, u16_t len) {
     state->sent_len += len;
 
     if (state->sent_len >= BUF_SIZE) {
-
-        state->run_count++;
-        if (state->run_count >= TEST_ITERATIONS) {
-            tcp_result(arg, 0, "sent 1");
-            return ERR_OK;
-        }
-
         // We should receive a new buffer from the server
         state->buffer_len = 0;
         state->sent_len = 0;
@@ -148,6 +140,7 @@ static bool tcp_client_open(void *arg) {
     tcp_err(state->tcp_pcb, tcp_client_err);
 
     state->buffer_len = 0;
+    state->error_code = 0;
 
     // cyw43_arch_lwip_begin/end should be used around calls into lwIP to ensure correct locking.
     // You can omit them if you are in a callback from lwIP. Note that when using pico_cyw_arch_poll
@@ -190,11 +183,11 @@ int run_tcp_client_test(const char* server_ip, unsigned int port, const char*req
         {
             strncpy(result, state->buffer, max_result_length);
 
-            char* data = malloc(BUF_SIZE+1);
-            strncpy(data, state->buffer, state->buffer_len);
-            data[state->buffer_len] = 0;
-            state->buffer_len = 0;
-            free(data);
+            // char* data = malloc(BUF_SIZE+1);
+            // strncpy(data, state->buffer, state->buffer_len);
+            // data[state->buffer_len] = 0;
+            // state->buffer_len = 0;
+            // free(data);
 
             state->complete = true;
             tcp_client_close(state);
@@ -216,6 +209,7 @@ int run_tcp_client_test(const char* server_ip, unsigned int port, const char*req
         sleep_ms(1000);
 #endif
     }
+    DEBUG_printf2("Error state %d\n", state->error_code);
     free(state);
 
     return 0;
