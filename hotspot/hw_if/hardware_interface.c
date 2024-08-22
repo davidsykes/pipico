@@ -114,7 +114,7 @@ int _tcp_request(const char* server_ip,
                          char*result,
                          int max_result_length)
 {
-    return run_tcp_client_test(server_ip,
+    return tcp_client_request(server_ip,
                          port,
                          request,
                          result,

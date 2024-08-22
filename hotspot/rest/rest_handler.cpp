@@ -17,7 +17,7 @@ std::string RestHandler::Get(const char* url)
     return hwif.tcp_request(server.c_str(), port, url);
 
     // char buffer[TCP_BUFFER_LENGTH];
-    // run_tcp_client_test("GET /codes HTTP/1.1\r\nHost: test.com\r\nAccept: */*\r\n\r\n", buffer, TCP_BUFFER_LENGTH);
+    // tcp_client_request("GET /codes HTTP/1.1\r\nHost: test.com\r\nAccept: */*\r\n\r\n", buffer, TCP_BUFFER_LENGTH);
     // return buffer;
 }
 

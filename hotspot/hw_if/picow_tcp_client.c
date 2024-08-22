@@ -165,7 +165,7 @@ static TCP_CLIENT_T* tcp_client_init(const char* server_ip, uint port) {
     return state;
 }
 
-int run_tcp_client_test(const char* server_ip, unsigned int port, const char*request, char* result, int max_result_length) {
+int tcp_client_request(const char* server_ip, unsigned int port, const char*request, char* result, int max_result_length) {
     TCP_CLIENT_T *state = tcp_client_init(server_ip, port);
     if (!state) {
         return -1;
@@ -212,5 +212,5 @@ int run_tcp_client_test(const char* server_ip, unsigned int port, const char*req
     DEBUG_printf2("Error state %d\n", state->error_code);
     free(state);
 
-    return 0;
+    return state->error_code;
 }
