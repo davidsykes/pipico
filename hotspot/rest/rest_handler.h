@@ -1,8 +1,15 @@
 #pragma once
 #include <string>
-#include "irest_handler.h"
 #include "pico_hardware_interface.h"
-#include "itcp_response_analyser.h"
+#include "tcp_response_analyser.h"
+
+
+class IRestHandler
+{
+public:
+    virtual std::string Get(const char* url) = 0;
+    virtual std::string Put(const char* url, const char* body) = 0;
+};
 
 class RestHandler : public IRestHandler
 {
@@ -12,7 +19,7 @@ class RestHandler : public IRestHandler
     unsigned int port;
 
     std::string MakeRequest(const char* url, const char* body);
-    std::string PutRaw(const std::string& request);
+    std::string PutRaw2(const std::string& request);
     void LogLastRequest(const std::string& request, const std::string& response);
 
     virtual std::string Get(const char* url);

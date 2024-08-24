@@ -10,6 +10,7 @@
 #include "Tests\pico_scope\PicoScopeTests.h"
 #include "Tests\pico_scope\TraceDataFormatterTests.h"
 #include "Tests\rest\RestHandlerTests.h"
+#include "Tests\rest\TcpRequestMakerTests.h"
 #include "Tests\rest\TcpResponseAnalyserTests.h"
 #include "Tests\ir\codes\ir_code_repository_tests.h"
 #include "Tests\ir\server\pages\HttpServerHomePageTests.h"
@@ -31,6 +32,7 @@ int main()
     PercentDecoderTests().RunTests();
     GPIOTests().RunTests();
     PicoScopeTests().RunTests();
+    TcpRequestMakerTests().RunTests();
     RestHandlerTests().RunTests();
     TraceDataFormatterTests().RunTests();
     TcpResponseAnalyserTests().RunTests();

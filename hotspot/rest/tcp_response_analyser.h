@@ -1,6 +1,12 @@
 #pragma once
-#include "itcp_response_analyser.h"
-#include "irest_handler.h"
+#include <string>
+
+class ITcpResponseAnalyser
+{
+public:
+	virtual bool AnalyseTcpResponse(const std::string& request, const std::string& response) = 0;
+};
+
 
 class TcpResponseAnalyser : public ITcpResponseAnalyser
 {

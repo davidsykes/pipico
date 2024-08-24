@@ -80,6 +80,6 @@ void HttpResponsePackagerTests::RunTests()
 
 void HttpResponsePackagerTests::CleanUpAfterTests()
 {
-	objectUnderTest.release();
 	mockRequestRouter.release();
+	objectUnderTest.release();
 }

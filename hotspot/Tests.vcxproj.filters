@@ -261,6 +261,12 @@
     <ClCompile Include="ir\server\widgets\log_display_widget.cpp">
       <Filter>Source Files\ir\server\widgets</Filter>
     </ClCompile>
+    <ClCompile Include="Tests\rest\TcpRequestMakerTests.cpp">
+      <Filter>Source Files\Tests\rest</Filter>
+    </ClCompile>
+    <ClCompile Include="rest\tcp_request_maker.cpp">
+      <Filter>Source Files\rest</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Tests\logic\input_form\HtmlRendererTests.h">
@@ -424,6 +430,12 @@
     </ClInclude>
     <ClInclude Include="ir\server\widgets\log_display_widget.h">
       <Filter>Source Files\ir\server\widgets</Filter>
+    </ClInclude>
+    <ClInclude Include="Tests\rest\TcpRequestMakerTests.h">
+      <Filter>Source Files\Tests\rest</Filter>
+    </ClInclude>
+    <ClInclude Include="rest\tcp_request_maker.h">
+      <Filter>Source Files\rest</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

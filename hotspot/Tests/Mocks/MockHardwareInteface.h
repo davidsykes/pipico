@@ -16,7 +16,7 @@ class IMockHardwareInterface : public IHardwareInterface
 	virtual void gpio_put(int pin_number, bool value) {}
 	virtual void set_led(bool value) {}
 	virtual void sleep_us(int useconds) {}
-	virtual std::string tcp_request(const char* server, unsigned int port, const char* request) { return ""; };
+	virtual int tcp_request(const char* server, unsigned int port, const char* request, std::string& response) { return -1; }
 	virtual void cyw43_arch_deinit() {};
 public:
 };

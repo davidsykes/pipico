@@ -35,7 +35,7 @@ std::string RestHandler::Put(const char* url, const char* body)
     return response;
 }
 
-std::string RestHandler::PutRaw(const std::string& request)
+std::string RestHandler::PutRaw2(const std::string& request)
 {
     return hwif.tcp_request(server.c_str(), port, request.c_str());
 }

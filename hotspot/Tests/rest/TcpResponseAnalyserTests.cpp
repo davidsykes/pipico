@@ -1,14 +1,14 @@
 #include <memory>
 #include "TcpResponseAnalyserTests.h"
-#include "../../rest/irest_handler.h"
+#include "../../rest/rest_handler.h"
 #include "../../rest/tcp_response_analyser.h"
 
-static std::unique_ptr<TcpResponseAnalyser> testObject;
+static std::unique_ptr<TcpResponseAnalyser> objectUnderTest;
 
 static TcpResponseAnalyser& CreateTestObject()
 {
-	testObject.reset(new TcpResponseAnalyser());
-	return *testObject.get();
+	objectUnderTest.reset(new TcpResponseAnalyser());
+	return *objectUnderTest.get();
 }
 
 static std::string MakeNotOkResponse();
@@ -40,7 +40,7 @@ void TcpResponseAnalyserTests::RunTests()
 
 void TcpResponseAnalyserTests::CleanUpAfterTests()
 {
-	testObject.release();
+	objectUnderTest.release();
 }
 
 static std::string MakeNotOkResponse()

@@ -147,6 +147,7 @@
     <ClCompile Include="pico_scope\pico_scope_trace.cpp" />
     <ClCompile Include="pico_scope\trace_data_formatter.cpp" />
     <ClCompile Include="rest\rest_handler.cpp" />
+    <ClCompile Include="rest\tcp_request_maker.cpp" />
     <ClCompile Include="rest\tcp_response_analyser.cpp" />
     <ClCompile Include="Tests.cpp" />
     <ClCompile Include="Tests\configurations\HotSpotConfigurationTests.cpp" />
@@ -167,6 +168,7 @@
     <ClCompile Include="Tests\pico_scope\PicoScopeTests.cpp" />
     <ClCompile Include="Tests\pico_scope\TraceDataFormatterTests.cpp" />
     <ClCompile Include="Tests\rest\RestHandlerTests.cpp" />
+    <ClCompile Include="Tests\rest\TcpRequestMakerTests.cpp" />
     <ClCompile Include="Tests\rest\TcpResponseAnalyserTests.cpp" />
     <ClCompile Include="Tests\TestFramework\Assert.cpp" />
     <ClCompile Include="Tests\TestFramework\TestFramework.cpp" />
@@ -203,6 +205,7 @@
     <ClInclude Include="rest\irest_handler.h" />
     <ClInclude Include="rest\itcp_response_analyser.h" />
     <ClInclude Include="rest\rest_handler.h" />
+    <ClInclude Include="rest\tcp_request_maker.h" />
     <ClInclude Include="rest\tcp_response_analyser.h" />
     <ClInclude Include="Tests\configurations\HotSpotConfigurationTests.h" />
     <ClInclude Include="Tests\gpio\GPIOTests.h" />
@@ -223,6 +226,7 @@
     <ClInclude Include="Tests\pico_scope\PicoScopeTests.h" />
     <ClInclude Include="Tests\pico_scope\TraceDataFormatterTests.h" />
     <ClInclude Include="Tests\rest\RestHandlerTests.h" />
+    <ClInclude Include="Tests\rest\TcpRequestMakerTests.h" />
     <ClInclude Include="Tests\rest\TcpResponseAnalyserTests.h" />
     <ClInclude Include="Tests\TestFramework\Assert.h" />
     <ClInclude Include="Tests\TestFramework\ITestModule.h" />

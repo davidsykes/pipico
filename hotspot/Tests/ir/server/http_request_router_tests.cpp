@@ -62,7 +62,7 @@ void HttpRequestRouterTests::RunTests()
 
 void HttpRequestRouterTests::CleanUpAfterTests()
 {
-	objectUnderTest.release();
 	mockHomeRequestHandler.release();
 	mockRecordRequestHandler.release();
+	objectUnderTest.release();
 }
