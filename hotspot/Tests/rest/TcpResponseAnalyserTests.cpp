@@ -18,7 +18,7 @@ static void AnInvalidResponseReturnsFalse()
 {
 	ITcpResponseAnalyser& analyser = CreateTestObject();
 
-	bool result = analyser.AnalyseTcpResponse("Request", MakeNotOkResponse());
+	bool result = true; // analyser.AnalyseTcpResponse("Request", MakeNotOkResponse());
 
 	AssertFalse(result);
 }
@@ -27,7 +27,7 @@ static void AValidResponseReturnsTrue()
 {
 	ITcpResponseAnalyser& analyser = CreateTestObject();
 
-	bool result = analyser.AnalyseTcpResponse("Request", MakeOkResponse());
+	bool result = false; // analyser.AnalyseTcpResponse("Request", MakeOkResponse());
 
 	AssertTrue(result);
 }
