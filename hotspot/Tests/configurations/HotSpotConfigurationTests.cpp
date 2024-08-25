@@ -26,7 +26,7 @@ static std::unique_ptr<IInputFormRenderer> formRenderer;
 static std::unique_ptr<MockCredentialsHandler> mockCredentialsHandler;
 static std::unique_ptr<HotSpotConfiguration> hotSpotConfiguration;
 
-static HotSpotTcpServer* CreateTestObject()
+static HotSpotTcpServer& CreateTestObject()
 {
 	htmlRenderer.reset(new MockHtmlRenderer);
 	formRenderer.reset(new MockInputFormRenderer);
@@ -37,29 +37,28 @@ static HotSpotTcpServer* CreateTestObject()
 		htmlRenderer.get(),
 		formRenderer.get(),
 		mockCredentialsHandler.get()));
-	return hotSpotConfiguration.get();
+	return *hotSpotConfiguration.get();
 }
 
-void GeneralRequestsReturnAnInputForm()
+static void GeneralRequestsReturnAnInputForm()
 {
-	auto config = CreateTestObject();
+	auto& config = CreateTestObject();
 
-	std::string result = config->process_request("request", "params");
+	std::string result = config.process_request("request", "params");
 
 	AssertEqual(result, "html(body(h1(description)p(Enter WiFi Details){Form}))");
 	AssertEqual(mockCredentialsHandler->HandledCredentials, "");
 }
 
-void CredentialsSubmissionCallsCredentialsHandler()
+static void CredentialsSubmissionCallsCredentialsHandler()
 {
-	auto config = CreateTestObject();
+	auto& config = CreateTestObject();
 
-	std::string result = config->process_request("/hotspotsubmit", "ssid=SSID&password=pass");
+	std::string result = config.process_request("/hotspotsubmit", "ssid=SSID&password=pass");
 
 	AssertEqual(result, "");
 	AssertEqual(mockCredentialsHandler->HandledCredentials, "ssid=SSID&password=pass");
 }
-
 
 void HotSpotConfigurationTests::RunTests()
 {

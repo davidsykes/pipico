@@ -21,20 +21,20 @@ static std::unique_ptr<MockPercentDecoder> mockPercentDecoder;
 static std::unique_ptr<MockFlashManager> mockFlashManager;
 static std::unique_ptr<CredentialsHandler> handler;
 
-static CredentialsHandler* CreateTestObject()
+static CredentialsHandler& CreateTestObject()
 {
 	mockPercentDecoder.reset(new MockPercentDecoder());
 	mockFlashManager.reset(new MockFlashManager());
 	handler.reset(new CredentialsHandler(mockPercentDecoder.get(), mockFlashManager.get()));
-	return handler.get();
+	return *handler.get();
 }
 
 static void ConvertedCredentialsAreStoredInTheFlash()
 {
 	std::string credentialsString = "ssid=ssid name&password=123456";
-	CredentialsHandler* handler = CreateTestObject();
+	auto& handler = CreateTestObject();
 
-	handler->HandleCredentials(credentialsString);
+	handler.HandleCredentials(credentialsString);
 
 	AssertEqual(mockFlashManager.get()->SSID, "converted ssid name");
 	AssertEqual(mockFlashManager.get()->password, "converted 123456");
@@ -44,9 +44,9 @@ static void ConvertedCredentialsAreStoredInTheFlash()
 static void MissingSSIDGeneratesAnError()
 {
 	std::string credentialsString = "NOssid=ssid name&password=123456";
-	CredentialsHandler* handler = CreateTestObject();
+	auto& handler = CreateTestObject();
 
-	handler->HandleCredentials(credentialsString);
+	handler.HandleCredentials(credentialsString);
 
 	AssertEqual(mockFlashManager.get()->SSID, "");
 	AssertEqual(mockFlashManager.get()->password, "");
@@ -56,9 +56,9 @@ static void MissingSSIDGeneratesAnError()
 static void MissingAmpersandGeneratesAnError()
 {
 	std::string credentialsString = "ssid=ssid name password=123456";
-	CredentialsHandler* handler = CreateTestObject();
+	auto& handler = CreateTestObject();
 
-	handler->HandleCredentials(credentialsString);
+	handler.HandleCredentials(credentialsString);
 
 	AssertEqual(mockFlashManager.get()->SSID, "");
 	AssertEqual(mockFlashManager.get()->password, "");
@@ -68,9 +68,9 @@ static void MissingAmpersandGeneratesAnError()
 static void MissingPasswordGeneratesAnError()
 {
 	std::string credentialsString = "ssid=ssid name&NOpassword=123456";
-	CredentialsHandler* handler = CreateTestObject();
+	auto& handler = CreateTestObject();
 
-	handler->HandleCredentials(credentialsString);
+	handler.HandleCredentials(credentialsString);
 
 	AssertEqual(mockFlashManager.get()->SSID, "");
 	AssertEqual(mockFlashManager.get()->password, "");

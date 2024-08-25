@@ -1,5 +1,7 @@
 run_ir_main can go
 
+turn CreateTestObject* into CreateTestObject&
+CreateTestObject return interface
 
 HotSpotTcpServer => new message interface
 

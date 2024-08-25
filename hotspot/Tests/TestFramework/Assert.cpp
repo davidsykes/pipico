@@ -63,7 +63,6 @@ void AssertEqual(const size_t expected, const size_t value)
 	}
 }
 
-
 static const char* SkipWhitespace(const char* p)
 {
 	++p;

@@ -1,114 +1,81 @@
 #include <memory>
-#include <sstream>
 #include "RestHandlerTests.h"
 #include "../../rest/rest_handler.h"
-#include "../../rest/itcp_response_analyser.h"
-#include "../Mocks/MockHardwareInteface.h"
-#include <vector>
 
-class RestHardwareInterface : public IMockHardwareInterface
+class RestMockTcpRequestMaker : public ITcpRequestMaker
 {
-	virtual std::string tcp_request(const char* server, unsigned int port, const char* request);
+	virtual int MakeRequest(const std::string& request, std::string& response);
 
 public:
-	std::string server;
-	unsigned int port=0;
-	std::vector<std::string> sent_data;
+	std::string Request;
+	std::string Response = "Tcp Request Response";
+	int StatusCode = 33;
 };
 
-class MockTcpResponseAnalyser : public ITcpResponseAnalyser
-{
-	virtual bool AnalyseTcpResponse(const std::string& request, const std::string& response) { this->request = request; this->response = response; return analyse_result; }
-public:
-	std::string request;
-	std::string response;
-	bool analyse_result = true;
-};
+static std::unique_ptr<RestHandler> objectUnderTest;
+static std::unique_ptr<RestMockTcpRequestMaker> mockTcpRequestMaker;
 
-static std::unique_ptr<RestHandler> testObject;
-static std::unique_ptr<RestHardwareInterface> mockHardwareInterface;
-static std::unique_ptr<MockTcpResponseAnalyser> mockTcpResponseAnalyser;
-
-static RestHandler& CreateTestObject()
+static IRestHandler& CreateTestObject()
 {
-	mockHardwareInterface.reset(new RestHardwareInterface());
-	mockTcpResponseAnalyser.reset(new MockTcpResponseAnalyser());
-	testObject.reset(new RestHandler(*mockHardwareInterface.get(), *mockTcpResponseAnalyser.get(), "server", 123));
-	return *testObject.get();
+	mockTcpRequestMaker.reset(new RestMockTcpRequestMaker);
+	objectUnderTest.reset(new RestHandler(*mockTcpRequestMaker.get()));
+	return *objectUnderTest.get();
 }
 
-static std::string MakePutRequest(const std::string& url, const std::string& body)
+static void GetPassesAGetRequestToTheTcpRequestMaker()
 {
-	std::stringstream s;
-	s << "PUT " << url;
-	s << " HTTP/1.1\r\nHost: ir.api\r\nAccept: */*\r\nContent-Type: application/json\r\nContent-Length: ";
-	s << body.length() << "\r\n\r\n" << body;
-	return s.str();
+	auto& rest = CreateTestObject();
+
+	rest.Get("get url");
+
+	AssertEqual("GET get url", mockTcpRequestMaker.get()->Request);
 }
 
-static void PutCombinesUrlAndBody()
+static void GetReturnsTheTcpRequestMakerResponse()
 {
-	IRestHandler& rest = CreateTestObject();
+	auto& rest = CreateTestObject();
 
-	rest.Put("url", "body");
+	auto response = rest.Get("get url");
 
-	RestHardwareInterface& hwif = *mockHardwareInterface.get();
-	std::string data = hwif.sent_data[0];
-	std::string expected = MakePutRequest("url", "body");
-
-	AssertEqual(expected, data);
-	AssertEqual("server", hwif.server);
-	AssertEqual(123, hwif.port);
+	AssertEqual("Tcp Request Response", response);
 }
 
-static void PutPassesRequestAndResponseToTCPResponseAnalyser()
+static void PutPassesAGetRequestToTheTcpRequestMaker()
 {
-	IRestHandler& rest = CreateTestObject();
+	auto& rest = CreateTestObject();
 
-	rest.Put("url", "body");
+	rest.Put("put url", "put body");
 
-	RestHardwareInterface& hwif = *mockHardwareInterface.get();
-	std::string data = hwif.sent_data[0];
-	std::string expected = MakePutRequest("url", "body");
-
-	AssertEqual(expected, mockTcpResponseAnalyser.get()->request);
-	AssertEqual("response", mockTcpResponseAnalyser.get()->response);
+	const char* expected = "PUT put url HTTP/1.1\r\nHost: ir.api\r\nAccept: */*\r\nContent-Type: application/json\r\nContent-Length: 8\r\n\r\nput body";
+	AssertEqual(expected, mockTcpRequestMaker.get()->Request);
 }
 
-static void PutLogsTheLastRequestIfTheAnalyserReturnsFalse()
+static void PutReturnsTheTcpRequestMakerResponse()
 {
-	IRestHandler& rest = CreateTestObject();
-	mockTcpResponseAnalyser.get()->analyse_result = false;
+	auto& rest = CreateTestObject();
 
-	rest.Put("url", "body");
+	auto response = rest.Put("put url", "put body");
 
-	RestHardwareInterface& hwif = *mockHardwareInterface.get();
-	AssertEqual(2, hwif.sent_data.size());
-	std::string data = hwif.sent_data[1];
-	std::string expected =
-		"PUT /log HTTP/1.1\r\nHost: ir.api\r\nAccept: */*\r\nContent-Type: application/json\r\nContent-Length: 114\r\n\r\nPUT url HTTP/1.1\r\nHost: ir.api\r\nAccept: */*\r\nContent-Type: application/json\r\nContent-Length: 4\r\n\r\nbody\r\n\r\nresponse";
+	AssertEqual("Tcp Request Response", response);
+}
 
-	AssertEqual(expected, data);
+int RestMockTcpRequestMaker::MakeRequest(const std::string& request, std::string& response)
+{
+	Request = request;
+	response = Response;
+	return StatusCode;
 }
 
 void RestHandlerTests::RunTests()
 {
-	PutCombinesUrlAndBody();
-	PutPassesRequestAndResponseToTCPResponseAnalyser();
-	PutLogsTheLastRequestIfTheAnalyserReturnsFalse();
+	GetPassesAGetRequestToTheTcpRequestMaker();
+	GetReturnsTheTcpRequestMakerResponse();
+	PutPassesAGetRequestToTheTcpRequestMaker();
+	PutReturnsTheTcpRequestMakerResponse();
 }
-
-std::string RestHardwareInterface::tcp_request(const char* server, unsigned int port, const char* request)
-{
-	this->server = server;
-	this->port = port;
-	sent_data.push_back(request);
-	return "response";
-};
-
 
 void RestHandlerTests::CleanUpAfterTests()
 {
-	mockHardwareInterface.release();
-	testObject.release();
+	mockTcpRequestMaker.release();
+	objectUnderTest.release();
 }

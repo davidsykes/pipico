@@ -1,7 +1,7 @@
 #pragma once
 #include <string>
 #include "pico_hardware_interface.h"
-#include "tcp_response_analyser.h"
+#include "tcp_request_maker.h"
 
 
 class IRestHandler
@@ -13,10 +13,7 @@ public:
 
 class RestHandler : public IRestHandler
 {
-    IHardwareInterface& hwif;
-    ITcpResponseAnalyser& tcp_analyser;
-    std::string server;
-    unsigned int port;
+    ITcpRequestMaker& tcpRequestMaker;
 
     std::string MakeRequest(const char* url, const char* body);
     std::string PutRaw2(const std::string& request);
@@ -26,5 +23,6 @@ class RestHandler : public IRestHandler
     virtual std::string Put(const char* url, const char* body);
 
 public:
-    RestHandler(IHardwareInterface& hwif, ITcpResponseAnalyser& tcp_analyser, const char* server, unsigned int port);
+    RestHandler(ITcpRequestMaker& tcpRequestMaker) :
+        tcpRequestMaker(tcpRequestMaker) {}
 };
