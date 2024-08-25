@@ -2,7 +2,6 @@
 #include "ir_main.h"
 #include "gpio/gpio.h"
 #include "codes/ir_code_repository.h"
-#include "../rest/itcp_response_analyser.h"
 #include "../rest/tcp_response_analyser.h"
 #include "../rest/rest_handler.h"
 #include "server_responses/codes_display_request_handler.h"

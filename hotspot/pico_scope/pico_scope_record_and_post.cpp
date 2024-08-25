@@ -11,22 +11,22 @@
 std::string PicoScopeRecordAndPost::RecordAndPostTrace()
 {
     printf("RECORD AND POST\n");
-    run_scope(hw_if, config);
+    run_scope(hw_if, config, restHandler);
     return "RECORD AND POST";
 }
 
-void run_scope(IHardwareInterface& hw_if, PicoScopeConfiguration& config)
+void run_scope(IHardwareInterface& hw_if, PicoScopeConfiguration& config, IRestHandler& rest)
 {
     printf("Run scope on pin %d\n", config.pin);
 
     hw_if.initialise_input_pin(config.pin);
     hw_if.gpio_set_pull_up(config.pin, 1);
 
-    TcpResponseAnalyser tcpResponseAnalyser;
-    RestHandler rest_imp(hw_if,
-                     tcpResponseAnalyser,
-                     SCOPE_API_SERVER_IP, SCOPE_API_PORT);
-    IRestHandler& rest = rest_imp;
+    //TcpResponseAnalyser tcpResponseAnalyser;
+    //RestHandler rest_imp(hw_if,
+    //                 tcpResponseAnalyser,
+    //                 SCOPE_API_SERVER_IP, SCOPE_API_PORT);
+    //IRestHandler& rest = rest_imp;
     PicoScope scope(hw_if, 100000);
     TraceDataFormatter traceFormatter;
 

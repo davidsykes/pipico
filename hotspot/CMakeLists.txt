@@ -30,6 +30,7 @@ add_executable(test
         pico_scope/pico_scope.cpp
         pico_scope/pico_scope_trace.cpp
         pico_scope/trace_data_formatter.cpp
+        rest/tcp_request_maker.cpp
         rest/rest_handler.cpp
         rest/tcp_response_analyser.cpp
         ir/ir_main.cpp

@@ -1,6 +1,7 @@
 #pragma once
 #include "pico_hardware_interface.h"
 #include "pico_scope_configuration.h"
+#include "rest_handler.h"
 
 class IPicoScopeRecordAndPost
 {
@@ -12,15 +13,17 @@ class PicoScopeRecordAndPost : public IPicoScopeRecordAndPost
 {
     IHardwareInterface& hw_if;
     PicoScopeConfiguration& config;
+    IRestHandler& restHandler;
 
     virtual std::string RecordAndPostTrace();
 
 public:
     PicoScopeRecordAndPost(IHardwareInterface& hw_if,
-                            PicoScopeConfiguration& config)
-                            : hw_if(hw_if), config(config) {}
+                            PicoScopeConfiguration& config,
+                            IRestHandler& restHandler)
+                            : hw_if(hw_if), config(config), restHandler(restHandler) {}
 };
 
 
-void run_scope(IHardwareInterface& hw_if, PicoScopeConfiguration& config);
+void run_scope(IHardwareInterface& hw_if, PicoScopeConfiguration& config, IRestHandler& restHandler);
 

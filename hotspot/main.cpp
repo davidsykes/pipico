@@ -12,6 +12,7 @@
 #include "ir/ir_main.h"
 #include "rest/rest_handler.h"
 #include "rest/tcp_response_analyser.h"
+#include "rest/tcp_request_error_logger.h"
 #include "tools/message_logger.h"
 
 #define WIFI_SSID "a907"
@@ -44,7 +45,9 @@ int main()
       #define SCOPE_API_SERVER_IP "192.168.1.87"
       #define SCOPE_API_PORT 5000
       TcpResponseAnalyser tcp_analyser;
-      RestHandler restHandler(hw_if, tcp_analyser, SCOPE_API_SERVER_IP, SCOPE_API_PORT);
+      TcpRequestErrorLogger tcpRequestErrorLogger;
+      TcpRequestMaker tcpRequestMaker(SCOPE_API_SERVER_IP, SCOPE_API_PORT, hw_if, tcp_analyser, tcpRequestErrorLogger);
+      RestHandler restHandler(tcpRequestMaker);
 
       IrCodeRepository irCodeRepository(restHandler);
       irCodeRepository.RetrieveCodes();
@@ -55,7 +58,7 @@ int main()
       HttpServerHomePage homeHandler(codesDisplayRequestHandler, codesRecordRequestHandler, LogDisplayWidget);
 
       PicoScopeConfiguration ir_scope_configuration(6);
-      PicoScopeRecordAndPost picoScopeRecordAndPost(hw_if, ir_scope_configuration);
+      PicoScopeRecordAndPost picoScopeRecordAndPost(hw_if, ir_scope_configuration, restHandler);
       HttpServerRecordHandler recordHandler(picoScopeRecordAndPost);
 
       HttpRequestRouter httpRequestRouter(homeHandler, recordHandler);
