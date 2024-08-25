@@ -8,15 +8,14 @@ int TcpRequestMaker::MakeRequest(const std::string& request, std::string& respon
 
 	if (tcp_request_result == 0)
 	{
-		tcpRequestErrorLogger.LogError(request, server_response);
+		tcpRequestErrorLogger.LogError(tcp_request_result, request, server_response);
 		return ExtractStatusAndBody(server_response, response);
 	}
 	else
 	{
-		tcpRequestErrorLogger.LogError(request, server_response);
+		tcpRequestErrorLogger.LogError(tcp_request_result, request, server_response);
 		return MakeServerErrorResponse(tcp_request_result, response);
 	}
-
 }
 
 

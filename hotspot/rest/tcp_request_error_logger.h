@@ -3,14 +3,14 @@
 class ITcpRequestErrorLogger
 {
 public:
-    virtual void LogError(const std::string& request, const std::string& response) = 0;
+    virtual void LogError(int tcp_request_result, const std::string& request, const std::string& response) = 0;
 };
 
 
 class TcpRequestErrorLogger : public ITcpRequestErrorLogger
 {
-    virtual void LogError(const std::string& request, const std::string& response)
+    virtual void LogError(int tcp_request_result, const std::string& request, const std::string& response)
     {
-        printf("TcpRequestErrorLogger NOT IMPLEMENTED\r\n");
+        printf("TCP REQUEST ERROR %d\n%s\n+-+-+-+-+-+-+-+-+-+-+\n%s\n^^^^^^^^^^^^^^^^\n", tcp_request_result, request.c_str(), response.c_str());
     }
 };
