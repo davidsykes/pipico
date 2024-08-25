@@ -14,28 +14,41 @@ static TcpResponseAnalyser& CreateTestObject()
 static std::string MakeNotOkResponse();
 static std::string MakeOkResponse();
 
+static void AValid200ResponseReturnsTheStatusCode()
+{
+	ITcpResponseAnalyser& analyser = CreateTestObject();
+
+	std::string body;
+	int result = analyser.AnalyseTcpResponse(MakeOkResponse(), body);
+
+	AssertEqual(200, result);
+}
+
+static void AValid200ResponseReturnsTheBody()
+{
+	ITcpResponseAnalyser& analyser = CreateTestObject();
+
+	std::string body;
+	int result = analyser.AnalyseTcpResponse(MakeOkResponse(), body);
+
+	AssertEqual("200", body);
+}
+
 static void AnInvalidResponseReturnsFalse()
 {
 	ITcpResponseAnalyser& analyser = CreateTestObject();
 
-	bool result = true; // analyser.AnalyseTcpResponse("Request", MakeNotOkResponse());
+	std::string body;
+	bool result = analyser.AnalyseTcpResponse(MakeNotOkResponse(), body);
 
 	AssertFalse(result);
 }
 
-static void AValidResponseReturnsTrue()
-{
-	ITcpResponseAnalyser& analyser = CreateTestObject();
-
-	bool result = false; // analyser.AnalyseTcpResponse("Request", MakeOkResponse());
-
-	AssertTrue(result);
-}
-
 void TcpResponseAnalyserTests::RunTests()
 {
+	AValid200ResponseReturnsTheStatusCode();
+	AValid200ResponseReturnsTheBody();
 	AnInvalidResponseReturnsFalse();
-	AValidResponseReturnsTrue();
 }
 
 void TcpResponseAnalyserTests::CleanUpAfterTests()

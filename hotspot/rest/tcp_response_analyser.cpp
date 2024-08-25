@@ -2,9 +2,11 @@
 
 #define CRLF_LEN 2
 
-bool TcpResponseAnalyser::AnalyseTcpResponse(const std::string& request, const std::string& _response)
+int TcpResponseAnalyser::AnalyseTcpResponse(const std::string& server_response, std::string& analysed_response)
 {
-	response = _response;
+	analysed_response = "AnalyseTcpResponse Not Implemented Error";
+
+	response = server_response;
 	response_length = response.size();
 	current_position = 0;
 	bool processing_header = true;

@@ -16,8 +16,6 @@ class RestHandler : public IRestHandler
     ITcpRequestMaker& tcpRequestMaker;
 
     std::string MakeRequest(const char* url, const char* body);
-    std::string PutRaw2(const std::string& request);
-    void LogLastRequest(const std::string& request, const std::string& response);
 
     virtual std::string Get(const char* url);
     virtual std::string Put(const char* url, const char* body);

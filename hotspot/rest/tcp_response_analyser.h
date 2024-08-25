@@ -4,7 +4,7 @@
 class ITcpResponseAnalyser
 {
 public:
-	virtual bool AnalyseTcpResponse(const std::string& request, const std::string& response) = 0;
+	virtual int AnalyseTcpResponse(const std::string& server_response, std::string& analysed_response) = 0;
 };
 
 
@@ -17,5 +17,5 @@ class TcpResponseAnalyser : public ITcpResponseAnalyser
 	void find_line();
 	void next_line();
 
-	virtual bool AnalyseTcpResponse(const std::string& request, const std::string& response);
+	virtual int AnalyseTcpResponse(const std::string& server_response, std::string& analysed_response);
 };
