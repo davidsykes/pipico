@@ -16,6 +16,7 @@ static std::unique_ptr<IrCodeRepository> objectUnderTest;
 static IrCodeRepository& CreateObjectUnderTest()
 {
 	mockRestHandler.reset(new MockRestHandler());
+	messageLogger.reset(new MessageLogger());
 	objectUnderTest.reset(new IrCodeRepository(*mockRestHandler.get()));
 	return *objectUnderTest.get();
 }
@@ -35,7 +36,7 @@ static void AnEmptyResponseFromTheServerResultsInAnErrorBeingLogged()
 
 	IMessageLogger& logger = *messageLogger.get();
 	AssertEqual(1, logger.Logs().size());
-	AssertEqual("1", logger.Logs()[0]);
+	AssertEqual("No response was received from the server when requesting IR codes", logger.Logs()[0]);
 }
 
 void IrCodeRepositoryTests::RunTests()

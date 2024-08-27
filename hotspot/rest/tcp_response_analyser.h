@@ -13,8 +13,6 @@ class TcpResponseAnalyser : public ITcpResponseAnalyser
 	std::string response;
 	const char* response_cstr = 0;
 	const char* current_line = 0;
-	//size_t current_position = 0;
-	//size_t response_length = 0;
 	size_t line_end = 0;
 	bool LineEndIsAtTheEndOfALine();
 	void FindLineEnd();

@@ -8,6 +8,6 @@ void IrCodeRepository::RetrieveCodes(IMessageLogger& messageLogger)
     printf("Retrieved those cods %s\n", result.c_str());
     if (result.empty())
     {
-        messageLogger.Log("log that nothing was received");
+        messageLogger.Log("No response was received from the server when requesting IR codes");
     }
 }
