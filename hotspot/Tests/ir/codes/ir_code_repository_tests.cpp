@@ -1,6 +1,7 @@
 #include <memory>
 #include "ir_code_repository_tests.h"
 #include "../../ir/codes/ir_code_repository.h"
+#include "../../tools/message_logger.h"
 
 class MockRestHandler : public IRestHandler
 {
@@ -9,6 +10,7 @@ class MockRestHandler : public IRestHandler
 };
 
 static std::unique_ptr<MockRestHandler> mockRestHandler;
+static std::unique_ptr<MessageLogger> messageLogger;
 static std::unique_ptr<IrCodeRepository> objectUnderTest;
 
 static IrCodeRepository& CreateObjectUnderTest()
@@ -21,18 +23,30 @@ static IrCodeRepository& CreateObjectUnderTest()
 static void AnEmptyResponseFromTheServerResultsInNoCodesLoaded()
 {
 	IrCodeRepository& codes = CreateObjectUnderTest();
-	codes.RetrieveCodes();
+	codes.RetrieveCodes(*messageLogger.get());
 
 	AssertEqual(0, codes.GetCodes().size());
+}
+
+static void AnEmptyResponseFromTheServerResultsInAnErrorBeingLogged()
+{
+	IrCodeRepository& codes = CreateObjectUnderTest();
+	codes.RetrieveCodes(*messageLogger.get());
+
+	IMessageLogger& logger = *messageLogger.get();
+	AssertEqual(1, logger.Logs().size());
+	AssertEqual("1", logger.Logs()[0]);
 }
 
 void IrCodeRepositoryTests::RunTests()
 {
 	AnEmptyResponseFromTheServerResultsInNoCodesLoaded();
+	AnEmptyResponseFromTheServerResultsInAnErrorBeingLogged();
 }
 
 void IrCodeRepositoryTests::CleanUpAfterTests()
 {
 	mockRestHandler.release();
+	messageLogger.release();
 	objectUnderTest.release();
 }

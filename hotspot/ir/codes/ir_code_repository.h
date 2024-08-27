@@ -2,6 +2,7 @@
 #include <vector>
 #include "../rest/rest_handler.h"
 #include "ir_code.h"
+#include "../../tools/message_logger.h"
 
 class IrCodeRepository
 {
@@ -11,6 +12,6 @@ class IrCodeRepository
 
 public:
     IrCodeRepository(IRestHandler& irRestHandler) : irRestHandler(irRestHandler) {}
-    void RetrieveCodes();
+    void RetrieveCodes(IMessageLogger& messageLogger);
     std::vector<IrCode>& GetCodes() { return codes; }
 };

@@ -28,7 +28,7 @@ int TcpRequestMaker::ExtractStatusAndBody(const std::string& server_response, st
 
 int TcpRequestMaker::MakeServerErrorResponse(int tcp_request_result, std::string& response)
 {
-	std::stringstream str;
+	std::ostringstream str;
 	str << "tcp error " << tcp_request_result;
 	response = str.str();
 	return 500;

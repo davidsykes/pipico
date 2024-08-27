@@ -1,13 +1,13 @@
 #include "stdio.h"
 #include "ir_code_repository.h"
 
-void IrCodeRepository::RetrieveCodes()
+void IrCodeRepository::RetrieveCodes(IMessageLogger& messageLogger)
 {
     printf("Retrieve those cods\n");
     std::string result = irRestHandler.Get("dem bones");
     printf("Retrieved those cods %s\n", result.c_str());
-    if (nothing received)
+    if (result.empty())
     {
-        log that nothing was received
+        messageLogger.Log("log that nothing was received");
     }
 }

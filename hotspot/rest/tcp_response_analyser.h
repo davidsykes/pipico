@@ -11,11 +11,17 @@ public:
 class TcpResponseAnalyser : public ITcpResponseAnalyser
 {
 	std::string response;
-	size_t current_position = 0;
-	size_t response_length = 0;
+	const char* response_cstr = 0;
+	const char* current_line = 0;
+	//size_t current_position = 0;
+	//size_t response_length = 0;
 	size_t line_end = 0;
-	void find_line();
-	void next_line();
+	bool LineEndIsAtTheEndOfALine();
+	void FindLineEnd();
+	void StartNextLine();
+	int FindStatusCode();
+	int FindDataLength();
 
 	virtual int AnalyseTcpResponse(const std::string& server_response, std::string& analysed_response);
+
 };

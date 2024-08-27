@@ -6,7 +6,7 @@
 std::string LogDisplayWidget::RenderWidget()
 {
 	auto logs = messageLogger.Logs();
-	std::stringstream str;
+	std::ostringstream str;
 
 	for (int i = 0; i < logs.size(); ++i)
 	{

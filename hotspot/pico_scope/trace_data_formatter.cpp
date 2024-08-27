@@ -5,7 +5,7 @@
 
 std::string TraceDataFormatter::FormatTraceData(const PicoScopeTrace& trace)
 {
-    std::stringstream s;
+    std::ostringstream s;
     s << "{\"InitialValue\":";
     s << trace.initial_value;
     s << ",\"Values\":[";

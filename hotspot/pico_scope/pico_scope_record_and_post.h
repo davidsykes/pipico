@@ -1,7 +1,7 @@
 #pragma once
 #include "pico_hardware_interface.h"
 #include "pico_scope_configuration.h"
-#include "rest_handler.h"
+#include "../rest/rest_handler.h"
 
 class IPicoScopeRecordAndPost
 {

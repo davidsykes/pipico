@@ -34,8 +34,9 @@ public:
 
 class MockTcpRequestErrorLogger : public ITcpRequestErrorLogger
 {
-	virtual void LogError(const std::string& request, const std::string& response) { Request = request; Response = response; }
+	virtual void LogError(int error, const std::string& request, const std::string& response) { Error = error; Request = request; Response = response; }
 public:
+	int Error = -77;
 	std::string Request;
 	std::string Response;
 };
@@ -115,6 +116,7 @@ static void IfAnErrorOccursTheErrorIsLogged()
 	std::string response;
 	int status = maker.MakeRequest("Request", response);
 
+	AssertEqual(-14, mockTcpRequestErrorLogger.get()->Error);
 	AssertEqual("Request", mockTcpRequestErrorLogger.get()->Request);
 	AssertEqual("Server Response", mockTcpRequestErrorLogger.get()->Response);
 }

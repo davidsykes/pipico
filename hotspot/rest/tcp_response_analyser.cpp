@@ -1,58 +1,81 @@
 #include "tcp_response_analyser.h"
 
-#define CRLF_LEN 2
+#define HTTP_VERSION		"HTTP/1.1"
+#define HTTP_VERSION_LENGTH	8
 
 int TcpResponseAnalyser::AnalyseTcpResponse(const std::string& server_response, std::string& analysed_response)
 {
-	analysed_response = "AnalyseTcpResponse Not Implemented Error";
-
 	response = server_response;
-	response_length = response.size();
-	current_position = 0;
+	response_cstr = response.c_str();;
+	current_line = response_cstr;
 	bool processing_header = true;
+
+	int status_code = FindStatusCode();
+	FindLineEnd();
+	StartNextLine();
 
 	while (processing_header)
 	{
-		find_line();
-
-		if (line_end == current_position)
+		FindLineEnd();
+		if (line_end == 0)
 		{
 			processing_header = false;
 		}
-
-		next_line();
+		StartNextLine();
 	}
 
-	find_line();
-	int data_length = atoi(response.c_str() + current_position);
-	next_line();
+	int data_length = FindDataLength();
 
-	std::string text = response.substr(current_position, data_length);
-	current_position += data_length + CRLF_LEN;
+	analysed_response = std::string(current_line, data_length);
 
-	return text == "Ok";
+	return status_code;
 }
 
-void TcpResponseAnalyser::find_line()
+int TcpResponseAnalyser::FindStatusCode()
 {
-	if (current_position < response_length)
+	if (strncmp(current_line, HTTP_VERSION, HTTP_VERSION_LENGTH) == 0)
 	{
-		line_end = response.find("\r\n", current_position);
-		if (line_end == std::string::npos)
-		{
-			line_end = response_length;
-		}
+		current_line += HTTP_VERSION_LENGTH + 1;
+		int status_code = atoi(current_line);
+		return status_code;
 	}
-	else
+	return 400;
+}
+
+int TcpResponseAnalyser::FindDataLength()
+{
+	int length = atoi(current_line);
+	FindLineEnd();
+	StartNextLine();
+
+	if (length <= (response.size() - (current_line - response_cstr)))
 	{
-		line_end = response_length;
+		return length;
+	}
+	return 0;
+}
+
+void TcpResponseAnalyser::FindLineEnd()
+{
+	line_end = 0;
+	while (!LineEndIsAtTheEndOfALine())
+	{
+		++line_end;
 	}
 }
 
-void TcpResponseAnalyser::next_line()
+bool TcpResponseAnalyser::LineEndIsAtTheEndOfALine()
 {
-	if (current_position < response_length)
+	return (current_line[line_end] == 0) || current_line[line_end] == '\r' || current_line[line_end] == '\n';
+}
+
+void TcpResponseAnalyser::StartNextLine()
+{
+	current_line += line_end;
+	if (*current_line)
 	{
-		current_position = line_end + CRLF_LEN;
+		if (*current_line == '\r') ++current_line;
+		if (*current_line == '\n') ++current_line;
 	}
 }
+

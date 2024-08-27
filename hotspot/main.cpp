@@ -50,7 +50,7 @@ int main()
       RestHandler restHandler(tcpRequestMaker);
 
       IrCodeRepository irCodeRepository(restHandler);
-      irCodeRepository.RetrieveCodes();
+      irCodeRepository.RetrieveCodes(messageLogger);
 
       CodesDisplayRequestHandler codesDisplayRequestHandler;
       CodesRecordRequestHandler codesRecordRequestHandler;
