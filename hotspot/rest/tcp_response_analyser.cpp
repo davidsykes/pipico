@@ -1,3 +1,4 @@
+#include <string.h>
 #include "tcp_response_analyser.h"
 
 #define HTTP_VERSION		"HTTP/1.1"
