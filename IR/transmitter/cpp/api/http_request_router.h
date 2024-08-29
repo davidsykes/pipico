@@ -1,6 +1,11 @@
 #pragma once
-#include "ihttp_request_router.h"
 #include "ihttp_request_handler.h"
+
+class IHttpRequestRouter
+{
+public:
+    virtual std::string RouteHttpRequest(const char* request) = 0;
+};
 
 class HttpRequestRouter : public IHttpRequestRouter
 {

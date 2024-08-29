@@ -1,0 +1,87 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Source Files\Tests">
+      <UniqueIdentifier>{2fc39c1d-173f-423a-9fe7-33a4e59a5975}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Tests\test_framework">
+      <UniqueIdentifier>{181653f4-659d-4aff-a031-4eb3c45a548c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Tests\tools">
+      <UniqueIdentifier>{60173621-dcaa-485d-a525-fdc48a32ace4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Tests\api">
+      <UniqueIdentifier>{e352c41c-8572-472a-a558-54e6e3f5ba21}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Tools">
+      <UniqueIdentifier>{fba2e033-3fef-4861-bfcc-f0582f70d558}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\api">
+      <UniqueIdentifier>{8f62f2fc-e9eb-40af-a5db-f55b282a16bb}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="IrXmitterTests.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="api\http_request_router_tests.cpp">
+      <Filter>Source Files\Tests\api</Filter>
+    </ClCompile>
+    <ClCompile Include="tools\MessageLoggerTests.cpp">
+      <Filter>Source Files\Tests\tools</Filter>
+    </ClCompile>
+    <ClCompile Include="TestFramework\Assert.cpp">
+      <Filter>Source Files\Tests\test_framework</Filter>
+    </ClCompile>
+    <ClCompile Include="TestFramework\TestFramework.cpp">
+      <Filter>Source Files\Tests\test_framework</Filter>
+    </ClCompile>
+    <ClCompile Include="TestFramework\TestModule.cpp">
+      <Filter>Source Files\Tests\test_framework</Filter>
+    </ClCompile>
+    <ClCompile Include="..\tools\message_logger.cpp">
+      <Filter>Source Files\Tools</Filter>
+    </ClCompile>
+    <ClCompile Include="..\api\http_request_router.cpp">
+      <Filter>Source Files\api</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="api\http_request_router_tests.h">
+      <Filter>Source Files\Tests\api</Filter>
+    </ClInclude>
+    <ClInclude Include="tools\MessageLoggerTests.h">
+      <Filter>Source Files\Tests\tools</Filter>
+    </ClInclude>
+    <ClInclude Include="TestFramework\Assert.h">
+      <Filter>Source Files\Tests\test_framework</Filter>
+    </ClInclude>
+    <ClInclude Include="TestFramework\ITestModule.h">
+      <Filter>Source Files\Tests\test_framework</Filter>
+    </ClInclude>
+    <ClInclude Include="TestFramework\TestFramework.h">
+      <Filter>Source Files\Tests\test_framework</Filter>
+    </ClInclude>
+    <ClInclude Include="..\tools\message_logger.h">
+      <Filter>Source Files\Tools</Filter>
+    </ClInclude>
+    <ClInclude Include="..\api\http_request_router.h">
+      <Filter>Source Files\api</Filter>
+    </ClInclude>
+    <ClInclude Include="..\api\ihttp_request_handler.h">
+      <Filter>Source Files\api</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>
