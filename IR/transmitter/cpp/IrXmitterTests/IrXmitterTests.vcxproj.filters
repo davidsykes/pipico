@@ -31,6 +31,12 @@
     <Filter Include="Source Files\api">
       <UniqueIdentifier>{8f62f2fc-e9eb-40af-a5db-f55b282a16bb}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Tests\tcp_server">
+      <UniqueIdentifier>{a9274f04-c2c6-4b2f-ab30-c0b460142dea}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\tcp_server">
+      <UniqueIdentifier>{6ea779e1-5593-48ca-80f1-f948f17fe3a9}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="IrXmitterTests.cpp">
@@ -57,6 +63,12 @@
     <ClCompile Include="..\api\http_request_router.cpp">
       <Filter>Source Files\api</Filter>
     </ClCompile>
+    <ClCompile Include="tcp_server\http_response_packager_tests.cpp">
+      <Filter>Source Files\Tests\tcp_server</Filter>
+    </ClCompile>
+    <ClCompile Include="..\tcp_server\http_response_packager.cpp">
+      <Filter>Source Files\tcp_server</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="api\http_request_router_tests.h">
@@ -82,6 +94,12 @@
     </ClInclude>
     <ClInclude Include="..\api\ihttp_request_handler.h">
       <Filter>Source Files\api</Filter>
+    </ClInclude>
+    <ClInclude Include="tcp_server\http_response_packager_tests.h">
+      <Filter>Source Files\Tests\tcp_server</Filter>
+    </ClInclude>
+    <ClInclude Include="..\tcp_server\http_response_packager.h">
+      <Filter>Source Files\tcp_server</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

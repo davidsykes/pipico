@@ -5,8 +5,7 @@ const std::string header2 = "\r\nContent-Type : text/plain; charset=utf-8\r\n\r\
 
 int HttpResponsePackager::RouteRequestAndPackageResponse(const char* request, std::string& header, std::string& body)
 {
-	//body = requestRouter.RouteHttpRequest(request);
-	body = "Hello World";
+	body = requestRouter.RouteHttpRequest(request);
 
 	if (body.length() > 0)
 	{
