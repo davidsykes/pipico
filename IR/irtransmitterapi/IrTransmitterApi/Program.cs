@@ -56,7 +56,7 @@ static void AddActionEndpoints(WebApplication app, ProgramServices programServic
 {
     app.MapPut("/uploadcodes", async delegate (HttpContext context)
     {
-        programServices.ControlModule.UploadCodes();
+        Logic.Control.ControlModule.UploadCodes();
         return "Ok";
     })
     .WithName("UploadCodes")
@@ -65,7 +65,7 @@ static void AddActionEndpoints(WebApplication app, ProgramServices programServic
 
     app.MapPut("/record", async delegate (HttpContext context)
     {
-        programServices.ControlModule.Record();
+        Logic.Control.ControlModule.Record();
         return "Ok";
     })
     .WithName("Record")
