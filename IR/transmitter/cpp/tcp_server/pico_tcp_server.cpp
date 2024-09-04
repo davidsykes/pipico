@@ -31,6 +31,13 @@ int process_http_request(TCP_CONNECT_STATE_T* con_state)
 #endif
         if ((con_state->header_len >= sizeof(con_state->headers)) || (con_state->result_len >= sizeof(con_state->result)))
         {
+#ifdef DEBUG_REQUEST_RESPONSE
+            printf("RESPOSE LENGTH EXCEEDED: %d,%d > %d,%d\n",
+            con_state->header_len,
+            con_state->result_len,
+            sizeof(con_state->headers),
+            sizeof(con_state->result));
+#endif
             return make_error(con_state, 500,"Response length exceeded");
         }
         strcpy(con_state->headers, header.c_str());
