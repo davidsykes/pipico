@@ -1,12 +1,12 @@
 #include <stdio.h>
-#include "pico_scope_record_and_post.h"
+#include "pico_scope_recorder.h"
 #include "pico_scope.h"
 
 #define SCOPE_API_SERVER_IP "192.168.1.87"
 #define SCOPE_API_PORT 5000
 #define TRACE_DATA_CREATE_URL "/trace"
 
-std::string PicoScopeRecordAndPost::RecordAndPostTrace()
+std::string PicoScopeRecorder::RecordTrace()
 {
     printf("RECORD AND POST\n");
     return run_scope(hw_if, config);

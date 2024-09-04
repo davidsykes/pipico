@@ -99,13 +99,13 @@
     <ClCompile Include="..\pico_scope\pico_scope.cpp">
       <Filter>Source Files\pico_scope</Filter>
     </ClCompile>
-    <ClCompile Include="..\pico_scope\pico_scope_record_and_post.cpp">
-      <Filter>Source Files\pico_scope</Filter>
-    </ClCompile>
     <ClCompile Include="..\pico_scope\pico_scope_trace.cpp">
       <Filter>Source Files\pico_scope</Filter>
     </ClCompile>
     <ClCompile Include="..\pico_scope\trace_data_formatter.cpp">
+      <Filter>Source Files\pico_scope</Filter>
+    </ClCompile>
+    <ClCompile Include="..\pico_scope\pico_scope_recorder.cpp">
       <Filter>Source Files\pico_scope</Filter>
     </ClCompile>
   </ItemGroup>
@@ -158,11 +158,11 @@
     <ClInclude Include="..\pico_scope\pico_scope_configuration.h">
       <Filter>Source Files\pico_scope</Filter>
     </ClInclude>
-    <ClInclude Include="..\pico_scope\pico_scope_record_and_post.h">
-      <Filter>Source Files\pico_scope</Filter>
-    </ClInclude>
     <ClInclude Include="Mocks\MockHardwareInteface.h">
       <Filter>Source Files\Tests\Mocks</Filter>
+    </ClInclude>
+    <ClInclude Include="..\pico_scope\pico_scope_recorder.h">
+      <Filter>Source Files\pico_scope</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
