@@ -1,9 +1,9 @@
-#include "log_display_widget.h"
+#include "log_display_action.h"
 #include <sstream>
 
 
 
-std::string LogDisplayWidget::RenderWidget()
+std::string LogDisplayAction::ApiAction()
 {
 	auto logs = messageLogger.Logs();
 	std::ostringstream str;

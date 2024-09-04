@@ -37,11 +37,20 @@
     <Filter Include="Source Files\tcp_server">
       <UniqueIdentifier>{6ea779e1-5593-48ca-80f1-f948f17fe3a9}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\Tests\tcp_server\widgets">
-      <UniqueIdentifier>{99a14167-2675-4d2b-9c0b-9dadbf927151}</UniqueIdentifier>
+    <Filter Include="Source Files\api\api_actions">
+      <UniqueIdentifier>{30c0d628-7e42-432d-b712-4c12149d9b66}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\tcp_server\widgets">
-      <UniqueIdentifier>{4ce47915-ce92-4316-a6be-f1d5f255e32b}</UniqueIdentifier>
+    <Filter Include="Source Files\Tests\api\api_actions">
+      <UniqueIdentifier>{3d659bc5-8138-477c-9023-0d8669a06a4a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Tests\pico_scope">
+      <UniqueIdentifier>{6b97764e-2e4e-4d67-91a5-ad1dbfceffe9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\pico_scope">
+      <UniqueIdentifier>{9050a46a-6731-4f18-9734-8c3c1d7fbbab}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Tests\Mocks">
+      <UniqueIdentifier>{b69c9741-cde0-45c6-aa10-dedf8bd5e261}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -75,11 +84,29 @@
     <ClCompile Include="..\tcp_server\http_response_packager.cpp">
       <Filter>Source Files\tcp_server</Filter>
     </ClCompile>
-    <ClCompile Include="tcp_server\widgets\logs_display_widget_tests.cpp">
-      <Filter>Source Files\Tests\tcp_server\widgets</Filter>
+    <ClCompile Include="..\api\api_actions\log_display_action.cpp">
+      <Filter>Source Files\api\api_actions</Filter>
     </ClCompile>
-    <ClCompile Include="..\tcp_server\widgets\log_display_widget.cpp">
-      <Filter>Source Files\tcp_server\widgets</Filter>
+    <ClCompile Include="api\api_actions\logs_display_action_tests.cpp">
+      <Filter>Source Files\Tests\api\api_actions</Filter>
+    </ClCompile>
+    <ClCompile Include="pico_scope\PicoScopeTests.cpp">
+      <Filter>Source Files\Tests\pico_scope</Filter>
+    </ClCompile>
+    <ClCompile Include="pico_scope\TraceDataFormatterTests.cpp">
+      <Filter>Source Files\Tests\pico_scope</Filter>
+    </ClCompile>
+    <ClCompile Include="..\pico_scope\pico_scope.cpp">
+      <Filter>Source Files\pico_scope</Filter>
+    </ClCompile>
+    <ClCompile Include="..\pico_scope\pico_scope_record_and_post.cpp">
+      <Filter>Source Files\pico_scope</Filter>
+    </ClCompile>
+    <ClCompile Include="..\pico_scope\pico_scope_trace.cpp">
+      <Filter>Source Files\pico_scope</Filter>
+    </ClCompile>
+    <ClCompile Include="..\pico_scope\trace_data_formatter.cpp">
+      <Filter>Source Files\pico_scope</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -113,14 +140,32 @@
     <ClInclude Include="..\tcp_server\http_response_packager.h">
       <Filter>Source Files\tcp_server</Filter>
     </ClInclude>
-    <ClInclude Include="tcp_server\widgets\logs_display_widget_tests.h">
-      <Filter>Source Files\Tests\tcp_server\widgets</Filter>
+    <ClInclude Include="..\api\api_actions\iapi_action.h">
+      <Filter>Source Files\api\api_actions</Filter>
     </ClInclude>
-    <ClInclude Include="..\tcp_server\widgets\iwidget.h">
-      <Filter>Source Files\tcp_server\widgets</Filter>
+    <ClInclude Include="..\api\api_actions\log_display_action.h">
+      <Filter>Source Files\api\api_actions</Filter>
     </ClInclude>
-    <ClInclude Include="..\tcp_server\widgets\log_display_widget.h">
-      <Filter>Source Files\tcp_server\widgets</Filter>
+    <ClInclude Include="api\api_actions\logs_display_action_tests.h">
+      <Filter>Source Files\Tests\api\api_actions</Filter>
+    </ClInclude>
+    <ClInclude Include="pico_scope\PicoScopeTests.h">
+      <Filter>Source Files\Tests\pico_scope</Filter>
+    </ClInclude>
+    <ClInclude Include="pico_scope\TraceDataFormatterTests.h">
+      <Filter>Source Files\Tests\pico_scope</Filter>
+    </ClInclude>
+    <ClInclude Include="..\pico_scope\pico_scope.h">
+      <Filter>Source Files\pico_scope</Filter>
+    </ClInclude>
+    <ClInclude Include="..\pico_scope\pico_scope_configuration.h">
+      <Filter>Source Files\pico_scope</Filter>
+    </ClInclude>
+    <ClInclude Include="..\pico_scope\pico_scope_record_and_post.h">
+      <Filter>Source Files\pico_scope</Filter>
+    </ClInclude>
+    <ClInclude Include="Mocks\MockHardwareInteface.h">
+      <Filter>Source Files\Tests\Mocks</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

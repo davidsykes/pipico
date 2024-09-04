@@ -1,7 +1,7 @@
 #pragma once
 #include "TestFramework.h"
 
-class LogsDisplayWidgetTests : public ITestModule
+class TraceDataFormatterTests : public ITestModule
 {
 	virtual void CleanUpAfterTests();
 public:

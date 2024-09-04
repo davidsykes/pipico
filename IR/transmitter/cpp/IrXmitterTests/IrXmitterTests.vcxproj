@@ -128,29 +128,41 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="..\api\api_actions\log_display_action.cpp" />
     <ClCompile Include="..\api\http_request_router.cpp" />
+    <ClCompile Include="..\pico_scope\pico_scope.cpp" />
+    <ClCompile Include="..\pico_scope\pico_scope_record_and_post.cpp" />
+    <ClCompile Include="..\pico_scope\pico_scope_trace.cpp" />
+    <ClCompile Include="..\pico_scope\trace_data_formatter.cpp" />
     <ClCompile Include="..\tcp_server\http_response_packager.cpp" />
-    <ClCompile Include="..\tcp_server\widgets\log_display_widget.cpp" />
     <ClCompile Include="..\tools\message_logger.cpp" />
+    <ClCompile Include="api\api_actions\logs_display_action_tests.cpp" />
     <ClCompile Include="api\http_request_router_tests.cpp" />
     <ClCompile Include="IrXmitterTests.cpp" />
+    <ClCompile Include="pico_scope\PicoScopeTests.cpp" />
+    <ClCompile Include="pico_scope\TraceDataFormatterTests.cpp" />
     <ClCompile Include="tcp_server\http_response_packager_tests.cpp" />
-    <ClCompile Include="tcp_server\widgets\logs_display_widget_tests.cpp" />
     <ClCompile Include="TestFramework\Assert.cpp" />
     <ClCompile Include="TestFramework\TestFramework.cpp" />
     <ClCompile Include="TestFramework\TestModule.cpp" />
     <ClCompile Include="tools\MessageLoggerTests.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\api\api_actions\iapi_action.h" />
+    <ClInclude Include="..\api\api_actions\log_display_action.h" />
     <ClInclude Include="..\api\http_request_router.h" />
     <ClInclude Include="..\api\ihttp_request_handler.h" />
+    <ClInclude Include="..\pico_scope\pico_scope.h" />
+    <ClInclude Include="..\pico_scope\pico_scope_configuration.h" />
+    <ClInclude Include="..\pico_scope\pico_scope_record_and_post.h" />
     <ClInclude Include="..\tcp_server\http_response_packager.h" />
-    <ClInclude Include="..\tcp_server\widgets\iwidget.h" />
-    <ClInclude Include="..\tcp_server\widgets\log_display_widget.h" />
     <ClInclude Include="..\tools\message_logger.h" />
+    <ClInclude Include="api\api_actions\logs_display_action_tests.h" />
     <ClInclude Include="api\http_request_router_tests.h" />
+    <ClInclude Include="Mocks\MockHardwareInteface.h" />
+    <ClInclude Include="pico_scope\PicoScopeTests.h" />
+    <ClInclude Include="pico_scope\TraceDataFormatterTests.h" />
     <ClInclude Include="tcp_server\http_response_packager_tests.h" />
-    <ClInclude Include="tcp_server\widgets\logs_display_widget_tests.h" />
     <ClInclude Include="TestFramework\Assert.h" />
     <ClInclude Include="TestFramework\ITestModule.h" />
     <ClInclude Include="TestFramework\TestFramework.h" />
