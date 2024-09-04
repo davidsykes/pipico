@@ -1,6 +1,7 @@
 ﻿using DSLogging;
 using DSLogging.Loggers;
 using Logic.Codes;
+using Logic.Control;
 using Logic.Database;
 using SQLiteLibrary;
 
@@ -12,6 +13,8 @@ namespace Logic
         public IDatabaseAccess DatabaseAccess { get; private set; }
         public TraceJsonToIrCodeDefinitionConverter TraceJsonToIrCodeDefinitionConverter { get; private set; }
 
+        public ControlModule ControlModule { get; private set; }
+
         public ProgramServices(ProgramParameters parameters)
         {
             Logger = SetUpLogging(parameters);
@@ -22,6 +25,7 @@ namespace Logic
             var systemWrapper = new SystemWrapper.SystemWrapper();
             DatabaseAccess = new DatabaseAccess(lockingDatabaseConnection, systemWrapper);
             TraceJsonToIrCodeDefinitionConverter = new TraceJsonToIrCodeDefinitionConverter();
+            ControlModule = new ControlModule();
         }
 
         private static IDSLogger SetUpLogging(ProgramParameters parameters)

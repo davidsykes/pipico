@@ -29,13 +29,15 @@ try
     logger = programServices.Logger;
     programServices.DatabaseAccess.Log("Micro service started");
 
-    AddOptionEndpoints(app, programServices);
-
-    AddCodeEndpoints(app, programServices);
-
-    AddSequenceEndpoints(app, programServices);
+    AddActionEndpoints(app, programServices);
 
     AddLoggingEndpoints(app, programServices);
+
+    //AddOptionEndpoints(app, programServices);
+
+    //AddCodeEndpoints(app, programServices);
+
+    //AddSequenceEndpoints(app, programServices);
 
     app.Run();
 }
@@ -48,6 +50,26 @@ catch (ApplicationParameterException ex)
 {
     logger.Log(DSLogLevel.Error, ex.Message);
     Console.WriteLine(ex.Message);
+}
+
+static void AddActionEndpoints(WebApplication app, ProgramServices programServices)
+{
+    app.MapPut("/uploadcodes", async delegate (HttpContext context)
+    {
+        programServices.ControlModule.UploadCodes();
+        return "Ok";
+    })
+    .WithName("UploadCodes")
+    .WithTags("Actions");
+
+
+    app.MapPut("/record", async delegate (HttpContext context)
+    {
+        programServices.ControlModule.Record();
+        return "Ok";
+    })
+    .WithName("Record")
+    .WithTags("Actions");
 }
 
 static void AddLoggingEndpoints(WebApplication app, ProgramServices programServices)
@@ -87,7 +109,7 @@ static void AddCodeEndpoints(WebApplication app, ProgramServices programServices
         return codes;
     })
    .WithName("Codes")
-   .WithTags("Codes");
+   .WithTags("{review}Codes");
 
     app.MapPut("/trace", async delegate (HttpContext context)
     {
@@ -95,14 +117,14 @@ static void AddCodeEndpoints(WebApplication app, ProgramServices programServices
         return CreateNewIrCode(jsonString, programServices);
     })
     .WithName("Trace")
-    .WithTags("Codes");
+    .WithTags("{review}Codes");
 
     app.MapPut("/manualsetcodedata", (string jsonString) =>
     {
         return CreateNewIrCode(jsonString, programServices);
     })
     .WithName("SetCodeNameManually")
-    .WithTags("Codes");
+    .WithTags("{review}Codes");
 
     app.MapPut("/setcodename", (string code, string name) =>
     {
@@ -110,14 +132,14 @@ static void AddCodeEndpoints(WebApplication app, ProgramServices programServices
         Console.WriteLine($"Set code {code} to {name}");
     })
     .WithName("SetCodeName")
-    .WithTags("Codes");
+    .WithTags("{review}Codes");
 
     app.MapPut("/deletecode", (string code) =>
     {
         programServices.DatabaseAccess.DeleteCode(code);
     })
     .WithName("DeleteCode")
-    .WithTags("Codes");
+    .WithTags("{review}Codes");
 }
 
 static string CreateNewIrCode(string jsonString, ProgramServices programServices)
@@ -149,7 +171,7 @@ static void AddSequenceEndpoints(WebApplication app, ProgramServices programServ
         Console.WriteLine($"Set sequence {sequence} {code} {position}");
     })
     .WithName("SetSequence")
-    .WithTags("Sequences");
+    .WithTags("{review}Sequences");
 
     app.MapPut("/deletesequence", (string sequence, string code, int position) =>
     {
@@ -157,7 +179,7 @@ static void AddSequenceEndpoints(WebApplication app, ProgramServices programServ
         Console.WriteLine($"Delete sequence {sequence} {code} {position}");
     })
     .WithName("DeleteSequence")
-    .WithTags("Sequences");
+    .WithTags("{review}Sequences");
 
     app.MapGet("/sequences", () =>
     {
@@ -165,7 +187,7 @@ static void AddSequenceEndpoints(WebApplication app, ProgramServices programServ
         return value;
     })
     .WithName("Sequences")
-    .WithTags("Sequences");
+    .WithTags("{review}Sequences");
 }
 
 static void AddOptionEndpoints(WebApplication app, ProgramServices programServices)
@@ -178,7 +200,7 @@ static void AddOptionEndpoints(WebApplication app, ProgramServices programServic
         return value;
     })
     .WithName("Option")
-    .WithTags("Options");
+    .WithTags("{review}Options");
 
     app.MapPut("/setoption", (string name, string value) =>
     {
@@ -188,5 +210,5 @@ static void AddOptionEndpoints(WebApplication app, ProgramServices programServic
         Console.WriteLine($"Set option {name} {value}");
     })
     .WithName("SetOption")
-    .WithTags("Options");
+    .WithTags("{review}Options");
 }
