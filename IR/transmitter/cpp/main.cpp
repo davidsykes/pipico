@@ -5,6 +5,8 @@
 #include "codes/ir_code_repository.h"
 #include "tcp_server/http_response_packager.h"
 #include "tcp_server/pico_tcp_server.h"
+#include "api/api_actions/log_display_action.h"
+#include "pico_scope/pico_scope_configuration.h"
 
 #define WIFI_SSID "a907"
 #define WIFI_PASSWORD "?thisistheWIFIyouhavebeenlookingfor1398"
@@ -27,15 +29,15 @@ int main()
 
    //CodesDisplayRequestHandler codesDisplayRequestHandler;
    //CodesRecordRequestHandler codesRecordRequestHandler;
-   // LogDisplayWidget LogDisplayWidget(messageLogger);
-   // HttpServerHomePage homeHandler(/*codesDisplayRequestHandler, codesRecordRequestHandler,*/ LogDisplayWidget);
+   LogDisplayAction logDisplayAction(messageLogger);
+   //HttpServerHomePage homeHandler(/*codesDisplayRequestHandler, codesRecordRequestHandler,*/ LogDisplayWidget);
 
-   // PicoScopeConfiguration ir_scope_configuration(6);
-   // PicoScopeRecordAndPost picoScopeRecordAndPost(hw_if, ir_scope_configuration, restHandler);
-   // HttpServerRecordHandler recordHandler(picoScopeRecordAndPost);
+   //PicoScopeConfiguration ir_scope_configuration(6);
+   //PicoScopeRecordAndPost picoScopeRecordAndPost(hw_if, ir_scope_configuration, restHandler);
+   //HttpServerRecordHandler recordHandler(picoScopeRecordAndPost);
 
-   // HttpRequestRouter httpRequestRouter(homeHandler, recordHandler);
-   HttpResponsePackager httpResponsePackager; //(/*httpRequestRouter*/);
+   HttpRequestRouter httpRequestRouter(logDisplayAction, logDisplayAction);
+   HttpResponsePackager httpResponsePackager(httpRequestRouter);
    main_pico_tcp_server(&httpResponsePackager);
 
    hw_if.cyw43_arch_deinit();
