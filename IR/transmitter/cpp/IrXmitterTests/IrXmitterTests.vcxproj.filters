@@ -108,6 +108,9 @@
     <ClCompile Include="..\pico_scope\pico_scope_recorder.cpp">
       <Filter>Source Files\pico_scope</Filter>
     </ClCompile>
+    <ClCompile Include="..\api\api_actions\record_ir_action.cpp">
+      <Filter>Source Files\api\api_actions</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="api\http_request_router_tests.h">
@@ -163,6 +166,9 @@
     </ClInclude>
     <ClInclude Include="..\pico_scope\pico_scope_recorder.h">
       <Filter>Source Files\pico_scope</Filter>
+    </ClInclude>
+    <ClInclude Include="..\api\api_actions\record_ir_action.h">
+      <Filter>Source Files\api\api_actions</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
