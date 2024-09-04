@@ -2,6 +2,7 @@
 #include <cstring>
 #include "http_response_packager.h"
 
+//#define DEBUG_REQUEST_RESPONSE
 
 int make_error(TCP_CONNECT_STATE_T* con_state, int error, const char*message)
 {
@@ -24,6 +25,10 @@ int process_http_request(TCP_CONNECT_STATE_T* con_state)
     {
         con_state->header_len = header.length();
         con_state->result_len = body.length();
+#ifdef DEBUG_REQUEST_RESPONSE
+        printf("Header: %s\n", header.c_str());
+        printf("Body: %s\n", body.c_str());
+#endif
         if ((con_state->header_len >= sizeof(con_state->headers)) || (con_state->result_len >= sizeof(con_state->result)))
         {
             return make_error(con_state, 500,"Response length exceeded");

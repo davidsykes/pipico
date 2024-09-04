@@ -6,7 +6,9 @@
 #include "tcp_server/http_response_packager.h"
 #include "tcp_server/pico_tcp_server.h"
 #include "api/api_actions/log_display_action.h"
+#include "api/api_actions/record_ir_action.h"
 #include "pico_scope/pico_scope_configuration.h"
+#include "pico_scope/pico_scope_recorder.h"
 
 #define WIFI_SSID "a907"
 #define WIFI_PASSWORD "?thisistheWIFIyouhavebeenlookingfor1398"
@@ -32,11 +34,12 @@ int main()
    LogDisplayAction logDisplayAction(messageLogger);
    //HttpServerHomePage homeHandler(/*codesDisplayRequestHandler, codesRecordRequestHandler,*/ LogDisplayWidget);
 
-   //PicoScopeConfiguration ir_scope_configuration(6);
-   //PicoScopeRecordAndPost picoScopeRecordAndPost(hw_if, ir_scope_configuration, restHandler);
+   PicoScopeConfiguration ir_scope_configuration(6);
+   PicoScopeRecorder picoScopeRecorder(hw_if, ir_scope_configuration);
+   RecordIrAction recordIrAction(picoScopeRecorder);
    //HttpServerRecordHandler recordHandler(picoScopeRecordAndPost);
 
-   HttpRequestRouter httpRequestRouter(logDisplayAction, logDisplayAction);
+   HttpRequestRouter httpRequestRouter(logDisplayAction, recordIrAction);
    HttpResponsePackager httpResponsePackager(httpRequestRouter);
    main_pico_tcp_server(&httpResponsePackager);
 

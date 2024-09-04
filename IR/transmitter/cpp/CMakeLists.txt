@@ -8,9 +8,14 @@ add_executable(test
         main.cpp
         api/http_request_router.cpp
         api/api_actions/log_display_action.cpp
+        api/api_actions/record_ir_action.cpp
         hw_if/hardware_interface.c
         hw_if/pico_hardware_interface.cpp
         gpio/gpio_input.cpp
+        pico_scope/pico_scope_recorder.cpp
+        pico_scope/pico_scope.cpp
+        pico_scope/trace_data_formatter.cpp
+        pico_scope/pico_scope_trace.cpp
         tcp_server/pico_tcp_server.c
         tcp_server/pico_tcp_server.cpp
         tcp_server/http_response_packager.cpp
