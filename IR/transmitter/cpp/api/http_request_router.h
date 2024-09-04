@@ -1,5 +1,5 @@
 #pragma once
-#include "ihttp_request_handler.h"
+#include "api_actions/iapi_action.h"
 
 class IHttpRequestRouter
 {
@@ -9,14 +9,14 @@ public:
 
 class HttpRequestRouter : public IHttpRequestRouter
 {
-    IHttpRequestHandler& homeRequestHandler;
-    IHttpRequestHandler& recordRequestHandler;
+    IApiAction& homeRequestHandler;
+    IApiAction& recordRequestHandler;
 
     virtual std::string RouteHttpRequest(const char* request);
 
 public:
-    HttpRequestRouter(IHttpRequestHandler& homeHandler,
-        IHttpRequestHandler& recordHandler)
+    HttpRequestRouter(IApiAction& homeHandler,
+        IApiAction& recordHandler)
         : homeRequestHandler(homeHandler),
         recordRequestHandler(recordHandler)
     {}

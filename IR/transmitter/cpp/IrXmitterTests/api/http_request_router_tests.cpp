@@ -2,11 +2,11 @@
 #include "http_request_router_tests.h"
 #include "../../api/http_request_router.h"
 
-class MockRequestHandler : public IHttpRequestHandler
+class MockRequestHandler : public IApiAction
 {
 	std::string requestType;
 
-	virtual std::string ProcessHttpRequest(const char* request) { return requestType; };
+	virtual std::string ApiAction() { return requestType; };
 
 public:
 	MockRequestHandler(const char* type) : requestType(type) {}

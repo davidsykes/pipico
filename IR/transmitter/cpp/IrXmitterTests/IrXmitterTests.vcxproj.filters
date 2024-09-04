@@ -131,9 +131,6 @@
     <ClInclude Include="..\api\http_request_router.h">
       <Filter>Source Files\api</Filter>
     </ClInclude>
-    <ClInclude Include="..\api\ihttp_request_handler.h">
-      <Filter>Source Files\api</Filter>
-    </ClInclude>
     <ClInclude Include="tcp_server\http_response_packager_tests.h">
       <Filter>Source Files\Tests\tcp_server</Filter>
     </ClInclude>

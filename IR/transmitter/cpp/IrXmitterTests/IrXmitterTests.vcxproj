@@ -151,7 +151,6 @@
     <ClInclude Include="..\api\api_actions\iapi_action.h" />
     <ClInclude Include="..\api\api_actions\log_display_action.h" />
     <ClInclude Include="..\api\http_request_router.h" />
-    <ClInclude Include="..\api\ihttp_request_handler.h" />
     <ClInclude Include="..\pico_scope\pico_scope.h" />
     <ClInclude Include="..\pico_scope\pico_scope_configuration.h" />
     <ClInclude Include="..\pico_scope\pico_scope_record_and_post.h" />
