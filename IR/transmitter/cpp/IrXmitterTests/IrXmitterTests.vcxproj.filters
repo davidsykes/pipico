@@ -37,6 +37,12 @@
     <Filter Include="Source Files\tcp_server">
       <UniqueIdentifier>{6ea779e1-5593-48ca-80f1-f948f17fe3a9}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Tests\tcp_server\widgets">
+      <UniqueIdentifier>{99a14167-2675-4d2b-9c0b-9dadbf927151}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\tcp_server\widgets">
+      <UniqueIdentifier>{4ce47915-ce92-4316-a6be-f1d5f255e32b}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="IrXmitterTests.cpp">
@@ -69,6 +75,12 @@
     <ClCompile Include="..\tcp_server\http_response_packager.cpp">
       <Filter>Source Files\tcp_server</Filter>
     </ClCompile>
+    <ClCompile Include="tcp_server\widgets\logs_display_widget_tests.cpp">
+      <Filter>Source Files\Tests\tcp_server\widgets</Filter>
+    </ClCompile>
+    <ClCompile Include="..\tcp_server\widgets\log_display_widget.cpp">
+      <Filter>Source Files\tcp_server\widgets</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="api\http_request_router_tests.h">
@@ -100,6 +112,15 @@
     </ClInclude>
     <ClInclude Include="..\tcp_server\http_response_packager.h">
       <Filter>Source Files\tcp_server</Filter>
+    </ClInclude>
+    <ClInclude Include="tcp_server\widgets\logs_display_widget_tests.h">
+      <Filter>Source Files\Tests\tcp_server\widgets</Filter>
+    </ClInclude>
+    <ClInclude Include="..\tcp_server\widgets\iwidget.h">
+      <Filter>Source Files\tcp_server\widgets</Filter>
+    </ClInclude>
+    <ClInclude Include="..\tcp_server\widgets\log_display_widget.h">
+      <Filter>Source Files\tcp_server\widgets</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
