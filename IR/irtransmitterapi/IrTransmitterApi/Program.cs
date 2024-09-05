@@ -101,114 +101,114 @@ static void AddLoggingEndpoints(WebApplication app, ProgramServices programServi
     .WithTags("Logs");
 }
 
-static void AddCodeEndpoints(WebApplication app, ProgramServices programServices)
-{
-    app.MapGet("/codes", () =>
-    {
-        var codes = programServices.DatabaseAccess.GetCodes();
-        return codes;
-    })
-   .WithName("Codes")
-   .WithTags("{review}Codes");
+//static void AddCodeEndpoints(WebApplication app, ProgramServices programServices)
+//{
+//    app.MapGet("/codes", () =>
+//    {
+//        var codes = programServices.DatabaseAccess.GetCodes();
+//        return codes;
+//    })
+//   .WithName("Codes")
+//   .WithTags("{review}Codes");
 
-    app.MapPut("/trace", async delegate (HttpContext context)
-    {
-        string jsonString = await Tools.GetJSONString(context);
-        return CreateNewIrCode(jsonString, programServices);
-    })
-    .WithName("Trace")
-    .WithTags("{review}Codes");
+//    app.MapPut("/trace", async delegate (HttpContext context)
+//    {
+//        string jsonString = await Tools.GetJSONString(context);
+//        return CreateNewIrCode(jsonString, programServices);
+//    })
+//    .WithName("Trace")
+//    .WithTags("{review}Codes");
 
-    app.MapPut("/manualsetcodedata", (string jsonString) =>
-    {
-        return CreateNewIrCode(jsonString, programServices);
-    })
-    .WithName("SetCodeNameManually")
-    .WithTags("{review}Codes");
+//    app.MapPut("/manualsetcodedata", (string jsonString) =>
+//    {
+//        return CreateNewIrCode(jsonString, programServices);
+//    })
+//    .WithName("SetCodeNameManually")
+//    .WithTags("{review}Codes");
 
-    app.MapPut("/setcodename", (string code, string name) =>
-    {
-        programServices.DatabaseAccess.UpdateCodeName(code, name);
-        Console.WriteLine($"Set code {code} to {name}");
-    })
-    .WithName("SetCodeName")
-    .WithTags("{review}Codes");
+//    app.MapPut("/setcodename", (string code, string name) =>
+//    {
+//        programServices.DatabaseAccess.UpdateCodeName(code, name);
+//        Console.WriteLine($"Set code {code} to {name}");
+//    })
+//    .WithName("SetCodeName")
+//    .WithTags("{review}Codes");
 
-    app.MapPut("/deletecode", (string code) =>
-    {
-        programServices.DatabaseAccess.DeleteCode(code);
-    })
-    .WithName("DeleteCode")
-    .WithTags("{review}Codes");
-}
+//    app.MapPut("/deletecode", (string code) =>
+//    {
+//        programServices.DatabaseAccess.DeleteCode(code);
+//    })
+//    .WithName("DeleteCode")
+//    .WithTags("{review}Codes");
+//}
 
-static string CreateNewIrCode(string jsonString, ProgramServices programServices)
-{
-    try
-    {
-        var irCodeDefinition = Logic.Codes.TraceJsonToIrCodeDefinitionConverter.Convert(jsonString);
+//static string CreateNewIrCode(string jsonString, ProgramServices programServices)
+//{
+//    try
+//    {
+//        var irCodeDefinition = Logic.Codes.TraceJsonToIrCodeDefinitionConverter.Convert(jsonString);
 
-        programServices.DatabaseAccess.UpdateIrCodeDefinition(irCodeDefinition);
-        Console.WriteLine($"Updated ir code {irCodeDefinition.Code}.");
-        programServices.Logger.Log(DSLogLevel.Information, $"Updated ir code {irCodeDefinition.Code}");
-        programServices.DatabaseAccess.Log($"Updated ir code {irCodeDefinition.Code}");
-        return "Ok";
-    }
-    catch (Exception ex)
-    {
-        Console.WriteLine($"Error processing a new ircode: {ex.Message}");
-        Console.WriteLine("\"" + jsonString + "\"");
-    }
+//        programServices.DatabaseAccess.UpdateIrCodeDefinition(irCodeDefinition);
+//        Console.WriteLine($"Updated ir code {irCodeDefinition.Code}.");
+//        programServices.Logger.Log(DSLogLevel.Information, $"Updated ir code {irCodeDefinition.Code}");
+//        programServices.DatabaseAccess.Log($"Updated ir code {irCodeDefinition.Code}");
+//        return "Ok";
+//    }
+//    catch (Exception ex)
+//    {
+//        Console.WriteLine($"Error processing a new ircode: {ex.Message}");
+//        Console.WriteLine("\"" + jsonString + "\"");
+//    }
 
-    return jsonString;
-}
+//    return jsonString;
+//}
 
-static void AddSequenceEndpoints(WebApplication app, ProgramServices programServices)
-{
-    app.MapPut("/setsequence", (string sequence, string code, int position) =>
-    {
-        programServices.DatabaseAccess.UpdateSequence(sequence, code, position);
-        Console.WriteLine($"Set sequence {sequence} {code} {position}");
-    })
-    .WithName("SetSequence")
-    .WithTags("{review}Sequences");
+//static void AddSequenceEndpoints(WebApplication app, ProgramServices programServices)
+//{
+//    app.MapPut("/setsequence", (string sequence, string code, int position) =>
+//    {
+//        programServices.DatabaseAccess.UpdateSequence(sequence, code, position);
+//        Console.WriteLine($"Set sequence {sequence} {code} {position}");
+//    })
+//    .WithName("SetSequence")
+//    .WithTags("{review}Sequences");
 
-    app.MapPut("/deletesequence", (string sequence, string code, int position) =>
-    {
-        programServices.DatabaseAccess.DeleteSequence(sequence, code, position);
-        Console.WriteLine($"Delete sequence {sequence} {code} {position}");
-    })
-    .WithName("DeleteSequence")
-    .WithTags("{review}Sequences");
+//    app.MapPut("/deletesequence", (string sequence, string code, int position) =>
+//    {
+//        programServices.DatabaseAccess.DeleteSequence(sequence, code, position);
+//        Console.WriteLine($"Delete sequence {sequence} {code} {position}");
+//    })
+//    .WithName("DeleteSequence")
+//    .WithTags("{review}Sequences");
 
-    app.MapGet("/sequences", () =>
-    {
-        var value = programServices.DatabaseAccess.GetSequences();
-        return value;
-    })
-    .WithName("Sequences")
-    .WithTags("{review}Sequences");
-}
+//    app.MapGet("/sequences", () =>
+//    {
+//        var value = programServices.DatabaseAccess.GetSequences();
+//        return value;
+//    })
+//    .WithName("Sequences")
+//    .WithTags("{review}Sequences");
+//}
 
-static void AddOptionEndpoints(WebApplication app, ProgramServices programServices)
-{
-    app.MapGet("/option", (string option) =>
-    {
-        var value = programServices.DatabaseAccess.GetOption(option);
-        programServices.Logger.Log(DSLogLevel.Information, $"Fetch option {option}={value}");
-        programServices.DatabaseAccess.Log($"Fetch option {option}={value}");
-        return value;
-    })
-    .WithName("Option")
-    .WithTags("{review}Options");
+//static void AddOptionEndpoints(WebApplication app, ProgramServices programServices)
+//{
+//    app.MapGet("/option", (string option) =>
+//    {
+//        var value = programServices.DatabaseAccess.GetOption(option);
+//        programServices.Logger.Log(DSLogLevel.Information, $"Fetch option {option}={value}");
+//        programServices.DatabaseAccess.Log($"Fetch option {option}={value}");
+//        return value;
+//    })
+//    .WithName("Option")
+//    .WithTags("{review}Options");
 
-    app.MapPut("/setoption", (string name, string value) =>
-    {
-        programServices.Logger.Log(DSLogLevel.Information, $"Set option {name}={value}");
-        programServices.DatabaseAccess.Log($"Set option {name}={value}");
-        programServices.DatabaseAccess.SetOption(name, value);
-        Console.WriteLine($"Set option {name} {value}");
-    })
-    .WithName("SetOption")
-    .WithTags("{review}Options");
-}
+//    app.MapPut("/setoption", (string name, string value) =>
+//    {
+//        programServices.Logger.Log(DSLogLevel.Information, $"Set option {name}={value}");
+//        programServices.DatabaseAccess.Log($"Set option {name}={value}");
+//        programServices.DatabaseAccess.SetOption(name, value);
+//        Console.WriteLine($"Set option {name} {value}");
+//    })
+//    .WithName("SetOption")
+//    .WithTags("{review}Options");
+//}
