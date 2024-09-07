@@ -195,7 +195,7 @@ namespace Tests.Logic
         [Test]
         public void DeleteCodeDeletesTheCode()
         {
-            _db.DeleteCode("123");
+            _db.DeleteCodeRows("123");
 
             var codes = _db.GetCodes();
 

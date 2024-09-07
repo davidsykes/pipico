@@ -7,8 +7,6 @@ namespace Tests.Logic.Codes
 {
     internal class TraceJsonToIrCodeDefinitionConverterTests : TestBase
     {
-        TraceJsonToIrCodeDefinitionConverter _converter;
-
 
         [Test]
         public void ASimpleCodeCanBeConverted()
@@ -21,16 +19,5 @@ namespace Tests.Logic.Codes
             code.Waveform[1].T.Should().Be(3);
             code.Waveform[1].V.Should().Be(4);
         }
-
-
-        #region Support Code
-
-        protected override void SetUpObjectUnderTest()
-        {
-            base.SetUpObjectUnderTest();
-            _converter = new TraceJsonToIrCodeDefinitionConverter();
-        }
-
-        #endregion
     }
 }

@@ -1,31 +1,34 @@
-﻿
-using System.Net.Http;
+﻿using Logic.Codes;
+using Logic.Database;
+using Logic.Network;
 
 namespace Logic.Control
 {
     public class ControlModule
     {
-        public static void Record()
+        readonly IHttpClientWrapper _httpClient;
+        readonly IDatabaseAccess _databaseAccess;
+
+        public ControlModule(IHttpClientWrapper _httpClient, IDatabaseAccess databaseAccess)
         {
-            var httpClient = new HttpClient();
-            var r = GetAsync(httpClient, "http://192.168.1.92/record").Result;
-            Console.WriteLine(r.ToString());
+            this._httpClient = _httpClient;
+            this._databaseAccess = databaseAccess;
         }
 
-        public static void UploadCodes()
+        public void Record()
         {
-            var httpClient = new HttpClient();
-            var r = GetAsync(httpClient, "http://192.168.1.92/bla").Result;
-            Console.WriteLine(r.ToString());
-        }
+            var json = _httpClient.Get("http://192.168.1.92/record");
 
-        private static async Task<string> GetAsync(HttpClient _httpClient, string url)
-        {
-            var response = await _httpClient.GetAsync(url);
-            var responseContent = response.Content;
-            using var reader = new StreamReader(await responseContent.ReadAsStreamAsync());
-            var responseText = await reader.ReadToEndAsync();
-            return responseText;
+            try
+            {
+                var irCodeDefinition = PicoRecordJsonToIrCodeDefinitionConverter.Convert(json);
+                _databaseAccess.UpdateIrCodeDefinition(irCodeDefinition);
+            }
+            catch (Exception ex)
+            {
+                string message = $"Invalid response from pico: {json}";
+                _databaseAccess.Log(message);
+            }
         }
     }
 }

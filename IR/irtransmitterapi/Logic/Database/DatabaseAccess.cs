@@ -73,48 +73,6 @@ namespace Logic.Database
             return options.SingleOrDefault()?.Value ?? "";
         }
 
-        //public string SetIrCodeWavePoints(string irCodeJSON)
-        //{
-        //    try
-        //    {
-        //        var irCode = JsonSerializer.Deserialize<WaveDefinitionFromPico>(irCodeJSON)
-        //            ?? throw new IrTransmitterApiException("Invalid data for SetIrCode");
-        //        var code = irCode.code;
-        //        var time = 0;
-        //        var wavePoints = irCode.wavepoints
-        //            .Select(w =>
-        //            {
-        //                time += w[0];
-        //                return
-        //            new DBOWavePoint
-        //            {
-        //                Code = code.ToString(),
-        //                Time = time,
-        //                Value = w[1]
-        //            };
-        //            }
-        //            );
-
-        //        UpdateIrCodeDefinition(new IRCodeDefinition { Code = code, Waveform = wavePoints.ToList() });
-
-        //        return code;
-        //    }
-        //    catch (JsonException)
-        //    {
-        //        throw new IrTransmitterApiException("Invalid data for SetIrCode");
-        //    }
-        //}
-
-        //private void UpdateIrCodeWavePoints(string code, IEnumerable<DBOWavePoint> wavePoints)
-        //{
-        //    _databaseConnection.RunInTransaction((IDatabaseTransaction t)
-        //        =>
-        //    {
-        //        DeleteCode(t, code);
-        //        t.InsertRows(wavePoints);
-        //    });
-        //}
-
         public void UpdateIrCodeDefinition(IRCodeDefinition iRCodeDefinition)
         {
             var dboWavePoints = iRCodeDefinition.Waveform.Select(w => new DBOWavePoint
@@ -127,7 +85,7 @@ namespace Logic.Database
             _databaseConnection.RunInTransaction((IDatabaseTransaction t)
                 =>
             {
-                DeleteCode(t, iRCodeDefinition.Code);
+                DeleteCodeRows(t, iRCodeDefinition.Code);
                 t.InsertRows(dboWavePoints);
             });
         }
@@ -191,13 +149,13 @@ namespace Logic.Database
             };
         }
 
-        public void DeleteCode(string code)
+        public void DeleteCodeRows(string code)
         {
             _databaseConnection.RunInTransaction((IDatabaseTransaction t)
-            => DeleteCode(t, code));
+            => DeleteCodeRows(t, code));
         }
 
-        private static void DeleteCode(IDatabaseTransaction t, string code)
+        private static void DeleteCodeRows(IDatabaseTransaction t, string code)
         {
             t.DeleteRows<DBOWavePoint>("Code=@Code", new { Code = code });
         }

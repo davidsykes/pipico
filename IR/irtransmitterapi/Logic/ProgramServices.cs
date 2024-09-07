@@ -3,6 +3,7 @@ using DSLogging.Loggers;
 using Logic.Codes;
 using Logic.Control;
 using Logic.Database;
+using Logic.Network;
 using SQLiteLibrary;
 
 namespace Logic
@@ -25,7 +26,8 @@ namespace Logic
             var systemWrapper = new SystemWrapper.SystemWrapper();
             DatabaseAccess = new DatabaseAccess(lockingDatabaseConnection, systemWrapper);
             TraceJsonToIrCodeDefinitionConverter = new TraceJsonToIrCodeDefinitionConverter();
-            ControlModule = new ControlModule();
+            var httpWrapper = new HttpClientWrapper();
+            ControlModule = new ControlModule(httpWrapper, DatabaseAccess);
         }
 
         private static IDSLogger SetUpLogging(ProgramParameters parameters)

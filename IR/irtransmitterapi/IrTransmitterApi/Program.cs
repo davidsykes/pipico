@@ -35,7 +35,7 @@ try
 
     //AddOptionEndpoints(app, programServices);
 
-    //AddCodeEndpoints(app, programServices);
+    AddCodeEndpoints(app, programServices);
 
     //AddSequenceEndpoints(app, programServices);
 
@@ -54,18 +54,9 @@ catch (ApplicationParameterException ex)
 
 static void AddActionEndpoints(WebApplication app, ProgramServices programServices)
 {
-    app.MapPut("/uploadcodes", async delegate (HttpContext context)
-    {
-        Logic.Control.ControlModule.UploadCodes();
-        return "Ok";
-    })
-    .WithName("UploadCodes")
-    .WithTags("Actions");
-
-
     app.MapPut("/record", async delegate (HttpContext context)
     {
-        Logic.Control.ControlModule.Record();
+        programServices.ControlModule.Record();
         return "Ok";
     })
     .WithName("Record")
@@ -101,15 +92,15 @@ static void AddLoggingEndpoints(WebApplication app, ProgramServices programServi
     .WithTags("Logs");
 }
 
-//static void AddCodeEndpoints(WebApplication app, ProgramServices programServices)
-//{
-//    app.MapGet("/codes", () =>
-//    {
-//        var codes = programServices.DatabaseAccess.GetCodes();
-//        return codes;
-//    })
-//   .WithName("Codes")
-//   .WithTags("{review}Codes");
+static void AddCodeEndpoints(WebApplication app, ProgramServices programServices)
+{
+    app.MapGet("/codes", () =>
+    {
+        var codes = programServices.DatabaseAccess.GetCodes();
+        return codes;
+    })
+   .WithName("Codes")
+   .WithTags("{review}Codes");
 
 //    app.MapPut("/trace", async delegate (HttpContext context)
 //    {
@@ -126,21 +117,21 @@ static void AddLoggingEndpoints(WebApplication app, ProgramServices programServi
 //    .WithName("SetCodeNameManually")
 //    .WithTags("{review}Codes");
 
-//    app.MapPut("/setcodename", (string code, string name) =>
-//    {
-//        programServices.DatabaseAccess.UpdateCodeName(code, name);
-//        Console.WriteLine($"Set code {code} to {name}");
-//    })
-//    .WithName("SetCodeName")
-//    .WithTags("{review}Codes");
+    app.MapPut("/setcodename", (string code, string name) =>
+    {
+        programServices.DatabaseAccess.UpdateCodeName(code, name);
+        Console.WriteLine($"Set code {code} to {name}");
+    })
+    .WithName("SetCodeName")
+    .WithTags("{review}Codes");
 
-//    app.MapPut("/deletecode", (string code) =>
-//    {
-//        programServices.DatabaseAccess.DeleteCode(code);
-//    })
-//    .WithName("DeleteCode")
-//    .WithTags("{review}Codes");
-//}
+    app.MapPut("/deletecode", (string code) =>
+    {
+        programServices.DatabaseAccess.DeleteCodeRows(code);
+    })
+    .WithName("DeleteCode")
+    .WithTags("{review}Codes");
+}
 
 //static string CreateNewIrCode(string jsonString, ProgramServices programServices)
 //{
