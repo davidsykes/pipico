@@ -22,7 +22,7 @@ static void TheLogsAreDisplayed()
 
 	std::string result = action.ApiAction();
 
-	AssertEqual("L1<br>L2", result);
+	AssertEqual("There are 2 logs<br>\nL1<br>L2", result);
 }
 
 void LogsDisplayActionTests::RunTests()

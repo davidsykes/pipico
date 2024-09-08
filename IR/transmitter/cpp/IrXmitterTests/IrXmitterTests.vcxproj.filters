@@ -52,6 +52,12 @@
     <Filter Include="Source Files\Tests\Mocks">
       <UniqueIdentifier>{b69c9741-cde0-45c6-aa10-dedf8bd5e261}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Tests\codes">
+      <UniqueIdentifier>{0c2161c4-2251-44d8-8741-863ba0bfff13}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\codes">
+      <UniqueIdentifier>{88c2f74a-3d31-468f-a042-02d4a2bcc831}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="IrXmitterTests.cpp">
@@ -111,6 +117,12 @@
     <ClCompile Include="..\api\api_actions\record_ir_action.cpp">
       <Filter>Source Files\api\api_actions</Filter>
     </ClCompile>
+    <ClCompile Include="codes\CodesRepositoryTests.cpp">
+      <Filter>Source Files\Tests\codes</Filter>
+    </ClCompile>
+    <ClCompile Include="..\codes\ir_codes_repository.cpp">
+      <Filter>Source Files\codes</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="api\http_request_router_tests.h">
@@ -169,6 +181,15 @@
     </ClInclude>
     <ClInclude Include="..\api\api_actions\record_ir_action.h">
       <Filter>Source Files\api\api_actions</Filter>
+    </ClInclude>
+    <ClInclude Include="codes\CodesRepositoryTests.h">
+      <Filter>Source Files\Tests\codes</Filter>
+    </ClInclude>
+    <ClInclude Include="..\codes\ir_code.h">
+      <Filter>Source Files\codes</Filter>
+    </ClInclude>
+    <ClInclude Include="..\codes\ir_codes_repository.h">
+      <Filter>Source Files\codes</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

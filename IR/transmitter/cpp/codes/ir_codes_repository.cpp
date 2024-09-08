@@ -1,5 +1,7 @@
+#include "ir_codes_repository.h"
 
 #define NUMBER_OF_CODES 1
+
 
 char CodeNametestcode[] = "testcode";
 int CodeSizetestcode = 68;
@@ -9,3 +11,20 @@ int CodeTimestestcode[] = {0, 4509, 9024, 9600, 11268, 11821, 13511, 14062, 1575
 
 char* codeNames[NUMBER_OF_CODES] = { CodeNametestcode };
 
+//char** code_names[] = { CodeNametestcode };
+
+IrCodesRepository::IrCodesRepository()
+{
+	for (int i = 0; i < NUMBER_OF_CODES; ++i)
+	{
+		IrCode code;
+		code.Name = codeNames[i];
+		codes.push_back(std::move(code));
+		IrCode& last = codes.back();
+	}
+}
+
+IrCode IrCodesRepository::First()
+{
+	return codes[0];
+}
