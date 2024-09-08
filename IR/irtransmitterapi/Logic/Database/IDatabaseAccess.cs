@@ -6,6 +6,7 @@ namespace Logic.Database
     public interface IDatabaseAccess
     {
         IList<IRCodeDefinition> GetCodes();
+        IRCodeDefinition? GetCode(string codeName);
         string GetOption(string optionName);
         DBOLog Log(string text);
         IList<DBOLog> GetLogs(int count);

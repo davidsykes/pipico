@@ -13,8 +13,8 @@ namespace Logic
         public IDSLogger Logger { get; private set; }
         public IDatabaseAccess DatabaseAccess { get; private set; }
         public TraceJsonToIrCodeDefinitionConverter TraceJsonToIrCodeDefinitionConverter { get; private set; }
-
         public ControlModule ControlModule { get; private set; }
+        public CodeFormatter CodeFormatter { get; private set; }
 
         public ProgramServices(ProgramParameters parameters)
         {
@@ -28,6 +28,7 @@ namespace Logic
             TraceJsonToIrCodeDefinitionConverter = new TraceJsonToIrCodeDefinitionConverter();
             var httpWrapper = new HttpClientWrapper();
             ControlModule = new ControlModule(httpWrapper, DatabaseAccess);
+            CodeFormatter = new CodeFormatter();
         }
 
         private static IDSLogger SetUpLogging(ProgramParameters parameters)

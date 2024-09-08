@@ -100,22 +100,34 @@ static void AddCodeEndpoints(WebApplication app, ProgramServices programServices
         return codes;
     })
    .WithName("Codes")
-   .WithTags("{review}Codes");
+   .WithTags("Codes");
 
-//    app.MapPut("/trace", async delegate (HttpContext context)
-//    {
-//        string jsonString = await Tools.GetJSONString(context);
-//        return CreateNewIrCode(jsonString, programServices);
-//    })
-//    .WithName("Trace")
-//    .WithTags("{review}Codes");
+    app.MapGet("/code", (string name) =>
+    {
+        var code = programServices.DatabaseAccess.GetCode(name);
+        if (code == null)
+        {
+            return $"Code {name} not found";
+        }
+        return programServices.CodeFormatter.FormatCodeCPlusPlus(code);
+    })
+   .WithName("Code")
+   .WithTags("Codes");
 
-//    app.MapPut("/manualsetcodedata", (string jsonString) =>
-//    {
-//        return CreateNewIrCode(jsonString, programServices);
-//    })
-//    .WithName("SetCodeNameManually")
-//    .WithTags("{review}Codes");
+    //    app.MapPut("/trace", async delegate (HttpContext context)
+    //    {
+    //        string jsonString = await Tools.GetJSONString(context);
+    //        return CreateNewIrCode(jsonString, programServices);
+    //    })
+    //    .WithName("Trace")
+    //    .WithTags("{review}Codes");
+
+    //    app.MapPut("/manualsetcodedata", (string jsonString) =>
+    //    {
+    //        return CreateNewIrCode(jsonString, programServices);
+    //    })
+    //    .WithName("SetCodeNameManually")
+    //    .WithTags("{review}Codes");
 
     app.MapPut("/setcodename", (string code, string name) =>
     {

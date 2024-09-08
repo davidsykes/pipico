@@ -2,7 +2,6 @@
 using Logic.Database.DatabaseObjects.IR;
 using Logic.DataObjects;
 using SQLiteLibrary;
-using System.Text.Json;
 using SystemWrapper;
 
 namespace Logic.Database
@@ -22,6 +21,11 @@ namespace Logic.Database
         {
             var wavePoints = _databaseConnection.Select<DBOWavePoint>();
 
+            return ConvertWavePointsIntoCodes(wavePoints);
+        }
+
+        static IList<IRCodeDefinition> ConvertWavePointsIntoCodes(IList<DBOWavePoint> wavePoints)
+        {
             var results = from p in wavePoints
                           group p by p.Code into g
                           select new { Code = g.Key, WavePoints = g.ToList() };
@@ -33,6 +37,18 @@ namespace Logic.Database
                     Waveform = m.WavePoints.OrderBy(s => s.Time)
                     .Select(i => new WavePoint { T = i.Time, V = i.Value }).ToList()
                 }).ToList();
+        }
+
+        public IRCodeDefinition? GetCode(string codeName)
+        {
+            var wavePoints = _databaseConnection.Select<DBOWavePoint>(
+                null,
+                "Code=@Code",
+                null,
+                new { Code = codeName }
+            );
+            var codes = ConvertWavePointsIntoCodes(wavePoints);
+            return codes.SingleOrDefault();
         }
 
         public DBOLog Log(string text)
@@ -102,7 +118,7 @@ namespace Logic.Database
             _databaseConnection.RunInTransaction((IDatabaseTransaction t)
                 => t.ExecuteNonQuery(
                     "UPDATE IRWavePoints SET Code=@NewName WHERE Code=@CurrentName",
-                    new { CurrentName = code, NewName = name}));
+                    new { CurrentName = code, NewName = name }));
         }
 
         public void UpdateSequence(string sequence, string code, int position)
@@ -132,15 +148,15 @@ namespace Logic.Database
             var sequences = _databaseConnection.Select<DBOSequence>();
 
             var grouped = from s in sequences
-                    group s by s.Sequence
+                          group s by s.Sequence
                     into g
-                    select new IRSequence
-                    {
-                        Name = g.Key,
-                        Codes = g
-                        .OrderBy(i => i.Position)
-                        .Select(h => h.Code).ToList(),
-                    }
+                          select new IRSequence
+                          {
+                              Name = g.Key,
+                              Codes = g
+                              .OrderBy(i => i.Position)
+                              .Select(h => h.Code).ToList(),
+                          }
                     ;
 
             return new IRSequences

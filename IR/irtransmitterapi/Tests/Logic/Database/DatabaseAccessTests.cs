@@ -21,6 +21,26 @@ namespace Tests.Logic
         DateTime _now2;
         Mock<ISystemWrapper> _mockSystemWrapper;
 
+        #region Codes
+
+        [Test]
+        public void GetCodeRetrievesTheCode()
+        {
+            var code = _db.GetCode("123");
+
+            code.Code.Should().Be("123");
+        }
+
+        [Test]
+        public void GetNonExistentCodeReturnsNull()
+        {
+            var code = _db.GetCode("non existent");
+
+            code.Should().BeNull();
+        }
+
+        #endregion
+
         #region Options
 
         [Test]
@@ -71,9 +91,9 @@ namespace Tests.Logic
                     Code = "123",
                     Waveform = new List<WavePoint>
                     {
-                        new WavePoint { T = 0, V = 0 },
-                        new WavePoint { T = 11, V = 1 },
-                        new WavePoint { T = 22, V = 0 }
+                        new() { T = 0, V = 0 },
+                        new() { T = 11, V = 1 },
+                        new() { T = 22, V = 0 }
                     }
                 },
                 new IRCodeDefinition
@@ -81,9 +101,9 @@ namespace Tests.Logic
                     Code = "456",
                     Waveform = new List<WavePoint>
                     {
-                        new WavePoint { T = 0, V = 0 },
-                        new WavePoint { T = 111, V = 1 },
-                        new WavePoint { T = 122, V = 0 }
+                        new() { T = 0, V = 0 },
+                        new() { T = 111, V = 1 },
+                        new() { T = 122, V = 0 }
                     }
                 }
             });
@@ -155,11 +175,11 @@ namespace Tests.Logic
                     Code = "3772793023",
                     Waveform = new List<WavePoint>
                     {
-                        new WavePoint { T = 0, V = 0 },
-                        new WavePoint { T = 4527, V = 1 },
-                        new WavePoint { T = 9027, V = 0 },
-                        new WavePoint { T = 9573, V = 1 },
-                        new WavePoint { T = 11271, V = 0 }
+                        new() { T = 0, V = 0 },
+                        new() { T = 4527, V = 1 },
+                        new() { T = 9027, V = 0 },
+                        new() { T = 9573, V = 1 },
+                        new() { T = 11271, V = 0 }
                     }
                 }
                 );
@@ -206,9 +226,9 @@ namespace Tests.Logic
                     Code = "456",
                     Waveform = new List<WavePoint>
                     {
-                        new WavePoint { T = 0, V = 0 },
-                        new WavePoint { T = 111, V = 1 },
-                        new WavePoint { T = 122, V = 0 }
+                        new() { T = 0, V = 0 },
+                        new() { T = 111, V = 1 },
+                        new() { T = 122, V = 0 }
                     }
                 }
             });

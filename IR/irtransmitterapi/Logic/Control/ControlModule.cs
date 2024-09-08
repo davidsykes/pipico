@@ -24,7 +24,7 @@ namespace Logic.Control
                 var irCodeDefinition = PicoRecordJsonToIrCodeDefinitionConverter.Convert(json);
                 _databaseAccess.UpdateIrCodeDefinition(irCodeDefinition);
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 string message = $"Invalid response from pico: {json}";
                 _databaseAccess.Log(message);
