@@ -1,25 +1,16 @@
 #include <memory>
 #include "http_request_router_tests.h"
+#include "../Mocks/MockApiAction.h"
 #include "../../api/http_request_router.h"
 
-class MockRequestHandler : public IApiAction
-{
-	std::string requestType;
-
-	virtual std::string ApiAction() { return requestType; };
-
-public:
-	MockRequestHandler(const char* type) : requestType(type) {}
-};
-
-static std::unique_ptr<MockRequestHandler> mockHomeRequestHandler;
-static std::unique_ptr<MockRequestHandler> mockRecordRequestHandler;
+static std::unique_ptr<MockApiAction> mockHomeRequestHandler;
+static std::unique_ptr<MockApiAction> mockRecordRequestHandler;
 static std::unique_ptr<HttpRequestRouter> objectUnderTest;
 
 static HttpRequestRouter& CreateObjectUnderTest()
 {
-	mockHomeRequestHandler.reset(new MockRequestHandler("Home"));
-	mockRecordRequestHandler.reset(new MockRequestHandler("Record"));
+	mockHomeRequestHandler.reset(new MockApiAction("Home"));
+	mockRecordRequestHandler.reset(new MockApiAction("Record"));
 	objectUnderTest.reset(new HttpRequestRouter(
 		*mockHomeRequestHandler.get(),
 		*mockRecordRequestHandler.get()));

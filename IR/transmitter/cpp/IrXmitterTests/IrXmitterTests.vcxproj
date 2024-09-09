@@ -128,6 +128,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="..\api\api_actions\codes_display_action.cpp" />
+    <ClCompile Include="..\api\api_actions\home_display_action.cpp" />
     <ClCompile Include="..\api\api_actions\log_display_action.cpp" />
     <ClCompile Include="..\api\api_actions\record_ir_action.cpp" />
     <ClCompile Include="..\api\http_request_router.cpp" />
@@ -139,6 +141,8 @@
     <ClCompile Include="..\tcp_server\http_response_packager.cpp" />
     <ClCompile Include="..\tools\message_logger.cpp" />
     <ClCompile Include="api\api_actions\logs_display_action_tests.cpp" />
+    <ClCompile Include="api\codes_display_action_tests.cpp" />
+    <ClCompile Include="api\home_display_action_tests.cpp" />
     <ClCompile Include="api\http_request_router_tests.cpp" />
     <ClCompile Include="codes\CodesRepositoryTests.cpp" />
     <ClCompile Include="IrXmitterTests.cpp" />
@@ -151,6 +155,8 @@
     <ClCompile Include="tools\MessageLoggerTests.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\api\api_actions\codes_display_action.h" />
+    <ClInclude Include="..\api\api_actions\home_display_action.h" />
     <ClInclude Include="..\api\api_actions\iapi_action.h" />
     <ClInclude Include="..\api\api_actions\log_display_action.h" />
     <ClInclude Include="..\api\api_actions\record_ir_action.h" />
@@ -163,8 +169,11 @@
     <ClInclude Include="..\tcp_server\http_response_packager.h" />
     <ClInclude Include="..\tools\message_logger.h" />
     <ClInclude Include="api\api_actions\logs_display_action_tests.h" />
+    <ClInclude Include="api\codes_display_action_tests.h" />
+    <ClInclude Include="api\home_display_action_tests.h" />
     <ClInclude Include="api\http_request_router_tests.h" />
     <ClInclude Include="codes\CodesRepositoryTests.h" />
+    <ClInclude Include="Mocks\MockApiAction.h" />
     <ClInclude Include="Mocks\MockHardwareInteface.h" />
     <ClInclude Include="pico_scope\PicoScopeTests.h" />
     <ClInclude Include="pico_scope\TraceDataFormatterTests.h" />

@@ -1,5 +1,7 @@
 #include <iostream>
 #include "api\http_request_router_tests.h"
+#include "api/home_display_action_tests.h"
+#include "api/codes_display_action_tests.h"
 #include "codes\CodesRepositoryTests.h"
 #include "tcp_server/http_response_packager_tests.h"
 #include "api/api_actions/logs_display_action_tests.h"
@@ -12,5 +14,7 @@ int main()
     MessageLoggerTests().RunTests();
     LogsDisplayActionTests().RunTests();
     CodesRepositoryTests().RunTests();
+    HomeDisplayActionTests().RunTests();
+    CodesDisplayActionTests().RunTests();
     std::cout << "Tests Complete\n";
 }

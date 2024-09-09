@@ -33,13 +33,15 @@ int main()
    //CodesRecordRequestHandler codesRecordRequestHandler;
    LogDisplayAction logDisplayAction(messageLogger);
    //HttpServerHomePage homeHandler(/*codesDisplayRequestHandler, codesRecordRequestHandler,*/ LogDisplayWidget);
+   CodesDisplayAction codesDisplayAction(irCodeRepository);
+   HomePageAction homePageAction(codesDisplayAction, logDisplayAction);
 
    PicoScopeConfiguration ir_scope_configuration(6);
    PicoScopeRecorder picoScopeRecorder(hw_if, ir_scope_configuration);
    RecordIrAction recordIrAction(picoScopeRecorder);
    //HttpServerRecordHandler recordHandler(picoScopeRecordAndPost);
 
-   HttpRequestRouter httpRequestRouter(logDisplayAction, recordIrAction);
+   HttpRequestRouter httpRequestRouter(homePageAction, recordIrAction);
    HttpResponsePackager httpResponsePackager(httpRequestRouter);
    main_pico_tcp_server(&httpResponsePackager);
 
