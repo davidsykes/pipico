@@ -2,11 +2,14 @@
 #include "gpio/gpio.h"
 #include "wifi/WiFiConnector.h"
 #include "tools/message_logger.h"
-#include "codes/ir_code_repository.h"
+#include "codes/ir_codes_repository.h"
 #include "tcp_server/http_response_packager.h"
 #include "tcp_server/pico_tcp_server.h"
+#include "api/api_actions/home_display_action.h"
 #include "api/api_actions/log_display_action.h"
 #include "api/api_actions/record_ir_action.h"
+#include "api/api_actions/codes_display_action.h"
+#include "api/formatters/code_display_formatter.h"
 #include "pico_scope/pico_scope_configuration.h"
 #include "pico_scope/pico_scope_recorder.h"
 
@@ -27,21 +30,22 @@ int main()
    connector.ConnectToWiFiDirect(hw_if, WIFI_SSID, WIFI_PASSWORD);
 
    MessageLogger messageLogger;
-   IrCodeRepository irCodeRepository;
+   IrCodesRepository irCodesRepository;
 
    //CodesDisplayRequestHandler codesDisplayRequestHandler;
    //CodesRecordRequestHandler codesRecordRequestHandler;
    LogDisplayAction logDisplayAction(messageLogger);
    //HttpServerHomePage homeHandler(/*codesDisplayRequestHandler, codesRecordRequestHandler,*/ LogDisplayWidget);
-   CodesDisplayAction codesDisplayAction(irCodeRepository);
-   HomePageAction homePageAction(codesDisplayAction, logDisplayAction);
+   CodeDisplayFormatter codeDisplayFormatter;
+   CodesDisplayAction codesDisplayAction(irCodesRepository, codeDisplayFormatter);
+   HomeDisplayAction homeDisplayAction(codesDisplayAction, logDisplayAction);
 
    PicoScopeConfiguration ir_scope_configuration(6);
    PicoScopeRecorder picoScopeRecorder(hw_if, ir_scope_configuration);
    RecordIrAction recordIrAction(picoScopeRecorder);
    //HttpServerRecordHandler recordHandler(picoScopeRecordAndPost);
 
-   HttpRequestRouter httpRequestRouter(homePageAction, recordIrAction);
+   HttpRequestRouter httpRequestRouter(homeDisplayAction, recordIrAction);
    HttpResponsePackager httpResponsePackager(httpRequestRouter);
    main_pico_tcp_server(&httpResponsePackager);
 

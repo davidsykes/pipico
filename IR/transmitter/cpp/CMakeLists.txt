@@ -9,7 +9,9 @@ add_executable(test
         api/http_request_router.cpp
         api/api_actions/log_display_action.cpp
         api/api_actions/record_ir_action.cpp
-        codes/ir_code_definitions.cpp
+        api/api_actions/home_display_action.cpp
+        api/api_actions/codes_display_action.cpp
+        codes/ir_codes_repository.cpp
         hw_if/hardware_interface.c
         hw_if/pico_hardware_interface.cpp
         gpio/gpio_input.cpp
