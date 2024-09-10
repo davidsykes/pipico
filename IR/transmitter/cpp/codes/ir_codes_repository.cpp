@@ -37,8 +37,3 @@ IrCodesRepository::IrCodesRepository()
 		}
 	}
 }
-
-IrCode IrCodesRepository::First()
-{
-	return codes[0];
-}

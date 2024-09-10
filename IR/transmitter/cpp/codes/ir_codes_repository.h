@@ -5,7 +5,7 @@
 class IIrCodesRepository
 {
 public:
-	virtual IrCode First() = 0;
+	virtual std::vector<IrCode>& GetCodes() = 0;
 };
 
 
@@ -14,7 +14,7 @@ class IrCodesRepository : public IIrCodesRepository
 {
 	std::vector<IrCode> codes;
 
-	virtual IrCode First();
+	virtual std::vector<IrCode>& GetCodes() { return codes; }
 
 public:
 	IrCodesRepository();

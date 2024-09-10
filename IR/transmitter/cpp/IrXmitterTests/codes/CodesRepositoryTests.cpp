@@ -14,7 +14,7 @@ static void ADefinitionCanBeRetrieved()
 {
 	IIrCodesRepository& definitions = CreateObjectUnderTest();
 
-	auto code = definitions.First();
+	auto code = definitions.GetCodes()[0];
 
 	AssertEqual("testcode", code.Name);
 	AssertEqual(68, code.Count);
