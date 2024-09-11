@@ -1,4 +1,5 @@
 #pragma once
+#include "../../codes/ir_code.h"
 
 class ICodeDisplayFormatter
 {
@@ -8,5 +9,10 @@ public:
 
 class CodeDisplayFormatter : public ICodeDisplayFormatter
 {
-	virtual std::string FormatCode(const IrCode& code) { return "Not Implemented"; }
+	std::string ip_address;
+
+	virtual std::string FormatCode(const IrCode& code);
+
+public:
+	CodeDisplayFormatter(const std::string& ip_address) : ip_address(ip_address) {}
 };

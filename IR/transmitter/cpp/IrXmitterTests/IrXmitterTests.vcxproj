@@ -143,6 +143,7 @@
     <ClCompile Include="..\tools\message_logger.cpp" />
     <ClCompile Include="api\api_actions\logs_display_action_tests.cpp" />
     <ClCompile Include="api\codes_display_action_tests.cpp" />
+    <ClCompile Include="api\formatters\code_display_fomatter_tests.cpp" />
     <ClCompile Include="api\home_display_action_tests.cpp" />
     <ClCompile Include="api\http_request_router_tests.cpp" />
     <ClCompile Include="codes\CodesRepositoryTests.cpp" />
@@ -172,6 +173,7 @@
     <ClInclude Include="..\tools\message_logger.h" />
     <ClInclude Include="api\api_actions\logs_display_action_tests.h" />
     <ClInclude Include="api\codes_display_action_tests.h" />
+    <ClInclude Include="api\formatters\code_display_fomatter_tests.h" />
     <ClInclude Include="api\home_display_action_tests.h" />
     <ClInclude Include="api\http_request_router_tests.h" />
     <ClInclude Include="codes\CodesRepositoryTests.h" />

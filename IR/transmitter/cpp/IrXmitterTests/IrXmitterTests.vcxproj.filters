@@ -61,6 +61,9 @@
     <Filter Include="Source Files\api\formatters">
       <UniqueIdentifier>{97845ae7-b1cf-414b-b66e-6659c4e2176f}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Tests\api\formatters">
+      <UniqueIdentifier>{929076aa-331a-4cdc-ac55-3cecc7ffcb1e}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="IrXmitterTests.cpp">
@@ -140,6 +143,9 @@
     </ClCompile>
     <ClCompile Include="..\api\formatters\code_display_formatter.cpp">
       <Filter>Source Files\api\formatters</Filter>
+    </ClCompile>
+    <ClCompile Include="api\formatters\code_display_fomatter_tests.cpp">
+      <Filter>Source Files\Tests\api\formatters</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -226,6 +232,9 @@
     </ClInclude>
     <ClInclude Include="..\api\formatters\code_display_formatter.h">
       <Filter>Source Files\api\formatters</Filter>
+    </ClInclude>
+    <ClInclude Include="api\formatters\code_display_fomatter_tests.h">
+      <Filter>Source Files\Tests\api\formatters</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -22,7 +22,7 @@ namespace Logic.Codes
             }
             s.Append($"}};\n");
 
-            s.Append($"int CodeValues{code.Code}[] = {{");
+            s.Append($"char CodeValues{code.Code}[] = {{");
             for (int i = 0; i < code.Waveform.Count; i++)
             {
                 if (i > 0)
