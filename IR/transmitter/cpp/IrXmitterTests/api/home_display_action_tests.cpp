@@ -18,9 +18,9 @@ static HomeDisplayAction& CreateObjectUnderTest()
 
 static void HomePageDisplaysCodesAndLogs()
 {
-	IApiAction& action = CreateObjectUnderTest();
+	ApiAction& action = CreateObjectUnderTest();
 
-	auto result = action.ApiAction();
+	auto result = action.Action();
 
 	AssertEqual("Codes<br>Logs", result);
 }
@@ -32,7 +32,7 @@ void HomeDisplayActionTests::RunTests()
 
 void HomeDisplayActionTests::CleanUpAfterTests()
 {
+	objectUnderTest.release();
 	mockHome.release();
 	mockLogs.release();
-	objectUnderTest.release();
 }

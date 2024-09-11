@@ -131,7 +131,7 @@
     <ClCompile Include="..\api\api_actions\codes_display_action.cpp" />
     <ClCompile Include="..\api\api_actions\home_display_action.cpp" />
     <ClCompile Include="..\api\api_actions\log_display_action.cpp" />
-    <ClCompile Include="..\api\api_actions\record_ir_action.cpp" />
+    <ClCompile Include="..\api\api_actions\play_ir_action.cpp" />
     <ClCompile Include="..\api\formatters\code_display_formatter.cpp" />
     <ClCompile Include="..\api\http_request_router.cpp" />
     <ClCompile Include="..\codes\ir_codes_repository.cpp" />
@@ -142,6 +142,7 @@
     <ClCompile Include="..\tcp_server\http_response_packager.cpp" />
     <ClCompile Include="..\tools\message_logger.cpp" />
     <ClCompile Include="api\api_actions\logs_display_action_tests.cpp" />
+    <ClCompile Include="api\api_actions\play_ir_action_tests.cpp" />
     <ClCompile Include="api\codes_display_action_tests.cpp" />
     <ClCompile Include="api\formatters\code_display_fomatter_tests.cpp" />
     <ClCompile Include="api\home_display_action_tests.cpp" />
@@ -157,10 +158,11 @@
     <ClCompile Include="tools\MessageLoggerTests.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\api\api_actions\api_action.h" />
     <ClInclude Include="..\api\api_actions\codes_display_action.h" />
     <ClInclude Include="..\api\api_actions\home_display_action.h" />
-    <ClInclude Include="..\api\api_actions\iapi_action.h" />
     <ClInclude Include="..\api\api_actions\log_display_action.h" />
+    <ClInclude Include="..\api\api_actions\play_ir_action.h" />
     <ClInclude Include="..\api\api_actions\record_ir_action.h" />
     <ClInclude Include="..\api\formatters\code_display_formatter.h" />
     <ClInclude Include="..\api\http_request_router.h" />
@@ -171,7 +173,9 @@
     <ClInclude Include="..\pico_scope\pico_scope_recorder.h" />
     <ClInclude Include="..\tcp_server\http_response_packager.h" />
     <ClInclude Include="..\tools\message_logger.h" />
+    <ClInclude Include="..\transmit\ir_signal_sender.h" />
     <ClInclude Include="api\api_actions\logs_display_action_tests.h" />
+    <ClInclude Include="api\api_actions\play_ir_action_tests.h" />
     <ClInclude Include="api\codes_display_action_tests.h" />
     <ClInclude Include="api\formatters\code_display_fomatter_tests.h" />
     <ClInclude Include="api\home_display_action_tests.h" />

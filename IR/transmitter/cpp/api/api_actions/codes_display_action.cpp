@@ -2,7 +2,7 @@
 #include "codes_display_action.h"
 
 
-std::string CodesDisplayAction::ApiAction()
+std::string CodesDisplayAction::Action()
 {
 	std::vector<IrCode>& codes = codeRepository.GetCodes();
 

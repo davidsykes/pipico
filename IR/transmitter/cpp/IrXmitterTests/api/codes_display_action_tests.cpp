@@ -45,9 +45,9 @@ static CodesDisplayAction& CreateObjectUnderTest()
 
 static void TheCodesDisplayPageDisplaysAllOfTheDefinedCodes()
 {
-	IApiAction& action = CreateObjectUnderTest();
+	ApiAction& action = CreateObjectUnderTest();
 
-	std::string result = action.ApiAction();
+	std::string result = action.Action();
 
 	AssertEqual("Code 1<br>Code 2<br>", result);
 }
@@ -59,7 +59,7 @@ void CodesDisplayActionTests::RunTests()
 
 void CodesDisplayActionTests::CleanUpAfterTests()
 {
+	objectUnderTest.release();
 	mockIrCodesRepository.release();
 	mockCodeDisplayFormatter.release();
-	objectUnderTest.release();
 }

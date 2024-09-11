@@ -64,6 +64,9 @@
     <Filter Include="Source Files\Tests\api\formatters">
       <UniqueIdentifier>{929076aa-331a-4cdc-ac55-3cecc7ffcb1e}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\transmit">
+      <UniqueIdentifier>{0bdfb913-075a-4057-a038-7b621da450b0}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="IrXmitterTests.cpp">
@@ -120,9 +123,6 @@
     <ClCompile Include="..\pico_scope\pico_scope_recorder.cpp">
       <Filter>Source Files\pico_scope</Filter>
     </ClCompile>
-    <ClCompile Include="..\api\api_actions\record_ir_action.cpp">
-      <Filter>Source Files\api\api_actions</Filter>
-    </ClCompile>
     <ClCompile Include="codes\CodesRepositoryTests.cpp">
       <Filter>Source Files\Tests\codes</Filter>
     </ClCompile>
@@ -146,6 +146,12 @@
     </ClCompile>
     <ClCompile Include="api\formatters\code_display_fomatter_tests.cpp">
       <Filter>Source Files\Tests\api\formatters</Filter>
+    </ClCompile>
+    <ClCompile Include="api\api_actions\play_ir_action_tests.cpp">
+      <Filter>Source Files\Tests\api\api_actions</Filter>
+    </ClCompile>
+    <ClCompile Include="..\api\api_actions\play_ir_action.cpp">
+      <Filter>Source Files\api\api_actions</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -175,9 +181,6 @@
     </ClInclude>
     <ClInclude Include="..\tcp_server\http_response_packager.h">
       <Filter>Source Files\tcp_server</Filter>
-    </ClInclude>
-    <ClInclude Include="..\api\api_actions\iapi_action.h">
-      <Filter>Source Files\api\api_actions</Filter>
     </ClInclude>
     <ClInclude Include="..\api\api_actions\log_display_action.h">
       <Filter>Source Files\api\api_actions</Filter>
@@ -235,6 +238,18 @@
     </ClInclude>
     <ClInclude Include="api\formatters\code_display_fomatter_tests.h">
       <Filter>Source Files\Tests\api\formatters</Filter>
+    </ClInclude>
+    <ClInclude Include="..\api\api_actions\api_action.h">
+      <Filter>Source Files\api\api_actions</Filter>
+    </ClInclude>
+    <ClInclude Include="api\api_actions\play_ir_action_tests.h">
+      <Filter>Source Files\Tests\api\api_actions</Filter>
+    </ClInclude>
+    <ClInclude Include="..\api\api_actions\play_ir_action.h">
+      <Filter>Source Files\api\api_actions</Filter>
+    </ClInclude>
+    <ClInclude Include="..\transmit\ir_signal_sender.h">
+      <Filter>Source Files\transmit</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

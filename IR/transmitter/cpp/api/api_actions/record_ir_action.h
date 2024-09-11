@@ -1,12 +1,12 @@
 #pragma once
-#include "iapi_action.h"
+#include "api_action.h"
 #include "../../pico_scope/pico_scope_recorder.h"
 
-class RecordIrAction : public IApiAction
+class RecordIrAction : public ApiAction
 {
 	IPicoScopeRecorder& irRecorder;
 
-	virtual std::string ApiAction();
+	virtual std::string Action() { return irRecorder.RecordTrace(); }
 
 public:
 	RecordIrAction(IPicoScopeRecorder& irRecorder) : irRecorder(irRecorder) {}

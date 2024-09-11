@@ -35,6 +35,6 @@ void CodeDisplayFormatterTests::RunTests()
 
 void CodeDisplayFormatterTests::CleanUpAfterTests()
 {
-	irCode.release();
 	objectUnderTest.release();
+	irCode.release();
 }

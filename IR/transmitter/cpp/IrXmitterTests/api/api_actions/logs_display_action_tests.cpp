@@ -15,12 +15,12 @@ static LogDisplayAction& CreateObjectUnderTest()
 
 static void TheLogsAreDisplayed()
 {
-	IApiAction& action = CreateObjectUnderTest();
+	ApiAction& action = CreateObjectUnderTest();
 	IMessageLogger& logger = *messageLogger.get();
 	logger.Log("L1");
 	logger.Log("L2");
 
-	std::string result = action.ApiAction();
+	std::string result = action.Action();
 
 	AssertEqual("There are 2 logs<br>\nL1<br>L2", result);
 }

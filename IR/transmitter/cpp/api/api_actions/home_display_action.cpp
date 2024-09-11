@@ -1,8 +1,8 @@
 #include "home_display_action.h"
 
-std::string HomeDisplayAction::ApiAction()
+std::string HomeDisplayAction::Action()
 {
-	return codesDisplayAction.ApiAction() +
+	return codesDisplayAction.Action() +
 		"<br>" +
-		logDisplayAction.ApiAction();
+		logDisplayAction.Action();
 }

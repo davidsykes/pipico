@@ -5,15 +5,18 @@
 
 static std::unique_ptr<MockApiAction> mockHomeRequestHandler;
 static std::unique_ptr<MockApiAction> mockRecordRequestHandler;
+static std::unique_ptr<MockApiAction> mockPlayCodeRequestHandler;
 static std::unique_ptr<HttpRequestRouter> objectUnderTest;
 
 static HttpRequestRouter& CreateObjectUnderTest()
 {
 	mockHomeRequestHandler.reset(new MockApiAction("Home"));
 	mockRecordRequestHandler.reset(new MockApiAction("Record"));
+	mockPlayCodeRequestHandler.reset(new MockApiAction("Play"));
 	objectUnderTest.reset(new HttpRequestRouter(
 		*mockHomeRequestHandler.get(),
-		*mockRecordRequestHandler.get()));
+		*mockRecordRequestHandler.get(),
+		*mockPlayCodeRequestHandler.get()));
 	return *objectUnderTest.get();
 }
 
@@ -35,7 +38,7 @@ static void FaviconRequestReturnsNotFound()
 	AssertTrue(result.empty());
 }
 
-static void ARecordRequestPassedTheRequestToTheRecordHander()
+static void ARecordRequestPassesTheRequestToTheRecordHander()
 {
 	IHttpRequestRouter& router = CreateObjectUnderTest();
 
@@ -44,16 +47,27 @@ static void ARecordRequestPassedTheRequestToTheRecordHander()
 	AssertEqual("Record", result);
 }
 
+static void ASendCodeRequestPassesTheRequestToTheIrPlayer()
+{
+	IHttpRequestRouter& router = CreateObjectUnderTest();
+
+	std::string result = router.RouteHttpRequest("GET /sendcode/code name");
+
+	AssertEqual("Play code name", result);
+}
+
 void HttpRequestRouterTests::RunTests()
 {
 	ARootRequestPassesTheRequestToTheHomeHandler();
 	FaviconRequestReturnsNotFound();
-	ARecordRequestPassedTheRequestToTheRecordHander();
+	ARecordRequestPassesTheRequestToTheRecordHander();
+	ASendCodeRequestPassesTheRequestToTheIrPlayer();
 }
 
 void HttpRequestRouterTests::CleanUpAfterTests()
 {
+	objectUnderTest.release();
 	mockHomeRequestHandler.release();
 	mockRecordRequestHandler.release();
-	objectUnderTest.release();
+	mockPlayCodeRequestHandler.release();
 }

@@ -49,8 +49,8 @@ void HttpServerHomePageTests::RunTests()
 
 void HttpServerHomePageTests::CleanUpAfterTests()
 {
+	objectUnderTest.release();
 	mockCodesDisplayRequestHandler.release();
 	mockCodesRecordRequestHandler.release();
 	mockLogsDisplayWidget.release();
-	objectUnderTest.release();
 }

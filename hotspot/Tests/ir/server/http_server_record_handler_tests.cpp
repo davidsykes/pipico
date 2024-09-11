@@ -33,6 +33,6 @@ void HttpServerRecordHandlerTests::RunTests()
 
 void HttpServerRecordHandlerTests::CleanUpAfterTests()
 {
-	mockPicoScopeRecordAndPost.release();
 	objectUnderTest.release();
+	mockPicoScopeRecordAndPost.release();
 }

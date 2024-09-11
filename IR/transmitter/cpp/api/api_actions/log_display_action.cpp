@@ -3,7 +3,7 @@
 
 
 
-std::string LogDisplayAction::ApiAction()
+std::string LogDisplayAction::Action()
 {
 	auto logs = messageLogger.Logs();
 	std::ostringstream str;

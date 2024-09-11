@@ -1,14 +1,14 @@
 #pragma once
-#include "iapi_action.h"
+#include "api_action.h"
 #include "../../codes/ir_codes_repository.h"
 #include "../formatters/code_display_formatter.h"
 
-class CodesDisplayAction : public IApiAction
+class CodesDisplayAction : public ApiAction
 {
 	IIrCodesRepository& codeRepository;
 	ICodeDisplayFormatter& codeDisplayFormatter;
 
-	virtual std::string ApiAction();
+	virtual std::string Action();
 
 public:
 	CodesDisplayAction(IIrCodesRepository& codeRepository,

@@ -1,12 +1,12 @@
 #pragma once
-#include "iapi_action.h"
+#include "api_action.h"
 #include "../../tools/message_logger.h"
 
-class LogDisplayAction : public IApiAction
+class LogDisplayAction : public ApiAction
 {
 	IMessageLogger& messageLogger;
 
-	virtual std::string ApiAction();
+	virtual std::string Action();
 
 public:
 	LogDisplayAction(IMessageLogger& messageLogger) : messageLogger(messageLogger) {}

@@ -156,8 +156,8 @@ void TcpRequestMakerTests::RunTests()
 
 void TcpRequestMakerTests::CleanUpAfterTests()
 {
+	objectUnderTest.release();
 	mockHardwareInterface.release();
 	mockTcpRequestErrorLogger.release();
 	mockTcpResponseAnalyser.release();
-	objectUnderTest.release();
 }

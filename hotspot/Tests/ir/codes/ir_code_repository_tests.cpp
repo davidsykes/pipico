@@ -47,7 +47,7 @@ void IrCodeRepositoryTests::RunTests()
 
 void IrCodeRepositoryTests::CleanUpAfterTests()
 {
+	objectUnderTest.release();
 	mockRestHandler.release();
 	messageLogger.release();
-	objectUnderTest.release();
 }
