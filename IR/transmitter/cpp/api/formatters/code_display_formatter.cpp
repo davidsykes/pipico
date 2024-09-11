@@ -5,9 +5,7 @@ std::string CodeDisplayFormatter::FormatCode(const IrCode& code)
 {
     std::ostringstream s;
 
-    s << "<a href=\"http://";
-    s << ip_address;
-    s << "/sendcode/";
+    s << "<a href=\"/sendcode/";
     s << code.Name;
     s << "\">Code " << code.Name << "</a>";
     return s.str();

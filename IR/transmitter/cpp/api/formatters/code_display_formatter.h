@@ -9,10 +9,5 @@ public:
 
 class CodeDisplayFormatter : public ICodeDisplayFormatter
 {
-	std::string ip_address;
-
 	virtual std::string FormatCode(const IrCode& code);
-
-public:
-	CodeDisplayFormatter(const std::string& ip_address) : ip_address(ip_address) {}
 };

@@ -7,7 +7,7 @@ static std::unique_ptr<IrCode> irCode;
 
 static CodeDisplayFormatter& CreateObjectUnderTest()
 {
-	objectUnderTest.reset(new CodeDisplayFormatter("ip address"));
+	objectUnderTest.reset(new CodeDisplayFormatter);
 	return *objectUnderTest.get();
 }
 
@@ -25,7 +25,7 @@ static void TheCodeHtmlIsRendered()
 
 	std::string result = action.FormatCode(code);
 
-	AssertEqual("<a href=\"http://ip address/sendcode/Code Name\">Code Code Name</a>", result);
+	AssertEqual("<a href=\"/sendcode/Code Name\">Code Code Name</a>", result);
 }
 
 void CodeDisplayFormatterTests::RunTests()
