@@ -9,7 +9,7 @@ namespace
 	class MockIrCodesRepository : public IIrCodesRepository
 	{
 		virtual std::vector<IrCode>& GetCodes() { Assert("Invalid"); }
-		virtual IrCode& GetCode(const std::string& name);
+		virtual IrCode* GetCode(const std::string& name);
 	public:
 		IrCode irCodeToSend;
 	};
@@ -68,13 +68,13 @@ static void AnInvalidCodeReturnsAnError()
 	AssertEqual("Code invalid code name not found", result);
 }
 
-IrCode& MockIrCodesRepository::GetCode(const std::string& name)
+IrCode* MockIrCodesRepository::GetCode(const std::string& name)
 {
 	if (name == valid_code_name)
 	{
-		return irCodeToSend;
+		return &irCodeToSend;
 	}
-	throw IIrCodesRepository::InvalidCodeException();
+	return 0;
 }
 
 void PlayIrActionTests::RunTests()

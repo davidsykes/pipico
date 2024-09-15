@@ -38,7 +38,15 @@ IrCodesRepository::IrCodesRepository()
 	}
 }
 
-IrCode& IrCodesRepository::GetCode(const std::string& name)
+IrCode* IrCodesRepository::GetCode(const std::string& name)
 {
-	return *new IrCode;
+	for (int i = 0; i < codes.size(); ++i)
+	{
+		if (codes[i].Name == name)
+		{
+			return &codes[i];
+		}
+	}
+
+	return 0;
 }

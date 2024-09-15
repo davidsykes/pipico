@@ -14,7 +14,7 @@ static void ADefinitionCanBeRetrieved()
 {
 	IIrCodesRepository& definitions = CreateObjectUnderTest();
 
-	auto code = definitions.GetCodes()[0];
+	IrCode& code = definitions.GetCodes()[0];
 
 	AssertEqual("testcode", code.Name);
 	AssertEqual(68, code.Count);
@@ -28,9 +28,33 @@ static void ADefinitionCanBeRetrieved()
 	AssertEqual(1, code.Values[2]);
 }
 
+static void ACodeCanBeFoundByName()
+{
+	IIrCodesRepository& definitions = CreateObjectUnderTest();
+
+	IrCode* codep = definitions.GetCode("testcode");
+	AssertFalse(codep == 0);
+
+	if (codep)
+	{
+		IrCode& code = *codep;
+		AssertEqual("testcode", code.Name);
+	}
+}
+
+static void IfACodeDoesNotExistGetCodeReturnsNull()
+{
+	IIrCodesRepository& definitions = CreateObjectUnderTest();
+
+	IrCode* codep = definitions.GetCode("invalid code");
+	AssertTrue(codep == 0);
+}
+
 void CodesRepositoryTests::RunTests()
 {
 	ADefinitionCanBeRetrieved();
+	ACodeCanBeFoundByName();
+	IfACodeDoesNotExistGetCodeReturnsNull();
 }
 
 void CodesRepositoryTests::CleanUpAfterTests()

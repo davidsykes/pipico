@@ -3,16 +3,14 @@
 
 std::string PlayIrAction::Action(const std::string& code_name)
 {
-	try
-	{
-		IrCode& code = codesRepository.GetCode(code_name);
+	IrCode* code = codesRepository.GetCode(code_name);
 
-		irSignalSender.SendCode(code);
-	}
-	catch (IIrCodesRepository::InvalidCodeException exception)
+	if (code == 0)
 	{
 		return std::string("Code ") + code_name + " not found";
 	}
+
+	irSignalSender.SendCode(*code);
 
 	return "";
 }

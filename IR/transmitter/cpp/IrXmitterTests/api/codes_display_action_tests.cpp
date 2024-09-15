@@ -10,7 +10,7 @@ namespace
 		std::vector<IrCode> codes;
 
 		virtual std::vector<IrCode>& GetCodes() { return codes; }
-		virtual IrCode& GetCode(const std::string& name) { Assert("Invalid"); }
+		virtual IrCode* GetCode(const std::string& name) { Assert("Invalid"); }
 	};
 
 	class MockCodeDisplayFormatter : public ICodeDisplayFormatter
