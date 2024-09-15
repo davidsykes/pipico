@@ -19,7 +19,7 @@ public:
 	}
 };
 
-static void Assert(const char* message)
+void Assert(const char* message)
 {
 	throw new AssertException(message);
 }

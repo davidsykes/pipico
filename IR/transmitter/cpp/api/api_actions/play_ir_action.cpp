@@ -1,9 +1,18 @@
 #include "play_ir_action.h"
-//#include <sstream>
 
 
-
-std::string PlayIrAction::Action(const std::string& p)
+std::string PlayIrAction::Action(const std::string& code_name)
 {
-	return "ffsda";
+	try
+	{
+		IrCode& code = codesRepository.GetCode(code_name);
+
+		irSignalSender.SendCode(code);
+	}
+	catch (IIrCodesRepository::InvalidCodeException exception)
+	{
+		return std::string("Code ") + code_name + " not found";
+	}
+
+	return "";
 }

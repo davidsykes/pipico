@@ -1,6 +1,7 @@
 #pragma once
 #include <string>
 
+[[noreturn]] void Assert(const char* message);
 void AssertTrue(bool value);
 void AssertFalse(bool value);
 void AssertEqual(const char* value, const char* expected);

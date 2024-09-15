@@ -37,3 +37,8 @@ IrCodesRepository::IrCodesRepository()
 		}
 	}
 }
+
+IrCode& IrCodesRepository::GetCode(const std::string& name)
+{
+	return *new IrCode;
+}

@@ -3,17 +3,21 @@
 #include "../Mocks/MockApiAction.h"
 #include "../../api/api_actions/codes_display_action.h"
 
-class MockIrCodesRepository : public IIrCodesRepository
+namespace
 {
-	std::vector<IrCode> codes;
+	class MockIrCodesRepository : public IIrCodesRepository
+	{
+		std::vector<IrCode> codes;
 
-	virtual std::vector<IrCode>& GetCodes() { return codes; }
-};
+		virtual std::vector<IrCode>& GetCodes() { return codes; }
+		virtual IrCode& GetCode(const std::string& name) { Assert("Invalid"); }
+	};
 
-class MockCodeDisplayFormatter : public ICodeDisplayFormatter
-{
-	virtual std::string FormatCode(const IrCode& code) { return code.Name; }
-};
+	class MockCodeDisplayFormatter : public ICodeDisplayFormatter
+	{
+		virtual std::string FormatCode(const IrCode& code) { return code.Name; }
+	};
+}
 
 static std::unique_ptr<CodesDisplayAction> objectUnderTest;
 static std::unique_ptr<MockIrCodesRepository> mockIrCodesRepository;
