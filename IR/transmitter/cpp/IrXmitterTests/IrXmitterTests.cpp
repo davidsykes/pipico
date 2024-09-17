@@ -6,6 +6,7 @@
 #include "api/api_actions/play_ir_action_tests.h"
 #include "api/formatters/code_display_fomatter_tests.h"
 #include "codes\CodesRepositoryTests.h"
+#include "gpio/GPIOTests.h"
 #include "tcp_server/http_response_packager_tests.h"
 #include "tools\MessageLoggerTests.h"
 #include "transmit/IrSignalSenderTests.h"
@@ -22,5 +23,6 @@ int main()
     CodeDisplayFormatterTests().RunTests();
     PlayIrActionTests().RunTests();
     IrSignalSenderTests().RunTests();
+    GPIOTests().RunTests();
     std::cout << "Tests Complete\n";
 }
