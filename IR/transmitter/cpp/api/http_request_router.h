@@ -15,6 +15,8 @@ class HttpRequestRouter : public IHttpRequestRouter
 
     virtual std::string RouteHttpRequest(const char* request);
 
+    std::string GetSingleToken(const char* token);
+
 public:
     HttpRequestRouter(ApiAction& homeHandler,
         ApiAction& recordHandler,

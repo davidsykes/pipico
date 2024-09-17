@@ -51,9 +51,18 @@ static void ASendCodeRequestPassesTheRequestToTheIrPlayer()
 {
 	IHttpRequestRouter& router = CreateObjectUnderTest();
 
+	std::string result = router.RouteHttpRequest("GET /sendcode/code_name");
+
+	AssertEqual("Play code_name", result);
+}
+
+static void ASendCodeRequestTerminatesTheCodeNameAtWhiteSpace()
+{
+	IHttpRequestRouter& router = CreateObjectUnderTest();
+
 	std::string result = router.RouteHttpRequest("GET /sendcode/code name");
 
-	AssertEqual("Play code name", result);
+	AssertEqual("Play code", result);
 }
 
 void HttpRequestRouterTests::RunTests()
@@ -62,6 +71,7 @@ void HttpRequestRouterTests::RunTests()
 	FaviconRequestReturnsNotFound();
 	ARecordRequestPassesTheRequestToTheRecordHander();
 	ASendCodeRequestPassesTheRequestToTheIrPlayer();
+	ASendCodeRequestTerminatesTheCodeNameAtWhiteSpace();
 }
 
 void HttpRequestRouterTests::CleanUpAfterTests()

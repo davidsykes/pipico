@@ -58,7 +58,7 @@ void PicoHardwareInterface::gpio_put(int pin_number, bool value)
     hardware_interface->gpio_put(pin_number, value);
 }
 
-uint64_t PicoHardwareInterface::gpio_put_at_us(int pin_number, bool value, int time_us)
+uint64_t PicoHardwareInterface::gpio_put_at_us(int pin_number, bool value, uint64_t time_us)
 {
     return hardware_interface->gpio_put_at_us(pin_number, value, time_us);
 }

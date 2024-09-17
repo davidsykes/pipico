@@ -97,7 +97,7 @@ void _gpio_put(int pin_number, int value)
     gpio_put(pin_number, value);
 }
 
-uint64_t _gpio_put_at_us(int pin_number, bool value, int time_us)
+uint64_t _gpio_put_at_us(int pin_number, bool value, uint64_t time_us)
 {
     while (true)
     {

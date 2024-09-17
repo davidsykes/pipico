@@ -13,9 +13,18 @@ std::string HttpRequestRouter::RouteHttpRequest(const char* request)
 	}
 	if (strncmp(request, "GET /sendcode", 13) == 0)
 	{
-		return playIrRequestHandler.Action(request + 14);
+		return playIrRequestHandler.Action(GetSingleToken(request + 14));
 	}
 
 	return "";
 }
 
+std::string HttpRequestRouter::GetSingleToken(const char* token)
+{
+	int i = 0;
+	while (!isspace(token[i]))
+	{
+		++i;
+	}
+	return std::string(token, i);
+}
