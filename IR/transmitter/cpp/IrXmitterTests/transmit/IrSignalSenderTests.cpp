@@ -7,7 +7,7 @@ namespace
 {
 	class MockHardwareInterface : public IMockHardwareInterface
 	{
-		virtual int gpio_put_at_us(int pin_number, bool value, int time_us);
+		virtual uint64_t gpio_put_at_us(int pin_number, bool value, int time_us);
 	public:
 		size_t size() const { return Times.size(); }
 		std::vector<int> Pins;
@@ -66,7 +66,7 @@ static void ACodeIsTransmitted()
 	AssertDataPoint(2, 302, 1);
 }
 
-int MockHardwareInterface::gpio_put_at_us(int pin_number, bool value, int time_us)
+uint64_t MockHardwareInterface::gpio_put_at_us(int pin_number, bool value, int time_us)
 {
 	Pins.push_back(pin_number);
 	Times.push_back(time_us);

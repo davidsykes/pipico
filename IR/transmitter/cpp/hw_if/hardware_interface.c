@@ -1,7 +1,6 @@
 #include "hardware_interface.h"
 #include "pico/cyw43_arch.h"
 #include "tusb.h"
-//#include "picow_tcp_client.h"
 
 
 void _initialise_pico_stdio()
@@ -97,8 +96,19 @@ void _gpio_put(int pin_number, int value)
 {
     gpio_put(pin_number, value);
 }
-x 
-    virtual int gpio_put_at_us(int pin_number, bool value, int time_us)=0;
+
+uint64_t _gpio_put_at_us(int pin_number, bool value, int time_us)
+{
+    while (true)
+    {
+        uint64_t now = time_us_64();
+        if (time_us < now)
+        {
+            gpio_put(pin_number, value);
+            return now;
+        }
+    }
+}
 
 void _set_led(int value)
 {
@@ -144,6 +154,7 @@ sHardwareInterface* create_hardware_interface()
     hwif->get_pins = &_get_pins;
     hwif->wait_pins_change = &_wait_pins_change;
     hwif->gpio_put = &_gpio_put;
+    hwif->gpio_put_at_us = &_gpio_put_at_us;
     hwif->set_led = &_set_led;
     hwif->sleep_us = &_sleep_us;
     hwif->tcp_request = &_tcp_request;

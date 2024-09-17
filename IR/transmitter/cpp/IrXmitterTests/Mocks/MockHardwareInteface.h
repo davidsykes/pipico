@@ -13,7 +13,7 @@ class IMockHardwareInterface : public IHardwareInterface
 	virtual int get_pins() { return 0; }
     virtual int wait_pins_change(sPinsChangeData* pinsChangeData, int mask, uint64_t timeout) { return 0;}
 	virtual void gpio_put(int pin_number, bool value) {}
-	virtual int gpio_put_at_us(int pin_number, bool value, int time_us) { return 0; }
+	virtual uint64_t gpio_put_at_us(int pin_number, bool value, int time_us) { return 0; }
 	virtual void set_led(bool value) {}
 	virtual void sleep_us(int useconds) {}
 	virtual int tcp_request(const char* server, unsigned int port, const char* request, std::string& response) { return -1; }

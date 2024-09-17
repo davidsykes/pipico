@@ -9,12 +9,15 @@
 #include "api/api_actions/log_display_action.h"
 #include "api/api_actions/record_ir_action.h"
 #include "api/api_actions/codes_display_action.h"
+#include "api/api_actions/play_ir_action.h"
 #include "api/formatters/code_display_formatter.h"
 #include "pico_scope/pico_scope_configuration.h"
 #include "pico_scope/pico_scope_recorder.h"
+#include "transmit/ir_signal_sender.h"
 
 #define WIFI_SSID "a907"
 #define WIFI_PASSWORD "?thisistheWIFIyouhavebeenlookingfor1398"
+#define TRANSMIT_PIN 14
 
 int main()
 {
@@ -43,9 +46,11 @@ int main()
    PicoScopeConfiguration ir_scope_configuration(6);
    PicoScopeRecorder picoScopeRecorder(hw_if, ir_scope_configuration);
    RecordIrAction recordIrAction(picoScopeRecorder);
-   //HttpServerRecordHandler recordHandler(picoScopeRecordAndPost);
 
-   HttpRequestRouter httpRequestRouter(homeDisplayAction, recordIrAction);
+   IrSignalSender irSignalSender(hw_if, TRANSMIT_PIN);
+   PlayIrAction playIrAction(irSignalSender, irCodesRepository);
+
+   HttpRequestRouter httpRequestRouter(homeDisplayAction, recordIrAction, playIrAction);
    HttpResponsePackager httpResponsePackager(httpRequestRouter);
    main_pico_tcp_server(&httpResponsePackager);
 

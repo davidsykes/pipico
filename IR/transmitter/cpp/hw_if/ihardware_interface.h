@@ -4,13 +4,8 @@
 #else
 #include "pico/types.h"
 #endif
-
-typedef struct _sPinsChangeData
-{
-    int current_value;
-    int new_value;
-    uint64_t time_us;
-} sPinsChangeData;
+#include <string>
+#include "pins_changed_data.h"
 
 class IHardwareInterface
 {
@@ -25,7 +20,7 @@ public:
     virtual int get_pins()=0;
     virtual int wait_pins_change(sPinsChangeData* pinsChangeData, int mask, uint64_t timeout)=0;
     virtual void gpio_put(int pin_number, bool value)=0;
-    virtual int gpio_put_at_us(int pin_number, bool value, int time_us)=0;
+    virtual uint64_t gpio_put_at_us(int pin_number, bool value, int time_us)=0;
     virtual void set_led(bool value)=0;
     virtual void sleep_us(int useconds)=0;
     virtual int tcp_request(const char* server, unsigned int port, const char* request, std::string& response)=0;
