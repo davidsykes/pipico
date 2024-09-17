@@ -67,6 +67,9 @@
     <Filter Include="Source Files\transmit">
       <UniqueIdentifier>{0bdfb913-075a-4057-a038-7b621da450b0}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Tests\transmit">
+      <UniqueIdentifier>{0beafcf7-2777-4123-9aef-53d33b824daf}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="IrXmitterTests.cpp">
@@ -152,6 +155,12 @@
     </ClCompile>
     <ClCompile Include="..\api\api_actions\play_ir_action.cpp">
       <Filter>Source Files\api\api_actions</Filter>
+    </ClCompile>
+    <ClCompile Include="transmit\IrSignalSenderTests.cpp">
+      <Filter>Source Files\Tests\transmit</Filter>
+    </ClCompile>
+    <ClCompile Include="..\transmit\ir_signal_sender.cpp">
+      <Filter>Source Files\transmit</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -250,6 +259,9 @@
     </ClInclude>
     <ClInclude Include="..\transmit\ir_signal_sender.h">
       <Filter>Source Files\transmit</Filter>
+    </ClInclude>
+    <ClInclude Include="transmit\IrSignalSenderTests.h">
+      <Filter>Source Files\Tests\transmit</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

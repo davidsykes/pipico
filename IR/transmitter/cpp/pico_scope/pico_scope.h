@@ -1,7 +1,7 @@
 #pragma once
 #include <string>
 #include <vector>
-#include "../hw_if/pico_hardware_interface.h"
+#include "../hw_if/ihardware_interface.h"
 
 class PicoScopeTrace
 {

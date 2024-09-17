@@ -8,6 +8,7 @@
 #include "codes\CodesRepositoryTests.h"
 #include "tcp_server/http_response_packager_tests.h"
 #include "tools\MessageLoggerTests.h"
+#include "transmit/IrSignalSenderTests.h"
 
 int main()
 {
@@ -20,5 +21,6 @@ int main()
     CodesDisplayActionTests().RunTests();
     CodeDisplayFormatterTests().RunTests();
     PlayIrActionTests().RunTests();
+    IrSignalSenderTests().RunTests();
     std::cout << "Tests Complete\n";
 }

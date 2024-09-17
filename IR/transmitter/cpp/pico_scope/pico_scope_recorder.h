@@ -1,5 +1,6 @@
 #pragma once
-#include "../hw_if/pico_hardware_interface.h"
+#include <string>
+#include "../hw_if/ihardware_interface.h"
 #include "pico_scope_configuration.h"
 
 class IPicoScopeRecorder

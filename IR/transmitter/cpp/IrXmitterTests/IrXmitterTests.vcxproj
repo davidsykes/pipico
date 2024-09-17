@@ -141,6 +141,7 @@
     <ClCompile Include="..\pico_scope\trace_data_formatter.cpp" />
     <ClCompile Include="..\tcp_server\http_response_packager.cpp" />
     <ClCompile Include="..\tools\message_logger.cpp" />
+    <ClCompile Include="..\transmit\ir_signal_sender.cpp" />
     <ClCompile Include="api\api_actions\logs_display_action_tests.cpp" />
     <ClCompile Include="api\api_actions\play_ir_action_tests.cpp" />
     <ClCompile Include="api\codes_display_action_tests.cpp" />
@@ -156,6 +157,7 @@
     <ClCompile Include="TestFramework\TestFramework.cpp" />
     <ClCompile Include="TestFramework\TestModule.cpp" />
     <ClCompile Include="tools\MessageLoggerTests.cpp" />
+    <ClCompile Include="transmit\IrSignalSenderTests.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\api\api_actions\api_action.h" />
@@ -190,6 +192,7 @@
     <ClInclude Include="TestFramework\ITestModule.h" />
     <ClInclude Include="TestFramework\TestFramework.h" />
     <ClInclude Include="tools\MessageLoggerTests.h" />
+    <ClInclude Include="transmit\IrSignalSenderTests.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

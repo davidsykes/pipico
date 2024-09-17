@@ -10,7 +10,7 @@ static MessageLogger& CreateTestObject()
 	return *messageLogger.get();
 }
 
-void ASimpleMessageCanBeLogged()
+static void ASimpleMessageCanBeLogged()
 {
 	IMessageLogger& log = CreateTestObject();
 
@@ -20,7 +20,7 @@ void ASimpleMessageCanBeLogged()
 	AssertEqual("Hello World", log.Logs()[0]);
 }
 
-void SeveralMessagesCanBeLogged()
+static void SeveralMessagesCanBeLogged()
 {
 	IMessageLogger& log = CreateTestObject();
 

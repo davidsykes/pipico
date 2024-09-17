@@ -57,7 +57,8 @@ void PicoHardwareInterface::gpio_put(int pin_number, bool value)
 {
     hardware_interface->gpio_put(pin_number, value);
 }
-
+x 
+    virtual int gpio_put_at_us(int pin_number, bool value, int time_us)=0;
 void PicoHardwareInterface::set_led(bool value)
 {
     hardware_interface->set_led(value);

@@ -25,6 +25,7 @@ typedef struct sHardwareInterface
     int (*get_pins)();
     int (*wait_pins_change)(sPinsChangeData* pins_change_data, int mask, uint64_t timeout);
     void (*gpio_put)(int pin_number, int value);
+    virtual int gpio_put_at_us(int pin_number, bool value, int time_us)=0;sfdf
     void (*set_led)(int value);
     void (*sleep_us)(int useconds);
     int (*tcp_request)(const char* server_ip,

@@ -97,6 +97,8 @@ void _gpio_put(int pin_number, int value)
 {
     gpio_put(pin_number, value);
 }
+x 
+    virtual int gpio_put_at_us(int pin_number, bool value, int time_us)=0;
 
 void _set_led(int value)
 {
