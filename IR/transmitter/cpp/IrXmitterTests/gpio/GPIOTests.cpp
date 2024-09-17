@@ -3,6 +3,8 @@
 #include "../../gpio/gpio.h"
 #include "../Mocks/MockHardwareInteface.h"
 
+#define TEST_PIN_NUMBER 5
+
 namespace
 {
 	class MockHardwareInterface : public IMockHardwareInterface
@@ -12,82 +14,95 @@ namespace
 		virtual int gpio_get(int pin_number) { return pin_value; }
 		virtual void gpio_set_pull_up(int pin_number, int value);
 		virtual void gpio_put(int pin_number, bool value) { pin_value = value; }
+		virtual uint64_t gpio_put_at_us(int pin_number, bool value, uint64_t time_us);
 	public:
 		int initialised_input_pin_number = 0;
 		int initialised_output_pin_number = 0;
 		int pin_value = 0;
 		int pull_up_value_for_initialised_pin = 0;
+		uint64_t set_at_time = 0;
 	};
 }
 
 static std::unique_ptr<MockHardwareInterface> hardwareInterface;
+static std::unique_ptr<GPIOInputPin> gPIOInputPin;
+static std::unique_ptr<GPIOOutputPin> gPIOOutputPin;
 
-
-static MockHardwareInterface& CreateHardwareInterface()
+static MockHardwareInterface& CreateHardwareInterface2()
 {
 	hardwareInterface.reset(new MockHardwareInterface);
 	return *hardwareInterface.get();
 }
 
+static GPIOInputPin& CreateTestInputPin()
+{
+	MockHardwareInterface& hw_if = CreateHardwareInterface2();
+	gPIOInputPin.reset(new GPIOInputPin(TEST_PIN_NUMBER, hw_if));
+	return *gPIOInputPin.get();
+}
+
+static GPIOOutputPin& CreateTestOutputPin()
+{
+	MockHardwareInterface& hw_if = CreateHardwareInterface2();
+	gPIOOutputPin.reset(new GPIOOutputPin(TEST_PIN_NUMBER, hw_if));
+	return *gPIOOutputPin.get();
+}
+
 static void GPIOInputPinInitialisesTheInputPin()
 {
-	MockHardwareInterface& hw_if = CreateHardwareInterface();
+	GPIOInputPin& ip = CreateTestInputPin();
 
-	GPIOInputPin ip(5, hw_if);
-
-	AssertEqual(5, hw_if.initialised_input_pin_number);
+	AssertEqual(5, hardwareInterface.get()->initialised_input_pin_number);
 }
 
 static void GPIOInputPinReturnsHardwareValues()
 {
-	MockHardwareInterface& hw_if = CreateHardwareInterface();
-	GPIOInputPin ip(5, hw_if);
+	GPIOInputPin& ip = CreateTestInputPin();
 
-	hw_if.pin_value = 1;
+	hardwareInterface.get()->pin_value = 1;
 	bool value = ip.Value();
 	AssertTrue(value);
 
-	hw_if.pin_value = 0;
+	hardwareInterface.get()->pin_value = 0;
 	value = ip.Value();
 	AssertFalse(value);
 }
 
 static void SetPullUpCallsHardwareSetPullUp()
 {
-	MockHardwareInterface& hw_if = CreateHardwareInterface();
-	GPIOInputPin ip(5, hw_if);
+	GPIOInputPin& ip = CreateTestInputPin();
+
 	ip.SetPullUp(1);
 
-	AssertEqual(1, hw_if.pull_up_value_for_initialised_pin);
+	AssertEqual(1, hardwareInterface.get()->pull_up_value_for_initialised_pin);
 
 }
 
 static void GPIOOutputPinInitialisesTheOutputPin()
 {
-	MockHardwareInterface& hw_if = CreateHardwareInterface();
+	GPIOOutputPin& ip = CreateTestOutputPin();
 
-	GPIOOutputPin ip(5, hw_if);
-
-	AssertEqual(5, hw_if.initialised_output_pin_number);
+	AssertEqual(5, hardwareInterface.get()->initialised_output_pin_number);
 }
 
 static void GPIOOutputPinSetsHardwareValues()
 {
-	MockHardwareInterface& hw_if = CreateHardwareInterface();
+	GPIOOutputPin& ip = CreateTestOutputPin();
 
-	GPIOOutputPin ip(5, hw_if);
-	ip.SetValue(47);
+	ip.SetValue(1);
 
-	AssertEqual(1, hw_if.pin_value);
+	AssertEqual(1, hardwareInterface.get()->pin_value);
 }
 
-void GPIOTests::RunTests()
+static void GPIOOutputPinSetValueAtUsSetsValueAtTimeAndReturnsTime()
 {
-	GPIOInputPinInitialisesTheInputPin();
-	GPIOInputPinReturnsHardwareValues();
-	SetPullUpCallsHardwareSetPullUp();
-	GPIOOutputPinInitialisesTheOutputPin();
-	GPIOOutputPinSetsHardwareValues();
+	GPIOOutputPin& ip = CreateTestOutputPin();
+
+	uint64_t result = ip.SetValueAt(1, 1234);
+
+	AssertEqual(1236, result);
+	AssertEqual(1, hardwareInterface.get()->pin_value);
+	AssertEqual(1234, hardwareInterface.get()->set_at_time);
 }
 
 void MockHardwareInterface::gpio_set_pull_up(int pin_number, int value)
@@ -98,7 +113,30 @@ void MockHardwareInterface::gpio_set_pull_up(int pin_number, int value)
 	}
 }
 
+uint64_t MockHardwareInterface::gpio_put_at_us(int pin_number, bool value, uint64_t time_us)
+{
+	if (pin_number == TEST_PIN_NUMBER)
+	{
+		pin_value = value;
+		set_at_time = time_us;
+		return time_us + 2;
+	}
+	return 123;
+}
+
+void GPIOTests::RunTests()
+{
+	GPIOInputPinInitialisesTheInputPin();
+	GPIOInputPinReturnsHardwareValues();
+	SetPullUpCallsHardwareSetPullUp();
+	GPIOOutputPinInitialisesTheOutputPin();
+	GPIOOutputPinSetsHardwareValues();
+	GPIOOutputPinSetValueAtUsSetsValueAtTimeAndReturnsTime();
+}
+
 void GPIOTests::CleanUpAfterTests()
 {
+	gPIOInputPin.release();
+	gPIOOutputPin.release();
 	hardwareInterface.release();
 }

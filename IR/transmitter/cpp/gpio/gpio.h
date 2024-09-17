@@ -17,5 +17,6 @@ class GPIOOutputPin
     IHardwareInterface& hw_if;
 public:
     GPIOOutputPin(int pin, IHardwareInterface& hw_if);
-    void SetValue(int value);
+    void SetValue(bool value);
+    uint64_t SetValueAt(bool value, uint64_t time_us);
 };
