@@ -1,6 +1,6 @@
 #pragma once
 #include "../codes/ir_codes_repository.h"
-#include "../hw_if/ihardware_interface.h"
+#include "../gpio/gpio.h"
 
 class IIrSignalSender
 {
@@ -10,12 +10,9 @@ public:
 
 class IrSignalSender : public IIrSignalSender
 {
-	IHardwareInterface& hw;
-	int pin_number;
+	IGPIOOutputPin& pin;
 	virtual void SendCode(const IrCode& code);
 public:
-	IrSignalSender(IHardwareInterface& hw,
-		int pin_number)
-		: hw(hw),
-		pin_number(pin_number) {}
+	IrSignalSender(IGPIOOutputPin& pin)
+		: pin(pin) {}
 };

@@ -87,7 +87,7 @@ static void GPIOOutputPinInitialisesTheOutputPin()
 
 static void GPIOOutputPinSetsHardwareValues()
 {
-	GPIOOutputPin& ip = CreateTestOutputPin();
+	IGPIOOutputPin& ip = CreateTestOutputPin();
 
 	ip.SetValue(1);
 
@@ -96,7 +96,7 @@ static void GPIOOutputPinSetsHardwareValues()
 
 static void GPIOOutputPinSetValueAtUsSetsValueAtTimeAndReturnsTime()
 {
-	GPIOOutputPin& ip = CreateTestOutputPin();
+	IGPIOOutputPin& ip = CreateTestOutputPin();
 
 	uint64_t result = ip.SetValueAt(1, 1234);
 

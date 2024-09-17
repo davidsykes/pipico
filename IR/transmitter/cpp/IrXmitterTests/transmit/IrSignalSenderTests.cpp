@@ -5,21 +5,21 @@
 
 namespace
 {
-	class MockHardwareInterface : public IMockHardwareInterface
+	class MockGPIOOutputPin : public IGPIOOutputPin
 	{
-		virtual uint64_t gpio_put_at_us(int pin_number, bool value, uint64_t time_us);
+		virtual void SetValue(bool value);
+		virtual uint64_t SetValueAt(bool value, uint64_t time_us);
+
 	public:
 		size_t size() const { return Times.size(); }
-		std::vector<int> Pins;
 		std::vector<uint64_t> Times;
 		std::vector<int> Values;
 	};
 }
 
 static std::unique_ptr<IrSignalSender> irSignalSender;
-static std::unique_ptr<MockHardwareInterface> mockHardwareInterface;
+static std::unique_ptr<MockGPIOOutputPin> mockGPIOOutputPin;
 static std::unique_ptr<IrCode> irCode;
-const int pin_number = 42;
 
 static void CreateDataPoint(int time, int value)
 {
@@ -40,16 +40,15 @@ static void CreateData()
 static IrSignalSender& CreateTestObject()
 {
 	CreateData();
-	mockHardwareInterface.reset(new MockHardwareInterface);
-	irSignalSender.reset(new IrSignalSender(*mockHardwareInterface.get(), pin_number));
+	mockGPIOOutputPin.reset(new MockGPIOOutputPin);
+	irSignalSender.reset(new IrSignalSender(*mockGPIOOutputPin.get()));
 	return *irSignalSender.get();
 }
 
 static void AssertDataPoint(int i, int time, int value)
 {
-	AssertEqual(pin_number, mockHardwareInterface.get()->Pins[i]);
-	AssertEqual(time, mockHardwareInterface.get()->Times[i]);
-	AssertEqual(value, mockHardwareInterface.get()->Values[i]);
+	AssertEqual(time, mockGPIOOutputPin.get()->Times[i]);
+	AssertEqual(value, mockGPIOOutputPin.get()->Values[i]);
 }
 
 static void ACodeIsTransmitted()
@@ -58,7 +57,7 @@ static void ACodeIsTransmitted()
 
 	sender.SendCode(*irCode.get());
 
-	MockHardwareInterface& mi = *mockHardwareInterface.get();
+	MockGPIOOutputPin& mi = *mockGPIOOutputPin.get();
 
 	AssertEqual(3, mi.size());
 	AssertDataPoint(0, 0, 1);
@@ -66,9 +65,14 @@ static void ACodeIsTransmitted()
 	AssertDataPoint(2, 302, 1);
 }
 
-uint64_t MockHardwareInterface::gpio_put_at_us(int pin_number, bool value, uint64_t time_us)
+
+void MockGPIOOutputPin::SetValue(bool value)
 {
-	Pins.push_back(pin_number);
+	Assert("Invalid call");
+}
+
+uint64_t MockGPIOOutputPin::SetValueAt(bool value, uint64_t time_us)
+{
 	Times.push_back(time_us);
 	Values.push_back(value);
 	return time_us + 2;
@@ -82,5 +86,6 @@ void IrSignalSenderTests::RunTests()
 void IrSignalSenderTests::CleanUpAfterTests()
 {
 	irCode.release();
+	mockGPIOOutputPin.release();
 	irSignalSender.release();
 }

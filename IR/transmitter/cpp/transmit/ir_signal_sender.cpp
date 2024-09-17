@@ -4,10 +4,10 @@
 void IrSignalSender::SendCode(const IrCode& code)
 {
 	uint64_t i = 0;
-	uint64_t start_time = hw.gpio_put_at_us(pin_number, code.Values[i], 0);
+	uint64_t start_time = pin.SetValueAt(code.Values[i], 0);
 
 	while (++i < code.Count)
 	{
-		hw.gpio_put_at_us(pin_number, code.Values[i], start_time + code.Times[i]);
+		pin.SetValueAt(code.Values[i], start_time + code.Times[i]);
 	}
 };

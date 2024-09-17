@@ -11,12 +11,20 @@ public:
     bool Value();
 };
 
-class GPIOOutputPin
+class IGPIOOutputPin
 {
+public:
+    virtual void SetValue(bool value) = 0;
+    virtual uint64_t SetValueAt(bool value, uint64_t time_us) = 0;
+};
+
+class GPIOOutputPin : public IGPIOOutputPin
+{
+    virtual void SetValue(bool value);
+    virtual uint64_t SetValueAt(bool value, uint64_t time_us);
+
     int pin;
     IHardwareInterface& hw_if;
 public:
     GPIOOutputPin(int pin, IHardwareInterface& hw_if);
-    void SetValue(bool value);
-    uint64_t SetValueAt(bool value, uint64_t time_us);
 };
