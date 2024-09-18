@@ -12,7 +12,8 @@
 #include "api/api_actions/play_ir_action.h"
 #include "api/formatters/code_display_formatter.h"
 #include "pico_scope/pico_scope_configuration.h"
-#include "pico_scope/pico_scope_recorder.h"
+//#include "pico_scope/pico_scope_recorder.h"
+#include "pico_scope/pico_scope_record_and_post.h"
 #include "transmit/ir_signal_sender.h"
 
 #define WIFI_SSID "a907"
@@ -30,40 +31,47 @@ int main()
    int actionValue = actionPin.Value();
    printf("Action %d\n", actionValue);
 
-   GPIOOutputPin _outputPin(TRANSMIT_PIN, hw_if);
-   IGPIOOutputPin& outputPin = _outputPin;
-   // int value = 0;
-   // uint64_t now = outputPin.SetValueAt(value, 0);
-   // while (actionValue == actionPin.Value())
-   // {
-   //    value = 1 - value;
-   //    now += 1000000;
-   //    outputPin.SetValueAt(value, now);
-   // }
+   if (actionValue == 1)
+   {
+      RunScope(hw_if);
+   }
+   else
+   {
+      GPIOOutputPin _outputPin(TRANSMIT_PIN, hw_if);
+      IGPIOOutputPin& outputPin = _outputPin;
+      // int value = 0;
+      // uint64_t now = outputPin.SetValueAt(value, 0);
+      // while (actionValue == actionPin.Value())
+      // {
+      //    value = 1 - value;
+      //    now += 1000000;
+      //    outputPin.SetValueAt(value, now);
+      // }
 
-   WiFiConnector connector;
-   connector.ConnectToWiFiDirect(hw_if, WIFI_SSID, WIFI_PASSWORD);
+      WiFiConnector connector;
+      connector.ConnectToWiFiDirect(hw_if, WIFI_SSID, WIFI_PASSWORD);
 
-   MessageLogger messageLogger;
-   IrCodesRepository irCodesRepository;
+      MessageLogger messageLogger;
+      IrCodesRepository irCodesRepository;
 
-   LogDisplayAction logDisplayAction(messageLogger);
-   CodeDisplayFormatter codeDisplayFormatter;
-   CodesDisplayAction codesDisplayAction(irCodesRepository, codeDisplayFormatter);
-   HomeDisplayAction homeDisplayAction(codesDisplayAction, logDisplayAction);
+      LogDisplayAction logDisplayAction(messageLogger);
+      CodeDisplayFormatter codeDisplayFormatter;
+      CodesDisplayAction codesDisplayAction(irCodesRepository, codeDisplayFormatter);
+      HomeDisplayAction homeDisplayAction(codesDisplayAction, logDisplayAction);
 
-   PicoScopeConfiguration ir_scope_configuration(6);
-   PicoScopeRecorder picoScopeRecorder(hw_if, ir_scope_configuration);
-   RecordIrAction recordIrAction(picoScopeRecorder);
+      PicoScopeConfiguration ir_scope_configuration(6);
+      PicoScopeRecorder picoScopeRecorder(hw_if, ir_scope_configuration);
+      RecordIrAction recordIrAction(picoScopeRecorder);
 
-   IrSignalSender irSignalSender(outputPin);
-   PlayIrAction playIrAction(irSignalSender, irCodesRepository);
+      IrSignalSender irSignalSender(outputPin);
+      PlayIrAction playIrAction(irSignalSender, irCodesRepository);
 
-   ((ApiAction&)playIrAction).Action("testcode");
+      ((ApiAction&)playIrAction).Action("testcode");
 
-   HttpRequestRouter httpRequestRouter(homeDisplayAction, recordIrAction, playIrAction);
-   HttpResponsePackager httpResponsePackager(httpRequestRouter);
-   main_pico_tcp_server(&httpResponsePackager);
+      HttpRequestRouter httpRequestRouter(homeDisplayAction, recordIrAction, playIrAction);
+      HttpResponsePackager httpResponsePackager(httpRequestRouter);
+      main_pico_tcp_server(&httpResponsePackager);
+   }
 
    hw_if.cyw43_arch_deinit();
    printf("Ended..");
