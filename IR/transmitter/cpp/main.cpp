@@ -27,7 +27,19 @@ int main()
 
    GPIOInputPin actionPin(2, hw_if);
    actionPin.SetPullUp(0);
-   printf("Action %d\n", actionPin.Value());
+   int actionValue = actionPin.Value();
+   printf("Action %d\n", actionValue);
+
+   GPIOOutputPin _outputPin(TRANSMIT_PIN, hw_if);
+   IGPIOOutputPin& outputPin = _outputPin;
+   // int value = 0;
+   // uint64_t now = outputPin.SetValueAt(value, 0);
+   // while (actionValue == actionPin.Value())
+   // {
+   //    value = 1 - value;
+   //    now += 1000000;
+   //    outputPin.SetValueAt(value, now);
+   // }
 
    WiFiConnector connector;
    connector.ConnectToWiFiDirect(hw_if, WIFI_SSID, WIFI_PASSWORD);
@@ -35,10 +47,7 @@ int main()
    MessageLogger messageLogger;
    IrCodesRepository irCodesRepository;
 
-   //CodesDisplayRequestHandler codesDisplayRequestHandler;
-   //CodesRecordRequestHandler codesRecordRequestHandler;
    LogDisplayAction logDisplayAction(messageLogger);
-   //HttpServerHomePage homeHandler(/*codesDisplayRequestHandler, codesRecordRequestHandler,*/ LogDisplayWidget);
    CodeDisplayFormatter codeDisplayFormatter;
    CodesDisplayAction codesDisplayAction(irCodesRepository, codeDisplayFormatter);
    HomeDisplayAction homeDisplayAction(codesDisplayAction, logDisplayAction);
@@ -47,8 +56,10 @@ int main()
    PicoScopeRecorder picoScopeRecorder(hw_if, ir_scope_configuration);
    RecordIrAction recordIrAction(picoScopeRecorder);
 
-   IrSignalSender irSignalSender(hw_if, TRANSMIT_PIN);
+   IrSignalSender irSignalSender(outputPin);
    PlayIrAction playIrAction(irSignalSender, irCodesRepository);
+
+   ((ApiAction&)playIrAction).Action("testcode");
 
    HttpRequestRouter httpRequestRouter(homeDisplayAction, recordIrAction, playIrAction);
    HttpResponsePackager httpResponsePackager(httpRequestRouter);
