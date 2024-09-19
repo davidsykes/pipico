@@ -141,6 +141,9 @@
     <ClCompile Include="..\pico_scope\pico_scope_recorder.cpp" />
     <ClCompile Include="..\pico_scope\pico_scope_trace.cpp" />
     <ClCompile Include="..\pico_scope\trace_data_formatter.cpp" />
+    <ClCompile Include="..\rest\rest_handler.cpp" />
+    <ClCompile Include="..\rest\tcp_request_maker.cpp" />
+    <ClCompile Include="..\rest\tcp_response_analyser.cpp" />
     <ClCompile Include="..\tcp_server\http_response_packager.cpp" />
     <ClCompile Include="..\tools\message_logger.cpp" />
     <ClCompile Include="..\transmit\ir_signal_sender.cpp" />
@@ -155,6 +158,9 @@
     <ClCompile Include="IrXmitterTests.cpp" />
     <ClCompile Include="pico_scope\PicoScopeTests.cpp" />
     <ClCompile Include="pico_scope\TraceDataFormatterTests.cpp" />
+    <ClCompile Include="rest\RestHandlerTests.cpp" />
+    <ClCompile Include="rest\TcpRequestMakerTests.cpp" />
+    <ClCompile Include="rest\TcpResponseAnalyserTests.cpp" />
     <ClCompile Include="tcp_server\http_response_packager_tests.cpp" />
     <ClCompile Include="TestFramework\Assert.cpp" />
     <ClCompile Include="TestFramework\TestFramework.cpp" />
@@ -177,6 +183,10 @@
     <ClInclude Include="..\pico_scope\pico_scope.h" />
     <ClInclude Include="..\pico_scope\pico_scope_configuration.h" />
     <ClInclude Include="..\pico_scope\pico_scope_recorder.h" />
+    <ClInclude Include="..\rest\rest_handler.h" />
+    <ClInclude Include="..\rest\tcp_request_error_logger.h" />
+    <ClInclude Include="..\rest\tcp_request_maker.h" />
+    <ClInclude Include="..\rest\tcp_response_analyser.h" />
     <ClInclude Include="..\tcp_server\http_response_packager.h" />
     <ClInclude Include="..\tools\message_logger.h" />
     <ClInclude Include="..\transmit\ir_signal_sender.h" />
@@ -192,6 +202,9 @@
     <ClInclude Include="Mocks\MockHardwareInteface.h" />
     <ClInclude Include="pico_scope\PicoScopeTests.h" />
     <ClInclude Include="pico_scope\TraceDataFormatterTests.h" />
+    <ClInclude Include="rest\RestHandlerTests.h" />
+    <ClInclude Include="rest\TcpRequestMakerTests.h" />
+    <ClInclude Include="rest\TcpResponseAnalyserTests.h" />
     <ClInclude Include="tcp_server\http_response_packager_tests.h" />
     <ClInclude Include="TestFramework\Assert.h" />
     <ClInclude Include="TestFramework\ITestModule.h" />

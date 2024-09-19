@@ -76,6 +76,12 @@
     <Filter Include="Source Files\gpio">
       <UniqueIdentifier>{6a98b4cf-d957-437b-a021-ba456a240313}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Tests\rest">
+      <UniqueIdentifier>{c4be1bc7-82be-4f77-9297-a2d8f0ff7538}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\rest">
+      <UniqueIdentifier>{0044486b-f2a7-4bef-897c-4ca9d440ccdb}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="IrXmitterTests.cpp">
@@ -176,6 +182,24 @@
     </ClCompile>
     <ClCompile Include="..\gpio\gpio_output.cpp">
       <Filter>Source Files\gpio</Filter>
+    </ClCompile>
+    <ClCompile Include="rest\RestHandlerTests.cpp">
+      <Filter>Source Files\Tests\rest</Filter>
+    </ClCompile>
+    <ClCompile Include="rest\TcpRequestMakerTests.cpp">
+      <Filter>Source Files\Tests\rest</Filter>
+    </ClCompile>
+    <ClCompile Include="rest\TcpResponseAnalyserTests.cpp">
+      <Filter>Source Files\Tests\rest</Filter>
+    </ClCompile>
+    <ClCompile Include="..\rest\rest_handler.cpp">
+      <Filter>Source Files\rest</Filter>
+    </ClCompile>
+    <ClCompile Include="..\rest\tcp_request_maker.cpp">
+      <Filter>Source Files\rest</Filter>
+    </ClCompile>
+    <ClCompile Include="..\rest\tcp_response_analyser.cpp">
+      <Filter>Source Files\rest</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -283,6 +307,27 @@
     </ClInclude>
     <ClInclude Include="..\gpio\gpio.h">
       <Filter>Source Files\gpio</Filter>
+    </ClInclude>
+    <ClInclude Include="rest\RestHandlerTests.h">
+      <Filter>Source Files\Tests\rest</Filter>
+    </ClInclude>
+    <ClInclude Include="rest\TcpRequestMakerTests.h">
+      <Filter>Source Files\Tests\rest</Filter>
+    </ClInclude>
+    <ClInclude Include="rest\TcpResponseAnalyserTests.h">
+      <Filter>Source Files\Tests\rest</Filter>
+    </ClInclude>
+    <ClInclude Include="..\rest\rest_handler.h">
+      <Filter>Source Files\rest</Filter>
+    </ClInclude>
+    <ClInclude Include="..\rest\tcp_request_error_logger.h">
+      <Filter>Source Files\rest</Filter>
+    </ClInclude>
+    <ClInclude Include="..\rest\tcp_request_maker.h">
+      <Filter>Source Files\rest</Filter>
+    </ClInclude>
+    <ClInclude Include="..\rest\tcp_response_analyser.h">
+      <Filter>Source Files\rest</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

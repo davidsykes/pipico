@@ -7,6 +7,9 @@
 #include "api/formatters/code_display_fomatter_tests.h"
 #include "codes\CodesRepositoryTests.h"
 #include "gpio/GPIOTests.h"
+#include "rest/RestHandlerTests.h"
+#include "rest/TcpRequestMakerTests.h"
+#include "rest/TcpResponseAnalyserTests.h"
 #include "tcp_server/http_response_packager_tests.h"
 #include "tools\MessageLoggerTests.h"
 #include "transmit/IrSignalSenderTests.h"
@@ -24,5 +27,8 @@ int main()
     PlayIrActionTests().RunTests();
     IrSignalSenderTests().RunTests();
     GPIOTests().RunTests();
+    RestHandlerTests().RunTests();
+    TcpRequestMakerTests().RunTests();
+    TcpResponseAnalyserTests().RunTests();
     std::cout << "Tests Complete\n";
 }
