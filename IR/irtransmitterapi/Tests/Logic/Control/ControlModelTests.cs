@@ -20,7 +20,7 @@ namespace Tests.Logic.Codes
         [Test]
         public void TheRecordOptionRequestsAPicoRecordAndStoresTheReturnedData()
         {
-            _control.Record();
+            _control.AskIrPicoToRecord();
 
             _mockDatabaseAccess.Verify(m => m.UpdateIrCodeDefinition(It.Is<IRCodeDefinition>(
                 m => m.Code == "New Code")));
@@ -32,7 +32,7 @@ namespace Tests.Logic.Codes
             _mockHttpClientWrapper.Setup(m => m.Get("http://192.168.1.92/record"))
                 .Returns("Gibberish");
 
-            _control.Record();
+            _control.AskIrPicoToRecord();
 
             _mockDatabaseAccess.Verify(m => m.Log("Invalid response from pico: Gibberish"));
         }

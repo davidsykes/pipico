@@ -7,7 +7,7 @@ namespace Logic.Codes
     {
         public string FormatCodeCPlusPlus(IRCodeDefinition code)
         {
-            StringBuilder s = new StringBuilder();
+            StringBuilder s = new ();
 
             s.Append($"char CodeName{code.Code}[] = \"{code.Code}\";\n");
 

@@ -56,7 +56,7 @@ static void AddActionEndpoints(WebApplication app, ProgramServices programServic
 {
     app.MapPut("/record", async delegate (HttpContext context)
     {
-        programServices.ControlModule.Record();
+        programServices.ControlModule.AskIrPicoToRecord();
         return "Ok";
     })
     .WithName("Record")
