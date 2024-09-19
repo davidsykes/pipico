@@ -1,2 +1,3 @@
 Modulator 38k
-C project to generate a 38k signal that can be modulated for ir control
+C project to generate a 38k signal that can be modulated for ir control.
+When an input pin is raised high, an output pin generates a 38k signal

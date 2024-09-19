@@ -15,7 +15,7 @@ namespace Logic.Control
             this._databaseAccess = databaseAccess;
         }
 
-        public void Record()
+        public void AskIrPicoToRecord()
         {
             var json = _httpClient.Get("http://192.168.1.92/record");
 
