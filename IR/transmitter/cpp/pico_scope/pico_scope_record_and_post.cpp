@@ -5,7 +5,7 @@
 #include "pico_scope.h"
 
 #define SCOPE_API_SERVER_IP "192.168.1.87"
-#define SCOPE_API_PORT 5000
+#define SCOPE_API_PORT 5001
 #define TRACE_DATA_CREATE_URL "/trace"
 #define PIN_FOR_PULL_UP 5
 
