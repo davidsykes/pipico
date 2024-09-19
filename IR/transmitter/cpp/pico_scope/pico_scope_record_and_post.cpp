@@ -7,7 +7,7 @@
 #define SCOPE_API_SERVER_IP "192.168.1.87"
 #define SCOPE_API_PORT 5000
 #define TRACE_DATA_CREATE_URL "/trace"
-
+#define PIN_FOR_PULL_UP 5
 
 void RunScope(IHardwareInterface& hw_if)
 {
@@ -20,7 +20,7 @@ void RunScope(IHardwareInterface& hw_if)
         tcpResponseAnalyser,
         tcpRequestErrorLogger);
     RestHandler restHandler(tcpRequestMaker);
-    PicoScopeConfiguration ir_scope_configuration(6);
+    PicoScopeConfiguration ir_scope_configuration(PIN_FOR_PULL_UP);
     PicoScopeRecordAndPost srap(
         hw_if,
         ir_scope_configuration,
@@ -40,7 +40,7 @@ std::string PicoScopeRecordAndPost::RecordAndPostTrace()
 
 void run_scope(IHardwareInterface& hw_if, PicoScopeConfiguration& config, IRestHandler& rest)
 {
-    printf("Run scope on pin %d\n", config.pin);
+    printf("Run scope on GP4-7 with pull up on pin %d\n", config.pin);
 
     hw_if.initialise_input_pin(config.pin);
     hw_if.gpio_set_pull_up(config.pin, 1);
