@@ -15,6 +15,7 @@ add_executable(test
         codes/ir_codes_repository.cpp
         hw_if/hardware_interface.c
         hw_if/pico_hardware_interface.cpp
+        hw_if/picow_tcp_client.c
         gpio/gpio_input.cpp
         gpio/gpio_output.cpp
         pico_scope/pico_scope_recorder.cpp

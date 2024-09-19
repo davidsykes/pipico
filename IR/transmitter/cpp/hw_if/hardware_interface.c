@@ -1,7 +1,7 @@
 #include "hardware_interface.h"
 #include "pico/cyw43_arch.h"
 #include "tusb.h"
-
+#include "picow_tcp_client.h"
 
 void _initialise_pico_stdio()
 {
@@ -126,12 +126,11 @@ int _tcp_request(const char* server_ip,
                          char*result,
                          int max_result_length)
 {
-    printf("NOT IMPLEMENTED\n");
-    // return tcp_client_request(server_ip,
-    //                      port,
-    //                      request,
-    //                      result,
-    //                      max_result_length);
+    return tcp_client_request(server_ip,
+                         port,
+                         request,
+                         result,
+                         max_result_length);
 }
 
 void _cyw43_arch_deinit()

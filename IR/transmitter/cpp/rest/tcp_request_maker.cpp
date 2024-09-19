@@ -18,7 +18,6 @@ int TcpRequestMaker::MakeRequest(const std::string& request, std::string& respon
 	}
 }
 
-
 int TcpRequestMaker::ExtractStatusAndBody(const std::string& server_response, std::string& response)
 {
 	int status_code = tcpResponseAnalyser.AnalyseTcpResponse(server_response, response);

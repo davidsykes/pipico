@@ -57,7 +57,7 @@ static err_t tcp_result(void *arg, int status, const char* where) {
     if (status == 0) {
         DEBUG_printf("test success\n");
     } else {
-        printf("test failed %d %s\n", status, where);
+        printf("Request failed %d %s\n", status, where);
         state->error_code = status;
     }
     state->complete = true;
