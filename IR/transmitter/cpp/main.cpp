@@ -26,6 +26,9 @@ int main()
    IHardwareInterface& hw_if = phw_if;
    hw_if.initialise_pico_stdio();
 
+   WiFiConnector connector;
+   connector.ConnectToWiFiDirect(hw_if, WIFI_SSID, WIFI_PASSWORD);
+
    GPIOInputPin actionPin(2, hw_if);
    actionPin.SetPullUp(0);
    int actionValue = actionPin.Value();
@@ -47,9 +50,6 @@ int main()
       //    now += 1000000;
       //    outputPin.SetValueAt(value, now);
       // }
-
-      WiFiConnector connector;
-      connector.ConnectToWiFiDirect(hw_if, WIFI_SSID, WIFI_PASSWORD);
 
       MessageLogger messageLogger;
       IrCodesRepository irCodesRepository;
