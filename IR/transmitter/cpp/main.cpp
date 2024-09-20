@@ -11,8 +11,7 @@
 #include "api/api_actions/codes_display_action.h"
 #include "api/api_actions/play_ir_action.h"
 #include "api/formatters/code_display_formatter.h"
-#include "pico_scope/pico_scope_configuration.h"
-#include "pico_scope/pico_scope_record_and_post.h"
+#include "pico_scope/pico_scope_main.h"
 #include "transmit/ir_signal_sender.h"
 
 #define WIFI_SSID "a907"
@@ -35,7 +34,7 @@ int main()
 
    if (actionValue == 1)
    {
-      RunScope(hw_if);
+      pico_scope_main(hw_if);
    }
    else
    {
