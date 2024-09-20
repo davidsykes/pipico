@@ -201,6 +201,12 @@
     <ClCompile Include="..\rest\tcp_response_analyser.cpp">
       <Filter>Source Files\rest</Filter>
     </ClCompile>
+    <ClCompile Include="pico_scope\PicoScopeCaptureAndPostTests.cpp">
+      <Filter>Source Files\Tests\pico_scope</Filter>
+    </ClCompile>
+    <ClCompile Include="..\pico_scope\pico_scope_capture_and_post.cpp">
+      <Filter>Source Files\pico_scope</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="api\http_request_router_tests.h">
@@ -328,6 +334,12 @@
     </ClInclude>
     <ClInclude Include="..\rest\tcp_response_analyser.h">
       <Filter>Source Files\rest</Filter>
+    </ClInclude>
+    <ClInclude Include="pico_scope\PicoScopeCaptureAndPostTests.h">
+      <Filter>Source Files\Tests\pico_scope</Filter>
+    </ClInclude>
+    <ClInclude Include="..\pico_scope\pico_scope_capture_and_post.h">
+      <Filter>Source Files\pico_scope</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

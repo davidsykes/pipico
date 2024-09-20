@@ -12,7 +12,6 @@
 #include "api/api_actions/play_ir_action.h"
 #include "api/formatters/code_display_formatter.h"
 #include "pico_scope/pico_scope_configuration.h"
-//#include "pico_scope/pico_scope_recorder.h"
 #include "pico_scope/pico_scope_record_and_post.h"
 #include "transmit/ir_signal_sender.h"
 

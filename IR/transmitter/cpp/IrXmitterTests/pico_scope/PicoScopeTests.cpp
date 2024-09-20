@@ -91,18 +91,6 @@ static void ATimeOutReturnsAPartialTrace()
 	AssertEqual(18, trace.value_times[2]);
 }
 
-void PicoScopeTests::RunTests()
-{
-	ASimpleTraceCanBeCaptured();
-	OnlyTheMostRecentTraceIsRetained();
-	ATimeOutReturnsAPartialTrace();
-}
-
-void PicoScopeTests::CleanUpAfterTests()
-{
-	mockHardwareInterface.release();
-}
-
 void MockHardwareInterface::Initialise(std::vector<int> values, std::vector<int> value_times)
 {
 	this->values = values;
@@ -114,7 +102,6 @@ uint64_t MockHardwareInterface::get_time_us()
 {
 	return next_value_time;
 }
-
 
 int MockHardwareInterface::get_pins()
 {
@@ -151,4 +138,16 @@ int MockHardwareInterface::wait_pins_change(sPinsChangeData* pinsChangeData, int
 			return 1;
 		}
 	}
+}
+
+void PicoScopeTests::RunTests()
+{
+	ASimpleTraceCanBeCaptured();
+	OnlyTheMostRecentTraceIsRetained();
+	ATimeOutReturnsAPartialTrace();
+}
+
+void PicoScopeTests::CleanUpAfterTests()
+{
+	mockHardwareInterface.release();
 }

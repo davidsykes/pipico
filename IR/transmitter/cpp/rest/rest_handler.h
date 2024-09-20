@@ -1,6 +1,5 @@
 #pragma once
 #include <string>
-//#include "../hw_if/ihardware_interface.h"
 #include "tcp_request_maker.h"
 
 

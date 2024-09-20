@@ -1,6 +1,5 @@
-#include "pico_scope.h"
 #include <sstream>
-
+#include "trace_data_formatter.h"
 
 
 std::string TraceDataFormatter::FormatTraceData(const PicoScopeTrace& trace)

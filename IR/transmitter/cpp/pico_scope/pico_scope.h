@@ -1,5 +1,5 @@
 #pragma once
-#include <string>
+// #include <string>
 #include <vector>
 #include "../hw_if/ihardware_interface.h"
 
@@ -27,8 +27,3 @@ public:
     PicoScopeTrace& FetchTrace();
 };
 
-class TraceDataFormatter
-{
-public:
-    std::string FormatTraceData(const PicoScopeTrace& trace);
-};

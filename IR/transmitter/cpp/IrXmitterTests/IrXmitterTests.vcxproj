@@ -138,6 +138,7 @@
     <ClCompile Include="..\gpio\gpio_input.cpp" />
     <ClCompile Include="..\gpio\gpio_output.cpp" />
     <ClCompile Include="..\pico_scope\pico_scope.cpp" />
+    <ClCompile Include="..\pico_scope\pico_scope_capture_and_post.cpp" />
     <ClCompile Include="..\pico_scope\pico_scope_recorder.cpp" />
     <ClCompile Include="..\pico_scope\pico_scope_trace.cpp" />
     <ClCompile Include="..\pico_scope\trace_data_formatter.cpp" />
@@ -156,6 +157,7 @@
     <ClCompile Include="codes\CodesRepositoryTests.cpp" />
     <ClCompile Include="gpio\GPIOTests.cpp" />
     <ClCompile Include="IrXmitterTests.cpp" />
+    <ClCompile Include="pico_scope\PicoScopeCaptureAndPostTests.cpp" />
     <ClCompile Include="pico_scope\PicoScopeTests.cpp" />
     <ClCompile Include="pico_scope\TraceDataFormatterTests.cpp" />
     <ClCompile Include="rest\RestHandlerTests.cpp" />
@@ -181,6 +183,7 @@
     <ClInclude Include="..\codes\ir_codes_repository.h" />
     <ClInclude Include="..\gpio\gpio.h" />
     <ClInclude Include="..\pico_scope\pico_scope.h" />
+    <ClInclude Include="..\pico_scope\pico_scope_capture_and_post.h" />
     <ClInclude Include="..\pico_scope\pico_scope_configuration.h" />
     <ClInclude Include="..\pico_scope\pico_scope_recorder.h" />
     <ClInclude Include="..\rest\rest_handler.h" />
@@ -200,6 +203,7 @@
     <ClInclude Include="gpio\GPIOTests.h" />
     <ClInclude Include="Mocks\MockApiAction.h" />
     <ClInclude Include="Mocks\MockHardwareInteface.h" />
+    <ClInclude Include="pico_scope\PicoScopeCaptureAndPostTests.h" />
     <ClInclude Include="pico_scope\PicoScopeTests.h" />
     <ClInclude Include="pico_scope\TraceDataFormatterTests.h" />
     <ClInclude Include="rest\RestHandlerTests.h" />

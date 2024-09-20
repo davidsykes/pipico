@@ -7,6 +7,9 @@
 #include "api/formatters/code_display_fomatter_tests.h"
 #include "codes\CodesRepositoryTests.h"
 #include "gpio/GPIOTests.h"
+#include "pico_scope/PicoScopeTests.h"
+#include "pico_scope/TraceDataFormatterTests.h"
+#include "pico_scope/PicoScopeCaptureAndPostTests.h"
 #include "rest/RestHandlerTests.h"
 #include "rest/TcpRequestMakerTests.h"
 #include "rest/TcpResponseAnalyserTests.h"
@@ -30,5 +33,8 @@ int main()
     RestHandlerTests().RunTests();
     TcpRequestMakerTests().RunTests();
     TcpResponseAnalyserTests().RunTests();
+    PicoScopeTests().RunTests(); 
+    TraceDataFormatterTests().RunTests();
+    PicoScopeCaptureAndPostTests().RunTests();
     std::cout << "Tests Complete\n";
 }

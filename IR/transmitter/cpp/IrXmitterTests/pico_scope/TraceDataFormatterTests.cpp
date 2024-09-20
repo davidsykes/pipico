@@ -1,5 +1,6 @@
 #include "TraceDataFormatterTests.h"
 #include "../../pico_scope/pico_scope.h"
+#include "../../pico_scope/trace_data_formatter.h"
 
 const char* prefix = "{\"InitialValue\":11,\"Values\":";
 

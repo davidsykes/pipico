@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include "pico_scope_recorder.h"
 #include "pico_scope.h"
+#include "trace_data_formatter.h"
 
 #define SCOPE_API_SERVER_IP "192.168.1.87"
 #define SCOPE_API_PORT 5000
