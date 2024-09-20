@@ -4,20 +4,23 @@
 #include "../../pico_scope/pico_scope.h"
 #include "../Mocks/MockHardwareInteface.h"
 
-class MockHardwareInterface : public IMockHardwareInterface
+namespace
 {
-	std::vector<int> values;
-	std::vector<int> value_times;
-	int next_value_index = 0;
-	int next_value_time = 0;
+	class MockHardwareInterface : public IMockHardwareInterface
+	{
+		std::vector<int> values;
+		std::vector<int> value_times;
+		int next_value_index = 0;
+		int next_value_time = 0;
 
-	virtual uint64_t get_time_us();
-	virtual int get_pins();
-    virtual int wait_pins_change(sPinsChangeData* pinsChangeData, int mask, uint64_t timeout);
+		virtual uint64_t get_time_us();
+		virtual int get_pins();
+		virtual int wait_pins_change(sPinsChangeData* pinsChangeData, int mask, uint64_t timeout);
 
-public:
-	void Initialise(std::vector<int> values, std::vector<int> value_times);
-};
+	public:
+		void Initialise(std::vector<int> values, std::vector<int> value_times);
+	};
+}
 
 static std::unique_ptr<MockHardwareInterface> mockHardwareInterface;
 
@@ -34,7 +37,7 @@ static void ASimpleTraceCanBeCaptured()
 	hw_if.Initialise({11, 42, 51, 63, 77}, {1, 5, 11, 23, 45});
 	PicoScope scope(hw_if, 1000);
 
-	PicoScopeTrace trace = scope.FetchTrace();
+	PicoScopeTrace trace = ((IPicoScope&)scope).FetchTrace();
 
 	AssertEqual(11, trace.initial_value);
 	AssertEqual(4, trace.values.size());
@@ -55,9 +58,9 @@ static void OnlyTheMostRecentTraceIsRetained()
 	PicoScope scope(hw_if, 1000);
 
 	hw_if.Initialise({ 11, 42, 51, 63, 77 }, { 1, 5, 11, 23, 45 });
-	PicoScopeTrace trace = scope.FetchTrace();
+	PicoScopeTrace trace = ((IPicoScope&)scope).FetchTrace();
 	hw_if.Initialise({ 111, 142, 151, 163, 177 }, { 1, 5, 11, 23, 45 });
-	trace = scope.FetchTrace();
+	trace = ((IPicoScope&)scope).FetchTrace();
 
 	AssertEqual(111, trace.initial_value);
 	AssertEqual(4, trace.values.size());
@@ -78,7 +81,7 @@ static void ATimeOutReturnsAPartialTrace()
 	hw_if.Initialise({ 11, 42, 51, 63, 77 }, { 1, 5, 11, 23, 45000 });
 	PicoScope scope(hw_if, 1000);
 
-	PicoScopeTrace trace = scope.FetchTrace();
+	PicoScopeTrace trace = ((IPicoScope&)scope).FetchTrace();
 
 	AssertEqual(11, trace.initial_value);
 	AssertEqual(3, trace.values.size());

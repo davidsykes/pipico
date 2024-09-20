@@ -4,6 +4,8 @@
 #include "../../pico_scope/pico_scope.h"
 #include "../Mocks/MockHardwareInteface.h"
 
+namespace
+{
 class MockHardwareInterface : public IMockHardwareInterface
 {
 	std::vector<int> values;
@@ -18,6 +20,7 @@ class MockHardwareInterface : public IMockHardwareInterface
 public:
 	void Initialise(std::vector<int> values, std::vector<int> value_times);
 };
+}
 
 static std::unique_ptr<MockHardwareInterface> mockHardwareInterface;
 

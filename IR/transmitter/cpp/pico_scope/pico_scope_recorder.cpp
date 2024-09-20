@@ -24,7 +24,7 @@ std::string run_scope(IHardwareInterface& hw_if, PicoScopeConfiguration& config)
     TraceDataFormatter traceFormatter;
 
     hw_if.set_led(1);
-    PicoScopeTrace& trace = scope.FetchTrace();
+    PicoScopeTrace& trace = ((IPicoScope&)scope).FetchTrace();
 
     hw_if.set_led(0);
     std::string traceData = traceFormatter.FormatTraceData(trace);

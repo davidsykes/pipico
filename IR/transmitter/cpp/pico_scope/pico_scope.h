@@ -14,7 +14,13 @@ public:
     void AddChange(int time, int value);
 };
 
-class PicoScope
+class IPicoScope
+{
+public:
+    virtual PicoScopeTrace& FetchTrace() = 0;
+};
+
+class PicoScope : public IPicoScope
 {
     IHardwareInterface& hw_if;
     int timeout_us;
@@ -22,8 +28,9 @@ class PicoScope
 
     int GetSignalPins();
 
+    virtual PicoScopeTrace& FetchTrace();
+
 public:
     PicoScope(IHardwareInterface& hw_if, int timeout_us);
-    PicoScopeTrace& FetchTrace();
 };
 
