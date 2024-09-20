@@ -12,6 +12,7 @@ from trace_plotter import TracePlotter
 from command_d import CommandD
 from command_p import CommandP
 from command_l import CommandL
+from command_c import CommandC
 
 surl = 'http://192.168.1.87:5000'
 #surl = 'http://localhost:5042'
@@ -28,6 +29,8 @@ command_p = CommandP(trace_plotter)
 command_processor.add_command('p', command_p, 'Plot trace file(s)')
 command_l = CommandL(trace_directory)
 command_processor.add_command('l', command_l, 'List trace file(s)')
+command_c = CommandC(trace_directory);
+command_processor.add_command('c', command_c, 'Show trace in a format fit for a pico')
 
 
 for i in range(1, len(sys.argv)):
