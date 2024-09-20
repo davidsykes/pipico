@@ -26,25 +26,38 @@ public:
 
 class MockRestHandler : public IRestHandler
 {
+	MockHardwareInterface& hw_if;
+
 	virtual std::string Get(const char* url) { Assert("Invalid"); }
-	virtual std::string Put(const char* url, const char* body) { Assert("Invalid"); }
+	virtual std::string Put(const char* url, const char* body);
 public:
-	bool TraceWasPosted = false;
+	MockRestHandler(MockHardwareInterface& hw_if) : hw_if(hw_if) {}
+
+	std::string PutUrl;
+	std::string PutData;
+	bool LedStateDuringPost = true;
 };
 
 static std::unique_ptr<PicoScopeCaptureAndPost> objectUnderTest;
 static std::unique_ptr<MockPicoScope> mockPicoScope;
 static std::unique_ptr<MockHardwareInterface> mockHardwareInterface;
+static std::unique_ptr<TraceDataFormatter> traceDataFormatter;
 static std::unique_ptr<MockRestHandler> mockRestHandler;
 static std::unique_ptr<PicoScopeTrace> capturedPicoScopeTrace;
 
 static PicoScopeCaptureAndPost& CreateObjectUnderTest()
 {
 	capturedPicoScopeTrace.reset(new PicoScopeTrace);
+	capturedPicoScopeTrace.get()->initial_value = 4242;
 	mockHardwareInterface.reset(new MockHardwareInterface);
-	mockPicoScope.reset(new MockPicoScope(*mockHardwareInterface.get(), *capturedPicoScopeTrace.get()));
-	mockRestHandler.reset(new MockRestHandler);
-	objectUnderTest.reset(new PicoScopeCaptureAndPost(*mockHardwareInterface.get(), *mockPicoScope.get()));
+	traceDataFormatter.reset(new TraceDataFormatter);
+	mockPicoScope.reset(new MockPicoScope(*mockHardwareInterface.get(),*capturedPicoScopeTrace.get()));
+	mockRestHandler.reset(new MockRestHandler(*mockHardwareInterface.get()));
+	objectUnderTest.reset(new PicoScopeCaptureAndPost(
+		*mockHardwareInterface.get(),
+		*mockPicoScope.get(),
+		*traceDataFormatter.get(),
+		*mockRestHandler.get()));
 	return *objectUnderTest.get();
 }
 
@@ -57,13 +70,15 @@ static void ATraceIsCapturedWhileTheHardwareLightIsOn()
 	AssertTrue(mockPicoScope.get()->LedStateDuringCapture);
 }
 
-static void ATraceCanBeCapturedFormattedAndPosted()
+static void TheTraceIsPostedWhileTheHardwareLightIsOff()
 {
 	IPicoScopeCaptureAndPost& cap = CreateObjectUnderTest();
 
 	cap.CaptureAndPost();
 
-	AssertTrue(mockRestHandler.get()->TraceWasPosted);
+	AssertEqual("/trace", mockRestHandler.get()->PutUrl);
+	AssertEqual("{\"InitialValue\":4242,\"Values\":[]}", mockRestHandler.get()->PutData);
+	AssertFalse(mockRestHandler.get()->LedStateDuringPost);
 }
 
 PicoScopeTrace& MockPicoScope::FetchTrace()
@@ -72,10 +87,18 @@ PicoScopeTrace& MockPicoScope::FetchTrace()
 	return trace;
 }
 
+std::string MockRestHandler::Put(const char* url, const char* body)
+{
+	LedStateDuringPost = hw_if.LedState;
+	PutUrl = url;
+	PutData = body;
+	return "";
+}
+
 void PicoScopeCaptureAndPostTests::RunTests()
 {
 	ATraceIsCapturedWhileTheHardwareLightIsOn();
-	ATraceCanBeCapturedFormattedAndPosted();
+	TheTraceIsPostedWhileTheHardwareLightIsOff();
 }
 
 void PicoScopeCaptureAndPostTests::CleanUpAfterTests()

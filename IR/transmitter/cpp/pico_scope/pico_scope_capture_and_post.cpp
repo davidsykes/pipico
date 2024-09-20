@@ -14,7 +14,10 @@
 void PicoScopeCaptureAndPost::CaptureAndPost()
 {
 	hw_if.set_led(1);
-	pico_scope.FetchTrace();
+	PicoScopeTrace& trace = pico_scope.FetchTrace();
+	hw_if.set_led(0);
+	std::string trace_data = trace_data_formatter.FormatTraceData(trace);
+	rest_handler.Put("/trace", trace_data.c_str());
 }
 
 

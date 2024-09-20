@@ -1,6 +1,7 @@
 #pragma once
 #include "pico_scope.h"
-
+#include "trace_data_formatter.h"
+#include "../rest/rest_handler.h"
 
 class IPicoScopeCaptureAndPost
 {
@@ -12,39 +13,20 @@ class PicoScopeCaptureAndPost : public IPicoScopeCaptureAndPost
 {
 	IHardwareInterface& hw_if;
 	IPicoScope& pico_scope;
+	TraceDataFormatter& trace_data_formatter;
+	IRestHandler& rest_handler;
 
 	virtual void CaptureAndPost();
 public:
 	PicoScopeCaptureAndPost(
 		IHardwareInterface& hw_if,
-		IPicoScope& pico_scope
+		IPicoScope& pico_scope,
+		TraceDataFormatter& trace_data_formatter,
+		IRestHandler& rest_handler
 	)
 		: hw_if(hw_if),
-		pico_scope(pico_scope)
+		pico_scope(pico_scope),
+		trace_data_formatter(trace_data_formatter),
+		rest_handler(rest_handler)
 	{}
 };
-
-//class IPicoScopeRecordAndPost
-//{
-//public:
-//    virtual std::string RecordAndPostTrace() = 0;
-//};
-//
-//class PicoScopeRecordAndPost : public IPicoScopeRecordAndPost
-//{
-//    IHardwareInterface& hw_if;
-//    PicoScopeConfiguration& config;
-//    IRestHandler& restHandler;
-//
-//    virtual std::string RecordAndPostTrace();
-//
-//public:
-//    PicoScopeRecordAndPost(IHardwareInterface& hw_if,
-//                            PicoScopeConfiguration& config,
-//                            IRestHandler& restHandler)
-//                            : hw_if(hw_if), config(config), restHandler(restHandler) {}
-//};
-//
-//
-//void RunScope(IHardwareInterface& hw_if);
-//void run_scope(IHardwareInterface& hw_if, PicoScopeConfiguration& config, IRestHandler& restHandler);
