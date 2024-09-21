@@ -20,21 +20,21 @@
 int main()
 {
     HttpRequestRouterTests().RunTests();
-    HttpResponsePackagerTests().RunTests();
-    MessageLoggerTests().RunTests();
-    LogsDisplayActionTests().RunTests();
-    CodesRepositoryTests().RunTests();
     HomeDisplayActionTests().RunTests();
     CodesDisplayActionTests().RunTests();
-    CodeDisplayFormatterTests().RunTests();
+    LogsDisplayActionTests().RunTests();
     PlayIrActionTests().RunTests();
-    IrSignalSenderTests().RunTests();
+    CodeDisplayFormatterTests().RunTests();
+    CodesRepositoryTests().RunTests();
     GPIOTests().RunTests();
+    PicoScopeTests().RunTests();
+    TraceDataFormatterTests().RunTests();
+    PicoScopeCaptureAndPostTests().RunTests();
     RestHandlerTests().RunTests();
     TcpRequestMakerTests().RunTests();
     TcpResponseAnalyserTests().RunTests();
-    PicoScopeTests().RunTests(); 
-    TraceDataFormatterTests().RunTests();
-    PicoScopeCaptureAndPostTests().RunTests();
+    HttpResponsePackagerTests().RunTests();
+    MessageLoggerTests().RunTests();
+    IrSignalSenderTests().RunTests();
     std::cout << "Tests Complete\n";
 }

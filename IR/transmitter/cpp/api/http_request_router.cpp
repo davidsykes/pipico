@@ -7,10 +7,6 @@ std::string HttpRequestRouter::RouteHttpRequest(const char* request)
 	{
 		return homeRequestHandler.Action();
 	}
-	if (strncmp(request, "GET /record", 11) == 0)
-	{
-		return recordRequestHandler.Action();
-	}
 	if (strncmp(request, "GET /sendcode", 13) == 0)
 	{
 		return playIrRequestHandler.Action(GetSingleToken(request + 14));

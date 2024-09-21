@@ -4,18 +4,15 @@
 #include "../../api/http_request_router.h"
 
 static std::unique_ptr<MockApiAction> mockHomeRequestHandler;
-static std::unique_ptr<MockApiAction> mockRecordRequestHandler;
 static std::unique_ptr<MockApiAction> mockPlayCodeRequestHandler;
 static std::unique_ptr<HttpRequestRouter> objectUnderTest;
 
 static HttpRequestRouter& CreateObjectUnderTest()
 {
 	mockHomeRequestHandler.reset(new MockApiAction("Home"));
-	mockRecordRequestHandler.reset(new MockApiAction("Record"));
 	mockPlayCodeRequestHandler.reset(new MockApiAction("Play"));
 	objectUnderTest.reset(new HttpRequestRouter(
 		*mockHomeRequestHandler.get(),
-		*mockRecordRequestHandler.get(),
 		*mockPlayCodeRequestHandler.get()));
 	return *objectUnderTest.get();
 }
@@ -38,13 +35,13 @@ static void FaviconRequestReturnsNotFound()
 	AssertTrue(result.empty());
 }
 
-static void ARecordRequestPassesTheRequestToTheRecordHander()
+static void TheRecordRequestHasBeenRemoved()
 {
 	IHttpRequestRouter& router = CreateObjectUnderTest();
 
 	std::string result = router.RouteHttpRequest("GET /record");
 
-	AssertEqual("Record", result);
+	AssertEqual("", result);
 }
 
 static void ASendCodeRequestPassesTheRequestToTheIrPlayer()
@@ -69,7 +66,7 @@ void HttpRequestRouterTests::RunTests()
 {
 	ARootRequestPassesTheRequestToTheHomeHandler();
 	FaviconRequestReturnsNotFound();
-	ARecordRequestPassesTheRequestToTheRecordHander();
+	TheRecordRequestHasBeenRemoved();
 	ASendCodeRequestPassesTheRequestToTheIrPlayer();
 	ASendCodeRequestTerminatesTheCodeNameAtWhiteSpace();
 }
@@ -78,6 +75,5 @@ void HttpRequestRouterTests::CleanUpAfterTests()
 {
 	objectUnderTest.release();
 	mockHomeRequestHandler.release();
-	mockRecordRequestHandler.release();
 	mockPlayCodeRequestHandler.release();
 }
