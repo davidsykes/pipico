@@ -9,7 +9,7 @@
 
 #define SCOPE_API_SERVER_IP "192.168.1.87"
 #define SCOPE_API_PORT 5000
-//#define TRACE_DATA_CREATE_URL "/trace"
+#define TRACE_DATA_CREATE_URL "/trace"
 #define PIN_FOR_PULL_UP 5
 
 
@@ -35,8 +35,11 @@ void pico_scope_main(IHardwareInterface& hw_if)
         hw_if,
         scope,
         trace_data_formatter,
-        restHandler);
-
-    printf("Capture a trace\n");
-    ((IPicoScopeCaptureAndPost&)srap).CaptureAndPost();
+        restHandler,
+        TRACE_DATA_CREATE_URL);
+    while(true)
+    {
+        printf("Capture a trace\n");
+        ((IPicoScopeCaptureAndPost&)srap).CaptureAndPost();
+    }
 }

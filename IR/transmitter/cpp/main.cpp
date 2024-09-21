@@ -7,7 +7,6 @@
 #include "tcp_server/pico_tcp_server.h"
 #include "api/api_actions/home_display_action.h"
 #include "api/api_actions/log_display_action.h"
-#include "api/api_actions/record_ir_action.h"
 #include "api/api_actions/codes_display_action.h"
 #include "api/api_actions/play_ir_action.h"
 #include "api/formatters/code_display_formatter.h"
@@ -57,16 +56,12 @@ int main()
       CodesDisplayAction codesDisplayAction(irCodesRepository, codeDisplayFormatter);
       HomeDisplayAction homeDisplayAction(codesDisplayAction, logDisplayAction);
 
-      PicoScopeConfiguration ir_scope_configuration(6);
-      PicoScopeRecorder picoScopeRecorder(hw_if, ir_scope_configuration);
-      RecordIrAction recordIrAction(picoScopeRecorder);
-
       IrSignalSender irSignalSender(outputPin);
       PlayIrAction playIrAction(irSignalSender, irCodesRepository);
 
       ((ApiAction&)playIrAction).Action("testcode");
 
-      HttpRequestRouter httpRequestRouter(homeDisplayAction, recordIrAction, playIrAction);
+      HttpRequestRouter httpRequestRouter(homeDisplayAction, playIrAction);
       HttpResponsePackager httpResponsePackager(httpRequestRouter);
       main_pico_tcp_server(&httpResponsePackager);
    }
