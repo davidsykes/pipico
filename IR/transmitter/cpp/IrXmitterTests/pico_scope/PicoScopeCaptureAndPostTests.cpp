@@ -57,7 +57,8 @@ static PicoScopeCaptureAndPost& CreateObjectUnderTest()
 		*mockHardwareInterface.get(),
 		*mockPicoScope.get(),
 		*traceDataFormatter.get(),
-		*mockRestHandler.get()));
+		*mockRestHandler.get(),
+		"trace url"));
 	return *objectUnderTest.get();
 }
 
@@ -76,7 +77,7 @@ static void TheTraceIsPostedWhileTheHardwareLightIsOff()
 
 	cap.CaptureAndPost();
 
-	AssertEqual("/trace", mockRestHandler.get()->PutUrl);
+	AssertEqual("trace url", mockRestHandler.get()->PutUrl);
 	AssertEqual("{\"InitialValue\":4242,\"Values\":[]}", mockRestHandler.get()->PutData);
 	AssertFalse(mockRestHandler.get()->LedStateDuringPost);
 }

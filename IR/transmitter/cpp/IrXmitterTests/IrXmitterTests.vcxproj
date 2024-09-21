@@ -139,7 +139,6 @@
     <ClCompile Include="..\gpio\gpio_output.cpp" />
     <ClCompile Include="..\pico_scope\pico_scope.cpp" />
     <ClCompile Include="..\pico_scope\pico_scope_capture_and_post.cpp" />
-    <ClCompile Include="..\pico_scope\pico_scope_recorder.cpp" />
     <ClCompile Include="..\pico_scope\pico_scope_trace.cpp" />
     <ClCompile Include="..\pico_scope\trace_data_formatter.cpp" />
     <ClCompile Include="..\rest\rest_handler.cpp" />
@@ -185,7 +184,6 @@
     <ClInclude Include="..\pico_scope\pico_scope.h" />
     <ClInclude Include="..\pico_scope\pico_scope_capture_and_post.h" />
     <ClInclude Include="..\pico_scope\pico_scope_configuration.h" />
-    <ClInclude Include="..\pico_scope\pico_scope_recorder.h" />
     <ClInclude Include="..\rest\rest_handler.h" />
     <ClInclude Include="..\rest\tcp_request_error_logger.h" />
     <ClInclude Include="..\rest\tcp_request_maker.h" />

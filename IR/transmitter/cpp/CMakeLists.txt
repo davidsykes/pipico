@@ -18,7 +18,6 @@ add_executable(test
         hw_if/picow_tcp_client.c
         gpio/gpio_input.cpp
         gpio/gpio_output.cpp
-        pico_scope/pico_scope_recorder.cpp
         pico_scope/pico_scope.cpp
         pico_scope/trace_data_formatter.cpp
         pico_scope/pico_scope_trace.cpp
