@@ -15,10 +15,13 @@ class SystemWrapper:
 
     def post(self, url):
         url = ''.join([self._server_url, '/', url])
-        print('Post', url)
+        #print('Post', url)
         req = Request(url, method='POST')
         resp = urlopen(req)
-        print(resp)
+        if (resp.status != 200):
+            print('Post response status', resp.status)
+            print('Post url', url)
+            print('Reason', resp.reason)
 
     def print(self, p):
         print(p)

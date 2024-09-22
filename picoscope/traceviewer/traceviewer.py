@@ -5,6 +5,7 @@ sys.path.append('./src/logic')
 from trace_directory import TraceDirectory
 from command_processor import CommandProcessor
 from program_quit_exception import ProgramQuitException
+from command_exception import CommandException
 from system_wrapper import SystemWrapper
 from argument_analyser import ArgumentAnalyser
 from trace_deletor import TraceDeletor
@@ -40,8 +41,11 @@ command_l.process_command()
 
 try:
     while True:
-        cmd = input("What now? ")
-        command_processor.process_command(cmd)
-        trace_directory.update_trace_list()
+        try:
+            cmd = input("What now? ")
+            command_processor.process_command(cmd)
+            trace_directory.update_trace_list()
+        except CommandException as ex:
+            print('Program Error:', ex)
 except ProgramQuitException:
     pass

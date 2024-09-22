@@ -67,5 +67,5 @@ int main()
    }
 
    hw_if.cyw43_arch_deinit();
-   printf("Ended..");
+   printf("Ended..\n");
 }
