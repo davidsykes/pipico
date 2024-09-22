@@ -207,6 +207,12 @@
     <ClCompile Include="..\pico_scope\pico_scope_capture_and_post.cpp">
       <Filter>Source Files\pico_scope</Filter>
     </ClCompile>
+    <ClCompile Include="tools\BlinkerTests.cpp">
+      <Filter>Source Files\Tests\tools</Filter>
+    </ClCompile>
+    <ClCompile Include="..\tools\blinker.cpp">
+      <Filter>Source Files\Tools</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="api\http_request_router_tests.h">
@@ -337,6 +343,12 @@
     </ClInclude>
     <ClInclude Include="..\pico_scope\pico_scope_capture_and_post.h">
       <Filter>Source Files\pico_scope</Filter>
+    </ClInclude>
+    <ClInclude Include="tools\BlinkerTests.h">
+      <Filter>Source Files\Tests\tools</Filter>
+    </ClInclude>
+    <ClInclude Include="..\tools\blinker.h">
+      <Filter>Source Files\Tools</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

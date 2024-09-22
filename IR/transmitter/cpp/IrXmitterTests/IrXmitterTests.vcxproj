@@ -145,6 +145,7 @@
     <ClCompile Include="..\rest\tcp_request_maker.cpp" />
     <ClCompile Include="..\rest\tcp_response_analyser.cpp" />
     <ClCompile Include="..\tcp_server\http_response_packager.cpp" />
+    <ClCompile Include="..\tools\blinker.cpp" />
     <ClCompile Include="..\tools\message_logger.cpp" />
     <ClCompile Include="..\transmit\ir_signal_sender.cpp" />
     <ClCompile Include="api\api_actions\logs_display_action_tests.cpp" />
@@ -166,6 +167,7 @@
     <ClCompile Include="TestFramework\Assert.cpp" />
     <ClCompile Include="TestFramework\TestFramework.cpp" />
     <ClCompile Include="TestFramework\TestModule.cpp" />
+    <ClCompile Include="tools\BlinkerTests.cpp" />
     <ClCompile Include="tools\MessageLoggerTests.cpp" />
     <ClCompile Include="transmit\IrSignalSenderTests.cpp" />
   </ItemGroup>
@@ -189,6 +191,7 @@
     <ClInclude Include="..\rest\tcp_request_maker.h" />
     <ClInclude Include="..\rest\tcp_response_analyser.h" />
     <ClInclude Include="..\tcp_server\http_response_packager.h" />
+    <ClInclude Include="..\tools\blinker.h" />
     <ClInclude Include="..\tools\message_logger.h" />
     <ClInclude Include="..\transmit\ir_signal_sender.h" />
     <ClInclude Include="api\api_actions\logs_display_action_tests.h" />
@@ -211,6 +214,7 @@
     <ClInclude Include="TestFramework\Assert.h" />
     <ClInclude Include="TestFramework\ITestModule.h" />
     <ClInclude Include="TestFramework\TestFramework.h" />
+    <ClInclude Include="tools\BlinkerTests.h" />
     <ClInclude Include="tools\MessageLoggerTests.h" />
     <ClInclude Include="transmit\IrSignalSenderTests.h" />
   </ItemGroup>

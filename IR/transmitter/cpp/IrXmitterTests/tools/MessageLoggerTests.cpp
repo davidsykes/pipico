@@ -2,12 +2,12 @@
 #include "MessageLoggerTests.h"
 #include "../../tools/message_logger.h"
 
-static std::unique_ptr<MessageLogger> messageLogger;
+static std::unique_ptr<MessageLogger> objectUnderTest;
 
 static MessageLogger& CreateTestObject()
 {
-	messageLogger.reset(new MessageLogger);
-	return *messageLogger.get();
+	objectUnderTest.reset(new MessageLogger);
+	return *objectUnderTest.get();
 }
 
 static void ASimpleMessageCanBeLogged()
@@ -42,5 +42,5 @@ void MessageLoggerTests::RunTests()
 
 void MessageLoggerTests::CleanUpAfterTests()
 {
-	messageLogger.release();
+	objectUnderTest.release();
 }
