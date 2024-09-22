@@ -10,11 +10,11 @@ static IrCodesRepository& CreateObjectUnderTest()
 	return *objectUnderTest.get();
 }
 
-static void ADefinitionCanBeRetrieved()
+static void ACodeCanBeRetrieved()
 {
-	IIrCodesRepository& definitions = CreateObjectUnderTest();
+	IIrCodesRepository& repo = CreateObjectUnderTest();
 
-	IrCode& code = definitions.GetCodes()[0];
+	IrCode& code = repo.GetCodes()[0];
 
 	AssertEqual("testcode", code.Name);
 	AssertEqual(68, code.Count);
@@ -30,9 +30,9 @@ static void ADefinitionCanBeRetrieved()
 
 static void ACodeCanBeFoundByName()
 {
-	IIrCodesRepository& definitions = CreateObjectUnderTest();
+	IIrCodesRepository& repo = CreateObjectUnderTest();
 
-	IrCode* codep = definitions.GetCode("testcode");
+	IrCode* codep = repo.GetCode("testcode");
 	AssertFalse(codep == 0);
 
 	if (codep)
@@ -44,17 +44,36 @@ static void ACodeCanBeFoundByName()
 
 static void IfACodeDoesNotExistGetCodeReturnsNull()
 {
-	IIrCodesRepository& definitions = CreateObjectUnderTest();
+	IIrCodesRepository& repo = CreateObjectUnderTest();
 
-	IrCode* codep = definitions.GetCode("invalid code");
-	AssertTrue(codep == 0);
+	IrCode* code = repo.GetCode("invalid code");
+	AssertTrue(code == 0);
+}
+
+static void CodeOnOffHasBeenDefined()
+{
+	IIrCodesRepository& repo = CreateObjectUnderTest();
+
+	IrCode& code = *repo.GetCode("OnOff");
+
+	AssertEqual("OnOff", code.Name);
+	AssertEqual(68, code.Count);
+	AssertEqual(68, code.Times.size());
+	AssertEqual(0, code.Times[0]);
+	AssertEqual(4538, code.Times[1]);
+	AssertEqual(9026, code.Times[2]);
+	AssertEqual(68, code.Values.size());
+	AssertEqual(1, code.Values[0]);
+	AssertEqual(0, code.Values[1]);
+	AssertEqual(1, code.Values[2]);
 }
 
 void CodesRepositoryTests::RunTests()
 {
-	ADefinitionCanBeRetrieved();
+	ACodeCanBeRetrieved();
 	ACodeCanBeFoundByName();
 	IfACodeDoesNotExistGetCodeReturnsNull();
+	CodeOnOffHasBeenDefined();
 }
 
 void CodesRepositoryTests::CleanUpAfterTests()
