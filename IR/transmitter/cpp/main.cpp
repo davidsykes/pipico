@@ -39,15 +39,6 @@ int main()
    {
       GPIOOutputPin _outputPin(TRANSMIT_PIN, hw_if);
       IGPIOOutputPin& outputPin = _outputPin;
-      // int value = 0;
-      // uint64_t now = outputPin.SetValueAt(value, 0);
-      // while (actionValue == actionPin.Value())
-      // {
-      //    value = 1 - value;
-      //    now += 1000000;
-      //    outputPin.SetValueAt(value, now);
-      // }
-
       MessageLogger messageLogger;
       IrCodesRepository irCodesRepository;
 
