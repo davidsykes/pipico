@@ -3,6 +3,7 @@
 #include "../../api/api_actions/play_ir_action.h"
 #include "../../transmit/ir_signal_sender.h"
 #include "../../codes/ir_codes_repository.h"
+#include "../Mocks/MockApiAction.h"
 
 namespace
 {
@@ -25,6 +26,7 @@ namespace
 static std::unique_ptr<PlayIrAction> objectUnderTest;
 static std::unique_ptr<MockIrCodesRepository> mockIrCodesRepository;
 static std::unique_ptr<MockIrSignalSender> mockIrSignalSender;
+static std::unique_ptr<MockApiAction> mockApiAction;
 static const std::string& valid_code_name = "code name";
 
 static void SetUpCodeRepository()
@@ -37,7 +39,11 @@ static PlayIrAction& CreateObjectUnderTest()
 {
 	SetUpCodeRepository();
 	mockIrSignalSender.reset(new MockIrSignalSender);
-	objectUnderTest.reset(new PlayIrAction(*mockIrSignalSender.get(), *mockIrCodesRepository.get()));
+	mockApiAction.reset(new MockApiAction("Home Page"));
+	objectUnderTest.reset(new PlayIrAction(
+		*mockIrSignalSender.get(),
+		*mockIrCodesRepository.get(),
+		*mockApiAction.get()));
 	return *objectUnderTest.get();
 }
 
@@ -50,13 +56,13 @@ static void TheCodeDataIsRetrievedAndSentToTheWavePlayer()
 	AssertEqual(valid_code_name, mockIrSignalSender.get()->irCodeSent.Name);
 }
 
-static void AValidCodeReturnsNoError()
+static void AValidCodeReturnsHomePageAction()
 {
 	ApiAction& action = CreateObjectUnderTest();
 
 	auto result = action.Action(valid_code_name);
 
-	AssertTrue(result.empty());
+	AssertEqual("Home Page", result);
 }
 
 static void AnInvalidCodeReturnsAnError()
@@ -80,7 +86,7 @@ IrCode* MockIrCodesRepository::GetCode(const std::string& name)
 void PlayIrActionTests::RunTests()
 {
 	TheCodeDataIsRetrievedAndSentToTheWavePlayer();
-	AValidCodeReturnsNoError();
+	AValidCodeReturnsHomePageAction();
 	AnInvalidCodeReturnsAnError();
 }
 

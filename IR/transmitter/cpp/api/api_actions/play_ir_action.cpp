@@ -12,5 +12,5 @@ std::string PlayIrAction::Action(const std::string& code_name)
 
 	irSignalSender.SendCode(*code);
 
-	return "";
+	return actionWhenFinished.Action();
 }

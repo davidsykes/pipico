@@ -7,12 +7,15 @@ class PlayIrAction : public ApiAction
 {
 	IIrCodesRepository& codesRepository;
 	IIrSignalSender& irSignalSender;
+	ApiAction& actionWhenFinished;
 
 	virtual std::string Action(const std::string& p);
 
 public:
 	PlayIrAction(IIrSignalSender& irSignalSender,
-		IIrCodesRepository& codesRepository)
+		IIrCodesRepository& codesRepository,
+		ApiAction& actionWhenFinished)
 		: irSignalSender(irSignalSender),
-		codesRepository(codesRepository){}
+		codesRepository(codesRepository),
+		actionWhenFinished(actionWhenFinished) {}
 };

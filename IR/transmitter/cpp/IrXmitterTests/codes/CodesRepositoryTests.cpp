@@ -54,9 +54,9 @@ static void CodeOnOffHasBeenDefined()
 {
 	IIrCodesRepository& repo = CreateObjectUnderTest();
 
-	IrCode& code = *repo.GetCode("OnOff");
+	IrCode& code = *repo.GetCode("SamsungOnOff");
 
-	AssertEqual("OnOff", code.Name);
+	AssertEqual("SamsungOnOff", code.Name);
 	AssertEqual(68, code.Count);
 	AssertEqual(68, code.Times.size());
 	AssertEqual(0, code.Times[0]);
