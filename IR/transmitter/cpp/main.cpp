@@ -21,7 +21,7 @@ int main()
 {
    PicoHardwareInterface phw_if;
    IHardwareInterface& hw_if = phw_if;
-   hw_if.initialise_pico_stdio();
+   hw_if.initialise_pico_stdio(false);
 
    WiFiConnector connector;
    connector.ConnectToWiFiDirect(hw_if, WIFI_SSID, WIFI_PASSWORD);
