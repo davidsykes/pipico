@@ -10,6 +10,7 @@ public:
 class HttpRequestRouter : public IHttpRequestRouter
 {
     ApiAction& homeRequestHandler;
+    ApiAction& rawRequestHandler;
     ApiAction& playIrRequestHandler;
 
     virtual std::string RouteHttpRequest(const char* request);
@@ -18,8 +19,10 @@ class HttpRequestRouter : public IHttpRequestRouter
 
 public:
     HttpRequestRouter(ApiAction& homeHandler,
+        ApiAction& rawHandler,
         ApiAction& playIrRequestHandler)
         : homeRequestHandler(homeHandler),
+        rawRequestHandler(rawHandler),
         playIrRequestHandler(playIrRequestHandler)
     {}
 };

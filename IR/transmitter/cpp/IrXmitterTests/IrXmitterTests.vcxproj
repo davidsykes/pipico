@@ -132,6 +132,7 @@
     <ClCompile Include="..\api\api_actions\home_display_action.cpp" />
     <ClCompile Include="..\api\api_actions\log_display_action.cpp" />
     <ClCompile Include="..\api\api_actions\play_ir_action.cpp" />
+    <ClCompile Include="..\api\api_actions\raw_display_action.cpp" />
     <ClCompile Include="..\api\formatters\code_display_formatter.cpp" />
     <ClCompile Include="..\api\http_request_router.cpp" />
     <ClCompile Include="..\codes\ir_codes_repository.cpp" />
@@ -154,6 +155,7 @@
     <ClCompile Include="api\formatters\code_display_fomatter_tests.cpp" />
     <ClCompile Include="api\home_display_action_tests.cpp" />
     <ClCompile Include="api\http_request_router_tests.cpp" />
+    <ClCompile Include="api\raw_display_action_tests.cpp" />
     <ClCompile Include="codes\CodesRepositoryTests.cpp" />
     <ClCompile Include="gpio\GPIOTests.cpp" />
     <ClCompile Include="IrXmitterTests.cpp" />
@@ -177,6 +179,7 @@
     <ClInclude Include="..\api\api_actions\home_display_action.h" />
     <ClInclude Include="..\api\api_actions\log_display_action.h" />
     <ClInclude Include="..\api\api_actions\play_ir_action.h" />
+    <ClInclude Include="..\api\api_actions\raw_display_action.h" />
     <ClInclude Include="..\api\api_actions\record_ir_action.h" />
     <ClInclude Include="..\api\formatters\code_display_formatter.h" />
     <ClInclude Include="..\api\http_request_router.h" />
@@ -200,6 +203,7 @@
     <ClInclude Include="api\formatters\code_display_fomatter_tests.h" />
     <ClInclude Include="api\home_display_action_tests.h" />
     <ClInclude Include="api\http_request_router_tests.h" />
+    <ClInclude Include="api\raw_display_action_tests.h" />
     <ClInclude Include="codes\CodesRepositoryTests.h" />
     <ClInclude Include="gpio\GPIOTests.h" />
     <ClInclude Include="Mocks\MockApiAction.h" />

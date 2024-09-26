@@ -1,6 +1,7 @@
 #include <iostream>
 #include "api\http_request_router_tests.h"
 #include "api/home_display_action_tests.h"
+#include "api/raw_display_action_tests.h"
 #include "api/codes_display_action_tests.h"
 #include "api/api_actions/logs_display_action_tests.h"
 #include "api/api_actions/play_ir_action_tests.h"
@@ -22,6 +23,7 @@ int main()
 {
     HttpRequestRouterTests().RunTests();
     HomeDisplayActionTests().RunTests();
+    RawDisplayActionTests().RunTests();
     CodesDisplayActionTests().RunTests();
     LogsDisplayActionTests().RunTests();
     PlayIrActionTests().RunTests();

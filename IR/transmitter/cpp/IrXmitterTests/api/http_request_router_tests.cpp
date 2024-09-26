@@ -4,15 +4,18 @@
 #include "../../api/http_request_router.h"
 
 static std::unique_ptr<MockApiAction> mockHomeRequestHandler;
+static std::unique_ptr<MockApiAction> mockRawRequestHandler;
 static std::unique_ptr<MockApiAction> mockPlayCodeRequestHandler;
 static std::unique_ptr<HttpRequestRouter> objectUnderTest;
 
 static HttpRequestRouter& CreateObjectUnderTest()
 {
 	mockHomeRequestHandler.reset(new MockApiAction("Home"));
+	mockRawRequestHandler.reset(new MockApiAction("Raw"));
 	mockPlayCodeRequestHandler.reset(new MockApiAction("Play"));
 	objectUnderTest.reset(new HttpRequestRouter(
 		*mockHomeRequestHandler.get(),
+		*mockRawRequestHandler.get(),
 		*mockPlayCodeRequestHandler.get()));
 	return *objectUnderTest.get();
 }
@@ -24,6 +27,15 @@ static void ARootRequestPassesTheRequestToTheHomeHandler()
 	std::string result = router.RouteHttpRequest("GET / bla");
 
 	AssertEqual("Home", result);
+}
+
+static void ARawRequestPassesTheRequestToTheRawHandler()
+{
+	IHttpRequestRouter& router = CreateObjectUnderTest();
+
+	std::string result = router.RouteHttpRequest("GET /raw bla");
+
+	AssertEqual("Raw", result);
 }
 
 static void FaviconRequestReturnsNotFound()
@@ -65,6 +77,7 @@ static void ASendCodeRequestTerminatesTheCodeNameAtWhiteSpace()
 void HttpRequestRouterTests::RunTests()
 {
 	ARootRequestPassesTheRequestToTheHomeHandler();
+	ARawRequestPassesTheRequestToTheRawHandler();
 	FaviconRequestReturnsNotFound();
 	TheRecordRequestHasBeenRemoved();
 	ASendCodeRequestPassesTheRequestToTheIrPlayer();
