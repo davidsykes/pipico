@@ -50,10 +50,9 @@ int main()
       IrSignalSender irSignalSender(outputPin);
       PlayIrAction playIrAction(irSignalSender, irCodesRepository);
 
-      ((ApiAction&)playIrAction).Action("testcode");
-
       HttpRequestRouter httpRequestRouter(homeDisplayAction, playIrAction);
       HttpResponsePackager httpResponsePackager(httpRequestRouter);
+      hw_if.set_led(true);
       main_pico_tcp_server(&httpResponsePackager);
    }
 
