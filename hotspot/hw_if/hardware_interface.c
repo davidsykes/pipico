@@ -4,7 +4,7 @@
 #include "picow_tcp_client.h"
 
 
-void _initialise_pico_stdio()
+void _initialise_pico_stdio(bool wait_for_usb_comms)
 {
     stdio_init_all();
     while (!tud_cdc_connected()) sleep_ms(100);

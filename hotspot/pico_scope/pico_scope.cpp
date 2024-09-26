@@ -1,7 +1,5 @@
 #include "pico_scope.h"
 
-
-
 PicoScope::PicoScope(IHardwareInterface& hw_if, int timeout_us)
     : hw_if(hw_if), timeout_us(timeout_us)
 {

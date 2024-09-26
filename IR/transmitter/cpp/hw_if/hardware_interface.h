@@ -8,7 +8,7 @@
 
 typedef struct sHardwareInterface
 {
-    void (*initialise_pico_stdio)();
+    void (*initialise_pico_stdio)(bool wait_for_usb_comms);
     int (*cyw43_arch_init)();
     int (*initialise_wifi)(const char* ssid, const char* password);
     uint64_t (*get_time_us)();

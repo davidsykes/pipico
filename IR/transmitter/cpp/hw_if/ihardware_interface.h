@@ -10,7 +10,7 @@
 class IHardwareInterface
 {
 public:
-    virtual void initialise_pico_stdio()=0;
+    virtual void initialise_pico_stdio(bool wait_for_usb_comms)=0;
     virtual int initialise_wifi(const char* ssid, const char* password)=0;
     virtual uint64_t get_time_us()=0;
     virtual void initialise_input_pin(int pin_number)=0;

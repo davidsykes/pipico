@@ -8,9 +8,9 @@ PicoHardwareInterface::PicoHardwareInterface()
     hardware_interface->cyw43_arch_init();
 }
 
-void PicoHardwareInterface::initialise_pico_stdio()
+void PicoHardwareInterface::initialise_pico_stdio(bool wait_for_usb_comms)
 {
-    hardware_interface->initialise_pico_stdio();
+    hardware_interface->initialise_pico_stdio(wait_for_usb_comms);
 }
 
 int PicoHardwareInterface::initialise_wifi(const char* ssid, const char* password)
