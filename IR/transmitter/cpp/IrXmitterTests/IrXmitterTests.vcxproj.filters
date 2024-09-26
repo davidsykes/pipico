@@ -144,12 +144,6 @@
     <ClCompile Include="..\codes\ir_codes_repository.cpp">
       <Filter>Source Files\codes</Filter>
     </ClCompile>
-    <ClCompile Include="api\codes_display_action_tests.cpp">
-      <Filter>Source Files\Tests\api</Filter>
-    </ClCompile>
-    <ClCompile Include="api\home_display_action_tests.cpp">
-      <Filter>Source Files\Tests\api</Filter>
-    </ClCompile>
     <ClCompile Include="..\api\api_actions\codes_display_action.cpp">
       <Filter>Source Files\api\api_actions</Filter>
     </ClCompile>
@@ -213,11 +207,17 @@
     <ClCompile Include="..\tools\blinker.cpp">
       <Filter>Source Files\Tools</Filter>
     </ClCompile>
-    <ClCompile Include="api\raw_display_action_tests.cpp">
-      <Filter>Source Files\Tests\api</Filter>
-    </ClCompile>
     <ClCompile Include="..\api\api_actions\raw_display_action.cpp">
       <Filter>Source Files\api\api_actions</Filter>
+    </ClCompile>
+    <ClCompile Include="api\api_actions\codes_display_action_tests.cpp">
+      <Filter>Source Files\Tests\api\api_actions</Filter>
+    </ClCompile>
+    <ClCompile Include="api\api_actions\home_display_action_tests.cpp">
+      <Filter>Source Files\Tests\api\api_actions</Filter>
+    </ClCompile>
+    <ClCompile Include="api\api_actions\raw_display_action_tests.cpp">
+      <Filter>Source Files\Tests\api\api_actions</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -280,12 +280,6 @@
     </ClInclude>
     <ClInclude Include="..\codes\ir_codes_repository.h">
       <Filter>Source Files\codes</Filter>
-    </ClInclude>
-    <ClInclude Include="api\codes_display_action_tests.h">
-      <Filter>Source Files\Tests\api</Filter>
-    </ClInclude>
-    <ClInclude Include="api\home_display_action_tests.h">
-      <Filter>Source Files\Tests\api</Filter>
     </ClInclude>
     <ClInclude Include="..\api\api_actions\codes_display_action.h">
       <Filter>Source Files\api\api_actions</Filter>
@@ -356,11 +350,17 @@
     <ClInclude Include="..\tools\blinker.h">
       <Filter>Source Files\Tools</Filter>
     </ClInclude>
-    <ClInclude Include="api\raw_display_action_tests.h">
-      <Filter>Source Files\Tests\api</Filter>
-    </ClInclude>
     <ClInclude Include="..\api\api_actions\raw_display_action.h">
       <Filter>Source Files\api\api_actions</Filter>
+    </ClInclude>
+    <ClInclude Include="api\api_actions\codes_display_action_tests.h">
+      <Filter>Source Files\Tests\api\api_actions</Filter>
+    </ClInclude>
+    <ClInclude Include="api\api_actions\home_display_action_tests.h">
+      <Filter>Source Files\Tests\api\api_actions</Filter>
+    </ClInclude>
+    <ClInclude Include="api\api_actions\raw_display_action_tests.h">
+      <Filter>Source Files\Tests\api\api_actions</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
