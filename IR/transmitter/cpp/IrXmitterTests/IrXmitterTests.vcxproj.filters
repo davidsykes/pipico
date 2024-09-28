@@ -228,6 +228,12 @@
     <ClCompile Include="transmit\IrCodeSenderTests.cpp">
       <Filter>Source Files\Tests\transmit</Filter>
     </ClCompile>
+    <ClCompile Include="api\formatters\button_formatter_tests.cpp">
+      <Filter>Source Files\Tests\api\formatters</Filter>
+    </ClCompile>
+    <ClCompile Include="..\api\formatters\button_formatter.cpp">
+      <Filter>Source Files\api\formatters</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="api\http_request_router_tests.h">
@@ -382,6 +388,12 @@
     </ClInclude>
     <ClInclude Include="transmit\IrCodeSenderTests.h">
       <Filter>Source Files\Tests\transmit</Filter>
+    </ClInclude>
+    <ClInclude Include="api\formatters\button_formatter_tests.h">
+      <Filter>Source Files\Tests\api\formatters</Filter>
+    </ClInclude>
+    <ClInclude Include="..\api\formatters\button_formatter.h">
+      <Filter>Source Files\api\formatters</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

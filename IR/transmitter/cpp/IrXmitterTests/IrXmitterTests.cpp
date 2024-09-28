@@ -6,6 +6,7 @@
 #include "api/api_actions/logs_display_action_tests.h"
 #include "api/api_actions/play_ir_action_tests.h"
 #include "api/formatters/code_display_fomatter_tests.h"
+#include "api/formatters/button_formatter_tests.h"
 #include "codes\CodesRepositoryTests.h"
 #include "gpio/GPIOTests.h"
 #include "pico_scope/PicoScopeTests.h"
@@ -29,6 +30,7 @@ int main()
     LogsDisplayActionTests().RunTests();
     PlayIrActionTests().RunTests();
     CodeDisplayFormatterTests().RunTests();
+    ButtonFormatterTests().RunTests();
     CodesRepositoryTests().RunTests();
     GPIOTests().RunTests();
     PicoScopeTests().RunTests();

@@ -133,6 +133,7 @@
     <ClCompile Include="..\api\api_actions\log_display_action.cpp" />
     <ClCompile Include="..\api\api_actions\play_ir_action.cpp" />
     <ClCompile Include="..\api\api_actions\raw_display_action.cpp" />
+    <ClCompile Include="..\api\formatters\button_formatter.cpp" />
     <ClCompile Include="..\api\formatters\code_display_formatter.cpp" />
     <ClCompile Include="..\api\http_request_router.cpp" />
     <ClCompile Include="..\codes\code_sequence_repository.cpp" />
@@ -156,6 +157,7 @@
     <ClCompile Include="api\api_actions\logs_display_action_tests.cpp" />
     <ClCompile Include="api\api_actions\play_ir_action_tests.cpp" />
     <ClCompile Include="api\api_actions\raw_display_action_tests.cpp" />
+    <ClCompile Include="api\formatters\button_formatter_tests.cpp" />
     <ClCompile Include="api\formatters\code_display_fomatter_tests.cpp" />
     <ClCompile Include="api\http_request_router_tests.cpp" />
     <ClCompile Include="codes\CodesRepositoryTests.cpp" />
@@ -184,6 +186,7 @@
     <ClInclude Include="..\api\api_actions\play_ir_action.h" />
     <ClInclude Include="..\api\api_actions\raw_display_action.h" />
     <ClInclude Include="..\api\api_actions\record_ir_action.h" />
+    <ClInclude Include="..\api\formatters\button_formatter.h" />
     <ClInclude Include="..\api\formatters\code_display_formatter.h" />
     <ClInclude Include="..\api\http_request_router.h" />
     <ClInclude Include="..\codes\code_sequence.h" />
@@ -208,6 +211,7 @@
     <ClInclude Include="api\api_actions\logs_display_action_tests.h" />
     <ClInclude Include="api\api_actions\play_ir_action_tests.h" />
     <ClInclude Include="api\api_actions\raw_display_action_tests.h" />
+    <ClInclude Include="api\formatters\button_formatter_tests.h" />
     <ClInclude Include="api\formatters\code_display_fomatter_tests.h" />
     <ClInclude Include="api\http_request_router_tests.h" />
     <ClInclude Include="codes\CodesRepositoryTests.h" />
