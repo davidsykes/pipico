@@ -25,7 +25,7 @@ static HttpResponsePackager& CreateObjectUnderTest()
 	return *objectUnderTest.get();
 }
 
-static void RequestsArePassedToTheRouter()
+static void RequestsArePassedToTheRouterAndPackagedWithHtmlMarkers()
 {
 	IHttpResponsePackager& packager = CreateObjectUnderTest();
 	std::string header, body;
@@ -33,7 +33,8 @@ static void RequestsArePassedToTheRouter()
 	int result = packager.RouteRequestAndPackageResponse("/ bla", header, body);
 
 	AssertEqual(1, result);
-	AssertEqual("Router result", body);
+
+	AssertEqual("<!DOCTYPE html><html><body>Router result</body></html> ", body);
 }
 
 static void TheHeaderIsTerminatedByTwoCRLF()
@@ -44,7 +45,7 @@ static void TheHeaderIsTerminatedByTwoCRLF()
 	int result = packager.RouteRequestAndPackageResponse("/ bla", header, body);
 
 	AssertEqual(1, result);
-	AssertEqual("HTTP/1.1 200 OK\r\nContent-Length: 13\r\nContent-Type : text/plain; charset=utf-8\r\n\r\n", header);
+	AssertEqual("HTTP/1.1 200 OK\r\nContent-Length: 55\r\nContent-Type : text/plain; charset=utf-8\r\n\r\n", header);
 }
 
 static void TheHeaderIsCreatedWithTheCorrectContentLength()
@@ -56,7 +57,7 @@ static void TheHeaderIsCreatedWithTheCorrectContentLength()
 	int result = packager.RouteRequestAndPackageResponse("/favicon", header, body);
 
 	AssertEqual(1, result);
-	AssertEqual("HTTP/1.1 200 OK\r\nContent-Length: 22\r\nContent-Type : text/plain; charset=utf-8\r\n\r\n", header);
+	AssertEqual("HTTP/1.1 200 OK\r\nContent-Length: 64\r\nContent-Type : text/plain; charset=utf-8\r\n\r\n", header);
 }
 
 static void IfTheRouterDoesNotRouteThen404IsReturned()
@@ -72,7 +73,7 @@ static void IfTheRouterDoesNotRouteThen404IsReturned()
 
 void HttpResponsePackagerTests::RunTests()
 {
-	RequestsArePassedToTheRouter();
+	RequestsArePassedToTheRouterAndPackagedWithHtmlMarkers();
 	TheHeaderIsTerminatedByTwoCRLF();
 	TheHeaderIsCreatedWithTheCorrectContentLength();
 	IfTheRouterDoesNotRouteThen404IsReturned();
