@@ -6,15 +6,16 @@
 class IIrSequenceSender
 {
 public:
-	virtual void SendSequence(const CodeSequence& code) = 0;
+	virtual void SendSequence(const CodeSequence& sequence) = 0;
 };
 
 class IrSequenceSender : public IIrSequenceSender
 {
+	IIrCodesRepository& irCodesRepository;
 	IIrCodeSender& codeSender;
 
-	virtual void SendSequence(const CodeSequence& code);
+	virtual void SendSequence(const CodeSequence& sequence);
 public:
-	IrSequenceSender(IIrCodeSender& codeSender)
-		: codeSender(codeSender) {}
+	IrSequenceSender(IIrCodesRepository& irCodesRepository, IIrCodeSender& codeSender)
+		: irCodesRepository(irCodesRepository), codeSender(codeSender) {}
 };
