@@ -2,7 +2,6 @@
 #include "raw_display_action_tests.h"
 #include "../Mocks/MockApiAction.h"
 #include "../../api/api_actions/raw_display_action.h"
-//
 
 static std::unique_ptr<MockApiAction> mockHome;
 static std::unique_ptr<MockApiAction> mockLogs;

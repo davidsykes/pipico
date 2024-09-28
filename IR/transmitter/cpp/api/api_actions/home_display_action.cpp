@@ -2,7 +2,5 @@
 
 std::string HomeDisplayAction::Action()
 {
-	return codesDisplayAction.Action() +
-		"<br>" +
-		logDisplayAction.Action();
+	return "sfd";
 }

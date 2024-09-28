@@ -2,37 +2,46 @@
 #include "home_display_action_tests.h"
 #include "../Mocks/MockApiAction.h"
 #include "../../api/api_actions/home_display_action.h"
-//
+#include "../../api/formatters/button_formatter.h"
+#include "../../codes/code_sequence_repository.h"
 
-static std::unique_ptr<MockApiAction> mockHome;
-static std::unique_ptr<MockApiAction> mockLogs;
+namespace
+{
+	class MockButtonFormatter : public IButtonFormatter
+	{
+	};
+}
+
+
+static std::unique_ptr<CodeSequenceRepository> codeSequenceRepository;
+static std::unique_ptr<MockButtonFormatter> mockButtonFormatter;
 static std::unique_ptr<HomeDisplayAction> objectUnderTest;
 
 static HomeDisplayAction& CreateObjectUnderTest()
 {
-	mockHome.reset(new MockApiAction("Codes"));
-	mockLogs.reset(new MockApiAction("Logs"));
-	objectUnderTest.reset(new HomeDisplayAction(*mockHome.get(), *mockLogs.get()));
+	codeSequenceRepository.reset(new CodeSequenceRepository);
+	mockButtonFormatter.reset(new MockButtonFormatter);
+	objectUnderTest.reset(new HomeDisplayAction(*codeSequenceRepository.get(), *mockButtonFormatter.get()));
 	return *objectUnderTest.get();
 }
 
-static void HomePageDisplaysCodesAndLogs()
+static void HomePageDisplaysCodeSequenceButtons()
 {
 	ApiAction& action = CreateObjectUnderTest();
 
 	auto result = action.Action();
 
-	AssertEqual("Codes<br>Logs", result);
+	AssertEqual("Button(Code Sequence 1 text,Code Sequence 1 link)<br>Button(Code Sequence 2 text,Code Sequence 2 link)", result);
 }
 
 void HomeDisplayActionTests::RunTests()
 {
-	HomePageDisplaysCodesAndLogs();
+	HomePageDisplaysCodeSequenceButtons();
 }
 
 void HomeDisplayActionTests::CleanUpAfterTests()
 {
 	objectUnderTest.release();
-	mockHome.release();
-	mockLogs.release();
+	mockButtonFormatter.release();
+	codeSequenceRepository.release();
 }

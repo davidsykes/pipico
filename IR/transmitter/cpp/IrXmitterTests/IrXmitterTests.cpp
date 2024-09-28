@@ -1,8 +1,8 @@
 #include <iostream>
 #include "api\http_request_router_tests.h"
-#include "api/home_display_action_tests.h"
-#include "api/raw_display_action_tests.h"
-#include "api/codes_display_action_tests.h"
+#include "api/api_actions/home_display_action_tests.h"
+#include "api/api_actions/raw_display_action_tests.h"
+#include "api/api_actions/codes_display_action_tests.h"
 #include "api/api_actions/logs_display_action_tests.h"
 #include "api/api_actions/play_ir_action_tests.h"
 #include "api/formatters/code_display_fomatter_tests.h"
