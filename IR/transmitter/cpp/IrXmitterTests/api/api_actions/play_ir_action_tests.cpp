@@ -1,7 +1,7 @@
 #include <memory>
 #include "play_ir_action_tests.h"
 #include "../../api/api_actions/play_ir_action.h"
-#include "../../transmit/ir_signal_sender.h"
+#include "../../transmit/ir_code_sender.h"
 #include "../../codes/ir_codes_repository.h"
 #include "../Mocks/MockApiAction.h"
 
@@ -15,7 +15,7 @@ namespace
 		IrCode irCodeToSend;
 	};
 
-	class MockIrSignalSender : public IIrSignalSender
+	class MockIrCodeSender : public IIrCodeSender
 	{
 		virtual void SendCode(const IrCode& code) { irCodeSent.Name = code.Name; }
 	public:
@@ -25,7 +25,7 @@ namespace
 
 static std::unique_ptr<PlayIrAction> objectUnderTest;
 static std::unique_ptr<MockIrCodesRepository> mockIrCodesRepository;
-static std::unique_ptr<MockIrSignalSender> mockIrSignalSender;
+static std::unique_ptr<MockIrCodeSender> mockIrCodeSender;
 static std::unique_ptr<MockApiAction> mockApiAction;
 static const std::string& valid_code_name = "code name";
 
@@ -38,10 +38,10 @@ static void SetUpCodeRepository()
 static PlayIrAction& CreateObjectUnderTest()
 {
 	SetUpCodeRepository();
-	mockIrSignalSender.reset(new MockIrSignalSender);
+	mockIrCodeSender.reset(new MockIrCodeSender);
 	mockApiAction.reset(new MockApiAction("Home Page"));
 	objectUnderTest.reset(new PlayIrAction(
-		*mockIrSignalSender.get(),
+		*mockIrCodeSender.get(),
 		*mockIrCodesRepository.get(),
 		*mockApiAction.get()));
 	return *objectUnderTest.get();
@@ -53,7 +53,7 @@ static void TheCodeDataIsRetrievedAndSentToTheWavePlayer()
 
 	action.Action(valid_code_name);
 
-	AssertEqual(valid_code_name, mockIrSignalSender.get()->irCodeSent.Name);
+	AssertEqual(valid_code_name, mockIrCodeSender.get()->irCodeSent.Name);
 }
 
 static void AValidCodeReturnsHomePageAction()
@@ -94,5 +94,5 @@ void PlayIrActionTests::CleanUpAfterTests()
 {
 	objectUnderTest.release();
 	mockIrCodesRepository.release();
-	mockIrSignalSender.release();
+	mockIrCodeSender.release();
 }

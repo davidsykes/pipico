@@ -17,7 +17,8 @@
 #include "tcp_server/http_response_packager_tests.h"
 #include "tools\MessageLoggerTests.h"
 #include "tools\BlinkerTests.h"
-#include "transmit/IrSignalSenderTests.h"
+#include "transmit/IrCodeSenderTests.h"
+#include "transmit/IrSequenceSenderTests.h"
 
 int main()
 {
@@ -39,6 +40,7 @@ int main()
     HttpResponsePackagerTests().RunTests();
     MessageLoggerTests().RunTests();
     BlinkerTests().RunTests();
-    IrSignalSenderTests().RunTests();
+    IrCodeSenderTests().RunTests();
+    IrSequenceSenderTests().RunTests();
     std::cout << "Tests Complete\n";
 }

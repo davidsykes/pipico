@@ -1,7 +1,7 @@
 #include <memory>
-#include "IrSignalSenderTests.h"
+#include "IrCodeSenderTests.h"
 #include "../Mocks/MockHardwareInteface.h"
-#include "../../transmit/ir_signal_sender.h"
+#include "../../transmit/ir_code_sender.h"
 
 namespace
 {
@@ -17,7 +17,7 @@ namespace
 	};
 }
 
-static std::unique_ptr<IrSignalSender> irSignalSender;
+static std::unique_ptr<IrCodeSender> objectUnderTest;
 static std::unique_ptr<MockGPIOOutputPin> mockGPIOOutputPin;
 static std::unique_ptr<IrCode> irCode;
 
@@ -37,12 +37,12 @@ static void CreateData()
 	CreateDataPoint(300, 1);
 }
 
-static IrSignalSender& CreateTestObject()
+static IrCodeSender& CreateTestObject()
 {
 	CreateData();
 	mockGPIOOutputPin.reset(new MockGPIOOutputPin);
-	irSignalSender.reset(new IrSignalSender(*mockGPIOOutputPin.get()));
-	return *irSignalSender.get();
+	objectUnderTest.reset(new IrCodeSender(*mockGPIOOutputPin.get()));
+	return *objectUnderTest.get();
 }
 
 static void AssertDataPoint(int i, int time, int value)
@@ -53,7 +53,7 @@ static void AssertDataPoint(int i, int time, int value)
 
 static void ACodeIsTransmitted()
 {
-	IIrSignalSender& sender = CreateTestObject();
+	IIrCodeSender& sender = CreateTestObject();
 
 	sender.SendCode(*irCode.get());
 
@@ -78,14 +78,14 @@ uint64_t MockGPIOOutputPin::SetValueAt(bool value, uint64_t time_us)
 	return time_us + 2;
 }
 
-void IrSignalSenderTests::RunTests()
+void IrCodeSenderTests::RunTests()
 {
 	ACodeIsTransmitted();
 }
 
-void IrSignalSenderTests::CleanUpAfterTests()
+void IrCodeSenderTests::CleanUpAfterTests()
 {
+	objectUnderTest.release();
 	irCode.release();
 	mockGPIOOutputPin.release();
-	irSignalSender.release();
 }

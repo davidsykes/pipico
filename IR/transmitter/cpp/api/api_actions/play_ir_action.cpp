@@ -10,7 +10,7 @@ std::string PlayIrAction::Action(const std::string& code_name)
 		return std::string("Code ") + code_name + " not found";
 	}
 
-	irSignalSender.SendCode(*code);
+	irCodeSender.SendCode(*code);
 
 	return actionWhenFinished.Action();
 }

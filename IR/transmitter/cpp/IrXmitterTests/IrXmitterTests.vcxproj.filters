@@ -162,12 +162,6 @@
     <ClCompile Include="..\api\api_actions\play_ir_action.cpp">
       <Filter>Source Files\api\api_actions</Filter>
     </ClCompile>
-    <ClCompile Include="transmit\IrSignalSenderTests.cpp">
-      <Filter>Source Files\Tests\transmit</Filter>
-    </ClCompile>
-    <ClCompile Include="..\transmit\ir_signal_sender.cpp">
-      <Filter>Source Files\transmit</Filter>
-    </ClCompile>
     <ClCompile Include="gpio\GPIOTests.cpp">
       <Filter>Source Files\Tests\gpio</Filter>
     </ClCompile>
@@ -218,6 +212,21 @@
     </ClCompile>
     <ClCompile Include="api\api_actions\raw_display_action_tests.cpp">
       <Filter>Source Files\Tests\api\api_actions</Filter>
+    </ClCompile>
+    <ClCompile Include="..\codes\code_sequence_repository.cpp">
+      <Filter>Source Files\codes</Filter>
+    </ClCompile>
+    <ClCompile Include="transmit\IrSequenceSenderTests.cpp">
+      <Filter>Source Files\Tests\transmit</Filter>
+    </ClCompile>
+    <ClCompile Include="..\transmit\ir_code_sender.cpp">
+      <Filter>Source Files\transmit</Filter>
+    </ClCompile>
+    <ClCompile Include="..\transmit\ir_sequence_sender.cpp">
+      <Filter>Source Files\transmit</Filter>
+    </ClCompile>
+    <ClCompile Include="transmit\IrCodeSenderTests.cpp">
+      <Filter>Source Files\Tests\transmit</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -305,12 +314,6 @@
     <ClInclude Include="..\api\api_actions\play_ir_action.h">
       <Filter>Source Files\api\api_actions</Filter>
     </ClInclude>
-    <ClInclude Include="..\transmit\ir_signal_sender.h">
-      <Filter>Source Files\transmit</Filter>
-    </ClInclude>
-    <ClInclude Include="transmit\IrSignalSenderTests.h">
-      <Filter>Source Files\Tests\transmit</Filter>
-    </ClInclude>
     <ClInclude Include="gpio\GPIOTests.h">
       <Filter>Source Files\Tests\gpio</Filter>
     </ClInclude>
@@ -361,6 +364,24 @@
     </ClInclude>
     <ClInclude Include="api\api_actions\raw_display_action_tests.h">
       <Filter>Source Files\Tests\api\api_actions</Filter>
+    </ClInclude>
+    <ClInclude Include="..\codes\code_sequence.h">
+      <Filter>Source Files\codes</Filter>
+    </ClInclude>
+    <ClInclude Include="..\codes\code_sequence_repository.h">
+      <Filter>Source Files\codes</Filter>
+    </ClInclude>
+    <ClInclude Include="transmit\IrSequenceSenderTests.h">
+      <Filter>Source Files\Tests\transmit</Filter>
+    </ClInclude>
+    <ClInclude Include="..\transmit\ir_code_sender.h">
+      <Filter>Source Files\transmit</Filter>
+    </ClInclude>
+    <ClInclude Include="..\transmit\ir_sequence_sender.h">
+      <Filter>Source Files\transmit</Filter>
+    </ClInclude>
+    <ClInclude Include="transmit\IrCodeSenderTests.h">
+      <Filter>Source Files\Tests\transmit</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

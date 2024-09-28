@@ -2,7 +2,7 @@
 #include "TestFramework.h"
 
 
-class IrSignalSenderTests : public ITestModule
+class IrCodeSenderTests : public ITestModule
 {
 	virtual void CleanUpAfterTests();
 

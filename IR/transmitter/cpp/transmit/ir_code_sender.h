@@ -2,17 +2,17 @@
 #include "../codes/ir_codes_repository.h"
 #include "../gpio/gpio.h"
 
-class IIrSignalSender
+class IIrCodeSender
 {
 public:
 	virtual void SendCode(const IrCode& code) = 0;
 };
 
-class IrSignalSender : public IIrSignalSender
+class IrCodeSender : public IIrCodeSender
 {
 	IGPIOOutputPin& pin;
 	virtual void SendCode(const IrCode& code);
 public:
-	IrSignalSender(IGPIOOutputPin& pin)
+	IrCodeSender(IGPIOOutputPin& pin)
 		: pin(pin) {}
 };

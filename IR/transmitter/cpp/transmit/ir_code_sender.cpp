@@ -1,7 +1,7 @@
-#include "ir_signal_sender.h"
+#include "ir_code_sender.h"
 
 
-void IrSignalSender::SendCode(const IrCode& code)
+void IrCodeSender::SendCode(const IrCode& code)
 {
 	uint64_t i = 0;
 	uint64_t start_time = pin.SetValueAt(code.Values[i], 0);
