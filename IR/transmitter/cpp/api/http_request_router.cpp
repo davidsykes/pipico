@@ -15,6 +15,10 @@ std::string HttpRequestRouter::RouteHttpRequest(const char* request)
 	{
 		return playIrRequestHandler.Action(GetSingleToken(request + 14));
 	}
+	if (strncmp(request, "GET /sequence", 13) == 0)
+	{
+		return playIrSequenceHandler.Action(GetSingleToken(request + 14));
+	}
 
 	return "";
 }
