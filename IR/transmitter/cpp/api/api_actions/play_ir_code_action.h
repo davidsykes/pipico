@@ -3,7 +3,7 @@
 #include "../../codes/ir_codes_repository.h"
 #include "../../transmit/ir_code_sender.h"
 
-class PlayIrAction : public ApiAction
+class PlayIrCodeAction : public ApiAction
 {
 	IIrCodesRepository& codesRepository;
 	IIrCodeSender& irCodeSender;
@@ -12,7 +12,7 @@ class PlayIrAction : public ApiAction
 	virtual std::string Action(const std::string& p);
 
 public:
-	PlayIrAction(IIrCodeSender& irCodeSender,
+	PlayIrCodeAction(IIrCodeSender& irCodeSender,
 		IIrCodesRepository& codesRepository,
 		ApiAction& actionWhenFinished)
 		: irCodeSender(irCodeSender),

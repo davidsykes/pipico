@@ -131,7 +131,8 @@
     <ClCompile Include="..\api\api_actions\codes_display_action.cpp" />
     <ClCompile Include="..\api\api_actions\home_display_action.cpp" />
     <ClCompile Include="..\api\api_actions\log_display_action.cpp" />
-    <ClCompile Include="..\api\api_actions\play_ir_action.cpp" />
+    <ClCompile Include="..\api\api_actions\play_ir_code_action.cpp" />
+    <ClCompile Include="..\api\api_actions\play_ir_sequence_action.cpp" />
     <ClCompile Include="..\api\api_actions\raw_display_action.cpp" />
     <ClCompile Include="..\api\formatters\button_formatter.cpp" />
     <ClCompile Include="..\api\formatters\code_display_formatter.cpp" />
@@ -155,7 +156,8 @@
     <ClCompile Include="api\api_actions\codes_display_action_tests.cpp" />
     <ClCompile Include="api\api_actions\home_display_action_tests.cpp" />
     <ClCompile Include="api\api_actions\logs_display_action_tests.cpp" />
-    <ClCompile Include="api\api_actions\play_ir_action_tests.cpp" />
+    <ClCompile Include="api\api_actions\play_ir_code_action_tests.cpp" />
+    <ClCompile Include="api\api_actions\play_ir_sequence_action_tests.cpp" />
     <ClCompile Include="api\api_actions\raw_display_action_tests.cpp" />
     <ClCompile Include="api\formatters\button_formatter_tests.cpp" />
     <ClCompile Include="api\formatters\code_display_fomatter_tests.cpp" />
@@ -184,7 +186,8 @@
     <ClInclude Include="..\api\api_actions\codes_display_action.h" />
     <ClInclude Include="..\api\api_actions\home_display_action.h" />
     <ClInclude Include="..\api\api_actions\log_display_action.h" />
-    <ClInclude Include="..\api\api_actions\play_ir_action.h" />
+    <ClInclude Include="..\api\api_actions\play_ir_code_action.h" />
+    <ClInclude Include="..\api\api_actions\play_ir_sequence_action.h" />
     <ClInclude Include="..\api\api_actions\raw_display_action.h" />
     <ClInclude Include="..\api\api_actions\record_ir_action.h" />
     <ClInclude Include="..\api\formatters\button_formatter.h" />
@@ -210,7 +213,8 @@
     <ClInclude Include="api\api_actions\codes_display_action_tests.h" />
     <ClInclude Include="api\api_actions\home_display_action_tests.h" />
     <ClInclude Include="api\api_actions\logs_display_action_tests.h" />
-    <ClInclude Include="api\api_actions\play_ir_action_tests.h" />
+    <ClInclude Include="api\api_actions\play_ir_code_action_tests.h" />
+    <ClInclude Include="api\api_actions\play_ir_sequence_action_tests.h" />
     <ClInclude Include="api\api_actions\raw_display_action_tests.h" />
     <ClInclude Include="api\formatters\button_formatter_tests.h" />
     <ClInclude Include="api\formatters\code_display_fomatter_tests.h" />

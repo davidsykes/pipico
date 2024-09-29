@@ -4,7 +4,8 @@
 #include "api/api_actions/raw_display_action_tests.h"
 #include "api/api_actions/codes_display_action_tests.h"
 #include "api/api_actions/logs_display_action_tests.h"
-#include "api/api_actions/play_ir_action_tests.h"
+#include "api/api_actions/play_ir_code_action_tests.h"
+#include "api/api_actions/play_ir_sequence_action_tests.h"
 #include "api/formatters/code_display_fomatter_tests.h"
 #include "api/formatters/button_formatter_tests.h"
 #include "codes\CodesRepositoryTests.h"
@@ -29,7 +30,8 @@ int main()
     RawDisplayActionTests().RunTests();
     CodesDisplayActionTests().RunTests();
     LogsDisplayActionTests().RunTests();
-    PlayIrActionTests().RunTests();
+    PlayIrCodeActionTests().RunTests();
+    PlayIrSequenceActionTests().RunTests();
     CodeDisplayFormatterTests().RunTests();
     ButtonFormatterTests().RunTests();
     CodesRepositoryTests().RunTests();

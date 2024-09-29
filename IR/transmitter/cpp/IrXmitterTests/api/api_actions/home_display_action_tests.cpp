@@ -13,11 +13,12 @@ namespace
 	};
 	class MockCodeSequenceRepository : public ICodeSequenceRepository
 	{
+		virtual const std::vector<CodeSequence>& GetCodeSequences() { return codeSequences; }
+		virtual const CodeSequence& GetSequence(const std::string& name) { Assert("Invalid"); }
 	public:
 		std::vector<CodeSequence> codeSequences;
 
 		MockCodeSequenceRepository();
-		virtual const std::vector<CodeSequence>& GetCodeSequences() { return codeSequences; }
 	};
 }
 

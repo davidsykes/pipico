@@ -12,7 +12,7 @@ static CodeSequenceRepository& CreateObjectUnderTest()
 
 static void ANonExistentSequenceReturnsTheFirstSequence()
 {
-	CodeSequenceRepository& repo = CreateObjectUnderTest();
+	ICodeSequenceRepository& repo = CreateObjectUnderTest();
 
 	const CodeSequence& sequence = repo.GetSequence("non existent sequence");
 
@@ -22,7 +22,7 @@ static void ANonExistentSequenceReturnsTheFirstSequence()
 
 static void TestFastForward30()
 {
-	CodeSequenceRepository& repo = CreateObjectUnderTest();
+	ICodeSequenceRepository& repo = CreateObjectUnderTest();
 
 	const CodeSequence& sequence = repo.GetSequence("FastForward30");
 
@@ -34,7 +34,7 @@ static void TestFastForward30()
 
 static void TestSamsungVolumeDown()
 {
-	CodeSequenceRepository& repo = CreateObjectUnderTest();
+	ICodeSequenceRepository& repo = CreateObjectUnderTest();
 
 	const CodeSequence& sequence = repo.GetSequence("SamsungVolumeDown");
 

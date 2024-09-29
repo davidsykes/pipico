@@ -1,7 +1,7 @@
-#include "play_ir_action.h"
+#include "play_ir_code_action.h"
 
 
-std::string PlayIrAction::Action(const std::string& code_name)
+std::string PlayIrCodeAction::Action(const std::string& code_name)
 {
 	IrCode* code = codesRepository.GetCode(code_name);
 
