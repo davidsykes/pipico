@@ -8,6 +8,7 @@
 #include "api/formatters/code_display_fomatter_tests.h"
 #include "api/formatters/button_formatter_tests.h"
 #include "codes\CodesRepositoryTests.h"
+#include "codes/CodeSequenceRepositoryTests.h"
 #include "gpio/GPIOTests.h"
 #include "pico_scope/PicoScopeTests.h"
 #include "pico_scope/TraceDataFormatterTests.h"
@@ -32,6 +33,7 @@ int main()
     CodeDisplayFormatterTests().RunTests();
     ButtonFormatterTests().RunTests();
     CodesRepositoryTests().RunTests();
+    CodeSequenceRepositoryTests().RunTests();
     GPIOTests().RunTests();
     PicoScopeTests().RunTests();
     TraceDataFormatterTests().RunTests();

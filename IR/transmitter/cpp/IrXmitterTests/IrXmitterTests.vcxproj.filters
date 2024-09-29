@@ -234,6 +234,9 @@
     <ClCompile Include="..\api\formatters\button_formatter.cpp">
       <Filter>Source Files\api\formatters</Filter>
     </ClCompile>
+    <ClCompile Include="codes\CodeSequenceRepositoryTests.cpp">
+      <Filter>Source Files\Tests\codes</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="api\http_request_router_tests.h">
@@ -394,6 +397,9 @@
     </ClInclude>
     <ClInclude Include="..\api\formatters\button_formatter.h">
       <Filter>Source Files\api\formatters</Filter>
+    </ClInclude>
+    <ClInclude Include="codes\CodeSequenceRepositoryTests.h">
+      <Filter>Source Files\Tests\codes</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

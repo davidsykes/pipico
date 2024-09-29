@@ -5,12 +5,12 @@
 
 class HomeDisplayAction : public ApiAction
 {
-	CodeSequenceRepository& codeSequenceRepository;
+	ICodeSequenceRepository& codeSequenceRepository;
 	IButtonFormatter& buttonFormatter;
 
 	virtual std::string Action();
 
 public:
-	HomeDisplayAction(CodeSequenceRepository& codeSequenceRepository,
+	HomeDisplayAction(ICodeSequenceRepository& codeSequenceRepository,
 		IButtonFormatter& buttonFormatter) : codeSequenceRepository(codeSequenceRepository), buttonFormatter(buttonFormatter) {}
 };

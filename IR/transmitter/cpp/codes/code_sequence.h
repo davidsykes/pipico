@@ -6,6 +6,7 @@ class CodeSequence
 {
 public:
 	std::string Name;
+	std::string DisplayText;
 	std::vector<std::string> Codes;
 
 	CodeSequence(const std::string& name) : Name(name) {}

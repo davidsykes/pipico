@@ -160,6 +160,7 @@
     <ClCompile Include="api\formatters\button_formatter_tests.cpp" />
     <ClCompile Include="api\formatters\code_display_fomatter_tests.cpp" />
     <ClCompile Include="api\http_request_router_tests.cpp" />
+    <ClCompile Include="codes\CodeSequenceRepositoryTests.cpp" />
     <ClCompile Include="codes\CodesRepositoryTests.cpp" />
     <ClCompile Include="gpio\GPIOTests.cpp" />
     <ClCompile Include="IrXmitterTests.cpp" />
@@ -214,6 +215,7 @@
     <ClInclude Include="api\formatters\button_formatter_tests.h" />
     <ClInclude Include="api\formatters\code_display_fomatter_tests.h" />
     <ClInclude Include="api\http_request_router_tests.h" />
+    <ClInclude Include="codes\CodeSequenceRepositoryTests.h" />
     <ClInclude Include="codes\CodesRepositoryTests.h" />
     <ClInclude Include="gpio\GPIOTests.h" />
     <ClInclude Include="Mocks\MockApiAction.h" />
