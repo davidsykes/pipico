@@ -9,6 +9,5 @@ public:
 	std::string DisplayText;
 	std::vector<std::string> Codes;
 
-	CodeSequence(const std::string& name) : Name(name) {}
-	CodeSequence(const char* name) : Name(name) {}
+	CodeSequence(const std::string& name, const std::string& display_text) : Name(name), DisplayText(display_text) {}
 };

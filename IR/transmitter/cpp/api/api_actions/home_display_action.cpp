@@ -15,7 +15,7 @@ std::string HomeDisplayAction::Action()
 		{
 			str << "<br>";
 		}
-		str << buttonFormatter.FormatButton(cs[s].Name, SEQUENCE_LINK + cs[s].Name);
+		str << buttonFormatter.FormatButton(cs[s].DisplayText, SEQUENCE_LINK + cs[s].Name);
 	}
 
 	return str.str();

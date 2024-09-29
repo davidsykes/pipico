@@ -39,7 +39,7 @@ static void HomePageDisplaysCodeSequenceButtons()
 
 	auto result = action.Action();
 
-	AssertEqual("Button(Code Sequence 1,/sequence/Code Sequence 1)<br>Button(Code Sequence 2,/sequence/Code Sequence 2)", result);
+	AssertEqual("Button(Sequence 1 Text,/sequence/Sequence1Name)<br>Button(Sequence 2 Text,/sequence/Sequence2Name)", result);
 }
 
 std::string MockButtonFormatter::FormatButton(const std::string& text, const std::string& link)
@@ -49,9 +49,9 @@ std::string MockButtonFormatter::FormatButton(const std::string& text, const std
 
 MockCodeSequenceRepository::MockCodeSequenceRepository()
 {
-	CodeSequence cs1("Code Sequence 1");
+	CodeSequence cs1("Sequence1Name", "Sequence 1 Text");
 	codeSequences.push_back(cs1);
-	CodeSequence cs2("Code Sequence 2");
+	CodeSequence cs2("Sequence2Name", "Sequence 2 Text");
 	codeSequences.push_back(cs2);
 }
 

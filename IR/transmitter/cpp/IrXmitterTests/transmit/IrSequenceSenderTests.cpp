@@ -30,7 +30,7 @@ static std::unique_ptr<CodeSequence> codeSequence;
 
 static void CreateData()
 {
-	codeSequence.reset(new CodeSequence("Test Sequence"));
+	codeSequence.reset(new CodeSequence("Test Sequence", "Test Sequence"));
 	codeSequence.get()->Codes.push_back("Code 1");
 	codeSequence.get()->Codes.push_back("Code 2");
 	codeSequence.get()->Codes.push_back("Code 3");
