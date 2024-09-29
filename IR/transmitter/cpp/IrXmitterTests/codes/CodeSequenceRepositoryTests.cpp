@@ -10,15 +10,14 @@ static CodeSequenceRepository& CreateObjectUnderTest()
 	return *objectUnderTest.get();
 }
 
-static void TestNonExistentSequence()
+static void ANonExistentSequenceReturnsTheFirstSequence()
 {
 	CodeSequenceRepository& repo = CreateObjectUnderTest();
 
 	const CodeSequence& sequence = repo.GetSequence("non existent sequence");
 
-	AssertEqual("Sequence not found", sequence.Name);
-	AssertEqual("Sequence not found", sequence.DisplayText);
-	AssertEqual(0, sequence.Codes.size());
+	AssertEqual("FastForward30", sequence.Name);
+	AssertEqual("Forward 30", sequence.DisplayText);
 }
 
 static void TestFastForward30()
@@ -47,7 +46,7 @@ static void TestSamsungVolumeDown()
 
 void CodeSequenceRepositoryTests::RunTests()
 {
-	TestNonExistentSequence();
+	ANonExistentSequenceReturnsTheFirstSequence();
 	TestFastForward30();
 	TestSamsungVolumeDown();
 }
