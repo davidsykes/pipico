@@ -9,10 +9,13 @@ add_executable(test
         api/http_request_router.cpp
         api/api_actions/log_display_action.cpp
         api/api_actions/home_display_action.cpp
+        api/api_actions/raw_display_action.cpp
         api/api_actions/codes_display_action.cpp
         api/api_actions/play_ir_action.cpp
         api/formatters/code_display_formatter.cpp
+        api/formatters/button_formatter.cpp
         codes/ir_codes_repository.cpp
+        codes/code_sequence_repository.cpp
         hw_if/hardware_interface.c
         hw_if/pico_hardware_interface.cpp
         hw_if/picow_tcp_client.c
@@ -30,7 +33,7 @@ add_executable(test
         tcp_server/pico_tcp_server.cpp
         tcp_server/http_response_packager.cpp
         tools/message_logger.cpp
-        transmit/ir_signal_sender.cpp
+        transmit/ir_code_sender.cpp
         wifi/WiFiConnector.cpp
 )
 target_include_directories(test PRIVATE
