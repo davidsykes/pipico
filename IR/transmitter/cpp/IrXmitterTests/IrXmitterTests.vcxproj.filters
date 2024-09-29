@@ -82,9 +82,6 @@
     <Filter Include="Source Files\rest">
       <UniqueIdentifier>{0044486b-f2a7-4bef-897c-4ca9d440ccdb}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\tcp_server\widgets">
-      <UniqueIdentifier>{4658f935-ad50-4200-b144-c0e23cab8711}</UniqueIdentifier>
-    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="IrXmitterTests.cpp">

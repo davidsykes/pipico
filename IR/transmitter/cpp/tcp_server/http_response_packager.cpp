@@ -1,7 +1,7 @@
 #include "http_response_packager.h"
 
 const std::string header1 = "HTTP/1.1 200 OK\r\nContent-Length: ";
-const std::string header2 = "\r\nContent-Type : text/plain; charset=utf-8\r\n\r\n";
+const std::string header2 = "\r\nContent-Type : text/html; charset=utf-8\r\nConnection: close\r\n\r\n";
 const std::string body_head = "<!DOCTYPE html><html><body>";
 const std::string body_foot = "</body></html> ";
 

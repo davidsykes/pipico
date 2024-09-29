@@ -6,17 +6,20 @@
 static std::unique_ptr<MockApiAction> mockHomeRequestHandler;
 static std::unique_ptr<MockApiAction> mockRawRequestHandler;
 static std::unique_ptr<MockApiAction> mockPlayCodeRequestHandler;
+static std::unique_ptr<MockApiAction> mockPlaySequenceRequestHandler;
 static std::unique_ptr<HttpRequestRouter> objectUnderTest;
 
 static HttpRequestRouter& CreateObjectUnderTest()
 {
 	mockHomeRequestHandler.reset(new MockApiAction("Home"));
 	mockRawRequestHandler.reset(new MockApiAction("Raw"));
-	mockPlayCodeRequestHandler.reset(new MockApiAction("Play"));
+	mockPlayCodeRequestHandler.reset(new MockApiAction("Play Code"));
+	mockPlaySequenceRequestHandler.reset(new MockApiAction("Play Sequence"));
 	objectUnderTest.reset(new HttpRequestRouter(
 		*mockHomeRequestHandler.get(),
 		*mockRawRequestHandler.get(),
-		*mockPlayCodeRequestHandler.get()));
+		*mockPlayCodeRequestHandler.get(),
+		*mockPlaySequenceRequestHandler.get()));
 	return *objectUnderTest.get();
 }
 
@@ -56,13 +59,13 @@ static void TheRecordRequestHasBeenRemoved()
 	AssertEqual("", result);
 }
 
-static void ASendCodeRequestPassesTheRequestToTheIrPlayer()
+static void ASendCodeRequestPassesTheCodeNameToTheIrPlayer()
 {
 	IHttpRequestRouter& router = CreateObjectUnderTest();
 
 	std::string result = router.RouteHttpRequest("GET /sendcode/code_name");
 
-	AssertEqual("Play code_name", result);
+	AssertEqual("Play Code code_name", result);
 }
 
 static void ASendCodeRequestTerminatesTheCodeNameAtWhiteSpace()
@@ -71,7 +74,16 @@ static void ASendCodeRequestTerminatesTheCodeNameAtWhiteSpace()
 
 	std::string result = router.RouteHttpRequest("GET /sendcode/code name");
 
-	AssertEqual("Play code", result);
+	AssertEqual("Play Code code", result);
+}
+
+static void ASequenceRequestPassesTheSequenceNameToThePlaySequenceAction()
+{
+	IHttpRequestRouter& router = CreateObjectUnderTest();
+
+	std::string result = router.RouteHttpRequest("GET /sequence/sequence_name");
+
+	AssertEqual("Play Sequence sequence_name", result);
 }
 
 void HttpRequestRouterTests::RunTests()
@@ -80,8 +92,9 @@ void HttpRequestRouterTests::RunTests()
 	ARawRequestPassesTheRequestToTheRawHandler();
 	FaviconRequestReturnsNotFound();
 	TheRecordRequestHasBeenRemoved();
-	ASendCodeRequestPassesTheRequestToTheIrPlayer();
+	ASendCodeRequestPassesTheCodeNameToTheIrPlayer();
 	ASendCodeRequestTerminatesTheCodeNameAtWhiteSpace();
+	ASequenceRequestPassesTheSequenceNameToThePlaySequenceAction();
 }
 
 void HttpRequestRouterTests::CleanUpAfterTests()
@@ -89,4 +102,5 @@ void HttpRequestRouterTests::CleanUpAfterTests()
 	objectUnderTest.release();
 	mockHomeRequestHandler.release();
 	mockPlayCodeRequestHandler.release();
+	mockPlaySequenceRequestHandler.release();
 }

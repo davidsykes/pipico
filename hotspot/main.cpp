@@ -27,7 +27,7 @@ int main()
 
    GPIOInputPin actionPin(2, hw_if);
    actionPin.SetPullUp(0);
-   printf("Action %d\n", actionPin.Value());
+   printf("Hotspot action %d\n", actionPin.Value());
 
    WiFiConnector connector;
    if (actionPin.Value() == 0)
