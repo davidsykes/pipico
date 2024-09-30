@@ -11,7 +11,8 @@ add_executable(test
         api/api_actions/home_display_action.cpp
         api/api_actions/raw_display_action.cpp
         api/api_actions/codes_display_action.cpp
-        api/api_actions/play_ir_action.cpp
+        api/api_actions/play_ir_code_action.cpp
+        api/api_actions/play_ir_sequence_action.cpp
         api/formatters/code_display_formatter.cpp
         api/formatters/button_formatter.cpp
         codes/ir_codes_repository.cpp
@@ -34,6 +35,7 @@ add_executable(test
         tcp_server/http_response_packager.cpp
         tools/message_logger.cpp
         transmit/ir_code_sender.cpp
+        transmit/ir_sequence_sender.cpp
         wifi/WiFiConnector.cpp
 )
 target_include_directories(test PRIVATE

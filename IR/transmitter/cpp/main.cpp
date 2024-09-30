@@ -3,13 +3,15 @@
 #include "wifi/WiFiConnector.h"
 #include "tools/message_logger.h"
 #include "codes/ir_codes_repository.h"
+#include "codes/code_sequence_repository.h"
 #include "tcp_server/http_response_packager.h"
 #include "tcp_server/pico_tcp_server.h"
 #include "api/api_actions/home_display_action.h"
 #include "api/api_actions/raw_display_action.h"
 #include "api/api_actions/log_display_action.h"
 #include "api/api_actions/codes_display_action.h"
-#include "api/api_actions/play_ir_action.h"
+#include "api/api_actions/play_ir_code_action.h"
+#include "api/api_actions/play_ir_sequence_action.h"
 #include "api/formatters/code_display_formatter.h"
 #include "pico_scope/pico_scope_main.h"
 #include "transmit/ir_code_sender.h"
@@ -52,9 +54,12 @@ int main()
       RawDisplayAction rawDisplayAction(codesDisplayAction, logDisplayAction);
 
       IrCodeSender irCodeSender(outputPin);
-      PlayIrAction playIrAction(irCodeSender, irCodesRepository, homeDisplayAction);
+      PlayIrCodeAction playIrCodeAction(irCodeSender, irCodesRepository, homeDisplayAction);
 
-      HttpRequestRouter httpRequestRouter(homeDisplayAction, rawDisplayAction, playIrAction);
+      IrSequenceSender irSequenceSender(irCodesRepository, irCodeSender);
+      PlayIrSequenceAction playIrSequenceAction(irSequenceSender, codeSequenceRepository, homeDisplayAction);
+
+      HttpRequestRouter httpRequestRouter(homeDisplayAction, rawDisplayAction, playIrCodeAction, playIrSequenceAction);
       HttpResponsePackager httpResponsePackager(httpRequestRouter);
       hw_if.set_led(true);
       main_pico_tcp_server(&httpResponsePackager);
