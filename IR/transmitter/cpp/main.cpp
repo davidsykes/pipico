@@ -43,14 +43,15 @@ int main()
       GPIOOutputPin _outputPin(TRANSMIT_PIN, hw_if);
       IGPIOOutputPin& outputPin = _outputPin;
       MessageLogger messageLogger;
+      LogDisplayAction logDisplayAction(messageLogger);
+
       IrCodesRepository irCodesRepository;
       CodeSequenceRepository codeSequenceRepository;
       ButtonFormatter buttonFormatter;
-      HomeDisplayAction homeDisplayAction(codeSequenceRepository, buttonFormatter);
+      HomeDisplayAction homeDisplayAction(codeSequenceRepository, buttonFormatter, logDisplayAction);
 
       CodeDisplayFormatter codeDisplayFormatter;
       CodesDisplayAction codesDisplayAction(irCodesRepository, codeDisplayFormatter);
-      LogDisplayAction logDisplayAction(messageLogger);
       RawDisplayAction rawDisplayAction(codesDisplayAction, logDisplayAction);
 
       IrCodeSender irCodeSender(outputPin);

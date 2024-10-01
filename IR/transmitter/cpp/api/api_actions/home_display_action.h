@@ -1,16 +1,17 @@
 #pragma once
 #include "api_action.h"
-#include "../../codes/code_sequence_repository.h"
-#include "../formatters/button_formatter.h"
 
 class HomeDisplayAction : public ApiAction
 {
-	ICodeSequenceRepository& codeSequenceRepository;
-	IButtonFormatter& buttonFormatter;
+	ApiAction& codeSequencesDisplayAction;
+	ApiAction& logsDisplayAction;
 
 	virtual std::string Action();
 
 public:
-	HomeDisplayAction(ICodeSequenceRepository& codeSequenceRepository,
-		IButtonFormatter& buttonFormatter) : codeSequenceRepository(codeSequenceRepository), buttonFormatter(buttonFormatter) {}
+	HomeDisplayAction(
+		ApiAction& codeSequencesDisplayAction,
+		ApiAction& logsDisplayAction)
+		: codeSequencesDisplayAction(codeSequencesDisplayAction),
+		logsDisplayAction(logsDisplayAction) {}
 };

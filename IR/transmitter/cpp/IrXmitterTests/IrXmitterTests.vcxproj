@@ -129,6 +129,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="..\api\api_actions\codes_display_action.cpp" />
+    <ClCompile Include="..\api\api_actions\code_sequences_display_action.cpp" />
     <ClCompile Include="..\api\api_actions\home_display_action.cpp" />
     <ClCompile Include="..\api\api_actions\log_display_action.cpp" />
     <ClCompile Include="..\api\api_actions\play_ir_code_action.cpp" />
@@ -154,6 +155,7 @@
     <ClCompile Include="..\transmit\ir_code_sender.cpp" />
     <ClCompile Include="..\transmit\ir_sequence_sender.cpp" />
     <ClCompile Include="api\api_actions\codes_display_action_tests.cpp" />
+    <ClCompile Include="api\api_actions\code_sequences_display_action_tests.cpp" />
     <ClCompile Include="api\api_actions\home_display_action_tests.cpp" />
     <ClCompile Include="api\api_actions\logs_display_action_tests.cpp" />
     <ClCompile Include="api\api_actions\play_ir_code_action_tests.cpp" />
@@ -184,6 +186,7 @@
   <ItemGroup>
     <ClInclude Include="..\api\api_actions\api_action.h" />
     <ClInclude Include="..\api\api_actions\codes_display_action.h" />
+    <ClInclude Include="..\api\api_actions\code_sequences_display_action.h" />
     <ClInclude Include="..\api\api_actions\home_display_action.h" />
     <ClInclude Include="..\api\api_actions\log_display_action.h" />
     <ClInclude Include="..\api\api_actions\play_ir_code_action.h" />
@@ -211,6 +214,7 @@
     <ClInclude Include="..\transmit\ir_code_sender.h" />
     <ClInclude Include="..\transmit\ir_sequence_sender.h" />
     <ClInclude Include="api\api_actions\codes_display_action_tests.h" />
+    <ClInclude Include="api\api_actions\code_sequences_display_action_tests.h" />
     <ClInclude Include="api\api_actions\home_display_action_tests.h" />
     <ClInclude Include="api\api_actions\logs_display_action_tests.h" />
     <ClInclude Include="api\api_actions\play_ir_code_action_tests.h" />

@@ -12,9 +12,9 @@ static MessageLogger& CreateTestObject()
 
 static void ASimpleMessageCanBeLogged()
 {
-	IMessageLogger& log = CreateTestObject();
+	MessageLogger& log = CreateTestObject();
 
-	log.Log("Hello World");
+	((IMessageLogger&) log).Log("Hello World");
 
 	AssertEqual(1, log.Logs().size());
 	AssertEqual("Hello World", log.Logs()[0]);
@@ -22,11 +22,11 @@ static void ASimpleMessageCanBeLogged()
 
 static void SeveralMessagesCanBeLogged()
 {
-	IMessageLogger& log = CreateTestObject();
+	MessageLogger& log = CreateTestObject();
 
-	log.Log("Hello World1");
-	log.Log("Hello World2");
-	log.Log("Hello World3");
+	((IMessageLogger&) log).Log("Hello World1");
+	((IMessageLogger&) log).Log("Hello World2");
+	((IMessageLogger&) log).Log("Hello World3");
 
 	AssertEqual(3, log.Logs().size());
 	AssertEqual("Hello World1", log.Logs()[0]);

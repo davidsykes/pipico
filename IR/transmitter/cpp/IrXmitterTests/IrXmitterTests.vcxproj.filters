@@ -240,6 +240,12 @@
     <ClCompile Include="..\api\api_actions\play_ir_sequence_action.cpp">
       <Filter>Source Files\api\api_actions</Filter>
     </ClCompile>
+    <ClCompile Include="api\api_actions\code_sequences_display_action_tests.cpp">
+      <Filter>Source Files\Tests\api\api_actions</Filter>
+    </ClCompile>
+    <ClCompile Include="..\api\api_actions\code_sequences_display_action.cpp">
+      <Filter>Source Files\api\api_actions</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="api\http_request_router_tests.h">
@@ -408,6 +414,12 @@
       <Filter>Source Files\api\api_actions</Filter>
     </ClInclude>
     <ClInclude Include="..\api\api_actions\play_ir_sequence_action.h">
+      <Filter>Source Files\api\api_actions</Filter>
+    </ClInclude>
+    <ClInclude Include="api\api_actions\code_sequences_display_action_tests.h">
+      <Filter>Source Files\Tests\api\api_actions</Filter>
+    </ClInclude>
+    <ClInclude Include="..\api\api_actions\code_sequences_display_action.h">
       <Filter>Source Files\api\api_actions</Filter>
     </ClInclude>
   </ItemGroup>

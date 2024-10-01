@@ -3,6 +3,7 @@
 #include "api/api_actions/home_display_action_tests.h"
 #include "api/api_actions/raw_display_action_tests.h"
 #include "api/api_actions/codes_display_action_tests.h"
+#include "api/api_actions/code_sequences_display_action_tests.h"
 #include "api/api_actions/logs_display_action_tests.h"
 #include "api/api_actions/play_ir_code_action_tests.h"
 #include "api/api_actions/play_ir_sequence_action_tests.h"
@@ -29,6 +30,7 @@ int main()
     HomeDisplayActionTests().RunTests();
     RawDisplayActionTests().RunTests();
     CodesDisplayActionTests().RunTests();
+    CodeSequencesDisplayActionTests().RunTests();
     LogsDisplayActionTests().RunTests();
     PlayIrCodeActionTests().RunTests();
     PlayIrSequenceActionTests().RunTests();

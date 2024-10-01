@@ -2,68 +2,37 @@
 #include "home_display_action_tests.h"
 #include "../Mocks/MockApiAction.h"
 #include "../../api/api_actions/home_display_action.h"
-#include "../../api/formatters/button_formatter.h"
-#include "../../codes/code_sequence_repository.h"
-
-namespace
-{
-	class MockButtonFormatter : public IButtonFormatter
-	{
-		virtual std::string FormatButton(const std::string& text, const std::string& link);
-	};
-	class MockCodeSequenceRepository : public ICodeSequenceRepository
-	{
-		virtual const std::vector<CodeSequence>& GetCodeSequences() { return codeSequences; }
-		virtual const CodeSequence& GetSequence(const std::string& name) { Assert("Invalid"); }
-	public:
-		std::vector<CodeSequence> codeSequences;
-
-		MockCodeSequenceRepository();
-	};
-}
-
-static std::unique_ptr<MockCodeSequenceRepository> codeSequenceRepository;
-static std::unique_ptr<MockButtonFormatter> mockButtonFormatter;
+static std::unique_ptr<MockApiAction> sequencesDisplayAction;
+static std::unique_ptr<MockApiAction> logDisplayAction;
 static std::unique_ptr<HomeDisplayAction> objectUnderTest;
 
 static HomeDisplayAction& CreateObjectUnderTest()
 {
-	codeSequenceRepository.reset(new MockCodeSequenceRepository);
-	mockButtonFormatter.reset(new MockButtonFormatter);
-	objectUnderTest.reset(new HomeDisplayAction(*codeSequenceRepository.get(), *mockButtonFormatter.get()));
+	sequencesDisplayAction.reset(new MockApiAction("Sequences"));
+	logDisplayAction.reset(new MockApiAction("Logs"));
+	objectUnderTest.reset(new HomeDisplayAction(
+		*sequencesDisplayAction.get(),
+		*logDisplayAction.get()));
 	return *objectUnderTest.get();
 }
 
-static void HomePageDisplaysCodeSequenceButtons()
+static void HomePageDisplaysCodeSequenceButtonsAndLogs()
 {
 	ApiAction& action = CreateObjectUnderTest();
 
 	auto result = action.Action();
 
-	AssertEqual("Button(Sequence 1 Text,/sequence/Sequence1Name)<br>Button(Sequence 2 Text,/sequence/Sequence2Name)", result);
-}
-
-std::string MockButtonFormatter::FormatButton(const std::string& text, const std::string& link)
-{
-	return std::string("Button(") +  text + "," + link + ")";
-}
-
-MockCodeSequenceRepository::MockCodeSequenceRepository()
-{
-	CodeSequence cs1("Sequence1Name", "Sequence 1 Text");
-	codeSequences.push_back(cs1);
-	CodeSequence cs2("Sequence2Name", "Sequence 2 Text");
-	codeSequences.push_back(cs2);
+	AssertEqual("SequencesLogs", result);
 }
 
 void HomeDisplayActionTests::RunTests()
 {
-	HomePageDisplaysCodeSequenceButtons();
+	HomePageDisplaysCodeSequenceButtonsAndLogs();
 }
 
 void HomeDisplayActionTests::CleanUpAfterTests()
 {
 	objectUnderTest.release();
-	mockButtonFormatter.release();
-	codeSequenceRepository.release();
+	logDisplayAction.release();
+	sequencesDisplayAction.release();
 }
