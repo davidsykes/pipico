@@ -4,10 +4,10 @@
 
 class LogDisplayAction : public ApiAction
 {
-	IMessageLogger& messageLogger;
+	MessageLogger& messageLogger;
 
 	virtual std::string Action();
 
 public:
-	LogDisplayAction(IMessageLogger& messageLogger) : messageLogger(messageLogger) {}
+	LogDisplayAction(MessageLogger& messageLogger) : messageLogger(messageLogger) {}
 };

@@ -5,14 +5,14 @@
 class IMessageLogger
 {
 public:
-	virtual void Log(const char* message) = 0;
-	virtual std::vector<std::string> Logs() = 0;
+	virtual void Log(const std::string&  message) = 0;
 };
 
 class MessageLogger : public IMessageLogger
 {
 	std::vector<std::string> logs;
 
-	virtual void Log(const char* message);
-	virtual std::vector<std::string> Logs() { return logs;  }
+	virtual void Log(const std::string& message);
+public:
+	std::vector<std::string> Logs() { return logs;  }
 };

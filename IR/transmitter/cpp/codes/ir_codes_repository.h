@@ -1,6 +1,7 @@
 #pragma once
 #include <vector>
 #include "ir_code.h"
+#include "../tools/message_logger.h"
 
 class IIrCodesRepository
 {
@@ -12,12 +13,14 @@ public:
 
 class IrCodesRepository : public IIrCodesRepository
 {
+	IMessageLogger& messageLogger;
+
 	std::vector<IrCode> codes;
 
 	virtual std::vector<IrCode>& GetCodes() { return codes; }
 	virtual IrCode* GetCode(const std::string& name);
 
 public:
-	IrCodesRepository();
+	IrCodesRepository(IMessageLogger& messageLogger);
 };
 

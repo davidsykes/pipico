@@ -25,7 +25,7 @@ int* codeTimes[NUMBER_OF_CODES]{ CodeTimestestcode, CodeTimesOnOff, CodeTimesSon
 char* codeValues[NUMBER_OF_CODES]{ CodeValuestestcode, CodeValuesOnOff, CodeValuesSonyForward };
 
 
-IrCodesRepository::IrCodesRepository()
+IrCodesRepository::IrCodesRepository(IMessageLogger& messageLogger) : messageLogger(messageLogger)
 {
 	for (int i = 0; i < NUMBER_OF_CODES; ++i)
 	{
@@ -56,6 +56,8 @@ IrCode* IrCodesRepository::GetCode(const std::string& name)
 			return &codes[i];
 		}
 	}
+
+	messageLogger.Log("Code '" + name + "' not found.");
 
 	return 0;
 }

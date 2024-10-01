@@ -1,12 +1,15 @@
 #include <memory>
 #include "CodesRepositoryTests.h"
 #include "../../codes/ir_codes_repository.h"
+#include "../../tools/message_logger.h"
 
 static std::unique_ptr<IrCodesRepository> objectUnderTest;
+static std::unique_ptr<MessageLogger> messageLogger;
 
 static IrCodesRepository& CreateObjectUnderTest()
 {
-	objectUnderTest.reset(new IrCodesRepository);
+	messageLogger.reset(new MessageLogger);
+	objectUnderTest.reset(new IrCodesRepository(*messageLogger.get()));
 	return *objectUnderTest.get();
 }
 
@@ -42,6 +45,15 @@ static void ACodeCanBeFoundByName()
 	}
 }
 
+static void IfACodeDoesNotExistAMessageIsLogged()
+{
+	IIrCodesRepository & repo = CreateObjectUnderTest();
+
+	IrCode* code = repo.GetCode("invalid code");
+
+	AssertEqual("Code 'invalid code' not found.", messageLogger.get()->Logs()[0]);
+}
+
 static void IfACodeDoesNotExistGetCodeReturnsNull()
 {
 	IIrCodesRepository& repo = CreateObjectUnderTest();
@@ -72,6 +84,7 @@ void CodesRepositoryTests::RunTests()
 {
 	ACodeCanBeRetrieved();
 	ACodeCanBeFoundByName();
+	IfACodeDoesNotExistAMessageIsLogged();
 	IfACodeDoesNotExistGetCodeReturnsNull();
 	CodeOnOffHasBeenDefined();
 }
@@ -79,5 +92,6 @@ void CodesRepositoryTests::RunTests()
 void CodesRepositoryTests::CleanUpAfterTests()
 {
 	objectUnderTest.release();
+	messageLogger.release();
 }
 
