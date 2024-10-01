@@ -1,14 +1,15 @@
 #include "code_sequence_repository.h"
 
-#define NUMBER_OF_SEQUENCES 2
+#define NUMBER_OF_SEQUENCES 3
 
 const char* FastForward30Codes[] = { "SonyForward", 0 };
 const char* SamsungVolumeDownCodes[] = { "SamsungVolumeDown", 0 };
+const char* TestSequenceCodes[] = { "testcode", 0 };
 
 
-const char* sequenceNames[NUMBER_OF_SEQUENCES] = { "FastForward30", "SamsungVolumeDown"};
-const char* displayNames[NUMBER_OF_SEQUENCES] = { "Forward 30", "Volume Down"};
-const char** sequences[NUMBER_OF_SEQUENCES] = { FastForward30Codes, SamsungVolumeDownCodes };
+const char* sequenceNames[NUMBER_OF_SEQUENCES] = { "FastForward30", "SamsungVolumeDown", "Test"};
+const char* displayNames[NUMBER_OF_SEQUENCES] = { "Forward 30", "Volume Down", "Test"};
+const char** sequences[NUMBER_OF_SEQUENCES] = { FastForward30Codes, SamsungVolumeDownCodes, TestSequenceCodes };
 
 CodeSequenceRepository::CodeSequenceRepository()
 {

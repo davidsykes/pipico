@@ -20,12 +20,12 @@ static void ACodeCanBeRetrieved()
 	IrCode& code = repo.GetCodes()[0];
 
 	AssertEqual("testcode", code.Name);
-	AssertEqual(68, code.Count);
-	AssertEqual(68, code.Times.size());
+	AssertEqual(8, code.Count);
+	AssertEqual(8, code.Times.size());
 	AssertEqual(0, code.Times[0]);
-	AssertEqual(4509, code.Times[1]);
-	AssertEqual(9024, code.Times[2]);
-	AssertEqual(68, code.Values.size());
+	AssertEqual(4000, code.Times[1]);
+	AssertEqual(8000, code.Times[2]);
+	AssertEqual(8, code.Values.size());
 	AssertEqual(1, code.Values[0]);
 	AssertEqual(0, code.Values[1]);
 	AssertEqual(1, code.Values[2]);
