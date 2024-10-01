@@ -8,7 +8,7 @@ std::string LogDisplayAction::Action()
 	auto logs = messageLogger.Logs();
 	std::ostringstream str;
 
-	str << "There are " << logs.size() << " logs<br>\n";
+	str << "<br><br>There are " << logs.size() << " logs<br>\n";
 
 	for (int i = 0; i < logs.size(); ++i)
 	{
