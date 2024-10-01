@@ -11,9 +11,9 @@ namespace
 		std::vector<IrCode> _unused;
 		IrCode codeBeingSent;
 		virtual std::vector<IrCode>& GetCodes() { return _unused; }
-		virtual IrCode* GetCode(const std::string& name) { codeBeingSent.Name = name; return &codeBeingSent; }
+		virtual IrCode* GetCode(const std::string& name);
 	public:
-		std::vector<std::string> SentCodes;
+		std::vector<std::string> ValidCodes;
 	};
 	class MockIrCodeSender : public IIrCodeSender
 	{
@@ -48,6 +48,9 @@ static IrSequenceSender& CreateTestObject()
 static void ASequenceIsTransmitted()
 {
 	IIrSequenceSender& sender = CreateTestObject();
+	mockCodesRepository.get()->ValidCodes.push_back("Code 1");
+	mockCodesRepository.get()->ValidCodes.push_back("Code 2");
+	mockCodesRepository.get()->ValidCodes.push_back("Code 3");
 
 	sender.SendSequence(*codeSequence.get());
 
@@ -58,10 +61,35 @@ static void ASequenceIsTransmitted()
 	AssertEqual("Code 3", sentCodes[2]);
 }
 
+static void IfACodeIsNotFoundItIsSkipped()
+{
+	IIrSequenceSender& sender = CreateTestObject();
+	mockCodesRepository.get()->ValidCodes.push_back("Code 1");
+	mockCodesRepository.get()->ValidCodes.push_back("Code 3");
+
+	sender.SendSequence(*codeSequence.get());
+
+	std::vector<std::string>& sentCodes = mockIrCodeSender.get()->SentCodes;
+	AssertEqual(2, sentCodes.size());
+	AssertEqual("Code 1", sentCodes[0]);
+	AssertEqual("Code 3", sentCodes[1]);
+}
+
+IrCode* MockCodesRepository::GetCode(const std::string& name)
+{
+	codeBeingSent.Name = name;
+	for (int i = 0; i < ValidCodes.size(); ++i)
+	{
+		if (name == ValidCodes[i])
+			return &codeBeingSent;
+	}
+	return 0;
+}
 
 void IrSequenceSenderTests::RunTests()
 {
 	ASequenceIsTransmitted();
+	IfACodeIsNotFoundItIsSkipped();
 }
 
 void IrSequenceSenderTests::CleanUpAfterTests()
