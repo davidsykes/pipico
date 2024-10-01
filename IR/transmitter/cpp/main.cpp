@@ -10,6 +10,7 @@
 #include "api/api_actions/raw_display_action.h"
 #include "api/api_actions/log_display_action.h"
 #include "api/api_actions/codes_display_action.h"
+#include "api/api_actions/code_sequences_display_action.h"
 #include "api/api_actions/play_ir_code_action.h"
 #include "api/api_actions/play_ir_sequence_action.h"
 #include "api/formatters/code_display_formatter.h"
@@ -45,13 +46,15 @@ int main()
       MessageLogger messageLogger;
       LogDisplayAction logDisplayAction(messageLogger);
 
-      IrCodesRepository irCodesRepository;
-      CodeSequenceRepository codeSequenceRepository;
-      ButtonFormatter buttonFormatter;
-      HomeDisplayAction homeDisplayAction(codeSequenceRepository, buttonFormatter, logDisplayAction);
-
+      IrCodesRepository irCodesRepository(messageLogger);
       CodeDisplayFormatter codeDisplayFormatter;
       CodesDisplayAction codesDisplayAction(irCodesRepository, codeDisplayFormatter);
+
+      CodeSequenceRepository codeSequenceRepository;
+      ButtonFormatter buttonFormatter;
+      CodeSequencesDisplayAction codeSequencesDisplayAction(codeSequenceRepository, buttonFormatter);
+
+      HomeDisplayAction homeDisplayAction(codeSequencesDisplayAction, logDisplayAction);
       RawDisplayAction rawDisplayAction(codesDisplayAction, logDisplayAction);
 
       IrCodeSender irCodeSender(outputPin);

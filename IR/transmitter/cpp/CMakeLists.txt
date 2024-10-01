@@ -11,6 +11,7 @@ add_executable(test
         api/api_actions/home_display_action.cpp
         api/api_actions/raw_display_action.cpp
         api/api_actions/codes_display_action.cpp
+        api/api_actions/code_sequences_display_action.cpp
         api/api_actions/play_ir_code_action.cpp
         api/api_actions/play_ir_sequence_action.cpp
         api/formatters/code_display_formatter.cpp
