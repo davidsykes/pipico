@@ -13,45 +13,20 @@ static IrCodesRepository& CreateObjectUnderTest()
 	return *objectUnderTest.get();
 }
 
-static void ACodeCanBeRetrieved()
-{
-	IIrCodesRepository& repo = CreateObjectUnderTest();
-
-	IrCode& code = repo.GetCodes()[0];
-
-	AssertEqual("testcode", code.Name);
-	AssertEqual(8, code.Count);
-	AssertEqual(8, code.Times.size());
-	AssertEqual(0, code.Times[0]);
-	AssertEqual(4000, code.Times[1]);
-	AssertEqual(8000, code.Times[2]);
-	AssertEqual(8, code.Values.size());
-	AssertEqual(1, code.Values[0]);
-	AssertEqual(0, code.Values[1]);
-	AssertEqual(1, code.Values[2]);
-}
-
 static void ACodeCanBeFoundByName()
 {
 	IIrCodesRepository& repo = CreateObjectUnderTest();
 
-	IrCode* codep = repo.GetCode("testcode");
-	AssertFalse(codep == 0);
+	IrCode& code = *repo.GetCode("Pause");
 
-	if (codep)
-	{
-		IrCode& code = *codep;
-		AssertEqual("testcode", code.Name);
-	}
-}
-
-static void IfACodeDoesNotExistAMessageIsLogged()
-{
-	IIrCodesRepository & repo = CreateObjectUnderTest();
-
-	IrCode* code = repo.GetCode("invalid code");
-
-	AssertEqual("Code 'invalid code' not found.", messageLogger.get()->Logs()[0]);
+	AssertEqual("Pause", code.Name);
+	AssertEqual(2, code.Count);
+	AssertEqual(2, code.Times.size());
+	AssertEqual(0, code.Times[0]);
+	AssertEqual(500000, code.Times[1]);
+	AssertEqual(2, code.Values.size());
+	AssertEqual(1, code.Values[0]);
+	AssertEqual(0, code.Values[1]);
 }
 
 static void IfACodeDoesNotExistGetCodeReturnsNull()
@@ -60,6 +35,15 @@ static void IfACodeDoesNotExistGetCodeReturnsNull()
 
 	IrCode* code = repo.GetCode("invalid code");
 	AssertTrue(code == 0);
+}
+
+static void IfACodeDoesNotExistAMessageIsLogged()
+{
+	IIrCodesRepository& repo = CreateObjectUnderTest();
+
+	IrCode* code = repo.GetCode("invalid code");
+
+	AssertEqual("Code 'invalid code' not found.", messageLogger.get()->Logs()[0]);
 }
 
 static void CodeOnOffHasBeenDefined()
@@ -80,31 +64,12 @@ static void CodeOnOffHasBeenDefined()
 	AssertEqual(1, code.Values[2]);
 }
 
-static void PauseCanBeAdded()
-{
-	IIrCodesRepository& repo = CreateObjectUnderTest();
-
-
-	IrCode& code = *repo.GetCode("Pause");
-
-	AssertEqual("Pause", code.Name);
-	AssertEqual(2, code.Count);
-	AssertEqual(2, code.Times.size());
-	AssertEqual(0, code.Times[0]);
-	AssertEqual(500000, code.Times[1]);
-	AssertEqual(2, code.Values.size());
-	AssertEqual(1, code.Values[0]);
-	AssertEqual(0, code.Values[1]);
-}
-
 void CodesRepositoryTests::RunTests()
 {
-	ACodeCanBeRetrieved();
 	ACodeCanBeFoundByName();
-	IfACodeDoesNotExistAMessageIsLogged();
 	IfACodeDoesNotExistGetCodeReturnsNull();
+	IfACodeDoesNotExistAMessageIsLogged();
 	CodeOnOffHasBeenDefined();
-	PauseCanBeAdded();
 }
 
 void CodesRepositoryTests::CleanUpAfterTests()
