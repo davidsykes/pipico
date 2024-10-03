@@ -15,6 +15,10 @@ const char** sequences[NUMBER_OF_SEQUENCES] = { FastForward30Codes, FastForward3
 CodeSequenceRepository::CodeSequenceRepository(IMessageLogger& messageLogger) : messageLogger(messageLogger)
 {
 	CodeSequence& sequence = CreateSequence("NullSequence", "Sequence Not Found");
+	CodeSequence& sequence2 = CreateSequence("SamsungVolumeUpx2", "Volume Up x 2");
+	sequence2.AddCode("SamsungVolumeUp");
+	sequence2.AddCode("Pause");
+	sequence2.AddCode("SamsungVolumeUp");
 
 	for (int i = 0; i < NUMBER_OF_SEQUENCES; ++i)
 	{
