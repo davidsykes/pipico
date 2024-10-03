@@ -25,9 +25,19 @@ static void TheLogsAreDisplayed()
 	AssertEqual("<br><br>There are 2 logs<br>\nL1<br>L2", result);
 }
 
+static void WhenaThereAreNoLogsNoOutputIsProduced()
+{
+	ApiAction& action = CreateObjectUnderTest();
+
+	std::string result = action.Action();
+
+	AssertEqual("", result);
+}
+
 void LogsDisplayActionTests::RunTests()
 {
 	TheLogsAreDisplayed();
+	WhenaThereAreNoLogsNoOutputIsProduced();
 }
 
 void LogsDisplayActionTests::CleanUpAfterTests()
