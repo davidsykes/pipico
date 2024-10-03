@@ -1,7 +1,5 @@
 #include "ir_codes_repository.h"
 
-#define NUMBER_OF_CODES 5
-
 char CodeNametestcode[] = "testcode";
 int CodeSizetestcode = 8;
 int CodeTimestestcode[] = { 0, 4000, 8000, 12000, 16000, 20000, 24000, 28000 };
@@ -22,37 +20,23 @@ int CodeSizeSamsungVolumeDown = 68;
 int CodeTimesSamsungVolumeDown[] = { 0, 4533, 9028, 9603, 11273, 11844, 13517, 14096, 15762, 16337, 16884, 17462, 18007, 18588, 19129, 19703, 20251, 20829, 21373, 21955, 23618, 24196, 25862, 26436, 28107, 28688, 29229, 29804, 30351, 30929, 31473, 32055, 32596, 33170, 33718, 34296, 35963, 36537, 38207, 38788, 39330, 39903, 41574, 42154, 42697, 43270, 43819, 44396, 44941, 45522, 46064, 46637, 47186, 47763, 48309, 48888, 50553, 51129, 51676, 52255, 53920, 54496, 56165, 56737, 58409, 58988, 60654, 61229 };
 char CodeValuesSamsungVolumeDown[] = { 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0 };
 
+char CodeNameSamsungVolumeUp[] = "SamsungVolumeUp";
+int CodeSizeSamsungVolumeUp = 68;
+int CodeTimesSamsungVolumeUp[] = { 0, 4585, 9026, 9605, 11270, 11847, 13513, 14088, 15757, 16330, 16879, 17457, 18001, 18583, 19123, 19698, 20245, 20877, 21368, 21940, 23612, 24192, 25856, 26434, 28100, 28676, 29222, 29802, 30344, 30918, 31466, 32044, 32588, 33223, 33711, 34286, 35955, 36528, 38199, 38780, 40443, 41022, 41565, 42138, 42687, 43264, 43809, 44390, 44931, 45505, 46054, 46632, 47176, 47758, 48298, 48873, 49420, 50000, 51664, 52241, 53908, 54483, 56152, 56725, 58395, 58977, 60639, 61219 };
+char CodeValuesSamsungVolumeUp[] = { 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0 };
+
 char CodeNamePause[] = "Pause";
 int CodeSizePause = 2;
 int CodeTimesPause[] = { 0, 500000 };
 char CodeValuesPause[] = { 1, 0 };
 
-char* codeNames[NUMBER_OF_CODES] = { CodeNametestcode, CodeNameOnOff, CodeNameSonyForward, CodeNameSamsungVolumeDown, CodeNamePause };
-int codeCounts[NUMBER_OF_CODES] = { CodeSizetestcode, CodeSizeOnOff, CodeSizeSonyForward, CodeSizeSamsungVolumeDown, CodeSizePause };
-int* codeTimes[NUMBER_OF_CODES]{ CodeTimestestcode, CodeTimesOnOff, CodeTimesSonyForward, CodeTimesSamsungVolumeDown,CodeTimesPause };
-char* codeValues[NUMBER_OF_CODES]{ CodeValuestestcode, CodeValuesOnOff, CodeValuesSonyForward, CodeValuesSamsungVolumeDown, CodeValuesPause };
-
-
 IrCodesRepository::IrCodesRepository(IMessageLogger& messageLogger) : messageLogger(messageLogger)
 {
-	for (int i = 0; i < NUMBER_OF_CODES; ++i)
-	{
-		IrCode code;
-		codes.push_back(std::move(code));
-		IrCode& last = codes.back();
-		last.Name = codeNames[i];
-		last.Count = codeCounts[i];
-		int* times = codeTimes[i];
-		for (int j = 0; j < last.Count; ++j)
-		{
-			last.Times.push_back(times[j]);
-		}
-		char* values = codeValues[i];
-		for (int j = 0; j < last.Count; ++j)
-		{
-			last.Values.push_back(values[j]);
-		}
-	}
+	AddCode(CodeNameOnOff, CodeSizeOnOff, CodeTimesOnOff, CodeValuesOnOff);
+	AddCode(CodeNameSonyForward, CodeSizeSonyForward, CodeTimesSonyForward, CodeValuesSonyForward);
+	AddCode(CodeNameSamsungVolumeDown, CodeSizeSamsungVolumeDown, CodeTimesSamsungVolumeDown, CodeValuesSamsungVolumeDown);
+	AddCode(CodeNameSamsungVolumeUp, CodeSizeSamsungVolumeUp, CodeTimesSamsungVolumeUp, CodeValuesSamsungVolumeUp);
+	AddCode(CodeNamePause, CodeSizePause, CodeTimesPause, CodeValuesPause);
 }
 
 IrCode* IrCodesRepository::GetCode(const std::string& name)
@@ -68,4 +52,21 @@ IrCode* IrCodesRepository::GetCode(const std::string& name)
 	messageLogger.Log("Code '" + name + "' not found.");
 
 	return 0;
+}
+
+void IrCodesRepository::AddCode(const char* name, int dataSize, int* times, char* values)
+{
+	IrCode code;
+	codes.push_back(std::move(code));
+	IrCode& last = codes.back();
+	last.Name = name;
+	last.Count = dataSize;
+	for (int j = 0; j < last.Count; ++j)
+	{
+		last.Times.push_back(times[j]);
+	}
+	for (int j = 0; j < last.Count; ++j)
+	{
+		last.Values.push_back(values[j]);
+	}
 }

@@ -80,6 +80,23 @@ static void CodeOnOffHasBeenDefined()
 	AssertEqual(1, code.Values[2]);
 }
 
+static void PauseCanBeAdded()
+{
+	IIrCodesRepository& repo = CreateObjectUnderTest();
+
+
+	IrCode& code = *repo.GetCode("Pause");
+
+	AssertEqual("Pause", code.Name);
+	AssertEqual(2, code.Count);
+	AssertEqual(2, code.Times.size());
+	AssertEqual(0, code.Times[0]);
+	AssertEqual(500000, code.Times[1]);
+	AssertEqual(2, code.Values.size());
+	AssertEqual(1, code.Values[0]);
+	AssertEqual(0, code.Values[1]);
+}
+
 void CodesRepositoryTests::RunTests()
 {
 	ACodeCanBeRetrieved();
@@ -87,6 +104,7 @@ void CodesRepositoryTests::RunTests()
 	IfACodeDoesNotExistAMessageIsLogged();
 	IfACodeDoesNotExistGetCodeReturnsNull();
 	CodeOnOffHasBeenDefined();
+	PauseCanBeAdded();
 }
 
 void CodesRepositoryTests::CleanUpAfterTests()

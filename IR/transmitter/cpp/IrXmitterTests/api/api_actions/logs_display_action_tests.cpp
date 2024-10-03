@@ -25,7 +25,7 @@ static void TheLogsAreDisplayed()
 	AssertEqual("<br><br>There are 2 logs<br>\nL1<br>L2", result);
 }
 
-static void WhenaThereAreNoLogsNoOutputIsProduced()
+static void WhenThereAreNoLogsNoOutputIsProduced()
 {
 	ApiAction& action = CreateObjectUnderTest();
 
@@ -37,7 +37,7 @@ static void WhenaThereAreNoLogsNoOutputIsProduced()
 void LogsDisplayActionTests::RunTests()
 {
 	TheLogsAreDisplayed();
-	WhenaThereAreNoLogsNoOutputIsProduced();
+	WhenThereAreNoLogsNoOutputIsProduced();
 }
 
 void LogsDisplayActionTests::CleanUpAfterTests()

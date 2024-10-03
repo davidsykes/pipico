@@ -20,6 +20,8 @@ class IrCodesRepository : public IIrCodesRepository
 	virtual std::vector<IrCode>& GetCodes() { return codes; }
 	virtual IrCode* GetCode(const std::string& name);
 
+	void AddCode(const char* name, int dataSize, int* times, char* values);
+
 public:
 	IrCodesRepository(IMessageLogger& messageLogger);
 };
