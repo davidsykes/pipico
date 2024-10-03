@@ -1,6 +1,6 @@
 #include "ir_codes_repository.h"
 
-#define NUMBER_OF_CODES 4
+#define NUMBER_OF_CODES 5
 
 char CodeNametestcode[] = "testcode";
 int CodeSizetestcode = 8;
@@ -22,11 +22,15 @@ int CodeSizeSamsungVolumeDown = 68;
 int CodeTimesSamsungVolumeDown[] = { 0, 4533, 9028, 9603, 11273, 11844, 13517, 14096, 15762, 16337, 16884, 17462, 18007, 18588, 19129, 19703, 20251, 20829, 21373, 21955, 23618, 24196, 25862, 26436, 28107, 28688, 29229, 29804, 30351, 30929, 31473, 32055, 32596, 33170, 33718, 34296, 35963, 36537, 38207, 38788, 39330, 39903, 41574, 42154, 42697, 43270, 43819, 44396, 44941, 45522, 46064, 46637, 47186, 47763, 48309, 48888, 50553, 51129, 51676, 52255, 53920, 54496, 56165, 56737, 58409, 58988, 60654, 61229 };
 char CodeValuesSamsungVolumeDown[] = { 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0 };
 
+char CodeNamePause[] = "Pause";
+int CodeSizePause = 2;
+int CodeTimesPause[] = { 0, 500000 };
+char CodeValuesPause[] = { 1, 0 };
 
-char* codeNames[NUMBER_OF_CODES] = { CodeNametestcode, CodeNameOnOff, CodeNameSonyForward, CodeNameSamsungVolumeDown };
-int codeCounts[NUMBER_OF_CODES] = { CodeSizetestcode, CodeSizeOnOff, CodeSizeSonyForward, CodeSizeSamsungVolumeDown };
-int* codeTimes[NUMBER_OF_CODES]{ CodeTimestestcode, CodeTimesOnOff, CodeTimesSonyForward, CodeTimesSamsungVolumeDown };
-char* codeValues[NUMBER_OF_CODES]{ CodeValuestestcode, CodeValuesOnOff, CodeValuesSonyForward, CodeValuesSamsungVolumeDown };
+char* codeNames[NUMBER_OF_CODES] = { CodeNametestcode, CodeNameOnOff, CodeNameSonyForward, CodeNameSamsungVolumeDown, CodeNamePause };
+int codeCounts[NUMBER_OF_CODES] = { CodeSizetestcode, CodeSizeOnOff, CodeSizeSonyForward, CodeSizeSamsungVolumeDown, CodeSizePause };
+int* codeTimes[NUMBER_OF_CODES]{ CodeTimestestcode, CodeTimesOnOff, CodeTimesSonyForward, CodeTimesSamsungVolumeDown,CodeTimesPause };
+char* codeValues[NUMBER_OF_CODES]{ CodeValuestestcode, CodeValuesOnOff, CodeValuesSonyForward, CodeValuesSamsungVolumeDown, CodeValuesPause };
 
 
 IrCodesRepository::IrCodesRepository(IMessageLogger& messageLogger) : messageLogger(messageLogger)
