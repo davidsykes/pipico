@@ -50,7 +50,7 @@ int main()
       CodeDisplayFormatter codeDisplayFormatter;
       CodesDisplayAction codesDisplayAction(irCodesRepository, codeDisplayFormatter);
 
-      CodeSequenceRepository codeSequenceRepository;
+      CodeSequenceRepository codeSequenceRepository(messageLogger);
       ButtonFormatter buttonFormatter;
       CodeSequencesDisplayAction codeSequencesDisplayAction(codeSequenceRepository, buttonFormatter);
 

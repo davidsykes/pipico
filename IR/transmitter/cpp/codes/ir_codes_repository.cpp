@@ -28,7 +28,7 @@ char CodeValuesSamsungVolumeUp[] = { 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1
 char CodeNamePause[] = "Pause";
 int CodeSizePause = 2;
 int CodeTimesPause[] = { 0, 500000 };
-char CodeValuesPause[] = { 1, 0 };
+char CodeValuesPause[] = { 0, 0 };
 
 IrCodesRepository::IrCodesRepository(IMessageLogger& messageLogger) : messageLogger(messageLogger)
 {
