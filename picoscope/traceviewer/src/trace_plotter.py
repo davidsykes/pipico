@@ -5,7 +5,7 @@ class TracePlotter:
         self._trace_directory = trace_directory
 
     def plot_traces(self, list_of_traces_to_plot):
-        fig, ax = plt.subplots()
+        fig = None
         trace_count = len(list_of_traces_to_plot)
         trace_separation = 0
         current_trace = 0
@@ -23,6 +23,8 @@ class TracePlotter:
                 x.append(s[0])
                 y.append(new_value)
                 previous_value = new_value
+            if fig is None:
+                fig, ax = plt.subplots()
             ax.plot(x, y)
             current_trace = current_trace + 1
         plt.show()
