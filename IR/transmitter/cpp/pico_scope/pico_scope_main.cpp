@@ -30,7 +30,7 @@ void pico_scope_main(IHardwareInterface& hw_if)
     hw_if.initialise_input_pin(ir_scope_configuration.pin);
     hw_if.gpio_set_pull_up(ir_scope_configuration.pin, 1);
 
-    PicoScope scope(hw_if, 100000);
+    PicoScope scope(hw_if, 2000000);
     PicoScopeCaptureAndPost srap(
         hw_if,
         scope,
