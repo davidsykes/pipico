@@ -12,6 +12,12 @@ namespace
 	public:
 		bool LedState = false;
 	};
+	class MockBlinker : public IBlinker
+	{
+		virtual void Blink(int count) { Blinked = count; }
+	public:
+		int Blinked = 0;
+	};
 }
 
 class MockPicoScope : public IPicoScope
@@ -44,6 +50,7 @@ static std::unique_ptr<MockHardwareInterface> mockHardwareInterface;
 static std::unique_ptr<TraceDataFormatter> traceDataFormatter;
 static std::unique_ptr<MockRestHandler> mockRestHandler;
 static std::unique_ptr<PicoScopeTrace> capturedPicoScopeTrace;
+static std::unique_ptr<MockBlinker> mockBlinker;
 
 static PicoScopeCaptureAndPost& CreateObjectUnderTest()
 {
@@ -53,12 +60,14 @@ static PicoScopeCaptureAndPost& CreateObjectUnderTest()
 	traceDataFormatter.reset(new TraceDataFormatter);
 	mockPicoScope.reset(new MockPicoScope(*mockHardwareInterface.get(),*capturedPicoScopeTrace.get()));
 	mockRestHandler.reset(new MockRestHandler(*mockHardwareInterface.get()));
+	mockBlinker.reset(new MockBlinker);
 	objectUnderTest.reset(new PicoScopeCaptureAndPost(
 		*mockHardwareInterface.get(),
 		*mockPicoScope.get(),
 		*traceDataFormatter.get(),
 		*mockRestHandler.get(),
-		"trace url"));
+		"trace url",
+		*mockBlinker.get()));
 	return *objectUnderTest.get();
 }
 
@@ -82,6 +91,15 @@ static void TheTraceIsPostedWhileTheHardwareLightIsOff()
 	AssertFalse(mockRestHandler.get()->LedStateDuringPost);
 }
 
+static void IfThePutOperationFailsTheBlinkerIsCalled()
+{
+	IPicoScopeCaptureAndPost& cap = CreateObjectUnderTest();
+
+	cap.CaptureAndPost();
+
+	AssertEqual(10, mockBlinker.get()->Blinked);
+}
+
 PicoScopeTrace& MockPicoScope::FetchTrace()
 {
 	LedStateDuringCapture = hw_if.LedState;
@@ -100,13 +118,16 @@ void PicoScopeCaptureAndPostTests::RunTests()
 {
 	ATraceIsCapturedWhileTheHardwareLightIsOn();
 	TheTraceIsPostedWhileTheHardwareLightIsOff();
+	IfThePutOperationFailsTheBlinkerIsCalled();
 }
 
 void PicoScopeCaptureAndPostTests::CleanUpAfterTests()
 {
 	objectUnderTest.release();
-	mockRestHandler.release();
 	mockPicoScope.release();
 	mockHardwareInterface.release();
+	traceDataFormatter.release();
+	mockRestHandler.release();
 	capturedPicoScopeTrace.release();
+	mockBlinker.release();
 }
