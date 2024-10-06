@@ -34,7 +34,7 @@ static void RequestsArePassedToTheRouterAndPackagedWithHtmlMarkers()
 
 	AssertEqual(1, result);
 
-	AssertEqual("<!DOCTYPE html><html><head><style type=\"text/css\">button{width: 40 %;height: 10 %;}</style></head><body>Router result</body></html> ", body);
+	AssertEqual("<!DOCTYPE html><html><head><style type=\"text/css\">button { width: 200px; height:60px; }</style></head><body>Router result</body></html> ", body);
 }
 
 static void TheHeaderIsTerminatedByTwoCRLF()
@@ -45,7 +45,7 @@ static void TheHeaderIsTerminatedByTwoCRLF()
 	int result = packager.RouteRequestAndPackageResponse("/ bla", header, body);
 
 	AssertEqual(1, result);
-	AssertEqual("HTTP/1.1 200 OK\r\nContent-Length: 132\r\nContent-Type : text/html; charset=utf-8\r\nConnection: close\r\n\r\n", header);
+	AssertEqual("HTTP/1.1 200 OK\r\nContent-Length: 136\r\nContent-Type : text/html; charset=utf-8\r\nConnection: close\r\n\r\n", header);
 }
 
 static void TheHeaderIsCreatedWithTheCorrectContentLength()
@@ -57,7 +57,7 @@ static void TheHeaderIsCreatedWithTheCorrectContentLength()
 	int result = packager.RouteRequestAndPackageResponse("/favicon", header, body);
 
 	AssertEqual(1, result);
-	AssertEqual("HTTP/1.1 200 OK\r\nContent-Length: 141\r\nContent-Type : text/html; charset=utf-8\r\nConnection: close\r\n\r\n", header);
+	AssertEqual("HTTP/1.1 200 OK\r\nContent-Length: 145\r\nContent-Type : text/html; charset=utf-8\r\nConnection: close\r\n\r\n", header);
 }
 
 static void IfTheRouterDoesNotRouteThen404IsReturned()

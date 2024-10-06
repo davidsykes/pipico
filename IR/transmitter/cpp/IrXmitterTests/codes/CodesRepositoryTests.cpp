@@ -25,7 +25,7 @@ static void ACodeCanBeFoundByName()
 	AssertEqual(0, code.Times[0]);
 	AssertEqual(500000, code.Times[1]);
 	AssertEqual(2, code.Values.size());
-	AssertEqual(1, code.Values[0]);
+	AssertEqual(0, code.Values[0]);
 	AssertEqual(0, code.Values[1]);
 }
 
