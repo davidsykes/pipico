@@ -12,6 +12,15 @@ CodeSequenceRepository::CodeSequenceRepository(IMessageLogger& messageLogger) : 
 		.AddCode("Pause")
 		.AddCode("SonyForward");
 
+	CreateSequence("Forward30x4", "Forward 30 x 4")
+		.AddCode("SonyForward")
+		.AddCode("Pause")
+		.AddCode("SonyForward")
+		.AddCode("Pause")
+		.AddCode("SonyForward")
+		.AddCode("Pause")
+		.AddCode("SonyForward");
+
 	CreateSequence("SamsungVolumeUpx2", "Volume Up x 2")
 		.AddCode("SamsungVolumeUp")
 		.AddCode("Pause")
