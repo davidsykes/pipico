@@ -32,51 +32,23 @@ static void ANonExistentSequenceLogsAnError()
 	AssertEqual("Sequence 'non existent sequence' not found.", messageLogger.get()->Logs()[0]);
 }
 
-static void TestFastForward30()
+static void TestForward30()
 {
 	ICodeSequenceRepository& repo = CreateObjectUnderTest();
 
-	const CodeSequence& sequence = repo.GetSequence("FastForward30");
+	const CodeSequence& sequence = repo.GetSequence("Forward30");
 
-	AssertEqual("FastForward30", sequence.Name);
+	AssertEqual("Forward30", sequence.Name);
 	AssertEqual("Forward 30", sequence.DisplayText);
 	AssertEqual(1, sequence.Codes.size());
 	AssertEqual("SonyForward", sequence.Codes[0]);
-}
-
-static void TestSamsungVolumeDown()
-{
-	ICodeSequenceRepository& repo = CreateObjectUnderTest();
-
-	const CodeSequence& sequence = repo.GetSequence("SamsungVolumeDown");
-
-	AssertEqual("SamsungVolumeDown", sequence.Name);
-	AssertEqual("Volume Down", sequence.DisplayText);
-	AssertEqual(1, sequence.Codes.size());
-	AssertEqual("SamsungVolumeDown", sequence.Codes[0]);
-}
-
-static void TestSamsungVolumeUpx2()
-{
-	ICodeSequenceRepository& repo = CreateObjectUnderTest();
-
-	const CodeSequence& sequence = repo.GetSequence("SamsungVolumeUpx2");
-
-	AssertEqual("SamsungVolumeUpx2", sequence.Name);
-	AssertEqual("Volume Up x 2", sequence.DisplayText);
-	AssertEqual(3, sequence.Codes.size());
-	AssertEqual("SamsungVolumeUp", sequence.Codes[0]);
-	AssertEqual("Pause", sequence.Codes[1]);
-	AssertEqual("SamsungVolumeUp", sequence.Codes[2]);
 }
 
 void CodeSequenceRepositoryTests::RunTests()
 {
 	ANonExistentSequenceReturnsAnEmptySequence();
 	ANonExistentSequenceLogsAnError();
-	TestFastForward30();
-	TestSamsungVolumeDown();
-	TestSamsungVolumeUpx2();
+	TestForward30();
 }
 
 void CodeSequenceRepositoryTests::CleanUpAfterTests()

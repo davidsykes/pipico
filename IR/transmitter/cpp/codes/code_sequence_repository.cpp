@@ -1,36 +1,21 @@
 #include "code_sequence_repository.h"
 
-#define NUMBER_OF_SEQUENCES 4
-
-const char* FastForward30Codes[] = { "SonyForward", 0 };
-const char* FastForward30Codesx2[] = { "SonyForward", "Pause", "SonyForward" };
-const char* SamsungVolumeDownCodes[] = { "SamsungVolumeDown", 0 };
-const char* TestSequenceCodes[] = { "testcode", 0 };
-
-
-const char* sequenceNames[NUMBER_OF_SEQUENCES] = { "FastForward30", "FastForward30x2", "SamsungVolumeDown", "Test"};
-const char* displayNames[NUMBER_OF_SEQUENCES] = { "Forward 30", "Forward 30 x 2", "Volume Down", "Test"};
-const char** sequences[NUMBER_OF_SEQUENCES] = { FastForward30Codes, FastForward30Codesx2, SamsungVolumeDownCodes, TestSequenceCodes };
+CodeSequence SequenceNotFoundSequence("NullSequence", "Sequence Not Found");
 
 CodeSequenceRepository::CodeSequenceRepository(IMessageLogger& messageLogger) : messageLogger(messageLogger)
 {
-	CodeSequence& sequence = CreateSequence("NullSequence", "Sequence Not Found");
-	CodeSequence& sequence2 = CreateSequence("SamsungVolumeUpx2", "Volume Up x 2");
-	sequence2.AddCode("SamsungVolumeUp");
-	sequence2.AddCode("Pause");
-	sequence2.AddCode("SamsungVolumeUp");
+	CreateSequence("Forward30", "Forward 30")
+		.AddCode("SonyForward");
 
-	for (int i = 0; i < NUMBER_OF_SEQUENCES; ++i)
-	{
-		CodeSequence s(sequenceNames[i], displayNames[i]);
-		const char** codes = sequences[i];
-		while (codes[0])
-		{
-			s.Codes.push_back(codes[0]);
-			++codes;
-		}
-		codeSequences.push_back(s);
-	}
+	CreateSequence("Forward30x2", "Forward 30 x 2")
+		.AddCode("SonyForward")
+		.AddCode("Pause")
+		.AddCode("SonyForward");
+
+	CreateSequence("SamsungVolumeUpx2", "Volume Up x 2")
+		.AddCode("SamsungVolumeUp")
+		.AddCode("Pause")
+		.AddCode("SamsungVolumeUp");
 }
 
 const std::vector<CodeSequence>& CodeSequenceRepository::GetCodeSequences()
@@ -49,7 +34,7 @@ const CodeSequence& CodeSequenceRepository::GetSequence(const std::string& name)
 	}
 
 	messageLogger.Log("Sequence '" + name + "' not found.");
-    return codeSequences[0];
+    return SequenceNotFoundSequence;
 }
 
 CodeSequence& CodeSequenceRepository::CreateSequence(const char* name, const char* displayName)
