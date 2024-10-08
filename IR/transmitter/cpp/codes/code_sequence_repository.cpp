@@ -25,6 +25,9 @@ CodeSequenceRepository::CodeSequenceRepository(IMessageLogger& messageLogger) : 
 		.AddCode("SamsungVolumeUp")
 		.AddCode("Pause")
 		.AddCode("SamsungVolumeUp");
+
+	CreateSequence("SamsungOnOff", "Samsung On Off")
+		.AddCode("SamsungOnOff");
 }
 
 const std::vector<CodeSequence>& CodeSequenceRepository::GetCodeSequences()

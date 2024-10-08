@@ -41,6 +41,7 @@ public:
 
 	std::string PutUrl;
 	std::string PutData;
+	std::string PutResponse;
 	bool LedStateDuringPost = true;
 };
 
@@ -94,10 +95,21 @@ static void TheTraceIsPostedWhileTheHardwareLightIsOff()
 static void IfThePutOperationFailsTheBlinkerIsCalled()
 {
 	IPicoScopeCaptureAndPost& cap = CreateObjectUnderTest();
+	mockRestHandler.get()->PutResponse = "Fail";
 
 	cap.CaptureAndPost();
 
 	AssertEqual(10, mockBlinker.get()->Blinked);
+}
+
+static void IfThePutOperationSucceedsTheBlinkerIsNotCalled()
+{
+	IPicoScopeCaptureAndPost& cap = CreateObjectUnderTest();
+	mockRestHandler.get()->PutResponse = "Ok";
+
+	cap.CaptureAndPost();
+
+	AssertEqual(0, mockBlinker.get()->Blinked);
 }
 
 PicoScopeTrace& MockPicoScope::FetchTrace()
@@ -111,7 +123,7 @@ std::string MockRestHandler::Put(const char* url, const char* body)
 	LedStateDuringPost = hw_if.LedState;
 	PutUrl = url;
 	PutData = body;
-	return "";
+	return PutResponse;
 }
 
 void PicoScopeCaptureAndPostTests::RunTests()
@@ -119,6 +131,7 @@ void PicoScopeCaptureAndPostTests::RunTests()
 	ATraceIsCapturedWhileTheHardwareLightIsOn();
 	TheTraceIsPostedWhileTheHardwareLightIsOff();
 	IfThePutOperationFailsTheBlinkerIsCalled();
+	IfThePutOperationSucceedsTheBlinkerIsNotCalled();
 }
 
 void PicoScopeCaptureAndPostTests::CleanUpAfterTests()
