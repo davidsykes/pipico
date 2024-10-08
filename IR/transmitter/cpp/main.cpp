@@ -17,8 +17,6 @@
 #include "pico_scope/pico_scope_main.h"
 #include "transmit/ir_code_sender.h"
 
-#define WIFI_SSID "a907"
-#define WIFI_PASSWORD "?thisistheWIFIyouhavebeenlookingfor1398"
 #define TRANSMIT_PIN 14
 
 int main()

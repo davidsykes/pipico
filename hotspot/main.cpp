@@ -15,10 +15,6 @@
 #include "rest/tcp_request_error_logger.h"
 #include "tools/message_logger.h"
 
-#define WIFI_SSID "a907"
-#define WIFI_PASSWORD "?thisistheWIFIyouhavebeenlookingfor1398"
-
-
 int main()
 {
    PicoHardwareInterface phw_if;
