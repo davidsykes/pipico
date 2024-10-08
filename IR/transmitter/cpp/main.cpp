@@ -16,6 +16,7 @@
 #include "api/formatters/code_display_formatter.h"
 #include "pico_scope/pico_scope_main.h"
 #include "transmit/ir_code_sender.h"
+#include "main.cxx"
 
 #define TRANSMIT_PIN 14
 
@@ -35,7 +36,8 @@ int main()
 
    if (actionValue == 1)
    {
-      pico_scope_main(hw_if);
+      Blinker blinker(hw_if);
+      pico_scope_main(hw_if, blinker);
    }
    else
    {

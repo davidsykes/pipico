@@ -35,6 +35,7 @@ add_executable(test
         tcp_server/pico_tcp_server.cpp
         tcp_server/http_response_packager.cpp
         tools/message_logger.cpp
+        tools/blinker.cpp
         transmit/ir_code_sender.cpp
         transmit/ir_sequence_sender.cpp
         wifi/WiFiConnector.cpp
