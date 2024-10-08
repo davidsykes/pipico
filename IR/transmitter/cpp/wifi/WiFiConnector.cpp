@@ -9,8 +9,8 @@
 // #include "logic/input_form/html_renderer.h"
 // #include "logic/input_form/input_form_renderer.h"
 
-// void WiFiConnector::ConnectToWiFi(const char* input_form_hotspot_name)
-// {
+ void WiFiConnector::ConnectToWiFi(const char* input_form_hotspot_name)
+ {
 //    FlashHardware flashHardware;
 //    WiFiConnectionMaker wifiConnectionMaker(&flashHardware);
 //    if (wifiConnectionMaker.CredentialsAreValid() && false)
@@ -43,7 +43,7 @@
 //       config->hotspot_name.c_str(),
 //       config->hotspot_password.c_str(),
 //       &processor);
-// }
+}
 
 
 void WiFiConnector::ConnectToWiFiDirect(IHardwareInterface& hw_if, const char* ssid, const char* password)
