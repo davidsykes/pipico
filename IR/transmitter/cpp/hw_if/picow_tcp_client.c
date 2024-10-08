@@ -182,13 +182,6 @@ int tcp_client_request(const char* server_ip, unsigned int port, const char*requ
         if (state->buffer_len > 0)
         {
             strncpy(result, state->buffer, max_result_length);
-
-            // char* data = malloc(BUF_SIZE+1);
-            // strncpy(data, state->buffer, state->buffer_len);
-            // data[state->buffer_len] = 0;
-            // state->buffer_len = 0;
-            // free(data);
-
             state->complete = true;
             tcp_client_close(state);
         }

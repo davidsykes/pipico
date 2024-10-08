@@ -13,9 +13,14 @@ void PicoHardwareInterface::initialise_pico_stdio(bool wait_for_usb_comms)
     hardware_interface->initialise_pico_stdio(wait_for_usb_comms);
 }
 
-int PicoHardwareInterface::initialise_wifi(const char* ssid, const char* password)
+int PicoHardwareInterface::initialise_wifi_sta(const char* ssid, const char* password)
 {
     return hardware_interface->initialise_wifi(ssid, password);
+}
+
+int PicoHardwareInterface::initialise_wifi_ap(const char* ssid, const char* password)
+{
+    return hardware_interface->initialise_wifi_ap(ssid, password);
 }
 
 uint64_t PicoHardwareInterface::get_time_us()

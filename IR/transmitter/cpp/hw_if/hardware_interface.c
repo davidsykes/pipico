@@ -13,7 +13,7 @@ void _initialise_pico_stdio(bool wait_for_usb_comms)
     printf("Stdio initialised\n");
 }
 
-int _initialise_wifi(const char* ssid, const char* password)
+int _initialise_wifi_sta(const char* ssid, const char* password)
 {
     cyw43_arch_enable_sta_mode();
 
@@ -25,6 +25,20 @@ int _initialise_wifi(const char* ssid, const char* password)
         printf("Connected.\n");
     }
     return 0;
+}
+
+int _initialise_wifi_ap(const char* ???)
+{
+    cyw43_arch_enable_ap_mode();
+
+    // printf("Connecting to Wi-Fi %s %s...\n", ssid, password);
+    // if (cyw43_arch_wifi_connect_blocking(ssid, password, CYW43_AUTH_WPA2_AES_PSK)) {
+        printf("failed to connect.\n");
+        return 1;
+    // } else {
+    //     printf("Connected.\n");
+    // }
+    // return 0;
 }
 
 int _cyw43_arch_init()
@@ -147,7 +161,8 @@ sHardwareInterface* create_hardware_interface()
 
     hwif->initialise_pico_stdio = &_initialise_pico_stdio;
     hwif->cyw43_arch_init = &_cyw43_arch_init;
-    hwif->initialise_wifi = &_initialise_wifi;
+    hwif->initialise_wifi_sta = &_initialise_wifi_sta;
+    hwif->initialise_wifi_ap = &_initialise_wifi_ap;
     hwif->get_time_us = &_get_time_us;
     hwif->initialise_input_pin = &_initialise_input_pin;
     hwif->gpio_set_pull_up = &_gpio_set_pull_up;
