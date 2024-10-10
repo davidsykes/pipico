@@ -1,6 +1,6 @@
 #pragma once
 #include <string>
-#include "../api/http_request_router.h"
+#include "../ihttp_request_router.h"
 
 class IHttpResponsePackager
 {

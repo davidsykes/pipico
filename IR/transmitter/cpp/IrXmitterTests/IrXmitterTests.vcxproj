@@ -149,11 +149,13 @@
     <ClCompile Include="..\rest\rest_handler.cpp" />
     <ClCompile Include="..\rest\tcp_request_maker.cpp" />
     <ClCompile Include="..\rest\tcp_response_analyser.cpp" />
-    <ClCompile Include="..\tcp_server\http_response_packager.cpp" />
     <ClCompile Include="..\tools\blinker.cpp" />
     <ClCompile Include="..\tools\message_logger.cpp" />
     <ClCompile Include="..\transmit\ir_code_sender.cpp" />
     <ClCompile Include="..\transmit\ir_sequence_sender.cpp" />
+    <ClCompile Include="..\wifi\input_form\html_renderer.cpp" />
+    <ClCompile Include="..\wifi\input_form\input_form_renderer.cpp" />
+    <ClCompile Include="..\wifi\tcpserver\http_response_packager.cpp" />
     <ClCompile Include="api\api_actions\codes_display_action_tests.cpp" />
     <ClCompile Include="api\api_actions\code_sequences_display_action_tests.cpp" />
     <ClCompile Include="api\api_actions\home_display_action_tests.cpp" />
@@ -174,7 +176,6 @@
     <ClCompile Include="rest\RestHandlerTests.cpp" />
     <ClCompile Include="rest\TcpRequestMakerTests.cpp" />
     <ClCompile Include="rest\TcpResponseAnalyserTests.cpp" />
-    <ClCompile Include="tcp_server\http_response_packager_tests.cpp" />
     <ClCompile Include="TestFramework\Assert.cpp" />
     <ClCompile Include="TestFramework\TestFramework.cpp" />
     <ClCompile Include="TestFramework\TestModule.cpp" />
@@ -182,6 +183,9 @@
     <ClCompile Include="tools\MessageLoggerTests.cpp" />
     <ClCompile Include="transmit\IrCodeSenderTests.cpp" />
     <ClCompile Include="transmit\IrSequenceSenderTests.cpp" />
+    <ClCompile Include="wifi\input_form\HtmlRendererTests.cpp" />
+    <ClCompile Include="wifi\input_form\InputFormRendererTests.cpp" />
+    <ClCompile Include="wifi\tcpserver\http_response_packager_tests.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\api\api_actions\api_action.h" />
@@ -208,11 +212,15 @@
     <ClInclude Include="..\rest\tcp_request_error_logger.h" />
     <ClInclude Include="..\rest\tcp_request_maker.h" />
     <ClInclude Include="..\rest\tcp_response_analyser.h" />
-    <ClInclude Include="..\tcp_server\http_response_packager.h" />
     <ClInclude Include="..\tools\blinker.h" />
     <ClInclude Include="..\tools\message_logger.h" />
     <ClInclude Include="..\transmit\ir_code_sender.h" />
     <ClInclude Include="..\transmit\ir_sequence_sender.h" />
+    <ClInclude Include="..\wifi\input_form\html_renderer.h" />
+    <ClInclude Include="..\wifi\input_form\ihtml_renderer.h" />
+    <ClInclude Include="..\wifi\input_form\iinput_form_renderer.h" />
+    <ClInclude Include="..\wifi\input_form\input_form_renderer.h" />
+    <ClInclude Include="..\wifi\tcpserver\http_response_packager.h" />
     <ClInclude Include="api\api_actions\codes_display_action_tests.h" />
     <ClInclude Include="api\api_actions\code_sequences_display_action_tests.h" />
     <ClInclude Include="api\api_actions\home_display_action_tests.h" />
@@ -234,7 +242,6 @@
     <ClInclude Include="rest\RestHandlerTests.h" />
     <ClInclude Include="rest\TcpRequestMakerTests.h" />
     <ClInclude Include="rest\TcpResponseAnalyserTests.h" />
-    <ClInclude Include="tcp_server\http_response_packager_tests.h" />
     <ClInclude Include="TestFramework\Assert.h" />
     <ClInclude Include="TestFramework\ITestModule.h" />
     <ClInclude Include="TestFramework\TestFramework.h" />
@@ -242,6 +249,9 @@
     <ClInclude Include="tools\MessageLoggerTests.h" />
     <ClInclude Include="transmit\IrCodeSenderTests.h" />
     <ClInclude Include="transmit\IrSequenceSenderTests.h" />
+    <ClInclude Include="wifi\input_form\HtmlRendererTests.h" />
+    <ClInclude Include="wifi\input_form\InputFormRendererTests.h" />
+    <ClInclude Include="wifi\tcpserver\http_response_packager_tests.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

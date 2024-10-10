@@ -18,11 +18,13 @@
 #include "rest/RestHandlerTests.h"
 #include "rest/TcpRequestMakerTests.h"
 #include "rest/TcpResponseAnalyserTests.h"
-#include "tcp_server/http_response_packager_tests.h"
 #include "tools\MessageLoggerTests.h"
 #include "tools\BlinkerTests.h"
 #include "transmit/IrCodeSenderTests.h"
 #include "transmit/IrSequenceSenderTests.h"
+#include "wifi/tcpserver/http_response_packager_tests.h"
+#include "wifi/input_form/HtmlRendererTests.h"
+#include "wifi/input_form/InputFormRendererTests.h"
 
 int main()
 {
@@ -45,10 +47,12 @@ int main()
     RestHandlerTests().RunTests();
     TcpRequestMakerTests().RunTests();
     TcpResponseAnalyserTests().RunTests();
-    HttpResponsePackagerTests().RunTests();
     MessageLoggerTests().RunTests();
     BlinkerTests().RunTests();
     IrCodeSenderTests().RunTests();
     IrSequenceSenderTests().RunTests();
+    HttpResponsePackagerTests().RunTests();
+    HtmlRendererTests().RunTests();
+    InputFormRendererTests().RunTests();
     std::cout << "Tests Complete\n";
 }

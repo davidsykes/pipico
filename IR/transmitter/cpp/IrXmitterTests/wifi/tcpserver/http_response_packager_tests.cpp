@@ -1,6 +1,6 @@
 #include <memory>
 #include "http_response_packager_tests.h"
-#include "../../tcp_server/http_response_packager.h"
+#include "../../wifi/tcpserver/http_response_packager.h"
 #include "../../api/http_request_router.h"
 
 class MockRequestRouter : public IHttpRequestRouter

@@ -31,12 +31,6 @@
     <Filter Include="Source Files\api">
       <UniqueIdentifier>{8f62f2fc-e9eb-40af-a5db-f55b282a16bb}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\Tests\tcp_server">
-      <UniqueIdentifier>{a9274f04-c2c6-4b2f-ab30-c0b460142dea}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\tcp_server">
-      <UniqueIdentifier>{6ea779e1-5593-48ca-80f1-f948f17fe3a9}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Source Files\api\api_actions">
       <UniqueIdentifier>{30c0d628-7e42-432d-b712-4c12149d9b66}</UniqueIdentifier>
     </Filter>
@@ -82,6 +76,24 @@
     <Filter Include="Source Files\rest">
       <UniqueIdentifier>{0044486b-f2a7-4bef-897c-4ca9d440ccdb}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Tests\wifi">
+      <UniqueIdentifier>{2dc9d560-fca5-4daa-ab76-b795c4b4f4c9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Tests\wifi\input_form">
+      <UniqueIdentifier>{a95bc5fa-3f58-4fa5-a13b-86710a27a4ce}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\wifi">
+      <UniqueIdentifier>{ed218811-6cda-4874-84bb-8496913b51b5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\wifi\tcpserver">
+      <UniqueIdentifier>{f0ec6870-667d-4151-aef0-8a4f8181b1fd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Tests\wifi\tcpserver">
+      <UniqueIdentifier>{d6847bc8-1885-4a74-8076-c4cf9b990cf2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\wifi\input_form">
+      <UniqueIdentifier>{c451e705-01dd-4a68-8665-888f75ff4844}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="IrXmitterTests.cpp">
@@ -107,12 +119,6 @@
     </ClCompile>
     <ClCompile Include="..\api\http_request_router.cpp">
       <Filter>Source Files\api</Filter>
-    </ClCompile>
-    <ClCompile Include="tcp_server\http_response_packager_tests.cpp">
-      <Filter>Source Files\Tests\tcp_server</Filter>
-    </ClCompile>
-    <ClCompile Include="..\tcp_server\http_response_packager.cpp">
-      <Filter>Source Files\tcp_server</Filter>
     </ClCompile>
     <ClCompile Include="..\api\api_actions\log_display_action.cpp">
       <Filter>Source Files\api\api_actions</Filter>
@@ -246,6 +252,24 @@
     <ClCompile Include="..\api\api_actions\code_sequences_display_action.cpp">
       <Filter>Source Files\api\api_actions</Filter>
     </ClCompile>
+    <ClCompile Include="wifi\input_form\HtmlRendererTests.cpp">
+      <Filter>Source Files\Tests\wifi\input_form</Filter>
+    </ClCompile>
+    <ClCompile Include="wifi\input_form\InputFormRendererTests.cpp">
+      <Filter>Source Files\Tests\wifi\input_form</Filter>
+    </ClCompile>
+    <ClCompile Include="..\wifi\tcpserver\http_response_packager.cpp">
+      <Filter>Source Files\wifi\tcpserver</Filter>
+    </ClCompile>
+    <ClCompile Include="wifi\tcpserver\http_response_packager_tests.cpp">
+      <Filter>Source Files\Tests\wifi\tcpserver</Filter>
+    </ClCompile>
+    <ClCompile Include="..\wifi\input_form\html_renderer.cpp">
+      <Filter>Source Files\wifi\input_form</Filter>
+    </ClCompile>
+    <ClCompile Include="..\wifi\input_form\input_form_renderer.cpp">
+      <Filter>Source Files\wifi\input_form</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="api\http_request_router_tests.h">
@@ -268,12 +292,6 @@
     </ClInclude>
     <ClInclude Include="..\api\http_request_router.h">
       <Filter>Source Files\api</Filter>
-    </ClInclude>
-    <ClInclude Include="tcp_server\http_response_packager_tests.h">
-      <Filter>Source Files\Tests\tcp_server</Filter>
-    </ClInclude>
-    <ClInclude Include="..\tcp_server\http_response_packager.h">
-      <Filter>Source Files\tcp_server</Filter>
     </ClInclude>
     <ClInclude Include="..\api\api_actions\log_display_action.h">
       <Filter>Source Files\api\api_actions</Filter>
@@ -421,6 +439,30 @@
     </ClInclude>
     <ClInclude Include="..\api\api_actions\code_sequences_display_action.h">
       <Filter>Source Files\api\api_actions</Filter>
+    </ClInclude>
+    <ClInclude Include="wifi\input_form\HtmlRendererTests.h">
+      <Filter>Source Files\Tests\wifi\input_form</Filter>
+    </ClInclude>
+    <ClInclude Include="wifi\input_form\InputFormRendererTests.h">
+      <Filter>Source Files\Tests\wifi\input_form</Filter>
+    </ClInclude>
+    <ClInclude Include="..\wifi\tcpserver\http_response_packager.h">
+      <Filter>Source Files\wifi\tcpserver</Filter>
+    </ClInclude>
+    <ClInclude Include="wifi\tcpserver\http_response_packager_tests.h">
+      <Filter>Source Files\Tests\wifi\tcpserver</Filter>
+    </ClInclude>
+    <ClInclude Include="..\wifi\input_form\html_renderer.h">
+      <Filter>Source Files\wifi\input_form</Filter>
+    </ClInclude>
+    <ClInclude Include="..\wifi\input_form\ihtml_renderer.h">
+      <Filter>Source Files\wifi\input_form</Filter>
+    </ClInclude>
+    <ClInclude Include="..\wifi\input_form\iinput_form_renderer.h">
+      <Filter>Source Files\wifi\input_form</Filter>
+    </ClInclude>
+    <ClInclude Include="..\wifi\input_form\input_form_renderer.h">
+      <Filter>Source Files\wifi\input_form</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
