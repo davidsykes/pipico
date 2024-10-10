@@ -24,7 +24,7 @@ int process_http_request(TCP_CONNECT_STATE_T* con_state);
 #ifdef __cplusplus
 
 extern "C" {
-int main_pico_tcp_server(void* http_request_handler);
+int run_tcp_server(void* http_request_handler);
 }
 
 #endif

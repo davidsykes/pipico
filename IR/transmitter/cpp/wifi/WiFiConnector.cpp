@@ -1,5 +1,8 @@
 // #include "debugprintf.h"
 #include "WiFiConnector.h"
+#include "hotspot_request_router.h"
+#include "tcpserver/http_response_packager.h"
+#include "tcpserver/pico_tcp_server.h"
 //#include "tcp_server_implementation.h"
 // #include "logic/flash/flash_hardware.h"
 // #include "logic/connecting/wifi_connection_maker.h"
@@ -47,6 +50,10 @@
    //    &processor);
 
    ConnectToWiFiDirect(hw_if, tempssid, temppassword);
+   
+   HotSpotRequestRouter httpRequestRouter;
+   HttpResponsePackager httpResponsePackager(httpRequestRouter);
+   run_tcp_server(&httpResponsePackager);
 }
 
 

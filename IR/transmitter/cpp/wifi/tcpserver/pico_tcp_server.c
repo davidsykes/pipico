@@ -191,7 +191,7 @@ static bool tcp_server_open(void *arg) {
     return true;
 }
 
-int main_pico_tcp_server(void* http_request_handler) {
+int run_tcp_server(void* http_request_handler) {
 
     TCP_SERVER_T *state = calloc(1, sizeof(TCP_SERVER_T));
     if (!state) {

@@ -1,11 +1,6 @@
 #pragma once
 #include "api_actions/api_action.h"
-
-class IHttpRequestRouter
-{
-public:
-    virtual std::string RouteHttpRequest(const char* request) = 0;
-};
+#include "../wifi/ihttp_request_router.h"
 
 class HttpRequestRouter : public IHttpRequestRouter
 {

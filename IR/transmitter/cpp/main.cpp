@@ -67,7 +67,7 @@ int main()
       HttpRequestRouter httpRequestRouter(homeDisplayAction, rawDisplayAction, playIrCodeAction, playIrSequenceAction);
       HttpResponsePackager httpResponsePackager(httpRequestRouter);
       hw_if.set_led(true);
-      main_pico_tcp_server(&httpResponsePackager);
+      run_tcp_server(&httpResponsePackager);
    }
 
    hw_if.cyw43_arch_deinit();
