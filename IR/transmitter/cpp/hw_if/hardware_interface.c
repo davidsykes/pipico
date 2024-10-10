@@ -27,9 +27,9 @@ int _initialise_wifi_sta(const char* ssid, const char* password)
     return 0;
 }
 
-int _initialise_wifi_ap(const char* ???)
+int _initialise_wifi_ap(const char* ssid, const char* password)
 {
-    cyw43_arch_enable_ap_mode();
+    cyw43_arch_enable_ap_mode(ssid, password, CYW43_AUTH_WPA2_AES_PSK);
 
     // printf("Connecting to Wi-Fi %s %s...\n", ssid, password);
     // if (cyw43_arch_wifi_connect_blocking(ssid, password, CYW43_AUTH_WPA2_AES_PSK)) {
