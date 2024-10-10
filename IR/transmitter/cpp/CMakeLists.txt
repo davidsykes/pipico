@@ -39,6 +39,8 @@ add_executable(test
         transmit/ir_code_sender.cpp
         transmit/ir_sequence_sender.cpp
         wifi/WiFiConnector.cpp
+        wifi/dhcpserver/dhcpserver.c
+        wifi/dnsserver/dnsserver.c
 )
 target_include_directories(test PRIVATE
         ${CMAKE_CURRENT_LIST_DIR}

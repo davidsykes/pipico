@@ -1,5 +1,6 @@
 // #include "debugprintf.h"
 #include "WiFiConnector.h"
+#include "tcp_server_implementation.h"
 // #include "logic/flash/flash_hardware.h"
 // #include "logic/connecting/wifi_connection_maker.h"
 // #include "logic/requests/hotspot_configuration.h"
@@ -9,7 +10,7 @@
 // #include "logic/input_form/html_renderer.h"
 // #include "logic/input_form/input_form_renderer.h"
 
- void WiFiConnector::ConnectToWiFi(const char* input_form_hotspot_name)
+ void WiFiConnector::ConnectToWiFi(IHardwareInterface& hw_if, const char* input_form_hotspot_name, const char* password)
  {
 //    FlashHardware flashHardware;
 //    WiFiConnectionMaker wifiConnectionMaker(&flashHardware);
@@ -35,20 +36,21 @@
 //       &inputFormRenderer,
 //       &credentialsHandler);
 
-//    TCP_REQUEST_PROCESSOR_T processor;
-//    processor.configuration = config;
-//    processor.process_request = &process_request;
+   TCP_REQUEST_PROCESSOR_T processor;
+   processor.configuration = 0; //config;
+   processor.process_request = &process_request;
+   printf("Going iddddn\n");
 
-//    main_hotspot(
-//       config->hotspot_name.c_str(),
-//       config->hotspot_password.c_str(),
-//       &processor);
+   main_hotspot(
+      "Pico", //config->hotspot_name.c_str(),
+      "12345678", //config->hotspot_password.c_str(),
+      &processor);
 }
 
 
 void WiFiConnector::ConnectToWiFiDirect(IHardwareInterface& hw_if, const char* ssid, const char* password)
 {
-   hw_if.initialise_wifi(ssid, password);
+   hw_if.initialise_wifi_sta(ssid, password);
 }
 
 // // TODO Factor this out to a server object
