@@ -191,27 +191,6 @@ static bool tcp_server_open(void *arg) {
     return true;
 }
 
-// // This "worker" function is called to safely perform work when instructed by key_pressed_func
-// void key_pressed_worker_func(async_context_t *context, async_when_pending_worker_t *worker) {
-//     assert(worker->user_data);
-//     printf("Disabling wifi\n");
-//     cyw43_arch_disable_ap_mode();
-//     ((TCP_SERVER_T*)(worker->user_data))->complete = true;
-// }
-
-// static async_when_pending_worker_t key_pressed_worker = {
-//         .do_work = key_pressed_worker_func
-// };
-
-// void key_pressed_func(void *param) {
-//     assert(param);
-//     int key = getchar_timeout_us(0); // get any pending key press but don't wait
-//     if (key == 'd' || key == 'D') {
-//         // We are probably in irq context so call wifi in a "worker"
-//         async_context_set_work_pending(((TCP_SERVER_T*)param)->context, &key_pressed_worker);
-//     }
-// }
-
 int main_pico_tcp_server(void* http_request_handler) {
 
     TCP_SERVER_T *state = calloc(1, sizeof(TCP_SERVER_T));

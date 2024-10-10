@@ -1,11 +1,5 @@
-#include "hw_if/pico_hardware_interface.h"
-#include "gpio/gpio.h"
-#include "wifi/WiFiConnector.h"
-#include "tools/message_logger.h"
 #include "codes/ir_codes_repository.h"
 #include "codes/code_sequence_repository.h"
-#include "tcp_server/http_response_packager.h"
-#include "tcp_server/pico_tcp_server.h"
 #include "api/api_actions/home_display_action.h"
 #include "api/api_actions/raw_display_action.h"
 #include "api/api_actions/log_display_action.h"
@@ -14,9 +8,15 @@
 #include "api/api_actions/play_ir_code_action.h"
 #include "api/api_actions/play_ir_sequence_action.h"
 #include "api/formatters/code_display_formatter.h"
-#include "pico_scope/pico_scope_main.h"
-#include "transmit/ir_code_sender.h"
+#include "hw_if/pico_hardware_interface.h"
+#include "gpio/gpio.h"
 #include "main.cxx"
+#include "pico_scope/pico_scope_main.h"
+#include "tools/message_logger.h"
+#include "transmit/ir_code_sender.h"
+#include "wifi/WiFiConnector.h"
+#include "wifi/tcpserver/http_response_packager.h"
+#include "wifi/tcpserver/pico_tcp_server.h"
 
 #define TRANSMIT_PIN 14
 
@@ -27,7 +27,7 @@ int main()
    hw_if.initialise_pico_stdio(true);
 
    WiFiConnector connector;
-   connector.ConnectToWiFi(hw_if, "Pico", "12345678");
+   connector.ConnectToWiFi(hw_if, "Pico", "12345678", WIFI_SSID, WIFI_PASSWORD);
    //connector.ConnectToWiFiDirect(hw_if, WIFI_SSID, WIFI_PASSWORD);
 
    GPIOInputPin actionPin(2, hw_if);

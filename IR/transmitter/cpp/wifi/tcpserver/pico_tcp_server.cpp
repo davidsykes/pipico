@@ -4,7 +4,7 @@
 
 //#define DEBUG_REQUEST_RESPONSE
 
-int make_error(TCP_CONNECT_STATE_T* con_state, int error, const char*message)
+static int make_error(TCP_CONNECT_STATE_T* con_state, int error, const char*message)
 {
     con_state->header_len = snprintf(con_state->headers, sizeof(con_state->headers),
     "HTTP/1.1 %d\r\nContent-Length: %d\r\n\r\n", error, strlen(message));

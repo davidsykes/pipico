@@ -1,3 +1,4 @@
+#error
 #pragma once
 #include <string.h>
 

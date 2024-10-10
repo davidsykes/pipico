@@ -31,9 +31,6 @@ add_executable(test
         rest/rest_handler.cpp
         rest/tcp_request_maker.cpp
         rest/tcp_response_analyser.cpp
-        tcp_server/pico_tcp_server.c
-        tcp_server/pico_tcp_server.cpp
-        tcp_server/http_response_packager.cpp
         tools/message_logger.cpp
         tools/blinker.cpp
         transmit/ir_code_sender.cpp
@@ -41,6 +38,9 @@ add_executable(test
         wifi/WiFiConnector.cpp
         wifi/dhcpserver/dhcpserver.c
         wifi/dnsserver/dnsserver.c
+        wifi/tcpserver/pico_tcp_server.c
+        wifi/tcpserver/pico_tcp_server.cpp
+        wifi/tcpserver/http_response_packager.cpp
 )
 target_include_directories(test PRIVATE
         ${CMAKE_CURRENT_LIST_DIR}
