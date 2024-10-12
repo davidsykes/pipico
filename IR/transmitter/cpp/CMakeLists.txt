@@ -6,7 +6,7 @@ set(CMAKE_CXX_STANDARD 17)
 pico_sdk_init()
 add_executable(test
         main.cpp
-        api/http_request_router.cpp
+        api/ir_controller_http_request_router.cpp
         api/api_actions/log_display_action.cpp
         api/api_actions/home_display_action.cpp
         api/api_actions/raw_display_action.cpp

@@ -1,5 +1,6 @@
 #include "codes/ir_codes_repository.h"
 #include "codes/code_sequence_repository.h"
+#include "api/ir_controller_http_request_router.h"
 #include "api/api_actions/home_display_action.h"
 #include "api/api_actions/raw_display_action.h"
 #include "api/api_actions/log_display_action.h"
@@ -64,7 +65,7 @@ int main()
       IrSequenceSender irSequenceSender(irCodesRepository, irCodeSender);
       PlayIrSequenceAction playIrSequenceAction(irSequenceSender, codeSequenceRepository, homeDisplayAction);
 
-      HttpRequestRouter httpRequestRouter(homeDisplayAction, rawDisplayAction, playIrCodeAction, playIrSequenceAction);
+      IrControllerHttpRequestRouter httpRequestRouter(homeDisplayAction, rawDisplayAction, playIrCodeAction, playIrSequenceAction);
       HttpResponsePackager httpResponsePackager(httpRequestRouter);
       hw_if.set_led(true);
       run_tcp_server(&httpResponsePackager);
