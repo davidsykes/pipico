@@ -99,9 +99,6 @@
     <ClCompile Include="IrXmitterTests.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="api\http_request_router_tests.cpp">
-      <Filter>Source Files\Tests\api</Filter>
-    </ClCompile>
     <ClCompile Include="tools\MessageLoggerTests.cpp">
       <Filter>Source Files\Tests\tools</Filter>
     </ClCompile>
@@ -116,9 +113,6 @@
     </ClCompile>
     <ClCompile Include="..\tools\message_logger.cpp">
       <Filter>Source Files\Tools</Filter>
-    </ClCompile>
-    <ClCompile Include="..\api\http_request_router.cpp">
-      <Filter>Source Files\api</Filter>
     </ClCompile>
     <ClCompile Include="..\api\api_actions\log_display_action.cpp">
       <Filter>Source Files\api\api_actions</Filter>
@@ -270,11 +264,14 @@
     <ClCompile Include="..\wifi\input_form\input_form_renderer.cpp">
       <Filter>Source Files\wifi\input_form</Filter>
     </ClCompile>
+    <ClCompile Include="api\ir_controller_http_request_router_tests.cpp">
+      <Filter>Source Files\Tests\api</Filter>
+    </ClCompile>
+    <ClCompile Include="..\api\ir_controller_http_request_router.cpp">
+      <Filter>Source Files\api\formatters</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="api\http_request_router_tests.h">
-      <Filter>Source Files\Tests\api</Filter>
-    </ClInclude>
     <ClInclude Include="tools\MessageLoggerTests.h">
       <Filter>Source Files\Tests\tools</Filter>
     </ClInclude>
@@ -289,9 +286,6 @@
     </ClInclude>
     <ClInclude Include="..\tools\message_logger.h">
       <Filter>Source Files\Tools</Filter>
-    </ClInclude>
-    <ClInclude Include="..\api\http_request_router.h">
-      <Filter>Source Files\api</Filter>
     </ClInclude>
     <ClInclude Include="..\api\api_actions\log_display_action.h">
       <Filter>Source Files\api\api_actions</Filter>
@@ -463,6 +457,12 @@
     </ClInclude>
     <ClInclude Include="..\wifi\input_form\input_form_renderer.h">
       <Filter>Source Files\wifi\input_form</Filter>
+    </ClInclude>
+    <ClInclude Include="api\ir_controller_http_request_router_tests.h">
+      <Filter>Source Files\Tests\api</Filter>
+    </ClInclude>
+    <ClInclude Include="..\api\ir_controller_http_request_router.h">
+      <Filter>Source Files\api\formatters</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -2,7 +2,7 @@
 #include "api_actions/api_action.h"
 #include "../wifi/ihttp_request_router.h"
 
-class HttpRequestRouter : public IHttpRequestRouter
+class IrControllerHttpRequestRouter : public IHttpRequestRouter
 {
     ApiAction& homeRequestHandler;
     ApiAction& rawRequestHandler;
@@ -14,7 +14,7 @@ class HttpRequestRouter : public IHttpRequestRouter
     std::string GetSingleToken(const char* token);
 
 public:
-    HttpRequestRouter(ApiAction& homeHandler,
+    IrControllerHttpRequestRouter(ApiAction& homeHandler,
         ApiAction& rawHandler,
         ApiAction& playIrRequestHandler,
         ApiAction& playIrSequenceHandler)

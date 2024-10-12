@@ -1,7 +1,7 @@
-#include "http_request_router.h"
+#include "ir_controller_http_request_router.h"
 #include <string.h>
 
-std::string HttpRequestRouter::RouteHttpRequest(const char* request)
+std::string IrControllerHttpRequestRouter::RouteHttpRequest(const char* request)
 {
 	if (strncmp(request, "GET / ", 6) == 0)
 	{
@@ -23,7 +23,7 @@ std::string HttpRequestRouter::RouteHttpRequest(const char* request)
 	return "";
 }
 
-std::string HttpRequestRouter::GetSingleToken(const char* token)
+std::string IrControllerHttpRequestRouter::GetSingleToken(const char* token)
 {
 	int i = 0;
 	while (!isspace(token[i]))

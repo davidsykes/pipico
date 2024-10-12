@@ -1,21 +1,21 @@
 #include <memory>
-#include "http_request_router_tests.h"
+#include "ir_controller_http_request_router_tests.h"
 #include "../Mocks/MockApiAction.h"
-#include "../../api/http_request_router.h"
+#include "../../api/ir_controller_http_request_router.h"
 
 static std::unique_ptr<MockApiAction> mockHomeRequestHandler;
 static std::unique_ptr<MockApiAction> mockRawRequestHandler;
 static std::unique_ptr<MockApiAction> mockPlayCodeRequestHandler;
 static std::unique_ptr<MockApiAction> mockPlaySequenceRequestHandler;
-static std::unique_ptr<HttpRequestRouter> objectUnderTest;
+static std::unique_ptr<IrControllerHttpRequestRouter> objectUnderTest;
 
-static HttpRequestRouter& CreateObjectUnderTest()
+static IrControllerHttpRequestRouter& CreateObjectUnderTest()
 {
 	mockHomeRequestHandler.reset(new MockApiAction("Home"));
 	mockRawRequestHandler.reset(new MockApiAction("Raw"));
 	mockPlayCodeRequestHandler.reset(new MockApiAction("Play Code"));
 	mockPlaySequenceRequestHandler.reset(new MockApiAction("Play Sequence"));
-	objectUnderTest.reset(new HttpRequestRouter(
+	objectUnderTest.reset(new IrControllerHttpRequestRouter(
 		*mockHomeRequestHandler.get(),
 		*mockRawRequestHandler.get(),
 		*mockPlayCodeRequestHandler.get(),
@@ -86,7 +86,7 @@ static void ASequenceRequestPassesTheSequenceNameToThePlaySequenceAction()
 	AssertEqual("Play Sequence sequence_name", result);
 }
 
-void HttpRequestRouterTests::RunTests()
+void IrControllerHttpRequestRouterTests::RunTests()
 {
 	ARootRequestPassesTheRequestToTheHomeHandler();
 	ARawRequestPassesTheRequestToTheRawHandler();
@@ -97,7 +97,7 @@ void HttpRequestRouterTests::RunTests()
 	ASequenceRequestPassesTheSequenceNameToThePlaySequenceAction();
 }
 
-void HttpRequestRouterTests::CleanUpAfterTests()
+void IrControllerHttpRequestRouterTests::CleanUpAfterTests()
 {
 	objectUnderTest.release();
 	mockHomeRequestHandler.release();

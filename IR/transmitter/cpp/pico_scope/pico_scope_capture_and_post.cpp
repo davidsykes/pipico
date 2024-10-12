@@ -9,7 +9,6 @@ void PicoScopeCaptureAndPost::CaptureAndPost()
 	std::string put_response = rest_handler.Put(trace_url.c_str(), trace_data.c_str());
 	if (put_response.substr(0, 2) != "Ok")
 	{
-		printf("PUT RESPONSE %s\n", put_response.c_str());
 		blinker.Blink(10);
 	}
 }
