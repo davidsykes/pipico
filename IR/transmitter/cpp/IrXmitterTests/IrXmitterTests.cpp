@@ -22,9 +22,11 @@
 #include "tools\BlinkerTests.h"
 #include "transmit/IrCodeSenderTests.h"
 #include "transmit/IrSequenceSenderTests.h"
+#include "wifi/HotSpotRequestRouterTests.h"
 #include "wifi/tcpserver/http_response_packager_tests.h"
 #include "wifi/input_form/HtmlRendererTests.h"
 #include "wifi/input_form/InputFormRendererTests.h"
+#include "wifi/input_form/SSIDPasswordInputFormRendererTests.h"
 
 int main()
 {
@@ -51,8 +53,10 @@ int main()
     BlinkerTests().RunTests();
     IrCodeSenderTests().RunTests();
     IrSequenceSenderTests().RunTests();
+    HotSpotRequestRouterTests().RunTests();
     HttpResponsePackagerTests().RunTests();
     HtmlRendererTests().RunTests();
     InputFormRendererTests().RunTests();
+    SSIDPasswordInputFormRendererTests().RunTests();
     std::cout << "Tests Complete\n";
 }

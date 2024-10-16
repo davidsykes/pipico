@@ -1,19 +1,8 @@
 #include <memory>
 #include "http_response_packager_tests.h"
+#include "../../Mocks/MockHttpRequestRouter.h"
 #include "../../wifi/tcpserver/http_response_packager.h"
 #include "../../api/ir_controller_http_request_router.h"
-
-class MockRequestRouter : public IHttpRequestRouter
-{
-	std::string requestType;
-
-	virtual std::string RouteHttpRequest(const char* request) { return requestType; };
-
-public:
-	MockRequestRouter(const char* type) : requestType(type) {}
-
-	void SetResponse(const char* response) { requestType = response; }
-};
 
 static std::unique_ptr<MockRequestRouter> mockRequestRouter;
 static std::unique_ptr<HttpResponsePackager> objectUnderTest;

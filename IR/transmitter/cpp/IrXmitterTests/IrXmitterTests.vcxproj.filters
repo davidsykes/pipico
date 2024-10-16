@@ -270,6 +270,15 @@
     <ClCompile Include="..\api\ir_controller_http_request_router.cpp">
       <Filter>Source Files\api\formatters</Filter>
     </ClCompile>
+    <ClCompile Include="..\wifi\input_form\SSIDPasswordInputFormRenderer.cpp">
+      <Filter>Source Files\wifi\input_form</Filter>
+    </ClCompile>
+    <ClCompile Include="wifi\input_form\SSIDPasswordInputFormRendererTests.cpp">
+      <Filter>Source Files\Tests\wifi\input_form</Filter>
+    </ClCompile>
+    <ClCompile Include="wifi\HotSpotRequestRouterTests.cpp">
+      <Filter>Source Files\Tests\wifi</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="tools\MessageLoggerTests.h">
@@ -463,6 +472,18 @@
     </ClInclude>
     <ClInclude Include="..\api\ir_controller_http_request_router.h">
       <Filter>Source Files\api\formatters</Filter>
+    </ClInclude>
+    <ClInclude Include="..\wifi\input_form\SSIDPasswordInputFormRenderer.h">
+      <Filter>Source Files\wifi\input_form</Filter>
+    </ClInclude>
+    <ClInclude Include="wifi\input_form\SSIDPasswordInputFormRendererTests.h">
+      <Filter>Source Files\Tests\wifi\input_form</Filter>
+    </ClInclude>
+    <ClInclude Include="wifi\HotSpotRequestRouterTests.h">
+      <Filter>Source Files\Tests\wifi</Filter>
+    </ClInclude>
+    <ClInclude Include="Mocks\MockHttpRequestRouter.h">
+      <Filter>Source Files\Tests\Mocks</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

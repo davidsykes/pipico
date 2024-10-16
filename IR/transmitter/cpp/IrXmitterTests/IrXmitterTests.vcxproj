@@ -155,6 +155,7 @@
     <ClCompile Include="..\transmit\ir_sequence_sender.cpp" />
     <ClCompile Include="..\wifi\input_form\html_renderer.cpp" />
     <ClCompile Include="..\wifi\input_form\input_form_renderer.cpp" />
+    <ClCompile Include="..\wifi\input_form\SSIDPasswordInputFormRenderer.cpp" />
     <ClCompile Include="..\wifi\tcpserver\http_response_packager.cpp" />
     <ClCompile Include="api\api_actions\codes_display_action_tests.cpp" />
     <ClCompile Include="api\api_actions\code_sequences_display_action_tests.cpp" />
@@ -183,8 +184,10 @@
     <ClCompile Include="tools\MessageLoggerTests.cpp" />
     <ClCompile Include="transmit\IrCodeSenderTests.cpp" />
     <ClCompile Include="transmit\IrSequenceSenderTests.cpp" />
+    <ClCompile Include="wifi\HotSpotRequestRouterTests.cpp" />
     <ClCompile Include="wifi\input_form\HtmlRendererTests.cpp" />
     <ClCompile Include="wifi\input_form\InputFormRendererTests.cpp" />
+    <ClCompile Include="wifi\input_form\SSIDPasswordInputFormRendererTests.cpp" />
     <ClCompile Include="wifi\tcpserver\http_response_packager_tests.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -220,6 +223,7 @@
     <ClInclude Include="..\wifi\input_form\ihtml_renderer.h" />
     <ClInclude Include="..\wifi\input_form\iinput_form_renderer.h" />
     <ClInclude Include="..\wifi\input_form\input_form_renderer.h" />
+    <ClInclude Include="..\wifi\input_form\SSIDPasswordInputFormRenderer.h" />
     <ClInclude Include="..\wifi\tcpserver\http_response_packager.h" />
     <ClInclude Include="api\api_actions\codes_display_action_tests.h" />
     <ClInclude Include="api\api_actions\code_sequences_display_action_tests.h" />
@@ -236,6 +240,7 @@
     <ClInclude Include="gpio\GPIOTests.h" />
     <ClInclude Include="Mocks\MockApiAction.h" />
     <ClInclude Include="Mocks\MockHardwareInteface.h" />
+    <ClInclude Include="Mocks\MockHttpRequestRouter.h" />
     <ClInclude Include="pico_scope\PicoScopeCaptureAndPostTests.h" />
     <ClInclude Include="pico_scope\PicoScopeTests.h" />
     <ClInclude Include="pico_scope\TraceDataFormatterTests.h" />
@@ -249,8 +254,10 @@
     <ClInclude Include="tools\MessageLoggerTests.h" />
     <ClInclude Include="transmit\IrCodeSenderTests.h" />
     <ClInclude Include="transmit\IrSequenceSenderTests.h" />
+    <ClInclude Include="wifi\HotSpotRequestRouterTests.h" />
     <ClInclude Include="wifi\input_form\HtmlRendererTests.h" />
     <ClInclude Include="wifi\input_form\InputFormRendererTests.h" />
+    <ClInclude Include="wifi\input_form\SSIDPasswordInputFormRendererTests.h" />
     <ClInclude Include="wifi\tcpserver\http_response_packager_tests.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
