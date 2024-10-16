@@ -10,6 +10,8 @@
 #include "pico/stdlib.h"
 #include "lwip/pbuf.h"
 #include "pico_tcp_server.h"
+#include "../dhcpserver/dhcpserver.h"
+#include "../dnsserver/dnsserver.h"
 
 #define TCP_PORT 80
 #define DEBUG_printf printf
@@ -199,6 +201,25 @@ int run_tcp_server(void* http_request_handler) {
         return 1;
     }
     state->http_request_handler = http_request_handler;
+
+
+
+
+    ip4_addr_t mask;
+    IP4_ADDR(ip_2_ip4(&state->gw), 192, 168, 4, 1);
+    IP4_ADDR(ip_2_ip4(&mask), 255, 255, 255, 0);
+
+    // Start the dhcp server
+    dhcp_server_t dhcp_server;
+    dhcp_server_init(&dhcp_server, &state->gw, &mask);
+
+    // Start the dns server
+    dns_server_t dns_server;
+    dns_server_init(&dns_server, &state->gw);
+
+
+
+
 
     if (!tcp_server_open(state)) {
         DEBUG_printf("failed to open server\n");

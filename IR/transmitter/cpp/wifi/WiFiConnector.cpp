@@ -49,7 +49,8 @@
    //    "12345678", //config->hotspot_password.c_str(),
    //    &processor);
 
-   ConnectToWiFiDirect(hw_if, tempssid, temppassword);
+   //ConnectToWiFiDirect(hw_if, tempssid, temppassword);
+   hw_if.initialise_wifi_ap("picobla","12345678");
    
    HotSpotRequestRouter httpRequestRouter;
    HttpResponsePackager httpResponsePackager(httpRequestRouter);
