@@ -3,5 +3,11 @@
 
 class HotSpotRequestRouter : public IHttpRequestRouter
 {
-    virtual std::string RouteHttpRequest(const char* request) { return "hello world"; }
+    IHttpRequestRouter& ssidInputForm;
+
+    virtual std::string RouteHttpRequest(const char* request);
+
+public:
+    HotSpotRequestRouter(IHttpRequestRouter& ssidInputForm)
+        : ssidInputForm(ssidInputForm) {}
 };

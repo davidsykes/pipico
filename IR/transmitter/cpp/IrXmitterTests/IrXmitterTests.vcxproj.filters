@@ -279,6 +279,9 @@
     <ClCompile Include="wifi\HotSpotRequestRouterTests.cpp">
       <Filter>Source Files\Tests\wifi</Filter>
     </ClCompile>
+    <ClCompile Include="..\wifi\hotspot_request_router.cpp">
+      <Filter>Source Files\wifi</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="tools\MessageLoggerTests.h">
@@ -484,6 +487,9 @@
     </ClInclude>
     <ClInclude Include="Mocks\MockHttpRequestRouter.h">
       <Filter>Source Files\Tests\Mocks</Filter>
+    </ClInclude>
+    <ClInclude Include="..\wifi\hotspot_request_router.h">
+      <Filter>Source Files\wifi</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
