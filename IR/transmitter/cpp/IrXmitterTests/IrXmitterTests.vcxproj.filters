@@ -270,9 +270,6 @@
     <ClCompile Include="..\api\ir_controller_http_request_router.cpp">
       <Filter>Source Files\api\formatters</Filter>
     </ClCompile>
-    <ClCompile Include="..\wifi\input_form\SSIDPasswordInputFormRenderer.cpp">
-      <Filter>Source Files\wifi\input_form</Filter>
-    </ClCompile>
     <ClCompile Include="wifi\input_form\SSIDPasswordInputFormRendererTests.cpp">
       <Filter>Source Files\Tests\wifi\input_form</Filter>
     </ClCompile>
@@ -281,6 +278,9 @@
     </ClCompile>
     <ClCompile Include="..\wifi\hotspot_request_router.cpp">
       <Filter>Source Files\wifi</Filter>
+    </ClCompile>
+    <ClCompile Include="..\wifi\input_form\ssid_password_input_form_renderer.cpp">
+      <Filter>Source Files\wifi\input_form</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -473,9 +473,6 @@
     <ClInclude Include="..\api\ir_controller_http_request_router.h">
       <Filter>Source Files\api\formatters</Filter>
     </ClInclude>
-    <ClInclude Include="..\wifi\input_form\SSIDPasswordInputFormRenderer.h">
-      <Filter>Source Files\wifi\input_form</Filter>
-    </ClInclude>
     <ClInclude Include="wifi\input_form\SSIDPasswordInputFormRendererTests.h">
       <Filter>Source Files\Tests\wifi\input_form</Filter>
     </ClInclude>
@@ -489,6 +486,9 @@
       <Filter>Source Files\wifi</Filter>
     </ClInclude>
     <ClInclude Include="..\wifi\input_form\irenderer.h">
+      <Filter>Source Files\wifi\input_form</Filter>
+    </ClInclude>
+    <ClInclude Include="..\wifi\input_form\ssid_password_input_form_renderer.h">
       <Filter>Source Files\wifi\input_form</Filter>
     </ClInclude>
   </ItemGroup>

@@ -1,4 +1,4 @@
-#include "SSIDPasswordInputFormRenderer.h"
+#include "ssid_password_input_form_renderer.h"
 
 std::string SSIDPasswordInputFormRenderer::Render()
 {

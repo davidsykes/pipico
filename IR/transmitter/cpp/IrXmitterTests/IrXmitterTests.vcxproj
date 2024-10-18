@@ -156,7 +156,7 @@
     <ClCompile Include="..\wifi\hotspot_request_router.cpp" />
     <ClCompile Include="..\wifi\input_form\html_renderer.cpp" />
     <ClCompile Include="..\wifi\input_form\input_form_renderer.cpp" />
-    <ClCompile Include="..\wifi\input_form\SSIDPasswordInputFormRenderer.cpp" />
+    <ClCompile Include="..\wifi\input_form\ssid_password_input_form_renderer.cpp" />
     <ClCompile Include="..\wifi\tcpserver\http_response_packager.cpp" />
     <ClCompile Include="api\api_actions\codes_display_action_tests.cpp" />
     <ClCompile Include="api\api_actions\code_sequences_display_action_tests.cpp" />
@@ -225,7 +225,7 @@
     <ClInclude Include="..\wifi\input_form\ihtml_renderer.h" />
     <ClInclude Include="..\wifi\input_form\input_form_renderer.h" />
     <ClInclude Include="..\wifi\input_form\irenderer.h" />
-    <ClInclude Include="..\wifi\input_form\SSIDPasswordInputFormRenderer.h" />
+    <ClInclude Include="..\wifi\input_form\ssid_password_input_form_renderer.h" />
     <ClInclude Include="..\wifi\tcpserver\http_response_packager.h" />
     <ClInclude Include="api\api_actions\codes_display_action_tests.h" />
     <ClInclude Include="api\api_actions\code_sequences_display_action_tests.h" />

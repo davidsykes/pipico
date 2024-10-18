@@ -2,7 +2,7 @@
 #include "TestFramework.h"
 #include "SSIDPasswordInputFormRendererTests.h"
 #include "../../Mocks\MockRenderer.h"
-#include "../../../wifi/input_form/SSIDPasswordInputFormRenderer.h"
+#include "../../../wifi/input_form/ssid_password_input_form_renderer.h"
 
 class MockHtmlRenderer : public IHtmlRenderer
 {
