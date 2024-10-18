@@ -15,8 +15,10 @@ static int make_error(TCP_CONNECT_STATE_T* con_state, int error, const char*mess
 int process_http_request(TCP_CONNECT_STATE_T* con_state)
 {
     std::string headers(con_state->headers);
+#ifdef DEBUG_REQUEST_RESPONSE
     std::string request = headers.substr(0, headers.find('\r'));
-    printf("Request: %s\n", request.c_str());
+    printf("TCP Request: %s\n", request.c_str());
+#endif
 
     IHttpResponsePackager* router = (IHttpResponsePackager*)con_state->http_request_handler;
     std::string header;

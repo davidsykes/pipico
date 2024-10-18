@@ -31,14 +31,8 @@ int _initialise_wifi_ap(const char* ssid, const char* password)
 {
     cyw43_arch_enable_ap_mode(ssid, password, CYW43_AUTH_WPA2_AES_PSK);
 
-    // printf("Connecting to Wi-Fi %s %s...\n", ssid, password);
-    // if (cyw43_arch_wifi_connect_blocking(ssid, password, CYW43_AUTH_WPA2_AES_PSK)) {
-        printf("failed to connect.\n");
-        return 1;
-    // } else {
-    //     printf("Connected.\n");
-    // }
-    // return 0;
+    printf("Ap mode enaled %s %s...\n", ssid, password);
+    return 0;
 }
 
 int _cyw43_arch_init()
