@@ -18,9 +18,9 @@ int PicoHardwareInterface::initialise_wifi_sta(const char* ssid, const char* pas
     return hardware_interface->initialise_wifi_sta(ssid, password);
 }
 
-int PicoHardwareInterface::initialise_wifi_ap(const char* ssid, const char* password)
+void PicoHardwareInterface::initialise_wifi_ap(const char* ssid, const char* password)
 {
-    return hardware_interface->initialise_wifi_ap(ssid, password);
+    hardware_interface->initialise_wifi_ap(ssid, password);
 }
 
 uint64_t PicoHardwareInterface::get_time_us()

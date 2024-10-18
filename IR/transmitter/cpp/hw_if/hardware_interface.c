@@ -27,7 +27,7 @@ int _initialise_wifi_sta(const char* ssid, const char* password)
     return 0;
 }
 
-int _initialise_wifi_ap(const char* ssid, const char* password)
+void _initialise_wifi_ap(const char* ssid, const char* password)
 {
     cyw43_arch_enable_ap_mode(ssid, password, CYW43_AUTH_WPA2_AES_PSK);
 

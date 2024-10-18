@@ -23,9 +23,19 @@ static void RootRequestsAreRoutedToTheSsidPasswordInputForm()
 	AssertEqual("ssid", html);
 }
 
+static void GoogleSafeBrowsingReturnsAnEmptyObject()
+{
+	IHttpRequestRouter* router = CreateTestObject();
+
+	std::string html = router->RouteHttpRequest("CONNECT proxy-safebrowsing");
+
+	AssertEqual("{}", html);
+}
+
 void HotSpotRequestRouterTests::RunTests()
 {
 	RootRequestsAreRoutedToTheSsidPasswordInputForm();
+	GoogleSafeBrowsingReturnsAnEmptyObject();
 }
 
 void HotSpotRequestRouterTests::CleanUpAfterTests()

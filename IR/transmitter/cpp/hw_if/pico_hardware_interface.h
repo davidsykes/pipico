@@ -8,7 +8,7 @@ class PicoHardwareInterface : public IHardwareInterface
 
     virtual void initialise_pico_stdio(bool wait_for_usb_comms);
     virtual int initialise_wifi_sta(const char* ssid, const char* password);
-    virtual int initialise_wifi_ap(const char* ssid, const char* password);
+    virtual void initialise_wifi_ap(const char* ssid, const char* password);
     virtual uint64_t get_time_us();
     virtual void initialise_input_pin(int pin_number);
     virtual void gpio_set_pull_up(int pin_number, int value);
