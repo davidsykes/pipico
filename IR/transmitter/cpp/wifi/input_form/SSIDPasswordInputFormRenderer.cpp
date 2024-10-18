@@ -1,6 +1,6 @@
 #include "SSIDPasswordInputFormRenderer.h"
 
-std::string SSIDPasswordInputFormRenderer::RouteHttpRequest(const char* request)
+std::string SSIDPasswordInputFormRenderer::Render()
 {
 	return html_renderer.RenderHtml(
 		html_renderer.RenderBody(

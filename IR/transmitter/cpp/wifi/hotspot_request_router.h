@@ -1,13 +1,14 @@
 #pragma once
 #include "ihttp_request_router.h"
+#include "input_form/irenderer.h"
 
 class HotSpotRequestRouter : public IHttpRequestRouter
 {
-    IHttpRequestRouter& ssidInputForm;
+    IRenderer& ssidInputForm;
 
     virtual std::string RouteHttpRequest(const char* request);
 
 public:
-    HotSpotRequestRouter(IHttpRequestRouter& ssidInputForm)
+    HotSpotRequestRouter(IRenderer& ssidInputForm)
         : ssidInputForm(ssidInputForm) {}
 };

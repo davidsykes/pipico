@@ -4,13 +4,13 @@
 #include "../../wifi/tcpserver/http_response_packager.h"
 #include "../../api/ir_controller_http_request_router.h"
 
-static std::unique_ptr<MockRequestRouter> mockRequestRouter;
+static std::unique_ptr<MockRequestRouter> mockInputFormRenderer;
 static std::unique_ptr<HttpResponsePackager> objectUnderTest;
 
 static HttpResponsePackager& CreateObjectUnderTest()
 {
-	mockRequestRouter.reset(new MockRequestRouter("Router result"));
-	objectUnderTest.reset(new HttpResponsePackager(*mockRequestRouter.get()));
+	mockInputFormRenderer.reset(new MockRequestRouter("Router result"));
+	objectUnderTest.reset(new HttpResponsePackager(*mockInputFormRenderer.get()));
 	return *objectUnderTest.get();
 }
 
@@ -40,7 +40,7 @@ static void TheHeaderIsTerminatedByTwoCRLF()
 static void TheHeaderIsCreatedWithTheCorrectContentLength()
 {
 	IHttpResponsePackager& packager = CreateObjectUnderTest();
-	mockRequestRouter.get()->SetResponse("a much longer response");
+	mockInputFormRenderer.get()->SetResponse("a much longer response");
 	std::string header, body;
 
 	int result = packager.RouteRequestAndPackageResponse("/favicon", header, body);
@@ -52,7 +52,7 @@ static void TheHeaderIsCreatedWithTheCorrectContentLength()
 static void IfTheRouterDoesNotRouteThen404IsReturned()
 {
 	IHttpResponsePackager& packager = CreateObjectUnderTest();
-	mockRequestRouter.get()->SetResponse("");
+	mockInputFormRenderer.get()->SetResponse("");
 	std::string header, body;
 
 	int result = packager.RouteRequestAndPackageResponse("/favicon", header, body);
@@ -71,5 +71,5 @@ void HttpResponsePackagerTests::RunTests()
 void HttpResponsePackagerTests::CleanUpAfterTests()
 {
 	objectUnderTest.release();
-	mockRequestRouter.release();
+	mockInputFormRenderer.release();
 }

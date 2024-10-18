@@ -2,5 +2,5 @@
 
 std::string HotSpotRequestRouter::RouteHttpRequest(const char* request)
 {
-	return ssidInputForm.RouteHttpRequest(request);
+	return ssidInputForm.Render();
 }

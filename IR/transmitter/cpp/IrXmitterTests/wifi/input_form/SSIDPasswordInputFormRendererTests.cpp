@@ -31,9 +31,9 @@ static SSIDPasswordInputFormRenderer& CreateTestObject()
 
 static void TheInputFormIsRendered()
 {
-	IHttpRequestRouter& renderer = CreateTestObject();
+	IRenderer& renderer = CreateTestObject();
 
-	std::string result = renderer.RouteHttpRequest("request");
+	std::string result = renderer.Render();
 
 	AssertEqual("html(body(head(description)p(Enter WiFi Details)Form))", result);
 }

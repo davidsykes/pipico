@@ -3,13 +3,13 @@
 #include "ihtml_renderer.h"
 #include "irenderer.h"
 
-class SSIDPasswordInputFormRenderer : public IHttpRequestRouter
+class SSIDPasswordInputFormRenderer : public IRenderer
 {
     std::string description;
     IHtmlRenderer& html_renderer;
     IRenderer& input_form;
 
-    virtual std::string RouteHttpRequest(const char* request);
+    virtual std::string Render();
 
     public:
         SSIDPasswordInputFormRenderer(
