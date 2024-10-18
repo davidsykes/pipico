@@ -30,9 +30,7 @@ int _initialise_wifi_sta(const char* ssid, const char* password)
 void _initialise_wifi_ap(const char* ssid, const char* password)
 {
     cyw43_arch_enable_ap_mode(ssid, password, CYW43_AUTH_WPA2_AES_PSK);
-
-    printf("Ap mode enaled %s %s...\n", ssid, password);
-    return 0;
+    printf("Ap mode started %s %s...\n", ssid, password);
 }
 
 int _cyw43_arch_init()
