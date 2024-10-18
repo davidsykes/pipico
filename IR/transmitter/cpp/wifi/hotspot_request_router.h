@@ -5,10 +5,11 @@
 class HotSpotRequestRouter : public IHttpRequestRouter
 {
     IRenderer& ssidInputForm;
+    IRenderer& hotspotsubmit;
 
     virtual std::string RouteHttpRequest(const char* request);
 
 public:
-    HotSpotRequestRouter(IRenderer& ssidInputForm)
-        : ssidInputForm(ssidInputForm) {}
+    HotSpotRequestRouter(IRenderer& ssidInputForm, IRenderer& hotspotsubmit)
+        : ssidInputForm(ssidInputForm), hotspotsubmit(hotspotsubmit) {}
 };

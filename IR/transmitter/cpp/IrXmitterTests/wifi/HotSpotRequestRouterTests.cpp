@@ -6,11 +6,15 @@
 
 static std::unique_ptr<HotSpotRequestRouter> objectUnderTest;
 static std::unique_ptr<MockRenderer> mockInputFormRenderer;
+static std::unique_ptr<MockRenderer> mockHotspotSubmitRenderer;
 
 static HotSpotRequestRouter* CreateTestObject()
 {
 	mockInputFormRenderer.reset(new MockRenderer("ssid"));
-	objectUnderTest.reset(new HotSpotRequestRouter(*mockInputFormRenderer.get()));
+	mockHotspotSubmitRenderer.reset(new MockRenderer("hotspotsubmit"));
+	objectUnderTest.reset(new HotSpotRequestRouter(
+		*mockInputFormRenderer.get(),
+		*mockHotspotSubmitRenderer.get()));
 	return objectUnderTest.get();
 }
 
@@ -32,14 +36,25 @@ static void GoogleSafeBrowsingReturnsAnEmptyObject()
 	AssertEqual("{}", html);
 }
 
+static void EnteredDetailsArePassedToTheFlashWriter()
+{
+	IHttpRequestRouter* router = CreateTestObject();
+
+	std::string html = router->RouteHttpRequest("GET /hotspotsubmit?ssid=a907&password=pwd HTTP/1.1");
+
+	AssertEqual("hotspotsubmit ssid=a907&password=pwd HTTP/1.1", html);
+}
+
 void HotSpotRequestRouterTests::RunTests()
 {
 	RootRequestsAreRoutedToTheSsidPasswordInputForm();
 	GoogleSafeBrowsingReturnsAnEmptyObject();
+	EnteredDetailsArePassedToTheFlashWriter();
 }
 
 void HotSpotRequestRouterTests::CleanUpAfterTests()
 {
 	objectUnderTest.release();
 	mockInputFormRenderer.release();
+	mockHotspotSubmitRenderer.release();
 }

@@ -2,7 +2,6 @@
 #include "hotspot_request_router.h"
 
 // GET /hotspot-detect.html HTTP/1.0
-// GET /hotspotsubmit?ssid=a907&password=peew HTTP/1.1
 
 std::string HotSpotRequestRouter::RouteHttpRequest(const char* request)
 {
@@ -11,6 +10,12 @@ std::string HotSpotRequestRouter::RouteHttpRequest(const char* request)
 		return "{}";
 	}
 
+	if (strncmp(request, "GET /hotspotsubmit?", 19) == 0)
+	{
+		return hotspotsubmit.Render(request + 19);
+	}
+
 	printf("HotSpotRequestRouter: %s\n", request);
 	return ssidInputForm.Render();
 }
+
