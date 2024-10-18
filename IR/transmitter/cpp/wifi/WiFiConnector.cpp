@@ -1,17 +1,10 @@
-// #include "debugprintf.h"
 #include "WiFiConnector.h"
 #include "hotspot_request_router.h"
 #include "tcpserver/http_response_packager.h"
 #include "tcpserver/pico_tcp_server.h"
-//#include "tcp_server_implementation.h"
-// #include "logic/flash/flash_hardware.h"
-// #include "logic/connecting/wifi_connection_maker.h"
-// #include "logic/requests/hotspot_configuration.h"
-// #include "logic/credentials/credentials_handler.h"
-// #include "logic/credentials/percent_decoder.h"
-// #include "logic/flash/flash_manager.h"
-// #include "logic/input_form/html_renderer.h"
-// #include "logic/input_form/input_form_renderer.h"
+#include "input_form/ssid_password_input_form_renderer.h"
+#include "input_form/html_renderer.h"
+#include "input_form/input_form_renderer.h"
 
  void WiFiConnector::ConnectToWiFi(IHardwareInterface& hw_if, const char* input_form_hotspot_name, const char* password, const char* tempssid, const char* temppassword)
  {
@@ -50,9 +43,12 @@
    //    &processor);
 
    //ConnectToWiFiDirect(hw_if, tempssid, temppassword);
-   hw_if.initialise_wifi_ap("picobla","12345678");
+   hw_if.initialise_wifi_ap(input_form_hotspot_name, password);
    
-   HotSpotRequestRouter httpRequestRouter;
+   HtmlRenderer htmlRenderer;
+   InputFormRenderer inputFormRenderer;
+   SSIDPasswordInputFormRenderer ssidPasswordInputFormRenderer("PicoIR", htmlRenderer, inputFormRenderer);
+   HotSpotRequestRouter httpRequestRouter(ssidPasswordInputFormRenderer);
    HttpResponsePackager httpResponsePackager(httpRequestRouter);
    run_tcp_server(&httpResponsePackager);
 }

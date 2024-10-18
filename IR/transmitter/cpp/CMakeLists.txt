@@ -36,8 +36,12 @@ add_executable(test
         transmit/ir_code_sender.cpp
         transmit/ir_sequence_sender.cpp
         wifi/WiFiConnector.cpp
+        wifi/hotspot_request_router.cpp
         wifi/dhcpserver/dhcpserver.c
         wifi/dnsserver/dnsserver.c
+        wifi/input_form/html_renderer.cpp
+        wifi/input_form/input_form_renderer.cpp
+        wifi/input_form/ssid_password_input_form_renderer.cpp
         wifi/tcpserver/pico_tcp_server.c
         wifi/tcpserver/pico_tcp_server.cpp
         wifi/tcpserver/http_response_packager.cpp

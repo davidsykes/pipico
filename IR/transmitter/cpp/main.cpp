@@ -28,7 +28,7 @@ int main()
    hw_if.initialise_pico_stdio(true);
 
    WiFiConnector connector;
-   connector.ConnectToWiFi(hw_if, "Pico", "12345678", WIFI_SSID, WIFI_PASSWORD);
+   connector.ConnectToWiFi(hw_if, "PicoIR", "12345678", WIFI_SSID, WIFI_PASSWORD);
    //connector.ConnectToWiFiDirect(hw_if, WIFI_SSID, WIFI_PASSWORD);
 
    GPIOInputPin actionPin(2, hw_if);
