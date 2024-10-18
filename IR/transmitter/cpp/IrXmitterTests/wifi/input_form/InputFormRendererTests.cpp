@@ -3,17 +3,17 @@
 #include "InputFormRendererTests.h"
 #include "../../wifi/input_form/input_form_renderer.h"
 
-static std::unique_ptr<IInputFormRenderer> renderer;
+static std::unique_ptr<IRenderer> objectUnderTest;
 
-static IInputFormRenderer* CreateTestObject()
+static IRenderer* CreateTestObject()
 {
-	renderer.reset(new InputFormRenderer);
-	return renderer.get();
+	objectUnderTest.reset(new InputFormRenderer);
+	return objectUnderTest.get();
 }
 
 void ASimpleFormCanBeRendered()
 {
-	IInputFormRenderer* renderer = CreateTestObject();
+	IRenderer* renderer = CreateTestObject();
 
 	std::string html = renderer->Render();
 
@@ -36,5 +36,5 @@ void InputFormRendererTests::RunTests()
 
 void InputFormRendererTests::CleanUpAfterTests()
 {
-	renderer.release();
+	objectUnderTest.release();
 }

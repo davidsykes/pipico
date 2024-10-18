@@ -1,7 +1,7 @@
 #pragma once
-#include "iinput_form_renderer.h"
+#include "irenderer.h"
 
-class InputFormRenderer : public IInputFormRenderer
+class InputFormRenderer : public IRenderer
 {
 	virtual std::string Render();
 };

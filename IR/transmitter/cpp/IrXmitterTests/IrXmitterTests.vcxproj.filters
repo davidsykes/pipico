@@ -464,9 +464,6 @@
     <ClInclude Include="..\wifi\input_form\ihtml_renderer.h">
       <Filter>Source Files\wifi\input_form</Filter>
     </ClInclude>
-    <ClInclude Include="..\wifi\input_form\iinput_form_renderer.h">
-      <Filter>Source Files\wifi\input_form</Filter>
-    </ClInclude>
     <ClInclude Include="..\wifi\input_form\input_form_renderer.h">
       <Filter>Source Files\wifi\input_form</Filter>
     </ClInclude>
@@ -490,6 +487,9 @@
     </ClInclude>
     <ClInclude Include="..\wifi\hotspot_request_router.h">
       <Filter>Source Files\wifi</Filter>
+    </ClInclude>
+    <ClInclude Include="..\wifi\input_form\irenderer.h">
+      <Filter>Source Files\wifi\input_form</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
