@@ -157,6 +157,7 @@
     <ClCompile Include="..\wifi\input_form\html_renderer.cpp" />
     <ClCompile Include="..\wifi\input_form\input_form_renderer.cpp" />
     <ClCompile Include="..\wifi\input_form\ssid_password_input_form_renderer.cpp" />
+    <ClCompile Include="..\wifi\input_form\ssid_password_submitter.cpp" />
     <ClCompile Include="..\wifi\tcpserver\http_response_packager.cpp" />
     <ClCompile Include="api\api_actions\codes_display_action_tests.cpp" />
     <ClCompile Include="api\api_actions\code_sequences_display_action_tests.cpp" />
@@ -189,6 +190,7 @@
     <ClCompile Include="wifi\input_form\HtmlRendererTests.cpp" />
     <ClCompile Include="wifi\input_form\InputFormRendererTests.cpp" />
     <ClCompile Include="wifi\input_form\SSIDPasswordInputFormRendererTests.cpp" />
+    <ClCompile Include="wifi\input_form\SSIDPasswordSubmitterTests.cpp" />
     <ClCompile Include="wifi\tcpserver\http_response_packager_tests.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -226,6 +228,7 @@
     <ClInclude Include="..\wifi\input_form\input_form_renderer.h" />
     <ClInclude Include="..\wifi\input_form\irenderer.h" />
     <ClInclude Include="..\wifi\input_form\ssid_password_input_form_renderer.h" />
+    <ClInclude Include="..\wifi\input_form\ssid_password_submitter.h" />
     <ClInclude Include="..\wifi\tcpserver\http_response_packager.h" />
     <ClInclude Include="api\api_actions\codes_display_action_tests.h" />
     <ClInclude Include="api\api_actions\code_sequences_display_action_tests.h" />
@@ -260,6 +263,7 @@
     <ClInclude Include="wifi\input_form\HtmlRendererTests.h" />
     <ClInclude Include="wifi\input_form\InputFormRendererTests.h" />
     <ClInclude Include="wifi\input_form\SSIDPasswordInputFormRendererTests.h" />
+    <ClInclude Include="wifi\input_form\SSIDPasswordSubmitterTests.h" />
     <ClInclude Include="wifi\tcpserver\http_response_packager_tests.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

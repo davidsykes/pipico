@@ -282,6 +282,12 @@
     <ClCompile Include="..\wifi\input_form\ssid_password_input_form_renderer.cpp">
       <Filter>Source Files\wifi\input_form</Filter>
     </ClCompile>
+    <ClCompile Include="wifi\input_form\SSIDPasswordSubmitterTests.cpp">
+      <Filter>Source Files\Tests\wifi\input_form</Filter>
+    </ClCompile>
+    <ClCompile Include="..\wifi\input_form\ssid_password_submitter.cpp">
+      <Filter>Source Files\wifi\input_form</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="tools\MessageLoggerTests.h">
@@ -489,6 +495,12 @@
       <Filter>Source Files\wifi\input_form</Filter>
     </ClInclude>
     <ClInclude Include="..\wifi\input_form\ssid_password_input_form_renderer.h">
+      <Filter>Source Files\wifi\input_form</Filter>
+    </ClInclude>
+    <ClInclude Include="wifi\input_form\SSIDPasswordSubmitterTests.h">
+      <Filter>Source Files\Tests\wifi\input_form</Filter>
+    </ClInclude>
+    <ClInclude Include="..\wifi\input_form\ssid_password_submitter.h">
       <Filter>Source Files\wifi\input_form</Filter>
     </ClInclude>
   </ItemGroup>
