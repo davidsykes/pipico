@@ -31,9 +31,9 @@ void SSIDPasswordSubmitter::AddParameter(std::vector<FlashParameter>& flashParam
 	size_t eq = data.find('=');
 	if (eq != std::string::npos)
 	{
-		FlashParameter p;
-		p.Name = data.substr(0, eq);
-		p.Value = percentDecoder.Decode(data.substr(eq + 1));
+		std::string name = data.substr(0, eq);
+		std::string value = percentDecoder.Decode(data.substr(eq + 1));
+		FlashParameter p(name, value);
 		flashParameters.push_back(p);
 	}
 }

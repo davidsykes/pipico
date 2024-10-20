@@ -1,0 +1,21 @@
+#pragma once
+#include <string>
+#include <vector>
+#include "flash_parameter.h"
+#include "flash_hardware.h"
+
+class IFlashWriter
+{
+public:
+    virtual bool WriteParameters(const std::vector<FlashParameter> parameters) = 0;
+};
+
+class FlashWriter : public IFlashWriter
+{
+    IFlashHardware& flashHardware;
+
+    virtual bool WriteParameters(const std::vector<FlashParameter> parameters);
+public:
+    FlashWriter(IFlashHardware& flashHardware)
+        : flashHardware(flashHardware) {}
+};

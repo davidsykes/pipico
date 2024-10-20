@@ -1,6 +1,6 @@
 #pragma once
 #include "irenderer.h"
-#include "../flash/flashwriter.h"
+#include "../flash/flash_writer.h"
 #include "percent_decoder.h"
 
 class SSIDPasswordSubmitter : public IRenderer

@@ -3,12 +3,12 @@
 #include "HtmlRendererTests.h"
 #include "../../wifi/input_form/html_renderer.h"
 
-static std::unique_ptr<IHtmlRenderer> htmlRenderer;
+static std::unique_ptr<IHtmlRenderer> objectUnderTest;
 
 static IHtmlRenderer* CreateTestObject()
 {
-	htmlRenderer.reset(new HtmlRenderer);
-	return htmlRenderer.get();
+	objectUnderTest.reset(new HtmlRenderer);
+	return objectUnderTest.get();
 }
 
 void RenderHtmlTest()
@@ -17,7 +17,7 @@ void RenderHtmlTest()
 
 	std::string html = renderer->RenderHtml("contents");
 
-	AssertEqual(html, "<html>contents</html>");
+	AssertEqual("<html>contents</html>", html);
 }
 
 void RenderBodyTest()
@@ -26,7 +26,7 @@ void RenderBodyTest()
 
 	std::string html = renderer->RenderBody("contents");
 
-	AssertEqual(html, "<body>contents</body>");
+	AssertEqual("<body>contents</body>", html);
 }
 
 void RenderHeaderTest()
@@ -35,7 +35,7 @@ void RenderHeaderTest()
 
 	std::string html = renderer->RenderHeader("contents");
 
-	AssertEqual(html, "<h1>contents</h1>");
+	AssertEqual("<h1>contents</h1>", html);
 }
 
 void RenderParagraphTest()
@@ -44,7 +44,7 @@ void RenderParagraphTest()
 
 	std::string html = renderer->RenderParagraph("contents");
 
-	AssertEqual(html, "<p>contents</p>");
+	AssertEqual("<p>contents</p>", html);
 }
 
 void HtmlRendererTests::RunTests()
@@ -57,5 +57,5 @@ void HtmlRendererTests::RunTests()
 
 void HtmlRendererTests::CleanUpAfterTests()
 {
-	htmlRenderer.release();
+	objectUnderTest.release();
 }

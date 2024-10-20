@@ -97,6 +97,9 @@
     <Filter Include="Source Files\wifi\flash">
       <UniqueIdentifier>{f1f30ac8-d37e-463d-9c58-a76bf68f6705}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Tests\wifi\flash">
+      <UniqueIdentifier>{b0ac73c8-9f43-4d7d-9839-e05d7c36d49f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="IrXmitterTests.cpp">
@@ -296,6 +299,12 @@
     </ClCompile>
     <ClCompile Include="..\wifi\input_form\percent_decoder.cpp">
       <Filter>Source Files\wifi\input_form</Filter>
+    </ClCompile>
+    <ClCompile Include="wifi\flash\FlashWriterTests.cpp">
+      <Filter>Source Files\Tests\wifi\flash</Filter>
+    </ClCompile>
+    <ClCompile Include="..\wifi\flash\flash_writer.cpp">
+      <Filter>Source Files\wifi\flash</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -518,14 +527,20 @@
     <ClInclude Include="..\wifi\flash\flash_parameter.h">
       <Filter>Source Files\wifi\flash</Filter>
     </ClInclude>
-    <ClInclude Include="..\wifi\flash\flashwriter.h">
-      <Filter>Source Files\wifi\flash</Filter>
-    </ClInclude>
     <ClInclude Include="..\wifi\input_form\percent_decoder.h">
       <Filter>Source Files\wifi\input_form</Filter>
     </ClInclude>
     <ClInclude Include="wifi\input_form\PercentDecoderTests.h">
       <Filter>Source Files\Tests\wifi\input_form</Filter>
+    </ClInclude>
+    <ClInclude Include="wifi\flash\FlashWriterTests.h">
+      <Filter>Source Files\Tests\wifi\flash</Filter>
+    </ClInclude>
+    <ClInclude Include="..\wifi\flash\flash_hardware.h">
+      <Filter>Source Files\wifi\flash</Filter>
+    </ClInclude>
+    <ClInclude Include="..\wifi\flash\flash_writer.h">
+      <Filter>Source Files\wifi\flash</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

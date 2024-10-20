@@ -8,7 +8,7 @@
 
  void WiFiConnector::ConnectToWiFi(IHardwareInterface& hw_if, const char* input_form_hotspot_name, const char* password, const char* tempssid, const char* temppassword)
  {
-//    FlashHardware flashHardware;
+    FlashHardware flashHardware;
 //    WiFiConnectionMaker wifiConnectionMaker(&flashHardware);
 //    if (wifiConnectionMaker.CredentialsAreValid() && false)
 //    {
@@ -48,7 +48,10 @@
    HtmlRenderer htmlRenderer;
    InputFormRenderer inputFormRenderer;
    SSIDPasswordInputFormRenderer ssidPasswordInputFormRenderer("PicoIR", htmlRenderer, inputFormRenderer);
-   HotSpotRequestRouter httpRequestRouter(ssidPasswordInputFormRenderer);
+   FlashWriter flashWriter(flashHardware);
+   PercentDecoder percentDecoder;
+   SSIDPasswordSubmitter ssidPasswordSubmitter(flashWriter, percentDecoder);
+   HotSpotRequestRouter httpRequestRouter(ssidPasswordInputFormRenderer, ssidPasswordSubmitter);
    HttpResponsePackager httpResponsePackager(httpRequestRouter);
    run_tcp_server(&httpResponsePackager);
 }
