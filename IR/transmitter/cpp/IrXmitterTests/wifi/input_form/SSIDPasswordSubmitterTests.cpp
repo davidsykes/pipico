@@ -1,26 +1,24 @@
 #include <memory>
+#include <sstream>
 #include "TestFramework.h"
 #include "SSIDPasswordSubmitterTests.h"
 #include "../../Mocks\MockRenderer.h"
 #include "../../../wifi/input_form/ssid_password_submitter.h"
-//
-//class MockHtmlRenderer : public IHtmlRenderer
-//{
-//	virtual std::string RenderHtml(std::string contents) { return "html(" + contents + ")"; }
-//	virtual std::string RenderBody(std::string contents) { return "body(" + contents + ")"; }
-//	virtual std::string RenderHeader(std::string contents) { return "head(" + contents + ")"; }
-//	virtual std::string RenderParagraph(std::string contents) { return "p(" + contents + ")"; }
-//};
-//
-//static std::unique_ptr<IHtmlRenderer> htmlRenderer;
-//static std::unique_ptr<MockRenderer> formRenderer;
+
+class MockFlashWriter : public IFlashWriter
+{
+	virtual bool WriteParameters(const std::vector<FlashParameter> parameters);
+public:
+	std::string DataWritten;
+};
+
+static std::unique_ptr<MockFlashWriter> mockFlashWriter;
 static std::unique_ptr<SSIDPasswordSubmitter> objectUnderTest;
 
 static SSIDPasswordSubmitter& CreateTestObject()
 {
-	//htmlRenderer.reset(new MockHtmlRenderer);
-	//formRenderer.reset(new MockRenderer("Form"));
-	objectUnderTest.reset(new SSIDPasswordSubmitter());
+	mockFlashWriter.reset(new MockFlashWriter);
+	objectUnderTest.reset(new SSIDPasswordSubmitter(*mockFlashWriter.get()));
 
 	return *objectUnderTest.get();
 }
@@ -29,27 +27,69 @@ static void TheSubmittedParametersArePassedToTheFlashWriter()
 {
 	IRenderer& submitter = CreateTestObject();
 
-	std::string result = submitter.Render();
+	std::string result = submitter.Render("ssid=fred&password=bill");
 
-	AssertEqual("html(body(head(description)p(Enter WiFi Details)Form))", result);
+	AssertEqual("ssid:fred,password:bill,", mockFlashWriter.get()->DataWritten);
 }
 
-static void TheSubmitterReturnsOk()
+static void IfTheWriterSucceedsTheSubmitterReturnsOk()
 {
 	IRenderer& submitter = CreateTestObject();
 
-	std::string result = submitter.Render();
+	std::string result = submitter.Render("ssid=fred&password=bill");
 
-	AssertEqual("html(body(head(description)p(Enter WiFi Details)Form))", result);
+	AssertEqual("Ok", result);
+}
+
+static void ParametersWithoutEqualSignsAreIgnored()
+{
+	IRenderer& submitter = CreateTestObject();
+
+	std::string result = submitter.Render("one=1&two&three=3");
+
+	AssertEqual("one:1,three:3,", mockFlashWriter.get()->DataWritten);
+}
+
+static void IfNoParametersAreSuppliedTheSubmitterReturnsNotOk()
+{
+	IRenderer& submitter = CreateTestObject();
+
+	std::string result = submitter.Render("");
+
+	AssertEqual("Fail", result);
+}
+
+static void IfNoParametersAreFoundTheSubmitterReturnsNotOk()
+{
+	IRenderer& submitter = CreateTestObject();
+
+	std::string result = submitter.Render("a&b&c");
+
+	AssertEqual("Fail", result);
+}
+
+bool MockFlashWriter::WriteParameters(const std::vector<FlashParameter> parameters)
+{
+	std::ostringstream s;
+	for (int i = 0; i < parameters.size(); ++i)
+	{
+		s << parameters[i].Name << ":" << parameters[i].Value << ",";
+	}
+	DataWritten = s.str();
+	return false;
 }
 
 void SSIDPasswordSubmitterTests::RunTests()
 {
 	TheSubmittedParametersArePassedToTheFlashWriter();
-	TheSubmitterReturnsOk();
+	IfTheWriterSucceedsTheSubmitterReturnsOk();
+	ParametersWithoutEqualSignsAreIgnored();
+	IfNoParametersAreSuppliedTheSubmitterReturnsNotOk();
+	IfNoParametersAreFoundTheSubmitterReturnsNotOk();
 }
 
 void SSIDPasswordSubmitterTests::CleanUpAfterTests()
 {
 	objectUnderTest.release();
+	mockFlashWriter.release();
 }

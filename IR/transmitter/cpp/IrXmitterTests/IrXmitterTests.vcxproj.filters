@@ -503,5 +503,8 @@
     <ClInclude Include="..\wifi\input_form\ssid_password_submitter.h">
       <Filter>Source Files\wifi\input_form</Filter>
     </ClInclude>
+    <ClInclude Include="..\wifi\input_form\flash_parameter.h">
+      <Filter>Source Files\wifi\input_form</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
