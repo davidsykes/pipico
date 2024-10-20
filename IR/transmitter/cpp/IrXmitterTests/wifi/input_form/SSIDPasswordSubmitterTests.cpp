@@ -12,24 +12,31 @@ public:
 	std::string DataWritten;
 };
 
+class MockPercentDecoder : public IPercentDecoder
+{
+	virtual std::string Decode(const std::string& value) { return "!" + value + "!"; }
+};
+
 static std::unique_ptr<MockFlashWriter> mockFlashWriter;
+static std::unique_ptr<MockPercentDecoder> mockPercentDecoder;
 static std::unique_ptr<SSIDPasswordSubmitter> objectUnderTest;
 
 static SSIDPasswordSubmitter& CreateTestObject()
 {
 	mockFlashWriter.reset(new MockFlashWriter);
-	objectUnderTest.reset(new SSIDPasswordSubmitter(*mockFlashWriter.get()));
+	mockPercentDecoder.reset(new MockPercentDecoder);
+	objectUnderTest.reset(new SSIDPasswordSubmitter(*mockFlashWriter.get(), *mockPercentDecoder.get()));
 
 	return *objectUnderTest.get();
 }
 
-static void TheSubmittedParametersArePassedToTheFlashWriter()
+static void TheSubmittedParametersArePercentDecodedAndPassedToTheFlashWriter()
 {
 	IRenderer& submitter = CreateTestObject();
 
 	std::string result = submitter.Render("ssid=fred&password=bill");
 
-	AssertEqual("ssid:fred,password:bill,", mockFlashWriter.get()->DataWritten);
+	AssertEqual("ssid:!fred!,password:!bill!,", mockFlashWriter.get()->DataWritten);
 }
 
 static void IfTheWriterSucceedsTheSubmitterReturnsOk()
@@ -47,7 +54,7 @@ static void ParametersWithoutEqualSignsAreIgnored()
 
 	std::string result = submitter.Render("one=1&two&three=3");
 
-	AssertEqual("one:1,three:3,", mockFlashWriter.get()->DataWritten);
+	AssertEqual("one:!1!,three:!3!,", mockFlashWriter.get()->DataWritten);
 }
 
 static void IfNoParametersAreSuppliedTheSubmitterReturnsNotOk()
@@ -81,7 +88,7 @@ bool MockFlashWriter::WriteParameters(const std::vector<FlashParameter> paramete
 
 void SSIDPasswordSubmitterTests::RunTests()
 {
-	TheSubmittedParametersArePassedToTheFlashWriter();
+	TheSubmittedParametersArePercentDecodedAndPassedToTheFlashWriter();
 	IfTheWriterSucceedsTheSubmitterReturnsOk();
 	ParametersWithoutEqualSignsAreIgnored();
 	IfNoParametersAreSuppliedTheSubmitterReturnsNotOk();
@@ -92,4 +99,5 @@ void SSIDPasswordSubmitterTests::CleanUpAfterTests()
 {
 	objectUnderTest.release();
 	mockFlashWriter.release();
+	mockPercentDecoder.release();
 }

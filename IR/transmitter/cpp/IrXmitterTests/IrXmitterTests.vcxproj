@@ -222,12 +222,15 @@
     <ClInclude Include="..\tools\message_logger.h" />
     <ClInclude Include="..\transmit\ir_code_sender.h" />
     <ClInclude Include="..\transmit\ir_sequence_sender.h" />
+    <ClInclude Include="..\wifi\flash\flashwriter.h" />
+    <ClInclude Include="..\wifi\flash\flash_parameter.h" />
     <ClInclude Include="..\wifi\hotspot_request_router.h" />
     <ClInclude Include="..\wifi\input_form\flash_parameter.h" />
     <ClInclude Include="..\wifi\input_form\html_renderer.h" />
     <ClInclude Include="..\wifi\input_form\ihtml_renderer.h" />
     <ClInclude Include="..\wifi\input_form\input_form_renderer.h" />
     <ClInclude Include="..\wifi\input_form\irenderer.h" />
+    <ClInclude Include="..\wifi\input_form\percent_decoder.h" />
     <ClInclude Include="..\wifi\input_form\ssid_password_input_form_renderer.h" />
     <ClInclude Include="..\wifi\input_form\ssid_password_submitter.h" />
     <ClInclude Include="..\wifi\tcpserver\http_response_packager.h" />

@@ -1,18 +1,21 @@
 #pragma once
 #include "irenderer.h"
 #include "../flash/flashwriter.h"
+#include "percent_decoder.h"
 
 class SSIDPasswordSubmitter : public IRenderer
 {
     IFlashWriter& flashWriter;
+    IPercentDecoder& percentDecoder;
 
     virtual std::string Render(const std::string& param);
 
     void AddParameter(std::vector<FlashParameter>& flashParameters, const std::string& data);
 
     public:
-        SSIDPasswordSubmitter(IFlashWriter& flashWriter)
-            : flashWriter(flashWriter)
+        SSIDPasswordSubmitter(IFlashWriter& flashWriter, IPercentDecoder& percentDecoder)
+            : flashWriter(flashWriter),
+            percentDecoder(percentDecoder)
         {}
 };
 

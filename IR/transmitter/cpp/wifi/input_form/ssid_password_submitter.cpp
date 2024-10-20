@@ -33,7 +33,7 @@ void SSIDPasswordSubmitter::AddParameter(std::vector<FlashParameter>& flashParam
 	{
 		FlashParameter p;
 		p.Name = data.substr(0, eq);
-		p.Value = data.substr(eq + 1);
+		p.Value = percentDecoder.Decode(data.substr(eq + 1));
 		flashParameters.push_back(p);
 	}
 }
