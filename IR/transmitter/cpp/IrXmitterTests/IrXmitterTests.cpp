@@ -28,6 +28,7 @@
 #include "wifi/input_form/InputFormRendererTests.h"
 #include "wifi/input_form/SSIDPasswordInputFormRendererTests.h"
 #include "wifi/input_form/SSIDPasswordSubmitterTests.h"
+#include "wifi/input_form/PercentDecoderTests.h"
 
 int main()
 {
@@ -60,5 +61,6 @@ int main()
     InputFormRendererTests().RunTests();
     SSIDPasswordInputFormRendererTests().RunTests();
     SSIDPasswordSubmitterTests().RunTests();
+    PercentDecoderTests().RunTests();
     std::cout << "Tests Complete\n";
 }

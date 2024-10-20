@@ -291,6 +291,12 @@
     <ClCompile Include="..\wifi\input_form\ssid_password_submitter.cpp">
       <Filter>Source Files\wifi\input_form</Filter>
     </ClCompile>
+    <ClCompile Include="wifi\input_form\PercentDecoderTests.cpp">
+      <Filter>Source Files\Tests\wifi\input_form</Filter>
+    </ClCompile>
+    <ClCompile Include="..\wifi\input_form\percent_decoder.cpp">
+      <Filter>Source Files\wifi\input_form</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="tools\MessageLoggerTests.h">
@@ -517,6 +523,9 @@
     </ClInclude>
     <ClInclude Include="..\wifi\input_form\percent_decoder.h">
       <Filter>Source Files\wifi\input_form</Filter>
+    </ClInclude>
+    <ClInclude Include="wifi\input_form\PercentDecoderTests.h">
+      <Filter>Source Files\Tests\wifi\input_form</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

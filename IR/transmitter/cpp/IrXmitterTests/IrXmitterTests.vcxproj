@@ -156,6 +156,7 @@
     <ClCompile Include="..\wifi\hotspot_request_router.cpp" />
     <ClCompile Include="..\wifi\input_form\html_renderer.cpp" />
     <ClCompile Include="..\wifi\input_form\input_form_renderer.cpp" />
+    <ClCompile Include="..\wifi\input_form\percent_decoder.cpp" />
     <ClCompile Include="..\wifi\input_form\ssid_password_input_form_renderer.cpp" />
     <ClCompile Include="..\wifi\input_form\ssid_password_submitter.cpp" />
     <ClCompile Include="..\wifi\tcpserver\http_response_packager.cpp" />
@@ -189,6 +190,7 @@
     <ClCompile Include="wifi\HotSpotRequestRouterTests.cpp" />
     <ClCompile Include="wifi\input_form\HtmlRendererTests.cpp" />
     <ClCompile Include="wifi\input_form\InputFormRendererTests.cpp" />
+    <ClCompile Include="wifi\input_form\PercentDecoderTests.cpp" />
     <ClCompile Include="wifi\input_form\SSIDPasswordInputFormRendererTests.cpp" />
     <ClCompile Include="wifi\input_form\SSIDPasswordSubmitterTests.cpp" />
     <ClCompile Include="wifi\tcpserver\http_response_packager_tests.cpp" />
@@ -266,6 +268,7 @@
     <ClInclude Include="wifi\HotSpotRequestRouterTests.h" />
     <ClInclude Include="wifi\input_form\HtmlRendererTests.h" />
     <ClInclude Include="wifi\input_form\InputFormRendererTests.h" />
+    <ClInclude Include="wifi\input_form\PercentDecoderTests.h" />
     <ClInclude Include="wifi\input_form\SSIDPasswordInputFormRendererTests.h" />
     <ClInclude Include="wifi\input_form\SSIDPasswordSubmitterTests.h" />
     <ClInclude Include="wifi\tcpserver\http_response_packager_tests.h" />
