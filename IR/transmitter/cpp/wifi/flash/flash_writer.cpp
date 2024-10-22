@@ -42,7 +42,7 @@ bool FlashWriter::WriteParameters(const std::vector<FlashParameter> parameters)
 
 uint8_t* StoreParameter(uint8_t* data_begin, uint8_t* data_current, const char* param)
 {
-	size_t lengthIncludingTerminator = strlen(param);
+	size_t lengthIncludingTerminator = strlen(param) + 1;
 
 	if (data_current + lengthIncludingTerminator >= data_begin + FLASH_BLOCK_SIZE)
 	{

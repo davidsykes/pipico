@@ -306,6 +306,12 @@
     <ClCompile Include="..\wifi\flash\flash_writer.cpp">
       <Filter>Source Files\wifi\flash</Filter>
     </ClCompile>
+    <ClCompile Include="wifi\flash\FlashParameterReaderTests.cpp">
+      <Filter>Source Files\Tests\wifi\flash</Filter>
+    </ClCompile>
+    <ClCompile Include="..\wifi\flash\flash_parameter_reader.cpp">
+      <Filter>Source Files\wifi\flash</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="tools\MessageLoggerTests.h">
@@ -540,6 +546,12 @@
       <Filter>Source Files\wifi\flash</Filter>
     </ClInclude>
     <ClInclude Include="..\wifi\flash\flash_writer.h">
+      <Filter>Source Files\wifi\flash</Filter>
+    </ClInclude>
+    <ClInclude Include="wifi\flash\FlashParameterReaderTests.h">
+      <Filter>Source Files\Tests\wifi\flash</Filter>
+    </ClInclude>
+    <ClInclude Include="..\wifi\flash\flash_parameter_reader.h">
       <Filter>Source Files\wifi\flash</Filter>
     </ClInclude>
   </ItemGroup>

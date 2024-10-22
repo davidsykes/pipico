@@ -153,6 +153,7 @@
     <ClCompile Include="..\tools\message_logger.cpp" />
     <ClCompile Include="..\transmit\ir_code_sender.cpp" />
     <ClCompile Include="..\transmit\ir_sequence_sender.cpp" />
+    <ClCompile Include="..\wifi\flash\flash_parameter_reader.cpp" />
     <ClCompile Include="..\wifi\flash\flash_writer.cpp" />
     <ClCompile Include="..\wifi\hotspot_request_router.cpp" />
     <ClCompile Include="..\wifi\input_form\html_renderer.cpp" />
@@ -188,6 +189,7 @@
     <ClCompile Include="tools\MessageLoggerTests.cpp" />
     <ClCompile Include="transmit\IrCodeSenderTests.cpp" />
     <ClCompile Include="transmit\IrSequenceSenderTests.cpp" />
+    <ClCompile Include="wifi\flash\FlashParameterReaderTests.cpp" />
     <ClCompile Include="wifi\flash\FlashWriterTests.cpp" />
     <ClCompile Include="wifi\HotSpotRequestRouterTests.cpp" />
     <ClCompile Include="wifi\input_form\HtmlRendererTests.cpp" />
@@ -228,6 +230,7 @@
     <ClInclude Include="..\transmit\ir_sequence_sender.h" />
     <ClInclude Include="..\wifi\flash\flash_hardware.h" />
     <ClInclude Include="..\wifi\flash\flash_parameter.h" />
+    <ClInclude Include="..\wifi\flash\flash_parameter_reader.h" />
     <ClInclude Include="..\wifi\flash\flash_writer.h" />
     <ClInclude Include="..\wifi\hotspot_request_router.h" />
     <ClInclude Include="..\wifi\input_form\flash_parameter.h" />
@@ -268,6 +271,7 @@
     <ClInclude Include="tools\MessageLoggerTests.h" />
     <ClInclude Include="transmit\IrCodeSenderTests.h" />
     <ClInclude Include="transmit\IrSequenceSenderTests.h" />
+    <ClInclude Include="wifi\flash\FlashParameterReaderTests.h" />
     <ClInclude Include="wifi\flash\FlashWriterTests.h" />
     <ClInclude Include="wifi\HotSpotRequestRouterTests.h" />
     <ClInclude Include="wifi\input_form\HtmlRendererTests.h" />

@@ -14,6 +14,18 @@
  void WiFiConnector::ConnectToWiFi(IHardwareInterface& hw_if, const char* input_form_hotspot_name, const char* password, const char* tempssid, const char* temppassword)
  {
     FlashHardware flashHardware;
+    
+    FlashParametersReader flashParametersReader(flashHardware);
+    if (flashParametersReader.ReadParameters()
+    && flashParametersReader.ContainsParameter("SSID")
+    && flashParametersReader.ContainsParameter("Password"))
+    {
+      if (hw_if.initialise_wifi_sta(input_form_hotspot_name, password))
+      {
+         return;
+      }
+    }
+
 //    WiFiConnectionMaker wifiConnectionMaker(&flashHardware);
 //    if (wifiConnectionMaker.CredentialsAreValid() && false)
 //    {

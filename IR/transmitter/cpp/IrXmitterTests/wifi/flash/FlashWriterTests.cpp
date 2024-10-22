@@ -4,14 +4,17 @@
 #include "../../wifi/flash/flash_writer.h"
 
 
-class MockFlashHardware : public IFlashHardware
+namespace
 {
-	virtual const uint8_t* ReadFlash() { Assert("Invalid"); }
-	virtual bool WriteFlash(const uint8_t* data) { DataWritten = data; return ReturnValue; }
-public:
-	const uint8_t* DataWritten = 0;
-	bool ReturnValue = true;
-};
+	class MockFlashHardware : public IFlashHardware
+	{
+		virtual const uint8_t* ReadFlash() { Assert("Invalid"); }
+		virtual bool WriteFlash(const uint8_t* data) { DataWritten = data; return ReturnValue; }
+	public:
+		const uint8_t* DataWritten = 0;
+		bool ReturnValue = true;
+	};
+}
 
 static std::unique_ptr<FlashWriter> objectUnderTest;
 static std::unique_ptr<MockFlashHardware> mockFlashHardware;
