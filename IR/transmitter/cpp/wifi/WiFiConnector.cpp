@@ -1,9 +1,13 @@
 #include "WiFiConnector.h"
 #include "hotspot_request_router.h"
 #include "flash/flash_hardware.h"
+#include "flash/flash_writer.h"
 #include "input_form/ssid_password_input_form_renderer.h"
 #include "input_form/html_renderer.h"
 #include "input_form/input_form_renderer.h"
+#include "input_form/percent_decoder.h"
+#include "input_form/ssid_password_input_form_renderer.h"
+#include "input_form/ssid_password_submitter.h"
 #include "tcpserver/http_response_packager.h"
 #include "tcpserver/pico_tcp_server.h"
 

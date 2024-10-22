@@ -10,7 +10,7 @@
 #include <string.h>
 #include "hardware/flash.h"
 #include "hardware/sync.h"
-#include "flash_program.h"
+#include "flash_hardware_imp.h"
 
 #define FLASH_TARGET_OFFSET (1856 * 1024)
 #define DATA_PREFIX         "CRD1"
@@ -75,7 +75,7 @@ int flash_test() {
 }
 
 
-bool write_flash_data(const uint8_t* flash_data)
+int write_flash_data(const uint8_t* flash_data)
 {
     //flash_test();
 
@@ -104,5 +104,5 @@ bool write_flash_data(const uint8_t* flash_data)
         DEBUG_printf("Programming failed!\n");
     else
         DEBUG_printf("Programming successful!\n");
-    return (!mismatch)
+    return (!mismatch);
 }

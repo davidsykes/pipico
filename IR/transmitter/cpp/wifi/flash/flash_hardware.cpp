@@ -1,7 +1,6 @@
 #include <cstdint>
-#include "../../low_level/flash_program.h"
 #include "flash_hardware.h"
-
+#include "flash_hardware_imp.h"
 
 const uint8_t* FlashHardware::ReadFlash()
 {
