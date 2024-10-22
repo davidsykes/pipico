@@ -34,7 +34,10 @@ void AssertTrue(bool value)
 
 void AssertFalse(bool value)
 {
-	AssertTrue(!value);
+	if (value)
+	{
+		Assert("Assert fails");
+	}
 }
 
 void AssertEqual(const char* expected, const char* value)

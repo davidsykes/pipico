@@ -1,8 +1,11 @@
 #pragma once
 #include <string>
 #include <vector>
+#include <memory>
 #include "flash_parameter.h"
 #include "flash_hardware.h"
+
+#define FLASH_BLOCK_SIZE 1024
 
 class IFlashWriter
 {
@@ -14,8 +17,11 @@ class FlashWriter : public IFlashWriter
 {
     IFlashHardware& flashHardware;
 
+    std::unique_ptr<uint8_t> data_block;
+
     virtual bool WriteParameters(const std::vector<FlashParameter> parameters);
+
+
 public:
-    FlashWriter(IFlashHardware& flashHardware)
-        : flashHardware(flashHardware) {}
+    FlashWriter(IFlashHardware& flashHardware);
 };
