@@ -75,7 +75,7 @@ int flash_test() {
 }
 
 
-void write_flash_data(const uint8_t* flash_data)
+bool write_flash_data(const uint8_t* flash_data)
 {
     //flash_test();
 
@@ -104,4 +104,5 @@ void write_flash_data(const uint8_t* flash_data)
         DEBUG_printf("Programming failed!\n");
     else
         DEBUG_printf("Programming successful!\n");
+    return (!mismatch)
 }
