@@ -4,7 +4,7 @@
 #include "flash_parameter.h"
 #include "flash_hardware.h"
 
-class IFlashParameterReader
+class IFlashParametersReader
 {
 public:
     virtual bool ReadParameters() = 0;
@@ -12,7 +12,7 @@ public:
     virtual const std::string& GetParameter(const std::string& name) = 0;
 };
 
-class FlashParameterReader : public IFlashParameterReader
+class FlashParametersReader : public IFlashParametersReader
 {
     IFlashHardware& flashHardware;
 
@@ -30,5 +30,5 @@ class FlashParameterReader : public IFlashParameterReader
     void ReadAParameter();
 
 public:
-    FlashParameterReader(IFlashHardware& flashHardware) : flashHardware(flashHardware) {}
+    FlashParametersReader(IFlashHardware& flashHardware) : flashHardware(flashHardware) {}
 };

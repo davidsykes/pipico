@@ -2,6 +2,7 @@
 #include "hotspot_request_router.h"
 #include "flash/flash_hardware.h"
 #include "flash/flash_writer.h"
+#include "flash/flash_parameters_reader.h"
 #include "input_form/ssid_password_input_form_renderer.h"
 #include "input_form/html_renderer.h"
 #include "input_form/input_form_renderer.h"
@@ -15,15 +16,29 @@
  {
     FlashHardware flashHardware;
     
-    FlashParametersReader flashParametersReader(flashHardware);
-    if (flashParametersReader.ReadParameters()
-    && flashParametersReader.ContainsParameter("SSID")
-    && flashParametersReader.ContainsParameter("Password"))
+    FlashParametersReader flashParametersReader_(flashHardware);
+    IFlashParametersReader& flashParametersReader(flashParametersReader_);
+    if (!flashParametersReader.ReadParameters())
     {
-      if (hw_if.initialise_wifi_sta(input_form_hotspot_name, password))
-      {
+      printf("Flash parameters not found\n");
+    }
+    else if (!flashParametersReader.ContainsParameter("SSID"))
+    {
+      printf("SSID not found\n");
+    }
+    else if (!flashParametersReader.ContainsParameter("Password"))
+    {
+      printf("Pasword not found\n");
+    }
+    else if (!hw_if.initialise_wifi_sta(
+      flashParametersReader.GetParameter("SSID").c_str(),
+      flashParametersReader.GetParameter("Password").c_str()))
+    {
+      printf("Connection to wifi failed\n");
+    }
+    else
+    {
          return;
-      }
     }
 
 //    WiFiConnectionMaker wifiConnectionMaker(&flashHardware);

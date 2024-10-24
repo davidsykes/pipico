@@ -41,6 +41,7 @@ add_executable(test
         wifi/dnsserver/dnsserver.c
         wifi/flash/flash_hardware_imp.c
         wifi/flash/flash_writer.cpp
+        wifi/flash/flash_parameters_reader.cpp
         wifi/flash/flash_hardware.cpp
         wifi/input_form/html_renderer.cpp
         wifi/input_form/input_form_renderer.cpp

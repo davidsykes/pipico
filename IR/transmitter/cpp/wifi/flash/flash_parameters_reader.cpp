@@ -1,7 +1,8 @@
-#include "flash_parameter_reader.h"
+#include <string.h>
+#include "flash_parameters_reader.h"
 #include "flash_constants.h"
 
-bool FlashParameterReader::ReadParameters()
+bool FlashParametersReader::ReadParameters()
 {
 	parameters.clear();
 	flash = (const char*)flashHardware.ReadFlash();
@@ -20,12 +21,12 @@ bool FlashParameterReader::ReadParameters()
 	return pointer > 0;
 }
 
-bool FlashParameterReader::HaveWeReachedTheEndOfTheParameters()
+bool FlashParametersReader::HaveWeReachedTheEndOfTheParameters()
 {
 	return (pointer == 0 || flash == 0 || flash[pointer] == 0);
 }
 
-std::string FlashParameterReader::ReadString()
+std::string FlashParametersReader::ReadString()
 {
 	size_t end = pointer;
 	while (end < FLASH_BLOCK_SIZE && flash[end] != 0)
@@ -43,7 +44,7 @@ std::string FlashParameterReader::ReadString()
 	return s;
 }
 
-void FlashParameterReader::ReadAParameter()
+void FlashParametersReader::ReadAParameter()
 {
 	std::string name = ReadString();
 	std::string value = ReadString();
@@ -54,7 +55,7 @@ void FlashParameterReader::ReadAParameter()
 	parameters.push_back(FlashParameter(name, value));
 }
 
-bool FlashParameterReader::ContainsParameter(const std::string& name)
+bool FlashParametersReader::ContainsParameter(const std::string& name)
 {
 	for (int i = 0; i < parameters.size(); ++i)
 	{
@@ -64,7 +65,7 @@ bool FlashParameterReader::ContainsParameter(const std::string& name)
 	return false;
 }
 
-const std::string& FlashParameterReader::GetParameter(const std::string& name)
+const std::string& FlashParametersReader::GetParameter(const std::string& name)
 {
 	for (int i = 0; i < parameters.size(); ++i)
 	{
