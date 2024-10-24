@@ -306,10 +306,10 @@
     <ClCompile Include="..\wifi\flash\flash_writer.cpp">
       <Filter>Source Files\wifi\flash</Filter>
     </ClCompile>
-    <ClCompile Include="wifi\flash\FlashParameterReaderTests.cpp">
+    <ClCompile Include="wifi\flash\FlashParametersReaderTests.cpp">
       <Filter>Source Files\Tests\wifi\flash</Filter>
     </ClCompile>
-    <ClCompile Include="..\wifi\flash\flash_parameter_reader.cpp">
+    <ClCompile Include="..\wifi\flash\flash_parameters_reader.cpp">
       <Filter>Source Files\wifi\flash</Filter>
     </ClCompile>
   </ItemGroup>
@@ -548,10 +548,10 @@
     <ClInclude Include="..\wifi\flash\flash_writer.h">
       <Filter>Source Files\wifi\flash</Filter>
     </ClInclude>
-    <ClInclude Include="wifi\flash\FlashParameterReaderTests.h">
+    <ClInclude Include="wifi\flash\FlashParametersReaderTests.h">
       <Filter>Source Files\Tests\wifi\flash</Filter>
     </ClInclude>
-    <ClInclude Include="..\wifi\flash\flash_parameter_reader.h">
+    <ClInclude Include="..\wifi\flash\flash_parameters_reader.h">
       <Filter>Source Files\wifi\flash</Filter>
     </ClInclude>
   </ItemGroup>

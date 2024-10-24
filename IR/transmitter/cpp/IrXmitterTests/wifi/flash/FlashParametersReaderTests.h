@@ -2,7 +2,7 @@
 #include "TestFramework.h"
 
 
-class FlashParameterReaderTests : public ITestModule
+class FlashParametersReaderTests : public ITestModule
 {
 	virtual void CleanUpAfterTests();
 

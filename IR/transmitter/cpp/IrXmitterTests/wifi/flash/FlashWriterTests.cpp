@@ -38,7 +38,8 @@ static void ParameterDataIsWrittenToFlashSequentially()
 	writer->WriteParameters(parameters);
 
 	const uint8_t* dataWritten = mockFlashHardware.get()->DataWritten;
-	AssertEqual(0, memcmp("Name 1\0Value 1\0Name 2\0Value 2\0\0", dataWritten, 31));
+
+	AssertEqual(0, memcmp(FLASH_PARAMETERS_PREFIX "Name 1\0Value 1\0Name 2\0Value 2\0\0", dataWritten, 31));
 }
 
 static void WriteParametersReturnsTrueWhenParametersAreSuccessfullyWritten()

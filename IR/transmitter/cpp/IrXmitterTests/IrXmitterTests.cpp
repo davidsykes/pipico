@@ -24,7 +24,7 @@
 #include "transmit/IrSequenceSenderTests.h"
 #include "wifi/HotSpotRequestRouterTests.h"
 #include "wifi/flash/FlashWriterTests.h"
-#include "wifi/flash/FlashParameterReaderTests.h"
+#include "wifi/flash/FlashParametersReaderTests.h"
 #include "wifi/tcpserver/http_response_packager_tests.h"
 #include "wifi/input_form/HtmlRendererTests.h"
 #include "wifi/input_form/InputFormRendererTests.h"
@@ -59,7 +59,7 @@ int main()
     IrSequenceSenderTests().RunTests();
     HotSpotRequestRouterTests().RunTests();
     FlashWriterTests().RunTests();
-    FlashParameterReaderTests().RunTests();
+    FlashParametersReaderTests().RunTests();
     HttpResponsePackagerTests().RunTests();
     HtmlRendererTests().RunTests();
     InputFormRendererTests().RunTests();

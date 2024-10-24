@@ -1,7 +1,7 @@
 #include <memory>
 #include "TestFramework.h"
-#include "FlashParameterReaderTests.h"
-#include "../../wifi/flash/flash_parameter_reader.h"
+#include "FlashParametersReaderTests.h"
+#include "../../wifi/flash/flash_parameters_reader.h"
 #include "../../wifi/flash/flash_constants.h"
 
 namespace
@@ -28,21 +28,21 @@ namespace
 	};
 }
 
-static std::unique_ptr<FlashParameterReader> objectUnderTest;
+static std::unique_ptr<FlashParametersReader> objectUnderTest;
 static std::unique_ptr<MockFlashHardware> mockFlashHardware;
 static std::unique_ptr<MockFlashDataBlock> mockFlashDataBlock;
 
-static FlashParameterReader* CreateTestObject()
+static FlashParametersReader* CreateTestObject()
 {
 	mockFlashDataBlock.reset(new MockFlashDataBlock(FLASH_BLOCK_SIZE));
 	mockFlashHardware.reset(new MockFlashHardware(*mockFlashDataBlock.get()));
-	objectUnderTest.reset(new FlashParameterReader(*mockFlashHardware.get()));
+	objectUnderTest.reset(new FlashParametersReader(*mockFlashHardware.get()));
 	return objectUnderTest.get();
 }
 
 static void FlashParametersCanBeRead()
 {
-	IFlashParameterReader& reader = *CreateTestObject();
+	IFlashParametersReader& reader = *CreateTestObject();
 	mockFlashDataBlock.get()->SetValidFlashData();
 
 	reader.ReadParameters();
@@ -55,7 +55,7 @@ static void FlashParametersCanBeRead()
 
 static void WhenFlashParametersAreFoundReadParametersReturnsTrue()
 {
-	IFlashParameterReader& reader = *CreateTestObject();
+	IFlashParametersReader& reader = *CreateTestObject();
 	mockFlashDataBlock.get()->SetValidFlashData();
 
 	bool result = reader.ReadParameters();
@@ -65,7 +65,7 @@ static void WhenFlashParametersAreFoundReadParametersReturnsTrue()
 
 static void IfTheDataPrefixIsNotFoundThenNoParametersAreRead()
 {
-	IFlashParameterReader& reader = *CreateTestObject();
+	IFlashParametersReader& reader = *CreateTestObject();
 	mockFlashDataBlock.get()->SetFlashData("Random stuff");
 
 	reader.ReadParameters();
@@ -76,7 +76,7 @@ static void IfTheDataPrefixIsNotFoundThenNoParametersAreRead()
 
 static void IfTheDataPrefixIsNotFoundThenReadParametersReturnsFalse()
 {
-	IFlashParameterReader& reader = *CreateTestObject();
+	IFlashParametersReader& reader = *CreateTestObject();
 	mockFlashDataBlock.get()->SetFlashData("Random stuff");
 
 	bool result = reader.ReadParameters();
@@ -86,7 +86,7 @@ static void IfTheDataPrefixIsNotFoundThenReadParametersReturnsFalse()
 
 static void IfANameExceedsTheBlockSizeThenNoFurtherParametersAreRead()
 {
-	IFlashParameterReader& reader = *CreateTestObject();
+	IFlashParametersReader& reader = *CreateTestObject();
 	mockFlashDataBlock.get()->CreateTestDataBiggerThanABlock(20);
 
 	bool result = reader.ReadParameters();
@@ -98,7 +98,7 @@ static void IfANameExceedsTheBlockSizeThenNoFurtherParametersAreRead()
 
 static void IfAValueExceedsTheBlockSizeThenNoFurtherParametersAreRead()
 {
-	IFlashParameterReader& reader = *CreateTestObject();
+	IFlashParametersReader& reader = *CreateTestObject();
 	mockFlashDataBlock.get()->CreateTestDataBiggerThanABlock(30);
 
 	bool result = reader.ReadParameters();
@@ -110,7 +110,7 @@ static void IfAValueExceedsTheBlockSizeThenNoFurtherParametersAreRead()
 
 static void UndefinedParametersReturnEmptyString()
 {
-	IFlashParameterReader& reader = *CreateTestObject();
+	IFlashParametersReader& reader = *CreateTestObject();
 
 	reader.ReadParameters();
 
@@ -144,7 +144,7 @@ void MockFlashDataBlock::CreateTestDataBiggerThanABlock(int start)
 
 //	Test Class
 
-void FlashParameterReaderTests::RunTests()
+void FlashParametersReaderTests::RunTests()
 {
 	FlashParametersCanBeRead();
 	WhenFlashParametersAreFoundReadParametersReturnsTrue();
@@ -155,7 +155,7 @@ void FlashParameterReaderTests::RunTests()
 	UndefinedParametersReturnEmptyString();
 }
 
-void FlashParameterReaderTests::CleanUpAfterTests()
+void FlashParametersReaderTests::CleanUpAfterTests()
 {
 	objectUnderTest.release();
 	mockFlashHardware.release();

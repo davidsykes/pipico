@@ -19,6 +19,8 @@ bool FlashWriter::WriteParameters(const std::vector<FlashParameter> parameters)
 
 	uint8_t* data_begin = data_block.get();
 	uint8_t* data_current = data_begin;
+	memcpy(data_current, FLASH_PARAMETERS_PREFIX, FLASH_PARAMETERS_PREFIX_LEN);
+	data_current += FLASH_PARAMETERS_PREFIX_LEN;
 
 	for (int x = 0; x < parameters.size(); ++x)
 	{
