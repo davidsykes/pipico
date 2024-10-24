@@ -5,7 +5,6 @@
 #include "flash_parameter.h"
 #include "flash_hardware.h"
 
-#define FLASH_BLOCK_SIZE 1024
 
 class IFlashWriter
 {

@@ -7,7 +7,7 @@
 class IFlashParameterReader
 {
 public:
-    virtual void ReadParameters() = 0;
+    virtual bool ReadParameters() = 0;
     virtual bool ContainsParameter(const std::string& name) = 0;
     virtual const std::string& GetParameter(const std::string& name) = 0;
 };
@@ -17,10 +17,11 @@ class FlashParameterReader : public IFlashParameterReader
     IFlashHardware& flashHardware;
 
     const char* flash = 0;
-    int pointer = 0;
+    size_t pointer = 0;
     std::vector<FlashParameter> parameters;
+    std::string invalidParameter;
 
-    virtual void ReadParameters();
+    virtual bool ReadParameters();
     virtual bool ContainsParameter(const std::string& name);
     virtual const std::string& GetParameter(const std::string& name);
 

@@ -1,5 +1,6 @@
 #include <cstring>
 #include "flash_writer.h"
+#include "flash_constants.h"
 
 uint8_t* StoreParameter(uint8_t* data_begin, uint8_t* data_current, const char* param);
 

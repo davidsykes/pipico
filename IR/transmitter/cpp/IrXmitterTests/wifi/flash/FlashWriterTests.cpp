@@ -2,7 +2,7 @@
 #include "TestFramework.h"
 #include "FlashWriterTests.h"
 #include "../../wifi/flash/flash_writer.h"
-
+#include "../../wifi/flash/flash_constants.h"
 
 namespace
 {
