@@ -1,19 +1,21 @@
 #include "ssid_password_submitter.h"
 
+std::string GetDataUpToTheFirstWhitespace(std::string data);
+
 std::string SSIDPasswordSubmitter::Render(const std::string& parameters)
 {
-	std::string remainder = parameters;
+	std::string data = GetDataUpToTheFirstWhitespace(parameters);
 	std::vector<FlashParameter> flashParameters;
 
-	size_t ampersand = remainder.find('&');
+	size_t ampersand = data.find('&');
 
 	while (ampersand != std::string::npos)
 	{
-		AddParameter(flashParameters, remainder.substr(0, ampersand));
-		remainder = remainder.substr(ampersand+1);
-		ampersand = remainder.find('&');
+		AddParameter(flashParameters, data.substr(0, ampersand));
+		data = data.substr(ampersand+1);
+		ampersand = data.find('&');
 	}
-	AddParameter(flashParameters, remainder);
+	AddParameter(flashParameters, data);
 
 	if (flashParameters.size() > 0)
 	{
@@ -25,7 +27,6 @@ std::string SSIDPasswordSubmitter::Render(const std::string& parameters)
 	return "Fail";
 }
 
-
 void SSIDPasswordSubmitter::AddParameter(std::vector<FlashParameter>& flashParameters, const std::string& data)
 {
 	size_t eq = data.find('=');
@@ -36,4 +37,10 @@ void SSIDPasswordSubmitter::AddParameter(std::vector<FlashParameter>& flashParam
 		FlashParameter p(name, value);
 		flashParameters.push_back(p);
 	}
+}
+
+std::string GetDataUpToTheFirstWhitespace(std::string data)
+{
+	size_t space = data.find(' ');
+	return data.substr(0, space);
 }

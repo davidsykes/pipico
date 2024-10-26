@@ -48,6 +48,15 @@ static void IfTheWriterSucceedsTheSubmitterReturnsOk()
 	AssertEqual("Ok", result);
 }
 
+static void DataIsTruncatedAtTheFirstSpace()
+{
+	IRenderer& submitter = CreateTestObject();
+
+	std::string result = submitter.Render("ssid=fred&password=bill more request data");
+
+	AssertEqual("ssid:!fred!,password:!bill!,", mockFlashWriter.get()->DataWritten);
+}
+
 static void ParametersWithoutEqualSignsAreIgnored()
 {
 	IRenderer& submitter = CreateTestObject();
@@ -90,6 +99,7 @@ void SSIDPasswordSubmitterTests::RunTests()
 {
 	TheSubmittedParametersArePercentDecodedAndPassedToTheFlashWriter();
 	IfTheWriterSucceedsTheSubmitterReturnsOk();
+	DataIsTruncatedAtTheFirstSpace();
 	ParametersWithoutEqualSignsAreIgnored();
 	IfNoParametersAreSuppliedTheSubmitterReturnsNotOk();
 	IfNoParametersAreFoundTheSubmitterReturnsNotOk();
