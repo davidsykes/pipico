@@ -4,28 +4,6 @@ Project to capture and store digital signals, such as infra red controller comma
 ScopeWebApi
 A central place for storing and retrieving scope data
 
-
-
-
-== Projects for archive ===
-
-tracecapture tracesender traceviewer
-
-tracecapture
-Pico C application that monitors gpio pins 8-15. It waits for any change, then records up to TRACE_COUNT changes over one second.
-The trace details are sent through uart0 in the format
-Header       uint64  0x12345678
-Trace count  uint32
-Traces       Time    uint
-             Value   unsigned char
-Terminator   uint64  0x87654321
-
-tracesender
-Pico python application to receive the data from the tracecapture and rest it to the ScopeWebApi
-
 traceviewer
 Python app to retrieve and display the trace data
 
-
-To Do:
-Remove the sleep(0.1) from the uart receiver so the transmitter delay can be removed

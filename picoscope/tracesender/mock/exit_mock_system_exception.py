@@ -1,2 +1,0 @@
-class ExitMockSystemException(Exception):
-	pass
