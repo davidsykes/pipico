@@ -51,12 +51,22 @@ static void InvalidPercentValuesAreIgnored()
 	AssertEqual(result, "a%b%");
 }
 
+static void ExclamationMarks()
+{
+	auto decoder = CreateTestObject();
+
+	auto result = decoder->Decode("Simple Value!");
+
+	AssertEqual(result, "Simple Value!");
+}
+
 void PercentDecoderTests::RunTests()
 {
 	ASimpleValueIsUnchanged();
 	SpacesCanBeConverted();
 	AmpersandValuesCanBeConverted();
 	InvalidPercentValuesAreIgnored();
+	ExclamationMarks();
 }
 
 void PercentDecoderTests::CleanUpAfterTests()
