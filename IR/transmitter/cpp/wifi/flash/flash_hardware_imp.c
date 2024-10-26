@@ -88,7 +88,7 @@ int write_flash_data(const uint8_t* flash_data)
     printf("Read current values\n");
     print_buf(flash_target_contents, FLASH_PAGE_SIZE);
 #endif
-    printf("\nErasing target region...\n");
+    printf("\nErasing target region...%d / %d\n", FLASH_SECTOR_SIZE, FLASH_PAGE_SIZE);
     uint32_t interrupts = save_and_disable_interrupts();
     flash_range_erase(FLASH_TARGET_OFFSET, FLASH_SECTOR_SIZE);
     restore_interrupts(interrupts);

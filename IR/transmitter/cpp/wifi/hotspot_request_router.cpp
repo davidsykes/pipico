@@ -1,10 +1,13 @@
 #include <string.h>
 #include "hotspot_request_router.h"
 
-// GET /hotspot-detect.html HTTP/1.0
+//#define DEBUG_REQUESTS
 
 std::string HotSpotRequestRouter::RouteHttpRequest(const char* request)
 {
+#ifdef DEBUG_REQUESTS
+	printf("vvvv REQUEST vvvv\n%s\n^^^^^^^^^^^^^^^^^\n", request);
+#endif
 	if (strncmp(request, "CONNECT proxy-safebrowsing", 26) == 0)
 	{
 		return "{}";
