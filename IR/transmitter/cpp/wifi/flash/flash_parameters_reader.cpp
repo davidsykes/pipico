@@ -52,6 +52,7 @@ void FlashParametersReader::ReadAParameter()
 	{
 		return;
 	}
+	printf("Flash parameter %s=%s\n", name.c_str(), value.c_str());
 	parameters.push_back(FlashParameter(name, value));
 }
 

@@ -18,8 +18,8 @@ int _initialise_wifi_sta(const char* ssid, const char* password)
     cyw43_arch_enable_sta_mode();
 
     printf("Connecting to Wi-Fi %s %s...\n", ssid, password);
-    if (cyw43_arch_wifi_connect_blocking(ssid, password, CYW43_AUTH_WPA2_AES_PSK)) {
-        printf("failed to connect.\n");
+    if (cyw43_arch_wifi_connect_timeout_ms(ssid, password, CYW43_AUTH_WPA2_AES_PSK, 20000)) {
+        printf("failed to connect to %s.\n", ssid);
         return 1;
     } else {
         printf("Connected.\n");

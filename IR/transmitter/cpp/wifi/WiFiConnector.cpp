@@ -22,17 +22,17 @@
     {
       printf("Flash parameters not found\n");
     }
-    else if (!flashParametersReader.ContainsParameter("SSID"))
+    else if (!flashParametersReader.ContainsParameter("ssid"))
     {
-      printf("SSID not found\n");
+      printf("ssid not found\n");
     }
-    else if (!flashParametersReader.ContainsParameter("Password"))
+    else if (!flashParametersReader.ContainsParameter("password"))
     {
-      printf("Pasword not found\n");
+      printf("password not found\n");
     }
-    else if (!hw_if.initialise_wifi_sta(
-      flashParametersReader.GetParameter("SSID").c_str(),
-      flashParametersReader.GetParameter("Password").c_str()))
+    else if (hw_if.initialise_wifi_sta(
+      flashParametersReader.GetParameter("ssid").c_str(),
+      flashParametersReader.GetParameter("password").c_str()) != 0)
     {
       printf("Connection to wifi failed\n");
     }
