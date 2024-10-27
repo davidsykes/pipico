@@ -1,5 +1,0 @@
-hotsppt
-C/C++ project to allow the pico to be connected to via wifi with the intention of allowing the wifi credentials to be supplied for attaching to a new network
-Also includes tcp server and client functionality.
-It got a bit heavy, and started to fail when both client and server codes was used, so a subset of functionality was split out into the IR folders
-Functionality is being moved to ir/transmitter/cpp
