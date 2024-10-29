@@ -11,7 +11,6 @@
 #include "api/formatters/code_display_formatter.h"
 #include "hw_if/pico_hardware_interface.h"
 #include "gpio/gpio.h"
-#include "main.cxx"
 #include "pico_scope/pico_scope_main.h"
 #include "tools/message_logger.h"
 #include "transmit/ir_code_sender.h"
@@ -28,8 +27,7 @@ int main()
    hw_if.initialise_pico_stdio(true);
 
    WiFiConnector connector;
-   connector.ConnectToWiFi(hw_if, "PicoIR", "12345678", WIFI_SSID, WIFI_PASSWORD);
-   //connector.ConnectToWiFiDirect(hw_if, WIFI_SSID, WIFI_PASSWORD);
+   connector.ConnectToWiFi(hw_if, "PicoIR", "12345678");
 
    GPIOInputPin actionPin(2, hw_if);
    actionPin.SetPullUp(0);

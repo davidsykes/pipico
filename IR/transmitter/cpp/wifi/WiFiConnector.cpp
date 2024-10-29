@@ -12,7 +12,7 @@
 #include "tcpserver/http_response_packager.h"
 #include "tcpserver/pico_tcp_server.h"
 
- void WiFiConnector::ConnectToWiFi(IHardwareInterface& hw_if, const char* input_form_hotspot_name, const char* password, const char* tempssid, const char* temppassword)
+ void WiFiConnector::ConnectToWiFi(IHardwareInterface& hw_if, const char* input_form_hotspot_name, const char* password)
  {
     FlashHardware flashHardware;
     
@@ -41,40 +41,6 @@
          return;
     }
 
-//    WiFiConnectionMaker wifiConnectionMaker(&flashHardware);
-//    if (wifiConnectionMaker.CredentialsAreValid() && false)
-//    {
-//       if (wifiConnectionMaker.ConnectToWiFi())
-//       {
-//          DEBUG_printf("wifiConnectionMaker Connected");
-//          return;
-//       }
-//    }
-
-//    HtmlRenderer htmlRenderer;
-//    InputFormRenderer inputFormRenderer;
-//    PercentDecoder percentDecoder;
-//    FlashManager flashManager(&flashHardware);
-//    CredentialsHandler credentialsHandler(&percentDecoder, &flashManager);
-
-//    HotSpotTcpServer *config = new HotSpotConfiguration(
-//       input_form_hotspot_name,
-//       wifiConnectionMaker.lastErrorMessage.c_str(),
-//       &htmlRenderer,
-//       &inputFormRenderer,
-//       &credentialsHandler);
-
-   // TCP_REQUEST_PROCESSOR_T processor;
-   // processor.configuration = 0; //config;
-   // processor.process_request = &process_request;
-   // printf("Going iddddn\n");
-
-   // main_hotspot(
-   //    "Pico", //config->hotspot_name.c_str(),
-   //    "12345678", //config->hotspot_password.c_str(),
-   //    &processor);
-
-   //ConnectToWiFiDirect(hw_if, tempssid, temppassword);
    hw_if.initialise_wifi_ap(input_form_hotspot_name, password);
    
    HtmlRenderer htmlRenderer;
@@ -88,21 +54,7 @@
    run_tcp_server(&httpResponsePackager);
 }
 
-
 void WiFiConnector::ConnectToWiFiDirect(IHardwareInterface& hw_if, const char* ssid, const char* password)
 {
    hw_if.initialise_wifi_sta(ssid, password);
 }
-
-// // TODO Factor this out to a server object
-// void WiFiConnector::ConnectToWiFiTestServer(HotSpotTcpServer& tcp_server_processor)
-// {
-//    HtmlRenderer htmlRenderer;
-//    InputFormRenderer inputFormRenderer;
-
-//    TCP_REQUEST_PROCESSOR_T processor;
-//    processor.configuration = &tcp_server_processor;
-//    processor.process_request = &process_request;
-
-//    run_tcp_server(&processor);
-// }
