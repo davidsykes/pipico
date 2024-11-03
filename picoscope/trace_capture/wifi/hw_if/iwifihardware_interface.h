@@ -1,6 +1,6 @@
 #pragma once
 
-class IHardwareInterface
+class IWiFiHardwareInterface
 {
 public:
     virtual void initialise_pico_stdio(bool wait_for_usb_comms)=0;

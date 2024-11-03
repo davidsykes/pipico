@@ -6,6 +6,7 @@ set(CMAKE_CXX_STANDARD 17)
 pico_sdk_init()
 add_executable(test
         main.cpp
+        hw_if/pico_hardware_interface.cpp
         wifi/WiFiConnector.cpp
         wifi/hotspot_request_router.cpp
         wifi/dhcpserver/dhcpserver.c
@@ -14,8 +15,7 @@ add_executable(test
         wifi/flash/flash_writer.cpp
         wifi/flash/flash_parameters_reader.cpp
         wifi/flash/flash_hardware.cpp
-        wifi/hw_if/hardware_interface.c
-        wifi/hw_if/pico_hardware_interface.cpp
+        wifi/hw_if/wifi_hardware_interface.cpp
         wifi/input_form/html_renderer.cpp
         wifi/input_form/input_form_renderer.cpp
         wifi/input_form/ssid_password_input_form_renderer.cpp

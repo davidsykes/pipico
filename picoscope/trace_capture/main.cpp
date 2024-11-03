@@ -1,5 +1,5 @@
 #include "stdio.h"
-// #include "hw_if/pico_hardware_interface.h"
+#include "hw_if/pico_hardware_interface.h"
 // #include "gpio/gpio.h"
 // #include "pico_scope/pico_scope_main.h"
 // #include "tools/message_logger.h"
@@ -9,12 +9,13 @@
 
 int main()
 {
-   // PicoHardwareInterface phw_if;
    // IHardwareInterface& hw_if = phw_if;
    // hw_if.initialise_pico_stdio(true);
 
    WiFiConnector connector;
    connector.ConnectToWiFi("PicoScope", "12345678");
+   
+   PicoHardwareInterface hw_if;
 
    // GPIOInputPin actionPin(2, hw_if);
    // actionPin.SetPullUp(0);
