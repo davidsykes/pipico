@@ -1,4 +1,5 @@
 #pragma once
+#include "pico/types.h"
 #include "pins_changed_data.h"
 
 typedef struct sHardwareInterface

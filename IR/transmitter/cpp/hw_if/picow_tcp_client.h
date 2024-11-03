@@ -5,4 +5,3 @@ int tcp_client_request(const char* server_ip,
                          const char* request,
                          char*result,
                          int max_result_length);
-void cyw43_arch_deinit();

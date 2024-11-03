@@ -11,7 +11,6 @@
 #include "api/formatters/code_display_formatter.h"
 #include "hw_if/pico_hardware_interface.h"
 #include "gpio/gpio.h"
-#include "pico_scope/pico_scope_main.h"
 #include "tools/message_logger.h"
 #include "transmit/ir_code_sender.h"
 #include "wifi/WiFiConnector.h"
@@ -29,45 +28,32 @@ int main()
    WiFiConnector connector;
    connector.ConnectToWiFi(hw_if, "PicoIR", "12345678");
 
-   GPIOInputPin actionPin(2, hw_if);
-   actionPin.SetPullUp(0);
-   int actionValue = actionPin.Value();
-   printf("Action %d\n", actionValue);
+   GPIOOutputPin _outputPin(TRANSMIT_PIN, hw_if);
+   IGPIOOutputPin& outputPin = _outputPin;
+   MessageLogger messageLogger;
+   LogDisplayAction logDisplayAction(messageLogger);
 
-   if (actionValue == 1)
-   {
-      Blinker blinker(hw_if);
-      pico_scope_main(hw_if, blinker);
-   }
-   else
-   {
-      GPIOOutputPin _outputPin(TRANSMIT_PIN, hw_if);
-      IGPIOOutputPin& outputPin = _outputPin;
-      MessageLogger messageLogger;
-      LogDisplayAction logDisplayAction(messageLogger);
+   IrCodesRepository irCodesRepository(messageLogger);
+   CodeDisplayFormatter codeDisplayFormatter;
+   CodesDisplayAction codesDisplayAction(irCodesRepository, codeDisplayFormatter);
 
-      IrCodesRepository irCodesRepository(messageLogger);
-      CodeDisplayFormatter codeDisplayFormatter;
-      CodesDisplayAction codesDisplayAction(irCodesRepository, codeDisplayFormatter);
+   CodeSequenceRepository codeSequenceRepository(messageLogger);
+   ButtonFormatter buttonFormatter;
+   CodeSequencesDisplayAction codeSequencesDisplayAction(codeSequenceRepository, buttonFormatter);
 
-      CodeSequenceRepository codeSequenceRepository(messageLogger);
-      ButtonFormatter buttonFormatter;
-      CodeSequencesDisplayAction codeSequencesDisplayAction(codeSequenceRepository, buttonFormatter);
+   HomeDisplayAction homeDisplayAction(codeSequencesDisplayAction, logDisplayAction);
+   RawDisplayAction rawDisplayAction(codesDisplayAction, logDisplayAction);
 
-      HomeDisplayAction homeDisplayAction(codeSequencesDisplayAction, logDisplayAction);
-      RawDisplayAction rawDisplayAction(codesDisplayAction, logDisplayAction);
+   IrCodeSender irCodeSender(outputPin);
+   PlayIrCodeAction playIrCodeAction(irCodeSender, irCodesRepository, homeDisplayAction);
 
-      IrCodeSender irCodeSender(outputPin);
-      PlayIrCodeAction playIrCodeAction(irCodeSender, irCodesRepository, homeDisplayAction);
+   IrSequenceSender irSequenceSender(irCodesRepository, irCodeSender);
+   PlayIrSequenceAction playIrSequenceAction(irSequenceSender, codeSequenceRepository, homeDisplayAction);
 
-      IrSequenceSender irSequenceSender(irCodesRepository, irCodeSender);
-      PlayIrSequenceAction playIrSequenceAction(irSequenceSender, codeSequenceRepository, homeDisplayAction);
-
-      IrControllerHttpRequestRouter httpRequestRouter(homeDisplayAction, rawDisplayAction, playIrCodeAction, playIrSequenceAction);
-      HttpResponsePackager httpResponsePackager(httpRequestRouter);
-      hw_if.set_led(true);
-      run_tcp_server(&httpResponsePackager);
-   }
+   IrControllerHttpRequestRouter httpRequestRouter(homeDisplayAction, rawDisplayAction, playIrCodeAction, playIrSequenceAction);
+   HttpResponsePackager httpResponsePackager(httpRequestRouter);
+   hw_if.set_led(true);
+   run_tcp_server(&httpResponsePackager);
 
    hw_if.cyw43_arch_deinit();
    printf("Ended..\n");

@@ -23,6 +23,7 @@ add_executable(test
         hw_if/picow_tcp_client.c
         gpio/gpio_input.cpp
         gpio/gpio_output.cpp
+        tools/message_logger.cpp
         transmit/ir_code_sender.cpp
         transmit/ir_sequence_sender.cpp
         wifi/WiFiConnector.cpp
