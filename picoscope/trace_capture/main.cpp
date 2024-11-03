@@ -1,8 +1,9 @@
 #include "stdio.h"
 #include "hw_if/pico_hardware_interface.h"
 // #include "gpio/gpio.h"
-// #include "pico_scope/pico_scope_main.h"
+#include "pico_scope/pico_scope_main.h"
 // #include "tools/message_logger.h"
+#include "tools/blinker.h"
 #include "wifi/WiFiConnector.h"
 
 #define TRANSMIT_PIN 14
@@ -24,8 +25,8 @@ int main()
 
    // if (actionValue == 1)
    // {
-//      Blinker blinker(hw_if);
-//      pico_scope_main(hw_if, blinker);
+     Blinker blinker(hw_if);
+     pico_scope_main(hw_if, blinker);
    // }
    // else
    // {

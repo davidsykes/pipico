@@ -1,9 +1,4 @@
 #pragma once
-#ifdef _CONSOLE
-#include <cinttypes>
-#else
-#include "pico/types.h"
-#endif
 #include "pins_changed_data.h"
 
 typedef struct sHardwareInterface

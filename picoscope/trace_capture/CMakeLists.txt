@@ -7,6 +7,17 @@ pico_sdk_init()
 add_executable(test
         main.cpp
         hw_if/pico_hardware_interface.cpp
+        hw_if/picow_tcp_client.c
+        pico_scope/pico_scope.cpp
+        pico_scope/trace_data_formatter.cpp
+        pico_scope/pico_scope_trace.cpp
+        pico_scope/pico_scope_capture_and_post.cpp
+        pico_scope/pico_scope_main.cpp
+        rest/rest_handler.cpp
+        rest/tcp_request_maker.cpp
+        rest/tcp_response_analyser.cpp
+        tools/message_logger.cpp
+        tools/blinker.cpp
         wifi/WiFiConnector.cpp
         wifi/hotspot_request_router.cpp
         wifi/dhcpserver/dhcpserver.c
