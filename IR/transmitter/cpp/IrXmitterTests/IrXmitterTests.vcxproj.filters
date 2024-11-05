@@ -37,12 +37,6 @@
     <Filter Include="Source Files\Tests\api\api_actions">
       <UniqueIdentifier>{3d659bc5-8138-477c-9023-0d8669a06a4a}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\Tests\pico_scope">
-      <UniqueIdentifier>{6b97764e-2e4e-4d67-91a5-ad1dbfceffe9}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\pico_scope">
-      <UniqueIdentifier>{9050a46a-6731-4f18-9734-8c3c1d7fbbab}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Source Files\Tests\Mocks">
       <UniqueIdentifier>{b69c9741-cde0-45c6-aa10-dedf8bd5e261}</UniqueIdentifier>
     </Filter>
@@ -69,12 +63,6 @@
     </Filter>
     <Filter Include="Source Files\gpio">
       <UniqueIdentifier>{6a98b4cf-d957-437b-a021-ba456a240313}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\Tests\rest">
-      <UniqueIdentifier>{c4be1bc7-82be-4f77-9297-a2d8f0ff7538}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\rest">
-      <UniqueIdentifier>{0044486b-f2a7-4bef-897c-4ca9d440ccdb}</UniqueIdentifier>
     </Filter>
     <Filter Include="Source Files\Tests\wifi">
       <UniqueIdentifier>{2dc9d560-fca5-4daa-ab76-b795c4b4f4c9}</UniqueIdentifier>
@@ -126,21 +114,6 @@
     <ClCompile Include="api\api_actions\logs_display_action_tests.cpp">
       <Filter>Source Files\Tests\api\api_actions</Filter>
     </ClCompile>
-    <ClCompile Include="pico_scope\PicoScopeTests.cpp">
-      <Filter>Source Files\Tests\pico_scope</Filter>
-    </ClCompile>
-    <ClCompile Include="pico_scope\TraceDataFormatterTests.cpp">
-      <Filter>Source Files\Tests\pico_scope</Filter>
-    </ClCompile>
-    <ClCompile Include="..\pico_scope\pico_scope.cpp">
-      <Filter>Source Files\pico_scope</Filter>
-    </ClCompile>
-    <ClCompile Include="..\pico_scope\pico_scope_trace.cpp">
-      <Filter>Source Files\pico_scope</Filter>
-    </ClCompile>
-    <ClCompile Include="..\pico_scope\trace_data_formatter.cpp">
-      <Filter>Source Files\pico_scope</Filter>
-    </ClCompile>
     <ClCompile Include="codes\CodesRepositoryTests.cpp">
       <Filter>Source Files\Tests\codes</Filter>
     </ClCompile>
@@ -167,36 +140,6 @@
     </ClCompile>
     <ClCompile Include="..\gpio\gpio_output.cpp">
       <Filter>Source Files\gpio</Filter>
-    </ClCompile>
-    <ClCompile Include="rest\RestHandlerTests.cpp">
-      <Filter>Source Files\Tests\rest</Filter>
-    </ClCompile>
-    <ClCompile Include="rest\TcpRequestMakerTests.cpp">
-      <Filter>Source Files\Tests\rest</Filter>
-    </ClCompile>
-    <ClCompile Include="rest\TcpResponseAnalyserTests.cpp">
-      <Filter>Source Files\Tests\rest</Filter>
-    </ClCompile>
-    <ClCompile Include="..\rest\rest_handler.cpp">
-      <Filter>Source Files\rest</Filter>
-    </ClCompile>
-    <ClCompile Include="..\rest\tcp_request_maker.cpp">
-      <Filter>Source Files\rest</Filter>
-    </ClCompile>
-    <ClCompile Include="..\rest\tcp_response_analyser.cpp">
-      <Filter>Source Files\rest</Filter>
-    </ClCompile>
-    <ClCompile Include="pico_scope\PicoScopeCaptureAndPostTests.cpp">
-      <Filter>Source Files\Tests\pico_scope</Filter>
-    </ClCompile>
-    <ClCompile Include="..\pico_scope\pico_scope_capture_and_post.cpp">
-      <Filter>Source Files\pico_scope</Filter>
-    </ClCompile>
-    <ClCompile Include="tools\BlinkerTests.cpp">
-      <Filter>Source Files\Tests\tools</Filter>
-    </ClCompile>
-    <ClCompile Include="..\tools\blinker.cpp">
-      <Filter>Source Files\Tools</Filter>
     </ClCompile>
     <ClCompile Include="..\api\api_actions\raw_display_action.cpp">
       <Filter>Source Files\api\api_actions</Filter>
@@ -335,18 +278,6 @@
     <ClInclude Include="api\api_actions\logs_display_action_tests.h">
       <Filter>Source Files\Tests\api\api_actions</Filter>
     </ClInclude>
-    <ClInclude Include="pico_scope\PicoScopeTests.h">
-      <Filter>Source Files\Tests\pico_scope</Filter>
-    </ClInclude>
-    <ClInclude Include="pico_scope\TraceDataFormatterTests.h">
-      <Filter>Source Files\Tests\pico_scope</Filter>
-    </ClInclude>
-    <ClInclude Include="..\pico_scope\pico_scope.h">
-      <Filter>Source Files\pico_scope</Filter>
-    </ClInclude>
-    <ClInclude Include="..\pico_scope\pico_scope_configuration.h">
-      <Filter>Source Files\pico_scope</Filter>
-    </ClInclude>
     <ClInclude Include="Mocks\MockHardwareInteface.h">
       <Filter>Source Files\Tests\Mocks</Filter>
     </ClInclude>
@@ -385,39 +316,6 @@
     </ClInclude>
     <ClInclude Include="..\gpio\gpio.h">
       <Filter>Source Files\gpio</Filter>
-    </ClInclude>
-    <ClInclude Include="rest\RestHandlerTests.h">
-      <Filter>Source Files\Tests\rest</Filter>
-    </ClInclude>
-    <ClInclude Include="rest\TcpRequestMakerTests.h">
-      <Filter>Source Files\Tests\rest</Filter>
-    </ClInclude>
-    <ClInclude Include="rest\TcpResponseAnalyserTests.h">
-      <Filter>Source Files\Tests\rest</Filter>
-    </ClInclude>
-    <ClInclude Include="..\rest\rest_handler.h">
-      <Filter>Source Files\rest</Filter>
-    </ClInclude>
-    <ClInclude Include="..\rest\tcp_request_error_logger.h">
-      <Filter>Source Files\rest</Filter>
-    </ClInclude>
-    <ClInclude Include="..\rest\tcp_request_maker.h">
-      <Filter>Source Files\rest</Filter>
-    </ClInclude>
-    <ClInclude Include="..\rest\tcp_response_analyser.h">
-      <Filter>Source Files\rest</Filter>
-    </ClInclude>
-    <ClInclude Include="pico_scope\PicoScopeCaptureAndPostTests.h">
-      <Filter>Source Files\Tests\pico_scope</Filter>
-    </ClInclude>
-    <ClInclude Include="..\pico_scope\pico_scope_capture_and_post.h">
-      <Filter>Source Files\pico_scope</Filter>
-    </ClInclude>
-    <ClInclude Include="tools\BlinkerTests.h">
-      <Filter>Source Files\Tests\tools</Filter>
-    </ClInclude>
-    <ClInclude Include="..\tools\blinker.h">
-      <Filter>Source Files\Tools</Filter>
     </ClInclude>
     <ClInclude Include="..\api\api_actions\raw_display_action.h">
       <Filter>Source Files\api\api_actions</Filter>

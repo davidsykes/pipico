@@ -1,0 +1,171 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Source Files\Tests">
+      <UniqueIdentifier>{ad9121e0-4534-45b6-931d-8c91aab6570e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Tests\TestFramework">
+      <UniqueIdentifier>{96c82c44-ace5-442e-b2ab-2c4fef97f929}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Tests\rest">
+      <UniqueIdentifier>{cd8a5b7e-93ae-48ae-b8fd-4b5ca45e1230}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Tests\tools">
+      <UniqueIdentifier>{7516c1a8-e99b-4ed8-b086-2504ad674c54}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Tools">
+      <UniqueIdentifier>{9ba5c709-a063-4d80-a093-9353e28e45eb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\rest">
+      <UniqueIdentifier>{af692252-4c90-449d-bf43-6cef77982175}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Tests\pico_scope">
+      <UniqueIdentifier>{8d185df2-fef9-4692-9379-59d9ee23e157}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\pico_scope">
+      <UniqueIdentifier>{13465f87-ff6a-493f-8c29-1daef4ae76e0}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="tools\BlinkerTests.cpp">
+      <Filter>Source Files\Tests\tools</Filter>
+    </ClCompile>
+    <ClCompile Include="TestFramework\Assert.cpp">
+      <Filter>Source Files\Tests\TestFramework</Filter>
+    </ClCompile>
+    <ClCompile Include="TestFramework\TestFramework.cpp">
+      <Filter>Source Files\Tests\TestFramework</Filter>
+    </ClCompile>
+    <ClCompile Include="TestFramework\TestModule.cpp">
+      <Filter>Source Files\Tests\TestFramework</Filter>
+    </ClCompile>
+    <ClCompile Include="rest\RestHandlerTests.cpp">
+      <Filter>Source Files\Tests\rest</Filter>
+    </ClCompile>
+    <ClCompile Include="rest\TcpRequestMakerTests.cpp">
+      <Filter>Source Files\Tests\rest</Filter>
+    </ClCompile>
+    <ClCompile Include="rest\TcpResponseAnalyserTests.cpp">
+      <Filter>Source Files\Tests\rest</Filter>
+    </ClCompile>
+    <ClCompile Include="ScopeTraceCaptureTests.cpp">
+      <Filter>Source Files\Tests</Filter>
+    </ClCompile>
+    <ClCompile Include="..\tools\blinker.cpp">
+      <Filter>Source Files\Tools</Filter>
+    </ClCompile>
+    <ClCompile Include="..\tools\message_logger.cpp">
+      <Filter>Source Files\Tools</Filter>
+    </ClCompile>
+    <ClCompile Include="..\rest\rest_handler.cpp">
+      <Filter>Source Files\rest</Filter>
+    </ClCompile>
+    <ClCompile Include="..\rest\tcp_request_maker.cpp">
+      <Filter>Source Files\rest</Filter>
+    </ClCompile>
+    <ClCompile Include="..\rest\tcp_response_analyser.cpp">
+      <Filter>Source Files\rest</Filter>
+    </ClCompile>
+    <ClCompile Include="pico_scope\PicoScopeCaptureAndPostTests.cpp">
+      <Filter>Source Files\Tests\pico_scope</Filter>
+    </ClCompile>
+    <ClCompile Include="pico_scope\PicoScopeTests.cpp">
+      <Filter>Source Files\Tests\pico_scope</Filter>
+    </ClCompile>
+    <ClCompile Include="pico_scope\TraceDataFormatterTests.cpp">
+      <Filter>Source Files\Tests\pico_scope</Filter>
+    </ClCompile>
+    <ClCompile Include="..\pico_scope\pico_scope.cpp">
+      <Filter>Source Files\pico_scope</Filter>
+    </ClCompile>
+    <ClCompile Include="..\pico_scope\pico_scope_capture_and_post.cpp">
+      <Filter>Source Files\pico_scope</Filter>
+    </ClCompile>
+    <ClCompile Include="..\pico_scope\pico_scope_main.cpp">
+      <Filter>Source Files\pico_scope</Filter>
+    </ClCompile>
+    <ClCompile Include="..\pico_scope\pico_scope_trace.cpp">
+      <Filter>Source Files\pico_scope</Filter>
+    </ClCompile>
+    <ClCompile Include="..\pico_scope\trace_data_formatter.cpp">
+      <Filter>Source Files\pico_scope</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="tools\BlinkerTests.h">
+      <Filter>Source Files\Tests\tools</Filter>
+    </ClInclude>
+    <ClInclude Include="TestFramework\Assert.h">
+      <Filter>Source Files\Tests\TestFramework</Filter>
+    </ClInclude>
+    <ClInclude Include="TestFramework\ITestModule.h">
+      <Filter>Source Files\Tests\TestFramework</Filter>
+    </ClInclude>
+    <ClInclude Include="TestFramework\TestFramework.h">
+      <Filter>Source Files\Tests\TestFramework</Filter>
+    </ClInclude>
+    <ClInclude Include="rest\RestHandlerTests.h">
+      <Filter>Source Files\Tests\rest</Filter>
+    </ClInclude>
+    <ClInclude Include="rest\TcpRequestMakerTests.h">
+      <Filter>Source Files\Tests\rest</Filter>
+    </ClInclude>
+    <ClInclude Include="rest\TcpResponseAnalyserTests.h">
+      <Filter>Source Files\Tests\rest</Filter>
+    </ClInclude>
+    <ClInclude Include="..\tools\blinker.h">
+      <Filter>Source Files\Tools</Filter>
+    </ClInclude>
+    <ClInclude Include="..\tools\message_logger.h">
+      <Filter>Source Files\Tools</Filter>
+    </ClInclude>
+    <ClInclude Include="..\rest\rest_handler.h">
+      <Filter>Source Files\rest</Filter>
+    </ClInclude>
+    <ClInclude Include="..\rest\tcp_request_error_logger.h">
+      <Filter>Source Files\rest</Filter>
+    </ClInclude>
+    <ClInclude Include="..\rest\tcp_request_maker.h">
+      <Filter>Source Files\rest</Filter>
+    </ClInclude>
+    <ClInclude Include="..\rest\tcp_response_analyser.h">
+      <Filter>Source Files\rest</Filter>
+    </ClInclude>
+    <ClInclude Include="pico_scope\PicoScopeCaptureAndPostTests.h">
+      <Filter>Source Files\Tests\pico_scope</Filter>
+    </ClInclude>
+    <ClInclude Include="pico_scope\PicoScopeTests.h">
+      <Filter>Source Files\Tests\pico_scope</Filter>
+    </ClInclude>
+    <ClInclude Include="pico_scope\TraceDataFormatterTests.h">
+      <Filter>Source Files\Tests\pico_scope</Filter>
+    </ClInclude>
+    <ClInclude Include="..\pico_scope\pico_scope.h">
+      <Filter>Source Files\pico_scope</Filter>
+    </ClInclude>
+    <ClInclude Include="..\pico_scope\pico_scope_capture_and_post.h">
+      <Filter>Source Files\pico_scope</Filter>
+    </ClInclude>
+    <ClInclude Include="..\pico_scope\pico_scope_configuration.h">
+      <Filter>Source Files\pico_scope</Filter>
+    </ClInclude>
+    <ClInclude Include="..\pico_scope\pico_scope_main.h">
+      <Filter>Source Files\pico_scope</Filter>
+    </ClInclude>
+    <ClInclude Include="..\pico_scope\trace_data_formatter.h">
+      <Filter>Source Files\pico_scope</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>

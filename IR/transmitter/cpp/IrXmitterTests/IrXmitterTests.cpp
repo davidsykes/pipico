@@ -12,14 +12,7 @@
 #include "codes\CodesRepositoryTests.h"
 #include "codes/CodeSequenceRepositoryTests.h"
 #include "gpio/GPIOTests.h"
-#include "pico_scope/PicoScopeTests.h"
-#include "pico_scope/TraceDataFormatterTests.h"
-#include "pico_scope/PicoScopeCaptureAndPostTests.h"
-#include "rest/RestHandlerTests.h"
-#include "rest/TcpRequestMakerTests.h"
-#include "rest/TcpResponseAnalyserTests.h"
 #include "tools\MessageLoggerTests.h"
-#include "tools\BlinkerTests.h"
 #include "transmit/IrCodeSenderTests.h"
 #include "transmit/IrSequenceSenderTests.h"
 #include "wifi/HotSpotRequestRouterTests.h"
@@ -47,14 +40,7 @@ int main()
     CodesRepositoryTests().RunTests();
     CodeSequenceRepositoryTests().RunTests();
     GPIOTests().RunTests();
-    PicoScopeTests().RunTests();
-    TraceDataFormatterTests().RunTests();
-    PicoScopeCaptureAndPostTests().RunTests();
-    RestHandlerTests().RunTests();
-    TcpRequestMakerTests().RunTests();
-    TcpResponseAnalyserTests().RunTests();
     MessageLoggerTests().RunTests();
-    BlinkerTests().RunTests();
     IrCodeSenderTests().RunTests();
     IrSequenceSenderTests().RunTests();
     HotSpotRequestRouterTests().RunTests();
