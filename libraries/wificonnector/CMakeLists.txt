@@ -1,5 +1,10 @@
 cmake_minimum_required(VERSION 3.13)
-project(mylib VERSION 1.0.1 DESCRIPTION "Wifi connection tool")
+include(pico_sdk_import.cmake)
+project(mylib VERSION 1.0.1 DESCRIPTION "Wifi connection tool"
+        LANGUAGES C CXX)
+set(CMAKE_C_STANDARD 11)
+set(CMAKE_CXX_STANDARD 17)
+pico_sdk_init()
 include(GNUInstallDirs)
 add_library(mylib SHARED
         src/wificonnector.cpp
@@ -18,3 +23,9 @@ install(TARGETS mylib
     PUBLIC_HEADER DESTINATION ${CMAKE_INSTALL_INCLUDEDIR})
 install(FILES ${CMAKE_BINARY_DIR}/mylib.pc
     DESTINATION ${CMAKE_INSTALL_DATAROOTDIR}/pkgconfig)
+
+    target_link_libraries(
+        mylib
+        pico_stdlib
+        pico_cyw43_arch_lwip_poll
+        hardware_flash)

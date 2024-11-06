@@ -1,0 +1,3 @@
+#define FLASH_BLOCK_SIZE            1024
+#define FLASH_PARAMETERS_PREFIX		"xyzzy"
+#define FLASH_PARAMETERS_PREFIX_LEN	5
