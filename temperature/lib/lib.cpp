@@ -6,23 +6,12 @@
 
 #include "pico/stdlib.h"
 #include "pico/cyw43_arch.h"
-#include "tusb.h"
-#include "lib.h"
 
-int main() {
-    stdio_init_all();
-    
-    while (!tud_cdc_connected()) sleep_ms(100);
-
-    if (cyw43_arch_init()) {
-        printf("Wi-Fi init failed");
-        return -1;
-    }
-    lib_main();
+int lib_main() {
     while (true) {
         cyw43_arch_gpio_put(CYW43_WL_GPIO_LED_PIN, 1);
-        sleep_ms(250);
+        sleep_ms(1250);
         cyw43_arch_gpio_put(CYW43_WL_GPIO_LED_PIN, 0);
-        sleep_ms(250);
+        sleep_ms(1250);
     }
 }
