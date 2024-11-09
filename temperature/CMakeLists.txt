@@ -10,5 +10,5 @@ set(CMAKE_CXX_STANDARD 17)
 # Initialize the SDK
 pico_sdk_init()
 
-add_subdirectory(lib)
+add_subdirectory(wificonnector)
 add_subdirectory(src)
