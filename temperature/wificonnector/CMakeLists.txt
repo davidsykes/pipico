@@ -2,7 +2,8 @@
 add_library(wificonnector INTERFACE)
 
 target_sources(wificonnector INTERFACE
-wificonnector.cpp
+src/wificonnector.cpp
+src/hw_if/wifi_hardware_interface.cpp
 )
 
 # For interface libraries this is not completely required. (This would likely be required for static and dynamic libraries.)

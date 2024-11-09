@@ -3,7 +3,7 @@
 // #include "flash/flash_hardware.h"
 // #include "flash/flash_writer.h"
 // #include "flash/flash_parameters_reader.h"
-// #include "hw_if/wifi_hardware_interface.h"
+#include "hw_if/wifi_hardware_interface.h"
 // #include "input_form/ssid_password_input_form_renderer.h"
 // #include "input_form/html_renderer.h"
 // #include "input_form/input_form_renderer.h"
@@ -15,9 +15,9 @@
 
  void WiFiConnector::ConnectToWiFi(const char* input_form_hotspot_name, const char* password)
  {
-//     WiFiHardwareInterface _hw_if;
-//     IWiFiHardwareInterface& hw_if(_hw_if);
-//     hw_if.initialise_pico_stdio(true);
+    WiFiHardwareInterface _hw_if;
+    IWiFiHardwareInterface& hw_if(_hw_if);
+    hw_if.initialise_pico_stdio(true);
 //     FlashHardware flashHardware;
     
 //     FlashParametersReader flashParametersReader_(flashHardware);
