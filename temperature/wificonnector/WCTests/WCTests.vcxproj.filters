@@ -1,0 +1,120 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Source Files\Tests">
+      <UniqueIdentifier>{20ff156a-b818-4f41-b54b-cc653afa45bd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Tests\flash">
+      <UniqueIdentifier>{10abb5ef-889f-48bd-b5fc-91123f781ccb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Tests\input_form">
+      <UniqueIdentifier>{3b38c136-cfbb-48b6-bbf2-01b60c22f669}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Tests\tcp_server">
+      <UniqueIdentifier>{5aab6737-bf4d-4677-9330-191a1db28ecd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Tests\Mocks">
+      <UniqueIdentifier>{3ea68710-004e-4430-bc00-52382263f9ed}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Tests\TestFramework">
+      <UniqueIdentifier>{1f5f549e-337a-44ae-82f2-425f09c3dd11}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="WCTests.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="flash\FlashParametersReaderTests.cpp">
+      <Filter>Source Files\Tests\flash</Filter>
+    </ClCompile>
+    <ClCompile Include="flash\FlashWriterTests.cpp">
+      <Filter>Source Files\Tests\flash</Filter>
+    </ClCompile>
+    <ClCompile Include="input_form\HtmlRendererTests.cpp">
+      <Filter>Source Files\Tests\input_form</Filter>
+    </ClCompile>
+    <ClCompile Include="input_form\InputFormRendererTests.cpp">
+      <Filter>Source Files\Tests\input_form</Filter>
+    </ClCompile>
+    <ClCompile Include="input_form\PercentDecoderTests.cpp">
+      <Filter>Source Files\Tests\input_form</Filter>
+    </ClCompile>
+    <ClCompile Include="input_form\SSIDPasswordInputFormRendererTests.cpp">
+      <Filter>Source Files\Tests\input_form</Filter>
+    </ClCompile>
+    <ClCompile Include="input_form\SSIDPasswordSubmitterTests.cpp">
+      <Filter>Source Files\Tests\input_form</Filter>
+    </ClCompile>
+    <ClCompile Include="tcpserver\http_response_packager_tests.cpp">
+      <Filter>Source Files\Tests\tcp_server</Filter>
+    </ClCompile>
+    <ClCompile Include="TestFramework\Assert.cpp">
+      <Filter>Source Files\Tests\TestFramework</Filter>
+    </ClCompile>
+    <ClCompile Include="TestFramework\TestFramework.cpp">
+      <Filter>Source Files\Tests\TestFramework</Filter>
+    </ClCompile>
+    <ClCompile Include="TestFramework\TestModule.cpp">
+      <Filter>Source Files\Tests\TestFramework</Filter>
+    </ClCompile>
+    <ClCompile Include="HotSpotRequestRouterTests.cpp">
+      <Filter>Source Files\Tests</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="flash\FlashParametersReaderTests.h">
+      <Filter>Source Files\Tests\flash</Filter>
+    </ClInclude>
+    <ClInclude Include="flash\FlashWriterTests.h">
+      <Filter>Source Files\Tests\flash</Filter>
+    </ClInclude>
+    <ClInclude Include="input_form\HtmlRendererTests.h">
+      <Filter>Source Files\Tests\input_form</Filter>
+    </ClInclude>
+    <ClInclude Include="input_form\InputFormRendererTests.h">
+      <Filter>Source Files\Tests\input_form</Filter>
+    </ClInclude>
+    <ClInclude Include="input_form\PercentDecoderTests.h">
+      <Filter>Source Files\Tests\input_form</Filter>
+    </ClInclude>
+    <ClInclude Include="input_form\SSIDPasswordInputFormRendererTests.h">
+      <Filter>Source Files\Tests\input_form</Filter>
+    </ClInclude>
+    <ClInclude Include="input_form\SSIDPasswordSubmitterTests.h">
+      <Filter>Source Files\Tests\input_form</Filter>
+    </ClInclude>
+    <ClInclude Include="tcpserver\http_response_packager_tests.h">
+      <Filter>Source Files\Tests\tcp_server</Filter>
+    </ClInclude>
+    <ClInclude Include="TestFramework\Assert.h">
+      <Filter>Source Files\Tests\TestFramework</Filter>
+    </ClInclude>
+    <ClInclude Include="TestFramework\ITestModule.h">
+      <Filter>Source Files\Tests\TestFramework</Filter>
+    </ClInclude>
+    <ClInclude Include="TestFramework\TestFramework.h">
+      <Filter>Source Files\Tests\TestFramework</Filter>
+    </ClInclude>
+    <ClInclude Include="mocks\MockRenderer.h">
+      <Filter>Source Files\Tests\Mocks</Filter>
+    </ClInclude>
+    <ClInclude Include="Mocks\MockHttpRequestRouter.h">
+      <Filter>Source Files\Tests\Mocks</Filter>
+    </ClInclude>
+    <ClInclude Include="HotSpotRequestRouterTests.h">
+      <Filter>Source Files\Tests</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>
