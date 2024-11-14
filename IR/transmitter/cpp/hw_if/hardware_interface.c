@@ -9,8 +9,8 @@ void _initialise_pico_stdio(bool wait_for_usb_comms)
     if (wait_for_usb_comms)
     {
         while (!tud_cdc_connected()) sleep_ms(100);
+        printf("Stdio initialised.\n");
     }
-    printf("Stdio initialised\n");
 }
 
 int _initialise_wifi_sta(const char* ssid, const char* password)
