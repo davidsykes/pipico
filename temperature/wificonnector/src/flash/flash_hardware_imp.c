@@ -41,46 +41,6 @@ void print_buf(const uint8_t *buf, size_t len) {
 }
 #endif
 
-// int flash_test() {
-//     printf("Flash page size: %d\n", FLASH_PAGE_SIZE);
-//     printf("Read original target region:\n");
-//     print_buf(flash_target_contents, FLASH_PAGE_SIZE);
-
-//     uint8_t random_data[FLASH_PAGE_SIZE];
-//     for (int i = 0; i < FLASH_PAGE_SIZE; ++i)
-//         random_data[i] = i * 3; // rand() >> 16;
-
-//     printf("Generated random data:\n");
-//     print_buf(random_data, FLASH_PAGE_SIZE);
-
-//     // Note that a whole number of sectors must be erased at a time.
-//     printf("\nErasing target region...\n");
-//     uint32_t interrupts = save_and_disable_interrupts();
-//     flash_range_erase(FLASH_TARGET_OFFSET, FLASH_SECTOR_SIZE);
-//     restore_interrupts(interrupts);
-//     printf("Done. Read back target region:\n");
-//     print_buf(flash_target_contents, FLASH_PAGE_SIZE);
-
-//     printf("\nProgramming target region...\n");
-//     interrupts = save_and_disable_interrupts();
-//     flash_range_program(FLASH_TARGET_OFFSET, random_data, FLASH_PAGE_SIZE);
-//     restore_interrupts(interrupts);
-//     printf("Done. Read back target region:\n");
-//     print_buf(flash_target_contents, FLASH_PAGE_SIZE);
-//     printf("\nChecking values\n");
-
-//     bool mismatch = false;
-//     for (int i = 0; i < FLASH_PAGE_SIZE; ++i) {
-//         if (random_data[i] != flash_target_contents[i])
-//             mismatch = true;
-//     }
-//     if (mismatch)
-//         printf("Programming failed!\n");
-//     else
-//         printf("Programming successful!\n");
-// }
-
-
 int write_flash_data(const uint8_t* flash_data)
 {
     //flash_test();

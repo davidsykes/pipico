@@ -31,6 +31,15 @@
     <Filter Include="Source Files\Tests\TestFramework">
       <UniqueIdentifier>{1f5f549e-337a-44ae-82f2-425f09c3dd11}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\flash">
+      <UniqueIdentifier>{01cf2af4-7ac2-4e49-8338-0d879d11f088}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\input_form">
+      <UniqueIdentifier>{47ca96a4-5fad-4e30-87cb-fe63b8a739df}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\tcp_server">
+      <UniqueIdentifier>{b2718770-c5bd-4fc0-a39f-c2a8f04141f1}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="WCTests.cpp">
@@ -71,6 +80,33 @@
     </ClCompile>
     <ClCompile Include="HotSpotRequestRouterTests.cpp">
       <Filter>Source Files\Tests</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\flash\flash_parameters_reader.cpp">
+      <Filter>Source Files\flash</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\flash\flash_writer.cpp">
+      <Filter>Source Files\flash</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\input_form\html_renderer.cpp">
+      <Filter>Source Files\input_form</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\input_form\input_form_renderer.cpp">
+      <Filter>Source Files\input_form</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\input_form\percent_decoder.cpp">
+      <Filter>Source Files\input_form</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\input_form\ssid_password_input_form_renderer.cpp">
+      <Filter>Source Files\input_form</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\input_form\ssid_password_submitter.cpp">
+      <Filter>Source Files\input_form</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\tcpserver\http_response_packager.cpp">
+      <Filter>Source Files\tcp_server</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\hotspot_request_router.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -115,6 +151,42 @@
     </ClInclude>
     <ClInclude Include="HotSpotRequestRouterTests.h">
       <Filter>Source Files\Tests</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\flash\flash_parameters_reader.h">
+      <Filter>Source Files\flash</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\flash\flash_writer.h">
+      <Filter>Source Files\flash</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\input_form\html_renderer.h">
+      <Filter>Source Files\input_form</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\input_form\ihtml_renderer.h">
+      <Filter>Source Files\input_form</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\input_form\input_form_renderer.h">
+      <Filter>Source Files\input_form</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\input_form\irenderer.h">
+      <Filter>Source Files\input_form</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\input_form\percent_decoder.h">
+      <Filter>Source Files\input_form</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\input_form\ssid_password_input_form_renderer.h">
+      <Filter>Source Files\input_form</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\input_form\ssid_password_submitter.h">
+      <Filter>Source Files\input_form</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\tcpserver\http_response_packager.h">
+      <Filter>Source Files\tcp_server</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\hotspot_request_router.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\ihttp_request_router.h">
+      <Filter>Source Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
