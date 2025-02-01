@@ -8,6 +8,8 @@ chmod +x pico_setup.sh
 
 Setting a project up to build
 
+Create CMakeLists.txt
+
 mkdir build
 cd build
 cmake .. -DPICO_BOARD=pico_w
