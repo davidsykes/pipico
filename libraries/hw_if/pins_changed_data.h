@@ -1,6 +1,6 @@
 
 
-// Code copies from pipico/libraries.hw_if
+// Code copied from pipico/libraries.hw_if
 
 
 
