@@ -12,13 +12,20 @@ pico_sdk_init()
 # rest of your project
 
 add_executable(web_button
-    main.c
-    modulate.c
-    gpio_pin.c
+    main.cpp
+    hw_if/pico_hardware_interface.cpp
+    hw_if/hardware_interface.c
+    hw_if/picow_tcp_client.c
 )
 
-# Add pico_stdlib library which aggregates commonly used features
-target_link_libraries(web_button pico_stdlib)
+target_include_directories(web_button PRIVATE
+        ${CMAKE_CURRENT_LIST_DIR}
+        hw_if
+        )
+pico_enable_stdio_usb(web_button 1)
+pico_enable_stdio_uart(web_button 0)
 
-# create map/bin/hex/uf2 file in addition to ELF.
+# Add pico_stdlib library which aggregates commonly used features
+target_link_libraries(web_button pico_stdlib pico_cyw43_arch_lwip_poll)
+
 pico_add_extra_outputs(web_button)
