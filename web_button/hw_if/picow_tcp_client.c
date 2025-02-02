@@ -20,7 +20,7 @@
 #include "lwip/tcp.h"
 #include "picow_tcp_client.h"
 
-#define DEBUG_printf
+#define DEBUG_printf printf
 #define DEBUG_printf2 printf
 #define BUF_SIZE 2048
 #define POLL_TIME_S 5
@@ -117,6 +117,7 @@ err_t tcp_client_recv(void *arg, struct tcp_pcb *tpcb, struct pbuf *p, err_t err
     // can use this method to cause an assertion in debug mode, if this method is called when
     // cyw43_arch_lwip_begin IS needed
     cyw43_arch_lwip_check();
+    DEBUG_printf("tcp_client_rcv %d\n", p->tot_len);
     if (p->tot_len > 0) {
         DEBUG_printf("recv %d err %d\n", p->tot_len, err);
         // Receive the buffer
@@ -180,6 +181,7 @@ int tcp_client_request(const char* server_ip, unsigned int port, const char*requ
         tcp_result(state, -1, "tcp_client_open");
         return -1;
     }
+    DEBUG_printf("Write Data %s:%d %s\n", server_ip, port, request);
     int write_result = tcp_write(state->tcp_pcb, request, strlen(request), 0);
     DEBUG_printf("Write Data %d\n", write_result);
 
