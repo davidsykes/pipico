@@ -5,6 +5,9 @@
 #include "../rest/tcp_request_error_logger.h"
 #include "../rest/tcp_request_maker.h"
 
+#define JB_IP   "192.168.1.126"
+#define JB_PORT 5001
+
 int main()
 {
 
@@ -22,20 +25,18 @@ int main()
     TcpResponseAnalyser tcpResponseAnalyser;
     TcpRequestErrorLogger tcpRequestErrorLogger;
     TcpRequestMaker tcpRequestMaker(
-        SCOPE_API_SERVER_IP,
-        SCOPE_API_PORT,
+        JB_IP,
+        JB_PORT,
         hw_if,
         tcpResponseAnalyser,
         tcpRequestErrorLogger);
-    TraceDataFormatter trace_data_formatter;
-    RestHandler restHandler(tcpRequestMaker);
+    RestHandler _restHandler(tcpRequestMaker);
+    IRestHandler& restHandler(_restHandler);
 
 
+    std::string response = restHandler.Get("/currenttrack");
 
-    std::string response;
-    int result = hw_if.tcp_request("192.168.1.126", 5001, "/currenttrack", response);
-
-    printf("Result = %d\n", result);
+    printf("Result = %s\n", response.c_str());
 
     printf("Ended..\n");
 }

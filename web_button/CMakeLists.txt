@@ -32,6 +32,9 @@ add_executable(web_button
     wifi/tcpserver/pico_tcp_server.c
     wifi/tcpserver/pico_tcp_server.cpp
     wifi/tcpserver/http_response_packager.cpp
+    rest/rest_handler.cpp
+    rest/tcp_request_maker.cpp
+    rest/tcp_response_analyser.cpp
 )
 
 target_include_directories(web_button PRIVATE
