@@ -14,7 +14,7 @@
 #include "../dnsserver/dnsserver.h"
 
 #define TCP_PORT 80
-#define DEBUG_printf printf
+#define DEBUG_printf
 #define DEBUG_printf2
 #define POLL_TIME_S 5
 #define HTTP_GET "GET /api"

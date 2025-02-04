@@ -20,8 +20,8 @@
 #include "lwip/tcp.h"
 #include "picow_tcp_client.h"
 
-#define DEBUG_printf printf
-#define DEBUG_printf2 printf
+#define DEBUG_printf
+#define DEBUG_printf2
 #define BUF_SIZE 2048
 #define POLL_TIME_S 5
 

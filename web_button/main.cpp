@@ -19,7 +19,7 @@ int main()
 
     WiFiConnector* wifi = new WiFiConnector();
     wifi->ConnectToWiFi(hw_if, "Button", "12345678");
-    printf("Co co connected\n");
+    printf("Connected to wifi\n");
 
 
     TcpResponseAnalyser tcpResponseAnalyser;

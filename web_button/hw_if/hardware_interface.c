@@ -9,6 +9,8 @@
 #include "tusb.h"
 #include "picow_tcp_client.h"
 
+#define DEBUG_printf
+
 void _initialise_pico_stdio(bool wait_for_usb_comms)
 {
     stdio_init_all();
@@ -23,7 +25,7 @@ int _initialise_wifi_sta(const char* ssid, const char* password)
 {
     cyw43_arch_enable_sta_mode();
 
-    printf("Connecting to Wi-Fi %s %s...\n", ssid, password);
+    DEBUG_printf("Connecting to Wi-Fi %s %s...\n", ssid, password);
     if (cyw43_arch_wifi_connect_timeout_ms(ssid, password, CYW43_AUTH_WPA2_AES_PSK, 20000)) {
         printf("failed to connect to %s.\n", ssid);
         return 1;

@@ -2,6 +2,8 @@
 #include "flash_parameters_reader.h"
 #include "flash_constants.h"
 
+#define DEBUG_printf
+
 bool FlashParametersReader::ReadParameters()
 {
 	parameters.clear();
@@ -52,7 +54,7 @@ void FlashParametersReader::ReadAParameter()
 	{
 		return;
 	}
-	printf("Flash parameter %s=%s\n", name.c_str(), value.c_str());
+	DEBUG_printf("Flash parameter %s=%s\n", name.c_str(), value.c_str());
 	parameters.push_back(FlashParameter(name, value));
 }
 
