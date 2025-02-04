@@ -1,4 +1,4 @@
-This is not an actual library, but a first step in creating a module that can be reused
+These are not an actual libraries, but a step towards creating reusable modules
 
 Copy the folder into the project directory
 
