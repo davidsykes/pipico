@@ -1,8 +1,8 @@
 #include <memory>
 #include <sstream>
 #include "TcpResponseAnalyserTests.h"
-#include "../../rest/rest_handler.h"
-#include "../../rest/tcp_response_analyser.h"
+#include "../rest/rest_handler.h"
+#include "../rest/tcp_response_analyser.h"
 
 static std::unique_ptr<TcpResponseAnalyser> objectUnderTest;
 

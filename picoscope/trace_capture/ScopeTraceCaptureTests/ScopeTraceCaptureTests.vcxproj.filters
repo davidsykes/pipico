@@ -19,9 +19,6 @@
     <Filter Include="Source Files\Tests\TestFramework">
       <UniqueIdentifier>{96c82c44-ace5-442e-b2ab-2c4fef97f929}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\Tests\rest">
-      <UniqueIdentifier>{cd8a5b7e-93ae-48ae-b8fd-4b5ca45e1230}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Source Files\Tests\tools">
       <UniqueIdentifier>{7516c1a8-e99b-4ed8-b086-2504ad674c54}</UniqueIdentifier>
     </Filter>
@@ -41,24 +38,6 @@
   <ItemGroup>
     <ClCompile Include="tools\BlinkerTests.cpp">
       <Filter>Source Files\Tests\tools</Filter>
-    </ClCompile>
-    <ClCompile Include="TestFramework\Assert.cpp">
-      <Filter>Source Files\Tests\TestFramework</Filter>
-    </ClCompile>
-    <ClCompile Include="TestFramework\TestFramework.cpp">
-      <Filter>Source Files\Tests\TestFramework</Filter>
-    </ClCompile>
-    <ClCompile Include="TestFramework\TestModule.cpp">
-      <Filter>Source Files\Tests\TestFramework</Filter>
-    </ClCompile>
-    <ClCompile Include="rest\RestHandlerTests.cpp">
-      <Filter>Source Files\Tests\rest</Filter>
-    </ClCompile>
-    <ClCompile Include="rest\TcpRequestMakerTests.cpp">
-      <Filter>Source Files\Tests\rest</Filter>
-    </ClCompile>
-    <ClCompile Include="rest\TcpResponseAnalyserTests.cpp">
-      <Filter>Source Files\Tests\rest</Filter>
     </ClCompile>
     <ClCompile Include="ScopeTraceCaptureTests.cpp">
       <Filter>Source Files\Tests</Filter>
@@ -102,28 +81,19 @@
     <ClCompile Include="..\pico_scope\trace_data_formatter.cpp">
       <Filter>Source Files\pico_scope</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\libraries\TestFramework\Assert.cpp">
+      <Filter>Source Files\Tests\TestFramework</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\libraries\TestFramework\TestFramework.cpp">
+      <Filter>Source Files\Tests\TestFramework</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\libraries\TestFramework\TestModule.cpp">
+      <Filter>Source Files\Tests\TestFramework</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="tools\BlinkerTests.h">
       <Filter>Source Files\Tests\tools</Filter>
-    </ClInclude>
-    <ClInclude Include="TestFramework\Assert.h">
-      <Filter>Source Files\Tests\TestFramework</Filter>
-    </ClInclude>
-    <ClInclude Include="TestFramework\ITestModule.h">
-      <Filter>Source Files\Tests\TestFramework</Filter>
-    </ClInclude>
-    <ClInclude Include="TestFramework\TestFramework.h">
-      <Filter>Source Files\Tests\TestFramework</Filter>
-    </ClInclude>
-    <ClInclude Include="rest\RestHandlerTests.h">
-      <Filter>Source Files\Tests\rest</Filter>
-    </ClInclude>
-    <ClInclude Include="rest\TcpRequestMakerTests.h">
-      <Filter>Source Files\Tests\rest</Filter>
-    </ClInclude>
-    <ClInclude Include="rest\TcpResponseAnalyserTests.h">
-      <Filter>Source Files\Tests\rest</Filter>
     </ClInclude>
     <ClInclude Include="..\tools\blinker.h">
       <Filter>Source Files\Tools</Filter>
@@ -166,6 +136,15 @@
     </ClInclude>
     <ClInclude Include="..\pico_scope\trace_data_formatter.h">
       <Filter>Source Files\pico_scope</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\libraries\TestFramework\Assert.h">
+      <Filter>Source Files\Tests\TestFramework</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\libraries\TestFramework\ITestModule.h">
+      <Filter>Source Files\Tests\TestFramework</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\libraries\TestFramework\TestFramework.h">
+      <Filter>Source Files\Tests\TestFramework</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

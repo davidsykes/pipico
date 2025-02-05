@@ -1,7 +1,7 @@
 #include <memory>
 #include "TcpRequestMakerTests.h"
-#include "../../rest/tcp_request_maker.h"
-#include "../Mocks/MockHardwareInteface.h"
+#include "../rest/tcp_request_maker.h"
+#include "Mocks/MockHardwareInteface.h"
 
 class RequestMakerHardwareInterface : public IMockHardwareInterface
 {

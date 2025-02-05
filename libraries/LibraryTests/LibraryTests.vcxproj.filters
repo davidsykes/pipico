@@ -1,0 +1,105 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Source Files\RestLibrary">
+      <UniqueIdentifier>{3896ebb9-e9c1-4f10-913e-c261fd2eeff4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Mocks">
+      <UniqueIdentifier>{c8051842-080d-40ab-aab3-20be5263f991}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\TestFramework">
+      <UniqueIdentifier>{52c994ab-fd05-4cd8-a008-f2cf595a818c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\RestLibrary\Source">
+      <UniqueIdentifier>{9de362e9-7d54-4277-8368-cb2303933042}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\RestLibrary\Tests">
+      <UniqueIdentifier>{3ca4d62c-44b9-4f89-89fc-64802882cddf}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="LibraryTests.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\TestFramework\Assert.cpp">
+      <Filter>Source Files\TestFramework</Filter>
+    </ClCompile>
+    <ClCompile Include="..\TestFramework\TestFramework.cpp">
+      <Filter>Source Files\TestFramework</Filter>
+    </ClCompile>
+    <ClCompile Include="..\TestFramework\TestModule.cpp">
+      <Filter>Source Files\TestFramework</Filter>
+    </ClCompile>
+    <ClCompile Include="..\rest\tests\RestHandlerTests.cpp">
+      <Filter>Source Files\RestLibrary\Tests</Filter>
+    </ClCompile>
+    <ClCompile Include="..\rest\tests\RestLibraryTests.cpp">
+      <Filter>Source Files\RestLibrary\Tests</Filter>
+    </ClCompile>
+    <ClCompile Include="..\rest\tests\TcpRequestMakerTests.cpp">
+      <Filter>Source Files\RestLibrary\Tests</Filter>
+    </ClCompile>
+    <ClCompile Include="..\rest\tests\TcpResponseAnalyserTests.cpp">
+      <Filter>Source Files\RestLibrary\Tests</Filter>
+    </ClCompile>
+    <ClCompile Include="..\rest\rest\rest_handler.cpp">
+      <Filter>Source Files\RestLibrary\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\rest\rest\tcp_request_maker.cpp">
+      <Filter>Source Files\RestLibrary\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\rest\rest\tcp_response_analyser.cpp">
+      <Filter>Source Files\RestLibrary\Source</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\rest\tests\Mocks\MockHardwareInteface.h">
+      <Filter>Source Files\Mocks</Filter>
+    </ClInclude>
+    <ClInclude Include="..\TestFramework\Assert.h">
+      <Filter>Source Files\TestFramework</Filter>
+    </ClInclude>
+    <ClInclude Include="..\TestFramework\ITestModule.h">
+      <Filter>Source Files\TestFramework</Filter>
+    </ClInclude>
+    <ClInclude Include="..\TestFramework\TestFramework.h">
+      <Filter>Source Files\TestFramework</Filter>
+    </ClInclude>
+    <ClInclude Include="..\rest\tests\RestHandlerTests.h">
+      <Filter>Source Files\RestLibrary\Tests</Filter>
+    </ClInclude>
+    <ClInclude Include="..\rest\tests\RestLibraryTests.h">
+      <Filter>Source Files\RestLibrary\Tests</Filter>
+    </ClInclude>
+    <ClInclude Include="..\rest\tests\TcpRequestMakerTests.h">
+      <Filter>Source Files\RestLibrary\Tests</Filter>
+    </ClInclude>
+    <ClInclude Include="..\rest\tests\TcpResponseAnalyserTests.h">
+      <Filter>Source Files\RestLibrary\Tests</Filter>
+    </ClInclude>
+    <ClInclude Include="..\rest\rest\rest_handler.h">
+      <Filter>Source Files\RestLibrary\Source</Filter>
+    </ClInclude>
+    <ClInclude Include="..\rest\rest\tcp_request_error_logger.h">
+      <Filter>Source Files\RestLibrary\Source</Filter>
+    </ClInclude>
+    <ClInclude Include="..\rest\rest\tcp_request_maker.h">
+      <Filter>Source Files\RestLibrary\Source</Filter>
+    </ClInclude>
+    <ClInclude Include="..\rest\rest\tcp_response_analyser.h">
+      <Filter>Source Files\RestLibrary\Source</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>

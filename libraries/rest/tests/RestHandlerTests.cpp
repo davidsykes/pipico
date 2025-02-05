@@ -1,6 +1,6 @@
 #include <memory>
 #include "RestHandlerTests.h"
-#include "../../rest/rest_handler.h"
+#include "../rest/rest_handler.h"
 
 class RestMockTcpRequestMaker : public ITcpRequestMaker
 {
