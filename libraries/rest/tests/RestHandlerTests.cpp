@@ -22,13 +22,13 @@ static IRestHandler& CreateTestObject()
 	return *objectUnderTest.get();
 }
 
-static void GetPassesAGetRequestToTheTcpRequestMaker()
+static void GetPassesAGetRequestWithHTTPVersionAndHostToTheTcpRequestMaker()
 {
 	auto& rest = CreateTestObject();
 
 	rest.Get("get url");
 
-	AssertEqual("GET get url", mockTcpRequestMaker.get()->Request);
+	AssertEqual("GET get url HTTP/1.1\r\nHost: api\r\n\r\n", mockTcpRequestMaker.get()->Request);
 }
 
 static void GetReturnsTheTcpRequestMakerResponse()
@@ -68,7 +68,7 @@ int RestMockTcpRequestMaker::MakeRequest(const std::string& request, std::string
 
 void RestHandlerTests::RunTests()
 {
-	GetPassesAGetRequestToTheTcpRequestMaker();
+	GetPassesAGetRequestWithHTTPVersionAndHostToTheTcpRequestMaker();
 	GetReturnsTheTcpRequestMakerResponse();
 	PutPassesAGetRequestToTheTcpRequestMaker();
 	PutReturnsTheTcpRequestMakerResponse();

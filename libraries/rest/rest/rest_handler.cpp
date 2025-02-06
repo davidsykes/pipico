@@ -5,10 +5,13 @@
 
 std::string RestHandler::Get(const char* url)
 {
-    std::string request = "GET ";
-    request += url;
+    std::ostringstream request;
+    request << "GET " << url << " HTTP/1.1\r\n";
+    request << "Host: api\r\n";
+    request << "\r\n";
+
     std::string response;
-    tcpRequestMaker.MakeRequest(request, response);
+    tcpRequestMaker.MakeRequest(request.str(), response);
     return response;
 }
 
