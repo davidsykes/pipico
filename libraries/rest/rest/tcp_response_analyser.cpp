@@ -43,9 +43,20 @@ int TcpResponseAnalyser::FindStatusCode()
 	return 400;
 }
 
+static int GetValueFromHexString(const char* hex_string)
+{
+	char* value_end;
+	int value = strtol(hex_string, &value_end, 16);
+	if (value_end > hex_string)
+	{
+		return value;
+	}
+	return 0;
+}
+
 int TcpResponseAnalyser::FindDataLength()
 {
-	int length = atoi(current_line);
+	int length = GetValueFromHexString(current_line);
 	FindLineEnd();
 	StartNextLine();
 

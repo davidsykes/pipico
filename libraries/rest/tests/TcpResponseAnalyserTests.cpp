@@ -1,8 +1,8 @@
 #include <memory>
 #include <sstream>
 #include "TcpResponseAnalyserTests.h"
-#include "../../rest/rest_handler.h"
-#include "../../rest/tcp_response_analyser.h"
+#include "../rest/rest_handler.h"
+#include "../rest/tcp_response_analyser.h"
 
 static std::unique_ptr<TcpResponseAnalyser> objectUnderTest;
 
@@ -96,6 +96,28 @@ static void APacketWithNoTerminatingLineFeedIsHandled()
 	AssertEqual("Ok", body);
 }
 
+static void ResponseDataLengthsAreHexDigits()
+{
+	ITcpResponseAnalyser& analyser = CreateTestObject();
+	std::string request = "HTTP/1.1 200 OK\r\n\
+Content-Type: application/json; charset=utf-8\r\n\
+Date: Tue, 04 Feb 2025 08:05:25 GMT\r\n\
+Server: Kestrel\r\n\
+Transfer-Encoding: chunked\r\n\
+\r\n\
+95\r\n\
+{\"responseType\":\"MP3PlayerDataObjects.Requests.MP3PlayerGetCurrentTrackRequest+Response\",\"response\":{\"currentTrackId\":0},\"error\":null,\"success\":true}\r\n\
+0\r\n\
+";
+	std::string body;
+
+	int result = analyser.AnalyseTcpResponse(request, body);
+
+	AssertEqual(200, result);
+	AssertEqual("{\"responseType\":\"MP3PlayerDataObjects.Requests.MP3PlayerGetCurrentTrackRequest+Response\",\"response\":{\"currentTrackId\":0},\"error\":null,\"success\":true}", body);
+
+}
+
 void TcpResponseAnalyserTests::RunTests()
 {
 	AValid200ResponseReturnsTheStatusCode();
@@ -105,6 +127,7 @@ void TcpResponseAnalyserTests::RunTests()
 	LinesTerminatedByCrAreHandled();
 	LinesTerminatedByLfAreHandled();
 	APacketWithNoTerminatingLineFeedIsHandled();
+	ResponseDataLengthsAreHexDigits();
 }
 
 void TcpResponseAnalyserTests::CleanUpAfterTests()
@@ -114,7 +137,7 @@ void TcpResponseAnalyserTests::CleanUpAfterTests()
 
 static std::string MakeNotOkResponse()
 {
-	return """HTTP/1.1 200 OK\r\n\
+	return "HTTP/1.1 200 OK\r\n\
 Content - Type: text / plain; charset = utf - 8\r\n\
 Date: Thu, 25 Jul 2024 06 : 28 : 24 GMT\r\n\
 Server : Kestrel\r\n\
@@ -128,7 +151,7 @@ Not Ok\r\n\
 
 static std::string MakeOkResponse()
 {
-	return """HTTP/1.1 200 OK\r\n\
+	return "HTTP/1.1 200 OK\r\n\
 Content - Type: text / plain; charset = utf - 8\r\n\
 Date: Sat, 27 Jul 2024 06 : 24 : 40 GMT\r\n\
 Server : Kestrel\r\n\
