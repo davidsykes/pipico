@@ -6,7 +6,7 @@
 #include "../rest/tcp_request_maker.h"
 
 #define JB_IP   "192.168.1.126"
-#define JB_PORT 5001
+#define JB_PORT 5002
 
 int main()
 {
@@ -33,10 +33,19 @@ int main()
     RestHandler _restHandler(tcpRequestMaker);
     IRestHandler& restHandler(_restHandler);
 
+    hw_if.initialise_input_pin(2);
+    while(1)
+    {
+        printf("\nWaiting..\n");
+        int pins = hw_if.gpio_get(2);
+        printf("Pins %d\n", pins);
+        while (pins == hw_if.gpio_get(2)) {}
+        pins = hw_if.gpio_get(2);
+        printf("Pins %d\n", pins);
 
-    std::string response = restHandler.Get("/currenttrack");
-
-    printf("Result = %s\n", response.c_str());
+        std::string response = restHandler.Get("/PlayCollection/7");
+        printf("Result = %s\n", response.c_str());
+    }
 
     printf("Ended..\n");
 }
