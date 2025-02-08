@@ -14,7 +14,7 @@ int main()
     IHardwareInterface* _hw_if = new PicoHardwareInterface();
     IHardwareInterface& hw_if = *_hw_if;
     hw_if.initialise_pico_stdio(true);
-    hw_if.set_led(true);
+    hw_if.set_led(false);
     printf("Start..\n");
 
     WiFiConnector* wifi = new WiFiConnector();
@@ -34,17 +34,25 @@ int main()
     IRestHandler& restHandler(_restHandler);
 
     hw_if.initialise_input_pin(2);
+
     while(1)
     {
+        while (hw_if.gpio_get(2)){}
+        hw_if.set_led(true);
         printf("\nWaiting..\n");
-        int pins = hw_if.gpio_get(2);
-        printf("Pins %d\n", pins);
-        while (pins == hw_if.gpio_get(2)) {}
-        pins = hw_if.gpio_get(2);
-        printf("Pins %d\n", pins);
+
+        while (!hw_if.gpio_get(2)) {}
+        hw_if.set_led(false);
 
         std::string response = restHandler.Get("/PlayCollection/7");
-        printf("Result = %s\n", response.c_str());
+        if (response.find("OK\r\n"))
+        {
+            hw_if.set_led(true);
+        }
+        else
+        {
+            printf("Result = %s\n", response.c_str());
+        }
     }
 
     printf("Ended..\n");
