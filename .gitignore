@@ -22,4 +22,4 @@ build
 .DS_Store
 *.pdf
 
-IR/transmitter/cpp/main.cxx
+ssid.txt

@@ -6,8 +6,6 @@
 
 #include "pico_hardware_interface.h"
 
-#define TCP_BUFFER_LENGTH   2048
-
 PicoHardwareInterface::PicoHardwareInterface()
 {
     hardware_interface = create_hardware_interface();
@@ -84,23 +82,7 @@ void PicoHardwareInterface::sleep_us(int useconds)
     hardware_interface->sleep_us(useconds);
 }
 
-int PicoHardwareInterface::tcp_request(const char* server, unsigned int port, const char* request, std::string& response)
-{
-    #ifdef DEBUG_TCP_REQUEST
-    printf("---TCP REQUEST---\n%s\n^^^\n", request);
-    #endif
-    char buffer[TCP_BUFFER_LENGTH];
-    buffer[0] = 0;
-    int result = hardware_interface->tcp_request(server, port, request, buffer, TCP_BUFFER_LENGTH);
-    if (result == 0)
-    {
-        response = buffer;
-        #ifdef DEBUG_TCP_REQUEST
-        printf("---TCP RESPONSE---\n%s\n^^^\n", response.c_str());
-        #endif
-    }
-    return result;
-}
+
 
 void PicoHardwareInterface::cyw43_arch_deinit()
 {

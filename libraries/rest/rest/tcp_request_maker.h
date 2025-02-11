@@ -1,6 +1,6 @@
 #pragma once
 #include <string>
-#include "../hw_if/ihardware_interface.h"
+#include "ipico_tcp_client.h"
 #include "tcp_response_analyser.h"
 #include "tcp_request_error_logger.h"
 
@@ -16,7 +16,7 @@ class TcpRequestMaker : public ITcpRequestMaker
 {
     std::string server;
     unsigned int port;
-    IHardwareInterface& hw_if;
+    IPicoTcpClient& pico_tcp_client;
     ITcpResponseAnalyser& tcpResponseAnalyser;
     ITcpRequestErrorLogger& tcpRequestErrorLogger;
 
@@ -28,12 +28,12 @@ public:
     TcpRequestMaker(
         const std::string& server,
         unsigned int port,
-        IHardwareInterface& hw_if,
+        IPicoTcpClient& pico_tcp_client,
         ITcpResponseAnalyser& tcpResponseAnalyser,
         ITcpRequestErrorLogger& tcpRequestErrorLogger) :
         server(server),
         port(port),
-        hw_if(hw_if),
+        pico_tcp_client(pico_tcp_client),
         tcpResponseAnalyser(tcpResponseAnalyser),
         tcpRequestErrorLogger(tcpRequestErrorLogger){}
 };

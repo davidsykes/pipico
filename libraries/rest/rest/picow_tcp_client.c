@@ -171,7 +171,7 @@ static TCP_CLIENT_T* tcp_client_init(const char* server_ip, uint port) {
     return state;
 }
 
-int tcp_client_request(const char* server_ip, unsigned int port, const char*request, char* result, int max_result_length) {
+int pico_tcp_client_request(const char* server_ip, unsigned int port, const char*request, char* result, int max_result_length) {
     TCP_CLIENT_T *state = tcp_client_init(server_ip, port);
     if (!state) {
         return -1;

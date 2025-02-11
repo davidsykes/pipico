@@ -4,7 +4,7 @@
 int TcpRequestMaker::MakeRequest(const std::string& request, std::string& response)
 {
 	std::string server_response;
-	int tcp_request_result = hw_if.tcp_request(server.c_str(), port, request.c_str(), server_response);
+	int tcp_request_result = pico_tcp_client.tcp_request(server.c_str(), port, request.c_str(), server_response);
 
 	if (tcp_request_result == 0)
 	{
