@@ -3,23 +3,24 @@
 #include "../rest/tcp_request_maker.h"
 #include "Mocks/MockHardwareInteface.h"
 
-class RequestMakerHardwareInterface : public IMockHardwareInterface
+class MockPicoTcpClient : public IPicoTcpClient
 {
-	virtual int tcp_request(const char* server, unsigned int port, const char* request, std::string& response)
+public:
+	std::string Server;
+	int Port;
+	std::string RequestMade;
+	std::string Response = "Server Response";
+	int TcpRequestReturnCode = 0;
+
+private:
+	int tcp_request(const char* server, unsigned int port, const char* request, std::string& response)
 	{
 		Server = server;
-		Port = port;
+		Port = port = 0;
 		RequestMade = request;
 		response = Response;
 		return TcpRequestReturnCode;
 	}
-
-public:
-	std::string Server;
-	unsigned int Port=0;
-	std::string RequestMade;
-	std::string Response = "Server Response";;
-	int TcpRequestReturnCode = 0;
 };
 
 class MockTcpResponseAnalyser : public ITcpResponseAnalyser
@@ -45,19 +46,19 @@ public:
 };
 
 static std::unique_ptr<TcpRequestMaker> objectUnderTest;
-static std::unique_ptr<RequestMakerHardwareInterface> mockHardwareInterface;
+static std::unique_ptr<MockPicoTcpClient> mockPicoTcpClient;
 static std::unique_ptr<MockTcpRequestErrorLogger> mockTcpRequestErrorLogger;
 static std::unique_ptr<MockTcpResponseAnalyser> mockTcpResponseAnalyser;
 
 static ITcpRequestMaker& CreateTestObject()
 {
-	mockHardwareInterface.reset(new RequestMakerHardwareInterface());
+	mockPicoTcpClient.reset(new MockPicoTcpClient());
 	mockTcpResponseAnalyser.reset(new MockTcpResponseAnalyser());
 	mockTcpRequestErrorLogger.reset(new MockTcpRequestErrorLogger);
 	objectUnderTest.reset(new TcpRequestMaker(
 		"Server ip",
 		4242,
-		*mockHardwareInterface.get(),
+		*mockPicoTcpClient.get(),
 		*mockTcpResponseAnalyser.get(),
 		*mockTcpRequestErrorLogger.get()));
 	TcpRequestMaker* m = objectUnderTest.get();
@@ -73,9 +74,9 @@ static void TheRequestIsPassedToTheServer()
 	std::string response;
 	maker.MakeRequest("Request", response);
 
-	AssertEqual("Server ip", mockHardwareInterface.get()->Server);
-	AssertEqual(4242, mockHardwareInterface.get()->Port);
-	AssertEqual("Request", mockHardwareInterface.get()->RequestMade);
+	AssertEqual("Server ip", mockPicoTcpClient.get()->Server);
+	AssertEqual(4242, mockPicoTcpClient.get()->Port);
+	AssertEqual("Request", mockPicoTcpClient.get()->RequestMade);
 }
 
 static void TheResponseIsPassedToTheTcpResponseAnalyser()
@@ -102,7 +103,7 @@ static void TheHttpStatusCodeIsReturned()
 static void IfAServerErrorOccursAnAppropriateCodeIsReturned()
 {
 	auto& maker = CreateTestObject();
-	mockHardwareInterface.get()->TcpRequestReturnCode = -14;
+	mockPicoTcpClient.get()->TcpRequestReturnCode = -14;
 
 	std::string response;
 	int status = maker.MakeRequest("Request", response);
@@ -114,7 +115,7 @@ static void IfAServerErrorOccursAnAppropriateCodeIsReturned()
 static void IfAnErrorOccursTheErrorIsLogged()
 {
 	auto& maker = CreateTestObject();
-	mockHardwareInterface.get()->TcpRequestReturnCode = -14;
+	mockPicoTcpClient.get()->TcpRequestReturnCode = -14;
 
 	std::string response;
 	int status = maker.MakeRequest("Request", response);
@@ -134,8 +135,7 @@ static void IfTheResponseIsNotRecognisedAnErrorIsReturned()
 	std::string response;
 	int status = maker.MakeRequest("Request", response);
 
-	AssertEqual("Request", mockTcpRequestErrorLogger.get()->Request);
-	AssertEqual("Server Response", mockTcpRequestErrorLogger.get()->Response);
+	AssertEqual(status, 142);
 }
 
 int MockTcpResponseAnalyser::AnalyseTcpResponse(const std::string& server_response, std::string& analysed_response)
@@ -162,7 +162,7 @@ void TcpRequestMakerTests::RunTests()
 void TcpRequestMakerTests::CleanUpAfterTests()
 {
 	objectUnderTest.release();
-	mockHardwareInterface.release();
+	mockPicoTcpClient.release();
 	mockTcpRequestErrorLogger.release();
 	mockTcpResponseAnalyser.release();
 }
