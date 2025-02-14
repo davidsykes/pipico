@@ -6,7 +6,7 @@
 #include "../rest/tcp_request_maker.h"
 
 #define JB_IP   "192.168.1.126"
-#define JB_PORT 5002
+#define JB_PORT 5001
 
 int main()
 {
@@ -44,9 +44,10 @@ int main()
         while (!hw_if.gpio_get(2)) {}
         hw_if.set_led(false);
 
-        std::string response = restHandler.Get("/PlayCollection/7");
+        std::string response = restHandler.Get("/currenttrack");
         if (response.find("OK\r\n"))
         {
+            printf("Result = %s\n", response.c_str());
             hw_if.set_led(true);
         }
         else
