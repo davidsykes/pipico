@@ -19,11 +19,6 @@ typedef struct sHardwareInterface
     uint64_t (*gpio_put_at_us)(int pin_number, bool value, uint64_t time_us);
     void (*set_led)(int value);
     void (*sleep_us)(int useconds);
-    int (*tcp_request)(const char* server_ip,
-                         unsigned int port,
-                         const char* request,
-                         char*result,
-                         int max_result_length);
     void (*cyw43_arch_deinit)();
 
 } sHardwareInterface;

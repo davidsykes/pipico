@@ -20,7 +20,6 @@ class PicoHardwareInterface : public IHardwareInterface
     virtual uint64_t gpio_put_at_us(int pin_number, bool value, uint64_t time_us);
     virtual void set_led(bool value);
     virtual void sleep_us(int useconds);
-    virtual int tcp_request(const char* server, unsigned int port, const char* request, std::string& response);
     virtual void cyw43_arch_deinit();
 
 public:

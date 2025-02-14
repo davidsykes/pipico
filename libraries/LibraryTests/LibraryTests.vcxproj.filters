@@ -16,9 +16,6 @@
     <Filter Include="Source Files\RestLibrary">
       <UniqueIdentifier>{3896ebb9-e9c1-4f10-913e-c261fd2eeff4}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\Mocks">
-      <UniqueIdentifier>{c8051842-080d-40ab-aab3-20be5263f991}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Source Files\TestFramework">
       <UniqueIdentifier>{52c994ab-fd05-4cd8-a008-f2cf595a818c}</UniqueIdentifier>
     </Filter>
@@ -65,9 +62,6 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\rest\tests\Mocks\MockHardwareInteface.h">
-      <Filter>Source Files\Mocks</Filter>
-    </ClInclude>
     <ClInclude Include="..\TestFramework\Assert.h">
       <Filter>Source Files\TestFramework</Filter>
     </ClInclude>

@@ -1,13 +1,12 @@
 #include <memory>
 #include "TcpRequestMakerTests.h"
 #include "../rest/tcp_request_maker.h"
-#include "Mocks/MockHardwareInteface.h"
 
 class MockPicoTcpClient : public IPicoTcpClient
 {
 public:
 	std::string Server;
-	int Port;
+	int Port = 0;
 	std::string RequestMade;
 	std::string Response = "Server Response";
 	int TcpRequestReturnCode = 0;
@@ -16,7 +15,7 @@ private:
 	int tcp_request(const char* server, unsigned int port, const char* request, std::string& response)
 	{
 		Server = server;
-		Port = port = 0;
+		Port = port;
 		RequestMade = request;
 		response = Response;
 		return TcpRequestReturnCode;

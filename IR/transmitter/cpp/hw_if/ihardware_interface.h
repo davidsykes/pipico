@@ -19,7 +19,6 @@ public:
     virtual uint64_t gpio_put_at_us(int pin_number, bool value, uint64_t time_us)=0;
     virtual void set_led(bool value)=0;
     virtual void sleep_us(int useconds)=0;
-    virtual int tcp_request(const char* server, unsigned int port, const char* request, std::string& response)=0;
     virtual void cyw43_arch_deinit()=0;
 };
 

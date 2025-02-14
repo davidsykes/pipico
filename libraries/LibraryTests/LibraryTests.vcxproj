@@ -145,7 +145,6 @@
     <ClInclude Include="..\rest\rest\tcp_request_error_logger.h" />
     <ClInclude Include="..\rest\rest\tcp_request_maker.h" />
     <ClInclude Include="..\rest\rest\tcp_response_analyser.h" />
-    <ClInclude Include="..\rest\tests\Mocks\MockHardwareInteface.h" />
     <ClInclude Include="..\rest\tests\RestHandlerTests.h" />
     <ClInclude Include="..\rest\tests\RestLibraryTests.h" />
     <ClInclude Include="..\rest\tests\TcpRequestMakerTests.h" />

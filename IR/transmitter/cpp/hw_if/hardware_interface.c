@@ -166,7 +166,6 @@ sHardwareInterface* create_hardware_interface()
     hwif->gpio_put_at_us = &_gpio_put_at_us;
     hwif->set_led = &_set_led;
     hwif->sleep_us = &_sleep_us;
-    hwif->tcp_request = &_tcp_request;
     hwif->cyw43_arch_deinit = &_cyw43_arch_deinit;
 
     return hwif;

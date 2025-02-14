@@ -3,7 +3,8 @@
 
 int main()
 {
-    std::cout << "Hello World!\n";
+    std::cout << "Running tests...\n";
     RestLibraryTests().RunTests();
+    std::cout << "Tests Complete.\n";
 };
 
