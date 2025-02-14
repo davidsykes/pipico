@@ -1,13 +1,17 @@
 
+#ifdef __cplusplus
+extern "C" {
+#endif
 
-// Code copied from pipico/libraries.hw_if
 
 
-
-#include "../hw_if/hardware_interface.h"
-
-int tcp_client_request(const char* server_ip,
+int pico_tcp_client_request(const char* server_ip,
                          uint port,
                          const char* request,
                          char*result,
                          int max_result_length);
+
+
+#ifdef __cplusplus
+}
+#endif

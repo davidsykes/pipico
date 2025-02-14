@@ -7,7 +7,6 @@
 #include "hardware_interface.h"
 #include "pico/cyw43_arch.h"
 #include "tusb.h"
-#include "picow_tcp_client.h"
 
 #define DEBUG_printf
 
@@ -137,18 +136,6 @@ void _sleep_us(int useconds)
     sleep_us(useconds);
 }
 
-int _tcp_request(const char* server_ip,
-                         uint port,
-                         const char* request,
-                         char*result,
-                         int max_result_length)
-{
-    return tcp_client_request(server_ip,
-                         port,
-                         request,
-                         result,
-                         max_result_length);
-}
 
 void _cyw43_arch_deinit()
 {
@@ -174,7 +161,6 @@ sHardwareInterface* create_hardware_interface()
     hwif->gpio_put_at_us = &_gpio_put_at_us;
     hwif->set_led = &_set_led;
     hwif->sleep_us = &_sleep_us;
-    hwif->tcp_request = &_tcp_request;
     hwif->cyw43_arch_deinit = &_cyw43_arch_deinit;
 
     return hwif;

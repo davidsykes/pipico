@@ -15,7 +15,6 @@ add_executable(web_button
     main.cpp
     hw_if/pico_hardware_interface.cpp
     hw_if/hardware_interface.c
-    hw_if/picow_tcp_client.c
     wifi/WiFiConnector.cpp
     wifi/hotspot_request_router.cpp
     wifi/dhcpserver/dhcpserver.c
@@ -32,9 +31,12 @@ add_executable(web_button
     wifi/tcpserver/pico_tcp_server.c
     wifi/tcpserver/pico_tcp_server.cpp
     wifi/tcpserver/http_response_packager.cpp
+    rest/rest_library.cpp
     rest/rest_handler.cpp
     rest/tcp_request_maker.cpp
     rest/tcp_response_analyser.cpp
+    rest/pico_tcp_client.cpp
+    rest/picow_tcp_client.c
 )
 
 target_include_directories(web_button PRIVATE
