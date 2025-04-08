@@ -1,0 +1,5 @@
+Libraries
+I have tried to understand the cmake library framework, but failed.
+This folder holds the most up to date versions of the various pico library code.
+When a project requires a library the code should be copied from here
+Any updates to the library code should be copied here
